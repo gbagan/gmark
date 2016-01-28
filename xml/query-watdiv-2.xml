@@ -1,0 +1,35 @@
+<queries>    
+    <query>
+        <metadata>
+            <multiplicity star="0.0"/>
+            <arity>2</arity>
+            <selectivity>linear</selectivity>
+            <type>chain</type>
+        </metadata>
+
+        <head>
+            <var>?x</var>
+            <var>?y</var>
+        </head>
+
+        <bodies>
+            <body>
+				<!-- Linear type query that select pairs (country / product) which are all the products liked by someone in the country -->
+                <conjunct src="?x" trg="?yprime">
+                    <disj>
+                        <concat>
+                            <symbol inverse="true">64</symbol>  <!-- nationality -->
+                        </concat>
+                    </disj>
+                </conjunct>
+                <conjunct src="?yprime" trg="?y">
+                    <disj>
+                        <concat>
+                            <symbol>57</symbol> <!-- like -->						
+                        </concat>
+                    </disj>
+                </conjunct>
+            </body>
+        </bodies>
+    </query>
+</queries>
