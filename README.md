@@ -1,4 +1,4 @@
-# gmark
+# gMark
 
 **To generate graph instances and query workloads using a graph configuration:**
 
@@ -31,3 +31,5 @@ and translate the queries from there in four files:
 - a.sparql
 - a.cypher
 - a.logicblox
+
+The file *xml/queries-examples.xml* illustrates our XML encoding of UCRPQ.
