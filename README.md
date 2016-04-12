@@ -7,10 +7,10 @@
     ./test -c ../use-cases/test.xml -g ../graph.txt -w ../xml/queries.xml -s
 
 where the parameters are:
-*-c* -> the configuration file
-*-q* -> the output file for the graph instance
-*-w* -> the output file for the queries generated on this instance
-*-s* -> to enforce selectivity estimation on binary queries
+-c -> the configuration file
+-q -> the output file for the graph instance
+-w -> the output file for the queries generated on this instance
+-s -> to enforce selectivity estimation on binary queries
 
 
 **To translate the generated queries from the internal XML encoding to the concrete query languages (suppose we are currently in src):**
