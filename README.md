@@ -33,3 +33,6 @@ and translate the queries from there in four files:
 - a.logicblox
 
 The file *xml/queries-examples.xml* illustrates our XML encoding of UCRPQ.
+
+**For more details about the gMark project, please refer to our technical report:
+http://arxiv.org/abs/1511.08386**
