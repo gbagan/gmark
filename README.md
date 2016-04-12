@@ -12,6 +12,7 @@ where the parameters are:
 - -w : the output file for the queries generated on this instance
 - -s : to enforce selectivity estimation on binary queries
 
+The provided configuration file *test.xml* encodes the schema of a bibliographical graph database.
 
 **To translate the generated queries from the internal XML encoding to the concrete query languages:**
 (suppose we are currently in src)
