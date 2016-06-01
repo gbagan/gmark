@@ -36,3 +36,18 @@ The file *xml/queries-examples.xml* illustrates our XML encoding of UCRPQ.
 
 **For more details about the gMark project, please refer to our technical report:
 http://arxiv.org/abs/1511.08386**
+
+
+**gMark will be demonstrated in VLDB 2016**
+
+
+    @article{BBCFLA16,
+    author = {G. Bagan and A. Bonifati and R. Ciucanu and G. H. L. Fletcher and A. Lemay and N. Advokaat},
+    title = {Generating Flexible Workloads for Graph Databases},
+    journal = {PVLDB},
+    volume = {9},
+    number = {13},
+    year = {2016},
+    }
+
+
