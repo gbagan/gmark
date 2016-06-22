@@ -1,26 +1,3 @@
-/* gMark
- * Copyright (C) 2015-2016 Guillaume Bagan <guillaume.bagan@liris.cnrs.fr>
- * Copyright (C) 2015-2016 Angela Bonifati <angela.bonifati@univ-lyon1.fr>
- * Copyright (C) 2015-2016 Radu Ciucanu <radu.ciucanu@cs.ox.ac.uk>
- * Copyright (C) 2015-2016 George Fletcher <g.h.l.fletcher@tue.nl>
- * Copyright (C) 2015-2016 Aurélien Lemay <aurelien.lemay@univ-lille3.fr>
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- **/
-
-
-
 #include <unistd.h>
 #include <fstream>
 
@@ -37,8 +14,9 @@ int main(int argc, char ** argv) {
     int c;
     bool selectivity = false;
     long nb_nodes = -1;
-    
-    while ((c = getopt(argc, argv, "c:g:w:sn:")) != -1) {
+    bool print_alias = false;    
+
+    while ((c = getopt(argc, argv, "c:g:w:san:")) != -1) {
         switch(c) {
             case 'c':
                 conf_file = optarg;
@@ -52,6 +30,9 @@ int main(int argc, char ** argv) {
             case 's':
                 selectivity = true;
                 break;
+            case 'a':
+                print_alias = true;
+                break;
             case 'n':
                 nb_nodes = atol(optarg);
         }
@@ -64,6 +45,7 @@ int main(int argc, char ** argv) {
     else {
         conf.nb_nodes = 0;
     }
+    conf.print_alias = print_alias;
     
     configparser::parse_config(conf_file, conf);
     cout << "complete config" << endl;
