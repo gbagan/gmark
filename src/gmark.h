@@ -12,6 +12,7 @@
 
 #include "randomgen.h"
 #include "config.h"
+#include "report.h"
 
 namespace graph {
 
@@ -22,6 +23,7 @@ vector<size_t> generate_random_slots(pair<size_t,size_t> range, const distributi
 class abstract_graph_writer {
 private:
     size_t nb_nodes;
+    size_t nb_edges;
     vector<pair<size_t,size_t>> node_ranges_per_type;
     vector<size_t> created_edges;
     
@@ -34,7 +36,7 @@ protected:
     config::config * conf;
     
 public:
-    void build_graph (config::config & conf);
+    void build_graph (config::config & conf, report::report & rep);
     void add_vertices(size_t type, size_t size);
     void add_edge(size_t subject, size_t predicate, size_t object);
     virtual void print_edge(size_t subject, size_t predicate, size_t object) = 0;

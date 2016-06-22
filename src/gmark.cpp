@@ -13,6 +13,7 @@
 #include <random>
 #include <algorithm>
 #include <chrono>
+#include <sys/time.h>
 
 namespace graph {
 
@@ -105,8 +106,12 @@ void abstract_graph_writer::add_remaining_edges(size_t predicate, size_t nb_edge
     cout << "add_remaining_edges: " << predicate << " " << nb_edges << endl;
 }
 
-void abstract_graph_writer::build_graph (config::config & conf) {
+void abstract_graph_writer::build_graph (config::config & conf, report::report & rep) {
+    struct timeval tbegin,tend;
+    gettimeofday(&tbegin,NULL);
+
     nb_nodes = 0;
+    nb_edges = 0;
     //size_t nb_vertices = conf.nb_vertices;
     //size_t node_index = 0;
     this->conf = &conf;
@@ -116,6 +121,8 @@ void abstract_graph_writer::build_graph (config::config & conf) {
         type++;
     }
     
+    rep.nb_nodes = nb_nodes;
+
     created_edges.clear();
     created_edges.resize(conf.predicates.size());
     
@@ -131,9 +138,11 @@ void abstract_graph_writer::build_graph (config::config & conf) {
             add_remaining_edges(predicate, nb_edges);
         }
     }
-    
-    
-    
+
+    rep.nb_edges = nb_edges; 
+   
+    gettimeofday(&tend,NULL);
+    rep.exec_time=((double)(1000*(tend.tv_sec-tbegin.tv_sec)+((tend.tv_usec-tbegin.tv_usec)/1000)))/1000.;
 }
 
 void abstract_graph_writer::add_vertices(size_t type, size_t size) {
@@ -147,6 +156,7 @@ void abstract_graph_writer::add_vertices(size_t type, size_t size) {
 
 void abstract_graph_writer::add_edge(size_t subject, size_t predicate, size_t object) {
     created_edges[predicate]++;
+    nb_edges++;
     print_edge(subject, predicate, object);
 }
 
@@ -164,18 +174,4 @@ void ntriple_graph_writer::print_edge(size_t subject, size_t predicate, size_t o
         *stream << predicate;
     *stream << " " << object << "\n";
 }
-
-
-/*
-int main(int argc, char ** argv) {
-    config conf;
-    conf.nb_vertices = 1000000;
-    //conf.ratio_per_type = {{0, 0.3}, {1, 0.7}};
-    conf.ratio_per_type = {{0, 1.0}};
-    conf.graph.add_edge(0, 0, 0, DISTRIBUTION::UNIFORM, 10, 10); //, DISTRIBUTION::UNIFORM, 5, 5);
-    //conf.graph.add_edge(0, 1, 1, DISTRIBUTION::ZIPFIAN, 2.0, 6);
-    graph g(conf);
-}
-*/
-
 }

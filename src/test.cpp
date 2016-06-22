@@ -6,6 +6,14 @@
 #include "configparser.h"
 #include "workload.h"
 #include "workload2.h"
+#include "report.h"
+
+void print_report(report::report & rep) {
+    cout << "report:" << endl;
+    cout << "number of nodes: " << rep.nb_nodes << endl;
+    cout << "number of edges: " << rep.nb_edges << endl;
+    cout << "execution time: " << rep.exec_time << endl;
+}
 
 int main(int argc, char ** argv) {
     string conf_file = "../use-cases/test.xml";
@@ -48,6 +56,9 @@ int main(int argc, char ** argv) {
     conf.print_alias = print_alias;
     
     configparser::parse_config(conf_file, conf);
+    
+    report::report rep;
+
     cout << "complete config" << endl;
     conf.complete_config();
     
@@ -57,7 +68,7 @@ int main(int argc, char ** argv) {
         graph_stream.open(graph_file);
         cout << "graph generation" << endl;
         graph::ntriple_graph_writer writer(graph_stream);
-        writer.build_graph(conf);
+        writer.build_graph(conf, rep);
         graph_stream.close();
     }
     
@@ -88,5 +99,7 @@ int main(int argc, char ** argv) {
         }
         */
     }
-    
+
+    print_report(rep);
 }
+
