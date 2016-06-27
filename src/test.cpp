@@ -15,6 +15,42 @@ void print_report(report::report & rep) {
     cout << "execution time: " << rep.exec_time << endl;
 }
 
+void html_report(config::config & conf, report::report & rep, ofstream & stream) {
+    stream << "<html>\n";
+    stream << "<head>\n";
+    stream << "<script type=\"text/javascript\" src=\"https://www.gstatic.com/charts/loader.js\"></script>\n";
+    stream << "<script type=\"text/javascript\">\n";
+    stream << "google.charts.load('current', {packages:['corechart', 'bar']});\n";
+    stream << "google.charts.setOnLoadCallback(drawChart);\n";
+
+
+    stream << "function drawChart() {\n";
+    stream << "var data = google.visualization.arrayToDataTable([\n";
+    stream << "['Node type', 'Number of nodes'], \n";
+    
+    for (auto & type : conf.types) {
+        stream << "['" << type.alias << "', " << type.size << "],\n";
+    }
+
+    stream << "]);\n";
+    stream << "var options = {\n";
+    stream << "title: 'Number of nodes by node type'\n";
+    stream << "};\n";
+    stream << "var chart = new google.visualization.ColumnChart(document.getElementById('hist11'));\n";
+    stream << "chart.draw(data, options);\n";
+    stream << "}\n";
+
+    stream << "</script></head>\n";
+    stream << "<body>\n";
+    stream << "<table border=\"1\">\n";
+    stream << "<tr><td>Number of nodes</td><td width=\"600\">" << conf.nb_nodes << "</td><td width=\"600\">" << rep.nb_nodes << "</td></tr>\n";
+    stream << "<tr><td>Number of edges</td><td>" << conf.nb_edges << "</td><td>" << rep.nb_edges << "</td></tr>\n";
+    stream << "<tr><td>Execution time</td><td></td><td>" << rep.exec_time << "</td></tr>\n";
+    stream << "<tr><td></td><td><div id=\"hist11\"/></td><td><div id=\"hist12\"/></td></tr>\n";
+    stream << "</table>\n";
+    stream << "</body></html>\n";
+}
+
 int main(int argc, char ** argv) {
     string conf_file = "../use-cases/test.xml";
     string graph_file;
@@ -101,5 +137,9 @@ int main(int argc, char ** argv) {
     }
 
     print_report(rep);
+
+    ofstream report_stream;
+    report_stream.open("report.html");
+    html_report(conf, rep, report_stream);
 }
 
