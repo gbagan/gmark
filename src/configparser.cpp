@@ -65,6 +65,7 @@ void parse_predicates(pugi::xml_node node, config::config & conf) {
             cerr << "id " << id << " is out of range" << endl;
             continue;
         }
+
         conf.predicates[id].alias = name;
     }
     

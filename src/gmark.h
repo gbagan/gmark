@@ -24,6 +24,8 @@ class abstract_graph_writer {
 private:
     size_t nb_nodes;
     size_t nb_edges;
+    vector<size_t> nb_edges_by_type;
+
     vector<pair<size_t,size_t>> node_ranges_per_type;
     vector<size_t> created_edges;
     

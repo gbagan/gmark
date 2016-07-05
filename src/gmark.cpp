@@ -112,6 +112,11 @@ void abstract_graph_writer::build_graph (config::config & conf, report::report &
 
     nb_nodes = 0;
     nb_edges = 0;
+    nb_edges_by_type.resize(conf.predicates.size());
+    for (size_t i = 0; i < nb_edges_by_type.size(); i++) {
+        nb_edges_by_type[i] = 0;
+    }
+
     //size_t nb_vertices = conf.nb_vertices;
     //size_t node_index = 0;
     this->conf = &conf;
@@ -140,7 +145,12 @@ void abstract_graph_writer::build_graph (config::config & conf, report::report &
     }
 
     rep.nb_edges = nb_edges; 
-   
+    rep.predicates.resize(nb_edges_by_type.size());
+    for (size_t i = 0; i < nb_edges_by_type.size(); i++) {
+        rep.predicates[i].alias = conf.predicates[i].alias;
+        rep.predicates[i].size = nb_edges_by_type[i];
+    }
+
     gettimeofday(&tend,NULL);
     rep.exec_time=((double)(1000*(tend.tv_sec-tbegin.tv_sec)+((tend.tv_usec-tbegin.tv_usec)/1000)))/1000.;
 }
@@ -157,6 +167,7 @@ void abstract_graph_writer::add_vertices(size_t type, size_t size) {
 void abstract_graph_writer::add_edge(size_t subject, size_t predicate, size_t object) {
     created_edges[predicate]++;
     nb_edges++;
+    nb_edges_by_type[predicate]++;
     print_edge(subject, predicate, object);
 }
 

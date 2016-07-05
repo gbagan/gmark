@@ -15,7 +15,7 @@ void print_report(report::report & rep) {
     cout << "execution time: " << rep.exec_time << endl;
 }
 
-void html_report(config::config & conf, report::report & rep, ofstream & stream) {
+void html_graph_report(config::config & conf, report::report & rep, ofstream & stream) {
     stream << "<html>\n";
     stream << "<head>\n";
     stream << "<script type=\"text/javascript\" src=\"https://www.gstatic.com/charts/loader.js\"></script>\n";
@@ -25,20 +25,61 @@ void html_report(config::config & conf, report::report & rep, ofstream & stream)
 
 
     stream << "function drawChart() {\n";
+
     stream << "var data = google.visualization.arrayToDataTable([\n";
     stream << "['Node type', 'Number of nodes'], \n";
-    
     for (auto & type : conf.types) {
         stream << "['" << type.alias << "', " << type.size << "],\n";
     }
-
     stream << "]);\n";
     stream << "var options = {\n";
     stream << "title: 'Number of nodes by node type'\n";
     stream << "};\n";
     stream << "var chart = new google.visualization.ColumnChart(document.getElementById('hist11'));\n";
     stream << "chart.draw(data, options);\n";
+
+    stream << "var data = google.visualization.arrayToDataTable([\n";
+    stream << "['Node type', 'Number of nodes'], \n";
+    for (auto & type : conf.types) {
+        stream << "['" << type.alias << "', " << type.size << "],\n";
+    }
+    stream << "]);\n";
+    stream << "var options = {\n";
+    stream << "title: 'Number of nodes by node type'\n";
+    stream << "};\n";
+    stream << "var chart = new google.visualization.ColumnChart(document.getElementById('hist12'));\n";
+    stream << "chart.draw(data, options);\n";
+
+
+    stream << "var data = google.visualization.arrayToDataTable([\n";
+    stream << "['Predicate type', 'Number of predicates'], \n";
+    for (auto & predicate : conf.predicates) {
+
+        stream << "['" << predicate.alias << "', " << predicate.size << "],\n";
+    }
+    stream << "]);\n";
+    stream << "var options = {\n";
+    stream << "title: 'Number of predicates by type'\n";
+    stream << "};\n";
+    stream << "var chart = new google.visualization.ColumnChart(document.getElementById('hist21'));\n";
+    stream << "chart.draw(data, options);\n";
+
+
+    stream << "var data = google.visualization.arrayToDataTable([\n";
+    stream << "['Predicate type', 'Number of predicates'], \n";
+    for (auto & predicate : rep.predicates) {
+
+        stream << "['" << predicate.alias << "', " << predicate.size << "],\n";
+    }
+    stream << "]);\n";
+    stream << "var options = {\n";
+    stream << "title: 'Number of predicates by type'\n";
+    stream << "};\n";
+    stream << "var chart = new google.visualization.ColumnChart(document.getElementById('hist22'));\n";
+    stream << "chart.draw(data, options);\n";
+
     stream << "}\n";
+
 
     stream << "</script></head>\n";
     stream << "<body>\n";
@@ -47,6 +88,7 @@ void html_report(config::config & conf, report::report & rep, ofstream & stream)
     stream << "<tr><td>Number of edges</td><td>" << conf.nb_edges << "</td><td>" << rep.nb_edges << "</td></tr>\n";
     stream << "<tr><td>Execution time</td><td></td><td>" << rep.exec_time << "</td></tr>\n";
     stream << "<tr><td></td><td><div id=\"hist11\"/></td><td><div id=\"hist12\"/></td></tr>\n";
+    stream << "<tr><td></td><td><div id=\"hist21\"/></td><td><div id=\"hist22\"/></td></tr>\n";
     stream << "</table>\n";
     stream << "</body></html>\n";
 }
@@ -93,19 +135,23 @@ int main(int argc, char ** argv) {
     
     configparser::parse_config(conf_file, conf);
     
-    report::report rep;
-
     cout << "complete config" << endl;
     conf.complete_config();
     
     
     if(graph_file != "") {
+        report::report rep;
+
         ofstream graph_stream;
         graph_stream.open(graph_file);
         cout << "graph generation" << endl;
         graph::ntriple_graph_writer writer(graph_stream);
         writer.build_graph(conf, rep);
         graph_stream.close();
+
+        ofstream report_stream;
+        report_stream.open("report.html");
+        html_graph_report(conf, rep, report_stream);
     }
     
     if (workload_file != "") {
@@ -135,11 +181,5 @@ int main(int argc, char ** argv) {
         }
         */
     }
-
-    print_report(rep);
-
-    ofstream report_stream;
-    report_stream.open("report.html");
-    html_report(conf, rep, report_stream);
 }
 
