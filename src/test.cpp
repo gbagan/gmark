@@ -93,6 +93,27 @@ void html_graph_report(config::config & conf, report::report & rep, ofstream & s
     stream << "</body></html>\n";
 }
 
+void html_workload_report(config::config & conf, report::workload_report & rep, ofstream & stream) {
+    config::workload & wconf = conf.workloads[0];
+    stream << "<html>\n";
+    stream << "<body>\n";
+    stream << "<table border=\"1\">\n";
+    stream << "<tr><td>Number of queries</td><td width=\"600\">" << wconf.size << "</td><td width=\"600\">" << wconf.size << "</td></tr>\n";
+    stream << "<tr><td>Number of conjuncts</td><td>" << wconf.conjuncts.first << "-" << wconf.conjuncts.second; 
+    stream << "</td><td>" << rep.min_conjuncts << "-" << rep.max_conjuncts << "</td></tr>\n";
+    stream << "<tr><td>Number of disjuncts</td><td>" << wconf.disjuncts.first << "-" << wconf.disjuncts.second; 
+    stream << "</td><td>" << rep.min_disjuncts << "-" << rep.max_disjuncts << "</td></tr>\n";
+    stream << "<tr><td>Number of disjuncts</td><td>" << wconf.length.first << "-" << wconf.length.second; 
+    stream << "</td><td>" << rep.min_length << "-" << rep.max_length << "</td></tr>\n";
+    stream << "<tr><td>Execution time</td><td></td><td>" << rep.exec_time << "</td></tr>\n";
+    stream << "</table>\n";
+    stream << "</body></html>\n";
+
+}
+
+
+
+
 int main(int argc, char ** argv) {
     string conf_file = "../use-cases/test.xml";
     string graph_file;
@@ -155,17 +176,24 @@ int main(int argc, char ** argv) {
     }
     
     if (workload_file != "") {
+        report::workload_report rep;
+
         ofstream workload_stream;
         workload_stream.open(workload_file);
         workload::workload wl;
         if(selectivity) {
-            workload2::generate_workload(conf, wl);
+            workload2::generate_workload(conf, wl, rep);
         }
         else {
             workload::generate_workload(conf, wl);
         }
         workload::write_xml(wl, workload_stream);
         workload_stream.close();
+
+        ofstream report_stream;
+        report_stream.open("workload.html");
+        html_workload_report(conf, rep, report_stream);  
+
         /*
         workload2::matrix mat;
         workload2::distance_matrix_between_types(conf, mat);

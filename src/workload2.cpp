@@ -1,8 +1,17 @@
 #include "workload2.h"
 
 #include <iostream>
+#include <sys/time.h>
 
 namespace workload2 {
+
+size_t MIN_CONJUNCTS = 100000000;
+size_t MAX_CONJUNCTS = 0;
+size_t MIN_DISJUNCTS = 100000000;
+size_t MAX_DISJUNCTS = 0;
+size_t MIN_LENGTH = 100000000;
+size_t MAX_LENGTH = 0;
+
 
 namespace SELECTIVITY {
     vector<type> types = { ONEONE, NONE, ONEN, EQUALS, LESS, GREATER, LESS_GREATER, CROSS };
@@ -432,6 +441,12 @@ void generate_random_path_aux2(const automaton & automat, const matrix_of_paths 
         cerr << "error: generate_random_path_aux2: " << __LINE__ << endl;
         exit(EXIT_FAILURE);
     }
+
+    
+    if (i < MIN_LENGTH)
+        MIN_LENGTH = i;
+    if (i > MAX_LENGTH)
+        MAX_LENGTH = i;
         
     for (; i > 0; i--) {
         rnd = uniform_random_generator(1, matrix.data[i][current_node].at(current_selectivity)).next();
@@ -473,6 +488,13 @@ void generate_random_conjunct(const config::config & conf, const config::workloa
     automaton automat(conf);
     size_t nb_disjuncts = uniform_random_generator(wconf.disjuncts.first, wconf.disjuncts.second).next();
     conj.disjuncts.resize(nb_disjuncts);
+
+    if (nb_disjuncts < MIN_DISJUNCTS)
+        MIN_DISJUNCTS = nb_disjuncts;
+    if (nb_disjuncts > MAX_DISJUNCTS)
+        MAX_DISJUNCTS = nb_disjuncts;
+
+
     auto length_gen = uniform_random_generator(wconf.length.first, wconf.length.second);
     for (auto & disjunct : conj.disjuncts) {
         size_t len = length_gen.next();
@@ -510,6 +532,12 @@ config::selectivity::type generate_random_selectivity(const config::workload & w
 
 void generate_chain(const config::config & conf, const config::workload & wconf, workload::query & q) {
     size_t nb_conjs = uniform_random_generator(wconf.conjuncts.first, wconf.conjuncts.second).next();
+
+    if (nb_conjs < MIN_CONJUNCTS)
+        MIN_CONJUNCTS = nb_conjs;
+    if (nb_conjs > MAX_CONJUNCTS)
+        MAX_CONJUNCTS = nb_conjs;
+
     q.bodies.emplace_back();
     auto & body = q.bodies[0];
     body.conjuncts.resize(nb_conjs);
@@ -546,6 +574,12 @@ void generate_chain(const config::config & conf, const config::workload & wconf,
 
 void generate_star(const config::config & conf, const config::workload & wconf, workload::query & q) {
     size_t nb_conjs = uniform_random_generator(wconf.conjuncts.first, wconf.conjuncts.second).next();
+
+    if (nb_conjs < MIN_CONJUNCTS)
+        MIN_CONJUNCTS = nb_conjs;
+    if (nb_conjs > MAX_CONJUNCTS)
+        MAX_CONJUNCTS = nb_conjs;
+
     q.bodies.emplace_back();
     auto & body = q.bodies[0];
     body.conjuncts.resize(nb_conjs);
@@ -596,6 +630,12 @@ void generate_star(const config::config & conf, const config::workload & wconf, 
 
 void generate_cycle(const config::config & conf, const config::workload & wconf, workload::query & q) {
     size_t nb_conjs = uniform_random_generator(wconf.conjuncts.first, wconf.conjuncts.second).next();
+
+    if (nb_conjs < MIN_CONJUNCTS)
+        MIN_CONJUNCTS = nb_conjs;
+    if (nb_conjs > MAX_CONJUNCTS)
+        MAX_CONJUNCTS = nb_conjs;
+
     q.bodies.emplace_back();
     auto & body = q.bodies[0];
     body.conjuncts.resize(nb_conjs);
@@ -656,6 +696,12 @@ void generate_cycle(const config::config & conf, const config::workload & wconf,
 
 void generate_starchain(const config::config & conf, const config::workload & wconf, workload::query & q) {
     size_t nb_conjs = uniform_random_generator(wconf.conjuncts.first, wconf.conjuncts.second).next();
+
+    if (nb_conjs < MIN_CONJUNCTS)
+        MIN_CONJUNCTS = nb_conjs;
+    if (nb_conjs > MAX_CONJUNCTS)
+        MAX_CONJUNCTS = nb_conjs;
+
     q.bodies.emplace_back();
     auto & body = q.bodies[0];
     body.conjuncts.resize(nb_conjs);
@@ -759,7 +805,10 @@ void generate_query(const config::config & conf, const config::workload & wconf,
     }
 }
 
-void generate_workload(const config::config & conf, workload::workload & wl) {
+void generate_workload(const config::config & conf, workload::workload & wl, report::workload_report & rep) {
+    struct timeval tbegin,tend;
+    gettimeofday(&tbegin,NULL);
+
     size_t size = 0;
     size_t c = 0;
     
@@ -770,13 +819,24 @@ void generate_workload(const config::config & conf, workload::workload & wl) {
     
     for (const auto & wconf : conf.workloads) {
         for (unsigned int i = 0; i < wconf.size; i++) {
-            cout << "generate query " << i << endl;
+            //cout << "generate query " << i << endl;
             workload2::generate_query(conf, wconf, wl.queries[c]);
             wl.queries[c].info.id = wconf.id;
             wl.queries[c].info.number = i;
             c++;
         }
     }
+
+    rep.min_conjuncts = MIN_CONJUNCTS;
+    rep.max_conjuncts = MAX_CONJUNCTS;
+    rep.min_disjuncts = MIN_DISJUNCTS;
+    rep.max_disjuncts = MAX_DISJUNCTS;
+    rep.min_length = MIN_LENGTH;
+    rep.max_length = MAX_LENGTH;
+
+    gettimeofday(&tend,NULL);
+    rep.exec_time=((double)(1000*(tend.tv_sec-tbegin.tv_sec)+((tend.tv_usec-tbegin.tv_usec)/1000)))/1000.;
+
 }
 
 

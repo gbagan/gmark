@@ -9,6 +9,7 @@
 
 #include "config.h"
 #include "workload.h"
+#include "report.h"
 
 namespace workload2 {
 
@@ -73,7 +74,7 @@ void compute_graph_from_matrix(const matrix &, size_t, graph &);
 void number_of_paths(const graph &, config::selectivity::type, size_t, matrix_of_paths &);
 void generate_random_path(const graph &, const matrix_of_paths &, long, size_t, double, vector<triple> &);
 
-void generate_workload(const config::config & conf, workload::workload & wl);    
+void generate_workload(const config::config & conf, workload::workload & wl, report::workload_report & report);    
 
 
 }

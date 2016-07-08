@@ -20,11 +20,17 @@ public:
     size_t nb_edges;
     double exec_time;
     vector<predicate> predicates;
-}
+};
 
-
-class query_report {
+class workload_report {
+public:
     double exec_time;
+    size_t min_conjuncts;
+    size_t max_conjuncts;
+    size_t min_disjuncts;
+    size_t max_disjuncts;
+    size_t min_length;
+    size_t max_length;
 };
 }
 
