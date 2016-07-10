@@ -32,6 +32,13 @@ public:
     size_t min_length;
     size_t max_length;
     double percentage_of_stars;
+    size_t nb_chains;
+    size_t nb_stars;
+    size_t nb_starchains;
+    size_t nb_cycles;
+    size_t nb_constant;
+    size_t nb_linear;
+    size_t nb_quadratic;
 };
 }
 

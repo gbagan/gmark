@@ -72,7 +72,6 @@ void parse_predicates(pugi::xml_node node, config::config & conf) {
     for (pugi::xml_node proportion_node : node.children("proportion")) {
         size_t id = proportion_node.attribute("symbol").as_uint();
         double proportion = proportion_node.text().as_double();
-        //cout << "proportion " << id << ", " << proportion  << endl;
         if (id < 0 || id >= size) {
             cerr << "id " << id << " is out of range" << endl;
             continue;

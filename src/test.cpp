@@ -54,7 +54,6 @@ void html_graph_report(config::config & conf, report::report & rep, ofstream & s
     stream << "var data = google.visualization.arrayToDataTable([\n";
     stream << "['Predicate type', 'Number of predicates'], \n";
     for (auto & predicate : conf.predicates) {
-
         stream << "['" << predicate.alias << "', " << predicate.size << "],\n";
     }
     stream << "]);\n";
@@ -68,7 +67,6 @@ void html_graph_report(config::config & conf, report::report & rep, ofstream & s
     stream << "var data = google.visualization.arrayToDataTable([\n";
     stream << "['Predicate type', 'Number of predicates'], \n";
     for (auto & predicate : rep.predicates) {
-
         stream << "['" << predicate.alias << "', " << predicate.size << "],\n";
     }
     stream << "]);\n";
@@ -105,8 +103,29 @@ void html_workload_report(config::config & conf, report::workload_report & rep, 
     stream << "</td><td>" << rep.min_disjuncts << "-" << rep.max_disjuncts << "</td></tr>\n";
     stream << "<tr><td>Chain length</td><td>" << wconf.length.first << "-" << wconf.length.second; 
     stream << "</td><td>" << rep.min_length << "-" << rep.max_length << "</td></tr>\n";
-    stream << "<tr><td>Percentage of stars</td><td>" << wconf.multiplicity << "</td><td>" << rep.percentage_of_stars << "</td></tr>\n";
+    stream << "<tr><td>Percentage of stars</td><td>" << 100 * wconf.multiplicity << "%</td><td>" << 100 * rep.percentage_of_stars << "%</td></tr>\n";
     stream << "<tr><td>Execution time</td><td></td><td>" << rep.exec_time << "</td></tr>\n";
+
+    stream << "<tr><td></td><td>";
+    int typetotal = (wconf.type.chain ? 1 : 0) +  (wconf.type.star ? 1 : 0) + (wconf.type.starchain ? 1 : 0) + (wconf.type.cycle ? 1 : 0);
+    stream << "chain: " << (wconf.type.chain * 100) / typetotal << "%<br/>";
+    stream << "star: " << (wconf.type.star * 100) / typetotal << "%<br/>";
+    stream << "starchain: " << (wconf.type.starchain * 100) / typetotal << "%<br/>";
+    stream << "cycle: " << (wconf.type.cycle * 100) / typetotal << "%</td>\n";
+    stream << "<td>";
+    stream << "chain: " << (rep.nb_chains * 100) / wconf.size << "%<br/>";
+    stream << "star: " << (rep.nb_stars * 100) / wconf.size << "%<br/>";
+    stream << "starchain: " << (rep.nb_starchains * 100) / wconf.size << "%<br/>";
+    stream << "cycle: " << (rep.nb_cycles * 100) / wconf.size << "%</td></tr>\n";
+
+    stream << "<tr><td></td><td>";
+    int seltotal = (wconf.selectivity.constant ? 1 : 0) +  (wconf.selectivity.linear ? 1 : 0) + (wconf.selectivity.quadratic ? 1 : 0);
+    stream << "constant: " << (wconf.selectivity.constant * 100) / seltotal << "%<br/>";
+    stream << "linear: " << (wconf.selectivity.linear * 100) / seltotal << "%<br/>";
+    stream << "quadratic: " << (wconf.selectivity.quadratic * 100) / seltotal << "%</td><td>";
+    stream << "constant: " << (rep.nb_constant * 100) / wconf.size << "%<br/>";
+    stream << "linear: " << (rep.nb_linear * 100) / wconf.size << "%<br/>";
+    stream << "quadratic: " << (rep.nb_quadratic * 100) / wconf.size << "%</td></tr>";
     stream << "</table>\n";
     stream << "</body></html>\n";
 

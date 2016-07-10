@@ -15,6 +15,15 @@ size_t MAX_LENGTH = 0;
 size_t NUMBER_OF_DISJUNCTS = 0;
 size_t NUMBER_OF_STARS = 0;
 
+size_t NB_CHAINS = 0;
+size_t NB_STARS = 0;
+size_t NB_STARCHAINS = 0;
+size_t NB_CYCLES = 0;
+
+size_t NB_CONSTANT = 0;
+size_t NB_LINEAR = 0;
+size_t NB_QUADRATIC = 0;
+
 namespace SELECTIVITY {
     vector<type> types = { ONEONE, NONE, ONEN, EQUALS, LESS, GREATER, LESS_GREATER, CROSS };
 }
@@ -355,7 +364,7 @@ void generate_random_path(const graph & graph, const matrix_of_paths & matrix, l
             }
         }
         
-        if (!has_star && test && random_0_1() <= star) {
+        if (/*!has_star && */ test && random_0_1() <= star) {
             path.emplace_back(current_node, SELECTIVITY::EQUALS, current_node, true);
             NUMBER_OF_DISJUNCTS++;
             NUMBER_OF_STARS++;
@@ -513,6 +522,7 @@ config::selectivity::type generate_random_selectivity(const config::workload & w
     if (wconf.selectivity.constant) {
         i++;
         if(i == n) {
+            NB_CONSTANT++;
             return config::selectivity::CONSTANT;
         }
     }
@@ -520,6 +530,7 @@ config::selectivity::type generate_random_selectivity(const config::workload & w
     if (wconf.selectivity.linear) {
         i++;
         if(i == n) {
+            NB_LINEAR++;
             return config::selectivity::LINEAR;
         }
     }
@@ -527,9 +538,11 @@ config::selectivity::type generate_random_selectivity(const config::workload & w
     if (wconf.selectivity.quadratic) {
         i++;
         if(i == n) {
+            NB_QUADRATIC++;
             return config::selectivity::QUADRATIC;
         }
     }
+    NB_LINEAR++;
     return config::selectivity::LINEAR;
 }
 
@@ -779,6 +792,7 @@ void generate_query(const config::config & conf, const config::workload & wconf,
         i++;
         if(i == n) {
             workload2::generate_chain(conf, wconf, q);
+            NB_CHAINS++;
             return;
         }
     }
@@ -787,6 +801,7 @@ void generate_query(const config::config & conf, const config::workload & wconf,
         i++;
         if(i == n) {
             workload2::generate_star(conf, wconf, q);
+            NB_STARS++;
             return;
         }
     }
@@ -795,6 +810,7 @@ void generate_query(const config::config & conf, const config::workload & wconf,
         i++;
         if(i == n) {
             workload2::generate_cycle(conf, wconf, q);
+            NB_CYCLES++;
             return;
         }
     }
@@ -803,6 +819,7 @@ void generate_query(const config::config & conf, const config::workload & wconf,
         i++;
         if(i == n) {
             workload2::generate_starchain(conf, wconf, q);
+            NB_STARCHAINS++;
             return;
         }
     }
@@ -836,6 +853,14 @@ void generate_workload(const config::config & conf, workload::workload & wl, rep
     rep.max_disjuncts = MAX_DISJUNCTS;
     rep.min_length = MIN_LENGTH;
     rep.max_length = MAX_LENGTH;
+    rep.nb_chains = NB_CHAINS;
+    rep.nb_stars = NB_STARS;
+    rep.nb_starchains =  NB_STARCHAINS;
+    rep.nb_cycles = NB_CYCLES;
+    rep.nb_constant = NB_CONSTANT;
+    rep.nb_linear = NB_LINEAR;
+    rep.nb_quadratic = NB_QUADRATIC;
+
     rep.percentage_of_stars = ((double) NUMBER_OF_STARS) / ((double) NUMBER_OF_DISJUNCTS);
 
     gettimeofday(&tend,NULL);
