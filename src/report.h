@@ -31,6 +31,7 @@ public:
     size_t max_disjuncts;
     size_t min_length;
     size_t max_length;
+    double percentage_of_stars;
 };
 }
 

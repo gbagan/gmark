@@ -103,8 +103,9 @@ void html_workload_report(config::config & conf, report::workload_report & rep, 
     stream << "</td><td>" << rep.min_conjuncts << "-" << rep.max_conjuncts << "</td></tr>\n";
     stream << "<tr><td>Number of disjuncts</td><td>" << wconf.disjuncts.first << "-" << wconf.disjuncts.second; 
     stream << "</td><td>" << rep.min_disjuncts << "-" << rep.max_disjuncts << "</td></tr>\n";
-    stream << "<tr><td>Number of disjuncts</td><td>" << wconf.length.first << "-" << wconf.length.second; 
+    stream << "<tr><td>Chain length</td><td>" << wconf.length.first << "-" << wconf.length.second; 
     stream << "</td><td>" << rep.min_length << "-" << rep.max_length << "</td></tr>\n";
+    stream << "<tr><td>Percentage of stars</td><td>" << wconf.multiplicity << "</td><td>" << rep.percentage_of_stars << "</td></tr>\n";
     stream << "<tr><td>Execution time</td><td></td><td>" << rep.exec_time << "</td></tr>\n";
     stream << "</table>\n";
     stream << "</body></html>\n";

@@ -12,6 +12,8 @@ size_t MAX_DISJUNCTS = 0;
 size_t MIN_LENGTH = 100000000;
 size_t MAX_LENGTH = 0;
 
+size_t NUMBER_OF_DISJUNCTS = 0;
+size_t NUMBER_OF_STARS = 0;
 
 namespace SELECTIVITY {
     vector<type> types = { ONEONE, NONE, ONEN, EQUALS, LESS, GREATER, LESS_GREATER, CROSS };
@@ -306,9 +308,7 @@ void generate_random_path(const graph & graph, const matrix_of_paths & matrix, l
     auto current_sel = SELECTIVITY::EQUALS;
     
     if (first_node >= 0) {
-        current_node = first_node;
-        
-        
+        current_node = first_node;   
     }
     else {
         size_t m = graph.neighbors.size();
@@ -357,6 +357,8 @@ void generate_random_path(const graph & graph, const matrix_of_paths & matrix, l
         
         if (!has_star && test && random_0_1() <= star) {
             path.emplace_back(current_node, SELECTIVITY::EQUALS, current_node, true);
+            NUMBER_OF_DISJUNCTS++;
+            NUMBER_OF_STARS++;
             has_star = true;
         }
         else {
@@ -375,6 +377,7 @@ void generate_random_path(const graph & graph, const matrix_of_paths & matrix, l
                 }
             }
             path.emplace_back(previous_node, sel, current_node, false);
+            NUMBER_OF_DISJUNCTS++;
         }
     }
 }
@@ -833,6 +836,7 @@ void generate_workload(const config::config & conf, workload::workload & wl, rep
     rep.max_disjuncts = MAX_DISJUNCTS;
     rep.min_length = MIN_LENGTH;
     rep.max_length = MAX_LENGTH;
+    rep.percentage_of_stars = ((double) NUMBER_OF_STARS) / ((double) NUMBER_OF_DISJUNCTS);
 
     gettimeofday(&tend,NULL);
     rep.exec_time=((double)(1000*(tend.tv_sec-tbegin.tv_sec)+((tend.tv_usec-tbegin.tv_usec)/1000)))/1000.;
