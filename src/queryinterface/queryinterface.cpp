@@ -82,9 +82,9 @@ void qinterface(const string & inputfilename)
 		      			plot_file << "\t" << var_text_trg << " [shape=circle, label=\"?"<< var_text_trg <<"\"];\n";
 								nodes_already_drawn.insert(var_text_trg);
 							}
-							plot_file << var_text_src << " -> " << var_text_trg << "[label=\"";
+							plot_file << "\t" << var_text_src << " -> " << var_text_trg << " [label=\"";
 		          qinterface_dot_regex(conjunct_node.first_child(), plot_file);
-							plot_file << "\"]";
+							plot_file << "\"];\n";
 		      }
 		  }
 
