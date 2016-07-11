@@ -1,0 +1,149 @@
+<generator>
+	<graph>
+		<nodes>1700000</nodes>
+		<output ntriples="1"/>
+	</graph>
+	
+	<predicates>
+		<size>7</size>
+		
+		<alias symbol="0">Interacts</alias>
+		<proportion symbol="0">0.002</proportion>
+		
+		<alias symbol="1">EncodedOn</alias>
+		<proportion symbol="1">0.063</proportion>
+		
+		<alias symbol="2">OccursIn</alias>
+		<proportion symbol="2">0.016</proportion>
+		
+		<alias symbol="3">Reference</alias>
+		<proportion symbol="3">0.027</proportion>
+		
+		<alias symbol="4">HasKeyword</alias>
+		<proportion symbol="4">0.230</proportion>
+		
+		<alias symbol="5">AuthoredBy</alias>
+		<proportion symbol="5">0.637</proportion>
+		
+		<alias symbol="6">PublishedIn</alias>
+		<proportion symbol="6">0.027</proportion>
+	</predicates>
+	
+	<types>
+		<size>7</size>
+		<alias type="0">Protein</alias>
+		<proportion type="0">0.31</proportion>
+		
+		<alias type="1">Gene</alias>
+		<proportion type="1">0.36</proportion>
+		
+		<alias type="2">Organism</alias>
+		<fixed type="2">15000</fixed>
+		
+		<alias type="3">Article</alias>
+		<proportion type="3">0.12</proportion>
+		
+		<alias type="4">Keyword</alias>
+		<fixed type="4">1200</fixed>
+		
+		<alias type="5">Author</alias>
+		<proportion type="5">0.21</proportion>
+		
+		<alias type="6">Journal</alias>
+		<fixed type="6">2000</fixed>
+	</types>
+	
+	<schema>
+		<source type="0"> <!-- Protein -->
+			<target type="0" symbol="0" multiplicity="*"> <!-- Interacts -->
+			<indistribution type="gaussian">
+				<mu>0.187</mu>
+				<sigma>0.4321</sigma>
+				</indistribution>
+				<outdistribution type="gaussian">
+				<mu>0.11</mu>
+				<sigma>1.68</sigma>
+				</outdistribution>
+			</target>
+			<target type="1" symbol="1" multiplicity="*"> <!-- EncodedOn -->
+				<indistribution type="zipfian">
+				<alpha>3.31</alpha>
+				</indistribution>
+				<outdistribution type="gaussian">
+				<mu>1.95</mu>
+				<sigma>0.99</sigma>
+				</outdistribution>
+			</target>
+			<target type="2" symbol="2" multiplicity="*"> <!-- OccursIn -->
+				<indistribution type="zipfian">
+				<alpha>1.62</alpha>
+				</indistribution>
+				<outdistribution type="uniform">
+				<min>1</min>
+				<max>1</max>
+				</outdistribution>
+			</target>
+			<target type="3" symbol="3" multiplicity="*"> <!-- Reference -->
+				<indistribution type="zipfian">
+				<alpha>2.53</alpha>
+				</indistribution>
+				<outdistribution type="gaussian">
+				<mu>1.68</mu>
+				<sigma>2.97</sigma>
+				</outdistribution>
+			</target>
+			<target type="4" symbol="4" multiplicity="*"> <!-- HasKeyword -->
+			<indistribution type="zipfian">
+				<alpha>0.20</alpha>
+				</indistribution>
+				<outdistribution type="gaussian">
+				<mu>7.13</mu>
+				<sigma>3.61</sigma>
+				</outdistribution>
+			</target>
+		</source>
+		<source type="3"> <!-- Article -->
+			<target type="5" symbol="5" multiplicity="*"> <!-- AuthoredBy -->
+				<indistribution type="zipfian">
+				<alpha>1.78</alpha>
+				</indistribution>
+				<outdistribution type="gaussian">
+				<mu>5.87</mu>
+				<sigma>4.99</sigma>
+				</outdistribution>
+			</target>
+			<target type="6" symbol="6" multiplicity="*"> <!-- PublishedIn -->
+				<indistribution type="zipfian">
+				<alpha>1.37</alpha>
+				</indistribution>
+				<outdistribution type="uniform">
+				<min>1</min>
+				<max>1</max>
+				</outdistribution>
+			</target>
+		</source>
+	</schema>
+
+
+	<workload id="0" size="1000">
+		<!-- bounds for the size of these queries -->
+		<size>
+			<conjuncts min="3" max="3"/>	<!-- number of A^M where M is a multiplicity 1 or * -->
+			<disjuncts min="1" max="3"/>	<!-- number of w_1 + ... + w_n in each A -->
+			<length min="2" max="4"/>		<!-- number of a_1 . ... . a_m in each w_i -->
+		</size>
+
+		<!-- probability to have "*" as multiplicity of the conjuncts -->
+		<multiplicity star="0.5"/>
+
+		<!-- the arity of the generated queries, we allow 0 for Boolean queries -->
+		<arity min="2" max="2"/>
+
+		<!-- we want only empty or linear queries, but not constant nor quadratic -->
+		<selectivity empty="1" constant="0" linear="1" quadratic="0"/>
+
+		<!-- we want to have in the workload chains and stars, but not cycles, etc. -->
+		<type chain="1" star="1" cycle="0" starchain="0"/>
+	</workload>
+
+</generator>
