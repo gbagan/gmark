@@ -32,7 +32,6 @@ void qinterface(const string & inputfilename)
 {
     pugi::xml_document doc;
     pugi::xml_parse_result result = doc.load_file(inputfilename.c_str()); 
-    int qcount = 0;
 
     if (! result)
     {
@@ -43,13 +42,19 @@ void qinterface(const string & inputfilename)
     }
 
 
+		int total = 0;
+    for (pugi::xml_node query : doc.child("queries").children("query"))
+			total ++;
+
+
+    int qcount = 0;
     for (pugi::xml_node query : doc.child("queries").children("query"))
     {
+			string prefix_file = "interface-queries/query-" + to_string(qcount);
 
-// begin Radu
+			// Generate Dot
 
 			ofstream plot_file;
-			string prefix_file = "interface-queries/query-" + to_string(qcount);
 			string plot_file_name = prefix_file + ".dot";
 			plot_file.open(plot_file_name);
 			set<string> nodes_already_drawn;
@@ -94,10 +99,71 @@ void qinterface(const string & inputfilename)
 			string draw_command = "dot -Tpng -o " + prefix_file + ".png " + plot_file_name;
 			system (draw_command.c_str());
 
-// end Radu
 
 
-        qcount++;
+			// Generate HTML
+
+			ofstream html_file;
+			string html_file_name = prefix_file + ".html";
+			html_file.open(html_file_name);
+			html_file << "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n";
+			html_file << "<html xmlns=\"http://www.w3.org/1999/xhtml\">\n";
+			html_file << "<head>\n";
+			html_file << "\t<title>Visualize query workload</title>\n";
+			html_file << "\t<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\n";
+			html_file << "\t<link rel=\"stylesheet\" type=\"text/css\" href=\"../style.css\"/>\n";
+			html_file << "\t<script src=\"../animation.js\"></script>\n";
+			html_file << "</head>\n";
+			html_file << "<body>\n\n";
+			html_file << "<div id=\"top\">\n\n";
+			html_file << "<div id=\"left\">\n";
+			html_file << "<h3>Stats for Query "<< to_string(qcount) <<"</h3>\n";
+			html_file << "<ul>\n";
+			html_file << "<li><i>Dataset</i>: <span class=\"todo\">TODO</span></li>\n";
+			html_file << "<li><i>Selectivity</i>: <span class=\"todo\">TODO</span></li>\n";
+			html_file << "<li><i>Arity</i>: <span class=\"todo\">TODO</span></li>\n";
+			html_file << "<li><i>Size</i>: C[<span class=\"todo\">TODO</span>], D[<span class=\"todo\">TODO</span>], L[<span class=\"todo\">TODO</span>]</li>\n";
+			html_file << "<li><i>Recursion</i>: <span class=\"todo\">TODO</span>%</li>\n";
+			html_file << "</ul>\n";
+			html_file << "<hr/>\n";
+			html_file << "<h3>Generate concrete syntaxes</h3>\n";
+			html_file << "<input type=\"checkbox\" id=\"sparql-checkbox\"/>SPARQL<br/>\n";
+			html_file << "<input type=\"checkbox\" id=\"opencypher-checkbox\"/>openCypher<br/>\n";
+			html_file << "<input type=\"checkbox\" id=\"sql-checkbox\"/>SQL<br/>\n";
+			html_file << "<input type=\"checkbox\" id=\"datalog-checkbox\"/>Datalog<br/>\n";
+			html_file << "<hr/>\n";
+			html_file << "<a href=\"query-"<< to_string((qcount - 1 >= 0)? (qcount - 1) : (total - 1)) <<".html\">&lt;&lt;Previous query</a>\n";
+			html_file << "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+			html_file << "<a href=\"query-"<< to_string((qcount + 1) % total) <<".html\">Next query&gt;&gt;</a>\n";
+			html_file << "</div> <!-- end left -->\n\n";
+			html_file << "<div id=\"right\">\n";
+			html_file << "<img src=\"query-" << to_string(qcount) <<".png\"/>\n";
+			html_file << "</div> <!-- end right -->\n\n";
+			html_file << "</div> <!-- end top -->\n\n";
+			html_file << "<div id=\"bottom\">\n";
+			html_file << "<br/><br/>\n\n";
+			html_file << "<table border=\"1\">\n";
+			html_file << "<tr>\n";
+			html_file << "<th id=\"sparql-header\">SPARQL</th>\n";
+			html_file << "<th id=\"opencypher-header\">openCypher</th>\n";
+			html_file << "<th id=\"sql-header\">SQL</th>\n";
+			html_file << "<th id=\"datalog-header\">Datalog</th>\n";
+			html_file << "</tr>\n";
+			html_file << "<tr>\n";
+			html_file << "<td id=\"sparql-syntax\">SPARQL code <span class=\"todo\">TODO</span></td>\n";
+			html_file << "<td id=\"opencypher-syntax\">openCypher code <span class=\"todo\">TODO</span></td>\n";
+			html_file << "<td id=\"sql-syntax\">SQL code <span class=\"todo\">TODO</span></td>\n";
+			html_file << "<td id=\"datalog-syntax\">Datalog code <span class=\"todo\">TODO</span></td>\n";
+			html_file << "</tr>\n";
+			html_file << "</table>\n";
+			html_file << "</div><!-- end bottom -->\n\n";
+			html_file << "</body>\n";
+			html_file << "</html>\n";
+			html_file.close();
+
+
+			// Increment qcount
+      qcount++;
     }
 
     cout << endl << endl << qcount << " queries processed" << endl << endl;
