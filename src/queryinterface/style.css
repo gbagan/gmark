@@ -1,0 +1,30 @@
+#left {
+	background-color:#DDDDEE;
+	width:25%;
+	float:left;
+	padding: 10px;
+	border-radius: 15px;
+}
+
+
+#right{
+	width=75%;
+	text-align:center;
+}
+
+
+td {
+	width:400px;
+	padding:5px;
+}
+
+
+#sparql-header, #sparql-syntax, #opencypher-header, #opencypher-syntax, #sql-header, #sql-syntax, #datalog-header, #datalog-syntax {
+	visibility: hidden;
+}
+
+
+.todo {
+	color:red;
+	background-color:yellow;
+}
