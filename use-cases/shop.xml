@@ -3,7 +3,6 @@
 <generator>
 	<graph>
 		<nodes>1000000</nodes>
-		<output ntriples="1"/>
 	</graph>
 
 	<predicates>
@@ -848,12 +847,12 @@
 
 
 
-	<workload id="0" size="100">
+	<workload id="0" size="50">
 		<!-- bounds for the size of these queries -->
 		<size>
-			<conjuncts min="1" max="3"/>	<!-- number of A^M where M is a multiplicity 1 or * -->
-			<disjuncts min="2" max="5"/>	<!-- number of w_1 + ... + w_n in each A -->
-			<length min="7" max="12"/>		<!-- number of a_1 . ... . a_m in each w_i -->
+			<conjuncts min="3" max="3"/>	<!-- number of A^M where M is a multiplicity 1 or * -->
+			<disjuncts min="1" max="3"/>	<!-- number of w_1 + ... + w_n in each A -->
+			<length min="2" max="4"/>		<!-- number of a_1 . ... . a_m in each w_i -->
 		</size>
 
 		<!-- probability to have "*" as multiplicity of the conjuncts -->
@@ -862,11 +861,11 @@
 		<!-- the arity of the generated queries, we allow 0 for Boolean queries -->
 		<arity min="2" max="2"/>
 
-		<!-- we want only empty or linear queries, but not constant nor quadratic -->
-		<selectivity constant="1" linear="1" quadratic="1"/>
+		<!-- we want only linear queries, but not constant nor quadratic -->
+		<selectivity constant="0" linear="1" quadratic="0"/>
 
 		<!-- we want to have in the workload chains and stars, but not cycles, etc. -->
-		<type chain="1" star="0" cycle="0" starchain="0"/>
+		<type chain="1" star="1" cycle="0" starchain="0"/>
 	</workload>
 
 </generator>

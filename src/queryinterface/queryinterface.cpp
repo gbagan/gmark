@@ -59,6 +59,9 @@ void qinterface(const string & inputfilename)
 			plot_file.open(plot_file_name);
 			set<string> nodes_already_drawn;
 
+
+			int arity = 0;
+
 			plot_file << "digraph g {\n";
   	  for (pugi::xml_node var_node : query.child("head").children("var"))
   	  {
@@ -67,6 +70,7 @@ void qinterface(const string & inputfilename)
         plot_file << "\t" << var_text; 
 				plot_file << " [fillcolor=\"yellow\", style=\"filled,\" shape=circle, label=\"?"<< var_text <<"\"];\n";
 				nodes_already_drawn.insert(var_text);
+				arity ++;
     	}
 
 		  for (pugi::xml_node body_node : query.child("bodies").children("body"))
@@ -120,8 +124,9 @@ void qinterface(const string & inputfilename)
 			html_file << "<h3>Stats for Query "<< to_string(qcount) <<"</h3>\n";
 			html_file << "<ul>\n";
 			html_file << "<li><i>Dataset</i>: <span class=\"todo\">TODO</span></li>\n";
-			html_file << "<li><i>Selectivity</i>: <span class=\"todo\">TODO</span></li>\n";
-			html_file << "<li><i>Arity</i>: <span class=\"todo\">TODO</span></li>\n";
+			html_file << "<li><i>Arity</i>: " << arity << "</li>\n";
+			if (arity == 2)
+				html_file << "<li><i>Selectivity</i>: <span class=\"todo\">TODO</span></li>\n";
 			html_file << "<li><i>Size</i>: C[<span class=\"todo\">TODO</span>], D[<span class=\"todo\">TODO</span>], L[<span class=\"todo\">TODO</span>]</li>\n";
 			html_file << "<li><i>Recursion</i>: <span class=\"todo\">TODO</span>%</li>\n";
 			html_file << "</ul>\n";
@@ -145,13 +150,13 @@ void qinterface(const string & inputfilename)
 			html_file << "<table border=\"1\">\n";
 			html_file << "<tr>\n";
 			html_file << "<th id=\"sparql-header\">SPARQL</th>\n";
-			html_file << "<th id=\"opencypher-header\">openCypher</th>\n";
+			html_file << "<th id=\"opencypher-header\">openCypher*</th>\n";
 			html_file << "<th id=\"sql-header\">SQL</th>\n";
 			html_file << "<th id=\"datalog-header\">Datalog</th>\n";
 			html_file << "</tr>\n";
 			html_file << "<tr>\n";
 			html_file << "<td id=\"sparql-syntax\">SPARQL code <span class=\"todo\">TODO</span></td>\n";
-			html_file << "<td id=\"opencypher-syntax\">openCypher code <span class=\"todo\">TODO</span></td>\n";
+			html_file << "<td id=\"opencypher-syntax\">openCypher code <span class=\"todo\">TODO</span><br/> <small>* This query may have a different semantics than the intended one because openCypher does not allow Kleene star above concatenation and/or inverses.</small></td>\n";
 			html_file << "<td id=\"sql-syntax\">SQL code <span class=\"todo\">TODO</span></td>\n";
 			html_file << "<td id=\"datalog-syntax\">Datalog code <span class=\"todo\">TODO</span></td>\n";
 			html_file << "</tr>\n";
