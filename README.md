@@ -13,7 +13,10 @@ where the parameters are:
 - -a : to use aliases for the predicates in the generated graph and queries
 - -n : to specify the number of nodes in the graph (it overrides the parameter from the config file)
 
-The provided configuration file *use-cases/test.xml* encodes the schema of a bibliographical graph database.
+The provided configuration files in the directory *use-cases* are:
+- *test.xml* : schema of a bibliographical graph database
+- *shop.xml* : schema of an oline shop (our gMark encoding of the default schema from WatDiv)
+- *social-network.xml* : schema of a social network (our gMark encoding of the schema from LDBC SNB)
 
 **To translate the generated queries from the internal XML encoding to the concrete query languages:**
 (suppose we are currently in src)
