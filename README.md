@@ -17,6 +17,7 @@ The provided configuration files in the directory *use-cases* are:
 - *test.xml* : schema of a bibliographical graph database
 - *shop.xml* : schema of an online shop (our gMark encoding of the default schema from WatDiv)
 - *social-network.xml* : schema of a social network (our gMark encoding of the schema from LDBC SNB)
+- *uniprot.xml* : schema of a protein network (our gMark encoding of the schema extracted from UniProt)
 
 **To translate the generated queries from the internal XML encoding to the concrete query languages:**
 (suppose we are currently in src)
