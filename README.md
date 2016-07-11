@@ -4,13 +4,14 @@
 
     cd src
     make
-    ./test -c ../use-cases/test.xml -g ../graph.txt -w ../xml/queries.xml -s
+    ./test -c ../use-cases/test.xml -g ../graph.txt -w ../xml/queries.xml
 
 where the parameters are:
 - -c : the configuration file
-- -q : the output file for the graph instance
+- -g : the output file for the graph instance
 - -w : the output file for the queries generated on this instance
-- -s : to enforce selectivity estimation on binary queries
+- -a : to use aliases for the predicates in the generated graph and queries
+- -n : to specify the number of nodes in the graph (it overrides the parameter from the config file)
 
 The provided configuration file *use-cases/test.xml* encodes the schema of a bibliographical graph database.
 
