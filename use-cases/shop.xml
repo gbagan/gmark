@@ -867,9 +867,6 @@
 
 		<!-- we want to have in the workload chains and stars, but not cycles, etc. -->
 		<type chain="1" star="0" cycle="0" starchain="0"/>
-
-		<!-- we can choose in which format(s) to generate the workflow -->
-		<output sparql="1" postgres="1" cypher="1"/>
 	</workload>
 
 </generator>
