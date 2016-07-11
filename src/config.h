@@ -31,15 +31,18 @@ class predicate {
 public:
    string alias;
    size_t size;
+   double proportion;
    
    predicate () {
        alias = "";
        size = 0;
+       proportion = 0;
    }
   
-   predicate (const string & alias_, double size_) {
+   predicate (const string & alias_, size_t size_, double proportion_) {
         alias = alias_;
         size = size_;
+        proportion = proportion_;
     }
 };
 

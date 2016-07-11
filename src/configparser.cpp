@@ -76,6 +76,7 @@ void parse_predicates(pugi::xml_node node, config::config & conf) {
             cerr << "id " << id << " is out of range" << endl;
             continue;
         }
+        conf.predicates[id].proportion = proportion;
         conf.predicates[id].size = (size_t) (proportion * conf.nb_edges);
     }
 }

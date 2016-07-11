@@ -33,6 +33,7 @@ void html_graph_report(config::config & conf, report::report & rep, ofstream & s
     }
     stream << "]);\n";
     stream << "var options = {\n";
+    stream << "vAxis: { logScale: true, baseline: 1 },\n";
     stream << "title: 'Number of nodes by node type'\n";
     stream << "};\n";
     stream << "var chart = new google.visualization.ColumnChart(document.getElementById('hist11'));\n";
@@ -45,6 +46,7 @@ void html_graph_report(config::config & conf, report::report & rep, ofstream & s
     }
     stream << "]);\n";
     stream << "var options = {\n";
+    stream << "vAxis: { logScale: true, baseline: 1 },\n";
     stream << "title: 'Number of nodes by node type'\n";
     stream << "};\n";
     stream << "var chart = new google.visualization.ColumnChart(document.getElementById('hist12'));\n";
@@ -54,10 +56,16 @@ void html_graph_report(config::config & conf, report::report & rep, ofstream & s
     stream << "var data = google.visualization.arrayToDataTable([\n";
     stream << "['Predicate type', 'Number of predicates'], \n";
     for (auto & predicate : conf.predicates) {
-        stream << "['" << predicate.alias << "', " << predicate.size << "],\n";
+        size_t size = 0;
+        if (conf.nb_edges > 0)
+            size = predicate.size;
+        else;
+            size = predicate.proportion * rep.nb_edges;
+        stream << "['" << predicate.alias << "', " << size << "],\n";
     }
     stream << "]);\n";
     stream << "var options = {\n";
+    stream << "vAxis: { logScale: true, baseline: 1 },\n";    
     stream << "title: 'Number of predicates by type'\n";
     stream << "};\n";
     stream << "var chart = new google.visualization.ColumnChart(document.getElementById('hist21'));\n";
@@ -71,6 +79,7 @@ void html_graph_report(config::config & conf, report::report & rep, ofstream & s
     }
     stream << "]);\n";
     stream << "var options = {\n";
+    stream << "vAxis: { logScale: true, baseline: 1 },\n";
     stream << "title: 'Number of predicates by type'\n";
     stream << "};\n";
     stream << "var chart = new google.visualization.ColumnChart(document.getElementById('hist22'));\n";
