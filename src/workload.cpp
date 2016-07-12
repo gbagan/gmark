@@ -66,8 +66,13 @@ void write_xml(const query & query, ostream & stream) {
     stream << "  <metadata>\n";
     stream << "    <id>" << query.info.id << "</id>\n";
     stream << "    <number>" << query.info.number << "</number>\n";
+    stream << "    <input>" << query.info.input << "</input>\n";
     stream << "    <arity>" << query.info.arity << "</arity>\n";
     stream << "    <selectivity>" << (query.info.arity == 2 ? to_string(query.info.selectivity) : "-") << "</selectivity>\n";
+    stream << "    <multiplicity>" << query.info.multiplicity << "</multiplicity>\n";
+    stream << "    <conjunct>" << query.info.conjunct << "</conjunct>\n";
+    stream << "    <disjuncts>" << query.info.disjuncts.first << "-" << query.info.disjuncts.second << "</disjuncts>\n";
+    stream << "    <length>" << query.info.length.first << "-" << query.info.length.second << "</length>\n";
     stream << "  </metadata>\n";
 
     stream << "  <head>\n";

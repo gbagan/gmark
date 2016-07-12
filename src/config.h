@@ -124,6 +124,7 @@ public:
 
 class config {
 public:
+    string input;
     size_t nb_nodes;
     size_t nb_edges;
     vector<type> types;

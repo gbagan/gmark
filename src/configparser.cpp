@@ -28,6 +28,7 @@ int parse_config(const string & filename, config::config & conf) {
         conf.nb_nodes = nodes;
     }
 
+    conf.input = filename;
     conf.nb_edges = edges;
    
     pugi::xml_node predicates = root.child("predicates");

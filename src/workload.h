@@ -14,8 +14,14 @@ class Info {
 public:
     int id;
     int number;
+    string input;
     config::selectivity::type selectivity;
     int arity;
+    string dataset;
+    double multiplicity;
+    size_t conjunct;
+    pair<size_t,size_t> disjuncts;
+    pair<size_t,size_t> length;
 };
 
 

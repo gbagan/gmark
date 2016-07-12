@@ -794,7 +794,8 @@ void generate_query(const config::config & conf, const config::workload & wconf,
     int sum = wconf.type.chain + wconf.type.star + wconf.type.cycle + wconf.type.starchain;
     int n = uniform_random_generator(1, sum).next();
     int i = 0;
-    
+
+
     if (wconf.type.chain) {
         i++;
         if(i == n) {
@@ -846,10 +847,40 @@ void generate_workload(const config::config & conf, workload::workload & wl, rep
     
     for (const auto & wconf : conf.workloads) {
         for (unsigned int i = 0; i < wconf.size; i++) {
+            int nb_stars = 0;
+            size_t min_disjunct = 10000000000;
+            size_t max_disjunct = 0;
+            size_t min_length = 1000000000;
+            size_t max_length = 0;
+            workload::query & query = wl.queries[c];
             //cout << "generate query " << i << endl;
-            workload2::generate_query(conf, wconf, wl.queries[c]);
-            wl.queries[c].info.id = wconf.id;
-            wl.queries[c].info.number = i;
+            workload2::generate_query(conf, wconf, query);
+            query.info.id = wconf.id;
+            query.info.number = i;
+            query.info.input = conf.input;
+            //wl.queries[c].info.multiplicity = wconf.multiplicity;
+            query.info.conjunct = query.bodies[0].conjuncts.size();
+            for (workload::conjunct & conjunct : query.bodies[0].conjuncts) {
+                if (conjunct.star)
+                    nb_stars++;
+                if(conjunct.disjuncts.size() < min_disjunct)
+                    min_disjunct = conjunct.disjuncts.size();
+                if(conjunct.disjuncts.size() > max_disjunct)
+                    max_disjunct = conjunct.disjuncts.size();
+                for (workload::disjunct & disjunct : conjunct.disjuncts) {
+                    if(disjunct.symbols.size() < min_length)
+                        min_length = disjunct.symbols.size();
+                    if(disjunct.symbols.size() > max_length)
+                        max_length = disjunct.symbols.size();
+                }
+            }
+            //q.info.disjuncts = wconf.disjuncts;
+            //q.info.length = wconf.length;
+            query.info.multiplicity = ((double) nb_stars) / query.info.conjunct;
+            query.info.disjuncts.first = min_disjunct;
+            query.info.disjuncts.second = max_disjunct;
+            query.info.length.first = min_length;
+            query.info.length.second = max_length;
             c++;
         }
     }
