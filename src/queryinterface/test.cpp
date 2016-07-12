@@ -26,7 +26,7 @@
 
 int main() {
 
-  qinterface("../../xml/queries.xml");
+  qinterface("../../xml/queries.xml", "../querytranslate/translated");
   exit(EXIT_SUCCESS);
 
 }

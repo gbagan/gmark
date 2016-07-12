@@ -14,8 +14,7 @@
 <h3>Stats for Query 2</h3>
 <ul>
 <li><i>Dataset</i>: <span class="todo">TODO</span></li>
-<li><i>Arity</i>: 2</li>
-<li><i>Selectivity</i>: <span class="todo">TODO</span></li>
+<li><i>Arity</i>: 0</li>
 <li><i>Size</i>: C[<span class="todo">TODO</span>], D[<span class="todo">TODO</span>], L[<span class="todo">TODO</span>]</li>
 <li><i>Recursion</i>: <span class="todo">TODO</span>%</li>
 </ul>
@@ -47,10 +46,10 @@
 <th id="datalog-header">Datalog</th>
 </tr>
 <tr>
-<td id="sparql-syntax">SPARQL code <span class="todo">TODO</span></td>
-<td id="opencypher-syntax">openCypher code <span class="todo">TODO</span><br/> <small>* This query may have a different semantics than the intended one because openCypher does not allow Kleene star above concatenation and/or inverses.</small></td>
-<td id="sql-syntax">SQL code <span class="todo">TODO</span></td>
-<td id="datalog-syntax">Datalog code <span class="todo">TODO</span></td>
+<td valign="top" id="sparql-syntax">PREFIX : &lt;http://example.org/gmark/&gt;<br/> ASK {  {  ?x0 ((^:p2/^:p1/:p3)|(^:p2/^:p1/:p3)) ?x1 . ?x0 ((^:p2/^:p1/:p3)) ?x2 . ?x0 ((^:p2/^:p1/:p3)|(^:p2/^:p1/:p3)|(^:p2/^:p1/:p3)) ?x3 . } }<br/></td>
+<td valign="top" id="opencypher-syntax">MATCH (x0)<-[:p2]-()<-[:p1]-()-[:p3]->(x1), (x0)<-[:p2]-()<-[:p1]-()-[:p3]->(x2), (x0)<-[:p2]-()<-[:p1]-()-[:p3]->(x3) RETURN "true" LIMIT 1;<br/><br/><br/>*Note: This query may have a different semantics than the intended one because openCypher does not allow Kleene star above concatenation and/or inverses.</td>
+<td valign="top" id="sql-syntax">WITH RECURSIVE c0(src, trg) AS ((SELECT s0.src, s2.trg FROM (SELECT trg as src, src as trg, label FROM edge) as s0, (SELECT trg as src, src as trg, label FROM edge) as s1, edge s2 WHERE s0.trg = s1.src AND s1.trg = s2.src AND s0.label = 2 AND s1.label = 1  AND s2.label = 3  UNION SELECT s0.src, s2.trg FROM (SELECT trg as src, src as trg, label FROM edge) as s0, (SELECT trg as src, src as trg, label FROM edge) as s1, edge s2 WHERE s0.trg = s1.src AND s1.trg = s2.src AND s0.label = 2 AND s1.label = 1  AND s2.label = 3 )) , c1(src, trg) AS ((SELECT s0.src, s2.trg FROM (SELECT trg as src, src as trg, label FROM edge) as s0, (SELECT trg as src, src as trg, label FROM edge) as s1, edge s2 WHERE s0.trg = s1.src AND s1.trg = s2.src AND s0.label = 2 AND s1.label = 1  AND s2.label = 3 )) , c2(src, trg) AS ((SELECT s0.src, s2.trg FROM (SELECT trg as src, src as trg, label FROM edge) as s0, (SELECT trg as src, src as trg, label FROM edge) as s1, edge s2 WHERE s0.trg = s1.src AND s1.trg = s2.src AND s0.label = 2 AND s1.label = 1  AND s2.label = 3  UNION SELECT s0.src, s2.trg FROM (SELECT trg as src, src as trg, label FROM edge) as s0, (SELECT trg as src, src as trg, label FROM edge) as s1, edge s2 WHERE s0.trg = s1.src AND s1.trg = s2.src AND s0.label = 2 AND s1.label = 1  AND s2.label = 3  UNION SELECT s0.src, s2.trg FROM (SELECT trg as src, src as trg, label FROM edge) as s0, (SELECT trg as src, src as trg, label FROM edge) as s1, edge s2 WHERE s0.trg = s1.src AND s1.trg = s2.src AND s0.label = 2 AND s1.label = 1  AND s2.label = 3 )) SELECT "true" FROM edge WHERE EXISTS (SELECT * FROM c0, c1, c2 WHERE c0.src = c1.src AND c0.src = c2.src);<br/></td>
+<td valign="top" id="datalog-syntax">BEGIN<br/>gmarkSubquery00(x, y) <- core:edge:edge(x1, 2, x0), core:edge:edge(x2, 1, x1), core:edge:edge(x2, 3, x3), x = x0, y = x3.<br/>gmarkSubquery00(x, y) <- core:edge:edge(x1, 2, x0), core:edge:edge(x2, 1, x1), core:edge:edge(x2, 3, x3), x = x0, y = x3.<br/>gmarkSubquery01(x, y) <- core:edge:edge(x1, 2, x0), core:edge:edge(x2, 1, x1), core:edge:edge(x2, 3, x3), x = x0, y = x3.<br/>gmarkSubquery02(x, y) <- core:edge:edge(x1, 2, x0), core:edge:edge(x2, 1, x1), core:edge:edge(x2, 3, x3), x = x0, y = x3.<br/>gmarkSubquery02(x, y) <- core:edge:edge(x1, 2, x0), core:edge:edge(x2, 1, x1), core:edge:edge(x2, 3, x3), x = x0, y = x3.<br/>gmarkSubquery02(x, y) <- core:edge:edge(x1, 2, x0), core:edge:edge(x2, 1, x1), core:edge:edge(x2, 3, x3), x = x0, y = x3.<br/>query() <- gmarkSubquery00(x0, x1), gmarkSubquery01(x0, x2), gmarkSubquery02(x0, x3).<br/>END<br/></td>
 </tr>
 </table>
 </div><!-- end bottom -->
