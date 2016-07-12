@@ -579,6 +579,8 @@ void generate_chain(const config::config & conf, const config::workload & wconf,
     }
     
     size_t arity = uniform_random_generator(wconf.arity.first, wconf.arity.second).next();
+    q.info.arity = arity;
+
     if (arity == 1) {
         q.variables.push_back("?x0");
     }
@@ -633,6 +635,7 @@ void generate_star(const config::config & conf, const config::workload & wconf, 
     }
     
     size_t arity = uniform_random_generator(wconf.arity.first, wconf.arity.second).next();
+    q.info.arity = arity;
 
     if (arity == 1) {
         q.variables.push_back("?x0");
@@ -665,7 +668,8 @@ void generate_cycle(const config::config & conf, const config::workload & wconf,
     matrix_of_paths pathmat;
     auto selectivity = generate_random_selectivity(wconf);
     q.info.selectivity = selectivity;
-    
+       
+
     number_of_paths(g, selectivity, n1, pathmat);
     vector<triple> path;
     generate_random_path(g, pathmat, -1, n1, wconf.multiplicity, path);
@@ -699,6 +703,7 @@ void generate_cycle(const config::config & conf, const config::workload & wconf,
     }
     
     size_t arity = uniform_random_generator(wconf.arity.first, wconf.arity.second).next();
+    q.info.arity = arity;
     if (arity == 1) {
         q.variables.push_back("?x0");
     }
@@ -773,6 +778,8 @@ void generate_starchain(const config::config & conf, const config::workload & wc
     
     
     size_t arity = uniform_random_generator(wconf.arity.first, wconf.arity.second).next();
+    q.info.arity = arity;
+
     if (arity == 1) {
         q.variables.push_back("?x0");
     }

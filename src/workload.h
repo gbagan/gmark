@@ -15,6 +15,7 @@ public:
     int id;
     int number;
     config::selectivity::type selectivity;
+    int arity;
 };
 
 
