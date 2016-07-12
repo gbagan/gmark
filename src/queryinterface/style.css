@@ -1,0 +1,43 @@
+#top {
+	width:2000px;
+}
+
+
+#left {
+	background-color:#DDDDEE;
+	width:350px;
+	float:left;
+	padding: 10px;
+	border-radius: 15px;
+}
+
+
+#right{
+	width:1650px;
+}
+
+img {
+	margin-left:50px;
+}
+
+
+#bottom{
+	float:left;
+}
+
+
+td {
+	width:400px;
+	padding:5px;
+}
+
+
+#sparql-header, #sparql-syntax, #opencypher-header, #opencypher-syntax, #sql-header, #sql-syntax, #datalog-header, #datalog-syntax {
+	visibility: hidden;
+}
+
+
+.todo {
+	color:red;
+	background-color:yellow;
+}

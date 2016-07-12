@@ -1,7 +1,6 @@
 <generator>
 	<graph>
 		<nodes>10000000</nodes>
-		<output ntriples="1"/>
 	</graph>
 
 	<predicates>
@@ -18,8 +17,6 @@
 		<alias symbol="3">extendedTo</alias>
 		<proportion symbol="3">0.1</proportion>
 	</predicates>
-
-
 
 	<types>
 		<size>5</size>
@@ -48,7 +45,7 @@
 					<sigma>1</sigma>
 				</indistribution>
 				<outdistribution type="zipfian">
-                                    <n>100</n>
+					<n>100</n>
 					<alpha>2.5</alpha>
 				</outdistribution>
 			</target>
@@ -69,7 +66,7 @@
 
 			<target type="2" symbol="3" multiplicity="?"> <!-- extended to a journal -->
 				<indistribution type="zipfian">
-                                        <n>100</n>
+					<n>100</n>
 					<alpha>2.5</alpha>
 				</indistribution>
 				<outdistribution type="uniform">
@@ -83,8 +80,8 @@
 		<source type="3"> <!-- conference -->
 			<target type="4" symbol="2" multiplicity="1"> <!-- held in a city -->
 				<indistribution type="zipfian">
-                                    <n>100</n>
-                                    <alpha>2.5</alpha>
+					<n>100</n>
+					<alpha>2.5</alpha>
 				</indistribution>
 				<outdistribution type="uniform">
 					<min>1</min>
@@ -95,10 +92,7 @@
 	</schema>
 
 
-
-	<!-- we can have several workloads -->
-	<!-- for each workload we can generate a specific number of queries -->
-	<workload id="0" size="1000">
+	<workload id="0" size="50">
 		<!-- bounds for the size of these queries -->
 		<size>
 			<conjuncts min="3" max="3"/>	<!-- number of A^M where M is a multiplicity 1 or * -->
@@ -112,14 +106,11 @@
 		<!-- the arity of the generated queries, we allow 0 for Boolean queries -->
 		<arity min="2" max="2"/>
 
-		<!-- we want only empty or linear queries, but not constant nor quadratic -->
-		<selectivity empty="1" constant="0" linear="1" quadratic="0"/>
+		<!-- we want only linear queries, but not constant nor quadratic -->
+		<selectivity constant="0" linear="1" quadratic="0"/>
 
 		<!-- we want to have in the workload chains and stars, but not cycles, etc. -->
 		<type chain="1" star="1" cycle="0" starchain="0"/>
-
-		<!-- we can choose in which format(s) to generate the workflow -->
-		<output sql="1" sparql="1" postgres="1" cypher="1"/>
 	</workload>
 
 </generator>

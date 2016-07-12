@@ -1,0 +1,871 @@
+<!-- gMark encoding of the default schema from WatDiv -->
+
+<generator>
+	<graph>
+		<nodes>1000000</nodes>
+	</graph>
+
+	<predicates>
+		<size>82</size>
+		<!-- we have only aliases, but no global constraints e.g., no <proportion>... -->	
+		<alias symbol="0">description</alias>
+		<alias symbol="1">contentRating</alias>
+		<alias symbol="2">keywords</alias>
+		<alias symbol="3">text</alias>
+		<alias symbol="4">contentSize</alias>
+		<alias symbol="5">caption</alias>
+		<alias symbol="6">expires</alias>
+		<alias symbol="7">opus</alias>
+		<alias symbol="8">movement</alias>
+		<alias symbol="9">composer</alias>
+		<alias symbol="10">performer</alias>
+		<alias symbol="11">producer</alias>
+		<alias symbol="12">recordNumber</alias>
+		<alias symbol="13">release</alias>
+		<alias symbol="14">duration</alias>
+		<alias symbol="15">award</alias>
+		<alias symbol="16">isbn</alias>
+		<alias symbol="17">bookEdition</alias>
+		<alias symbol="18">numberOfPages</alias>
+		<alias symbol="19">published</alias>
+		<alias symbol="20">datePublished</alias>
+		<alias symbol="21">wordCount</alias>
+		<alias symbol="22">printColumn</alias>
+		<alias symbol="23">printEdition</alias>
+		<alias symbol="24">printPage</alias>
+		<alias symbol="25">printSection</alias>
+		<alias symbol="26">name</alias>
+		<alias symbol="27">openingHours</alias>
+		<alias symbol="28">paymentAccepted</alias>
+		<alias symbol="29">email</alias>
+		<alias symbol="30">telephone</alias>
+		<alias symbol="31">faxNumber</alias>
+		<alias symbol="32">aggregateRating</alias>
+		<alias symbol="33">legalName</alias>
+		<alias symbol="34">serialNumber</alias>
+		<alias symbol="35">price</alias>
+		<alias symbol="36">validForm</alias>
+		<alias symbol="37">validThrough</alias>
+		<alias symbol="38">priceValidUntil</alias>
+		<alias symbol="39">eligibleQuantity</alias>
+		<alias symbol="40">purchaseDate</alias>
+		<alias symbol="41">url</alias>
+		<alias symbol="42">hits</alias>
+		<alias symbol="43">rating</alias>
+		<alias symbol="44">totalVotes</alias>
+		<alias symbol="45">userId</alias>
+		<alias symbol="46">givenName</alias>
+		<alias symbol="47">familyName</alias>
+		<alias symbol="48">birthDate</alias>
+		<alias symbol="49">jobTitle</alias>
+		<alias symbol="50">title</alias>
+		<alias symbol="51">type</alias>
+		<alias symbol="52">tag</alias>
+		<alias symbol="53">hasGenre</alias>
+		<alias symbol="54">homepage</alias>
+		<alias symbol="55">parentContry</alias>
+		<alias symbol="56">language</alias>
+		<alias symbol="57">like</alias>
+		<alias symbol="58">subscribes</alias>
+		<alias symbol="59">follows</alias>
+		<alias symbol="60">friendOf</alias>
+		<alias symbol="61">location</alias>
+		<alias symbol="62">age</alias>
+		<alias symbol="63">gender</alias>
+		<alias symbol="64">nationality</alias>
+		<alias symbol="65">conductor</alias>
+		<alias symbol="66">performedIn</alias>
+		<alias symbol="67">artist</alias>
+		<alias symbol="68">actor</alias>
+		<alias symbol="69">director</alias>
+		<alias symbol="70">trailer</alias>
+		<alias symbol="71">author</alias>
+		<alias symbol="72">editor</alias>
+		<alias symbol="73">offers</alias>
+		<alias symbol="74">contactPoint</alias>
+		<alias symbol="75">employee</alias>
+		<alias symbol="76">includes</alias>
+		<alias symbol="77">eligibleRegion</alias>
+		<alias symbol="78">makesPurchase</alias>
+		<alias symbol="79">purchaseFor</alias>
+		<alias symbol="80">reviewer</alias>
+		<alias symbol="81">hasReview</alias>
+	</predicates>
+
+
+
+	<types>
+		<size>24</size>
+
+		<alias type="0">Genre</alias>
+		<fixed type="0">21</fixed>
+
+		<alias type="1">SubGenre</alias>
+		<fixed type="1">145</fixed>
+
+		<alias type="2">Topic</alias>
+		<fixed type="2">250</fixed>
+
+		<alias type="3">City</alias>
+		<fixed type="3">240</fixed>
+
+		<alias type="4">Country</alias>
+		<fixed type="4">25</fixed>
+
+		<alias type="5">Language</alias>
+		<fixed type="5">35</fixed>
+
+		<alias type="6">Role</alias>
+		<fixed type="6">3</fixed>
+
+		<alias type="7">AgeGroup</alias>
+		<fixed type="7">9</fixed>
+
+		<alias type="8">Gender</alias>
+		<fixed type="8">2</fixed>
+
+		<alias type="9">ClassicalMusicConcert</alias>
+		<proportion type="9">0.01</proportion>
+
+		<alias type="10">MusicAlbum</alias>
+		<proportion type="10">0.01</proportion>
+
+		<alias type="11">Movie</alias>
+		<proportion type="11">0.01</proportion>
+
+		<alias type="12">Book</alias>
+		<proportion type="12">0.01</proportion>
+
+		<alias type="13">NewsArticle</alias>
+		<proportion type="13">0.01</proportion>
+
+		<alias type="14">OtherProduct</alias>
+		<proportion type="14">0.01</proportion>
+
+		<alias type="15">Retailer</alias>
+		<proportion type="15">0.009</proportion>
+
+		<alias type="16">Offer</alias>
+		<proportion type="16">0.17</proportion>
+
+		<alias type="17">Purchase</alias>
+		<proportion type="17">0.28</proportion>
+
+		<alias type="18">Website</alias>
+		<proportion type="18">0.01</proportion>
+
+		<alias type="19">Review</alias>
+		<proportion type="19">0.28</proportion>
+
+		<alias type="20">User</alias>
+		<proportion type="20">0.19</proportion>
+
+		<alias type="21">string</alias>
+                <fixed type="21">1000</fixed>
+                
+		<alias type="22">integer</alias>
+                <fixed type="22">1000</fixed>
+                
+		<alias type="23">date</alias>
+                <fixed type="23">1000</fixed>
+	</types>
+
+
+
+
+	<schema>
+		<source type="9"> <!-- classical music concert -->
+			<target type="21" symbol="50" multiplicity="1"/>
+			<target type="21" symbol="0" multiplicity="?"/>
+			<target type="22" symbol="1" multiplicity="*"> <!-- rating -->
+				<outdistribution type="zipfian">
+					<alpha>2.5</alpha>
+				</outdistribution>
+			</target>
+			<target type="21" symbol="2" multiplicity="*"> <!-- keywords -->
+				<outdistribution type="zipfian">
+					<alpha>2.5</alpha>
+				</outdistribution>
+			</target>
+			<target type="21" symbol="3" multiplicity="?"/>
+			<target type="22" symbol="4" multiplicity="?"/>
+			<target type="21" symbol="5" multiplicity="?"/>
+			<target type="23" symbol="6" multiplicity="?"/>
+
+			<target type="22" symbol="7" multiplicity="?"/>
+			<target type="22" symbol="8" multiplicity="?"/>
+			<target type="21" symbol="9" multiplicity="?"/>
+			<target type="21" symbol="10" multiplicity="?"/>
+		</source>
+
+
+		<source type="10"> <!-- music album -->
+			<target type="21" symbol="50" multiplicity="1"/>
+			<target type="21" symbol="0" multiplicity="?"/>
+			<target type="22" symbol="1" multiplicity="*"> <!-- rating -->
+				<outdistribution type="zipfian">
+					<alpha>2.5</alpha>
+				</outdistribution>
+			</target>
+			<target type="21" symbol="2" multiplicity="*"> <!-- keywords -->
+				<outdistribution type="zipfian">
+					<alpha>2.5</alpha>
+				</outdistribution>
+			</target>
+			<target type="21" symbol="3" multiplicity="?"/>
+			<target type="22" symbol="4" multiplicity="?"/>
+			<target type="21" symbol="5" multiplicity="?"/>
+			<target type="23" symbol="6" multiplicity="?"/>
+
+			<target type="21" symbol="11" multiplicity="?"/>
+			<target type="22" symbol="12" multiplicity="?"/>
+			<target type="23" symbol="13" multiplicity="?"/>
+		</source>
+
+
+		<source type="11"> <!-- movie -->
+			<target type="21" symbol="50" multiplicity="1"/>
+			<target type="21" symbol="0" multiplicity="?"/>
+			<target type="22" symbol="1" multiplicity="*"> <!-- rating -->
+				<outdistribution type="zipfian">
+					<alpha>2.5</alpha>
+				</outdistribution>
+			</target>
+			<target type="21" symbol="2" multiplicity="*"> <!-- keywords -->
+				<outdistribution type="zipfian">
+					<alpha>2.5</alpha>
+				</outdistribution>
+			</target>
+			<target type="21" symbol="3" multiplicity="?"/>
+			<target type="22" symbol="4" multiplicity="?"/>
+			<target type="21" symbol="5" multiplicity="?"/>
+			<target type="23" symbol="6" multiplicity="?"/>
+
+			<target type="22" symbol="14" multiplicity="?"/>
+			<target type="21" symbol="11" multiplicity="?"/>
+			<target type="21" symbol="15" multiplicity="?"/>
+		</source>
+
+
+		<source type="12"> <!-- book -->
+			<target type="21" symbol="50" multiplicity="1"/>
+			<target type="21" symbol="0" multiplicity="?"/>
+			<target type="22" symbol="1" multiplicity="*"> <!-- rating -->
+				<outdistribution type="zipfian">
+					<alpha>2.5</alpha>
+				</outdistribution>
+			</target>
+			<target type="21" symbol="2" multiplicity="*"> <!-- keywords -->
+				<outdistribution type="zipfian">
+					<alpha>2.5</alpha>
+				</outdistribution>
+			</target>
+			<target type="21" symbol="3" multiplicity="?"/>
+			<target type="22" symbol="4" multiplicity="?"/>
+			<target type="21" symbol="5" multiplicity="?"/>
+			<target type="23" symbol="6" multiplicity="?"/>
+
+			<target type="22" symbol="16" multiplicity="1"/>
+			<target type="22" symbol="17" multiplicity="?"/>
+			<target type="22" symbol="18" multiplicity="?"/>
+		</source>
+
+
+		<source type="13"> <!-- news article -->
+			<target type="21" symbol="50" multiplicity="1"/>
+			<target type="21" symbol="0" multiplicity="?"/>
+			<target type="22" symbol="1" multiplicity="*"> <!-- rating -->
+				<outdistribution type="zipfian">
+					<alpha>2.5</alpha>
+				</outdistribution>
+			</target>
+			<target type="21" symbol="2" multiplicity="*"> <!-- keywords -->
+				<outdistribution type="zipfian">
+					<alpha>2.5</alpha>
+				</outdistribution>
+			</target>
+			<target type="21" symbol="3" multiplicity="?"/>
+			<target type="22" symbol="4" multiplicity="?"/>
+			<target type="21" symbol="5" multiplicity="?"/>
+			<target type="23" symbol="6" multiplicity="?"/>
+
+			<target type="21" symbol="19" multiplicity="?"/>
+			<target type="23" symbol="20" multiplicity="?"/>
+			<target type="22" symbol="21" multiplicity="?"/>
+			<target type="22" symbol="22" multiplicity="?"/>
+			<target type="22" symbol="23" multiplicity="?"/>
+			<target type="22" symbol="24" multiplicity="?"/>
+			<target type="22" symbol="25" multiplicity="?"/>
+		</source>
+
+
+		<source type="14"> <!-- other product -->
+			<target type="21" symbol="50" multiplicity="1"/>
+			<target type="21" symbol="0" multiplicity="?"/>
+			<target type="22" symbol="1" multiplicity="*"> <!-- rating -->
+				<outdistribution type="zipfian">
+					<alpha>2.5</alpha>
+				</outdistribution>
+			</target>
+			<target type="21" symbol="2" multiplicity="*"> <!-- keywords -->
+				<outdistribution type="zipfian">
+					<alpha>2.5</alpha>
+				</outdistribution>
+			</target>
+			<target type="21" symbol="3" multiplicity="?"/>
+			<target type="22" symbol="4" multiplicity="?"/>
+			<target type="21" symbol="5" multiplicity="?"/>
+			<target type="23" symbol="6" multiplicity="?"/>
+		</source>
+
+
+
+		<source type="15"> <!-- retailer -->
+			<target type="21" symbol="26" multiplicity="1"/>
+			<target type="21" symbol="0" multiplicity="1"/>
+			<target type="22" symbol="27" multiplicity="?"/>
+			<target type="21" symbol="28" multiplicity="?"/>
+			<target type="21" symbol="29" multiplicity="?"/>
+			<target type="22" symbol="30" multiplicity="?"/>
+			<target type="22" symbol="31" multiplicity="?"/>
+			<target type="22" symbol="32" multiplicity="?"/>
+			<target type="21" symbol="33" multiplicity="?"/>
+		</source>
+
+
+		<source type="16"> <!-- offer -->
+			<target type="22" symbol="34" multiplicity="1"/>
+			<target type="22" symbol="35" multiplicity="1"/>
+			<target type="23" symbol="36" multiplicity="?"/>
+			<target type="23" symbol="37" multiplicity="?"/>
+			<target type="23" symbol="38" multiplicity="?"/>
+			<target type="22" symbol="39" multiplicity="?"/>
+		</source>
+
+
+		<source type="17"> <!-- purchase -->
+			<target type="22" symbol="35" multiplicity="1"/>
+			<target type="23" symbol="40" multiplicity="?"/>
+		</source>
+
+
+		<source type="18"> <!-- website -->
+			<target type="21" symbol="41" multiplicity="1"/>
+			<target type="22" symbol="42" multiplicity="1"/>
+		</source>
+
+
+		<source type="19"> <!-- review -->
+			<target type="22" symbol="43" multiplicity="1"/>
+			<target type="21" symbol="50" multiplicity="?"/>
+			<target type="21" symbol="3" multiplicity="?"/>
+			<target type="22" symbol="44" multiplicity="?"/>
+		</source>
+
+
+		<source type="20"> <!-- user -->
+			<target type="22" symbol="45" multiplicity="1"/>
+			<target type="21" symbol="46" multiplicity="?"/>
+			<target type="21" symbol="47" multiplicity="?"/>
+			<target type="23" symbol="48" multiplicity="?"/>
+			<target type="21" symbol="29" multiplicity="?"/>
+			<target type="22" symbol="30" multiplicity="?"/>
+			<target type="21" symbol="49" multiplicity="?"/>
+		</source>
+
+
+		<source type="1"> <!-- SubGenre -->
+			<target type="0" symbol="51" multiplicity="1"> <!-- Genre -->
+				<outdistribution type="uniform">
+					<min>1</min>
+					<max>1</max>
+				</outdistribution>
+			</target>
+			<target type="2" symbol="52" multiplicity="1"> <!-- Topic -->
+				<outdistribution type="uniform">
+					<min>6</min>
+					<max>6</max>
+				</outdistribution>
+			</target>
+		</source>
+
+
+		<source type="9"> <!-- Classical Music Concert -->
+			<target type="1" symbol="53" multiplicity="+">
+				<outdistribution type="gaussian">
+					<mu>3</mu>
+					<sigma>1</sigma>
+				</outdistribution>
+			</target>
+			<target type="2" symbol="52" multiplicity="*">
+				<outdistribution type="uniform">
+					<min>20</min>
+					<max>20</max>
+				</outdistribution>
+			</target>
+			<target type="18" symbol="54" multiplicity="1">
+				<outdistribution type="uniform">
+					<min>1</min>
+					<max>1</max>
+				</outdistribution>
+			</target>
+			<target type="20" symbol="65" multiplicity="1">
+				<outdistribution type="uniform">
+					<min>1</min>
+					<max>1</max>
+				</outdistribution>
+			</target>
+			<target type="3" symbol="66" multiplicity="*">
+				<outdistribution type="zipfian">
+					<alpha>2.5</alpha>
+				</outdistribution>
+			</target>
+			<target type="19" symbol="81" multiplicity="*">
+				<outdistribution type="gaussian">
+					<mu>60</mu>
+					<sigma>20</sigma>
+				</outdistribution>
+			</target>
+		</source>
+
+
+		<source type="10"> <!-- Music Album -->
+			<target type="1" symbol="53" multiplicity="+">
+				<outdistribution type="gaussian">
+					<mu>3</mu>
+					<sigma>1</sigma>
+				</outdistribution>
+			</target>
+			<target type="2" symbol="52" multiplicity="*">
+				<outdistribution type="uniform">
+					<min>20</min>
+					<max>20</max>
+				</outdistribution>
+			</target>
+			<target type="18" symbol="54" multiplicity="1">
+				<outdistribution type="uniform">
+					<min>1</min>
+					<max>1</max>
+				</outdistribution>
+			</target>
+			<target type="20" symbol="67" multiplicity="*">
+				<outdistribution type="zipfian">
+					<alpha>2.5</alpha>
+				</outdistribution>
+			</target>
+			<target type="19" symbol="81" multiplicity="*">
+				<outdistribution type="gaussian">
+					<mu>60</mu>
+					<sigma>20</sigma>
+				</outdistribution>
+			</target>
+		</source>
+
+
+		<source type="11"> <!-- Movie -->
+			<target type="1" symbol="53" multiplicity="+">
+				<outdistribution type="gaussian">
+					<mu>3</mu>
+					<sigma>1</sigma>
+				</outdistribution>
+			</target>
+			<target type="2" symbol="52" multiplicity="*">
+				<outdistribution type="uniform">
+					<min>20</min>
+					<max>20</max>
+				</outdistribution>
+			</target>
+			<target type="18" symbol="54" multiplicity="1">
+				<outdistribution type="uniform">
+					<min>1</min>
+					<max>1</max>
+				</outdistribution>
+			</target>
+			<target type="20" symbol="68" multiplicity="+">
+				<outdistribution type="gaussian">
+					<mu>25</mu>
+					<sigma>5</sigma>
+				</outdistribution>
+			</target>
+			<target type="20" symbol="69" multiplicity="1">
+				<outdistribution type="zipfian">
+					<alpha>2.5</alpha>
+				</outdistribution>
+			</target>
+			<target type="18" symbol="70" multiplicity="*">
+				<outdistribution type="gaussian">
+					<mu>3</mu>
+					<sigma>1</sigma>
+				</outdistribution>
+			</target>
+			<target type="5" symbol="56" multiplicity="*">
+				<outdistribution type="zipfian">
+					<alpha>2.5</alpha>
+				</outdistribution>
+			</target>
+			<target type="19" symbol="81" multiplicity="*">
+				<outdistribution type="gaussian">
+					<mu>60</mu>
+					<sigma>20</sigma>
+				</outdistribution>
+			</target>
+		</source>
+
+
+		<source type="12"> <!-- Book -->
+			<target type="1" symbol="53" multiplicity="+">
+				<outdistribution type="gaussian">
+					<mu>3</mu>
+					<sigma>1</sigma>
+				</outdistribution>
+			</target>
+			<target type="2" symbol="52" multiplicity="*">
+				<outdistribution type="uniform">
+					<min>20</min>
+					<max>20</max>
+				</outdistribution>
+			</target>
+			<target type="18" symbol="54" multiplicity="1">
+				<outdistribution type="uniform">
+					<min>1</min>
+					<max>1</max>
+				</outdistribution>
+			</target>
+			<target type="20" symbol="71" multiplicity="*">
+				<outdistribution type="gaussian">
+					<mu>4</mu>
+					<sigma>2</sigma>
+				</outdistribution>
+			</target>
+			<target type="20" symbol="72" multiplicity="*">
+				<outdistribution type="gaussian">
+					<mu>4</mu>
+					<sigma>2</sigma>
+				</outdistribution>
+			</target>
+			<target type="5" symbol="56" multiplicity="*">
+				<outdistribution type="zipfian">
+					<alpha>2.5</alpha>
+				</outdistribution>
+			</target>
+			<target type="19" symbol="81" multiplicity="*">
+				<outdistribution type="gaussian">
+					<mu>60</mu>
+					<sigma>20</sigma>
+				</outdistribution>
+			</target>
+		</source>
+
+
+		<source type="13"> <!-- News Article -->
+			<target type="1" symbol="53" multiplicity="+">
+				<outdistribution type="gaussian">
+					<mu>3</mu>
+					<sigma>1</sigma>
+				</outdistribution>
+			</target>
+			<target type="2" symbol="52" multiplicity="*">
+				<outdistribution type="uniform">
+					<min>20</min>
+					<max>20</max>
+				</outdistribution>
+			</target>
+			<target type="18" symbol="54" multiplicity="1">
+				<outdistribution type="uniform">
+					<min>1</min>
+					<max>1</max>
+				</outdistribution>
+			</target>
+			<target type="20" symbol="71" multiplicity="*">
+				<outdistribution type="uniform">
+					<min>1</min>
+					<max>1</max>
+				</outdistribution>
+			</target>
+			<target type="20" symbol="72" multiplicity="*">
+				<outdistribution type="gaussian">
+					<mu>3</mu>
+					<sigma>1</sigma>
+				</outdistribution>
+			</target>
+			<target type="19" symbol="81" multiplicity="*">
+				<outdistribution type="gaussian">
+					<mu>60</mu>
+					<sigma>20</sigma>
+				</outdistribution>
+			</target>
+		</source>
+
+
+		<source type="14"> <!-- Other Product -->
+			<target type="1" symbol="53" multiplicity="+">
+				<outdistribution type="gaussian">
+					<mu>3</mu>
+					<sigma>1</sigma>
+				</outdistribution>
+			</target>
+			<target type="2" symbol="52" multiplicity="*">
+				<outdistribution type="uniform">
+					<min>20</min>
+					<max>20</max>
+				</outdistribution>
+			</target>
+			<target type="18" symbol="54" multiplicity="1">
+				<outdistribution type="uniform">
+					<min>1</min>
+					<max>1</max>
+				</outdistribution>
+			</target>
+			<target type="19" symbol="81" multiplicity="*">
+				<outdistribution type="gaussian">
+					<mu>60</mu>
+					<sigma>20</sigma>
+				</outdistribution>
+			</target>
+		</source>
+
+
+		<source type="3"> <!-- City -->
+			<target type="4" symbol="55" multiplicity="1">
+				<outdistribution type="zipfian">
+					<alpha>2.5</alpha>
+				</outdistribution>
+			</target>
+		</source>
+
+
+		<source type="18"> <!-- Website -->
+			<target type="5" symbol="56" multiplicity="1">
+				<outdistribution type="zipfian">
+					<alpha>2.5</alpha>
+				</outdistribution>
+			</target>
+		</source>
+
+
+		<source type="20"> <!-- User -->
+			<target type="6" symbol="51" multiplicity="*">
+				<outdistribution type="zipfian">
+					<alpha>2.5</alpha>
+				</outdistribution>
+			</target>
+			<target type="9" symbol="57" multiplicity="*">
+				<outdistribution type="zipfian">
+					<alpha>2.5</alpha>
+				</outdistribution>
+			</target>
+			<target type="10" symbol="57" multiplicity="*">
+				<outdistribution type="zipfian">
+					<alpha>2.5</alpha>
+				</outdistribution>
+			</target>
+			<target type="11" symbol="57" multiplicity="*">
+				<outdistribution type="zipfian">
+					<alpha>2.5</alpha>
+				</outdistribution>
+			</target>
+			<target type="12" symbol="57" multiplicity="*">
+				<outdistribution type="zipfian">
+					<alpha>2.5</alpha>
+				</outdistribution>
+			</target>
+			<target type="13" symbol="57" multiplicity="*">
+				<outdistribution type="zipfian">
+					<alpha>2.5</alpha>
+				</outdistribution>
+			</target>
+			<target type="14" symbol="57" multiplicity="*">
+				<outdistribution type="zipfian">
+					<alpha>2.5</alpha>
+				</outdistribution>
+			</target>
+			<target type="18" symbol="54" multiplicity="*">
+				<outdistribution type="uniform">
+					<min>1</min>
+					<max>1</max>
+				</outdistribution>
+			</target>
+			<target type="18" symbol="58" multiplicity="1">
+				<outdistribution type="gaussian">
+					<mu>15</mu>
+					<sigma>5</sigma>
+				</outdistribution>
+			</target>
+			<target type="20" symbol="59" multiplicity="*">
+				<outdistribution type="zipfian">
+					<alpha>2.5</alpha>
+				</outdistribution>
+			</target>
+			<target type="20" symbol="60" multiplicity="*">
+				<outdistribution type="gaussian">
+					<mu>225</mu>
+					<sigma>25</sigma>
+                                    </outdistribution>
+			</target>
+			<target type="3" symbol="61" multiplicity="1">
+				<outdistribution type="zipfian">
+					<alpha>2.5</alpha>
+				</outdistribution>
+			</target>
+			<target type="7" symbol="62" multiplicity="1">
+				<outdistribution type="gaussian">
+					<mu>35</mu>
+					<sigma>15</sigma>
+				</outdistribution>
+			</target>
+			<target type="8" symbol="63" multiplicity="1">
+				<outdistribution type="uniform">
+					<min>1</min>
+					<max>1</max>
+				</outdistribution>
+			</target>
+			<target type="4" symbol="64" multiplicity="1">
+				<outdistribution type="zipfian">
+					<alpha>2.5</alpha>
+                                        <n>1000</n>
+				</outdistribution>
+			</target>
+			<target type="17" symbol="78" multiplicity="*">
+				<outdistribution type="gaussian">
+					<mu>20</mu>
+					<sigma>5</sigma>
+				</outdistribution>
+			</target>
+		</source>
+
+
+		<source type="15"> <!-- Retailer -->
+			<target type="16" symbol="73" multiplicity="*">
+				<outdistribution type="zipfian">
+					<alpha>2.5</alpha>
+				</outdistribution>
+			</target>
+			<target type="20" symbol="74" multiplicity="1">
+				<outdistribution type="uniform">
+					<min>1</min>
+					<max>1</max>
+				</outdistribution>
+			</target>
+			<target type="20" symbol="75" multiplicity="*">
+				<outdistribution type="gaussian">
+					<mu>10</mu>
+					<sigma>5</sigma>
+				</outdistribution>
+			</target>
+		</source>
+
+
+		<source type="16"> <!-- Offer -->
+			<target type="9" symbol="76" multiplicity="1">
+				<outdistribution type="uniform">
+					<min>1</min>
+					<max>1</max>
+				</outdistribution>
+			</target>
+			<target type="10" symbol="76" multiplicity="1">
+				<outdistribution type="uniform">
+					<min>1</min>
+					<max>1</max>
+				</outdistribution>
+			</target>
+			<target type="11" symbol="76" multiplicity="1">
+				<outdistribution type="uniform">
+					<min>1</min>
+					<max>1</max>
+				</outdistribution>
+			</target>
+			<target type="12" symbol="76" multiplicity="1">
+				<outdistribution type="uniform">
+					<min>1</min>
+					<max>1</max>
+				</outdistribution>
+			</target>
+			<target type="13" symbol="76" multiplicity="1">
+				<outdistribution type="uniform">
+					<min>1</min>
+					<max>1</max>
+				</outdistribution>
+			</target>
+			<target type="14" symbol="76" multiplicity="1">
+				<outdistribution type="uniform">
+					<min>1</min>
+					<max>1</max>
+				</outdistribution>
+			</target>
+			<target type="4" symbol="72" multiplicity="*">
+				<outdistribution type="zipfian">
+					<alpha>2.5</alpha>
+				</outdistribution>
+			</target>
+		</source>
+
+
+		<source type="17"> <!-- Purchase -->
+			<target type="9" symbol="79" multiplicity="1">
+				<outdistribution type="zipfian">
+					<alpha>2.5</alpha>
+				</outdistribution>
+			</target>
+			<target type="10" symbol="79" multiplicity="1">
+				<outdistribution type="zipfian">
+					<alpha>2.5</alpha>
+				</outdistribution>
+			</target>
+			<target type="11" symbol="79" multiplicity="1">
+				<outdistribution type="zipfian">
+					<alpha>2.5</alpha>
+				</outdistribution>
+			</target>
+			<target type="12" symbol="79" multiplicity="1">
+				<outdistribution type="zipfian">
+					<alpha>2.5</alpha>
+				</outdistribution>
+			</target>
+			<target type="13" symbol="79" multiplicity="1">
+				<outdistribution type="zipfian">
+					<alpha>2.5</alpha>
+				</outdistribution>
+			</target>
+			<target type="14" symbol="79" multiplicity="1">
+				<outdistribution type="zipfian">
+					<alpha>2.5</alpha>
+				</outdistribution>
+			</target>
+		</source>
+
+
+		<source type="19"> <!-- Review -->
+			<target type="20" symbol="80" multiplicity="1">
+				<outdistribution type="uniform">
+					<min>1</min>
+					<max>1</max>
+				</outdistribution>
+			</target>
+		</source>
+
+	</schema>
+
+
+
+	<workload id="0" size="50">
+		<!-- bounds for the size of these queries -->
+		<size>
+			<conjuncts min="3" max="3"/>	<!-- number of A^M where M is a multiplicity 1 or * -->
+			<disjuncts min="1" max="3"/>	<!-- number of w_1 + ... + w_n in each A -->
+			<length min="2" max="4"/>		<!-- number of a_1 . ... . a_m in each w_i -->
+		</size>
+
+		<!-- probability to have "*" as multiplicity of the conjuncts -->
+		<multiplicity star="0.5"/>
+
+		<!-- the arity of the generated queries, we allow 0 for Boolean queries -->
+		<arity min="2" max="2"/>
+
+		<!-- we want only linear queries, but not constant nor quadratic -->
+		<selectivity constant="0" linear="1" quadratic="0"/>
+
+		<!-- we want to have in the workload chains and stars, but not cycles, etc. -->
+		<type chain="1" star="1" cycle="0" starchain="0"/>
+	</workload>
+
+</generator>

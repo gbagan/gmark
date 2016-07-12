@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Visualize query workload</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" href="../style.css"/>
+	<script src="../animation.js"></script>
+</head>
+<body>
+
+<div id="top">
+
+<div id="left">
+<h3>Stats for Query 7</h3>
+<ul>
+<li><i>Dataset</i>: <span class="todo">TODO</span></li>
+<li><i>Arity</i>: 2</li>
+<li><i>Selectivity</i>: <span class="todo">TODO</span></li>
+<li><i>Size</i>: C[<span class="todo">TODO</span>], D[<span class="todo">TODO</span>], L[<span class="todo">TODO</span>]</li>
+<li><i>Recursion</i>: <span class="todo">TODO</span>%</li>
+</ul>
+<hr/>
+<h3>Generate concrete syntaxes</h3>
+<input type="checkbox" id="sparql-checkbox"/>SPARQL<br/>
+<input type="checkbox" id="opencypher-checkbox"/>openCypher<br/>
+<input type="checkbox" id="sql-checkbox"/>SQL<br/>
+<input type="checkbox" id="datalog-checkbox"/>Datalog<br/>
+<hr/>
+<a href="query-6.html">&lt;&lt;Previous query</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="query-8.html">Next query&gt;&gt;</a>
+</div> <!-- end left -->
+
+<div id="right">
+<img src="query-7.png"/>
+</div> <!-- end right -->
+
+</div> <!-- end top -->
+
+<div id="bottom">
+<br/><br/>
+
+<table border="1">
+<tr>
+<th id="sparql-header">SPARQL</th>
+<th id="opencypher-header">openCypher*</th>
+<th id="sql-header">SQL</th>
+<th id="datalog-header">Datalog</th>
+</tr>
+<tr>
+<td id="sparql-syntax">SPARQL code <span class="todo">TODO</span></td>
+<td id="opencypher-syntax">openCypher code <span class="todo">TODO</span><br/> <small>* This query may have a different semantics than the intended one because openCypher does not allow Kleene star above concatenation and/or inverses.</small></td>
+<td id="sql-syntax">SQL code <span class="todo">TODO</span></td>
+<td id="datalog-syntax">Datalog code <span class="todo">TODO</span></td>
+</tr>
+</table>
+</div><!-- end bottom -->
+
+</body>
+</html>
