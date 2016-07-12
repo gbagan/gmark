@@ -27,8 +27,10 @@ img {
 
 
 td {
-	width:400px;
-	padding:5px;
+	width : 400px;
+	padding : 5px;
+ 	font-size : 75%;
+  	font-family : "Courier New", Courier, monospace;
 }
 
 

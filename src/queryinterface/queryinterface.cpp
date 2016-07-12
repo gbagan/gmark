@@ -28,10 +28,11 @@
 
 #include "queryinterface.h"
 
-void qinterface(const string & inputfilename)
+void qinterface(const string & inputfilename, const string & translatedir)
 {
     pugi::xml_document doc;
     pugi::xml_parse_result result = doc.load_file(inputfilename.c_str()); 
+
 
     if (! result)
     {
@@ -155,10 +156,46 @@ void qinterface(const string & inputfilename)
 			html_file << "<th id=\"datalog-header\">Datalog</th>\n";
 			html_file << "</tr>\n";
 			html_file << "<tr>\n";
-			html_file << "<td id=\"sparql-syntax\">SPARQL code <span class=\"todo\">TODO</span></td>\n";
-			html_file << "<td id=\"opencypher-syntax\">openCypher code <span class=\"todo\">TODO</span><br/> <small>* This query may have a different semantics than the intended one because openCypher does not allow Kleene star above concatenation and/or inverses.</small></td>\n";
-			html_file << "<td id=\"sql-syntax\">SQL code <span class=\"todo\">TODO</span></td>\n";
-			html_file << "<td id=\"datalog-syntax\">Datalog code <span class=\"todo\">TODO</span></td>\n";
+
+			string line;
+
+			html_file << "<td valign=\"top\" id=\"sparql-syntax\">";
+			ifstream sparqlcode;
+			sparqlcode.open(translatedir + "/query-" + to_string(qcount) + ".sparql");
+			while(getline(sparqlcode, line)) {
+				line.replace(line.find("<"), 1, "&lt;");
+				line.replace(line.find(">"), 1, "&gt;<br/>");
+				html_file << line << "<br/>";
+			}
+			sparqlcode.close();
+			html_file << "</td>\n";
+
+			html_file << "<td valign=\"top\" id=\"opencypher-syntax\">";
+			ifstream opencyphercode;
+			opencyphercode.open(translatedir + "/query-" + to_string(qcount) + ".cypher");
+			while(getline(opencyphercode, line))
+				html_file << line << "<br/>";
+			opencyphercode.close();
+
+			html_file << "<br/><br/>*Note: This query may have a different semantics than the intended one because openCypher does not allow Kleene star above concatenation and/or inverses.</td>\n";
+
+			html_file << "<td valign=\"top\" id=\"sql-syntax\">";
+			ifstream sqlcode;
+			sqlcode.open(translatedir + "/query-" + to_string(qcount) + ".sql");
+			while(getline(sqlcode, line))
+				html_file << line << "<br/>";
+			sqlcode.close();
+			html_file << "</td>\n";
+
+			html_file << "<td valign=\"top\" id=\"datalog-syntax\">";
+			ifstream lbcode;
+			lbcode.open(translatedir + "/query-" + to_string(qcount) + ".lb");
+			while(getline(lbcode, line))
+				html_file << line << "<br/>";
+			lbcode.close();
+
+			html_file << "</td>\n";
+
 			html_file << "</tr>\n";
 			html_file << "</table>\n";
 			html_file << "</div><!-- end bottom -->\n\n";
