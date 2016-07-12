@@ -223,7 +223,8 @@ void qinterface_dot_regex(pugi::xml_node query, ofstream & file)
     string name = query.name();
     if(name == "symbol")
     {
-        file << "p" << query.text().get();
+//        file << "p" << query.text().get();
+        file << "" << query.text().get();
         if (query.attribute("inverse").as_bool())
         {
             file << "-";
