@@ -61,8 +61,6 @@ void qinterface(const string & inputfilename, const string & translatedir)
 			set<string> nodes_already_drawn;
 
 
-			int arity = 0;
-
 			plot_file << "digraph g {\n";
   	  for (pugi::xml_node var_node : query.child("head").children("var"))
   	  {
@@ -71,7 +69,6 @@ void qinterface(const string & inputfilename, const string & translatedir)
         plot_file << "\t" << var_text; 
 				plot_file << " [fillcolor=\"yellow\", style=\"filled,\" shape=circle, label=\"?"<< var_text <<"\"];\n";
 				nodes_already_drawn.insert(var_text);
-				arity ++;
     	}
 
 		  for (pugi::xml_node body_node : query.child("bodies").children("body"))
@@ -108,6 +105,15 @@ void qinterface(const string & inputfilename, const string & translatedir)
 
 			// Generate HTML
 
+
+			string input = query.child("metadata").child("input").child_value();
+			string arity = query.child("metadata").child("arity").child_value();
+			string selectivity = query.child("metadata").child("selectivity").child_value();
+			string multiplicity = query.child("metadata").child("multiplicity").child_value();
+			string conjunct = query.child("metadata").child("conjunct").child_value();
+			string disjuncts = query.child("metadata").child("disjuncts").child_value();
+			string length = query.child("metadata").child("length").child_value();
+
 			ofstream html_file;
 			string html_file_name = prefix_file + ".html";
 			html_file.open(html_file_name);
@@ -124,12 +130,12 @@ void qinterface(const string & inputfilename, const string & translatedir)
 			html_file << "<div id=\"left\">\n";
 			html_file << "<h3>Stats for Query "<< to_string(qcount) <<"</h3>\n";
 			html_file << "<ul>\n";
-			html_file << "<li><i>Dataset</i>: <span class=\"todo\">TODO</span></li>\n";
+			html_file << "<li><i>Dataset</i>: " << input << "</li>\n";
 			html_file << "<li><i>Arity</i>: " << arity << "</li>\n";
-			if (arity == 2)
-				html_file << "<li><i>Selectivity</i>: <span class=\"todo\">TODO</span></li>\n";
-			html_file << "<li><i>Size</i>: C[<span class=\"todo\">TODO</span>], D[<span class=\"todo\">TODO</span>], L[<span class=\"todo\">TODO</span>]</li>\n";
-			html_file << "<li><i>Recursion</i>: <span class=\"todo\">TODO</span>%</li>\n";
+			html_file << "<li><i>Selectivity</i>: " << selectivity << "</li>\n";
+			html_file << "<li><i>Size</i>: C[" << conjunct << "-" << conjunct << "], ";
+			html_file << "D["<< disjuncts << "], L[" << length << "]</li>\n";
+			html_file << "<li><i>Recursion</i>: " << to_string(int(atof(multiplicity.c_str()) * 100)) << "%</li>\n";
 			html_file << "</ul>\n";
 			html_file << "<hr/>\n";
 			html_file << "<h3>Generate concrete syntaxes</h3>\n";
