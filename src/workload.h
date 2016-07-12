@@ -67,12 +67,12 @@ public:
 
 
 
-void write_xml(const symbol &, ostream &);
-void write_xml(const disjunct &, ostream &);
-void write_xml(const conjunct &, ostream &);
-void write_xml(const body &, ostream &);
-void write_xml(const query &, ostream &);
-void write_xml(const workload &, ostream &);
+void write_xml(const symbol &, ostream &, config::config &);
+void write_xml(const disjunct &, ostream &, config::config &);
+void write_xml(const conjunct &, ostream &, config::config &);
+void write_xml(const body &, ostream &, config::config &);
+void write_xml(const query &, ostream &, config::config &);
+void write_xml(const workload &, ostream &, config::config &);
 
 class graph {
 public:

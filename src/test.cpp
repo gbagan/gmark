@@ -213,7 +213,7 @@ int main(int argc, char ** argv) {
         else {
             workload::generate_workload(conf, wl);
         }
-        workload::write_xml(wl, workload_stream);
+        workload::write_xml(wl, workload_stream, conf);
         workload_stream.close();
 
         ofstream report_stream;

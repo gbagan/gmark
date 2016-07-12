@@ -21,30 +21,35 @@ symbol::symbol(long id_) {
 }
 
 
-void write_xml(const symbol & symb, ostream & stream) {
+void write_xml(const symbol & symb, ostream & stream, config::config & conf) {
     stream << "          <symbol";
     if (symb.reverse) {
         stream << " inverse=\"true\"";
     }
-    stream << ">" << symb.id << "</symbol>\n";
+    stream << ">";
+    if(conf.print_alias && conf.predicates[symb.id].alias.size() > 0)
+        stream << conf.predicates[symb.id].alias;
+    else
+        stream << symb.id;
+    stream << "</symbol>\n";
 }    
 
-void write_xml(const disjunct & disj, ostream & stream) {
+void write_xml(const disjunct & disj, ostream & stream, config::config & conf) {
     stream << "        <concat>\n";
     for (const auto & symb : disj.symbols) {
-        write_xml(symb, stream);
+        write_xml(symb, stream, conf);
     }
     stream << "        </concat>\n";
 }    
     
-void write_xml(const conjunct & conj, ostream & stream) {
+void write_xml(const conjunct & conj, ostream & stream, config::config & conf) {
     stream << "      <conjunct src=\"" << conj.source << "\" trg=\"" << conj.target << "\">\n";
     if (conj.star) {
         stream << "      <star>\n";
     }
     stream << "      <disj>\n";
     for (const auto & disj : conj.disjuncts) {
-        write_xml(disj, stream);
+        write_xml(disj, stream, conf);
     }
     stream << "      </disj>\n";
     if (conj.star) {
@@ -53,15 +58,15 @@ void write_xml(const conjunct & conj, ostream & stream) {
     stream << "      </conjunct>\n";
 }
 
-void write_xml(const body & body, ostream & stream) {
+void write_xml(const body & body, ostream & stream, config::config & conf) {
     stream << "    <body>\n";
     for (const auto & conj : body.conjuncts) {
-        write_xml(conj, stream);
+        write_xml(conj, stream, conf);
     }
     stream << "    </body>\n";
 }
 
-void write_xml(const query & query, ostream & stream) {
+void write_xml(const query & query, ostream & stream, config::config & conf) {
     stream << "<query>\n";
     stream << "  <metadata>\n";
     stream << "    <id>" << query.info.id << "</id>\n";
@@ -82,7 +87,7 @@ void write_xml(const query & query, ostream & stream) {
     stream << "  </head>\n";
     stream << "  <bodies>\n";
     for (const auto & body : query.bodies) {
-        write_xml(body, stream);
+        write_xml(body, stream, conf);
     }
     
     stream << "  </bodies>\n";
@@ -90,10 +95,10 @@ void write_xml(const query & query, ostream & stream) {
     
 }
 
-void write_xml(const workload & wl, ostream & stream) {
+void write_xml(const workload & wl, ostream & stream, config::config & conf) {
     stream << "<queries>\n";
     for (auto & query : wl.queries) {
-        write_xml(query, stream);
+        write_xml(query, stream, conf);
         stream << "\n";
     }
     stream << "</queries>\n";
