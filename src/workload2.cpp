@@ -660,6 +660,7 @@ void generate_cycle(const config::config & conf, const config::workload & wconf,
     body.conjuncts.resize(nb_conjs);
     
     size_t n1 = nb_conjs/2;
+    size_t n2 = nb_conjs - n1;
     
     matrix distmat;
     distance_matrix_between_types(conf, distmat);
@@ -682,21 +683,22 @@ void generate_cycle(const config::config & conf, const config::workload & wconf,
         generate_random_conjunct(conf, wconf, path[i].start, path[i].selectivity, path[i].end, conjunct);
     }
 
+    matrix_of_paths pathmat2;
+    number_of_paths(g, selectivity, n2, pathmat2);
     vector<triple> path2;
-    generate_random_path(g, pathmat, path[0].start, n1, wconf.multiplicity, path2);
+    generate_random_path(g, pathmat2, path[0].start, n2, wconf.multiplicity, path2);
     
-    for(size_t i = 0; i < n1; i++) {
-        auto & conjunct = body.conjuncts[i];
+    for(size_t i = 0; i < n2; i++) {
+        auto & conjunct = body.conjuncts[n1+i];
         if (i == 0)
             conjunct.source = "?x0";
         else
             conjunct.source = "?x" + to_string(n1+i);
         
-        if (i == n1-1)
+        if (i == n2-1)
             conjunct.target = "?x" + to_string(n1);
         else
             conjunct.target = "?x" + to_string(n1+i+1);
-        
         
         conjunct.star = path2[i].star;
         generate_random_conjunct(conf, wconf, path2[i].start, path2[i].selectivity, path2[i].end, conjunct);
