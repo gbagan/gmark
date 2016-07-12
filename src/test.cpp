@@ -91,9 +91,9 @@ void html_graph_report(config::config & conf, report::report & rep, ofstream & s
     stream << "</script></head>\n";
     stream << "<body>\n";
     stream << "<table border=\"1\">\n";
-    stream << "<tr><td>Number of nodes</td><td width=\"600\">" << conf.nb_nodes << "</td><td width=\"600\">" << rep.nb_nodes << "</td></tr>\n";
-    stream << "<tr><td>Number of edges</td><td>" << conf.nb_edges << "</td><td>" << rep.nb_edges << "</td></tr>\n";
-    stream << "<tr><td>Execution time</td><td></td><td>" << rep.exec_time << "</td></tr>\n";
+    stream << "<tr><td>Size</td><td width=\"600\">" << conf.nb_nodes << " nodes</td>";
+    stream << "<td width=\"600\">" << rep.nb_nodes << " nodes (" << rep.nb_edges << " edges)</td></tr>\n";
+    stream << "<tr><td>Execution time</td><td></td><td>" << rep.exec_time << " seconds</td></tr>\n";
     stream << "<tr><td></td><td><div id=\"hist11\"/></td><td><div id=\"hist12\"/></td></tr>\n";
     stream << "<tr><td></td><td><div id=\"hist21\"/></td><td><div id=\"hist22\"/></td></tr>\n";
     stream << "</table>\n";
@@ -148,11 +148,11 @@ int main(int argc, char ** argv) {
     string graph_file;
     string workload_file;
     int c;
-    bool selectivity = false;
+    bool selectivity = true;
     long nb_nodes = -1;
     bool print_alias = false;    
 
-    while ((c = getopt(argc, argv, "c:g:w:san:")) != -1) {
+    while ((c = getopt(argc, argv, "c:g:w:an:")) != -1) {
         switch(c) {
             case 'c':
                 conf_file = optarg;
@@ -162,9 +162,6 @@ int main(int argc, char ** argv) {
                 break;
             case 'w':
                 workload_file = optarg;
-                break;
-            case 's':
-                selectivity = true;
                 break;
             case 'a':
                 print_alias = true;
