@@ -28,15 +28,11 @@
 
 #include "querytranslate.h"
 
-void qtranslate(const string & inputfilename, 
-                const string & sqlfilename, 
-                const string & sparqlfilename, 
-                const string & cypherfilename, 
-                const string & logicbloxfilename)
+void qtranslate(const string & inputfilename, const string & output_directory)
 {
     pugi::xml_document doc;
     pugi::xml_parse_result result = doc.load_file(inputfilename.c_str()); 
-    ofstream sqlout, sparqlout, cypherout, logicbloxout;
+    //ofstream sqlout, sparqlout, cypherout, logicbloxout;
     int qcount = 0;
 
     if (! result)
@@ -46,6 +42,8 @@ void qtranslate(const string & inputfilename,
         cout << "Error offset: " << result.offset << endl << endl;
         return;
     }
+
+    /*
 
     if (!sqlfilename.empty())
     {
@@ -88,29 +86,30 @@ void qtranslate(const string & inputfilename,
         cout << endl << "Logicblox queries written to " << logicbloxfilename;
     }
 
+    */
+
+
     for (pugi::xml_node query : doc.child("queries").children("query"))
     {
-        if (!sqlfilename.empty())
-            qtranslate_sql(query, sqlout);
-        if (!sparqlfilename.empty())
-            qtranslate_sparql(query, sparqlout);
-        if (!logicbloxfilename.empty())
-          qtranslate_logicblox(query, logicbloxout);
+        ofstream sqlout, sparqlout, cypherout, logicbloxout;
+        sqlout.open(output_directory + "/query-" + to_string(qcount) + ".sql");
+        qtranslate_sql(query, sqlout);
+        sqlout.close();
+
+        sparqlout.open(output_directory + "/query-" + to_string(qcount) + ".sparql");
+        qtranslate_sparql(query, sparqlout);
+        sparqlout.close();
+
+        cypherout.open(output_directory + "/query-" + to_string(qcount) + ".cypher");
+        qtranslate_cypher(query, cypherout);
+        cypherout.close();
+
+        logicbloxout.open(output_directory + "/query-" + to_string(qcount) + ".lb");
+        qtranslate_logicblox(query, logicbloxout);
+        logicbloxout.close();
 
         qcount++;
     }
-
-    if (!cypherfilename.empty())
-    {
-      qtranslate_cypher_doc(doc);
-      for (pugi::xml_node query : doc.child("queries").children("query")) 
-        qtranslate_cypher(query, cypherout);
-    }
-
-    sqlout.close();
-    sparqlout.close();
-    cypherout.close();
-    logicbloxout.close();
     cout << endl << endl << qcount << " queries processed" << endl << endl;
 }
 

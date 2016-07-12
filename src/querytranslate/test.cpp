@@ -26,7 +26,7 @@
 
 int main() {
 
-  qtranslate("../../xml/queries.xml", "a.sql", "a.sparql", "a.cypher", "a.logicblox");
+  qtranslate("../../xml/queries.xml", "translated");
   exit(EXIT_SUCCESS);
 
 }

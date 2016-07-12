@@ -31,7 +31,7 @@
 #include <vector>
 using namespace std;
 
-void qtranslate(const string &, const string &, const string &, const string &, const string &);
+void qtranslate(const string &, const string &);
 void qtranslate_sql(pugi::xml_node, ofstream &);
 void qtranslate_sql_body(pugi::xml_node, pugi::xml_node, ofstream &);
 void qtranslate_sql_select(pugi::xml_node, unordered_map < string, pair < vector <int>, vector <int> > > &, int, ostream &, const string &);
