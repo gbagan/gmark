@@ -12,10 +12,10 @@
 		<proportion symbol="1">0.3</proportion>
 
 		<alias symbol="2">heldIn</alias>
-		<proportion symbol="2">0.1</proportion>
+		<proportion symbol="2">0.01</proportion>
 
 		<alias symbol="3">extendedTo</alias>
-		<proportion symbol="3">0.1</proportion>
+		<proportion symbol="3">0.19</proportion>
 	</predicates>
 
 	<types>
