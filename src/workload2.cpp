@@ -561,7 +561,7 @@ void generate_arity_more_than_2(workload::query & q, size_t arity, bool is_cycle
     } 
     for (size_t i = 0; i < arity; i++) {
         while (true) {
-            size_t i = uniform_random_generator(0, nb_conjs).next();
+            size_t i = uniform_random_generator(0, arity-1).next();
             if(std::find(q.variables.begin(), q.variables.end(), "?x" + to_string(i)) == q.variables.end()) {
 		q.variables.push_back("?x" + to_string(i));
                 break;
