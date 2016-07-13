@@ -858,12 +858,16 @@ void generate_workload(const config::config & conf, workload::workload & wl, rep
             size_t max_length = 0;
             workload::query & query = wl.queries[c];
             //cout << "generate query " << i << endl;
-            for (int j = 0; j < 10; j++) {
+            for (int j = 0; j < 100; j++) {
                 try {
                     workload2::generate_query(conf, wconf, query);
                 }
                 catch (const string & e) {
                     continue;
+                }
+                if (j == 99) {
+                    cerr << "fail to generate a query" << endl;
+                    exit(EXIT_FAILURE);
                 }
                 break;
             }
