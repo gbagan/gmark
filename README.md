@@ -16,6 +16,15 @@ This executes the following three steps:
 
     ./test -c ../use-cases/test.xml -g ../demo/play/play-graph.txt -w ../demo/play/play-workload.xml -r ../demo/play/
 
+where the parameters are:
+- -c : the configuration file
+- -g : the output file for the graph instance
+- -w : the output file for the queries generated on this instance
+- -r : the output directory for the html reports
+and optionally
+- -a : to use aliases for the predicates in the generated graph and queries
+- -n : to specify the number of nodes in the graph (it overrides the parameter from the config file)
+
 2. Translation of the queries into the four concrete syntaxes
 
     ./test -w ../../demo/play/play-workload.xml -o ../../demo/play/play-translated
