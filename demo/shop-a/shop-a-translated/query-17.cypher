@@ -1,1 +1,1 @@
-MATCH (x0)-[:pincludes|ppurchaseFor*]->(x1), (x1)-[:pcaption]->()<-[:pcaption]-()-[:pdescription]->()<-[:pkeywords]-(x2), (x2)-[:pactor|phasReview*]->(x3) RETURN DISTINCT x2, x1, x0, x3;
+MATCH (x0)<-[:pcontentSize]-()-[:ptag]->(x1), (x0)<-[:ptelephone]-()-[:ptelephone]->()<-[:pcontentRating]-()-[:ptag]->(x2), (x0)<-[:pcontentRating]-()-[:ptag]->(x3) RETURN "true" LIMIT 1;

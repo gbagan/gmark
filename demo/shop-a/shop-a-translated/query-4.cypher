@@ -1,1 +1,1 @@
-MATCH (x0)-[:phasReview*]->(x1), (x1)-[:pactor]->()<-[:previewer]-(x2), (x2)-[:previewer|phasReview*]->(x3) RETURN "true" LIMIT 1;
+MATCH (x0)-[:pdirector*]->(x1), (x0)-[:ptrailer|pactor*]->(x2), (x0)-[:pdirector|phomepage|pactor*]->(x3) RETURN DISTINCT x0;

@@ -1,1 +1,1 @@
-MATCH (x0)<-[:page]-()<-[:pdirector]-()-[:planguage]->(x1), (x1)<-[:planguage]-()<-[:phomepage]-()-[:ptag]->(x2), (x0)<-[:page]-()<-[:pconductor]-()-[:phasGenre]->(x3), (x2)<-[:page]-()-[:puserId]->()<-[:pcontentSize]-()-[:phasGenre]->(x4) RETURN DISTINCT x0;
+MATCH (x0)-[:previewer]->()-[:plike]->()<-[:plike]-()<-[:pemployee]-(x1), (x0)-[:previewer]->()-[:plike]->()<-[:plike]-()<-[:pemployee]-(x2), (x0)-[:previewer]->()-[:pfollows]->()<-[:pfollows]-()<-[:pemployee]-(x3), (x0)-[:previewer]->()-[:plike]->()<-[:plike]-()<-[:pcontactPoint]-(x4) RETURN DISTINCT x0, x1;

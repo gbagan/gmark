@@ -1,1 +1,1 @@
-MATCH (x0)<-[:planguage]-()<-[:psubscribes]-()-[:pgivenName]->(x1), (x1)<-[:pdescription]-()-[:peditor]->()-[:pbirthDate]->(x2), (x0)<-[:planguage]-()-[:ptext]->()<-[:ptext]-()-[:pprintPage]->(x3), (x2)<-[:planguage]-()<-[:ppurchaseFor]-()-[:ppurchaseFor]->()-[:pnumberOfPages]->(x4) RETURN "true" LIMIT 1;
+MATCH (x0)<-[:plocation]-()-[:pgender]->(x1), (x0)<-[:pperformedIn]-()<-[:plike]-()-[:pfollows]->()-[:pgender]->(x2), (x0)<-[:pperformedIn]-()<-[:plike]-()-[:pgender]->(x3), (x0)<-[:plocation]-()-[:pgender]->(x4) RETURN DISTINCT x1, x2, x0, x3;

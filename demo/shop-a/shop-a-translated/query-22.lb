@@ -1,9 +1,8 @@
 BEGIN
-gmarkSubquery00(x, y) <- core:edge:edge(x1, nationality, x0), core:edge:edge(x1, jobTitle, x2), x = x0, y = x2.
-gmarkSubquery00(x, y) <- core:edge:edge(x1, nationality, x0), core:edge:edge(x1, jobTitle, x2), x = x0, y = x2.
-gmarkSubquery01(x, y) <- core:edge:edge(x1, nationality, x0), core:edge:edge(x1, jobTitle, x2), x = x0, y = x2.
-gmarkSubquery02(x, y) <- core:edge:edge(x1, nationality, x0), core:edge:edge(x1, familyName, x2), core:edge:edge(x3, performer, x2), core:edge:edge(x3, performer, x4), x = x0, y = x4.
-gmarkSubquery02(x, y) <- core:edge:edge(x1, nationality, x0), core:edge:edge(x1, userId, x2), core:edge:edge(x3, contentSize, x2), core:edge:edge(x3, description, x4), x = x0, y = x4.
-gmarkSubquery02(x, y) <- core:edge:edge(x1, parentContry, x0), core:edge:edge(x2, performedIn, x1), core:edge:edge(x2, description, x3), x = x0, y = x3.
-query(x0, x1, x2) <- gmarkSubquery00(x0, x1), gmarkSubquery01(x0, x2), gmarkSubquery02(x0, x3).
+gmarkSubquery00(x, y) <- core:edge:edge(x1, type, x0), core:edge:edge(x2, actor, x1), core:edge:edge(x2, tag, x3), x = x0, y = x3.
+gmarkSubquery00(x, y) <- core:edge:edge(x1, type, x0), core:edge:edge(x1, like, x2), core:edge:edge(x2, tag, x3), x = x0, y = x3.
+gmarkSubquery00(x, y) <- core:edge:edge(x1, type, x0), core:edge:edge(x1, like, x2), core:edge:edge(x2, tag, x3), x = x0, y = x3.
+gmarkSubquery01(x, y) <- core:edge:edge(x1, type, x0), core:edge:edge(x2, editor, x1), core:edge:edge(x2, tag, x3), x = x0, y = x3.
+gmarkSubquery02(x, y) <- core:edge:edge(x1, type, x0), core:edge:edge(x1, like, x2), core:edge:edge(x2, tag, x3), x = x0, y = x3.
+query(x1, x2, x3, x0) <- gmarkSubquery00(x0, x1), gmarkSubquery01(x0, x2), gmarkSubquery02(x0, x3).
 END

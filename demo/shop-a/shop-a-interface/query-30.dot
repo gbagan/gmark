@@ -1,11 +1,11 @@
 digraph g {
-	x3 [fillcolor="yellow", style="filled," shape=circle, label="?x3"];
-	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
-	x2 [fillcolor="yellow", style="filled," shape=circle, label="?x2"];
-	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
-	x0 -> x1 [label="((purchaseFor.hasReview.rating.hits-)+(purchaseFor.keywords.description-.homepage))"];
-	x1 -> x2 [label="((homepage-.like.like-.author-))"];
-	x0 -> x3 [label="((purchaseFor.contentSize.price-.includes)+(price.contentSize-.description.keywords-)+(purchaseFor.award.description-))"];
+	x0 [shape=circle, label="?x0"];
+	x1 [shape=circle, label="?x1"];
+	x0 -> x1 [label="((price.bookEdition-)+(price.printSection-.printPage.isbn-)+(price.contentRating-.contentRating.contentRating-))"];
+	x2 [shape=circle, label="?x2"];
+	x0 -> x2 [label="((purchaseFor.author.telephone.contentRating-))"];
+	x3 [shape=circle, label="?x3"];
+	x0 -> x3 [label="((price.contentSize-)+(purchaseFor.published.keywords-))"];
 	x4 [shape=circle, label="?x4"];
-	x2 -> x4 [label="((purchaseFor.like-.familyName.title-)+(purchaseFor.opus.printEdition-))"];
+	x0 -> x4 [label="((price.contentRating-))"];
 }

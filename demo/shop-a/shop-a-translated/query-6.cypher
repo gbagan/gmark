@@ -1,1 +1,1 @@
-MATCH (x0)-[:pduration]->()<-[:pduration]-()-[:paward]->()<-[:pcaption]-(x1), (x0)-[:pduration]->()<-[:paggregateRating]-(x2), (x1)-[:ptrailer]->()-[:purl]->()<-[:plegalName]-(x3) RETURN "true" LIMIT 1;
+MATCH (x0)-[:pincludes|pincludes|pincludes*]->(x1), (x1)-[:pincludes|pincludes*]->(x2), (x0)-[:pincludes*]->(x3), (x2)-[:pincludes|pincludes|pincludes*]->(x4) RETURN DISTINCT x1, x3, x0, x2;

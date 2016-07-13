@@ -1,1 +1,1 @@
-MATCH (x0)<-[:ptitle]-()-[:pkeywords]->()<-[:pfamilyName]-()-[:pgender]->(x1), (x0)<-[:pemail]-()-[:pgender]->(x2), (x0)<-[:pemail]-()-[:pfollows]->()-[:pgender]->(x3) RETURN DISTINCT x0, x1;
+MATCH (x0)-[:pcontentRating]->()<-[:pprintColumn]-()-[:ptitle]->()<-[:pperformer]-(x1), (x1)-[:phomepage|pconductor|pincludes*]->(x2), (x2)-[:phomepage]->()-[:purl]->(x3) RETURN "true" LIMIT 1;

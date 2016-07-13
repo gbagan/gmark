@@ -1,8 +1,14 @@
 BEGIN
-gmarkSubquery00(x, y) <- core:edge:edge(x1, title, x0), core:edge:edge(x1, keywords, x2), core:edge:edge(x3, familyName, x2), core:edge:edge(x3, gender, x4), x = x0, y = x4.
-gmarkSubquery01(x, y) <- core:edge:edge(x1, email, x0), core:edge:edge(x1, gender, x2), x = x0, y = x2.
-gmarkSubquery01(x, y) <- core:edge:edge(x1, description, x0), core:edge:edge(x1, editor, x2), core:edge:edge(x2, gender, x3), x = x0, y = x3.
-gmarkSubquery02(x, y) <- core:edge:edge(x1, email, x0), core:edge:edge(x1, follows, x2), core:edge:edge(x2, gender, x3), x = x0, y = x3.
-gmarkSubquery02(x, y) <- core:edge:edge(x1, caption, x0), core:edge:edge(x1, contentRating, x2), core:edge:edge(x3, userId, x2), core:edge:edge(x3, gender, x4), x = x0, y = x4.
-query(x0, x1) <- gmarkSubquery00(x0, x1), gmarkSubquery01(x0, x2), gmarkSubquery02(x0, x3).
+gmarkSubquery00(x, y) <- core:edge:edge(x0, contentRating, x1), core:edge:edge(x2, printColumn, x1), core:edge:edge(x2, title, x3), core:edge:edge(x4, performer, x3), x = x0, y = x4.
+gmarkSubquery00(x, y) <- core:edge:edge(x1, like, x0), core:edge:edge(x1, friendOf, x2), core:edge:edge(x2, like, x3), x = x0, y = x3.
+gmarkSubquery01(x, y) <- core:edge:edge(x0, homepage, x1), core:edge:edge(x2, homepage, x1), x = x0, y = x2.
+gmarkSubquery01(x, y) <- core:edge:edge(x0, conductor, x1), core:edge:edge(x2, friendOf, x1), core:edge:edge(x3, conductor, x2), x = x0, y = x3.
+gmarkSubquery01(x, y) <- core:edge:edge(x1, includes, x0), core:edge:edge(x1, includes, x2), x = x0, y = x2.
+gmarkSubquery01(x, x) <- core:edge:edge(x, r, y).
+gmarkSubquery01(y, y) <- core:edge:edge(x, r, y).
+gmarkSubquery01(x, y) <- gmarkSubquery01(x, z), gmarkSubquery01(z, y).
+gmarkSubquery02(x, y) <- core:edge:edge(x0, homepage, x1), core:edge:edge(x1, url, x2), x = x0, y = x2.
+gmarkSubquery02(x, y) <- core:edge:edge(x0, conductor, x1), core:edge:edge(x1, givenName, x2), x = x0, y = x2.
+gmarkSubquery02(x, y) <- core:edge:edge(x0, movement, x1), core:edge:edge(x2, duration, x1), core:edge:edge(x2, description, x3), x = x0, y = x3.
+query() <- gmarkSubquery00(x0, x1), gmarkSubquery01(x1, x2), gmarkSubquery02(x2, x3).
 END

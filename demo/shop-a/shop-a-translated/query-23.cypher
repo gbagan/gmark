@@ -1,1 +1,1 @@
-MATCH (x0)-[:pproducer]->()<-[:pemail]-()<-[:pactor]-(x1), (x0)-[:phasReview]->()<-[:phasReview]-()-[:pconductor]->()<-[:pdirector]-(x2), (x1)-[:pdirector]->()-[:pfriendOf]->()-[:phomepage]->()<-[:phomepage]-(x3) RETURN DISTINCT x3, x0, x1, x2;
+MATCH (x0)<-[:phasGenre]-()-[:planguage]->(x1), (x0)<-[:phasGenre]-()-[:planguage]->(x2), (x0)<-[:phasGenre]-()-[:pdescription]->()<-[:ptitle]-()-[:planguage]->(x3) RETURN DISTINCT x0, x1;

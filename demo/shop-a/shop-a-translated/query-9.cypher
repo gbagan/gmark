@@ -1,1 +1,1 @@
-MATCH (x0)<-[:planguage]-()-[:pkeywords]->()<-[:pemail]-()-[:plocation]->(x1), (x0)<-[:planguage]-()<-[:plike]-()-[:plocation]->(x2), (x0)<-[:planguage]-()-[:pisbn]->()<-[:puserId]-()-[:plocation]->(x3), (x0)<-[:planguage]-()-[:peditor]->()-[:plocation]->(x4) RETURN DISTINCT x3, x0, x1, x2;
+MATCH (x0)-[:pincludes|pincludes|pincludes*]->(x1), (x0)-[:pincludes*]->(x2), (x0)-[:pincludes*]->(x3), (x0)-[:pincludes|pincludes*]->(x4) RETURN DISTINCT x0, x1;

@@ -1,1 +1,1 @@
-MATCH (x0)<-[:phomepage]-()-[:pbookEdition]->()<-[:pcontentSize]-(x1), (x0)-[:purl]->()<-[:pemail]-(x2), (x1)-[:purl]->()<-[:pname]-()-[:ppaymentAccepted]->()<-[:ppaymentAccepted]-(x3) RETURN DISTINCT x0, x1;
+MATCH (x0)-[:paggregateRating]->()<-[:pcontentRating]-()-[:pexpires]->(x1), (x1)<-[:pbirthDate]-()<-[:pemployee]-()-[:ptelephone]->(x2), (x2)<-[:pnumberOfPages]-()-[:pcaption]->()<-[:pdescription]-()-[:ptag]->(x3), (x3)<-[:ptag]-()<-[:phasGenre]-()<-[:plike]-()-[:pgender]->(x4) RETURN DISTINCT x0;

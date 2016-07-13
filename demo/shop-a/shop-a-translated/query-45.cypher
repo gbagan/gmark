@@ -1,1 +1,1 @@
-MATCH (x0)<-[:phomepage]-()-[:pdescription]->()<-[:pname]-(x1), (x0)-[:phits]->()<-[:pfaxNumber]-(x2), (x0)<-[:psubscribes]-()<-[:pauthor]-()-[:pwordCount]->()<-[:pfaxNumber]-(x3) RETURN "true" LIMIT 1;
+MATCH (x0)-[:phomepage]->()<-[:phomepage]-()<-[:pconductor]-(x1), (x1)-[:pconductor]->()-[:pfriendOf]->()-[:plike]->(x2), (x0)-[:phasReview]->()<-[:phasReview]-()-[:phomepage]->(x3), (x2)<-[:pincludes]-()-[:pincludes]->()-[:phomepage]->(x4) RETURN DISTINCT x0, x2;

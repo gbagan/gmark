@@ -1,11 +1,9 @@
 digraph g {
-	x0 [shape=circle, label="?x0"];
-	x1 [shape=circle, label="?x1"];
-	x0 -> x1 [label="((hasGenre-.title.description-.expires)+(hasGenre-.includes-.priceValidUntil))"];
-	x2 [shape=circle, label="?x2"];
-	x1 -> x2 [label="((purchaseDate-.price.printColumn-.printPage)+(birthDate-.director-.duration))"];
-	x3 [shape=circle, label="?x3"];
-	x2 -> x3 [label="((contentRating-.caption.title-.hasGenre))"];
-	x4 [shape=circle, label="?x4"];
-	x3 -> x4 [label="((hasGenre-.like-.gender))"];
+	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
+	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
+	x2 [fillcolor="yellow", style="filled," shape=circle, label="?x2"];
+	x3 [fillcolor="yellow", style="filled," shape=circle, label="?x3"];
+	x0 -> x1 [label="((numberOfPages-.purchaseFor-)+(contentRating-.purchaseFor-))"];
+	x1 -> x2 [label="(((purchaseFor.conductor.conductor-.purchaseFor-)+(purchaseFor.author.friendOf.makesPurchase)+(purchaseFor.author.author-.purchaseFor-)))*"];
+	x2 -> x3 [label="(((purchaseFor.purchaseFor-)))*"];
 }

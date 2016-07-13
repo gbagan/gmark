@@ -1,1 +1,1 @@
-MATCH (x0)<-[:ptype]-()-[:plike]->()-[:pkeywords]->()<-[:ptitle]-(x1), (x1)-[:pdirector]->()<-[:pfriendOf]-()-[:page]->(x2), (x2)<-[:page]-()-[:puserId]->()<-[:pcontentRating]-()-[:ptext]->(x3) RETURN "true" LIMIT 1;
+MATCH (x0)-[:ppurchaseFor]->()-[:ptitle]->()<-[:ppublished]-()<-[:pincludes]-(x1), (x0)-[:ppurchaseFor]->()-[:ptitle]->()<-[:pdescription]-()-[:poffers]->(x2), (x0)-[:pprice]->()<-[:pcontentRating]-()-[:pprintColumn]->()<-[:pserialNumber]-(x3), (x0)-[:ppurchaseFor]->()-[:pcontentRating]->()<-[:pcontentRating]-()<-[:pincludes]-(x4) RETURN DISTINCT x2, x0, x3, x1;

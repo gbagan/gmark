@@ -1,1 +1,1 @@
-MATCH (x0)-[:pauthor|pauthor|pauthor*]->(x1), (x0)-[:pauthor|peditor|pauthor*]->(x2), (x1)-[:pauthor|peditor|pauthor*]->(x3) RETURN "true" LIMIT 1;
+MATCH (x0)<-[:ptag]-()<-[:ppurchaseFor]-()-[:ppurchaseDate]->(x1), (x0)<-[:ptag]-()-[:ptrailer]->()<-[:psubscribes]-()-[:pnationality]->(x2), (x1)<-[:ptag]-()-[:pdirector]->()-[:pnationality]->(x3) RETURN DISTINCT x0, x2, x1, x3;

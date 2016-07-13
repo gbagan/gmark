@@ -1,1 +1,1 @@
-MATCH (x0)-[:partist]->()<-[:previewer]-()<-[:phasReview]-(x1), (x0)<-[:pincludes]-()-[:pincludes]->()-[:phomepage]->()<-[:phomepage]-(x2), (x1)<-[:pincludes]-()-[:pincludes]->()<-[:ppurchaseFor]-()-[:ppurchaseFor]->(x3) RETURN DISTINCT x0, x1, x2;
+MATCH (x0)<-[:pperformedIn]-()-[:phasGenre]->()-[:ptype]->(x1), (x0)<-[:pperformedIn]-()-[:pcaption]->()<-[:pkeywords]-()-[:planguage]->(x2), (x1)<-[:pperformedIn]-()-[:phomepage]->()-[:planguage]->(x3) RETURN DISTINCT x3, x0, x1, x2;

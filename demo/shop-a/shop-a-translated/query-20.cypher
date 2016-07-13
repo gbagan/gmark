@@ -1,1 +1,1 @@
-MATCH (x0)-[:phasReview]->()-[:previewer]->()-[:plike]->()<-[:plike]-(x1), (x1)-[:phomepage|pfriendOf|previewer*]->(x2), (x2)-[:pmakesPurchase]->()-[:ppurchaseFor]->(x3) RETURN DISTINCT x0, x2, x1;
+MATCH (x0)-[:ppurchaseFor]->()-[:ptext]->()<-[:pcaption]-(x1), (x0)-[:ppurchaseFor]->()<-[:ppurchaseFor]-(x2), (x1)-[:ppurchaseFor]->()-[:pauthor]->()<-[:pdirector]-()<-[:ppurchaseFor]-(x3) RETURN DISTINCT x0;

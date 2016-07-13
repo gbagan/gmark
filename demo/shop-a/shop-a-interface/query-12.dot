@@ -1,9 +1,9 @@
 digraph g {
-	x0 [shape=circle, label="?x0"];
-	x1 [shape=circle, label="?x1"];
-	x0 -> x1 [label="(((author.author-)+(author.friendOf-.editor-)+(author.friendOf.author-)))*"];
-	x2 [shape=circle, label="?x2"];
-	x0 -> x2 [label="(((author.follows.follows-.subscribes)+(editor.like.like-.subscribes)+(author.follows.follows-.homepage)))*"];
-	x3 [shape=circle, label="?x3"];
-	x1 -> x3 [label="(((author.like.like-.homepage)+(editor.follows.artist-.homepage)+(author.like.like-.homepage)))*"];
+	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
+	x2 [fillcolor="yellow", style="filled," shape=circle, label="?x2"];
+	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
+	x3 [fillcolor="yellow", style="filled," shape=circle, label="?x3"];
+	x0 -> x1 [label="((tag-.purchaseFor-.purchaseDate)+(tag-.includes-.validThrough)+(tag-.hasGenre-.expires))"];
+	x0 -> x2 [label="((tag-.trailer.subscribes-.nationality))"];
+	x1 -> x3 [label="((tag-.director.nationality)+(tag-.author.nationality))"];
 }

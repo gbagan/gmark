@@ -1,1 +1,1 @@
-MATCH (x0)-[:pincludes|pincludes|pincludes*]->(x1), (x0)-[:pincludes*]->(x2), (x0)-[:pincludes|pincludes|pincludes*]->(x3), (x0)-[:pincludes|pincludes*]->(x4) RETURN DISTINCT x2, x0, x1, x3;
+MATCH (x0)-[:pcontentRating]->()<-[:puserId]-()<-[:partist]-(x1), (x1)-[:partist]->()-[:plike]->(x2), (x2)-[:peditor]->()<-[:partist]-()<-[:ppurchaseFor]-(x3) RETURN DISTINCT x0;

@@ -1,1 +1,1 @@
-MATCH (x0)-[:phasReview*]->(x1), (x1)-[:peditor*]->(x2), (x2)-[:pprintColumn]->()<-[:phits]-(x3) RETURN DISTINCT x3, x1, x2, x0;
+MATCH (x0)<-[:ptype]-()-[:pfollows]->()-[:pgender]->(x1), (x1)<-[:pgender]-()-[:pbirthDate]->(x2), (x2)<-[:pvalidForm]-()-[:pprice]->()<-[:pcontentSize]-()-[:ptag]->(x3), (x3)<-[:ptag]-()-[:prelease]->(x4) RETURN "true" LIMIT 1;

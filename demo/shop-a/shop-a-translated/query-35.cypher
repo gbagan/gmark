@@ -1,1 +1,1 @@
-MATCH (x0)<-[:pkeywords]-()-[:ptext]->()<-[:pgivenName]-()-[:plike]->(x1), (x1)-[:phasReview|pincludes|phomepage*]->(x2), (x2)-[:ptitle]->()<-[:pcaption]-()-[:pexpires]->()<-[:pexpires]-(x3), (x3)-[:phomepage]->()<-[:phomepage]-(x4) RETURN DISTINCT x1, x2, x0;
+MATCH (x0)-[:pauthor]->()-[:phomepage]->()<-[:ptrailer]-(x1), (x1)-[:pdirector|phasReview|pdirector*]->(x2), (x2)-[:pdirector]->()<-[:pauthor]-()-[:pcaption]->()<-[:ppublished]-(x3) RETURN DISTINCT x0, x3;

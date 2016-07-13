@@ -1,1 +1,1 @@
-MATCH (x0)-[:ppublished]->()<-[:pdescription]-()-[:pkeywords]->()<-[:ptext]-(x1), (x0)-[:pauthor]->()-[:puserId]->()<-[:pcontentSize]-(x2), (x0)-[:pdescription]->()<-[:pkeywords]-(x3) RETURN DISTINCT x0, x1;
+MATCH (x0)-[:partist]->()-[:plike]->()<-[:ppurchaseFor]-(x1), (x1)-[:ppurchaseFor*]->(x2), (x0)-[:partist]->()-[:plike]->()-[:phasReview]->()<-[:phasReview]-(x3), (x2)-[:partist]->()-[:plike]->(x4) RETURN DISTINCT x0;

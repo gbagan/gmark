@@ -1,1 +1,1 @@
-MATCH (x0)-[:phomepage|phomepage|phomepage*]->(x1), (x1)-[:psubscribes|phomepage|phomepage*]->(x2), (x0)-[:phomepage*]->(x3), (x2)-[:phomepage|phomepage|phomepage*]->(x4) RETURN DISTINCT x1, x2, x0, x3;
+MATCH (x0)<-[:pconductor]-()-[:pkeywords]->()<-[:ptitle]-(x1), (x0)-[:pjobTitle]->()<-[:ptitle]-(x2), (x0)-[:pemail]->()<-[:pcaption]-()-[:pisbn]->()<-[:pduration]-(x3), (x0)-[:pjobTitle]->()<-[:pdescription]-()-[:pcontentSize]->()<-[:pcontentSize]-(x4) RETURN DISTINCT x0;

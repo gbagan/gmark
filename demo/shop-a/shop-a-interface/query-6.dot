@@ -1,9 +1,11 @@
 digraph g {
-	x0 [shape=circle, label="?x0"];
-	x1 [shape=circle, label="?x1"];
-	x0 -> x1 [label="((duration.duration-.award.caption-)+(director.jobTitle.caption-)+(description.keywords-))"];
-	x2 [shape=circle, label="?x2"];
-	x0 -> x2 [label="((duration.aggregateRating-)+(text.legalName-)+(contentSize.faxNumber-))"];
-	x3 [shape=circle, label="?x3"];
-	x1 -> x3 [label="((trailer.url.legalName-)+(award.award-.caption.email-))"];
+	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
+	x3 [fillcolor="yellow", style="filled," shape=circle, label="?x3"];
+	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
+	x2 [fillcolor="yellow", style="filled," shape=circle, label="?x2"];
+	x0 -> x1 [label="(((includes.includes-)+(includes.hasReview.hasReview-.includes-)+(includes.trailer.homepage-.includes-)))*"];
+	x1 -> x2 [label="(((includes.includes-)+(includes.includes-)))*"];
+	x0 -> x3 [label="(((includes.homepage.homepage-.includes-)))*"];
+	x4 [shape=circle, label="?x4"];
+	x2 -> x4 [label="(((includes.editor.editor-.includes-)+(includes.hasReview.hasReview-.includes-)+(includes.hasReview.hasReview-.includes-)))*"];
 }

@@ -1,11 +1,9 @@
 digraph g {
-	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
-	x3 [fillcolor="yellow", style="filled," shape=circle, label="?x3"];
 	x2 [fillcolor="yellow", style="filled," shape=circle, label="?x2"];
 	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
-	x0 -> x1 [label="((includes.wordCount.totalVotes-)+(eligibleQuantity.rating-))"];
-	x0 -> x2 [label="((validThrough.release-.caption.text-)+(price.wordCount-.caption.title-)+(includes.caption.title-))"];
-	x0 -> x3 [label="((includes.title.title-)+(priceValidUntil.expires-.composer.title-)+(eligibleQuantity.opus-.hasReview))"];
-	x4 [shape=circle, label="?x4"];
-	x0 -> x4 [label="((includes.caption.caption-.hasReview))"];
+	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
+	x3 [fillcolor="yellow", style="filled," shape=circle, label="?x3"];
+	x0 -> x1 [label="(((hasReview.hasReview-.includes-.includes)+(purchaseFor-.purchaseFor)))*"];
+	x0 -> x2 [label="(((purchaseFor-.purchaseFor.includes-.includes)))*"];
+	x1 -> x3 [label="(((purchaseFor-.purchaseFor.purchaseFor-.purchaseFor)+(homepage.homepage-.homepage.homepage-)+(homepage.subscribes-.reviewer-.hasReview-)))*"];
 }

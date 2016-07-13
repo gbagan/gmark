@@ -1,1 +1,1 @@
-MATCH (x0)-[:pactor]->()-[:plike]->()<-[:plike]-()-[:psubscribes]->(x1), (x1)-[:phomepage|phomepage*]->(x2), (x2)<-[:phomepage]-()<-[:plike]-()<-[:pactor]-(x3), (x3)-[:phasReview]->()-[:previewer]->()-[:plike]->(x4) RETURN DISTINCT x1, x2, x0;
+MATCH (x0)-[:partist]->()<-[:pauthor]-()-[:phasReview]->(x1), (x1)-[:phasReview|phasReview|previewer*]->(x2), (x0)<-[:plike]-()-[:pmakesPurchase]->()-[:ppurchaseFor]->(x3), (x2)<-[:plike]-()-[:pmakesPurchase]->()-[:ppurchaseFor]->(x4) RETURN DISTINCT x0, x1, x2;

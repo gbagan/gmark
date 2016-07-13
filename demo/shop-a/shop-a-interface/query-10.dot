@@ -1,11 +1,9 @@
 digraph g {
-	x2 [fillcolor="yellow", style="filled," shape=circle, label="?x2"];
 	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
-	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
-	x3 [fillcolor="yellow", style="filled," shape=circle, label="?x3"];
-	x0 -> x1 [label="(((includes.hasReview.hasReview-.includes-)+(includes.hasReview.hasReview-.includes-)+(includes.editor.author-.includes-)))*"];
-	x0 -> x2 [label="(((includes.purchaseFor-.purchaseFor.includes-)))*"];
-	x0 -> x3 [label="(((includes.includes-)+(includes.editor.actor-.includes-)+(includes.homepage.homepage-.includes-)))*"];
-	x4 [shape=circle, label="?x4"];
-	x0 -> x4 [label="(((includes.actor.actor-.includes-)+(includes.hasReview.hasReview-.includes-)))*"];
+	x1 [shape=circle, label="?x1"];
+	x0 -> x1 [label="((contentRating.userId-.artist-)+(isbn.eligibleQuantity-.includes))"];
+	x2 [shape=circle, label="?x2"];
+	x1 -> x2 [label="((artist.like)+(artist.friendOf.author-)+(artist.author-))"];
+	x3 [shape=circle, label="?x3"];
+	x2 -> x3 [label="((editor.artist-.purchaseFor-)+(like-.friendOf.makesPurchase))"];
 }

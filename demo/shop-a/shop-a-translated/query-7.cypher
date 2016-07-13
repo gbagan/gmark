@@ -1,1 +1,1 @@
-MATCH (x0)-[:phasReview]->()<-[:phasReview]-()<-[:plike]-()-[:pfriendOf]->(x1), (x1)-[:plike]->()<-[:plike]-()-[:phomepage]->(x2), (x2)<-[:phomepage]-()-[:pdescription]->()<-[:pdescription]-()<-[:pincludes]-(x3), (x3)-[:pincludes]->()-[:partist]->()<-[:pfollows]-()<-[:pactor]-(x4) RETURN DISTINCT x0, x4;
+MATCH (x0)-[:peditor|phomepage*]->(x1), (x1)-[:pauthor]->()-[:pfriendOf]->()<-[:pemployee]-()-[:poffers]->(x2), (x0)-[:pauthor|plike|plike*]->(x3), (x2)-[:plike|plike*]->(x4) RETURN DISTINCT x0;

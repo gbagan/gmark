@@ -1,1 +1,1 @@
-MATCH (x0)<-[:plike]-()<-[:pauthor]-()-[:phasReview]->(x1), (x0)<-[:plike]-()<-[:pcontactPoint]-()-[:pemployee]->()<-[:previewer]-(x2), (x0)<-[:plike]-()<-[:pconductor]-()-[:phasReview]->(x3) RETURN "true" LIMIT 1;
+MATCH (x0)<-[:phomepage]-()-[:plike]->()-[:phasReview]->(x1), (x0)<-[:psubscribes]-()-[:pfriendOf]->()-[:plike]->()-[:phasReview]->(x2), (x0)<-[:phomepage]-()-[:pauthor]->()-[:plike]->()-[:phasReview]->(x3), (x0)<-[:phomepage]-()-[:plike]->()-[:phasReview]->(x4) RETURN DISTINCT x0, x1;

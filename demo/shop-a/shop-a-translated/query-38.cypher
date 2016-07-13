@@ -1,1 +1,1 @@
-MATCH (x0)<-[:page]-()-[:pjobTitle]->()<-[:pdescription]-(x1), (x1)-[:phomepage|ppurchaseFor*]->(x2), (x2)-[:phomepage]->()<-[:phomepage]-()-[:plike]->(x3), (x3)-[:ptext]->()<-[:pcaption]-()-[:phasGenre]->()-[:ptype]->(x4) RETURN "true" LIMIT 1;
+MATCH (x0)-[:pincludes*]->(x1), (x1)-[:pincludes|pincludes*]->(x2), (x2)-[:pincludes]->()<-[:plike]-()<-[:partist]-(x3), (x3)-[:partist]->()-[:phomepage]->(x4) RETURN DISTINCT x0, x4;

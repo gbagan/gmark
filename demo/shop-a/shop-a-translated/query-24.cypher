@@ -1,1 +1,1 @@
-MATCH (x0)-[:phomepage]->()-[:phits]->()<-[:pcontentSize]-(x1), (x0)-[:pconductor]->()-[:pgivenName]->()<-[:ptext]-(x2), (x0)-[:ptext]->()<-[:pdescription]-(x3), (x0)-[:ptitle]->()<-[:ptitle]-(x4) RETURN DISTINCT x0;
+MATCH (x0)<-[:phomepage]-()-[:pcontentRating]->()<-[:pwordCount]-(x1), (x0)-[:purl]->()<-[:pdescription]-()-[:pdirector]->()<-[:peditor]-(x2), (x0)-[:purl]->()<-[:ptitle]-(x3), (x0)<-[:phomepage]-()-[:pcaption]->()<-[:ptext]-()<-[:phasReview]-(x4) RETURN DISTINCT x2, x1, x3, x0;

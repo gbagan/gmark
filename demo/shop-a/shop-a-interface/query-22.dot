@@ -1,9 +1,9 @@
 digraph g {
-	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
 	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
 	x2 [fillcolor="yellow", style="filled," shape=circle, label="?x2"];
-	x0 -> x1 [label="((nationality-.jobTitle)+(nationality-.jobTitle))"];
-	x0 -> x2 [label="((nationality-.jobTitle))"];
-	x3 [shape=circle, label="?x3"];
-	x0 -> x3 [label="((nationality-.familyName.performer-.performer)+(nationality-.userId.contentSize-.description)+(parentContry-.performedIn-.description))"];
+	x3 [fillcolor="yellow", style="filled," shape=circle, label="?x3"];
+	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
+	x0 -> x1 [label="((type-.actor-.tag)+(type-.like.tag)+(type-.like.tag))"];
+	x0 -> x2 [label="((type-.editor-.tag))"];
+	x0 -> x3 [label="((type-.like.tag))"];
 }

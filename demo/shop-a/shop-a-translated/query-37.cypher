@@ -1,1 +1,1 @@
-MATCH (x0)-[:pincludes]->()-[:pwordCount]->()<-[:ptotalVotes]-(x1), (x0)-[:pvalidThrough]->()<-[:prelease]-()-[:pcaption]->()<-[:ptext]-(x2), (x0)-[:pincludes]->()-[:ptitle]->()<-[:ptitle]-(x3), (x0)-[:pincludes]->()-[:pcaption]->()<-[:pcaption]-()-[:phasReview]->(x4) RETURN DISTINCT x0, x3, x2, x1;
+MATCH (x0)-[:phasReview|ppurchaseFor*]->(x1), (x0)-[:ppurchaseFor*]->(x2), (x1)-[:ppurchaseFor|phomepage|phomepage*]->(x3) RETURN DISTINCT x2, x1, x0, x3;

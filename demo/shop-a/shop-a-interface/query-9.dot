@@ -1,11 +1,11 @@
 digraph g {
-	x3 [fillcolor="yellow", style="filled," shape=circle, label="?x3"];
 	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
 	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
-	x2 [fillcolor="yellow", style="filled," shape=circle, label="?x2"];
-	x0 -> x1 [label="((language-.keywords.email-.location)+(language-.like-.location)+(language-.actor.nationality.parentContry-))"];
-	x0 -> x2 [label="((language-.like-.location))"];
-	x0 -> x3 [label="((language-.isbn.userId-.location)+(language-.like-.location))"];
+	x0 -> x1 [label="(((includes.actor.director-.includes-)+(includes.includes-)+(includes.includes-)))*"];
+	x2 [shape=circle, label="?x2"];
+	x0 -> x2 [label="(((includes.includes-.includes.includes-)))*"];
+	x3 [shape=circle, label="?x3"];
+	x0 -> x3 [label="(((includes.purchaseFor-.purchaseFor.includes-)))*"];
 	x4 [shape=circle, label="?x4"];
-	x0 -> x4 [label="((language-.editor.location)+(language-.homepage-.location)+(language-.contentSize.telephone-.location))"];
+	x0 -> x4 [label="(((includes.homepage.homepage-.includes-)+(includes.hasReview.hasReview-.includes-)))*"];
 }

@@ -1,1 +1,1 @@
-MATCH (x0)<-[:pdatePublished]-()-[:peditor]->()-[:pfamilyName]->()<-[:ptext]-(x1), (x1)-[:pdirector]->()-[:plike]->()<-[:pincludes]-()-[:pincludes]->(x2), (x2)-[:pconductor]->()-[:pfollows]->()-[:pmakesPurchase]->(x3), (x3)<-[:pmakesPurchase]-()-[:pemail]->()<-[:pkeywords]-()-[:phasGenre]->(x4) RETURN DISTINCT x0, x4;
+MATCH (x0)-[:previewer|previewer*]->(x1), (x0)-[:phasReview|previewer|previewer*]->(x2), (x0)-[:phasReview|previewer|previewer*]->(x3) RETURN DISTINCT x1, x0, x2;

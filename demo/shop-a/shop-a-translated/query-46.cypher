@@ -1,1 +1,1 @@
-MATCH (x0)-[:pauthor*]->(x1), (x0)-[:phomepage|pfriendOf|peditor*]->(x2), (x0)-[:pactor|pfriendOf*]->(x3) RETURN "true" LIMIT 1;
+MATCH (x0)-[:ppurchaseFor|ppurchaseFor|phasReview*]->(x1), (x0)-[:phasReview|phasReview*]->(x2), (x0)-[:phasReview|phasReview|phomepage*]->(x3), (x0)-[:phomepage*]->(x4) RETURN DISTINCT x0, x1;

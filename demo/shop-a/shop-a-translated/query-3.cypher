@@ -1,1 +1,1 @@
-MATCH (x0)-[:peditor]->()-[:plike]->()<-[:plike]-()<-[:pactor]-(x1), (x1)-[:pactor]->()-[:plike]->()-[:phasReview]->(x2), (x0)<-[:pincludes]-()-[:pincludes]->(x3), (x2)-[:pauthor]->()<-[:pfriendOf]-()<-[:pauthor]-(x4) RETURN DISTINCT x0;
+MATCH (x0)-[:plike]->()-[:phomepage]->()<-[:phomepage]-(x1), (x1)-[:pincludes*]->(x2), (x0)<-[:peditor]-()-[:peditor]->()-[:pfriendOf]->(x3), (x2)<-[:pactor]-()-[:pactor]->()-[:psubscribes]->()<-[:psubscribes]-(x4) RETURN "true" LIMIT 1;

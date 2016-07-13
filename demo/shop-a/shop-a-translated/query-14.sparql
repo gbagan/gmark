@@ -1,1 +1,1 @@
-PREFIX : <http://example.org/gmark/> ASK {  {  ?x0 ((^:plike/^:previewer/^:phasReview/:phomepage)) ?x1 . ?x0 ((^:ppurchaseFor/:ppurchaseFor/^:plike/:phomepage)|(^:plike/:pfriendOf/^:pfollows/:phomepage)|(^:pincludes/:pincludes/^:plike/:psubscribes)) ?x2 . ?x0 ((:peditor/^:partist/:phomepage)) ?x3 . ?x0 ((^:plike/:psubscribes)) ?x4 . } }
+PREFIX : <http://example.org/gmark/> ASK {  {  ?x0 ((:pauthor/:plike/^:plike/^:pauthor)) ?x1 . ?x1 ((^:plike/^:pauthor/^:pincludes)) ?x2 . ?x2 (((:pincludes/:ptrailer/^:phomepage/^:pincludes)|(:pincludes/^:pincludes))){,3} ?x3 . } }

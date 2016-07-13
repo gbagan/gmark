@@ -1,1 +1,1 @@
-MATCH (x0)<-[:psubscribes]-()-[:plike]->()<-[:plike]-()<-[:pauthor]-(x1), (x1)<-[:plike]-()<-[:pconductor]-(x2), (x2)-[:ppurchaseFor*]->(x3) RETURN DISTINCT x0, x3;
+MATCH (x0)-[:pmakesPurchase|ppurchaseFor|ppurchaseFor*]->(x1), (x0)-[:ppurchaseFor*]->(x2), (x0)-[:pmakesPurchase|pmakesPurchase|ppurchaseFor*]->(x3) RETURN DISTINCT x2, x1, x3, x0;

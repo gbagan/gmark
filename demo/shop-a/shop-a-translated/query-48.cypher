@@ -1,1 +1,1 @@
-MATCH (x0)<-[:phasGenre]-()-[:pcontentSize]->()<-[:pcontentSize]-(x1), (x1)-[:pdirector]->()-[:plike]->()<-[:plike]-()-[:pmakesPurchase]->(x2), (x0)<-[:phasGenre]-()<-[:ppurchaseFor]-()-[:ppurchaseFor]->(x3), (x2)<-[:phasGenre]-()-[:pauthor]->()<-[:pauthor]-(x4) RETURN DISTINCT x1, x2, x0, x3;
+MATCH (x0)-[:pconductor|pconductor|phomepage*]->(x1), (x1)<-[:plike]-()-[:psubscribes]->()<-[:phomepage]-()-[:pauthor]->(x2), (x2)<-[:previewer]-()-[:previewer]->()-[:plike]->(x3) RETURN DISTINCT x2, x0, x1, x3;

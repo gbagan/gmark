@@ -1,1 +1,1 @@
-MATCH (x0)<-[:ptag]-()-[:pcontentSize]->()<-[:pmovement]-()-[:pperformedIn]->(x1), (x0)<-[:ptag]-()-[:ptext]->()<-[:pkeywords]-()-[:pcaption]->(x2), (x1)<-[:ptag]-()-[:phasReview]->()-[:ptitle]->(x3) RETURN DISTINCT x0, x2, x1, x3;
+MATCH (x0)-[:ppurchaseFor|peditor*]->(x1), (x1)-[:pwordCount]->()<-[:puserId]-()-[:pemail]->(x2), (x2)<-[:pjobTitle]-()-[:plocation]->(x3), (x3)<-[:plocation]-()<-[:pauthor]-(x4) RETURN "true" LIMIT 1;

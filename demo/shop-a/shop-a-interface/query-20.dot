@@ -1,9 +1,9 @@
 digraph g {
 	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
-	x2 [fillcolor="yellow", style="filled," shape=circle, label="?x2"];
-	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
-	x0 -> x1 [label="((hasReview.reviewer.like.like-)+(conductor.like.like-)+(conductor.like.like-))"];
-	x1 -> x2 [label="(((homepage.homepage-)+(friendOf.friendOf-)+(reviewer-.reviewer)))*"];
+	x1 [shape=circle, label="?x1"];
+	x0 -> x1 [label="((purchaseFor.text.caption-))"];
+	x2 [shape=circle, label="?x2"];
+	x0 -> x2 [label="((purchaseFor.purchaseFor-)+(purchaseFor.purchaseFor-.makesPurchase-.makesPurchase))"];
 	x3 [shape=circle, label="?x3"];
-	x2 -> x3 [label="((makesPurchase.purchaseFor))"];
+	x1 -> x3 [label="((purchaseFor.author.director-.purchaseFor-)+(purchaseFor.purchaseFor-)+(makesPurchase-.makesPurchase))"];
 }

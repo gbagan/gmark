@@ -1,1 +1,1 @@
-MATCH (x0)-[:pcaption]->()<-[:pdescription]-()-[:ptext]->()<-[:ptitle]-(x1), (x1)<-[:pincludes]-()-[:pincludes]->()-[:pauthor]->()-[:plike]->(x2), (x0)-[:pauthor]->()<-[:peditor]-(x3), (x2)<-[:ppurchaseFor]-()-[:ppurchaseFor]->()-[:phomepage]->()<-[:phomepage]-(x4) RETURN DISTINCT x0;
+MATCH (x0)<-[:ptext]-()-[:partist]->()-[:plocation]->(x1), (x0)<-[:ptext]-()-[:ptag]->(x2), (x1)<-[:pcomposer]-()-[:ptag]->(x3) RETURN DISTINCT x0, x2, x1;

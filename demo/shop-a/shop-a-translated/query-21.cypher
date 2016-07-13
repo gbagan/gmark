@@ -1,1 +1,1 @@
-MATCH (x0)<-[:ppurchaseFor]-()-[:ppurchaseFor]->()<-[:plike]-()-[:psubscribes]->(x1), (x0)-[:peditor]->()<-[:pauthor]-()<-[:ppurchaseFor]-()-[:ppurchaseFor]->(x2), (x1)-[:phomepage]->()<-[:psubscribes]-()<-[:pfriendOf]-()<-[:pauthor]-(x3) RETURN DISTINCT x2, x0, x1;
+MATCH (x0)-[:partist]->()<-[:previewer]-()-[:previewer]->()<-[:pfollows]-(x1), (x1)-[:pconductor*]->(x2), (x2)-[:pfriendOf|pemployee*]->(x3) RETURN DISTINCT x2, x0, x1;

@@ -1,1 +1,1 @@
-MATCH (x0)<-[:page]-()<-[:pfollows]-(x1), (x1)<-[:pfriendOf]-()-[:phomepage]->()<-[:phomepage]-()<-[:peditor]-(x2), (x2)-[:pexpires]->()<-[:pvalidThrough]-()-[:peditor]->(x3) RETURN DISTINCT x2, x1, x3, x0;
+MATCH (x0)<-[:plike]-()-[:pfriendOf]->()<-[:pactor]-(x1), (x0)<-[:ppurchaseFor]-()-[:ppurchaseFor]->()<-[:plike]-()<-[:pdirector]-(x2), (x0)<-[:plike]-()-[:psubscribes]->()<-[:ptrailer]-(x3), (x0)<-[:plike]-()<-[:pfriendOf]-()<-[:pdirector]-(x4) RETURN "true" LIMIT 1;
