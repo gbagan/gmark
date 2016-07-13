@@ -1,43 +1,23 @@
 # gMark
 
-**To generate graph instances and query workloads using a graph configuration:**
+**To compile the code:**
 
-    cd src
-    make
-    ./test -c ../use-cases/test.xml -g ../graph.txt -w ../xml/queries.xml
+    cd demo/scripts
+    ./compile-all.sh
 
-where the parameters are:
-- -c : the configuration file
-- -g : the output file for the graph instance
-- -w : the output file for the queries generated on this instance
-- -a : to use aliases for the predicates in the generated graph and queries
-- -n : to specify the number of nodes in the graph (it overrides the parameter from the config file)
+**To generate an entire workflow, use the prepared script play.sh:**
+(suppose we are currently in demo/scripts)
 
-The provided configuration files in the directory *use-cases* are:
-- *test.xml* : schema of a bibliographical graph database
-- *shop.xml* : schema of an online shop (our gMark encoding of the default schema from WatDiv)
-- *social-network.xml* : schema of a social network (our gMark encoding of the schema from LDBC SNB)
-- *uniprot.xml* : schema of a protein network (our gMark encoding of the schema extracted from UniProt)
+    ./play.sh
 
-**To translate the generated queries from the internal XML encoding to the concrete query languages:**
-(suppose we are currently in src)
+This executes the following three steps:
 
-    cd querytranslate
-    make
-    ./test
+- Generation of the graph and query workload in internal format, and html reports for both
+- Translation of the queries into the four concrete syntaxes
+- Generation of the query workload interface
 
-This will read the file 
 
-	../../xml/queries.xml
 
-and translate the queries from there in four files: 
-
-- a.sql 
-- a.sparql
-- a.cypher
-- a.logicblox
-
-The file *xml/queries-examples.xml* illustrates our XML encoding of UCRPQ.
 
 **For more details about the gMark project, please refer to our technical report:
 http://arxiv.org/abs/1511.08386**
