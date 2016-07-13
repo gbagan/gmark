@@ -1,0 +1,9 @@
+BEGIN
+gmarkSubquery00(x, y) <- core:edge:edge(x1, 66, x0), core:edge:edge(x1, 9, x2), core:edge:edge(x3, 5, x2), core:edge:edge(x3, 81, x4), x = x0, y = x4.
+gmarkSubquery00(x, y) <- core:edge:edge(x1, 66, x0), core:edge:edge(x1, 9, x2), core:edge:edge(x3, 50, x2), x = x0, y = x3.
+gmarkSubquery00(x, y) <- core:edge:edge(x1, 61, x0), core:edge:edge(x2, 68, x1), core:edge:edge(x2, 81, x3), x = x0, y = x3.
+gmarkSubquery01(x, y) <- core:edge:edge(x0, 3, x1), core:edge:edge(x2, 33, x1), x = x0, y = x2.
+gmarkSubquery01(x, y) <- core:edge:edge(x0, 43, x1), core:edge:edge(x2, 7, x1), core:edge:edge(x2, 10, x3), core:edge:edge(x4, 26, x3), x = x0, y = x4.
+gmarkSubquery02(x, y) <- core:edge:edge(x0, 75, x1), core:edge:edge(x1, 59, x2), core:edge:edge(x3, 68, x2), core:edge:edge(x4, 76, x3), x = x0, y = x4.
+query(x0, x3) <- gmarkSubquery00(x0, x1), gmarkSubquery01(x1, x2), gmarkSubquery02(x2, x3).
+END

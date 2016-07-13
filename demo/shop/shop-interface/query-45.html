@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Visualize query workload</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" href="../../style/style.css"/>
+	<script src="../../style/animation.js"></script>
+</head>
+<body>
+
+<div id="top">
+
+<div id="left">
+<h3>Stats for Query 45</h3>
+<ul>
+<li><i>Dataset</i>: ../use-cases/shop.xml</li>
+<li><i>Arity</i>: 2</li>
+<li><i>Selectivity</i>: 1</li>
+<li><i>Size</i>: C[3-3], D[1-2], L[2-3]</li>
+<li><i>Recursion</i>: 0%</li>
+</ul>
+<hr/>
+<h3>Generate concrete syntaxes</h3>
+<input type="checkbox" id="sparql-checkbox"/>SPARQL<br/>
+<input type="checkbox" id="opencypher-checkbox"/>openCypher<br/>
+<input type="checkbox" id="sql-checkbox"/>SQL<br/>
+<input type="checkbox" id="datalog-checkbox"/>Datalog<br/>
+<hr/>
+<a href="query-44.html">&lt;&lt;Previous query</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="query-46.html">Next query&gt;&gt;</a>
+</div> <!-- end left -->
+
+<div id="right">
+<img src="query-45.png"/>
+</div> <!-- end right -->
+
+</div> <!-- end top -->
+
+<div id="bottom">
+<br/><br/>
+
+<table border="1">
+<tr>
+<th id="sparql-header">SPARQL</th>
+<th id="opencypher-header">openCypher*</th>
+<th id="sql-header">SQL</th>
+<th id="datalog-header">Datalog</th>
+</tr>
+<tr>
+<td valign="top" id="sparql-syntax">PREFIX : &lt;http://example.org/gmark/&gt;<br/> SELECT DISTINCT ?x0 ?x3 WHERE {  {  ?x0 ((:p78/:p79/^:p76)) ?x1 . ?x1 ((:p39/^:p17/:p56)|(:p76/:p54/:p56)) ?x2 . ?x2 ((^:p56/:p53)|(^:p56/^:p54/:p53)) ?x3 . } }<br/></td>
+<td valign="top" id="opencypher-syntax">MATCH (x0)-[:p78]->()-[:p79]->()<-[:p76]-(x1), (x1)-[:p39]->()<-[:p17]-()-[:p56]->(x2), (x2)<-[:p56]-()-[:p53]->(x3) RETURN DISTINCT x0, x3;<br/><br/><br/>*Note: This query may have a different semantics than the intended one because openCypher does not allow Kleene star above concatenation and/or inverses.</td>
+<td valign="top" id="sql-syntax">WITH RECURSIVE c0(src, trg) AS ((SELECT s0.src, s2.trg FROM edge s0, edge s1, (SELECT trg as src, src as trg, label FROM edge) as s2 WHERE s0.trg = s1.src AND s1.trg = s2.src AND s0.label = 78 AND s1.label = 79  AND s2.label = 76 )) , c1(src, trg) AS ((SELECT s0.src, s2.trg FROM edge s0, (SELECT trg as src, src as trg, label FROM edge) as s1, edge s2 WHERE s0.trg = s1.src AND s1.trg = s2.src AND s0.label = 39 AND s1.label = 17  AND s2.label = 56  UNION SELECT s0.src, s2.trg FROM edge s0, edge s1, edge s2 WHERE s0.trg = s1.src AND s1.trg = s2.src AND s0.label = 76 AND s1.label = 54  AND s2.label = 56 )) , c2(src, trg) AS ((SELECT s0.src, s1.trg FROM (SELECT trg as src, src as trg, label FROM edge) as s0, edge s1 WHERE s0.trg = s1.src AND s0.label = 56 AND s1.label = 53  UNION SELECT s0.src, s2.trg FROM (SELECT trg as src, src as trg, label FROM edge) as s0, (SELECT trg as src, src as trg, label FROM edge) as s1, edge s2 WHERE s0.trg = s1.src AND s1.trg = s2.src AND s0.label = 56 AND s1.label = 54  AND s2.label = 53 )) SELECT DISTINCT c0.src, c2.trg  FROM c0, c1, c2 WHERE c2.src = c1.trg AND c1.src = c0.trg;<br/></td>
+<td valign="top" id="datalog-syntax">BEGIN<br/>gmarkSubquery00(x, y) <- core:edge:edge(x0, 78, x1), core:edge:edge(x1, 79, x2), core:edge:edge(x3, 76, x2), x = x0, y = x3.<br/>gmarkSubquery01(x, y) <- core:edge:edge(x0, 39, x1), core:edge:edge(x2, 17, x1), core:edge:edge(x2, 56, x3), x = x0, y = x3.<br/>gmarkSubquery01(x, y) <- core:edge:edge(x0, 76, x1), core:edge:edge(x1, 54, x2), core:edge:edge(x2, 56, x3), x = x0, y = x3.<br/>gmarkSubquery02(x, y) <- core:edge:edge(x1, 56, x0), core:edge:edge(x1, 53, x2), x = x0, y = x2.<br/>gmarkSubquery02(x, y) <- core:edge:edge(x1, 56, x0), core:edge:edge(x2, 54, x1), core:edge:edge(x2, 53, x3), x = x0, y = x3.<br/>query(x0, x3) <- gmarkSubquery00(x0, x1), gmarkSubquery01(x1, x2), gmarkSubquery02(x2, x3).<br/>END<br/></td>
+</tr>
+</table>
+</div><!-- end bottom -->
+
+</body>
+</html>

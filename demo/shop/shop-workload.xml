@@ -1,0 +1,3376 @@
+<queries>
+<query>
+  <metadata>
+    <id>0</id>
+    <number>0</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>1</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-2</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x1</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">78</symbol>
+          <symbol inverse="true">72</symbol>
+          <symbol inverse="true">79</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">78</symbol>
+          <symbol>60</symbol>
+          <symbol>78</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">78</symbol>
+          <symbol inverse="true">72</symbol>
+          <symbol>72</symbol>
+          <symbol>78</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol>79</symbol>
+          <symbol inverse="true">79</symbol>
+          <symbol>79</symbol>
+          <symbol inverse="true">79</symbol>
+        </concat>
+        <concat>
+          <symbol>79</symbol>
+          <symbol inverse="true">79</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>1</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>0.666667</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-2</disjuncts>
+    <length>3-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x3</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">76</symbol>
+          <symbol>76</symbol>
+          <symbol>81</symbol>
+          <symbol inverse="true">81</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
+          <symbol>67</symbol>
+          <symbol inverse="true">59</symbol>
+          <symbol inverse="true">71</symbol>
+        </concat>
+        <concat>
+          <symbol>67</symbol>
+          <symbol inverse="true">59</symbol>
+          <symbol inverse="true">60</symbol>
+          <symbol inverse="true">72</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol>72</symbol>
+          <symbol>60</symbol>
+          <symbol inverse="true">71</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>2</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>2-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x1</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol inverse="true">51</symbol>
+          <symbol>46</symbol>
+          <symbol inverse="true">2</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">51</symbol>
+          <symbol inverse="true">68</symbol>
+          <symbol>14</symbol>
+          <symbol inverse="true">1</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <disj>
+        <concat>
+          <symbol inverse="true">51</symbol>
+          <symbol inverse="true">67</symbol>
+          <symbol>2</symbol>
+          <symbol inverse="true">2</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">51</symbol>
+          <symbol inverse="true">65</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">51</symbol>
+          <symbol inverse="true">69</symbol>
+          <symbol>4</symbol>
+          <symbol inverse="true">1</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <disj>
+        <concat>
+          <symbol inverse="true">51</symbol>
+          <symbol inverse="true">65</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">51</symbol>
+          <symbol>29</symbol>
+          <symbol inverse="true">0</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">51</symbol>
+          <symbol inverse="true">68</symbol>
+          <symbol>0</symbol>
+          <symbol inverse="true">9</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>3</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>1</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x1</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol>65</symbol>
+          <symbol inverse="true">80</symbol>
+          <symbol inverse="true">81</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol>81</symbol>
+          <symbol>80</symbol>
+          <symbol inverse="true">65</symbol>
+        </concat>
+        <concat>
+          <symbol>81</symbol>
+          <symbol inverse="true">81</symbol>
+          <symbol>81</symbol>
+          <symbol inverse="true">81</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">76</symbol>
+          <symbol>76</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol>65</symbol>
+          <symbol>54</symbol>
+          <symbol inverse="true">54</symbol>
+        </concat>
+        <concat>
+          <symbol>65</symbol>
+          <symbol inverse="true">60</symbol>
+          <symbol inverse="true">65</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>4</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-2</disjuncts>
+    <length>3-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x3</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol inverse="true">66</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">4</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">61</symbol>
+          <symbol>30</symbol>
+          <symbol inverse="true">8</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
+          <symbol>65</symbol>
+          <symbol>57</symbol>
+          <symbol inverse="true">57</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <disj>
+        <concat>
+          <symbol inverse="true">71</symbol>
+          <symbol>81</symbol>
+          <symbol inverse="true">81</symbol>
+          <symbol inverse="true">79</symbol>
+        </concat>
+        <concat>
+          <symbol>54</symbol>
+          <symbol inverse="true">54</symbol>
+          <symbol inverse="true">79</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>5</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>0.333333</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>2-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x3</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol inverse="true">53</symbol>
+          <symbol inverse="true">57</symbol>
+          <symbol>63</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">53</symbol>
+          <symbol>65</symbol>
+          <symbol>63</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
+          <symbol inverse="true">63</symbol>
+          <symbol>60</symbol>
+          <symbol>48</symbol>
+          <symbol inverse="true">38</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">63</symbol>
+          <symbol>48</symbol>
+          <symbol inverse="true">36</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol>76</symbol>
+          <symbol inverse="true">76</symbol>
+        </concat>
+        <concat>
+          <symbol>76</symbol>
+          <symbol inverse="true">79</symbol>
+          <symbol>79</symbol>
+          <symbol inverse="true">76</symbol>
+        </concat>
+        <concat>
+          <symbol>76</symbol>
+          <symbol>71</symbol>
+          <symbol inverse="true">69</symbol>
+          <symbol inverse="true">76</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>6</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>3-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x3</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol>54</symbol>
+          <symbol inverse="true">70</symbol>
+          <symbol>68</symbol>
+          <symbol inverse="true">65</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
+          <symbol>65</symbol>
+          <symbol inverse="true">80</symbol>
+          <symbol inverse="true">81</symbol>
+          <symbol>81</symbol>
+        </concat>
+        <concat>
+          <symbol>54</symbol>
+          <symbol inverse="true">54</symbol>
+          <symbol>81</symbol>
+        </concat>
+        <concat>
+          <symbol>65</symbol>
+          <symbol inverse="true">60</symbol>
+          <symbol inverse="true">71</symbol>
+          <symbol>81</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <disj>
+        <concat>
+          <symbol>80</symbol>
+          <symbol>57</symbol>
+          <symbol inverse="true">79</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>7</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>1</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>2-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x1</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">76</symbol>
+          <symbol>76</symbol>
+        </concat>
+        <concat>
+          <symbol>81</symbol>
+          <symbol inverse="true">81</symbol>
+          <symbol>69</symbol>
+          <symbol inverse="true">71</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">76</symbol>
+          <symbol>76</symbol>
+          <symbol>72</symbol>
+          <symbol inverse="true">71</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol>71</symbol>
+          <symbol inverse="true">72</symbol>
+        </concat>
+        <concat>
+          <symbol>54</symbol>
+          <symbol inverse="true">54</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">79</symbol>
+          <symbol>79</symbol>
+        </concat>
+        <concat>
+          <symbol>81</symbol>
+          <symbol inverse="true">81</symbol>
+        </concat>
+        <concat>
+          <symbol>71</symbol>
+          <symbol>58</symbol>
+          <symbol inverse="true">54</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>8</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x1</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol>5</symbol>
+          <symbol inverse="true">0</symbol>
+          <symbol>67</symbol>
+          <symbol>62</symbol>
+        </concat>
+        <concat>
+          <symbol>54</symbol>
+          <symbol inverse="true">54</symbol>
+          <symbol>62</symbol>
+        </concat>
+        <concat>
+          <symbol>67</symbol>
+          <symbol>62</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <disj>
+        <concat>
+          <symbol inverse="true">76</symbol>
+          <symbol>39</symbol>
+          <symbol inverse="true">30</symbol>
+          <symbol>62</symbol>
+        </concat>
+        <concat>
+          <symbol>2</symbol>
+          <symbol inverse="true">46</symbol>
+          <symbol>62</symbol>
+        </concat>
+        <concat>
+          <symbol>2</symbol>
+          <symbol inverse="true">3</symbol>
+          <symbol>69</symbol>
+          <symbol>62</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <disj>
+        <concat>
+          <symbol>0</symbol>
+          <symbol inverse="true">47</symbol>
+          <symbol>62</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>9</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>1</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>3-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x1</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">79</symbol>
+          <symbol inverse="true">78</symbol>
+          <symbol inverse="true">72</symbol>
+        </concat>
+        <concat>
+          <symbol>71</symbol>
+          <symbol>60</symbol>
+          <symbol inverse="true">72</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol>54</symbol>
+          <symbol inverse="true">58</symbol>
+          <symbol inverse="true">72</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol>72</symbol>
+          <symbol inverse="true">75</symbol>
+          <symbol>75</symbol>
+          <symbol inverse="true">72</symbol>
+        </concat>
+        <concat>
+          <symbol>72</symbol>
+          <symbol inverse="true">80</symbol>
+          <symbol inverse="true">81</symbol>
+        </concat>
+        <concat>
+          <symbol>54</symbol>
+          <symbol inverse="true">54</symbol>
+          <symbol>81</symbol>
+          <symbol inverse="true">81</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>10</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>0.666667</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x3</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol>81</symbol>
+          <symbol inverse="true">81</symbol>
+          <symbol>54</symbol>
+          <symbol inverse="true">54</symbol>
+        </concat>
+        <concat>
+          <symbol>54</symbol>
+          <symbol inverse="true">54</symbol>
+          <symbol>58</symbol>
+          <symbol inverse="true">54</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">79</symbol>
+          <symbol>79</symbol>
+          <symbol inverse="true">76</symbol>
+          <symbol>76</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
+          <symbol>67</symbol>
+          <symbol inverse="true">67</symbol>
+          <symbol inverse="true">76</symbol>
+          <symbol>76</symbol>
+        </concat>
+        <concat>
+          <symbol>67</symbol>
+          <symbol inverse="true">59</symbol>
+          <symbol>58</symbol>
+          <symbol inverse="true">54</symbol>
+        </concat>
+        <concat>
+          <symbol>67</symbol>
+          <symbol inverse="true">67</symbol>
+          <symbol inverse="true">76</symbol>
+          <symbol>76</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">76</symbol>
+          <symbol>76</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>11</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>3-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x3</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol inverse="true">56</symbol>
+          <symbol>54</symbol>
+          <symbol>41</symbol>
+          <symbol inverse="true">46</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">56</symbol>
+          <symbol inverse="true">54</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">56</symbol>
+          <symbol>71</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
+          <symbol>47</symbol>
+          <symbol inverse="true">3</symbol>
+        </concat>
+        <concat>
+          <symbol>45</symbol>
+          <symbol inverse="true">44</symbol>
+        </concat>
+        <concat>
+          <symbol>57</symbol>
+          <symbol>5</symbol>
+          <symbol inverse="true">50</symbol>
+          <symbol>81</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <disj>
+        <concat>
+          <symbol inverse="true">81</symbol>
+          <symbol inverse="true">57</symbol>
+          <symbol inverse="true">74</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">81</symbol>
+          <symbol inverse="true">57</symbol>
+          <symbol inverse="true">74</symbol>
+        </concat>
+        <concat>
+          <symbol>80</symbol>
+          <symbol inverse="true">71</symbol>
+          <symbol inverse="true">57</symbol>
+          <symbol inverse="true">74</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>12</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>2-2</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x1</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol>60</symbol>
+          <symbol inverse="true">72</symbol>
+          <symbol>72</symbol>
+          <symbol inverse="true">69</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">74</symbol>
+          <symbol>74</symbol>
+          <symbol inverse="true">68</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <disj>
+        <concat>
+          <symbol inverse="true">72</symbol>
+          <symbol>71</symbol>
+          <symbol inverse="true">69</symbol>
+        </concat>
+        <concat>
+          <symbol>54</symbol>
+          <symbol inverse="true">54</symbol>
+          <symbol inverse="true">79</symbol>
+          <symbol>79</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <disj>
+        <concat>
+          <symbol inverse="true">72</symbol>
+          <symbol inverse="true">79</symbol>
+          <symbol>79</symbol>
+        </concat>
+        <concat>
+          <symbol>60</symbol>
+          <symbol inverse="true">68</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>13</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>0.333333</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>4-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x3</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol inverse="true">61</symbol>
+          <symbol>57</symbol>
+          <symbol>5</symbol>
+          <symbol inverse="true">50</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
+          <symbol>50</symbol>
+          <symbol inverse="true">2</symbol>
+          <symbol>7</symbol>
+          <symbol inverse="true">34</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol>76</symbol>
+          <symbol inverse="true">76</symbol>
+          <symbol>76</symbol>
+          <symbol inverse="true">76</symbol>
+        </concat>
+        <concat>
+          <symbol>76</symbol>
+          <symbol>71</symbol>
+          <symbol inverse="true">72</symbol>
+          <symbol inverse="true">76</symbol>
+        </concat>
+        <concat>
+          <symbol>76</symbol>
+          <symbol>70</symbol>
+          <symbol inverse="true">70</symbol>
+          <symbol inverse="true">76</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>14</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>0.666667</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x3</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol>81</symbol>
+          <symbol inverse="true">81</symbol>
+        </concat>
+        <concat>
+          <symbol>81</symbol>
+          <symbol inverse="true">81</symbol>
+          <symbol inverse="true">79</symbol>
+          <symbol>79</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
+          <symbol>54</symbol>
+          <symbol inverse="true">58</symbol>
+          <symbol inverse="true">72</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">79</symbol>
+          <symbol>79</symbol>
+        </concat>
+        <concat>
+          <symbol>81</symbol>
+          <symbol inverse="true">81</symbol>
+          <symbol inverse="true">79</symbol>
+          <symbol>79</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol>81</symbol>
+          <symbol>80</symbol>
+          <symbol inverse="true">72</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>15</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>0.333333</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x3</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">79</symbol>
+          <symbol>79</symbol>
+          <symbol>81</symbol>
+          <symbol inverse="true">81</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">79</symbol>
+          <symbol>79</symbol>
+        </concat>
+        <concat>
+          <symbol>81</symbol>
+          <symbol inverse="true">81</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
+          <symbol inverse="true">79</symbol>
+          <symbol>79</symbol>
+          <symbol inverse="true">79</symbol>
+          <symbol>79</symbol>
+        </concat>
+        <concat>
+          <symbol>81</symbol>
+          <symbol inverse="true">81</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <disj>
+        <concat>
+          <symbol inverse="true">57</symbol>
+          <symbol>78</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>16</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>2-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x3</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol inverse="true">56</symbol>
+          <symbol inverse="true">58</symbol>
+          <symbol>48</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">56</symbol>
+          <symbol inverse="true">54</symbol>
+          <symbol>6</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">56</symbol>
+          <symbol>4</symbol>
+          <symbol inverse="true">24</symbol>
+          <symbol>20</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
+          <symbol inverse="true">40</symbol>
+          <symbol inverse="true">78</symbol>
+          <symbol>51</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">6</symbol>
+          <symbol>68</symbol>
+          <symbol>51</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <disj>
+        <concat>
+          <symbol inverse="true">51</symbol>
+          <symbol inverse="true">75</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">51</symbol>
+          <symbol inverse="true">75</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>17</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>3-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x3</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol inverse="true">63</symbol>
+          <symbol inverse="true">72</symbol>
+          <symbol inverse="true">57</symbol>
+          <symbol>62</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">63</symbol>
+          <symbol>59</symbol>
+          <symbol>62</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">63</symbol>
+          <symbol>59</symbol>
+          <symbol>62</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
+          <symbol inverse="true">62</symbol>
+          <symbol inverse="true">71</symbol>
+          <symbol>56</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <disj>
+        <concat>
+          <symbol inverse="true">56</symbol>
+          <symbol>42</symbol>
+          <symbol inverse="true">4</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>18</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>1</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>2-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x1</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">79</symbol>
+          <symbol>79</symbol>
+          <symbol>54</symbol>
+          <symbol inverse="true">54</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">76</symbol>
+          <symbol>76</symbol>
+        </concat>
+        <concat>
+          <symbol>54</symbol>
+          <symbol inverse="true">54</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">79</symbol>
+          <symbol>79</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">76</symbol>
+          <symbol>76</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol>81</symbol>
+          <symbol inverse="true">81</symbol>
+          <symbol>54</symbol>
+          <symbol inverse="true">54</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">76</symbol>
+          <symbol>76</symbol>
+          <symbol inverse="true">79</symbol>
+          <symbol>79</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">79</symbol>
+          <symbol>79</symbol>
+          <symbol inverse="true">76</symbol>
+          <symbol>76</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>19</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-2</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x3</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol inverse="true">20</symbol>
+          <symbol>71</symbol>
+          <symbol>49</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">6</symbol>
+          <symbol>5</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
+          <symbol inverse="true">3</symbol>
+          <symbol>52</symbol>
+          <symbol inverse="true">52</symbol>
+          <symbol>51</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <disj>
+        <concat>
+          <symbol inverse="true">51</symbol>
+          <symbol inverse="true">53</symbol>
+          <symbol>5</symbol>
+          <symbol inverse="true">50</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>20</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>0.333333</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>2-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x3</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol inverse="true">81</symbol>
+          <symbol>67</symbol>
+          <symbol inverse="true">59</symbol>
+          <symbol>54</symbol>
+        </concat>
+        <concat>
+          <symbol>80</symbol>
+          <symbol>57</symbol>
+          <symbol inverse="true">57</symbol>
+          <symbol>54</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
+          <symbol inverse="true">54</symbol>
+          <symbol>59</symbol>
+          <symbol inverse="true">59</symbol>
+          <symbol>78</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">54</symbol>
+          <symbol>67</symbol>
+          <symbol inverse="true">59</symbol>
+          <symbol>78</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">54</symbol>
+          <symbol>57</symbol>
+          <symbol inverse="true">57</symbol>
+          <symbol>78</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol>79</symbol>
+          <symbol inverse="true">79</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">78</symbol>
+          <symbol inverse="true">71</symbol>
+          <symbol>72</symbol>
+          <symbol>78</symbol>
+        </concat>
+        <concat>
+          <symbol>79</symbol>
+          <symbol inverse="true">79</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>21</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>2-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x3</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol>79</symbol>
+          <symbol>71</symbol>
+          <symbol inverse="true">75</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">78</symbol>
+          <symbol>60</symbol>
+          <symbol inverse="true">75</symbol>
+        </concat>
+        <concat>
+          <symbol>79</symbol>
+          <symbol>70</symbol>
+          <symbol inverse="true">58</symbol>
+          <symbol inverse="true">74</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
+          <symbol>75</symbol>
+          <symbol>59</symbol>
+          <symbol>57</symbol>
+        </concat>
+        <concat>
+          <symbol>75</symbol>
+          <symbol>57</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <disj>
+        <concat>
+          <symbol>71</symbol>
+          <symbol>60</symbol>
+          <symbol>57</symbol>
+        </concat>
+        <concat>
+          <symbol>71</symbol>
+          <symbol>59</symbol>
+          <symbol inverse="true">80</symbol>
+          <symbol inverse="true">81</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>22</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x1</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol inverse="true">34</symbol>
+          <symbol>76</symbol>
+          <symbol>3</symbol>
+          <symbol inverse="true">29</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">45</symbol>
+          <symbol inverse="true">74</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <disj>
+        <concat>
+          <symbol inverse="true">1</symbol>
+          <symbol>21</symbol>
+          <symbol inverse="true">27</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <disj>
+        <concat>
+          <symbol inverse="true">4</symbol>
+          <symbol>8</symbol>
+          <symbol inverse="true">27</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">45</symbol>
+          <symbol inverse="true">74</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">1</symbol>
+          <symbol>5</symbol>
+          <symbol inverse="true">47</symbol>
+          <symbol inverse="true">75</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>23</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>2-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x3</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol>67</symbol>
+          <symbol inverse="true">69</symbol>
+        </concat>
+        <concat>
+          <symbol>67</symbol>
+          <symbol inverse="true">69</symbol>
+        </concat>
+        <concat>
+          <symbol>67</symbol>
+          <symbol>57</symbol>
+          <symbol>72</symbol>
+          <symbol inverse="true">69</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
+          <symbol>4</symbol>
+          <symbol inverse="true">30</symbol>
+          <symbol>74</symbol>
+          <symbol>48</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">76</symbol>
+          <symbol>36</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">57</symbol>
+          <symbol>48</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <disj>
+        <concat>
+          <symbol inverse="true">36</symbol>
+          <symbol>72</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">6</symbol>
+          <symbol>54</symbol>
+          <symbol inverse="true">58</symbol>
+          <symbol>64</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>24</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>3-3</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x1</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol>67</symbol>
+          <symbol inverse="true">59</symbol>
+          <symbol>58</symbol>
+        </concat>
+        <concat>
+          <symbol>67</symbol>
+          <symbol inverse="true">67</symbol>
+          <symbol>54</symbol>
+        </concat>
+        <concat>
+          <symbol>67</symbol>
+          <symbol inverse="true">59</symbol>
+          <symbol>54</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <disj>
+        <concat>
+          <symbol>67</symbol>
+          <symbol inverse="true">59</symbol>
+          <symbol>58</symbol>
+        </concat>
+        <concat>
+          <symbol>67</symbol>
+          <symbol inverse="true">59</symbol>
+          <symbol>58</symbol>
+        </concat>
+        <concat>
+          <symbol>67</symbol>
+          <symbol inverse="true">59</symbol>
+          <symbol>58</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <disj>
+        <concat>
+          <symbol>67</symbol>
+          <symbol inverse="true">67</symbol>
+          <symbol>54</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>25</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>0.666667</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>2-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x3</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol>54</symbol>
+          <symbol inverse="true">54</symbol>
+        </concat>
+        <concat>
+          <symbol>54</symbol>
+          <symbol inverse="true">54</symbol>
+          <symbol>69</symbol>
+          <symbol inverse="true">65</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">79</symbol>
+          <symbol>79</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
+          <symbol>54</symbol>
+          <symbol inverse="true">54</symbol>
+          <symbol inverse="true">65</symbol>
+        </concat>
+        <concat>
+          <symbol>54</symbol>
+          <symbol inverse="true">58</symbol>
+          <symbol>60</symbol>
+          <symbol inverse="true">65</symbol>
+        </concat>
+        <concat>
+          <symbol>54</symbol>
+          <symbol inverse="true">54</symbol>
+          <symbol inverse="true">65</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol>54</symbol>
+          <symbol inverse="true">54</symbol>
+        </concat>
+        <concat>
+          <symbol>65</symbol>
+          <symbol>54</symbol>
+          <symbol inverse="true">54</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>26</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>0.333333</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x3</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">74</symbol>
+          <symbol>75</symbol>
+          <symbol>60</symbol>
+        </concat>
+        <concat>
+          <symbol>54</symbol>
+          <symbol inverse="true">58</symbol>
+        </concat>
+        <concat>
+          <symbol>78</symbol>
+          <symbol>79</symbol>
+          <symbol>65</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
+          <symbol>57</symbol>
+          <symbol>71</symbol>
+          <symbol inverse="true">69</symbol>
+          <symbol inverse="true">76</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <disj>
+        <concat>
+          <symbol>35</symbol>
+          <symbol inverse="true">30</symbol>
+          <symbol inverse="true">60</symbol>
+          <symbol>63</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>27</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x1</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol inverse="true">57</symbol>
+          <symbol inverse="true">71</symbol>
+          <symbol>71</symbol>
+          <symbol inverse="true">75</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <disj>
+        <concat>
+          <symbol inverse="true">57</symbol>
+          <symbol inverse="true">72</symbol>
+          <symbol inverse="true">57</symbol>
+          <symbol inverse="true">75</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">57</symbol>
+          <symbol inverse="true">74</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">57</symbol>
+          <symbol>60</symbol>
+          <symbol inverse="true">74</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <disj>
+        <concat>
+          <symbol inverse="true">76</symbol>
+          <symbol inverse="true">73</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">57</symbol>
+          <symbol inverse="true">75</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>28</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>0.666667</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x3</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">76</symbol>
+          <symbol>76</symbol>
+        </concat>
+        <concat>
+          <symbol>69</symbol>
+          <symbol inverse="true">68</symbol>
+        </concat>
+        <concat>
+          <symbol>69</symbol>
+          <symbol>60</symbol>
+          <symbol inverse="true">60</symbol>
+          <symbol inverse="true">69</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol>68</symbol>
+          <symbol>60</symbol>
+          <symbol inverse="true">68</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <disj>
+        <concat>
+          <symbol>68</symbol>
+          <symbol inverse="true">59</symbol>
+          <symbol inverse="true">65</symbol>
+          <symbol inverse="true">76</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">57</symbol>
+          <symbol inverse="true">72</symbol>
+          <symbol inverse="true">76</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">57</symbol>
+          <symbol>58</symbol>
+          <symbol inverse="true">54</symbol>
+          <symbol inverse="true">76</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>29</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x1</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol>54</symbol>
+          <symbol inverse="true">54</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <disj>
+        <concat>
+          <symbol>81</symbol>
+          <symbol inverse="true">81</symbol>
+          <symbol>54</symbol>
+          <symbol inverse="true">54</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <disj>
+        <concat>
+          <symbol inverse="true">76</symbol>
+          <symbol>76</symbol>
+          <symbol inverse="true">76</symbol>
+          <symbol>76</symbol>
+        </concat>
+        <concat>
+          <symbol>81</symbol>
+          <symbol inverse="true">81</symbol>
+        </concat>
+        <concat>
+          <symbol>81</symbol>
+          <symbol inverse="true">81</symbol>
+          <symbol>54</symbol>
+          <symbol inverse="true">54</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>30</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>0.333333</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x3</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol>71</symbol>
+          <symbol inverse="true">72</symbol>
+          <symbol>72</symbol>
+          <symbol>57</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">79</symbol>
+          <symbol>79</symbol>
+        </concat>
+        <concat>
+          <symbol>71</symbol>
+          <symbol>60</symbol>
+          <symbol inverse="true">71</symbol>
+        </concat>
+        <concat>
+          <symbol>72</symbol>
+          <symbol inverse="true">68</symbol>
+          <symbol inverse="true">76</symbol>
+          <symbol>76</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <disj>
+        <concat>
+          <symbol>72</symbol>
+          <symbol>59</symbol>
+          <symbol>58</symbol>
+          <symbol inverse="true">54</symbol>
+        </concat>
+        <concat>
+          <symbol>72</symbol>
+          <symbol>57</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>31</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>3-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x1</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol inverse="true">54</symbol>
+          <symbol inverse="true">57</symbol>
+          <symbol inverse="true">69</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">70</symbol>
+          <symbol>69</symbol>
+          <symbol inverse="true">59</symbol>
+          <symbol inverse="true">69</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">54</symbol>
+          <symbol inverse="true">57</symbol>
+          <symbol inverse="true">69</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <disj>
+        <concat>
+          <symbol inverse="true">54</symbol>
+          <symbol inverse="true">57</symbol>
+          <symbol inverse="true">69</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <disj>
+        <concat>
+          <symbol inverse="true">54</symbol>
+          <symbol inverse="true">57</symbol>
+          <symbol inverse="true">69</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">54</symbol>
+          <symbol inverse="true">59</symbol>
+          <symbol inverse="true">60</symbol>
+          <symbol inverse="true">68</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">54</symbol>
+          <symbol inverse="true">57</symbol>
+          <symbol inverse="true">69</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>32</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>1</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-2</disjuncts>
+    <length>2-2</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x1</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">76</symbol>
+          <symbol>76</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">76</symbol>
+          <symbol>76</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">76</symbol>
+          <symbol>76</symbol>
+        </concat>
+        <concat>
+          <symbol>81</symbol>
+          <symbol inverse="true">81</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>33</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>0.333333</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x3</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol>76</symbol>
+          <symbol>72</symbol>
+          <symbol inverse="true">69</symbol>
+          <symbol inverse="true">76</symbol>
+        </concat>
+        <concat>
+          <symbol>76</symbol>
+          <symbol inverse="true">76</symbol>
+          <symbol>76</symbol>
+          <symbol inverse="true">76</symbol>
+        </concat>
+        <concat>
+          <symbol>76</symbol>
+          <symbol>71</symbol>
+          <symbol inverse="true">69</symbol>
+          <symbol inverse="true">76</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
+          <symbol>76</symbol>
+          <symbol>21</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">73</symbol>
+          <symbol>0</symbol>
+          <symbol inverse="true">19</symbol>
+          <symbol>22</symbol>
+        </concat>
+        <concat>
+          <symbol>39</symbol>
+          <symbol inverse="true">7</symbol>
+          <symbol>4</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <disj>
+        <concat>
+          <symbol inverse="true">8</symbol>
+          <symbol>53</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>34</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>3-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x1</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol inverse="true">70</symbol>
+          <symbol>53</symbol>
+          <symbol>51</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">54</symbol>
+          <symbol>53</symbol>
+          <symbol>51</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <disj>
+        <concat>
+          <symbol inverse="true">54</symbol>
+          <symbol>53</symbol>
+          <symbol>51</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <disj>
+        <concat>
+          <symbol inverse="true">54</symbol>
+          <symbol inverse="true">71</symbol>
+          <symbol>53</symbol>
+          <symbol>51</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">54</symbol>
+          <symbol>53</symbol>
+          <symbol>51</symbol>
+        </concat>
+        <concat>
+          <symbol>42</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>53</symbol>
+          <symbol>51</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>35</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x1</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol>81</symbol>
+          <symbol inverse="true">81</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">79</symbol>
+          <symbol>79</symbol>
+        </concat>
+        <concat>
+          <symbol>54</symbol>
+          <symbol inverse="true">54</symbol>
+          <symbol>54</symbol>
+          <symbol inverse="true">54</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <disj>
+        <concat>
+          <symbol>81</symbol>
+          <symbol>80</symbol>
+          <symbol inverse="true">71</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <disj>
+        <concat>
+          <symbol>81</symbol>
+          <symbol>80</symbol>
+          <symbol inverse="true">71</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">79</symbol>
+          <symbol inverse="true">78</symbol>
+          <symbol inverse="true">72</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">79</symbol>
+          <symbol>79</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>36</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>1</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x1</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol>69</symbol>
+          <symbol>54</symbol>
+          <symbol inverse="true">70</symbol>
+        </concat>
+        <concat>
+          <symbol>70</symbol>
+          <symbol inverse="true">54</symbol>
+        </concat>
+        <concat>
+          <symbol>68</symbol>
+          <symbol inverse="true">71</symbol>
+          <symbol inverse="true">76</symbol>
+          <symbol>76</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol>81</symbol>
+          <symbol inverse="true">81</symbol>
+          <symbol inverse="true">76</symbol>
+          <symbol>76</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol>69</symbol>
+          <symbol>58</symbol>
+          <symbol inverse="true">54</symbol>
+        </concat>
+        <concat>
+          <symbol>54</symbol>
+          <symbol inverse="true">54</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>37</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>0.666667</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x3</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol>76</symbol>
+          <symbol>67</symbol>
+          <symbol>57</symbol>
+        </concat>
+        <concat>
+          <symbol>76</symbol>
+          <symbol>72</symbol>
+          <symbol inverse="true">60</symbol>
+          <symbol>57</symbol>
+        </concat>
+        <concat>
+          <symbol>76</symbol>
+          <symbol>72</symbol>
+          <symbol>57</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol>54</symbol>
+          <symbol inverse="true">54</symbol>
+          <symbol>54</symbol>
+          <symbol inverse="true">54</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">79</symbol>
+          <symbol>79</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">76</symbol>
+          <symbol>76</symbol>
+          <symbol>54</symbol>
+          <symbol inverse="true">54</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol>81</symbol>
+          <symbol>80</symbol>
+          <symbol>54</symbol>
+          <symbol inverse="true">54</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>38</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>0.333333</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>3-3</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x3</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">70</symbol>
+          <symbol>68</symbol>
+          <symbol>58</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
+          <symbol inverse="true">58</symbol>
+          <symbol>58</symbol>
+          <symbol inverse="true">54</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <disj>
+        <concat>
+          <symbol inverse="true">79</symbol>
+          <symbol>79</symbol>
+          <symbol>54</symbol>
+        </concat>
+        <concat>
+          <symbol>81</symbol>
+          <symbol inverse="true">81</symbol>
+          <symbol>54</symbol>
+        </concat>
+        <concat>
+          <symbol>54</symbol>
+          <symbol inverse="true">70</symbol>
+          <symbol>54</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>39</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>1</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>2-2</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x3</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol>71</symbol>
+          <symbol>60</symbol>
+          <symbol inverse="true">71</symbol>
+        </concat>
+        <concat>
+          <symbol>54</symbol>
+          <symbol inverse="true">54</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol>71</symbol>
+          <symbol>58</symbol>
+          <symbol inverse="true">54</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">76</symbol>
+          <symbol>76</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol>71</symbol>
+          <symbol inverse="true">72</symbol>
+          <symbol>72</symbol>
+          <symbol inverse="true">72</symbol>
+        </concat>
+        <concat>
+          <symbol>71</symbol>
+          <symbol inverse="true">71</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>40</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>3-3</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x1</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol>74</symbol>
+          <symbol>57</symbol>
+          <symbol>54</symbol>
+        </concat>
+        <concat>
+          <symbol>73</symbol>
+          <symbol>76</symbol>
+          <symbol>70</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <disj>
+        <concat>
+          <symbol>74</symbol>
+          <symbol>59</symbol>
+          <symbol>58</symbol>
+        </concat>
+        <concat>
+          <symbol>74</symbol>
+          <symbol>57</symbol>
+          <symbol>54</symbol>
+        </concat>
+        <concat>
+          <symbol>74</symbol>
+          <symbol>57</symbol>
+          <symbol>54</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <disj>
+        <concat>
+          <symbol>75</symbol>
+          <symbol>57</symbol>
+          <symbol>54</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>41</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>0.333333</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x3</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol>65</symbol>
+          <symbol>58</symbol>
+          <symbol inverse="true">54</symbol>
+        </concat>
+        <concat>
+          <symbol>65</symbol>
+          <symbol>78</symbol>
+          <symbol>79</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
+          <symbol>54</symbol>
+          <symbol inverse="true">54</symbol>
+        </concat>
+        <concat>
+          <symbol>81</symbol>
+          <symbol>80</symbol>
+          <symbol inverse="true">72</symbol>
+        </concat>
+        <concat>
+          <symbol>54</symbol>
+          <symbol inverse="true">58</symbol>
+          <symbol inverse="true">72</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol>71</symbol>
+          <symbol inverse="true">71</symbol>
+          <symbol inverse="true">79</symbol>
+          <symbol>79</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>42</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>0.666667</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-2</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x3</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol>75</symbol>
+          <symbol inverse="true">60</symbol>
+          <symbol inverse="true">74</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol>74</symbol>
+          <symbol inverse="true">72</symbol>
+          <symbol>71</symbol>
+          <symbol inverse="true">74</symbol>
+        </concat>
+        <concat>
+          <symbol>75</symbol>
+          <symbol inverse="true">60</symbol>
+          <symbol inverse="true">74</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol>75</symbol>
+          <symbol inverse="true">74</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>43</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>1</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x1</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol>76</symbol>
+          <symbol>54</symbol>
+          <symbol inverse="true">54</symbol>
+          <symbol inverse="true">76</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol>76</symbol>
+          <symbol>71</symbol>
+          <symbol inverse="true">72</symbol>
+          <symbol inverse="true">76</symbol>
+        </concat>
+        <concat>
+          <symbol>76</symbol>
+          <symbol inverse="true">76</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol>76</symbol>
+          <symbol inverse="true">76</symbol>
+        </concat>
+        <concat>
+          <symbol>76</symbol>
+          <symbol inverse="true">76</symbol>
+        </concat>
+        <concat>
+          <symbol>76</symbol>
+          <symbol inverse="true">76</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>44</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>2-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x1</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol inverse="true">57</symbol>
+          <symbol>60</symbol>
+          <symbol inverse="true">72</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">57</symbol>
+          <symbol inverse="true">71</symbol>
+        </concat>
+        <concat>
+          <symbol>81</symbol>
+          <symbol inverse="true">81</symbol>
+          <symbol inverse="true">57</symbol>
+          <symbol inverse="true">72</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <disj>
+        <concat>
+          <symbol inverse="true">57</symbol>
+          <symbol>54</symbol>
+          <symbol inverse="true">58</symbol>
+          <symbol inverse="true">72</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">57</symbol>
+          <symbol inverse="true">72</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <disj>
+        <concat>
+          <symbol inverse="true">57</symbol>
+          <symbol inverse="true">60</symbol>
+          <symbol inverse="true">72</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">57</symbol>
+          <symbol inverse="true">71</symbol>
+          <symbol inverse="true">57</symbol>
+          <symbol inverse="true">72</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">57</symbol>
+          <symbol inverse="true">72</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>45</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-2</disjuncts>
+    <length>2-3</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x3</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol>78</symbol>
+          <symbol>79</symbol>
+          <symbol inverse="true">76</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
+          <symbol>39</symbol>
+          <symbol inverse="true">17</symbol>
+          <symbol>56</symbol>
+        </concat>
+        <concat>
+          <symbol>76</symbol>
+          <symbol>54</symbol>
+          <symbol>56</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <disj>
+        <concat>
+          <symbol inverse="true">56</symbol>
+          <symbol>53</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">56</symbol>
+          <symbol inverse="true">54</symbol>
+          <symbol>53</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>46</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x3</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol inverse="true">66</symbol>
+          <symbol>9</symbol>
+          <symbol inverse="true">5</symbol>
+          <symbol>81</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">66</symbol>
+          <symbol>9</symbol>
+          <symbol inverse="true">50</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">61</symbol>
+          <symbol inverse="true">68</symbol>
+          <symbol>81</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
+          <symbol>3</symbol>
+          <symbol inverse="true">33</symbol>
+        </concat>
+        <concat>
+          <symbol>43</symbol>
+          <symbol inverse="true">7</symbol>
+          <symbol>10</symbol>
+          <symbol inverse="true">26</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <disj>
+        <concat>
+          <symbol>75</symbol>
+          <symbol>59</symbol>
+          <symbol inverse="true">68</symbol>
+          <symbol inverse="true">76</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>47</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>3-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x1</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol>52</symbol>
+          <symbol inverse="true">52</symbol>
+          <symbol>51</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <disj>
+        <concat>
+          <symbol>52</symbol>
+          <symbol inverse="true">52</symbol>
+          <symbol>51</symbol>
+        </concat>
+        <concat>
+          <symbol>6</symbol>
+          <symbol inverse="true">6</symbol>
+          <symbol>53</symbol>
+          <symbol>51</symbol>
+        </concat>
+        <concat>
+          <symbol>52</symbol>
+          <symbol inverse="true">52</symbol>
+          <symbol>51</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <disj>
+        <concat>
+          <symbol>3</symbol>
+          <symbol inverse="true">5</symbol>
+          <symbol>53</symbol>
+          <symbol>51</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>48</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>3-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x1</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol inverse="true">57</symbol>
+          <symbol inverse="true">68</symbol>
+          <symbol>81</symbol>
+          <symbol inverse="true">81</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <disj>
+        <concat>
+          <symbol inverse="true">57</symbol>
+          <symbol>54</symbol>
+          <symbol inverse="true">54</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">57</symbol>
+          <symbol inverse="true">80</symbol>
+          <symbol inverse="true">81</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">57</symbol>
+          <symbol inverse="true">80</symbol>
+          <symbol inverse="true">81</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <disj>
+        <concat>
+          <symbol inverse="true">57</symbol>
+          <symbol>54</symbol>
+          <symbol inverse="true">54</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>49</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>0.666667</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-2</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x3</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">76</symbol>
+          <symbol>76</symbol>
+          <symbol>72</symbol>
+          <symbol inverse="true">69</symbol>
+        </concat>
+        <concat>
+          <symbol>70</symbol>
+          <symbol inverse="true">54</symbol>
+          <symbol inverse="true">68</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol>70</symbol>
+          <symbol inverse="true">54</symbol>
+          <symbol>54</symbol>
+          <symbol inverse="true">70</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <disj>
+        <concat>
+          <symbol>68</symbol>
+          <symbol inverse="true">80</symbol>
+          <symbol inverse="true">81</symbol>
+        </concat>
+        <concat>
+          <symbol>69</symbol>
+          <symbol inverse="true">71</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+</queries>
