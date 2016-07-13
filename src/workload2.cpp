@@ -329,8 +329,9 @@ void generate_random_path(const graph & graph, const matrix_of_paths & matrix, l
         }
     
         if (nb_paths == 0) {
-            cerr << "error: generate_random_path " << __LINE__ << endl;
-            exit(-1);
+            throw string("error: generate_random_path ") + to_string(__LINE__);
+            //cerr << "error: generate_random_path " << __LINE__ << endl;
+            //exit(-1);
         }
     
         size_t rnd = uniform_random_generator(1, nb_paths).next();
@@ -348,8 +349,9 @@ void generate_random_path(const graph & graph, const matrix_of_paths & matrix, l
     }
     
     if(matrix.data[len][current_node].count(current_sel) == 0 || matrix.data[len][current_node].at(current_sel) == 0) {
-        cerr << "error: generate_random_path " << __LINE__ << endl;
-        exit(0);
+        throw string("error: generate_random_path ") + to_string(__LINE__);
+        //cerr << "error: generate_random_path " << __LINE__ << endl;
+        //exit(0);
     }
     
     bool has_star = false;
@@ -856,7 +858,15 @@ void generate_workload(const config::config & conf, workload::workload & wl, rep
             size_t max_length = 0;
             workload::query & query = wl.queries[c];
             //cout << "generate query " << i << endl;
-            workload2::generate_query(conf, wconf, query);
+            for (int j = 0; j < 10; j++) {
+                try {
+                    workload2::generate_query(conf, wconf, query);
+                }
+                catch (const string & e) {
+                    continue;
+                }
+                break;
+            }
             query.info.id = wconf.id;
             query.info.number = i;
             query.info.input = conf.input;
