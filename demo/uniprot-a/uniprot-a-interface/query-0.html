@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Visualize query workload</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" href="../../style/style.css"/>
+	<script src="../../style/animation.js"></script>
+</head>
+<body>
+
+<div id="top">
+
+<div id="left">
+<h3>Stats for Query 0</h3>
+<ul>
+<li><i>Dataset</i>: ../use-cases/uniprot.xml</li>
+<li><i>Arity</i>: 0</li>
+<li><i>Selectivity</i>: -</li>
+<li><i>Size</i>: C[3-3], D[2-3], L[2-4]</li>
+<li><i>Recursion</i>: 0%</li>
+</ul>
+<hr/>
+<h3>Generate concrete syntaxes</h3>
+<input type="checkbox" id="sparql-checkbox"/>SPARQL<br/>
+<input type="checkbox" id="opencypher-checkbox"/>openCypher<br/>
+<input type="checkbox" id="sql-checkbox"/>SQL<br/>
+<input type="checkbox" id="datalog-checkbox"/>Datalog<br/>
+<hr/>
+<a href="query-49.html">&lt;&lt;Previous query</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="query-1.html">Next query&gt;&gt;</a>
+</div> <!-- end left -->
+
+<div id="right">
+<img src="query-0.png"/>
+</div> <!-- end right -->
+
+</div> <!-- end top -->
+
+<div id="bottom">
+<br/><br/>
+
+<table border="1">
+<tr>
+<th id="sparql-header">SPARQL</th>
+<th id="opencypher-header">openCypher*</th>
+<th id="sql-header">SQL</th>
+<th id="datalog-header">Datalog</th>
+</tr>
+<tr>
+<td valign="top" id="sparql-syntax">PREFIX : &lt;http://example.org/gmark/&gt;<br/> ASK {  {  ?x0 ((^:pEncodedOn/^:pInteracts/:pInteracts/^:pInteracts)|(^:pEncodedOn/:pInteracts)|(^:pEncodedOn/:pInteracts/^:pInteracts)) ?x1 . ?x0 ((^:pEncodedOn/:pReference/:pPublishedIn)|(^:pEncodedOn/:pReference/:pPublishedIn)|(^:pEncodedOn/:pReference/:pPublishedIn)) ?x2 . ?x1 ((^:pEncodedOn/:pInteracts/:pReference/:pPublishedIn)|(^:pEncodedOn/:pReference/:pPublishedIn)) ?x3 . } }<br/></td>
+<td valign="top" id="opencypher-syntax">MATCH (x0)<-[:pEncodedOn]-()<-[:pInteracts]-()-[:pInteracts]->()<-[:pInteracts]-(x1), (x0)<-[:pEncodedOn]-()-[:pReference]->()-[:pPublishedIn]->(x2), (x1)<-[:pEncodedOn]-()-[:pInteracts]->()-[:pReference]->()-[:pPublishedIn]->(x3) RETURN "true" LIMIT 1;<br/><br/><br/>*Note: This query may have a different semantics than the intended one because openCypher does not allow Kleene star above concatenation and/or inverses.</td>
+<td valign="top" id="sql-syntax">WITH RECURSIVE c0(src, trg) AS ((SELECT s0.src, s3.trg FROM (SELECT trg as src, src as trg, label FROM edge) as s0, (SELECT trg as src, src as trg, label FROM edge) as s1, edge s2, (SELECT trg as src, src as trg, label FROM edge) as s3 WHERE s0.trg = s1.src AND s1.trg = s2.src AND s2.trg = s3.src AND s0.label = EncodedOn AND s1.label = Interacts  AND s2.label = Interacts  AND s3.label = Interacts  UNION SELECT s0.src, s1.trg FROM (SELECT trg as src, src as trg, label FROM edge) as s0, edge s1 WHERE s0.trg = s1.src AND s0.label = EncodedOn AND s1.label = Interacts  UNION SELECT s0.src, s2.trg FROM (SELECT trg as src, src as trg, label FROM edge) as s0, edge s1, (SELECT trg as src, src as trg, label FROM edge) as s2 WHERE s0.trg = s1.src AND s1.trg = s2.src AND s0.label = EncodedOn AND s1.label = Interacts  AND s2.label = Interacts )) , c1(src, trg) AS ((SELECT s0.src, s2.trg FROM (SELECT trg as src, src as trg, label FROM edge) as s0, edge s1, edge s2 WHERE s0.trg = s1.src AND s1.trg = s2.src AND s0.label = EncodedOn AND s1.label = Reference  AND s2.label = PublishedIn  UNION SELECT s0.src, s2.trg FROM (SELECT trg as src, src as trg, label FROM edge) as s0, edge s1, edge s2 WHERE s0.trg = s1.src AND s1.trg = s2.src AND s0.label = EncodedOn AND s1.label = Reference  AND s2.label = PublishedIn  UNION SELECT s0.src, s2.trg FROM (SELECT trg as src, src as trg, label FROM edge) as s0, edge s1, edge s2 WHERE s0.trg = s1.src AND s1.trg = s2.src AND s0.label = EncodedOn AND s1.label = Reference  AND s2.label = PublishedIn )) , c2(src, trg) AS ((SELECT s0.src, s3.trg FROM (SELECT trg as src, src as trg, label FROM edge) as s0, edge s1, edge s2, edge s3 WHERE s0.trg = s1.src AND s1.trg = s2.src AND s2.trg = s3.src AND s0.label = EncodedOn AND s1.label = Interacts  AND s2.label = Reference  AND s3.label = PublishedIn  UNION SELECT s0.src, s2.trg FROM (SELECT trg as src, src as trg, label FROM edge) as s0, edge s1, edge s2 WHERE s0.trg = s1.src AND s1.trg = s2.src AND s0.label = EncodedOn AND s1.label = Reference  AND s2.label = PublishedIn )) SELECT "true" FROM edge WHERE EXISTS (SELECT * FROM c0, c1, c2 WHERE c2.src = c0.trg AND c0.src = c1.src);<br/></td>
+<td valign="top" id="datalog-syntax">BEGIN<br/>gmarkSubquery00(x, y) <- core:edge:edge(x1, EncodedOn, x0), core:edge:edge(x2, Interacts, x1), core:edge:edge(x2, Interacts, x3), core:edge:edge(x4, Interacts, x3), x = x0, y = x4.<br/>gmarkSubquery00(x, y) <- core:edge:edge(x1, EncodedOn, x0), core:edge:edge(x1, Interacts, x2), x = x0, y = x2.<br/>gmarkSubquery00(x, y) <- core:edge:edge(x1, EncodedOn, x0), core:edge:edge(x1, Interacts, x2), core:edge:edge(x3, Interacts, x2), x = x0, y = x3.<br/>gmarkSubquery01(x, y) <- core:edge:edge(x1, EncodedOn, x0), core:edge:edge(x1, Reference, x2), core:edge:edge(x2, PublishedIn, x3), x = x0, y = x3.<br/>gmarkSubquery01(x, y) <- core:edge:edge(x1, EncodedOn, x0), core:edge:edge(x1, Reference, x2), core:edge:edge(x2, PublishedIn, x3), x = x0, y = x3.<br/>gmarkSubquery01(x, y) <- core:edge:edge(x1, EncodedOn, x0), core:edge:edge(x1, Reference, x2), core:edge:edge(x2, PublishedIn, x3), x = x0, y = x3.<br/>gmarkSubquery02(x, y) <- core:edge:edge(x1, EncodedOn, x0), core:edge:edge(x1, Interacts, x2), core:edge:edge(x2, Reference, x3), core:edge:edge(x3, PublishedIn, x4), x = x0, y = x4.<br/>gmarkSubquery02(x, y) <- core:edge:edge(x1, EncodedOn, x0), core:edge:edge(x1, Reference, x2), core:edge:edge(x2, PublishedIn, x3), x = x0, y = x3.<br/>query() <- gmarkSubquery00(x0, x1), gmarkSubquery01(x0, x2), gmarkSubquery02(x1, x3).<br/>END<br/></td>
+</tr>
+</table>
+</div><!-- end bottom -->
+
+</body>
+</html>

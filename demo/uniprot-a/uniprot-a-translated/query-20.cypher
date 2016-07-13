@@ -1,0 +1,1 @@
+MATCH (x0)<-[:pOccursIn]-()-[:pReference]->()<-[:pReference]-()-[:pOccursIn]->(x1), (x0)<-[:pOccursIn]-()-[:pHasKeyword]->(x2), (x1)<-[:pOccursIn]-()-[:pHasKeyword]->()<-[:pHasKeyword]-()-[:pHasKeyword]->(x3) RETURN "true" LIMIT 1;

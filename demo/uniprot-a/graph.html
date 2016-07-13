@@ -1,0 +1,81 @@
+<html>
+<head>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+google.charts.load('current', {packages:['corechart', 'bar']});
+google.charts.setOnLoadCallback(drawChart);
+function drawChart() {
+var data = google.visualization.arrayToDataTable([
+['Node type', 'Number of nodes'], 
+['Protein', 31000],
+['Gene', 36000],
+['Organism', 15000],
+['Article', 12000],
+['Keyword', 1200],
+['Author', 21000],
+['Journal', 2000],
+]);
+var options = {
+vAxis: { logScale: true, baseline: 1 },
+title: 'Number of nodes by node type'
+};
+var chart = new google.visualization.ColumnChart(document.getElementById('hist11'));
+chart.draw(data, options);
+var data = google.visualization.arrayToDataTable([
+['Node type', 'Number of nodes'], 
+['Protein', 31000],
+['Gene', 36000],
+['Organism', 15000],
+['Article', 12000],
+['Keyword', 1200],
+['Author', 21000],
+['Journal', 2000],
+]);
+var options = {
+vAxis: { logScale: true, baseline: 1 },
+title: 'Number of nodes by node type'
+};
+var chart = new google.visualization.ColumnChart(document.getElementById('hist12'));
+chart.draw(data, options);
+var data = google.visualization.arrayToDataTable([
+['Predicate type', 'Number of predicates'], 
+['Interacts', 682],
+['EncodedOn', 21485],
+['OccursIn', 5456],
+['Reference', 9207],
+['HasKeyword', 78437],
+['AuthoredBy', 217237],
+['PublishedIn', 9207],
+]);
+var options = {
+vAxis: { logScale: true, baseline: 1 },
+title: 'Number of predicates by type'
+};
+var chart = new google.visualization.ColumnChart(document.getElementById('hist21'));
+chart.draw(data, options);
+var data = google.visualization.arrayToDataTable([
+['Predicate type', 'Number of predicates'], 
+['Interacts', 913],
+['EncodedOn', 8714],
+['OccursIn', 31000],
+['Reference', 11927],
+['HasKeyword', 207757],
+['AuthoredBy', 68721],
+['PublishedIn', 12000],
+]);
+var options = {
+vAxis: { logScale: true, baseline: 1 },
+title: 'Number of predicates by type'
+};
+var chart = new google.visualization.ColumnChart(document.getElementById('hist22'));
+chart.draw(data, options);
+}
+</script></head>
+<body>
+<table border="1">
+<tr><td>Size</td><td width="600">100000 nodes</td><td width="600">118200 nodes (341032 edges)</td></tr>
+<tr><td>Execution time</td><td></td><td>2.284 seconds</td></tr>
+<tr><td></td><td><div id="hist11"/></td><td><div id="hist12"/></td></tr>
+<tr><td></td><td><div id="hist21"/></td><td><div id="hist22"/></td></tr>
+</table>
+</body></html>

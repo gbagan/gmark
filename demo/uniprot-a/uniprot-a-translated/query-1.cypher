@@ -1,0 +1,1 @@
+MATCH (x0)<-[:pOccursIn]-()-[:pEncodedOn]->()<-[:pEncodedOn]-()-[:pReference]->(x1), (x1)-[:pPublishedIn]->()<-[:pPublishedIn]-(x2), (x2)-[:pAuthoredBy]->()<-[:pAuthoredBy]-()<-[:pReference]-()-[:pEncodedOn]->(x3), (x3)<-[:pEncodedOn]-()-[:pInteracts]->()-[:pReference]->(x4) RETURN DISTINCT x0;

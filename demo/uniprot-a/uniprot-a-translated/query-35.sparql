@@ -1,0 +1,1 @@
+PREFIX : <http://example.org/gmark/> ASK {  {  ?x0 ((^:pOccursIn/^:pInteracts)|(^:pOccursIn/^:pInteracts/^:pInteracts)|(^:pOccursIn/^:pInteracts/:pInteracts)) ?x1 . ?x0 ((^:pOccursIn/:pReference)) ?x2 . ?x1 ((^:pOccursIn/:pHasKeyword/^:pHasKeyword/:pReference)) ?x3 . } }

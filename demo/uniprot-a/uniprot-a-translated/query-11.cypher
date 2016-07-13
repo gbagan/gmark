@@ -1,0 +1,1 @@
+MATCH (x0)<-[:pPublishedIn]-()<-[:pReference]-()-[:pInteracts]->()-[:pHasKeyword]->(x1), (x0)<-[:pPublishedIn]-()<-[:pReference]-()-[:pInteracts]->()-[:pHasKeyword]->(x2), (x0)<-[:pPublishedIn]-()<-[:pReference]-()-[:pHasKeyword]->(x3) RETURN DISTINCT x0;

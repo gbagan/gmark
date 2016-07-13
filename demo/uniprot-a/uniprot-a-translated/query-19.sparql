@@ -1,0 +1,1 @@
+PREFIX : <http://example.org/gmark/> SELECT DISTINCT ?x3 ?x0 ?x1 ?x2 WHERE {  {  ?x0 ((^:pOccursIn/:pReference/:pPublishedIn)|(^:pOccursIn/:pReference/:pPublishedIn)) ?x1 . ?x1 ((^:pPublishedIn/^:pReference/^:pInteracts)|(^:pPublishedIn/^:pReference/:pInteracts)) ?x2 . ?x2 (((:pInteracts/:pInteracts/^:pInteracts/:pInteracts))){,3} ?x3 . } }

@@ -1,0 +1,9 @@
+digraph g {
+	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
+	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
+	x3 [fillcolor="yellow", style="filled," shape=circle, label="?x3"];
+	x2 [fillcolor="yellow", style="filled," shape=circle, label="?x2"];
+	x0 -> x1 [label="((PublishedIn-.Reference-.Interacts-.OccursIn))"];
+	x1 -> x2 [label="((OccursIn-.Interacts.Reference.AuthoredBy)+(OccursIn-.Interacts.Reference.AuthoredBy))"];
+	x2 -> x3 [label="((AuthoredBy-.AuthoredBy.AuthoredBy-)+(AuthoredBy-.PublishedIn.PublishedIn-))"];
+}

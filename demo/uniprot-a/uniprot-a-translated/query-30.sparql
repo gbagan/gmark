@@ -1,0 +1,1 @@
+PREFIX : <http://example.org/gmark/> SELECT DISTINCT ?x0 WHERE {  {  ?x0 ((:pAuthoredBy/^:pAuthoredBy/:pAuthoredBy)|(:pAuthoredBy/^:pAuthoredBy/:pAuthoredBy)) ?x1 . ?x0 ((:pAuthoredBy/^:pAuthoredBy/:pAuthoredBy)) ?x2 . ?x0 ((:pAuthoredBy/^:pAuthoredBy/:pAuthoredBy)|(:pAuthoredBy/^:pAuthoredBy/:pAuthoredBy)|(:pPublishedIn/^:pPublishedIn/:pAuthoredBy)) ?x3 . } }

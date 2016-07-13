@@ -1,0 +1,9 @@
+digraph g {
+	x0 [shape=circle, label="?x0"];
+	x1 [shape=circle, label="?x1"];
+	x0 -> x1 [label="((OccursIn-.Interacts-)+(OccursIn-.Interacts-.Interacts-)+(OccursIn-.Interacts-.Interacts))"];
+	x2 [shape=circle, label="?x2"];
+	x0 -> x2 [label="((OccursIn-.Reference))"];
+	x3 [shape=circle, label="?x3"];
+	x1 -> x3 [label="((OccursIn-.HasKeyword.HasKeyword-.Reference))"];
+}

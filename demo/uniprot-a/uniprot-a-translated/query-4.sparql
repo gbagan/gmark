@@ -1,0 +1,1 @@
+PREFIX : <http://example.org/gmark/> SELECT DISTINCT ?x0 ?x1 WHERE {  {  ?x0 ((^:pEncodedOn/^:pInteracts/:pReference)|(^:pEncodedOn/^:pInteracts/:pReference)|(^:pEncodedOn/^:pInteracts/:pReference)) ?x1 . ?x0 ((^:pEncodedOn/:pHasKeyword)) ?x2 . ?x1 ((^:pEncodedOn/:pHasKeyword)|(^:pEncodedOn/:pHasKeyword)) ?x3 . } }

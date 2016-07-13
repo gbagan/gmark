@@ -1,0 +1,1 @@
+MATCH (x0)<-[:pEncodedOn]-()-[:pReference]->()-[:pAuthoredBy]->(x1), (x1)<-[:pAuthoredBy]-()-[:pAuthoredBy]->()<-[:pAuthoredBy]-(x2), (x2)<-[:pReference]-()-[:pInteracts]->()-[:pHasKeyword]->(x3), (x3)<-[:pHasKeyword]-()-[:pHasKeyword]->()<-[:pHasKeyword]-(x4) RETURN "true" LIMIT 1;

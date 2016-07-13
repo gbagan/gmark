@@ -1,0 +1,9 @@
+digraph g {
+	x3 [fillcolor="yellow", style="filled," shape=circle, label="?x3"];
+	x2 [fillcolor="yellow", style="filled," shape=circle, label="?x2"];
+	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
+	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
+	x0 -> x1 [label="((PublishedIn-.Reference-.Reference)+(PublishedIn-.Reference-.Interacts.Reference))"];
+	x1 -> x2 [label="((Reference-.Interacts.Interacts.Interacts))"];
+	x2 -> x3 [label="((Interacts.Interacts-.EncodedOn))"];
+}
