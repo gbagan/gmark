@@ -1,0 +1,1 @@
+MATCH (x0)<-[:pextendedTo]-()<-[:pauthors]-(x1), (x1)-[:pauthors]->()-[:ppublishedIn]->()<-[:ppublishedIn]-()-[:ppublishedIn]->(x2), (x2)-[:ppublishedIn|ppublishedIn|ppublishedIn*]->(x3), (x3)-[:ppublishedIn|ppublishedIn|ppublishedIn*]->(x4) RETURN "true" LIMIT 1;

@@ -1,0 +1,1 @@
+MATCH (x0)-[:pauthors]->()-[:pextendedTo]->()<-[:pextendedTo]-()-[:pextendedTo]->(x1), (x0)-[:pauthors]->()<-[:pauthors]-()-[:pauthors]->()-[:pextendedTo]->(x2), (x0)-[:pauthors]->()-[:pextendedTo]->()<-[:pextendedTo]-()-[:pextendedTo]->(x3) RETURN DISTINCT x0;

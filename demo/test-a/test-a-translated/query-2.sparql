@@ -1,0 +1,1 @@
+PREFIX : <http://example.org/gmark/> ASK {  {  ?x0 ((^:pheldIn/^:ppublishedIn)) ?x1 . ?x1 ((^:pauthors/:pauthors/^:pauthors)) ?x2 . ?x2 ((:pauthors/^:pauthors/:pauthors/^:pauthors)|(:pauthors/:pextendedTo/^:pextendedTo/^:pauthors)) ?x3 . ?x3 ((:pauthors/:ppublishedIn/:pheldIn)) ?x4 . } }

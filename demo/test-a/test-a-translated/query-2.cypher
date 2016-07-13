@@ -1,0 +1,1 @@
+MATCH (x0)<-[:pheldIn]-()<-[:ppublishedIn]-(x1), (x1)<-[:pauthors]-()-[:pauthors]->()<-[:pauthors]-(x2), (x2)-[:pauthors]->()<-[:pauthors]-()-[:pauthors]->()<-[:pauthors]-(x3), (x3)-[:pauthors]->()-[:ppublishedIn]->()-[:pheldIn]->(x4) RETURN "true" LIMIT 1;
