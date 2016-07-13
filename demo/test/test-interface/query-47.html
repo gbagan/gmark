@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Visualize query workload</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" href="../../style/style.css"/>
+	<script src="../../style/animation.js"></script>
+</head>
+<body>
+
+<div id="top">
+
+<div id="left">
+<h3>Stats for Query 47</h3>
+<ul>
+<li><i>Dataset</i>: ../use-cases/test.xml</li>
+<li><i>Arity</i>: 1</li>
+<li><i>Selectivity</i>: -</li>
+<li><i>Size</i>: C[3-3], D[1-2], L[2-4]</li>
+<li><i>Recursion</i>: 0%</li>
+</ul>
+<hr/>
+<h3>Generate concrete syntaxes</h3>
+<input type="checkbox" id="sparql-checkbox"/>SPARQL<br/>
+<input type="checkbox" id="opencypher-checkbox"/>openCypher<br/>
+<input type="checkbox" id="sql-checkbox"/>SQL<br/>
+<input type="checkbox" id="datalog-checkbox"/>Datalog<br/>
+<hr/>
+<a href="query-46.html">&lt;&lt;Previous query</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="query-48.html">Next query&gt;&gt;</a>
+</div> <!-- end left -->
+
+<div id="right">
+<img src="query-47.png"/>
+</div> <!-- end right -->
+
+</div> <!-- end top -->
+
+<div id="bottom">
+<br/><br/>
+
+<table border="1">
+<tr>
+<th id="sparql-header">SPARQL</th>
+<th id="opencypher-header">openCypher*</th>
+<th id="sql-header">SQL</th>
+<th id="datalog-header">Datalog</th>
+</tr>
+<tr>
+<td valign="top" id="sparql-syntax">PREFIX : &lt;http://example.org/gmark/&gt;<br/> SELECT DISTINCT ?x0 WHERE {  {  ?x0 ((:p0/:p1)) ?x1 . ?x0 ((:p0/:p1/^:p1/:p1)) ?x2 . ?x0 ((:p0/:p1/^:p1/:p1)|(:p0/:p1/^:p1/:p1)) ?x3 . } }<br/></td>
+<td valign="top" id="opencypher-syntax">MATCH (x0)-[:p0]->()-[:p1]->(x1), (x0)-[:p0]->()-[:p1]->()<-[:p1]-()-[:p1]->(x2), (x0)-[:p0]->()-[:p1]->()<-[:p1]-()-[:p1]->(x3) RETURN DISTINCT x0;<br/><br/><br/>*Note: This query may have a different semantics than the intended one because openCypher does not allow Kleene star above concatenation and/or inverses.</td>
+<td valign="top" id="sql-syntax">WITH RECURSIVE c0(src, trg) AS ((SELECT s0.src, s1.trg FROM edge s0, edge s1 WHERE s0.trg = s1.src AND s0.label = 0 AND s1.label = 1 )) , c1(src, trg) AS ((SELECT s0.src, s3.trg FROM edge s0, edge s1, (SELECT trg as src, src as trg, label FROM edge) as s2, edge s3 WHERE s0.trg = s1.src AND s1.trg = s2.src AND s2.trg = s3.src AND s0.label = 0 AND s1.label = 1  AND s2.label = 1  AND s3.label = 1 )) , c2(src, trg) AS ((SELECT s0.src, s3.trg FROM edge s0, edge s1, (SELECT trg as src, src as trg, label FROM edge) as s2, edge s3 WHERE s0.trg = s1.src AND s1.trg = s2.src AND s2.trg = s3.src AND s0.label = 0 AND s1.label = 1  AND s2.label = 1  AND s3.label = 1  UNION SELECT s0.src, s3.trg FROM edge s0, edge s1, (SELECT trg as src, src as trg, label FROM edge) as s2, edge s3 WHERE s0.trg = s1.src AND s1.trg = s2.src AND s2.trg = s3.src AND s0.label = 0 AND s1.label = 1  AND s2.label = 1  AND s3.label = 1 )) SELECT DISTINCT c0.src FROM c0, c1, c2 WHERE c0.src = c1.src AND c0.src = c2.src;<br/></td>
+<td valign="top" id="datalog-syntax">BEGIN<br/>gmarkSubquery00(x, y) <- core:edge:edge(x0, 0, x1), core:edge:edge(x1, 1, x2), x = x0, y = x2.<br/>gmarkSubquery01(x, y) <- core:edge:edge(x0, 0, x1), core:edge:edge(x1, 1, x2), core:edge:edge(x3, 1, x2), core:edge:edge(x3, 1, x4), x = x0, y = x4.<br/>gmarkSubquery02(x, y) <- core:edge:edge(x0, 0, x1), core:edge:edge(x1, 1, x2), core:edge:edge(x3, 1, x2), core:edge:edge(x3, 1, x4), x = x0, y = x4.<br/>gmarkSubquery02(x, y) <- core:edge:edge(x0, 0, x1), core:edge:edge(x1, 1, x2), core:edge:edge(x3, 1, x2), core:edge:edge(x3, 1, x4), x = x0, y = x4.<br/>query(x0) <- gmarkSubquery00(x0, x1), gmarkSubquery01(x0, x2), gmarkSubquery02(x0, x3).<br/>END<br/></td>
+</tr>
+</table>
+</div><!-- end bottom -->
+
+</body>
+</html>

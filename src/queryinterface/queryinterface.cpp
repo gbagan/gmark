@@ -122,8 +122,8 @@ void qinterface(const string & inputfilename, const string & translatedir, const
 			html_file << "<head>\n";
 			html_file << "\t<title>Visualize query workload</title>\n";
 			html_file << "\t<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\n";
-			html_file << "\t<link rel=\"stylesheet\" type=\"text/css\" href=\"../style.css\"/>\n";
-			html_file << "\t<script src=\"../animation.js\"></script>\n";
+			html_file << "\t<link rel=\"stylesheet\" type=\"text/css\" href=\"../../style/style.css\"/>\n";
+			html_file << "\t<script src=\"../../style/animation.js\"></script>\n";
 			html_file << "</head>\n";
 			html_file << "<body>\n\n";
 			html_file << "<div id=\"top\">\n\n";

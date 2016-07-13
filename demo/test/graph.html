@@ -1,0 +1,71 @@
+<html>
+<head>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+google.charts.load('current', {packages:['corechart', 'bar']});
+google.charts.setOnLoadCallback(drawChart);
+function drawChart() {
+var data = google.visualization.arrayToDataTable([
+['Node type', 'Number of nodes'], 
+['researcher', 500000],
+['paper', 300000],
+['journal', 100000],
+['conference', 100000],
+['city', 100],
+]);
+var options = {
+vAxis: { logScale: true, baseline: 1 },
+title: 'Number of nodes by node type'
+};
+var chart = new google.visualization.ColumnChart(document.getElementById('hist11'));
+chart.draw(data, options);
+var data = google.visualization.arrayToDataTable([
+['Node type', 'Number of nodes'], 
+['researcher', 500000],
+['paper', 300000],
+['journal', 100000],
+['conference', 100000],
+['city', 100],
+]);
+var options = {
+vAxis: { logScale: true, baseline: 1 },
+title: 'Number of nodes by node type'
+};
+var chart = new google.visualization.ColumnChart(document.getElementById('hist12'));
+chart.draw(data, options);
+var data = google.visualization.arrayToDataTable([
+['Predicate type', 'Number of predicates'], 
+['authors', 390036],
+['publishedIn', 234021],
+['heldIn', 78007],
+['extendedTo', 78007],
+]);
+var options = {
+vAxis: { logScale: true, baseline: 1 },
+title: 'Number of predicates by type'
+};
+var chart = new google.visualization.ColumnChart(document.getElementById('hist21'));
+chart.draw(data, options);
+var data = google.visualization.arrayToDataTable([
+['Predicate type', 'Number of predicates'], 
+['authors', 400195],
+['publishedIn', 300000],
+['heldIn', 89],
+['extendedTo', 79788],
+]);
+var options = {
+vAxis: { logScale: true, baseline: 1 },
+title: 'Number of predicates by type'
+};
+var chart = new google.visualization.ColumnChart(document.getElementById('hist22'));
+chart.draw(data, options);
+}
+</script></head>
+<body>
+<table border="1">
+<tr><td>Size</td><td width="600">1000000 nodes</td><td width="600">1000100 nodes (780072 edges)</td></tr>
+<tr><td>Execution time</td><td></td><td>0.846 seconds</td></tr>
+<tr><td></td><td><div id="hist11"/></td><td><div id="hist12"/></td></tr>
+<tr><td></td><td><div id="hist21"/></td><td><div id="hist22"/></td></tr>
+</table>
+</body></html>

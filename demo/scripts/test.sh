@@ -1,6 +1,6 @@
 #!/bin/bash
 
-folder="../demo/scenarios/test/"
+folder="../demo/test/"
 
 cd ../../src
 ./test -c ../use-cases/test.xml -g "$folder"test-graph.txt -w "$folder"test-workload.xml -r "$folder"
