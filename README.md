@@ -13,10 +13,16 @@
 This executes the following three steps:
 
 1. Generation of the graph and query workload in internal format, and html reports for both
+
+    ./test -c ../use-cases/test.xml -g ../demo/play/play-graph.txt -w ../demo/play/play-workload.xml -r ../demo/play/
+
 2. Translation of the queries into the four concrete syntaxes
+
+    ./test -w ../../demo/play/play-workload.xml -o ../../demo/play/play-translated
+
 3. Generation of the query workload interface
 
-
+    ./test -w ../../demo/play/play-workload.xml -t ../../demo/play/play-translated -o ../../demo/play/play-interface
 
 
 **For more details about the gMark project, please refer to our technical report:
