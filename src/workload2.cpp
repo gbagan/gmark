@@ -551,14 +551,17 @@ config::selectivity::type generate_random_selectivity(const config::workload & w
 
 void generate_arity_more_than_2(workload::query & q, size_t arity) {
     size_t nb_conjs = q.bodies[0].conjuncts.size();
-        if (arity > nb_conjs+1)
-            arity = nb_conjs+1;
+    if (arity > nb_conjs+1)
+        arity = nb_conjs+1;
+    for (size_t i = 0; i < arity; i++) {
         while (true) {
             size_t i = uniform_random_generator(0, nb_conjs).next();
-            if(std::find(q.variables.begin(), q.variables.end(), "?x" + to_string(i)) != q.variables.end()) {
+            if(std::find(q.variables.begin(), q.variables.end(), "?x" + to_string(i)) == q.variables.end()) {
 		q.variables.push_back("?x" + to_string(i));
+                break;
             }
         }
+    }
 }
 
 void generate_chain(const config::config & conf, const config::workload & wconf, workload::query & q) {
