@@ -54,6 +54,13 @@ where the parameters are:
 - -t : the translations of the queries generated at step 2.
 - -o : the output directory for the query workload interface
 
+**Provided examples**
+We provide several examples of generated graphs, query workloads in internal format, html reports, translated queries, and query workload interfaces.
+
+You can find them in the directory *demo*, subdirectories *test*, *test-a*, *shop*, *shop-a*, *social*, *social-a*, *uniprot*, *uniprot-a*. 
+
+These scenarios basically correspond to the aforementioned four configuration files from *use-cases*, and for each of them we generated versions without or with aliases (i.e., using integers as predicates or using real-world predicates specified in the configuration file, respectively).
+
 
 ## For more details about the gMark project, please refer to our technical report: http://arxiv.org/abs/1511.08386
 
