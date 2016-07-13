@@ -52,10 +52,10 @@ where the parameters are:
 - -o : the output directory for the query workload interface
 
 
-# For more details about the gMark project, please refer to our technical report: http://arxiv.org/abs/1511.08386
+## For more details about the gMark project, please refer to our technical report: http://arxiv.org/abs/1511.08386
 
 
-# gMark will be demonstrated in VLDB 2016
+## gMark will be demonstrated in VLDB 2016
 
 If you use gMark, please cite:
 
