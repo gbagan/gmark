@@ -1,9 +1,9 @@
 digraph g {
 	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
-	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
-	x0 -> x1 [label="(((79-.78-.72-)+(71.60.72-)))*"];
+	x3 [fillcolor="yellow", style="filled," shape=circle, label="?x3"];
+	x1 [shape=circle, label="?x1"];
+	x0 -> x1 [label="((48-.61)+(20-.72.61)+(6-.69.61))"];
 	x2 [shape=circle, label="?x2"];
-	x0 -> x2 [label="(((54.58-.72-)))*"];
-	x3 [shape=circle, label="?x3"];
-	x0 -> x3 [label="(((72.75-.75.72-)+(72.80-.81-)+(54.54-.81.81-)))*"];
+	x1 -> x2 [label="((61-.60-.51)+(61-.72-.71.51)+(61-.59-.51))"];
+	x2 -> x3 [label="((51-.51)+(51-.60.59-.51)+(51-.67-.67.51))"];
 }

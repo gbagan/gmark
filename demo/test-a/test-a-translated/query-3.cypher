@@ -1,1 +1,1 @@
-MATCH (x0)-[:pheldIn]->()<-[:pheldIn]-()<-[:ppublishedIn]-(x1), (x1)-[:ppublishedIn|ppublishedIn|ppublishedIn*]->(x2), (x2)-[:ppublishedIn]->()<-[:ppublishedIn]-()<-[:pauthors]-(x3) RETURN DISTINCT x0;
+MATCH (x0)-[:ppublishedIn|ppublishedIn*]->(x1), (x0)-[:ppublishedIn*]->(x2), (x0)-[:ppublishedIn|ppublishedIn|ppublishedIn*]->(x3), (x0)-[:ppublishedIn|ppublishedIn|ppublishedIn*]->(x4) RETURN DISTINCT x0, x1;

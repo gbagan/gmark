@@ -1,11 +1,9 @@
 digraph g {
+	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
 	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
-	x4 [fillcolor="yellow", style="filled," shape=circle, label="?x4"];
-	x1 [shape=circle, label="?x1"];
-	x0 -> x1 [label="((extendedTo-.publishedIn)+(extendedTo-.publishedIn)+(extendedTo-.publishedIn.publishedIn-.publishedIn))"];
-	x2 [shape=circle, label="?x2"];
-	x1 -> x2 [label="(((publishedIn-.publishedIn.publishedIn-.publishedIn)+(publishedIn-.publishedIn)))*"];
-	x3 [shape=circle, label="?x3"];
-	x2 -> x3 [label="((publishedIn-.publishedIn.publishedIn-))"];
-	x3 -> x4 [label="(((publishedIn.publishedIn-.publishedIn.publishedIn-)+(publishedIn.publishedIn-.publishedIn.publishedIn-)+(publishedIn.publishedIn-)))*"];
+	x3 [fillcolor="yellow", style="filled," shape=circle, label="?x3"];
+	x2 [fillcolor="yellow", style="filled," shape=circle, label="?x2"];
+	x0 -> x1 [label="((heldIn-.heldIn.heldIn-.publishedIn-.heldIn-.publishedIn-.publishedIn.heldIn)+(heldIn-.publishedIn-.heldIn-.publishedIn-.publishedIn.heldIn)+(heldIn-.publishedIn-.authors-.authors.heldIn-.publishedIn-.publishedIn.heldIn))"];
+	x0 -> x2 [label="((publishedIn.publishedIn-.publishedIn.publishedIn-.heldIn-.publishedIn-.publishedIn.heldIn)+(heldIn-.publishedIn-.publishedIn.heldIn))"];
+	x0 -> x3 [label="((heldIn-.heldIn.heldIn-.heldIn.heldIn-.publishedIn-.publishedIn.heldIn)+(heldIn-.heldIn.heldIn-.heldIn))"];
 }

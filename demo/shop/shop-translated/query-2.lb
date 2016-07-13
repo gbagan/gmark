@@ -1,11 +1,10 @@
 BEGIN
-gmarkSubquery00(x, y) <- core:edge:edge(x1, 51, x0), core:edge:edge(x1, 46, x2), core:edge:edge(x3, 2, x2), x = x0, y = x3.
-gmarkSubquery00(x, y) <- core:edge:edge(x1, 51, x0), core:edge:edge(x2, 68, x1), core:edge:edge(x2, 14, x3), core:edge:edge(x4, 1, x3), x = x0, y = x4.
-gmarkSubquery01(x, y) <- core:edge:edge(x1, 51, x0), core:edge:edge(x2, 67, x1), core:edge:edge(x2, 2, x3), core:edge:edge(x4, 2, x3), x = x0, y = x4.
-gmarkSubquery01(x, y) <- core:edge:edge(x1, 51, x0), core:edge:edge(x2, 65, x1), x = x0, y = x2.
-gmarkSubquery01(x, y) <- core:edge:edge(x1, 51, x0), core:edge:edge(x2, 69, x1), core:edge:edge(x2, 4, x3), core:edge:edge(x4, 1, x3), x = x0, y = x4.
-gmarkSubquery02(x, y) <- core:edge:edge(x1, 51, x0), core:edge:edge(x2, 65, x1), x = x0, y = x2.
-gmarkSubquery02(x, y) <- core:edge:edge(x1, 51, x0), core:edge:edge(x1, 29, x2), core:edge:edge(x3, 0, x2), x = x0, y = x3.
-gmarkSubquery02(x, y) <- core:edge:edge(x1, 51, x0), core:edge:edge(x2, 68, x1), core:edge:edge(x2, 0, x3), core:edge:edge(x4, 9, x3), x = x0, y = x4.
-query(x0, x1) <- gmarkSubquery00(x0, x1), gmarkSubquery01(x0, x2), gmarkSubquery02(x0, x3).
+gmarkSubquery00(x, y) <- core:edge:edge(x1, 64, x0), core:edge:edge(x1, 48, x2), x = x0, y = x2.
+gmarkSubquery00(x, y) <- core:edge:edge(x1, 72, x0), core:edge:edge(x1, 36, x2), x = x0, y = x2.
+gmarkSubquery01(x, y) <- core:edge:edge(x1, 72, x0), core:edge:edge(x1, 38, x2), x = x0, y = x2.
+gmarkSubquery01(x, y) <- core:edge:edge(x1, 64, x0), core:edge:edge(x1, 57, x2), core:edge:edge(x2, 72, x3), core:edge:edge(x3, 48, x4), x = x0, y = x4.
+gmarkSubquery01(x, y) <- core:edge:edge(x1, 64, x0), core:edge:edge(x1, 57, x2), core:edge:edge(x2, 20, x3), x = x0, y = x3.
+gmarkSubquery02(x, y) <- core:edge:edge(x1, 72, x0), core:edge:edge(x1, 37, x2), x = x0, y = x2.
+gmarkSubquery03(x, y) <- core:edge:edge(x1, 64, x0), core:edge:edge(x1, 29, x2), core:edge:edge(x3, 46, x2), core:edge:edge(x3, 48, x4), x = x0, y = x4.
+query(x0, x1) <- gmarkSubquery00(x0, x1), gmarkSubquery01(x0, x2), gmarkSubquery02(x0, x3), gmarkSubquery03(x0, x4).
 END

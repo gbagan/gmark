@@ -1,1 +1,1 @@
-MATCH (x0)-[:p54|p54|p79*]->(x1), (x1)-[:p54]->()<-[:p54]-()<-[:p65]-(x2), (x2)-[:p54|p65*]->(x3) RETURN DISTINCT x0, x3;
+MATCH (x0)-[:p76*]->(x1), (x0)-[:p81|p76*]->(x2), (x1)-[:p54*]->(x3) RETURN DISTINCT x1, x2, x0;

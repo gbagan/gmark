@@ -1,9 +1,9 @@
 digraph g {
 	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
-	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
-	x0 -> x1 [label="((publishedIn.heldIn.heldIn-))"];
+	x3 [fillcolor="yellow", style="filled," shape=circle, label="?x3"];
+	x1 [shape=circle, label="?x1"];
+	x0 -> x1 [label="((extendedTo-.extendedTo.extendedTo-.extendedTo)+(extendedTo-.extendedTo.extendedTo-.extendedTo))"];
 	x2 [shape=circle, label="?x2"];
-	x0 -> x2 [label="((extendedTo.extendedTo-.publishedIn))"];
-	x3 [shape=circle, label="?x3"];
-	x0 -> x3 [label="((authors-.authors.publishedIn)+(publishedIn.heldIn.heldIn-)+(publishedIn.heldIn.heldIn-))"];
+	x1 -> x2 [label="((extendedTo-.authors-.authors.authors-))"];
+	x2 -> x3 [label="((authors.publishedIn.publishedIn-.authors-)+(authors.authors-)+(authors.publishedIn.publishedIn-.authors-))"];
 }
