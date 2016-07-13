@@ -1,0 +1,1 @@
+MATCH (x0)<-[:pgender]-()-[:pjobTitle]->()<-[:pname]-(x1), (x0)<-[:pgender]-()<-[:pemployee]-(x2), (x0)<-[:pgender]-()<-[:pconductor]-()-[:pcontentRating]->()<-[:pfaxNumber]-(x3) RETURN "true" LIMIT 1;

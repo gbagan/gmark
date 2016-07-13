@@ -1,0 +1,1 @@
+PREFIX : <http://example.org/gmark/> ASK {  {  ?x0 ((^:peditor/:peligibleQuantity/^:precordNumber/:prelease)|(^:peditor/:pincludes/:prelease)) ?x1 . ?x0 ((^:pnationality/:pfriendOf/:pgender)|(^:pnationality/:pgender)|(^:pnationality/:pfollows/:pgender)) ?x2 . ?x1 ((^:pnationality/:pgender)|(^:pnationality/:pgender)) ?x3 . } }

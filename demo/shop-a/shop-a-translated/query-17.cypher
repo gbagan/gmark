@@ -1,0 +1,1 @@
+MATCH (x0)<-[:pbirthDate]-()-[:pgender]->(x1), (x0)<-[:pexpires]-()-[:peditor]->()-[:pgender]->(x2), (x0)<-[:ppriceValidUntil]-()-[:pincludes]->()-[:pauthor]->()-[:pgender]->(x3), (x0)<-[:pexpires]-()<-[:plike]-()-[:pgender]->(x4) RETURN "true" LIMIT 1;

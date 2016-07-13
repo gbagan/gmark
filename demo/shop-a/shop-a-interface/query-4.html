@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Visualize query workload</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" href="../../style/style.css"/>
+	<script src="../../style/animation.js"></script>
+</head>
+<body>
+
+<div id="top">
+
+<div id="left">
+<h3>Stats for Query 4</h3>
+<ul>
+<li><i>Dataset</i>: ../use-cases/shop.xml</li>
+<li><i>Arity</i>: 1</li>
+<li><i>Selectivity</i>: -</li>
+<li><i>Size</i>: C[4-4], D[2-2], L[2-4]</li>
+<li><i>Recursion</i>: 50%</li>
+</ul>
+<hr/>
+<h3>Generate concrete syntaxes</h3>
+<input type="checkbox" id="sparql-checkbox"/>SPARQL<br/>
+<input type="checkbox" id="opencypher-checkbox"/>openCypher<br/>
+<input type="checkbox" id="sql-checkbox"/>SQL<br/>
+<input type="checkbox" id="datalog-checkbox"/>Datalog<br/>
+<hr/>
+<a href="query-3.html">&lt;&lt;Previous query</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="query-5.html">Next query&gt;&gt;</a>
+</div> <!-- end left -->
+
+<div id="right">
+<img src="query-4.png"/>
+</div> <!-- end right -->
+
+</div> <!-- end top -->
+
+<div id="bottom">
+<br/><br/>
+
+<table border="1">
+<tr>
+<th id="sparql-header">SPARQL</th>
+<th id="opencypher-header">openCypher*</th>
+<th id="sql-header">SQL</th>
+<th id="datalog-header">Datalog</th>
+</tr>
+<tr>
+<td valign="top" id="sparql-syntax">PREFIX : &lt;http://example.org/gmark/&gt;<br/> SELECT DISTINCT ?x0 WHERE {  {  ?x0 ((^:ptype/^:phasGenre/:ptext/^:purl)|(^:ptype/^:phasGenre/:phomepage)) ?x1 . ?x1 ((^:ptrailer/:ptrailer/:purl/^:pname)|(:purl/^:pemail)) ?x2 . ?x2 (((:pemployee/:phomepage/^:psubscribes/^:pemployee)|(:pemployee/^:pemployee))){,3} ?x3 . ?x3 (((:pemployee/^:pcontactPoint)|(:pcontactPoint/^:previewer/:previewer/^:pemployee))){,3} ?x4 . } }<br/></td>
+<td valign="top" id="opencypher-syntax">MATCH (x0)<-[:ptype]-()<-[:phasGenre]-()-[:ptext]->()<-[:purl]-(x1), (x1)<-[:ptrailer]-()-[:ptrailer]->()-[:purl]->()<-[:pname]-(x2), (x2)-[:pemployee|pemployee*]->(x3), (x3)-[:pemployee|pcontactPoint*]->(x4) RETURN DISTINCT x0;<br/><br/><br/>*Note: This query may have a different semantics than the intended one because openCypher does not allow Kleene star above concatenation and/or inverses.</td>
+<td valign="top" id="sql-syntax">WITH RECURSIVE c0(src, trg) AS ((SELECT s0.src, s3.trg FROM (SELECT trg as src, src as trg, label FROM edge) as s0, (SELECT trg as src, src as trg, label FROM edge) as s1, edge s2, (SELECT trg as src, src as trg, label FROM edge) as s3 WHERE s0.trg = s1.src AND s1.trg = s2.src AND s2.trg = s3.src AND s0.label = type AND s1.label = hasGenre  AND s2.label = text  AND s3.label = url  UNION SELECT s0.src, s2.trg FROM (SELECT trg as src, src as trg, label FROM edge) as s0, (SELECT trg as src, src as trg, label FROM edge) as s1, edge s2 WHERE s0.trg = s1.src AND s1.trg = s2.src AND s0.label = type AND s1.label = hasGenre  AND s2.label = homepage )) , c1(src, trg) AS ((SELECT s0.src, s3.trg FROM (SELECT trg as src, src as trg, label FROM edge) as s0, edge s1, edge s2, (SELECT trg as src, src as trg, label FROM edge) as s3 WHERE s0.trg = s1.src AND s1.trg = s2.src AND s2.trg = s3.src AND s0.label = trailer AND s1.label = trailer  AND s2.label = url  AND s3.label = name  UNION SELECT s0.src, s1.trg FROM edge s0, (SELECT trg as src, src as trg, label FROM edge) as s1 WHERE s0.trg = s1.src AND s0.label = url AND s1.label = email )) , c2(src, trg) AS ((SELECT edge.src, edge.src FROM edge UNION SELECT edge.trg, edge.trg FROM edge UNION SELECT s0.src, s3.trg FROM edge s0, edge s1, (SELECT trg as src, src as trg, label FROM edge) as s2, (SELECT trg as src, src as trg, label FROM edge) as s3 WHERE s0.trg = s1.src AND s1.trg = s2.src AND s2.trg = s3.src AND s0.label = employee AND s1.label = homepage  AND s2.label = subscribes  AND s3.label = employee  UNION SELECT s0.src, s1.trg FROM edge s0, (SELECT trg as src, src as trg, label FROM edge) as s1 WHERE s0.trg = s1.src AND s0.label = employee AND s1.label = employee )) , c3(src, trg) AS (SELECT src, trg FROM c2 UNION SELECT head.src, tail.trg FROM c2 as head, c3 as tail WHERE head.trg = tail.src) , c4(src, trg) AS ((SELECT edge.src, edge.src FROM edge UNION SELECT edge.trg, edge.trg FROM edge UNION SELECT s0.src, s1.trg FROM edge s0, (SELECT trg as src, src as trg, label FROM edge) as s1 WHERE s0.trg = s1.src AND s0.label = employee AND s1.label = contactPoint  UNION SELECT s0.src, s3.trg FROM edge s0, (SELECT trg as src, src as trg, label FROM edge) as s1, edge s2, (SELECT trg as src, src as trg, label FROM edge) as s3 WHERE s0.trg = s1.src AND s1.trg = s2.src AND s2.trg = s3.src AND s0.label = contactPoint AND s1.label = reviewer  AND s2.label = reviewer  AND s3.label = employee )) , c5(src, trg) AS (SELECT src, trg FROM c4 UNION SELECT head.src, tail.trg FROM c4 as head, c5 as tail WHERE head.trg = tail.src) SELECT DISTINCT c0.src FROM c0, c1, c2, c3, c4, c5 WHERE c1.src = c0.trg AND c2.src = c1.trg AND c4.src = c2.trg;<br/></td>
+<td valign="top" id="datalog-syntax">BEGIN<br/>gmarkSubquery00(x, y) <- core:edge:edge(x1, type, x0), core:edge:edge(x2, hasGenre, x1), core:edge:edge(x2, text, x3), core:edge:edge(x4, url, x3), x = x0, y = x4.<br/>gmarkSubquery00(x, y) <- core:edge:edge(x1, type, x0), core:edge:edge(x2, hasGenre, x1), core:edge:edge(x2, homepage, x3), x = x0, y = x3.<br/>gmarkSubquery01(x, y) <- core:edge:edge(x1, trailer, x0), core:edge:edge(x1, trailer, x2), core:edge:edge(x2, url, x3), core:edge:edge(x4, name, x3), x = x0, y = x4.<br/>gmarkSubquery01(x, y) <- core:edge:edge(x0, url, x1), core:edge:edge(x2, email, x1), x = x0, y = x2.<br/>gmarkSubquery02(x, y) <- core:edge:edge(x0, employee, x1), core:edge:edge(x1, homepage, x2), core:edge:edge(x3, subscribes, x2), core:edge:edge(x4, employee, x3), x = x0, y = x4.<br/>gmarkSubquery02(x, y) <- core:edge:edge(x0, employee, x1), core:edge:edge(x2, employee, x1), x = x0, y = x2.<br/>gmarkSubquery02(x, x) <- core:edge:edge(x, r, y).<br/>gmarkSubquery02(y, y) <- core:edge:edge(x, r, y).<br/>gmarkSubquery02(x, y) <- gmarkSubquery02(x, z), gmarkSubquery02(z, y).<br/>gmarkSubquery03(x, y) <- core:edge:edge(x0, employee, x1), core:edge:edge(x2, contactPoint, x1), x = x0, y = x2.<br/>gmarkSubquery03(x, y) <- core:edge:edge(x0, contactPoint, x1), core:edge:edge(x2, reviewer, x1), core:edge:edge(x2, reviewer, x3), core:edge:edge(x4, employee, x3), x = x0, y = x4.<br/>gmarkSubquery03(x, x) <- core:edge:edge(x, r, y).<br/>gmarkSubquery03(y, y) <- core:edge:edge(x, r, y).<br/>gmarkSubquery03(x, y) <- gmarkSubquery03(x, z), gmarkSubquery03(z, y).<br/>query(x0) <- gmarkSubquery00(x0, x1), gmarkSubquery01(x1, x2), gmarkSubquery02(x2, x3), gmarkSubquery03(x3, x4).<br/>END<br/></td>
+</tr>
+</table>
+</div><!-- end bottom -->
+
+</body>
+</html>

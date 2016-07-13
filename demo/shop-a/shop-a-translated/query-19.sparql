@@ -1,0 +1,1 @@
+PREFIX : <http://example.org/gmark/> SELECT DISTINCT ?x0 ?x1 WHERE {  {  ?x0 ((^:ptag/^:plike/^:pfriendOf/:plike)|(^:ptag/^:phasGenre)) ?x1 . ?x0 ((^:ptag/:peditor/:pfamilyName/^:ptext)) ?x2 . ?x0 ((^:ptag/^:phasGenre)|(^:ptag/:pproducer/^:pcaption)) ?x3 . } }

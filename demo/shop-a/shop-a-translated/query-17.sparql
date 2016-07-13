@@ -1,0 +1,1 @@
+PREFIX : <http://example.org/gmark/> ASK {  {  ?x0 ((^:pbirthDate/:pgender)|(^:pbirthDate/:pgender)|(^:pbirthDate/:pgender)) ?x1 . ?x0 ((^:pexpires/:peditor/:pgender)) ?x2 . ?x0 ((^:ppriceValidUntil/:pincludes/:pauthor/:pgender)) ?x3 . ?x0 ((^:pexpires/^:plike/:pgender)|(^:prelease/:precordNumber/^:puserId/:pgender)) ?x4 . } }

@@ -1,0 +1,1 @@
+PREFIX : <http://example.org/gmark/> SELECT DISTINCT ?x0 WHERE {  {  ?x0 ((^:plike/^:pdirector)|(^:plike/^:pdirector)) ?x1 . ?x1 ((:pactor/:plike)|(:pactor/^:pfriendOf/:plike)|(:pdirector/:pfollows/^:pfriendOf/^:pauthor)) ?x2 . ?x2 ((:pauthor/:plike/:phasReview/^:phasReview)) ?x3 . ?x3 ((:pcaption/^:pfamilyName/:page)) ?x4 . } }

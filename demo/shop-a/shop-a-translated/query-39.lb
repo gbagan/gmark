@@ -1,0 +1,8 @@
+BEGIN
+gmarkSubquery00(x, y) <- core:edge:edge(x1, contactPoint, x0), core:edge:edge(x1, description, x2), core:edge:edge(x3, producer, x2), core:edge:edge(x3, expires, x4), x = x0, y = x4.
+gmarkSubquery01(x, y) <- core:edge:edge(x0, like, x1), core:edge:edge(x1, hasGenre, x2), core:edge:edge(x2, type, x3), x = x0, y = x3.
+gmarkSubquery01(x, y) <- core:edge:edge(x1, conductor, x0), core:edge:edge(x1, hasGenre, x2), core:edge:edge(x2, type, x3), x = x0, y = x3.
+gmarkSubquery02(x, y) <- core:edge:edge(x1, author, x0), core:edge:edge(x1, hasGenre, x2), core:edge:edge(x2, type, x3), x = x0, y = x3.
+gmarkSubquery02(x, y) <- core:edge:edge(x0, like, x1), core:edge:edge(x1, hasGenre, x2), core:edge:edge(x2, type, x3), x = x0, y = x3.
+query(x0, x1) <- gmarkSubquery00(x0, x1), gmarkSubquery01(x0, x2), gmarkSubquery02(x1, x3).
+END

@@ -1,0 +1,1 @@
+MATCH (x0)<-[:pgender]-()<-[:pfollows]-()<-[:pconductor]-()-[:pperformedIn]->(x1), (x1)-[:pparentContry]->()<-[:pparentContry]-(x2), (x0)<-[:pgender]-()-[:plike]->()-[:phasGenre]->(x3), (x2)<-[:pgender]-()<-[:pauthor]-()-[:phasGenre]->(x4) RETURN DISTINCT x0;

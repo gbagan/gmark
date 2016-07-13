@@ -1,0 +1,14 @@
+BEGIN
+gmarkSubquery00(x, y) <- core:edge:edge(x1, contentSize, x0), core:edge:edge(x2, like, x1), core:edge:edge(x2, telephone, x3), core:edge:edge(x4, contentRating, x3), x = x0, y = x4.
+gmarkSubquery00(x, y) <- core:edge:edge(x1, duration, x0), core:edge:edge(x1, text, x2), core:edge:edge(x3, keywords, x2), x = x0, y = x3.
+gmarkSubquery00(x, y) <- core:edge:edge(x1, rating, x0), core:edge:edge(x1, text, x2), core:edge:edge(x3, text, x2), x = x0, y = x3.
+gmarkSubquery01(x, y) <- core:edge:edge(x1, telephone, x0), core:edge:edge(x1, like, x2), x = x0, y = x2.
+gmarkSubquery01(x, y) <- core:edge:edge(x1, duration, x0), core:edge:edge(x1, caption, x2), core:edge:edge(x3, description, x2), x = x0, y = x3.
+gmarkSubquery01(x, y) <- core:edge:edge(x1, printEdition, x0), core:edge:edge(x1, caption, x2), core:edge:edge(x3, caption, x2), x = x0, y = x3.
+gmarkSubquery02(x, y) <- core:edge:edge(x1, faxNumber, x0), core:edge:edge(x1, employee, x2), core:edge:edge(x2, email, x3), core:edge:edge(x4, description, x3), x = x0, y = x4.
+gmarkSubquery02(x, y) <- core:edge:edge(x1, hits, x0), core:edge:edge(x2, trailer, x1), x = x0, y = x2.
+gmarkSubquery02(x, y) <- core:edge:edge(x1, aggregateRating, x0), core:edge:edge(x1, telephone, x2), core:edge:edge(x3, contentRating, x2), x = x0, y = x3.
+gmarkSubquery03(x, y) <- core:edge:edge(x1, userId, x0), core:edge:edge(x1, friendOf, x2), core:edge:edge(x2, userId, x3), core:edge:edge(x4, contentSize, x3), x = x0, y = x4.
+gmarkSubquery03(x, y) <- core:edge:edge(x1, bookEdition, x0), core:edge:edge(x1, contentRating, x2), core:edge:edge(x3, contentSize, x2), x = x0, y = x3.
+query() <- gmarkSubquery00(x0, x1), gmarkSubquery01(x0, x2), gmarkSubquery02(x0, x3), gmarkSubquery03(x0, x4).
+END

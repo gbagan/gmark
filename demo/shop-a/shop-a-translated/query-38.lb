@@ -1,0 +1,11 @@
+BEGIN
+gmarkSubquery00(x, y) <- core:edge:edge(x0, description, x1), core:edge:edge(x2, description, x1), x = x0, y = x2.
+gmarkSubquery00(x, y) <- core:edge:edge(x0, contentSize, x1), core:edge:edge(x2, contentSize, x1), core:edge:edge(x2, homepage, x3), core:edge:edge(x4, homepage, x3), x = x0, y = x4.
+gmarkSubquery00(x, y) <- core:edge:edge(x0, keywords, x1), core:edge:edge(x2, title, x1), core:edge:edge(x2, description, x3), core:edge:edge(x4, text, x3), x = x0, y = x4.
+gmarkSubquery01(x, y) <- core:edge:edge(x0, contentRating, x1), core:edge:edge(x2, printPage, x1), x = x0, y = x2.
+gmarkSubquery01(x, y) <- core:edge:edge(x0, text, x1), core:edge:edge(x2, title, x1), x = x0, y = x2.
+gmarkSubquery01(x, y) <- core:edge:edge(x0, keywords, x1), core:edge:edge(x2, jobTitle, x1), core:edge:edge(x3, author, x2), x = x0, y = x3.
+gmarkSubquery02(x, y) <- core:edge:edge(x1, like, x0), core:edge:edge(x1, familyName, x2), core:edge:edge(x3, text, x2), x = x0, y = x3.
+gmarkSubquery02(x, y) <- core:edge:edge(x0, hasGenre, x1), core:edge:edge(x1, tag, x2), core:edge:edge(x3, tag, x2), core:edge:edge(x4, hasGenre, x3), x = x0, y = x4.
+query() <- gmarkSubquery00(x0, x1), gmarkSubquery01(x0, x2), gmarkSubquery02(x0, x3).
+END

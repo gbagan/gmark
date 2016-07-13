@@ -1,0 +1,1 @@
+MATCH (x0)<-[:pcontactPoint]-()-[:pdescription]->()<-[:pproducer]-()-[:pexpires]->(x1), (x0)-[:plike]->()-[:phasGenre]->()-[:ptype]->(x2), (x1)<-[:pauthor]-()-[:phasGenre]->()-[:ptype]->(x3) RETURN DISTINCT x0, x1;

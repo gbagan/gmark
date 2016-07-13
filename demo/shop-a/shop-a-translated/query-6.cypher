@@ -1,0 +1,1 @@
+MATCH (x0)-[:pemployee|phomepage*]->(x1), (x0)-[:pauthor|pconductor|pdirector*]->(x2), (x0)-[:pfriendOf|peditor|peditor*]->(x3), (x0)-[:pmakesPurchase|pfriendOf|pfriendOf*]->(x4) RETURN DISTINCT x1, x2, x0;

@@ -1,0 +1,1 @@
+MATCH (x0)-[:pincludes]->()-[:peditor]->()-[:plike]->(x1), (x0)-[:pincludes]->()-[:phasReview]->()<-[:phasReview]-()<-[:pincludes]-(x2), (x1)-[:pincludes]->()<-[:pincludes]-()-[:pincludes]->()<-[:pincludes]-(x3) RETURN DISTINCT x0;

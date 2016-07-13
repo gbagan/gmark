@@ -1,0 +1,9 @@
+BEGIN
+gmarkSubquery00(x, y) <- core:edge:edge(x1, makesPurchase, x0), core:edge:edge(x2, conductor, x1), x = x0, y = x2.
+gmarkSubquery01(x, y) <- core:edge:edge(x0, purchaseFor, x1), core:edge:edge(x1, hasReview, x2), core:edge:edge(x2, reviewer, x3), core:edge:edge(x3, makesPurchase, x4), x = x0, y = x4.
+gmarkSubquery01(x, y) <- core:edge:edge(x0, purchaseFor, x1), core:edge:edge(x2, purchaseFor, x1), core:edge:edge(x3, makesPurchase, x2), core:edge:edge(x3, makesPurchase, x4), x = x0, y = x4.
+gmarkSubquery02(x, y) <- core:edge:edge(x0, purchaseFor, x1), core:edge:edge(x1, conductor, x2), core:edge:edge(x2, makesPurchase, x3), x = x0, y = x3.
+gmarkSubquery02(x, y) <- core:edge:edge(x0, purchaseFor, x1), core:edge:edge(x2, purchaseFor, x1), x = x0, y = x2.
+gmarkSubquery02(x, y) <- core:edge:edge(x1, makesPurchase, x0), core:edge:edge(x2, editor, x1), core:edge:edge(x3, purchaseFor, x2), x = x0, y = x3.
+query(x0) <- gmarkSubquery00(x0, x1), gmarkSubquery01(x0, x2), gmarkSubquery02(x1, x3).
+END

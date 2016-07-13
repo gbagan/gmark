@@ -1,0 +1,1 @@
+MATCH (x0)-[:pemployee]->()-[:pfriendOf]->()-[:plike]->(x1), (x0)-[:pemployee]->()-[:plike]->(x2), (x0)-[:poffers]->()-[:pincludes]->()<-[:pincludes]-()-[:pincludes]->(x3), (x0)-[:pemployee]->()-[:plike]->(x4) RETURN "true" LIMIT 1;

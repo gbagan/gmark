@@ -1,0 +1,1 @@
+MATCH (x0)-[:ptag]->()<-[:ptag]-(x1), (x0)-[:phomepage]->()-[:purl]->()<-[:pproducer]-(x2), (x0)-[:pcontentSize]->()<-[:pduration]-(x3), (x0)-[:pkeywords]->()<-[:pjobTitle]-()<-[:pactor]-(x4) RETURN DISTINCT x0, x1;

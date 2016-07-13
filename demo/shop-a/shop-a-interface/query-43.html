@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Visualize query workload</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" href="../../style/style.css"/>
+	<script src="../../style/animation.js"></script>
+</head>
+<body>
+
+<div id="top">
+
+<div id="left">
+<h3>Stats for Query 43</h3>
+<ul>
+<li><i>Dataset</i>: ../use-cases/shop.xml</li>
+<li><i>Arity</i>: 1</li>
+<li><i>Selectivity</i>: -</li>
+<li><i>Size</i>: C[4-4], D[1-3], L[2-4]</li>
+<li><i>Recursion</i>: 0%</li>
+</ul>
+<hr/>
+<h3>Generate concrete syntaxes</h3>
+<input type="checkbox" id="sparql-checkbox"/>SPARQL<br/>
+<input type="checkbox" id="opencypher-checkbox"/>openCypher<br/>
+<input type="checkbox" id="sql-checkbox"/>SQL<br/>
+<input type="checkbox" id="datalog-checkbox"/>Datalog<br/>
+<hr/>
+<a href="query-42.html">&lt;&lt;Previous query</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="query-44.html">Next query&gt;&gt;</a>
+</div> <!-- end left -->
+
+<div id="right">
+<img src="query-43.png"/>
+</div> <!-- end right -->
+
+</div> <!-- end top -->
+
+<div id="bottom">
+<br/><br/>
+
+<table border="1">
+<tr>
+<th id="sparql-header">SPARQL</th>
+<th id="opencypher-header">openCypher*</th>
+<th id="sql-header">SQL</th>
+<th id="datalog-header">Datalog</th>
+</tr>
+<tr>
+<td valign="top" id="sparql-syntax">PREFIX : &lt;http://example.org/gmark/&gt;<br/> SELECT DISTINCT ?x0 WHERE {  {  ?x0 ((^:plike/^:pdirector)|(^:plike/^:pdirector)) ?x1 . ?x1 ((:pactor/:plike)|(:pactor/^:pfriendOf/:plike)|(:pdirector/:pfollows/^:pfriendOf/^:pauthor)) ?x2 . ?x2 ((:pauthor/:plike/:phasReview/^:phasReview)) ?x3 . ?x3 ((:pcaption/^:pfamilyName/:page)) ?x4 . } }<br/></td>
+<td valign="top" id="opencypher-syntax">MATCH (x0)<-[:plike]-()<-[:pdirector]-(x1), (x1)-[:pactor]->()-[:plike]->(x2), (x2)-[:pauthor]->()-[:plike]->()-[:phasReview]->()<-[:phasReview]-(x3), (x3)-[:pcaption]->()<-[:pfamilyName]-()-[:page]->(x4) RETURN DISTINCT x0;<br/><br/><br/>*Note: This query may have a different semantics than the intended one because openCypher does not allow Kleene star above concatenation and/or inverses.</td>
+<td valign="top" id="sql-syntax">WITH RECURSIVE c0(src, trg) AS ((SELECT s0.src, s1.trg FROM (SELECT trg as src, src as trg, label FROM edge) as s0, (SELECT trg as src, src as trg, label FROM edge) as s1 WHERE s0.trg = s1.src AND s0.label = like AND s1.label = director  UNION SELECT s0.src, s1.trg FROM (SELECT trg as src, src as trg, label FROM edge) as s0, (SELECT trg as src, src as trg, label FROM edge) as s1 WHERE s0.trg = s1.src AND s0.label = like AND s1.label = director )) , c1(src, trg) AS ((SELECT s0.src, s1.trg FROM edge s0, edge s1 WHERE s0.trg = s1.src AND s0.label = actor AND s1.label = like  UNION SELECT s0.src, s2.trg FROM edge s0, (SELECT trg as src, src as trg, label FROM edge) as s1, edge s2 WHERE s0.trg = s1.src AND s1.trg = s2.src AND s0.label = actor AND s1.label = friendOf  AND s2.label = like  UNION SELECT s0.src, s3.trg FROM edge s0, edge s1, (SELECT trg as src, src as trg, label FROM edge) as s2, (SELECT trg as src, src as trg, label FROM edge) as s3 WHERE s0.trg = s1.src AND s1.trg = s2.src AND s2.trg = s3.src AND s0.label = director AND s1.label = follows  AND s2.label = friendOf  AND s3.label = author )) , c2(src, trg) AS ((SELECT s0.src, s3.trg FROM edge s0, edge s1, edge s2, (SELECT trg as src, src as trg, label FROM edge) as s3 WHERE s0.trg = s1.src AND s1.trg = s2.src AND s2.trg = s3.src AND s0.label = author AND s1.label = like  AND s2.label = hasReview  AND s3.label = hasReview )) , c3(src, trg) AS ((SELECT s0.src, s2.trg FROM edge s0, (SELECT trg as src, src as trg, label FROM edge) as s1, edge s2 WHERE s0.trg = s1.src AND s1.trg = s2.src AND s0.label = caption AND s1.label = familyName  AND s2.label = age )) SELECT DISTINCT c0.src FROM c0, c1, c2, c3 WHERE c1.src = c0.trg AND c2.src = c1.trg AND c3.src = c2.trg;<br/></td>
+<td valign="top" id="datalog-syntax">BEGIN<br/>gmarkSubquery00(x, y) <- core:edge:edge(x1, like, x0), core:edge:edge(x2, director, x1), x = x0, y = x2.<br/>gmarkSubquery00(x, y) <- core:edge:edge(x1, like, x0), core:edge:edge(x2, director, x1), x = x0, y = x2.<br/>gmarkSubquery01(x, y) <- core:edge:edge(x0, actor, x1), core:edge:edge(x1, like, x2), x = x0, y = x2.<br/>gmarkSubquery01(x, y) <- core:edge:edge(x0, actor, x1), core:edge:edge(x2, friendOf, x1), core:edge:edge(x2, like, x3), x = x0, y = x3.<br/>gmarkSubquery01(x, y) <- core:edge:edge(x0, director, x1), core:edge:edge(x1, follows, x2), core:edge:edge(x3, friendOf, x2), core:edge:edge(x4, author, x3), x = x0, y = x4.<br/>gmarkSubquery02(x, y) <- core:edge:edge(x0, author, x1), core:edge:edge(x1, like, x2), core:edge:edge(x2, hasReview, x3), core:edge:edge(x4, hasReview, x3), x = x0, y = x4.<br/>gmarkSubquery03(x, y) <- core:edge:edge(x0, caption, x1), core:edge:edge(x2, familyName, x1), core:edge:edge(x2, age, x3), x = x0, y = x3.<br/>query(x0) <- gmarkSubquery00(x0, x1), gmarkSubquery01(x1, x2), gmarkSubquery02(x2, x3), gmarkSubquery03(x3, x4).<br/>END<br/></td>
+</tr>
+</table>
+</div><!-- end bottom -->
+
+</body>
+</html>

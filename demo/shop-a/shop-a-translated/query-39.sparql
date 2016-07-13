@@ -1,0 +1,1 @@
+PREFIX : <http://example.org/gmark/> SELECT DISTINCT ?x0 ?x1 WHERE {  {  ?x0 ((^:pcontactPoint/:pdescription/^:pproducer/:pexpires)) ?x1 . ?x0 ((:plike/:phasGenre/:ptype)|(^:pconductor/:phasGenre/:ptype)) ?x2 . ?x1 ((^:pauthor/:phasGenre/:ptype)|(:plike/:phasGenre/:ptype)) ?x3 . } }

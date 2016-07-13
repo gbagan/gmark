@@ -1,0 +1,1 @@
+MATCH (x0)<-[:ptype]-()<-[:phasGenre]-()-[:ptext]->()<-[:purl]-(x1), (x1)<-[:ptrailer]-()-[:ptrailer]->()-[:purl]->()<-[:pname]-(x2), (x2)-[:pemployee|pemployee*]->(x3), (x3)-[:pemployee|pcontactPoint*]->(x4) RETURN DISTINCT x0;

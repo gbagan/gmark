@@ -1,0 +1,9 @@
+digraph g {
+	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
+	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
+	x0 -> x1 [label="((keywords.keywords-.isbn.printEdition-)+(producer.title-)+(contentSize.printPage-))"];
+	x2 [shape=circle, label="?x2"];
+	x0 -> x2 [label="((homepage.hits.userId-)+(contentSize.rating-.reviewer)+(keywords.description-.performer.jobTitle-))"];
+	x3 [shape=circle, label="?x3"];
+	x1 -> x3 [label="((title.title-.purchaseFor-.makesPurchase-)+(tag.tag-.actor))"];
+}

@@ -1,0 +1,1 @@
+MATCH (x0)<-[:plike]-()<-[:pdirector]-(x1), (x1)-[:pactor]->()-[:plike]->(x2), (x2)-[:pauthor]->()-[:plike]->()-[:phasReview]->()<-[:phasReview]-(x3), (x3)-[:pcaption]->()<-[:pfamilyName]-()-[:page]->(x4) RETURN DISTINCT x0;

@@ -1,0 +1,1 @@
+MATCH (x0)<-[:pcontentSize]-()<-[:plike]-()-[:ptelephone]->()<-[:pcontentRating]-(x1), (x0)<-[:ptelephone]-()-[:plike]->(x2), (x0)<-[:pfaxNumber]-()-[:pemployee]->()-[:pemail]->()<-[:pdescription]-(x3), (x0)<-[:puserId]-()-[:pfriendOf]->()-[:puserId]->()<-[:pcontentSize]-(x4) RETURN "true" LIMIT 1;

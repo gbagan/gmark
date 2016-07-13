@@ -1,0 +1,1 @@
+PREFIX : <http://example.org/gmark/> ASK {  {  ?x0 ((^:planguage/:phasGenre)|(^:planguage/^:phomepage/:phasGenre)|(^:planguage/:phasGenre)) ?x1 . ?x0 ((^:planguage/:pcontentSize/^:pcontentRating/:phasGenre)) ?x2 . ?x0 ((^:planguage/^:phomepage/:phasGenre)) ?x3 . ?x0 ((^:planguage/:pproducer/^:paward/:phasGenre)|(^:planguage/:pisbn/^:popus/:phasGenre)) ?x4 . } }

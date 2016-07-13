@@ -1,0 +1,1 @@
+MATCH (x0)<-[:planguage]-()-[:phasGenre]->(x1), (x0)<-[:planguage]-()-[:pcontentSize]->()<-[:pcontentRating]-()-[:phasGenre]->(x2), (x0)<-[:planguage]-()<-[:phomepage]-()-[:phasGenre]->(x3), (x0)<-[:planguage]-()-[:pproducer]->()<-[:paward]-()-[:phasGenre]->(x4) RETURN "true" LIMIT 1;

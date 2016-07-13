@@ -1,0 +1,11 @@
+digraph g {
+	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
+	x1 [shape=circle, label="?x1"];
+	x0 -> x1 [label="((gender-.follows-.conductor-.performedIn)+(gender-.like.like-.location))"];
+	x2 [shape=circle, label="?x2"];
+	x1 -> x2 [label="((parentContry.parentContry-)+(parentContry.nationality-.location))"];
+	x3 [shape=circle, label="?x3"];
+	x0 -> x3 [label="((gender-.like.hasGenre)+(gender-.telephone.contentSize-.hasGenre))"];
+	x4 [shape=circle, label="?x4"];
+	x2 -> x4 [label="((gender-.author-.hasGenre)+(gender-.familyName.description-.hasGenre)+(gender-.like.hasGenre))"];
+}

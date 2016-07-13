@@ -1,0 +1,10 @@
+BEGIN
+gmarkSubquery00(x, y) <- core:edge:edge(x1, editor, x0), core:edge:edge(x1, eligibleQuantity, x2), core:edge:edge(x3, recordNumber, x2), core:edge:edge(x3, release, x4), x = x0, y = x4.
+gmarkSubquery00(x, y) <- core:edge:edge(x1, editor, x0), core:edge:edge(x1, includes, x2), core:edge:edge(x2, release, x3), x = x0, y = x3.
+gmarkSubquery01(x, y) <- core:edge:edge(x1, nationality, x0), core:edge:edge(x1, friendOf, x2), core:edge:edge(x2, gender, x3), x = x0, y = x3.
+gmarkSubquery01(x, y) <- core:edge:edge(x1, nationality, x0), core:edge:edge(x1, gender, x2), x = x0, y = x2.
+gmarkSubquery01(x, y) <- core:edge:edge(x1, nationality, x0), core:edge:edge(x1, follows, x2), core:edge:edge(x2, gender, x3), x = x0, y = x3.
+gmarkSubquery02(x, y) <- core:edge:edge(x1, nationality, x0), core:edge:edge(x1, gender, x2), x = x0, y = x2.
+gmarkSubquery02(x, y) <- core:edge:edge(x1, nationality, x0), core:edge:edge(x1, gender, x2), x = x0, y = x2.
+query() <- gmarkSubquery00(x0, x1), gmarkSubquery01(x0, x2), gmarkSubquery02(x1, x3).
+END

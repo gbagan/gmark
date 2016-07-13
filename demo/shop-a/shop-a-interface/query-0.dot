@@ -1,0 +1,11 @@
+digraph g {
+	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
+	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
+	x2 [fillcolor="yellow", style="filled," shape=circle, label="?x2"];
+	x0 -> x1 [label="((includes.homepage.homepage-))"];
+	x1 -> x2 [label="(((purchaseFor-.makesPurchase-.friendOf.author-)+(editor.editor-)))*"];
+	x3 [shape=circle, label="?x3"];
+	x2 -> x3 [label="((contentSize.printPage-.description.title-))"];
+	x4 [shape=circle, label="?x4"];
+	x3 -> x4 [label="((hasReview.reviewer.employee-))"];
+}

@@ -1,0 +1,1 @@
+MATCH (x0)-[:pkeywords]->()<-[:pkeywords]-()-[:pisbn]->()<-[:pprintEdition]-(x1), (x0)-[:phomepage]->()-[:phits]->()<-[:puserId]-(x2), (x1)-[:ptitle]->()<-[:ptitle]-()<-[:ppurchaseFor]-()<-[:pmakesPurchase]-(x3) RETURN DISTINCT x0, x1;

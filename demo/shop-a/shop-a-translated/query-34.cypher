@@ -1,0 +1,1 @@
+MATCH (x0)<-[:plocation]-()<-[:peditor]-()-[:phasGenre]->(x1), (x1)<-[:phasGenre]-()-[:pexpires]->()<-[:prelease]-()-[:pcontentSize]->(x2), (x0)<-[:pperformedIn]-()-[:ptag]->(x3), (x2)<-[:pperformedIn]-()-[:phasGenre]->()-[:ptag]->(x4) RETURN "true" LIMIT 1;

@@ -1,0 +1,1 @@
+MATCH (x0)-[:pproducer]->()<-[:pdescription]-()-[:planguage]->(x1), (x0)<-[:ppurchaseFor]-()-[:ppurchaseFor]->()-[:planguage]->(x2), (x0)-[:phomepage]->()-[:planguage]->(x3) RETURN DISTINCT x1, x0, x2;

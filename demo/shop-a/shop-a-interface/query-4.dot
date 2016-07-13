@@ -1,0 +1,11 @@
+digraph g {
+	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
+	x1 [shape=circle, label="?x1"];
+	x0 -> x1 [label="((type-.hasGenre-.text.url-)+(type-.hasGenre-.homepage))"];
+	x2 [shape=circle, label="?x2"];
+	x1 -> x2 [label="((trailer-.trailer.url.name-)+(url.email-))"];
+	x3 [shape=circle, label="?x3"];
+	x2 -> x3 [label="(((employee.homepage.subscribes-.employee-)+(employee.employee-)))*"];
+	x4 [shape=circle, label="?x4"];
+	x3 -> x4 [label="(((employee.contactPoint-)+(contactPoint.reviewer-.reviewer.employee-)))*"];
+}

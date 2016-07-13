@@ -1,0 +1,9 @@
+BEGIN
+gmarkSubquery00(x, y) <- core:edge:edge(x1, tag, x0), core:edge:edge(x2, like, x1), core:edge:edge(x2, age, x3), x = x0, y = x3.
+gmarkSubquery01(x, y) <- core:edge:edge(x1, tag, x0), core:edge:edge(x2, like, x1), core:edge:edge(x2, type, x3), x = x0, y = x3.
+gmarkSubquery01(x, y) <- core:edge:edge(x1, tag, x0), core:edge:edge(x1, contentRating, x2), core:edge:edge(x3, userId, x2), core:edge:edge(x3, type, x4), x = x0, y = x4.
+gmarkSubquery01(x, y) <- core:edge:edge(x1, tag, x0), core:edge:edge(x2, like, x1), core:edge:edge(x2, type, x3), x = x0, y = x3.
+gmarkSubquery02(x, y) <- core:edge:edge(x1, tag, x0), core:edge:edge(x2, like, x1), core:edge:edge(x2, type, x3), x = x0, y = x3.
+gmarkSubquery02(x, y) <- core:edge:edge(x1, tag, x0), core:edge:edge(x1, conductor, x2), core:edge:edge(x2, type, x3), x = x0, y = x3.
+query(x0, x1, x2) <- gmarkSubquery00(x0, x1), gmarkSubquery01(x0, x2), gmarkSubquery02(x1, x3).
+END

@@ -1,0 +1,1 @@
+MATCH (x0)<-[:pnationality]-()<-[:pconductor]-()-[:pconductor]->()-[:ptype]->(x1), (x0)<-[:peditor]-()-[:pincludes]->()-[:pauthor]->()-[:ptype]->(x2), (x0)<-[:pnationality]-()-[:ptype]->(x3) RETURN "true" LIMIT 1;

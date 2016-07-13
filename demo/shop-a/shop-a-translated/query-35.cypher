@@ -1,0 +1,1 @@
+MATCH (x0)<-[:pnationality]-()-[:pfriendOf]->()-[:plike]->()<-[:ppurchaseFor]-(x1), (x1)-[:pmakesPurchase*]->(x2), (x2)-[:ppurchaseFor|pmakesPurchase*]->(x3), (x3)-[:pmakesPurchase|ppurchaseFor*]->(x4) RETURN DISTINCT x1, x2, x0;

@@ -1,0 +1,11 @@
+BEGIN
+gmarkSubquery00(x, y) <- core:edge:edge(x1, performedIn, x0), core:edge:edge(x1, composer, x2), core:edge:edge(x3, title, x2), core:edge:edge(x4, release, x3), core:edge:edge(x4, producer, x5), core:edge:edge(x6, keywords, x5), x = x0, y = x6.
+gmarkSubquery00(x, y) <- core:edge:edge(x1, location, x0), core:edge:edge(x1, like, x2), core:edge:edge(x3, expires, x2), core:edge:edge(x3, homepage, x4), core:edge:edge(x5, homepage, x4), x = x0, y = x5.
+gmarkSubquery01(x, y) <- core:edge:edge(x1, purchaseFor, x0), core:edge:edge(x1, purchaseFor, x2), core:edge:edge(x3, validThrough, x2), core:edge:edge(x3, includes, x4), x = x0, y = x4.
+gmarkSubquery01(x, y) <- core:edge:edge(x1, purchaseFor, x0), core:edge:edge(x1, purchaseFor, x2), core:edge:edge(x3, validForm, x2), core:edge:edge(x3, includes, x4), core:edge:edge(x4, keywords, x5), core:edge:edge(x6, title, x5), x = x0, y = x6.
+gmarkSubquery02(x, y) <- core:edge:edge(x1, performedIn, x0), core:edge:edge(x1, hasReview, x2), core:edge:edge(x2, rating, x3), core:edge:edge(x4, datePublished, x3), core:edge:edge(x5, purchaseFor, x4), core:edge:edge(x5, price, x6), core:edge:edge(x7, isbn, x6), x = x0, y = x7.
+gmarkSubquery02(x, y) <- core:edge:edge(x1, birthDate, x0), core:edge:edge(x2, editor, x1), core:edge:edge(x2, title, x3), core:edge:edge(x4, text, x3), x = x0, y = x4.
+gmarkSubquery02(x, y) <- core:edge:edge(x1, expires, x0), core:edge:edge(x2, like, x1), core:edge:edge(x2, email, x3), core:edge:edge(x4, keywords, x3), x = x0, y = x4.
+query(x0) <- gmarkSubquery00(x0, x1), gmarkSubquery01(x0, x2), gmarkSubquery02(x0, x3).
+query(x0) <- .
+END

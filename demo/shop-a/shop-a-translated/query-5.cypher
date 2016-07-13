@@ -1,0 +1,1 @@
+MATCH (x0)-[:pdescription]->()<-[:pdescription]-()-[:phasGenre]->()-[:ptype]->(x1), (x1)<-[:ptype]-()<-[:phasGenre]-()-[:pperformedIn]->(x2), (x0)<-[:ppurchaseFor]-()-[:ppurchaseFor]->()<-[:pincludes]-()-[:pincludes]->(x3), (x2)-[:phasReview]->()<-[:phasReview]-()-[:ptrailer]->()<-[:phomepage]-(x4) RETURN DISTINCT x1, x0, x2;

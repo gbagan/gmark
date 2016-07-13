@@ -1,0 +1,1 @@
+PREFIX : <http://example.org/gmark/> ASK {  {  ?x0 ((^:pnationality/^:pconductor/:pconductor/:ptype)|(^:pnationality/^:pfollows/:ptype)|(^:pnationality/:ptype)) ?x1 . ?x0 ((^:peditor/:pincludes/:pauthor/:ptype)|(^:pparentContry/^:plocation/:ptype)|(^:pnationality/:pfollows/:ptype)) ?x2 . ?x0 ((^:pnationality/:ptype)) ?x3 . } }

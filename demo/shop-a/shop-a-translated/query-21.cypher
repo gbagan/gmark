@@ -1,0 +1,1 @@
+MATCH (x0)<-[:page]-()<-[:pfollows]-()<-[:pactor]-()-[:pkeywords]->(x1), (x0)<-[:page]-()-[:pfamilyName]->()<-[:pjobTitle]-()-[:pfamilyName]->(x2), (x0)<-[:page]-()-[:pfamilyName]->(x3), (x0)<-[:page]-()<-[:pactor]-()-[:pproducer]->(x4) RETURN DISTINCT x0;

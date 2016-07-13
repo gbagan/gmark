@@ -1,0 +1,12 @@
+BEGIN
+gmarkSubquery00(x, y) <- core:edge:edge(x0, tag, x1), core:edge:edge(x2, tag, x1), x = x0, y = x2.
+gmarkSubquery00(x, y) <- core:edge:edge(x0, description, x1), core:edge:edge(x2, title, x1), x = x0, y = x2.
+gmarkSubquery01(x, y) <- core:edge:edge(x0, homepage, x1), core:edge:edge(x1, url, x2), core:edge:edge(x3, producer, x2), x = x0, y = x3.
+gmarkSubquery02(x, y) <- core:edge:edge(x0, contentSize, x1), core:edge:edge(x2, duration, x1), x = x0, y = x2.
+gmarkSubquery02(x, y) <- core:edge:edge(x0, published, x1), core:edge:edge(x2, text, x1), x = x0, y = x2.
+gmarkSubquery02(x, y) <- core:edge:edge(x1, like, x0), core:edge:edge(x1, like, x2), core:edge:edge(x2, text, x3), core:edge:edge(x4, text, x3), x = x0, y = x4.
+gmarkSubquery03(x, y) <- core:edge:edge(x0, keywords, x1), core:edge:edge(x2, jobTitle, x1), core:edge:edge(x3, actor, x2), x = x0, y = x3.
+gmarkSubquery03(x, y) <- core:edge:edge(x0, printColumn, x1), core:edge:edge(x2, duration, x1), x = x0, y = x2.
+gmarkSubquery03(x, y) <- core:edge:edge(x1, includes, x0), core:edge:edge(x1, serialNumber, x2), core:edge:edge(x3, duration, x2), x = x0, y = x3.
+query(x0, x1) <- gmarkSubquery00(x0, x1), gmarkSubquery01(x0, x2), gmarkSubquery02(x0, x3), gmarkSubquery03(x0, x4).
+END

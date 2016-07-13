@@ -1,0 +1,13 @@
+BEGIN
+gmarkSubquery00(x, y) <- core:edge:edge(x1, tag, x0), core:edge:edge(x2, like, x1), core:edge:edge(x2, type, x3), x = x0, y = x3.
+gmarkSubquery00(x, y) <- core:edge:edge(x1, tag, x0), core:edge:edge(x1, conductor, x2), core:edge:edge(x2, type, x3), x = x0, y = x3.
+gmarkSubquery01(x, y) <- core:edge:edge(x1, tag, x0), core:edge:edge(x2, like, x1), core:edge:edge(x2, type, x3), x = x0, y = x3.
+gmarkSubquery01(x, y) <- core:edge:edge(x1, tag, x0), core:edge:edge(x2, like, x1), core:edge:edge(x2, type, x3), x = x0, y = x3.
+gmarkSubquery01(x, y) <- core:edge:edge(x1, tag, x0), core:edge:edge(x1, description, x2), core:edge:edge(x3, givenName, x2), core:edge:edge(x3, type, x4), x = x0, y = x4.
+gmarkSubquery02(x, y) <- core:edge:edge(x1, tag, x0), core:edge:edge(x1, director, x2), core:edge:edge(x2, type, x3), x = x0, y = x3.
+gmarkSubquery02(x, y) <- core:edge:edge(x1, tag, x0), core:edge:edge(x1, contentRating, x2), core:edge:edge(x3, userId, x2), core:edge:edge(x3, type, x4), x = x0, y = x4.
+gmarkSubquery03(x, y) <- core:edge:edge(x1, tag, x0), core:edge:edge(x1, author, x2), core:edge:edge(x2, type, x3), x = x0, y = x3.
+gmarkSubquery03(x, y) <- core:edge:edge(x1, tag, x0), core:edge:edge(x2, like, x1), core:edge:edge(x2, type, x3), x = x0, y = x3.
+gmarkSubquery03(x, y) <- core:edge:edge(x1, tag, x0), core:edge:edge(x1, editor, x2), core:edge:edge(x2, type, x3), x = x0, y = x3.
+query(x2, x1, x0) <- gmarkSubquery00(x0, x1), gmarkSubquery01(x0, x2), gmarkSubquery02(x0, x3), gmarkSubquery03(x0, x4).
+END

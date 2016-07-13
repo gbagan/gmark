@@ -1,0 +1,11 @@
+BEGIN
+gmarkSubquery00(x, y) <- core:edge:edge(x0, givenName, x1), core:edge:edge(x2, keywords, x1), x = x0, y = x2.
+gmarkSubquery00(x, y) <- core:edge:edge(x0, homepage, x1), core:edge:edge(x1, url, x2), core:edge:edge(x3, description, x2), x = x0, y = x3.
+gmarkSubquery00(x, y) <- core:edge:edge(x0, email, x1), core:edge:edge(x2, composer, x1), x = x0, y = x2.
+gmarkSubquery01(x, y) <- core:edge:edge(x1, contactPoint, x0), core:edge:edge(x1, description, x2), core:edge:edge(x3, keywords, x2), x = x0, y = x3.
+gmarkSubquery01(x, y) <- core:edge:edge(x0, givenName, x1), core:edge:edge(x2, title, x1), x = x0, y = x2.
+gmarkSubquery01(x, y) <- core:edge:edge(x1, employee, x0), core:edge:edge(x1, openingHours, x2), core:edge:edge(x3, serialNumber, x2), core:edge:edge(x3, includes, x4), x = x0, y = x4.
+gmarkSubquery02(x, y) <- core:edge:edge(x0, telephone, x1), core:edge:edge(x2, contentRating, x1), core:edge:edge(x2, hasReview, x3), core:edge:edge(x4, hasReview, x3), x = x0, y = x4.
+gmarkSubquery02(x, y) <- core:edge:edge(x0, jobTitle, x1), core:edge:edge(x2, keywords, x1), x = x0, y = x2.
+query(x0, x2, x1) <- gmarkSubquery00(x0, x1), gmarkSubquery01(x0, x2), gmarkSubquery02(x0, x3).
+END

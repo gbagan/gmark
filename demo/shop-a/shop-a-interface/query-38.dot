@@ -1,0 +1,9 @@
+digraph g {
+	x0 [shape=circle, label="?x0"];
+	x1 [shape=circle, label="?x1"];
+	x0 -> x1 [label="((description.description-)+(contentSize.contentSize-.homepage.homepage-)+(keywords.title-.description.text-))"];
+	x2 [shape=circle, label="?x2"];
+	x0 -> x2 [label="((contentRating.printPage-)+(text.title-)+(keywords.jobTitle-.author-))"];
+	x3 [shape=circle, label="?x3"];
+	x0 -> x3 [label="((like-.familyName.text-)+(hasGenre.tag.tag-.hasGenre-))"];
+}

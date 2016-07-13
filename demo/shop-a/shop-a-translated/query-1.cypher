@@ -1,0 +1,1 @@
+MATCH (x0)<-[:peditor]-()-[:peligibleQuantity]->()<-[:precordNumber]-()-[:prelease]->(x1), (x0)<-[:pnationality]-()-[:pfriendOf]->()-[:pgender]->(x2), (x1)<-[:pnationality]-()-[:pgender]->(x3) RETURN "true" LIMIT 1;

@@ -1,0 +1,8 @@
+BEGIN
+gmarkSubquery00(x, y) <- core:edge:edge(x1, tag, x0), core:edge:edge(x2, like, x1), core:edge:edge(x3, friendOf, x2), core:edge:edge(x3, like, x4), x = x0, y = x4.
+gmarkSubquery00(x, y) <- core:edge:edge(x1, tag, x0), core:edge:edge(x2, hasGenre, x1), x = x0, y = x2.
+gmarkSubquery01(x, y) <- core:edge:edge(x1, tag, x0), core:edge:edge(x1, editor, x2), core:edge:edge(x2, familyName, x3), core:edge:edge(x4, text, x3), x = x0, y = x4.
+gmarkSubquery02(x, y) <- core:edge:edge(x1, tag, x0), core:edge:edge(x2, hasGenre, x1), x = x0, y = x2.
+gmarkSubquery02(x, y) <- core:edge:edge(x1, tag, x0), core:edge:edge(x1, producer, x2), core:edge:edge(x3, caption, x2), x = x0, y = x3.
+query(x0, x1) <- gmarkSubquery00(x0, x1), gmarkSubquery01(x0, x2), gmarkSubquery02(x0, x3).
+END
