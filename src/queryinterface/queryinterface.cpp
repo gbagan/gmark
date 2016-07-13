@@ -28,7 +28,7 @@
 
 #include "queryinterface.h"
 
-void qinterface(const string & inputfilename, const string & translatedir)
+void qinterface(const string & inputfilename, const string & translatedir, const string & interfacedir)
 {
     pugi::xml_document doc;
     pugi::xml_parse_result result = doc.load_file(inputfilename.c_str()); 
@@ -51,7 +51,7 @@ void qinterface(const string & inputfilename, const string & translatedir)
     int qcount = 0;
     for (pugi::xml_node query : doc.child("queries").children("query"))
     {
-			string prefix_file = "interface-queries/query-" + to_string(qcount);
+			string prefix_file = interfacedir + "/query-" + to_string(qcount);
 
 			// Generate Dot
 

@@ -22,11 +22,36 @@
 #include <cstdlib>
 #include <iostream>
 #include <vector>
+#include <unistd.h>
+#include <fstream>
 #include "queryinterface.h"
 
-int main() {
+int main(int argc, char ** argv) {
 
-  qinterface("../../xml/queries.xml", "../querytranslate/translated");
+//	./test -w ../../xml/queries.xml -t ../querytranslate/translated -o interface-queries
+	
+
+//  qinterface("../../xml/queries.xml", "../querytranslate/translated");
+
+	string inputfilename, translatedir, interfacedir;
+	int c;
+
+	while ((c = getopt(argc, argv, "w:t:o:")) != -1) {
+	switch(c) {
+		case 'w':
+			inputfilename = optarg;
+			break;
+		case 't':
+			translatedir = optarg;
+			break;
+		case 'o':
+			interfacedir = optarg;
+			break;
+	}
+	}
+
+	qinterface (inputfilename.c_str(), translatedir.c_str(), interfacedir.c_str());
+
   exit(EXIT_SUCCESS);
 
 }

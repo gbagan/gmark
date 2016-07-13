@@ -32,6 +32,6 @@
 #include <set>
 using namespace std;
 
-void qinterface(const string &, const string &);
+void qinterface(const string &, const string &, const string &);
 void qinterface_dot_regex(pugi::xml_node, ofstream &);
 #endif
