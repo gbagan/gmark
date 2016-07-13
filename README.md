@@ -15,6 +15,7 @@ This executes the following three steps:
 
 **1. Generation of the graph and query workload in internal format, and html reports for both**
 
+    cd ../../src
     ./test -c ../use-cases/test.xml -g ../demo/play/play-graph.txt -w ../demo/play/play-workload.xml -r ../demo/play/
 
 where the parameters are:
@@ -36,6 +37,7 @@ The provided configuration files in the directory *use-cases* are:
 
 **2. Translation of the queries into the four concrete syntaxes**
 
+    cd querytranslate
     ./test -w ../../demo/play/play-workload.xml -o ../../demo/play/play-translated
 
 where the parameters are:
@@ -44,6 +46,7 @@ where the parameters are:
 
 **3. Generation of the query workload interface**
 
+    cd ../queryinterface
     ./test -w ../../demo/play/play-workload.xml -t ../../demo/play/play-translated -o ../../demo/play/play-interface
 
 where the parameters are:
