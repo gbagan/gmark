@@ -1,11 +1,13 @@
 digraph g {
-	x0 [shape=circle, label="?x0"];
+	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
+	x5 [fillcolor="yellow", style="filled," shape=circle, label="?x5"];
 	x1 [shape=circle, label="?x1"];
-	x0 -> x1 [label="((extendedTo-.publishedIn.publishedIn-))"];
+	x0 -> x1 [label="((extendedTo-.extendedTo))"];
 	x2 [shape=circle, label="?x2"];
-	x1 -> x2 [label="((authors-.authors.authors-))"];
+	x1 -> x2 [label="((extendedTo-.authors-))"];
 	x3 [shape=circle, label="?x3"];
-	x2 -> x3 [label="((authors.authors-.authors.publishedIn)+(authors.publishedIn.heldIn.heldIn-)+(authors.authors-.authors.publishedIn))"];
+	x2 -> x3 [label="((authors.extendedTo))"];
 	x4 [shape=circle, label="?x4"];
-	x3 -> x4 [label="((publishedIn-.publishedIn.publishedIn-))"];
+	x3 -> x4 [label="((extendedTo-.authors-.authors)+(extendedTo-.authors-.authors))"];
+	x4 -> x5 [label="(((publishedIn.publishedIn-)))*"];
 }
