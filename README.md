@@ -12,9 +12,9 @@
 
 This executes the following three steps:
 
-- Generation of the graph and query workload in internal format, and html reports for both
-- Translation of the queries into the four concrete syntaxes
-- Generation of the query workload interface
+1. Generation of the graph and query workload in internal format, and html reports for both
+2. Translation of the queries into the four concrete syntaxes
+3. Generation of the query workload interface
 
 
 
