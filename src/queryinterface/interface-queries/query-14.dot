@@ -1,8 +1,0 @@
-digraph g {
-	x0 [shape=circle, label="?x0"];
-	x1 [shape=circle, label="?x1"];
-	x0 -> x1 [label="((heldIn-.heldIn))"];
-	x2 [shape=circle, label="?x2"];
-	x0 -> x2 [label="((heldIn-.publishedIn-.publishedIn)+(heldIn-.publishedIn-.publishedIn))"];
-	x2 -> x1 [label="((publishedIn-.publishedIn.heldIn)+(publishedIn-.publishedIn.heldIn))"];
-}
