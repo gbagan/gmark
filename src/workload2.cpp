@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <sys/time.h>
+#include <algorithm>
 
 namespace workload2 {
 
@@ -548,6 +549,18 @@ config::selectivity::type generate_random_selectivity(const config::workload & w
     return config::selectivity::LINEAR;
 }
 
+void generate_arity_more_than_2(workload::query & q, size_t arity) {
+    size_t nb_conjs = q.bodies[0].conjuncts.size();
+        if (arity > nb_conjs+1)
+            arity = nb_conjs+1;
+        while (true) {
+            size_t i = uniform_random_generator(0, nb_conjs).next();
+            if(std::find(q.variables.begin(), q.variables.end(), "?x" + to_string(i)) != q.variables.end()) {
+		q.variables.push_back("?x" + to_string(i));
+            }
+        }
+}
+
 void generate_chain(const config::config & conf, const config::workload & wconf, workload::query & q) {
     size_t nb_conjs = uniform_random_generator(wconf.conjuncts.first, wconf.conjuncts.second).next();
 
@@ -586,10 +599,14 @@ void generate_chain(const config::config & conf, const config::workload & wconf,
     if (arity == 1) {
         q.variables.push_back("?x0");
     }
-    else if (arity >= 2) {
+    else if (arity == 2) {
         q.variables.push_back("?x0");
         q.variables.push_back("?x" + to_string(nb_conjs));
     }
+    else if (arity > 2) {
+        generate_arity_more_than_2(q, arity);
+    }
+
 }
 
 void generate_star(const config::config & conf, const config::workload & wconf, workload::query & q) {
@@ -642,9 +659,12 @@ void generate_star(const config::config & conf, const config::workload & wconf, 
     if (arity == 1) {
         q.variables.push_back("?x0");
     }
-    else if (arity >= 2) {
+    else if (arity == 2) {
         q.variables.push_back("?x0");
         q.variables.push_back("?x1");
+    }
+    else if (arity > 2) {
+        generate_arity_more_than_2(q, arity);
     }
 }
 
@@ -711,11 +731,13 @@ void generate_cycle(const config::config & conf, const config::workload & wconf,
     if (arity == 1) {
         q.variables.push_back("?x0");
     }
-    else if (arity >= 2) {
+    else if (arity == 2) {
         q.variables.push_back("?x0");
         q.variables.push_back("?x" + to_string(n1));
-    }    
-    
+    }
+    else if (arity > 2) {
+        generate_arity_more_than_2(q, arity);
+    }
 }
 
 
@@ -787,9 +809,12 @@ void generate_starchain(const config::config & conf, const config::workload & wc
     if (arity == 1) {
         q.variables.push_back("?x0");
     }
-    else if (arity >= 2) {
+    else if (arity == 2) {
         q.variables.push_back("?x0");
         q.variables.push_back("?x" + to_string(n1));
+    }
+    else if (arity > 2) {
+        generate_arity_more_than_2(q, arity);
     }
 }
 
