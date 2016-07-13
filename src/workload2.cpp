@@ -549,10 +549,16 @@ config::selectivity::type generate_random_selectivity(const config::workload & w
     return config::selectivity::LINEAR;
 }
 
-void generate_arity_more_than_2(workload::query & q, size_t arity) {
+void generate_arity_more_than_2(workload::query & q, size_t arity, bool is_cycle) {
     size_t nb_conjs = q.bodies[0].conjuncts.size();
-    if (arity > nb_conjs+1)
-        arity = nb_conjs+1;
+    if (!is_cycle) {
+        if (arity > nb_conjs+1)
+            arity = nb_conjs+1;
+    }
+    else {
+        if (arity > nb_conjs)
+            arity = nb_conjs;
+    } 
     for (size_t i = 0; i < arity; i++) {
         while (true) {
             size_t i = uniform_random_generator(0, nb_conjs).next();
@@ -607,7 +613,7 @@ void generate_chain(const config::config & conf, const config::workload & wconf,
         q.variables.push_back("?x" + to_string(nb_conjs));
     }
     else if (arity > 2) {
-        generate_arity_more_than_2(q, arity);
+        generate_arity_more_than_2(q, arity, false);
     }
 
 }
@@ -667,7 +673,7 @@ void generate_star(const config::config & conf, const config::workload & wconf, 
         q.variables.push_back("?x1");
     }
     else if (arity > 2) {
-        generate_arity_more_than_2(q, arity);
+        generate_arity_more_than_2(q, arity, false);
     }
 }
 
@@ -739,7 +745,7 @@ void generate_cycle(const config::config & conf, const config::workload & wconf,
         q.variables.push_back("?x" + to_string(n1));
     }
     else if (arity > 2) {
-        generate_arity_more_than_2(q, arity);
+        generate_arity_more_than_2(q, arity, true);
     }
 }
 
@@ -817,7 +823,7 @@ void generate_starchain(const config::config & conf, const config::workload & wc
         q.variables.push_back("?x" + to_string(n1));
     }
     else if (arity > 2) {
-        generate_arity_more_than_2(q, arity);
+        generate_arity_more_than_2(q, arity, false);
     }
 }
 
