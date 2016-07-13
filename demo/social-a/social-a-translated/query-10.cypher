@@ -1,0 +1,1 @@
+MATCH (x0)-[:pisSubclassOf]->()-[:phasCreator]->()-[:pemail]->()<-[:pname]-(x1), (x1)-[:pname]->()<-[:pemail]-()-[:phasInterest]->()-[:phasType]->(x2), (x0)-[:pcontent]->()<-[:pcontent]-(x3), (x2)-[:pcontent]->()<-[:pimageFile]-()-[:pcontent]->()<-[:pcontent]-(x4) RETURN DISTINCT x0, x1, x2 UNION  UNION ;

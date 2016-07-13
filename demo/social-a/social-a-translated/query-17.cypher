@@ -1,0 +1,1 @@
+MATCH (x0)-[:plocationIP]->()<-[:pbrowserUsed]-()-[:phasInterest]->(x1), (x1)-[:pname*]->(x2), (x0)-[:pcreationDate]->()<-[:pcreationDate]-(x3), (x2)-[:plocationIP]->()<-[:pgender]-()-[:pname]->()<-[:plocationIP]-(x4) RETURN "true" LIMIT 1 UNION  UNION  UNION  UNION ;

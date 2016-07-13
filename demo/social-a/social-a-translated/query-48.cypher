@@ -1,0 +1,1 @@
+MATCH (x0)-[:pbirthday|pcreationDate|pcreationDate*]->(x1), (x1)<-[:pbirthday]-()-[:pemail]->()<-[:pbrowserUsed]-()-[:pworksAt]->(x2), (x2)-[:pname|pname*]->(x3), (x3)-[:pname]->()<-[:plength]-(x4) RETURN DISTINCT x3, x0, x2, x1 UNION ;

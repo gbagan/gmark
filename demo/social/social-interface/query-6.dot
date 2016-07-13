@@ -1,0 +1,9 @@
+digraph g {
+	x3 [fillcolor="yellow", style="filled," shape=circle, label="?x3"];
+	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
+	x2 [fillcolor="yellow", style="filled," shape=circle, label="?x2"];
+	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
+	x0 -> x1 [label="(((26.16-.22.26-)+(26.26-)))*"];
+	x0 -> x2 [label="(((26.24-.23.26-)+(26.23-.23.26-)+(26.26-)))*"];
+	x1 -> x3 [label="(((26.21-.15.15-)+(26.26-)))*"];
+}

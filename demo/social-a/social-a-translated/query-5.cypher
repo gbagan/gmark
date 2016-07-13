@@ -1,0 +1,1 @@
+MATCH (x0)-[:pname]->()<-[:pimageFile]-()-[:pcontent]->(x1), (x1)<-[:pname]-()-[:pknows]->()-[:pstudyAt]->(x2), (x2)-[:pname|pname*]->(x3), (x3)<-[:pstudyAt]-()-[:plocationIP]->()<-[:pname]-()<-[:phasCreator]-(x4) RETURN "true" LIMIT 1 UNION ;

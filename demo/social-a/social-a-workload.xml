@@ -1,0 +1,4113 @@
+<queries>
+<query>
+  <metadata>
+    <id>0</id>
+    <number>0</number>
+    <input>../use-cases/social-network.xml</input>
+    <arity>4</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>0.25</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x3</var>
+    <var>?x0</var>
+    <var>?x1</var>
+    <var>?x2</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">browserUsed</symbol>
+          <symbol>birthday</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">creationDate</symbol>
+          <symbol>locationIP</symbol>
+          <symbol inverse="true">browserUsed</symbol>
+          <symbol>birthday</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">creationDate</symbol>
+          <symbol>browserUsed</symbol>
+          <symbol inverse="true">locationIP</symbol>
+          <symbol>birthday</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">birthday</symbol>
+          <symbol>creationDate</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol>gender</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x4">
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">locationIP</symbol>
+          <symbol>browserUsed</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+    <body>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>1</number>
+    <input>../use-cases/social-network.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>0.75</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x2</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">content</symbol>
+          <symbol>content</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x2" trg="?x4">
+      <star>
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">imageFile</symbol>
+          <symbol>imageFile</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">content</symbol>
+          <symbol>language</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">browserUsed</symbol>
+          <symbol>browserUsed</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>2</number>
+    <input>../use-cases/social-network.xml</input>
+    <arity>0</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>1</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>2-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">gender</symbol>
+          <symbol>browserUsed</symbol>
+          <symbol inverse="true">imageFile</symbol>
+          <symbol>language</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">browserUsed</symbol>
+          <symbol>browserUsed</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">content</symbol>
+          <symbol>imageFile</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">browserUsed</symbol>
+          <symbol>gender</symbol>
+          <symbol inverse="true">browserUsed</symbol>
+          <symbol>locationIP</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">browserUsed</symbol>
+          <symbol>locationIP</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol>name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x1" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">gender</symbol>
+          <symbol>creationDate</symbol>
+          <symbol inverse="true">birthday</symbol>
+          <symbol>gender</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">name</symbol>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol>name</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">name</symbol>
+          <symbol>name</symbol>
+          <symbol inverse="true">browserUsed</symbol>
+          <symbol>browserUsed</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>3</number>
+    <input>../use-cases/social-network.xml</input>
+    <arity>1</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol>isPartOf</symbol>
+          <symbol>isPartOf</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <disj>
+        <concat>
+          <symbol>isLocatedIn</symbol>
+          <symbol>isPartOf</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">speaks</symbol>
+          <symbol>locationIP</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol>isPartOf</symbol>
+          <symbol>isPartOf</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <disj>
+        <concat>
+          <symbol>isLocatedIn</symbol>
+          <symbol>isPartOf</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+    <body>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>4</number>
+    <input>../use-cases/social-network.xml</input>
+    <arity>0</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>1</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">imageFile</symbol>
+          <symbol>content</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol>gender</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol>gender</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x3" trg="?x4">
+      <star>
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">language</symbol>
+          <symbol>imageFile</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol>gender</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>5</number>
+    <input>../use-cases/social-network.xml</input>
+    <arity>0</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>0.25</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>2-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">imageFile</symbol>
+          <symbol>content</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">language</symbol>
+          <symbol>imageFile</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol>gender</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
+          <symbol inverse="true">name</symbol>
+          <symbol>knows</symbol>
+          <symbol>studyAt</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">name</symbol>
+          <symbol>knows</symbol>
+          <symbol>gender</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">gender</symbol>
+          <symbol>knows</symbol>
+          <symbol>locationIP</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">gender</symbol>
+          <symbol>locationIP</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x3" trg="?x4">
+      <disj>
+        <concat>
+          <symbol inverse="true">studyAt</symbol>
+          <symbol>locationIP</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol inverse="true">hasCreator</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">studyAt</symbol>
+          <symbol inverse="true">hasCreator</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+    <body>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>6</number>
+    <input>../use-cases/social-network.xml</input>
+    <arity>2</arity>
+    <selectivity>2</selectivity>
+    <multiplicity>0.666667</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>4-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x3</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">imageFile</symbol>
+          <symbol>imageFile</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">language</symbol>
+          <symbol>content</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">browserUsed</symbol>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">speaks</symbol>
+          <symbol>locationIP</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol>gender</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+    <body>
+    </body>
+    <body>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>7</number>
+    <input>../use-cases/social-network.xml</input>
+    <arity>1</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>1</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>2-2</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol>locationIP</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">gender</symbol>
+          <symbol>gender</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">imageFile</symbol>
+          <symbol>language</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">language</symbol>
+          <symbol>imageFile</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">browserUsed</symbol>
+          <symbol>gender</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x4">
+      <star>
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>8</number>
+    <input>../use-cases/social-network.xml</input>
+    <arity>3</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>1-2</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x1</var>
+    <var>?x2</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol>hasType</symbol>
+          <symbol inverse="true">isSubclassOf</symbol>
+        </concat>
+        <concat>
+          <symbol>hasType</symbol>
+          <symbol inverse="true">isSubclassOf</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol inverse="true">hasType</symbol>
+          <symbol>hasType</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">hasInterest</symbol>
+          <symbol>hasInterest</symbol>
+          <symbol>hasType</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <disj>
+        <concat>
+          <symbol inverse="true">hasInterest</symbol>
+          <symbol>likes</symbol>
+          <symbol>browserUsed</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x4">
+      <disj>
+        <concat>
+          <symbol>hasType</symbol>
+          <symbol inverse="true">isSubclassOf</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+    <body>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>9</number>
+    <input>../use-cases/social-network.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>1</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x1</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">locationIP</symbol>
+          <symbol>browserUsed</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">content</symbol>
+          <symbol>language</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">gender</symbol>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x4">
+      <star>
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol>locationIP</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>10</number>
+    <input>../use-cases/social-network.xml</input>
+    <arity>3</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x1</var>
+    <var>?x2</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol>isSubclassOf</symbol>
+          <symbol>hasCreator</symbol>
+          <symbol>email</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">email</symbol>
+          <symbol>hasInterest</symbol>
+          <symbol>hasType</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">worksAt</symbol>
+          <symbol>hasInterest</symbol>
+          <symbol>hasType</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <disj>
+        <concat>
+          <symbol>content</symbol>
+          <symbol inverse="true">content</symbol>
+        </concat>
+        <concat>
+          <symbol>content</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol>name</symbol>
+          <symbol inverse="true">content</symbol>
+        </concat>
+        <concat>
+          <symbol>content</symbol>
+          <symbol inverse="true">content</symbol>
+          <symbol>imageFile</symbol>
+          <symbol inverse="true">content</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x4">
+      <disj>
+        <concat>
+          <symbol>content</symbol>
+          <symbol inverse="true">imageFile</symbol>
+          <symbol>content</symbol>
+          <symbol inverse="true">content</symbol>
+        </concat>
+        <concat>
+          <symbol>content</symbol>
+          <symbol inverse="true">gender</symbol>
+          <symbol>locationIP</symbol>
+          <symbol inverse="true">content</symbol>
+        </concat>
+        <concat>
+          <symbol>content</symbol>
+          <symbol inverse="true">content</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+    <body>
+    </body>
+    <body>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>11</number>
+    <input>../use-cases/social-network.xml</input>
+    <arity>1</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>0.75</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>3-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">name</symbol>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol>browserUsed</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">language</symbol>
+          <symbol>content</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">content</symbol>
+          <symbol>imageFile</symbol>
+          <symbol inverse="true">locationIP</symbol>
+          <symbol>locationIP</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
+          <symbol inverse="true">name</symbol>
+          <symbol>isLocatedIn</symbol>
+          <symbol inverse="true">isLocatedIn</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">name</symbol>
+          <symbol inverse="true">hasInterest</symbol>
+          <symbol>knows</symbol>
+          <symbol>studyAt</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">name</symbol>
+          <symbol>isLocatedIn</symbol>
+          <symbol inverse="true">isLocatedIn</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">speaks</symbol>
+          <symbol>isLocatedIn</symbol>
+          <symbol inverse="true">isLocatedIn</symbol>
+          <symbol>locationIP</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">email</symbol>
+          <symbol>speaks</symbol>
+          <symbol inverse="true">speaks</symbol>
+          <symbol>gender</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">speaks</symbol>
+          <symbol>studyAt</symbol>
+          <symbol inverse="true">studyAt</symbol>
+          <symbol>name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x2" trg="?x4">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">speaks</symbol>
+          <symbol>speaks</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol>gender</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">email</symbol>
+          <symbol inverse="true">knows</symbol>
+          <symbol>speaks</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">email</symbol>
+          <symbol>email</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+    <body>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>12</number>
+    <input>../use-cases/social-network.xml</input>
+    <arity>0</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>0.333333</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol>isLocatedIn</symbol>
+          <symbol>name</symbol>
+          <symbol inverse="true">length</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol>creationDate</symbol>
+          <symbol inverse="true">creationDate</symbol>
+        </concat>
+        <concat>
+          <symbol>length</symbol>
+          <symbol inverse="true">browserUsed</symbol>
+          <symbol>browserUsed</symbol>
+          <symbol inverse="true">length</symbol>
+        </concat>
+        <concat>
+          <symbol>length</symbol>
+          <symbol inverse="true">length</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <disj>
+        <concat>
+          <symbol>length</symbol>
+          <symbol inverse="true">content</symbol>
+          <symbol>language</symbol>
+        </concat>
+        <concat>
+          <symbol>length</symbol>
+          <symbol inverse="true">content</symbol>
+          <symbol>language</symbol>
+        </concat>
+        <concat>
+          <symbol>length</symbol>
+          <symbol inverse="true">content</symbol>
+          <symbol>language</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>13</number>
+    <input>../use-cases/social-network.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>1</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x1</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol>content</symbol>
+          <symbol inverse="true">locationIP</symbol>
+          <symbol>browserUsed</symbol>
+          <symbol inverse="true">content</symbol>
+        </concat>
+        <concat>
+          <symbol>content</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol>name</symbol>
+          <symbol inverse="true">content</symbol>
+        </concat>
+        <concat>
+          <symbol>content</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol>name</symbol>
+          <symbol inverse="true">content</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol>content</symbol>
+          <symbol inverse="true">locationIP</symbol>
+          <symbol>name</symbol>
+          <symbol inverse="true">content</symbol>
+        </concat>
+        <concat>
+          <symbol>content</symbol>
+          <symbol inverse="true">locationIP</symbol>
+          <symbol>browserUsed</symbol>
+          <symbol inverse="true">content</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol>content</symbol>
+          <symbol inverse="true">imageFile</symbol>
+          <symbol>language</symbol>
+          <symbol inverse="true">content</symbol>
+        </concat>
+        <concat>
+          <symbol>content</symbol>
+          <symbol inverse="true">language</symbol>
+          <symbol>imageFile</symbol>
+          <symbol inverse="true">content</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x4">
+      <star>
+      <disj>
+        <concat>
+          <symbol>content</symbol>
+          <symbol inverse="true">content</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+    <body>
+    </body>
+    <body>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>14</number>
+    <input>../use-cases/social-network.xml</input>
+    <arity>1</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>1</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol>language</symbol>
+          <symbol inverse="true">language</symbol>
+        </concat>
+        <concat>
+          <symbol>content</symbol>
+          <symbol inverse="true">content</symbol>
+        </concat>
+        <concat>
+          <symbol>content</symbol>
+          <symbol inverse="true">gender</symbol>
+          <symbol>locationIP</symbol>
+          <symbol inverse="true">content</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol>content</symbol>
+          <symbol inverse="true">content</symbol>
+          <symbol>content</symbol>
+          <symbol inverse="true">content</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol>language</symbol>
+          <symbol inverse="true">language</symbol>
+        </concat>
+        <concat>
+          <symbol>content</symbol>
+          <symbol inverse="true">content</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x2" trg="?x4">
+      <star>
+      <disj>
+        <concat>
+          <symbol>content</symbol>
+          <symbol inverse="true">browserUsed</symbol>
+          <symbol>browserUsed</symbol>
+          <symbol inverse="true">content</symbol>
+        </concat>
+        <concat>
+          <symbol>content</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol>locationIP</symbol>
+          <symbol inverse="true">content</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>15</number>
+    <input>../use-cases/social-network.xml</input>
+    <arity>4</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>0.75</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>2-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x2</var>
+    <var>?x3</var>
+    <var>?x0</var>
+    <var>?x1</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">name</symbol>
+          <symbol>gender</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">gender</symbol>
+          <symbol>birthday</symbol>
+          <symbol inverse="true">creationDate</symbol>
+          <symbol>browserUsed</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">language</symbol>
+          <symbol>content</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
+          <symbol inverse="true">email</symbol>
+          <symbol>likes</symbol>
+          <symbol inverse="true">replyOf</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">email</symbol>
+          <symbol inverse="true">hasCreator</symbol>
+          <symbol inverse="true">isSubclassOf</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">content</symbol>
+          <symbol>isSubclassOf</symbol>
+          <symbol inverse="true">replyOf</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">browserUsed</symbol>
+          <symbol inverse="true">likes</symbol>
+          <symbol inverse="true">hasCreator</symbol>
+          <symbol>isLocatedIn</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">email</symbol>
+          <symbol inverse="true">hasCreator</symbol>
+          <symbol>isLocatedIn</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">locationIP</symbol>
+          <symbol>hasCreator</symbol>
+          <symbol inverse="true">hasCreator</symbol>
+          <symbol>isLocatedIn</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x2" trg="?x4">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">speaks</symbol>
+          <symbol>email</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">email</symbol>
+          <symbol inverse="true">hasCreator</symbol>
+          <symbol>isLocatedIn</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+    <body>
+    </body>
+    <body>
+    </body>
+    <body>
+    </body>
+    <body>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>16</number>
+    <input>../use-cases/social-network.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>1</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>2-3</disjuncts>
+    <length>4-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x1</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">content</symbol>
+          <symbol>language</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol>browserUsed</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">content</symbol>
+          <symbol>content</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">browserUsed</symbol>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">browserUsed</symbol>
+          <symbol>locationIP</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">language</symbol>
+          <symbol>language</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">imageFile</symbol>
+          <symbol>content</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>17</number>
+    <input>../use-cases/social-network.xml</input>
+    <arity>0</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>0.25</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>1-2</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol>locationIP</symbol>
+          <symbol inverse="true">browserUsed</symbol>
+          <symbol>hasInterest</symbol>
+        </concat>
+        <concat>
+          <symbol>creationDate</symbol>
+          <symbol inverse="true">birthday</symbol>
+          <symbol inverse="true">hasCreator</symbol>
+          <symbol>hasTag</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">content</symbol>
+          <symbol>language</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <disj>
+        <concat>
+          <symbol>creationDate</symbol>
+          <symbol inverse="true">creationDate</symbol>
+        </concat>
+        <concat>
+          <symbol>browserUsed</symbol>
+          <symbol inverse="true">gender</symbol>
+          <symbol>birthday</symbol>
+          <symbol inverse="true">creationDate</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x4">
+      <disj>
+        <concat>
+          <symbol>locationIP</symbol>
+          <symbol inverse="true">gender</symbol>
+          <symbol>name</symbol>
+          <symbol inverse="true">locationIP</symbol>
+        </concat>
+        <concat>
+          <symbol>browserUsed</symbol>
+          <symbol inverse="true">content</symbol>
+          <symbol>imageFile</symbol>
+          <symbol inverse="true">locationIP</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+    <body>
+    </body>
+    <body>
+    </body>
+    <body>
+    </body>
+    <body>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>18</number>
+    <input>../use-cases/social-network.xml</input>
+    <arity>0</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>1-2</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol>isSubclassOf</symbol>
+          <symbol inverse="true">hasType</symbol>
+          <symbol inverse="true">hasTag</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">email</symbol>
+          <symbol inverse="true">hasModerator</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <disj>
+        <concat>
+          <symbol inverse="true">isSubclassOf</symbol>
+          <symbol>name</symbol>
+          <symbol inverse="true">email</symbol>
+          <symbol inverse="true">hasModerator</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">email</symbol>
+          <symbol inverse="true">hasModerator</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x4">
+      <disj>
+        <concat>
+          <symbol inverse="true">hasType</symbol>
+          <symbol inverse="true">hasInterest</symbol>
+          <symbol inverse="true">hasModerator</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">hasType</symbol>
+          <symbol inverse="true">hasTag</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>19</number>
+    <input>../use-cases/social-network.xml</input>
+    <arity>3</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>1</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x2</var>
+    <var>?x1</var>
+    <var>?x0</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">locationIP</symbol>
+          <symbol>locationIP</symbol>
+          <symbol inverse="true">content</symbol>
+          <symbol>language</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">browserUsed</symbol>
+          <symbol>locationIP</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol>name</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">name</symbol>
+          <symbol>gender</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol>name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">browserUsed</symbol>
+          <symbol>browserUsed</symbol>
+          <symbol inverse="true">gender</symbol>
+          <symbol>name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">browserUsed</symbol>
+          <symbol>gender</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol>name</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">name</symbol>
+          <symbol>name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x4">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">imageFile</symbol>
+          <symbol>imageFile</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">browserUsed</symbol>
+          <symbol>name</symbol>
+          <symbol inverse="true">imageFile</symbol>
+          <symbol>language</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+    <body>
+    </body>
+    <body>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>20</number>
+    <input>../use-cases/social-network.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>0.333333</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>2-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x3</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">browserUsed</symbol>
+          <symbol>speaks</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">locationIP</symbol>
+          <symbol>email</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">gender</symbol>
+          <symbol>birthday</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol>creationDate</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">birthday</symbol>
+          <symbol>browserUsed</symbol>
+          <symbol inverse="true">browserUsed</symbol>
+          <symbol>creationDate</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">creationDate</symbol>
+          <symbol>creationDate</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">creationDate</symbol>
+          <symbol>creationDate</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+    <body>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>21</number>
+    <input>../use-cases/social-network.xml</input>
+    <arity>1</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>1</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">imageFile</symbol>
+          <symbol>imageFile</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">locationIP</symbol>
+          <symbol>locationIP</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">content</symbol>
+          <symbol>content</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+    <body>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>22</number>
+    <input>../use-cases/social-network.xml</input>
+    <arity>0</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>0.333333</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>2-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">language</symbol>
+          <symbol>imageFile</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">gender</symbol>
+          <symbol>browserUsed</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">content</symbol>
+          <symbol>language</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <disj>
+        <concat>
+          <symbol>isPartOf</symbol>
+          <symbol>name</symbol>
+          <symbol inverse="true">content</symbol>
+        </concat>
+        <concat>
+          <symbol>isPartOf</symbol>
+          <symbol>name</symbol>
+          <symbol inverse="true">content</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">speaks</symbol>
+          <symbol>browserUsed</symbol>
+          <symbol inverse="true">content</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+    <body>
+    </body>
+    <body>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>23</number>
+    <input>../use-cases/social-network.xml</input>
+    <arity>4</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>0.75</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x3</var>
+    <var>?x0</var>
+    <var>?x2</var>
+    <var>?x1</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">browserUsed</symbol>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">imageFile</symbol>
+          <symbol>imageFile</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">gender</symbol>
+          <symbol>locationIP</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x2" trg="?x4">
+      <star>
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+    <body>
+    </body>
+    <body>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>24</number>
+    <input>../use-cases/social-network.xml</input>
+    <arity>4</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>1</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>2-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x3</var>
+    <var>?x2</var>
+    <var>?x1</var>
+    <var>?x0</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">content</symbol>
+          <symbol>imageFile</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">browserUsed</symbol>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x4">
+      <star>
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">imageFile</symbol>
+          <symbol>imageFile</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+    <body>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>25</number>
+    <input>../use-cases/social-network.xml</input>
+    <arity>2</arity>
+    <selectivity>2</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x1</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol>hasInterest</symbol>
+          <symbol>hasType</symbol>
+        </concat>
+        <concat>
+          <symbol>hasInterest</symbol>
+          <symbol>hasType</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <disj>
+        <concat>
+          <symbol>hasInterest</symbol>
+          <symbol>hasType</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <disj>
+        <concat>
+          <symbol>isLocatedIn</symbol>
+          <symbol inverse="true">isLocatedIn</symbol>
+          <symbol>speaks</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">hasCreator</symbol>
+          <symbol>hasTag</symbol>
+          <symbol>hasType</symbol>
+        </concat>
+        <concat>
+          <symbol>likes</symbol>
+          <symbol>hasCreator</symbol>
+          <symbol>hasInterest</symbol>
+          <symbol>hasType</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x4">
+      <disj>
+        <concat>
+          <symbol>likes</symbol>
+          <symbol>hasTag</symbol>
+          <symbol>hasType</symbol>
+        </concat>
+        <concat>
+          <symbol>isLocatedIn</symbol>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol inverse="true">isSubclassOf</symbol>
+        </concat>
+        <concat>
+          <symbol>browserUsed</symbol>
+          <symbol inverse="true">email</symbol>
+          <symbol>hasInterest</symbol>
+          <symbol>hasType</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>26</number>
+    <input>../use-cases/social-network.xml</input>
+    <arity>0</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>0.333333</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">content</symbol>
+          <symbol>content</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
+          <symbol>isLocatedIn</symbol>
+          <symbol inverse="true">isLocatedIn</symbol>
+          <symbol>isLocatedIn</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <disj>
+        <concat>
+          <symbol>isPartOf</symbol>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol>isSubclassOf</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>27</number>
+    <input>../use-cases/social-network.xml</input>
+    <arity>3</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>0.25</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x1</var>
+    <var>?x2</var>
+    <var>?x0</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">browserUsed</symbol>
+          <symbol>browserUsed</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">browserUsed</symbol>
+          <symbol>browserUsed</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
+          <symbol>isPartOf</symbol>
+          <symbol inverse="true">isPartOf</symbol>
+          <symbol>isPartOf</symbol>
+        </concat>
+        <concat>
+          <symbol>isPartOf</symbol>
+          <symbol inverse="true">isPartOf</symbol>
+          <symbol>isPartOf</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">email</symbol>
+          <symbol>speaks</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">speaks</symbol>
+          <symbol>email</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">isPartOf</symbol>
+          <symbol>name</symbol>
+          <symbol inverse="true">speaks</symbol>
+          <symbol>email</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x3" trg="?x4">
+      <disj>
+        <concat>
+          <symbol inverse="true">name</symbol>
+          <symbol>gender</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+    <body>
+    </body>
+    <body>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>28</number>
+    <input>../use-cases/social-network.xml</input>
+    <arity>4</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>0.25</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x1</var>
+    <var>?x2</var>
+    <var>?x3</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol inverse="true">birthday</symbol>
+          <symbol>email</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">birthday</symbol>
+          <symbol>email</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol>browserUsed</symbol>
+          <symbol inverse="true">length</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol>length</symbol>
+          <symbol inverse="true">length</symbol>
+        </concat>
+        <concat>
+          <symbol>creationDate</symbol>
+          <symbol inverse="true">creationDate</symbol>
+          <symbol>creationDate</symbol>
+          <symbol inverse="true">creationDate</symbol>
+        </concat>
+        <concat>
+          <symbol>length</symbol>
+          <symbol inverse="true">gender</symbol>
+          <symbol>browserUsed</symbol>
+          <symbol inverse="true">length</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x3" trg="?x4">
+      <disj>
+        <concat>
+          <symbol>length</symbol>
+          <symbol inverse="true">gender</symbol>
+          <symbol>email</symbol>
+          <symbol inverse="true">locationIP</symbol>
+        </concat>
+        <concat>
+          <symbol>containerOf</symbol>
+          <symbol>imageFile</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>29</number>
+    <input>../use-cases/social-network.xml</input>
+    <arity>0</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>1</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-2</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol>content</symbol>
+          <symbol inverse="true">locationIP</symbol>
+          <symbol>browserUsed</symbol>
+          <symbol inverse="true">content</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol>content</symbol>
+          <symbol inverse="true">browserUsed</symbol>
+          <symbol>browserUsed</symbol>
+          <symbol inverse="true">content</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x1" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol>content</symbol>
+          <symbol inverse="true">imageFile</symbol>
+          <symbol>content</symbol>
+          <symbol inverse="true">content</symbol>
+        </concat>
+        <concat>
+          <symbol>content</symbol>
+          <symbol inverse="true">content</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+    <body>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>30</number>
+    <input>../use-cases/social-network.xml</input>
+    <arity>1</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>1</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">creationDate</symbol>
+          <symbol>birthday</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">creationDate</symbol>
+          <symbol>locationIP</symbol>
+          <symbol inverse="true">gender</symbol>
+          <symbol>birthday</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">creationDate</symbol>
+          <symbol>browserUsed</symbol>
+          <symbol inverse="true">locationIP</symbol>
+          <symbol>birthday</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">creationDate</symbol>
+          <symbol>birthday</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">creationDate</symbol>
+          <symbol>name</symbol>
+          <symbol inverse="true">browserUsed</symbol>
+          <symbol>creationDate</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">creationDate</symbol>
+          <symbol>creationDate</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>31</number>
+    <input>../use-cases/social-network.xml</input>
+    <arity>3</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>0.5</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x2</var>
+    <var>?x1</var>
+    <var>?x0</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">language</symbol>
+          <symbol>content</symbol>
+          <symbol inverse="true">content</symbol>
+          <symbol>language</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
+          <symbol inverse="true">language</symbol>
+          <symbol>replyOf</symbol>
+          <symbol>isLocatedIn</symbol>
+          <symbol inverse="true">isLocatedIn</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">language</symbol>
+          <symbol>replyOf</symbol>
+          <symbol>isLocatedIn</symbol>
+          <symbol inverse="true">isLocatedIn</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">content</symbol>
+          <symbol>language</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x3" trg="?x4">
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol inverse="true">isPartOf</symbol>
+          <symbol inverse="true">isLocatedIn</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol>speaks</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>32</number>
+    <input>../use-cases/social-network.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>1</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x4</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol>content</symbol>
+          <symbol inverse="true">content</symbol>
+          <symbol>content</symbol>
+          <symbol inverse="true">content</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol>content</symbol>
+          <symbol inverse="true">gender</symbol>
+          <symbol>browserUsed</symbol>
+          <symbol inverse="true">content</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol>content</symbol>
+          <symbol inverse="true">content</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x3" trg="?x4">
+      <star>
+      <disj>
+        <concat>
+          <symbol>content</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol>browserUsed</symbol>
+          <symbol inverse="true">content</symbol>
+        </concat>
+        <concat>
+          <symbol>content</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol>name</symbol>
+          <symbol inverse="true">content</symbol>
+        </concat>
+        <concat>
+          <symbol>content</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol>name</symbol>
+          <symbol inverse="true">content</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+    <body>
+    </body>
+    <body>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>33</number>
+    <input>../use-cases/social-network.xml</input>
+    <arity>0</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>0.25</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol>language</symbol>
+          <symbol inverse="true">gender</symbol>
+          <symbol>studyAt</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <disj>
+        <concat>
+          <symbol>imageFile</symbol>
+          <symbol inverse="true">imageFile</symbol>
+          <symbol>content</symbol>
+          <symbol inverse="true">content</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x4">
+      <disj>
+        <concat>
+          <symbol>imageFile</symbol>
+          <symbol inverse="true">imageFile</symbol>
+        </concat>
+        <concat>
+          <symbol>imageFile</symbol>
+          <symbol inverse="true">browserUsed</symbol>
+          <symbol>locationIP</symbol>
+          <symbol inverse="true">language</symbol>
+        </concat>
+        <concat>
+          <symbol>content</symbol>
+          <symbol inverse="true">language</symbol>
+          <symbol>content</symbol>
+          <symbol inverse="true">imageFile</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>34</number>
+    <input>../use-cases/social-network.xml</input>
+    <arity>4</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>2-3</disjuncts>
+    <length>3-4</length>
+  </metadata>
+  <head>
+    <var>?x3</var>
+    <var>?x1</var>
+    <var>?x2</var>
+    <var>?x0</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol inverse="true">studyAt</symbol>
+          <symbol>likes</symbol>
+          <symbol inverse="true">replyOf</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">studyAt</symbol>
+          <symbol>likes</symbol>
+          <symbol inverse="true">isSubclassOf</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">email</symbol>
+          <symbol>hasInterest</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">studyAt</symbol>
+          <symbol inverse="true">knows</symbol>
+          <symbol>speaks</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>isLocatedIn</symbol>
+          <symbol inverse="true">isLocatedIn</symbol>
+          <symbol>hasInterest</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x3">
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">locationIP</symbol>
+          <symbol>likes</symbol>
+          <symbol>hasTag</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">studyAt</symbol>
+          <symbol inverse="true">knows</symbol>
+          <symbol>hasInterest</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">speaks</symbol>
+          <symbol>hasInterest</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>35</number>
+    <input>../use-cases/social-network.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>2-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x1</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">browserUsed</symbol>
+          <symbol>gender</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">browserUsed</symbol>
+          <symbol>locationIP</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">content</symbol>
+          <symbol>imageFile</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">locationIP</symbol>
+          <symbol>browserUsed</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">locationIP</symbol>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">browserUsed</symbol>
+          <symbol>browserUsed</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>36</number>
+    <input>../use-cases/social-network.xml</input>
+    <arity>3</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>1</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x1</var>
+    <var>?x2</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">creationDate</symbol>
+          <symbol>locationIP</symbol>
+          <symbol inverse="true">locationIP</symbol>
+          <symbol>creationDate</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">creationDate</symbol>
+          <symbol>birthday</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">creationDate</symbol>
+          <symbol>creationDate</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">birthday</symbol>
+          <symbol>locationIP</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol>creationDate</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">creationDate</symbol>
+          <symbol inverse="true">likes</symbol>
+          <symbol>isLocatedIn</symbol>
+          <symbol inverse="true">isLocatedIn</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">birthday</symbol>
+          <symbol>isLocatedIn</symbol>
+          <symbol inverse="true">isLocatedIn</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">creationDate</symbol>
+          <symbol>isLocatedIn</symbol>
+          <symbol inverse="true">isLocatedIn</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x2" trg="?x4">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">creationDate</symbol>
+          <symbol>isLocatedIn</symbol>
+          <symbol inverse="true">isLocatedIn</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">creationDate</symbol>
+          <symbol>isLocatedIn</symbol>
+          <symbol inverse="true">isLocatedIn</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+    <body>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>37</number>
+    <input>../use-cases/social-network.xml</input>
+    <arity>2</arity>
+    <selectivity>2</selectivity>
+    <multiplicity>1</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-2</disjuncts>
+    <length>3-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x1</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">name</symbol>
+          <symbol>name</symbol>
+          <symbol inverse="true">gender</symbol>
+          <symbol>gender</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">language</symbol>
+          <symbol>imageFile</symbol>
+          <symbol inverse="true">gender</symbol>
+          <symbol>gender</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">length</symbol>
+          <symbol>hasMember</symbol>
+          <symbol>isLocatedIn</symbol>
+          <symbol inverse="true">isLocatedIn</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x1" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">email</symbol>
+          <symbol>speaks</symbol>
+          <symbol inverse="true">gender</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">speaks</symbol>
+          <symbol inverse="true">hasModerator</symbol>
+          <symbol>length</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>38</number>
+    <input>../use-cases/social-network.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>1</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x1</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol>creationDate</symbol>
+          <symbol inverse="true">birthday</symbol>
+          <symbol>locationIP</symbol>
+          <symbol inverse="true">length</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol>length</symbol>
+          <symbol inverse="true">length</symbol>
+        </concat>
+        <concat>
+          <symbol>length</symbol>
+          <symbol inverse="true">language</symbol>
+          <symbol>imageFile</symbol>
+          <symbol inverse="true">length</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol>length</symbol>
+          <symbol inverse="true">gender</symbol>
+          <symbol>name</symbol>
+          <symbol inverse="true">length</symbol>
+        </concat>
+        <concat>
+          <symbol>length</symbol>
+          <symbol inverse="true">length</symbol>
+        </concat>
+        <concat>
+          <symbol>length</symbol>
+          <symbol inverse="true">locationIP</symbol>
+          <symbol>gender</symbol>
+          <symbol inverse="true">length</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>39</number>
+    <input>../use-cases/social-network.xml</input>
+    <arity>1</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>0.75</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">gender</symbol>
+          <symbol>gender</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol>gender</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">locationIP</symbol>
+          <symbol>locationIP</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x2" trg="?x4">
+      <star>
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+    <body>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>40</number>
+    <input>../use-cases/social-network.xml</input>
+    <arity>2</arity>
+    <selectivity>2</selectivity>
+    <multiplicity>0.75</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x4</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">content</symbol>
+          <symbol>imageFile</symbol>
+          <symbol inverse="true">gender</symbol>
+          <symbol>locationIP</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">browserUsed</symbol>
+          <symbol>name</symbol>
+          <symbol inverse="true">language</symbol>
+          <symbol>language</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">gender</symbol>
+          <symbol>gender</symbol>
+          <symbol inverse="true">imageFile</symbol>
+          <symbol>content</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">name</symbol>
+          <symbol>name</symbol>
+          <symbol inverse="true">browserUsed</symbol>
+          <symbol>name</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">content</symbol>
+          <symbol>imageFile</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <disj>
+        <concat>
+          <symbol inverse="true">gender</symbol>
+          <symbol>speaks</symbol>
+          <symbol inverse="true">language</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x3" trg="?x4">
+      <star>
+      <disj>
+        <concat>
+          <symbol>content</symbol>
+          <symbol inverse="true">browserUsed</symbol>
+          <symbol>browserUsed</symbol>
+          <symbol inverse="true">content</symbol>
+        </concat>
+        <concat>
+          <symbol>content</symbol>
+          <symbol inverse="true">browserUsed</symbol>
+          <symbol>locationIP</symbol>
+          <symbol inverse="true">imageFile</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>41</number>
+    <input>../use-cases/social-network.xml</input>
+    <arity>4</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>3-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x1</var>
+    <var>?x0</var>
+    <var>?x2</var>
+    <var>?x3</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol>imageFile</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol>gender</symbol>
+          <symbol inverse="true">content</symbol>
+        </concat>
+        <concat>
+          <symbol>imageFile</symbol>
+          <symbol inverse="true">content</symbol>
+        </concat>
+        <concat>
+          <symbol>language</symbol>
+          <symbol inverse="true">imageFile</symbol>
+          <symbol>content</symbol>
+          <symbol inverse="true">content</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <disj>
+        <concat>
+          <symbol>content</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol inverse="true">isLocatedIn</symbol>
+        </concat>
+        <concat>
+          <symbol>content</symbol>
+          <symbol inverse="true">locationIP</symbol>
+          <symbol>email</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>content</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol>email</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x3">
+      <disj>
+        <concat>
+          <symbol>imageFile</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol inverse="true">isLocatedIn</symbol>
+        </concat>
+        <concat>
+          <symbol>content</symbol>
+          <symbol inverse="true">gender</symbol>
+          <symbol>speaks</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>imageFile</symbol>
+          <symbol inverse="true">gender</symbol>
+          <symbol>speaks</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>42</number>
+    <input>../use-cases/social-network.xml</input>
+    <arity>3</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>1-2</disjuncts>
+    <length>3-4</length>
+  </metadata>
+  <head>
+    <var>?x1</var>
+    <var>?x0</var>
+    <var>?x2</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol>isLocatedIn</symbol>
+          <symbol>isPartOf</symbol>
+          <symbol inverse="true">isPartOf</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <disj>
+        <concat>
+          <symbol inverse="true">knows</symbol>
+          <symbol>speaks</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>likes</symbol>
+          <symbol inverse="true">likes</symbol>
+          <symbol>isLocatedIn</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <disj>
+        <concat>
+          <symbol>isLocatedIn</symbol>
+          <symbol>isPartOf</symbol>
+          <symbol inverse="true">isPartOf</symbol>
+        </concat>
+        <concat>
+          <symbol>isLocatedIn</symbol>
+          <symbol inverse="true">isLocatedIn</symbol>
+          <symbol inverse="true">studyAt</symbol>
+          <symbol>isLocatedIn</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x4">
+      <disj>
+        <concat>
+          <symbol inverse="true">knows</symbol>
+          <symbol>knows</symbol>
+          <symbol>isLocatedIn</symbol>
+        </concat>
+        <concat>
+          <symbol>isLocatedIn</symbol>
+          <symbol inverse="true">isLocatedIn</symbol>
+          <symbol>knows</symbol>
+          <symbol>isLocatedIn</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>43</number>
+    <input>../use-cases/social-network.xml</input>
+    <arity>4</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>2-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x3</var>
+    <var>?x1</var>
+    <var>?x2</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol inverse="true">hasCreator</symbol>
+          <symbol>locationIP</symbol>
+          <symbol inverse="true">gender</symbol>
+          <symbol>gender</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">hasCreator</symbol>
+          <symbol>browserUsed</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <disj>
+        <concat>
+          <symbol>likes</symbol>
+          <symbol>isLocatedIn</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">hasCreator</symbol>
+          <symbol>isLocatedIn</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x3">
+      <disj>
+        <concat>
+          <symbol inverse="true">hasCreator</symbol>
+          <symbol>hasTag</symbol>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">hasModerator</symbol>
+          <symbol>hasModerator</symbol>
+          <symbol>gender</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">hasModerator</symbol>
+          <symbol>hasMember</symbol>
+          <symbol>browserUsed</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+    <body>
+    </body>
+    <body>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>44</number>
+    <input>../use-cases/social-network.xml</input>
+    <arity>0</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>1</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol>content</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol>name</symbol>
+          <symbol inverse="true">imageFile</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol>content</symbol>
+          <symbol inverse="true">language</symbol>
+        </concat>
+        <concat>
+          <symbol>language</symbol>
+          <symbol inverse="true">browserUsed</symbol>
+          <symbol>locationIP</symbol>
+          <symbol inverse="true">content</symbol>
+        </concat>
+        <concat>
+          <symbol>language</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol>browserUsed</symbol>
+          <symbol inverse="true">language</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol>imageFile</symbol>
+          <symbol inverse="true">imageFile</symbol>
+          <symbol>language</symbol>
+          <symbol inverse="true">content</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>45</number>
+    <input>../use-cases/social-network.xml</input>
+    <arity>3</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>1</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-1</disjuncts>
+    <length>4-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x1</var>
+    <var>?x2</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">creationDate</symbol>
+          <symbol>locationIP</symbol>
+          <symbol inverse="true">browserUsed</symbol>
+          <symbol>birthday</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">birthday</symbol>
+          <symbol>knows</symbol>
+          <symbol>gender</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x1" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">creationDate</symbol>
+          <symbol>speaks</symbol>
+          <symbol inverse="true">gender</symbol>
+          <symbol>studyAt</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>46</number>
+    <input>../use-cases/social-network.xml</input>
+    <arity>0</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>1</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">imageFile</symbol>
+          <symbol>imageFile</symbol>
+          <symbol inverse="true">locationIP</symbol>
+          <symbol>name</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">gender</symbol>
+          <symbol>browserUsed</symbol>
+          <symbol inverse="true">browserUsed</symbol>
+          <symbol>name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">browserUsed</symbol>
+          <symbol>locationIP</symbol>
+          <symbol inverse="true">language</symbol>
+          <symbol>content</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">content</symbol>
+          <symbol>language</symbol>
+          <symbol inverse="true">language</symbol>
+          <symbol>content</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">browserUsed</symbol>
+          <symbol>name</symbol>
+          <symbol inverse="true">browserUsed</symbol>
+          <symbol>name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">name</symbol>
+          <symbol>name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x2" trg="?x4">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">gender</symbol>
+          <symbol>name</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">name</symbol>
+          <symbol>locationIP</symbol>
+          <symbol inverse="true">locationIP</symbol>
+          <symbol>browserUsed</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">locationIP</symbol>
+          <symbol>gender</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>47</number>
+    <input>../use-cases/social-network.xml</input>
+    <arity>2</arity>
+    <selectivity>2</selectivity>
+    <multiplicity>0.25</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x2</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">gender</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">gender</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">gender</symbol>
+          <symbol>gender</symbol>
+          <symbol inverse="true">gender</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol>creationDate</symbol>
+          <symbol inverse="true">creationDate</symbol>
+          <symbol>gender</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>locationIP</symbol>
+          <symbol inverse="true">content</symbol>
+          <symbol>imageFile</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x4">
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>48</number>
+    <input>../use-cases/social-network.xml</input>
+    <arity>4</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>0.5</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x3</var>
+    <var>?x0</var>
+    <var>?x2</var>
+    <var>?x1</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">birthday</symbol>
+          <symbol>creationDate</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">creationDate</symbol>
+          <symbol>length</symbol>
+          <symbol inverse="true">browserUsed</symbol>
+          <symbol>creationDate</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">creationDate</symbol>
+          <symbol>creationDate</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
+          <symbol inverse="true">birthday</symbol>
+          <symbol>email</symbol>
+          <symbol inverse="true">browserUsed</symbol>
+          <symbol>worksAt</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">creationDate</symbol>
+          <symbol>knows</symbol>
+          <symbol>worksAt</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">creationDate</symbol>
+          <symbol>hasMember</symbol>
+          <symbol>worksAt</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">language</symbol>
+          <symbol>imageFile</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">content</symbol>
+          <symbol>content</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x3" trg="?x4">
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">length</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+    <body>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>49</number>
+    <input>../use-cases/social-network.xml</input>
+    <arity>3</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>0.75</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x1</var>
+    <var>?x2</var>
+    <var>?x0</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">locationIP</symbol>
+          <symbol>locationIP</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
+          <symbol inverse="true">isPartOf</symbol>
+          <symbol>isPartOf</symbol>
+          <symbol>isPartOf</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">length</symbol>
+          <symbol>length</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">locationIP</symbol>
+          <symbol>locationIP</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x2" trg="?x4">
+      <star>
+      <disj>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">locationIP</symbol>
+          <symbol>browserUsed</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol>name</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+    <body>
+    </body>
+  </bodies>
+</query>
+
+</queries>

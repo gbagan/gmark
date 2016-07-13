@@ -1,0 +1,11 @@
+digraph g {
+	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
+	x1 [shape=circle, label="?x1"];
+	x0 -> x1 [label="(((name.name-.locationIP.name-)+(name.gender-.gender.name-)))*"];
+	x2 [shape=circle, label="?x2"];
+	x0 -> x2 [label="(((name.imageFile-.language.name-)+(name.language-.imageFile.name-)))*"];
+	x3 [shape=circle, label="?x3"];
+	x0 -> x3 [label="(((name.browserUsed-.gender.name-)+(name.name-)))*"];
+	x4 [shape=circle, label="?x4"];
+	x0 -> x4 [label="(((name.name-)+(name.name-)))*"];
+}

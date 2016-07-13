@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Visualize query workload</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" href="../../style/style.css"/>
+	<script src="../../style/animation.js"></script>
+</head>
+<body>
+
+<div id="top">
+
+<div id="left">
+<h3>Stats for Query 31</h3>
+<ul>
+<li><i>Dataset</i>: ../use-cases/social-network.xml</li>
+<li><i>Arity</i>: 3</li>
+<li><i>Selectivity</i>: -</li>
+<li><i>Size</i>: C[4-4], D[1-3], L[2-4]</li>
+<li><i>Recursion</i>: 50%</li>
+</ul>
+<hr/>
+<h3>Generate concrete syntaxes</h3>
+<input type="checkbox" id="sparql-checkbox"/>SPARQL<br/>
+<input type="checkbox" id="opencypher-checkbox"/>openCypher<br/>
+<input type="checkbox" id="sql-checkbox"/>SQL<br/>
+<input type="checkbox" id="datalog-checkbox"/>Datalog<br/>
+<hr/>
+<a href="query-30.html">&lt;&lt;Previous query</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="query-32.html">Next query&gt;&gt;</a>
+</div> <!-- end left -->
+
+<div id="right">
+<img src="query-31.png"/>
+</div> <!-- end right -->
+
+</div> <!-- end top -->
+
+<div id="bottom">
+<br/><br/>
+
+<table border="1">
+<tr>
+<th id="sparql-header">SPARQL</th>
+<th id="opencypher-header">openCypher*</th>
+<th id="sql-header">SQL</th>
+<th id="datalog-header">Datalog</th>
+</tr>
+<tr>
+<td valign="top" id="sparql-syntax">PREFIX : &lt;http://example.org/gmark/&gt;<br/> SELECT DISTINCT ?x2 ?x1 ?x0 WHERE {  {  ?x0 (((^:planguage/:pcontent/^:pcontent/:planguage))){,3} ?x1 . ?x1 ((^:planguage/:preplyOf/:pisLocatedIn/^:pisLocatedIn)|(^:planguage/:preplyOf/:pisLocatedIn/^:pisLocatedIn)) ?x2 . ?x2 (((:pname/^:pname)|(:pname/^:pname)|(:pname/^:pcontent/:planguage/^:pname))){,3} ?x3 . ?x3 ((:pname/^:pname/^:pisPartOf/^:pisLocatedIn)|(:pname/^:pname/:pspeaks/^:pname)) ?x4 . } }<br/></td>
+<td valign="top" id="opencypher-syntax">MATCH (x0)-[:planguage*]->(x1), (x1)<-[:planguage]-()-[:preplyOf]->()-[:pisLocatedIn]->()<-[:pisLocatedIn]-(x2), (x2)-[:pname|pname|pname*]->(x3), (x3)-[:pname]->()<-[:pname]-()<-[:pisPartOf]-()<-[:pisLocatedIn]-(x4) RETURN DISTINCT x2, x1, x0;<br/><br/><br/>*Note: This query may have a different semantics than the intended one because openCypher does not allow Kleene star above concatenation and/or inverses.</td>
+<td valign="top" id="sql-syntax">WITH RECURSIVE c0(src, trg) AS ((SELECT edge.src, edge.src FROM edge UNION SELECT edge.trg, edge.trg FROM edge UNION SELECT s0.src, s3.trg FROM (SELECT trg as src, src as trg, label FROM edge) as s0, edge s1, (SELECT trg as src, src as trg, label FROM edge) as s2, edge s3 WHERE s0.trg = s1.src AND s1.trg = s2.src AND s2.trg = s3.src AND s0.label = language AND s1.label = content  AND s2.label = content  AND s3.label = language )) , c1(src, trg) AS (SELECT src, trg FROM c0 UNION SELECT head.src, tail.trg FROM c0 as head, c1 as tail WHERE head.trg = tail.src) , c2(src, trg) AS ((SELECT s0.src, s3.trg FROM (SELECT trg as src, src as trg, label FROM edge) as s0, edge s1, edge s2, (SELECT trg as src, src as trg, label FROM edge) as s3 WHERE s0.trg = s1.src AND s1.trg = s2.src AND s2.trg = s3.src AND s0.label = language AND s1.label = replyOf  AND s2.label = isLocatedIn  AND s3.label = isLocatedIn  UNION SELECT s0.src, s3.trg FROM (SELECT trg as src, src as trg, label FROM edge) as s0, edge s1, edge s2, (SELECT trg as src, src as trg, label FROM edge) as s3 WHERE s0.trg = s1.src AND s1.trg = s2.src AND s2.trg = s3.src AND s0.label = language AND s1.label = replyOf  AND s2.label = isLocatedIn  AND s3.label = isLocatedIn )) , c3(src, trg) AS ((SELECT edge.src, edge.src FROM edge UNION SELECT edge.trg, edge.trg FROM edge UNION SELECT s0.src, s1.trg FROM edge s0, (SELECT trg as src, src as trg, label FROM edge) as s1 WHERE s0.trg = s1.src AND s0.label = name AND s1.label = name  UNION SELECT s0.src, s1.trg FROM edge s0, (SELECT trg as src, src as trg, label FROM edge) as s1 WHERE s0.trg = s1.src AND s0.label = name AND s1.label = name  UNION SELECT s0.src, s3.trg FROM edge s0, (SELECT trg as src, src as trg, label FROM edge) as s1, edge s2, (SELECT trg as src, src as trg, label FROM edge) as s3 WHERE s0.trg = s1.src AND s1.trg = s2.src AND s2.trg = s3.src AND s0.label = name AND s1.label = content  AND s2.label = language  AND s3.label = name )) , c4(src, trg) AS (SELECT src, trg FROM c3 UNION SELECT head.src, tail.trg FROM c3 as head, c4 as tail WHERE head.trg = tail.src) , c5(src, trg) AS ((SELECT s0.src, s3.trg FROM edge s0, (SELECT trg as src, src as trg, label FROM edge) as s1, (SELECT trg as src, src as trg, label FROM edge) as s2, (SELECT trg as src, src as trg, label FROM edge) as s3 WHERE s0.trg = s1.src AND s1.trg = s2.src AND s2.trg = s3.src AND s0.label = name AND s1.label = name  AND s2.label = isPartOf  AND s3.label = isLocatedIn  UNION SELECT s0.src, s3.trg FROM edge s0, (SELECT trg as src, src as trg, label FROM edge) as s1, edge s2, (SELECT trg as src, src as trg, label FROM edge) as s3 WHERE s0.trg = s1.src AND s1.trg = s2.src AND s2.trg = s3.src AND s0.label = name AND s1.label = name  AND s2.label = speaks  AND s3.label = name )) SELECT DISTINCT c3.src, c2.src, c0.src FROM c0, c1, c2, c3, c4, c5 WHERE c2.src = c0.trg AND c3.src = c2.trg AND c5.src = c3.trg;<br/></td>
+<td valign="top" id="datalog-syntax">BEGIN<br/>gmarkSubquery00(x, y) <- core:edge:edge(x1, language, x0), core:edge:edge(x1, content, x2), core:edge:edge(x3, content, x2), core:edge:edge(x3, language, x4), x = x0, y = x4.<br/>gmarkSubquery00(x, x) <- core:edge:edge(x, r, y).<br/>gmarkSubquery00(y, y) <- core:edge:edge(x, r, y).<br/>gmarkSubquery00(x, y) <- gmarkSubquery00(x, z), gmarkSubquery00(z, y).<br/>gmarkSubquery01(x, y) <- core:edge:edge(x1, language, x0), core:edge:edge(x1, replyOf, x2), core:edge:edge(x2, isLocatedIn, x3), core:edge:edge(x4, isLocatedIn, x3), x = x0, y = x4.<br/>gmarkSubquery01(x, y) <- core:edge:edge(x1, language, x0), core:edge:edge(x1, replyOf, x2), core:edge:edge(x2, isLocatedIn, x3), core:edge:edge(x4, isLocatedIn, x3), x = x0, y = x4.<br/>gmarkSubquery02(x, y) <- core:edge:edge(x0, name, x1), core:edge:edge(x2, name, x1), x = x0, y = x2.<br/>gmarkSubquery02(x, y) <- core:edge:edge(x0, name, x1), core:edge:edge(x2, name, x1), x = x0, y = x2.<br/>gmarkSubquery02(x, y) <- core:edge:edge(x0, name, x1), core:edge:edge(x2, content, x1), core:edge:edge(x2, language, x3), core:edge:edge(x4, name, x3), x = x0, y = x4.<br/>gmarkSubquery02(x, x) <- core:edge:edge(x, r, y).<br/>gmarkSubquery02(y, y) <- core:edge:edge(x, r, y).<br/>gmarkSubquery02(x, y) <- gmarkSubquery02(x, z), gmarkSubquery02(z, y).<br/>gmarkSubquery03(x, y) <- core:edge:edge(x0, name, x1), core:edge:edge(x2, name, x1), core:edge:edge(x3, isPartOf, x2), core:edge:edge(x4, isLocatedIn, x3), x = x0, y = x4.<br/>gmarkSubquery03(x, y) <- core:edge:edge(x0, name, x1), core:edge:edge(x2, name, x1), core:edge:edge(x2, speaks, x3), core:edge:edge(x4, name, x3), x = x0, y = x4.<br/>query(x2, x1, x0) <- gmarkSubquery00(x0, x1), gmarkSubquery01(x1, x2), gmarkSubquery02(x2, x3), gmarkSubquery03(x3, x4).<br/>END<br/></td>
+</tr>
+</table>
+</div><!-- end bottom -->
+
+</body>
+</html>

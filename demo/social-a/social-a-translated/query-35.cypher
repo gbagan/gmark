@@ -1,0 +1,1 @@
+MATCH (x0)-[:pname]->()<-[:pname]-(x1), (x0)-[:pname]->()<-[:pbrowserUsed]-()-[:plocationIP]->()<-[:pname]-(x2), (x0)-[:pname]->()<-[:plocationIP]-()-[:pname]->()<-[:pname]-(x3) RETURN DISTINCT x0, x1;

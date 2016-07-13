@@ -1,0 +1,1 @@
+PREFIX : <http://example.org/gmark/> ASK {  {  ?x0 ((:p16/^:p22/:p21/^:p16)|(:p16/^:p16)|(:p16/^:p21/:p16/^:p16)) ?x1 . ?x0 ((:p16/^:p16/:p22/^:p16)) ?x2 . ?x0 ((:p16/^:p16/:p21/^:p16)) ?x3 . ?x0 ((:p21/^:p16)) ?x4 . }  UNION  {  }  UNION  {  }  UNION  {  } }

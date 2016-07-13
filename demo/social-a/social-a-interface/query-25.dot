@@ -1,0 +1,11 @@
+digraph g {
+	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
+	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
+	x0 -> x1 [label="((hasInterest.hasType)+(hasInterest.hasType))"];
+	x2 [shape=circle, label="?x2"];
+	x0 -> x2 [label="((hasInterest.hasType))"];
+	x3 [shape=circle, label="?x3"];
+	x0 -> x3 [label="((isLocatedIn.isLocatedIn-.speaks.name-)+(hasCreator-.hasTag.hasType)+(likes.hasCreator.hasInterest.hasType))"];
+	x4 [shape=circle, label="?x4"];
+	x0 -> x4 [label="((likes.hasTag.hasType)+(isLocatedIn.name.name-.isSubclassOf-)+(browserUsed.email-.hasInterest.hasType))"];
+}

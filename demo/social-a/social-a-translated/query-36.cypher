@@ -1,0 +1,1 @@
+MATCH (x0)-[:pcreationDate*]->(x1), (x1)-[:pcreationDate|pcreationDate|pbirthday*]->(x2), (x0)-[:pcreationDate|pbirthday|pcreationDate*]->(x3), (x2)-[:pcreationDate|pcreationDate*]->(x4) RETURN DISTINCT x0, x1, x2 UNION ;

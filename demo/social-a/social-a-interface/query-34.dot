@@ -1,0 +1,9 @@
+digraph g {
+	x3 [fillcolor="yellow", style="filled," shape=circle, label="?x3"];
+	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
+	x2 [fillcolor="yellow", style="filled," shape=circle, label="?x2"];
+	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
+	x0 -> x1 [label="((studyAt-.likes.replyOf-)+(studyAt-.likes.isSubclassOf-))"];
+	x0 -> x2 [label="((name.email-.hasInterest)+(studyAt-.knows-.speaks.name-)+(isLocatedIn.isLocatedIn-.hasInterest))"];
+	x1 -> x3 [label="((name.locationIP-.likes.hasTag)+(studyAt-.knows-.hasInterest)+(name.speaks-.hasInterest))"];
+}

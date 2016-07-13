@@ -1,0 +1,1 @@
+MATCH (x0)-[:phasType]->()<-[:pisSubclassOf]-(x1), (x0)-[:pname]->()<-[:pname]-()<-[:phasType]-()-[:phasType]->(x2), (x0)<-[:phasInterest]-()-[:plikes]->()-[:pbrowserUsed]->()<-[:pname]-(x3), (x0)-[:phasType]->()<-[:pisSubclassOf]-(x4) RETURN DISTINCT x0, x1, x2 UNION ;

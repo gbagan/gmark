@@ -1,0 +1,1 @@
+PREFIX : <http://example.org/gmark/> ASK {  {  ?x0 ((:pisLocatedIn/:pname/^:plength)) ?x1 . ?x1 (((:pcreationDate/^:pcreationDate)|(:plength/^:pbrowserUsed/:pbrowserUsed/^:plength)|(:plength/^:plength))){,3} ?x2 . ?x2 ((:plength/^:pcontent/:planguage)|(:plength/^:pcontent/:planguage)|(:plength/^:pcontent/:planguage)) ?x3 . } }

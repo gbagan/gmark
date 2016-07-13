@@ -1,0 +1,1 @@
+MATCH (x0)-[:pname|pgender|planguage*]->(x1), (x1)<-[:pemail]-()-[:plikes]->()<-[:preplyOf]-(x2), (x0)-[:pbrowserUsed|pemail|plocationIP*]->(x3), (x2)-[:pspeaks|pemail*]->(x4) RETURN DISTINCT x2, x3, x0, x1 UNION  UNION  UNION  UNION ;

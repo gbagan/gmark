@@ -1,0 +1,1 @@
+MATCH (x0)-[:pisSubclassOf]->()<-[:phasType]-()<-[:phasTag]-(x1), (x0)<-[:pisSubclassOf]-()-[:pname]->()<-[:pemail]-()<-[:phasModerator]-(x2), (x0)-[:pname]->()<-[:pemail]-()<-[:phasModerator]-(x3), (x0)<-[:phasType]-()<-[:phasInterest]-()<-[:phasModerator]-(x4) RETURN "true" LIMIT 1;

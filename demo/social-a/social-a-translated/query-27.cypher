@@ -1,0 +1,1 @@
+MATCH (x0)-[:pname|pname|pname*]->(x1), (x1)-[:pisPartOf]->()<-[:pisPartOf]-()-[:pisPartOf]->(x2), (x2)-[:pname]->()<-[:pemail]-()-[:pspeaks]->(x3), (x3)<-[:pname]-()-[:pgender]->()<-[:pname]-(x4) RETURN DISTINCT x1, x2, x0 UNION  UNION ;

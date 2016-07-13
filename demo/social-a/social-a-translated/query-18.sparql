@@ -1,0 +1,1 @@
+PREFIX : <http://example.org/gmark/> ASK {  {  ?x0 ((:pisSubclassOf/^:phasType/^:phasTag)|(:pname/^:pemail/^:phasModerator)) ?x1 . ?x0 ((^:pisSubclassOf/:pname/^:pemail/^:phasModerator)) ?x2 . ?x0 ((:pname/^:pemail/^:phasModerator)) ?x3 . ?x0 ((^:phasType/^:phasInterest/^:phasModerator)|(^:phasType/^:phasTag)) ?x4 . } }

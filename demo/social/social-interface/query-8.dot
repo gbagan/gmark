@@ -1,0 +1,11 @@
+digraph g {
+	x0 [shape=circle, label="?x0"];
+	x1 [shape=circle, label="?x1"];
+	x0 -> x1 [label="((16.22-.21.16-)+(16.16-)+(16.21-.16.16-))"];
+	x2 [shape=circle, label="?x2"];
+	x0 -> x2 [label="((16.16-.22.16-))"];
+	x3 [shape=circle, label="?x3"];
+	x0 -> x3 [label="((16.16-.21.16-))"];
+	x4 [shape=circle, label="?x4"];
+	x0 -> x4 [label="((21.16-))"];
+}

@@ -1,0 +1,137 @@
+<html>
+<head>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+google.charts.load('current', {packages:['corechart', 'bar']});
+google.charts.setOnLoadCallback(drawChart);
+function drawChart() {
+var data = google.visualization.arrayToDataTable([
+['Node type', 'Number of nodes'], 
+['Person', 691],
+['University', 847],
+['Company', 722],
+['City', 513],
+['Country', 561],
+['Continent', 704],
+['Forum', 674],
+['Tag', 655],
+['TagClass', 602],
+['Post', 299],
+['Comment', 182],
+['Message', 500],
+['String', 417],
+['Integer', 754],
+['DateTime', 1879],
+]);
+var options = {
+vAxis: { logScale: true, baseline: 1 },
+title: 'Number of nodes by node type'
+};
+var chart = new google.visualization.ColumnChart(document.getElementById('hist11'));
+chart.draw(data, options);
+var data = google.visualization.arrayToDataTable([
+['Node type', 'Number of nodes'], 
+['Person', 691],
+['University', 847],
+['Company', 722],
+['City', 513],
+['Country', 561],
+['Continent', 704],
+['Forum', 674],
+['Tag', 655],
+['TagClass', 602],
+['Post', 299],
+['Comment', 182],
+['Message', 500],
+['String', 417],
+['Integer', 754],
+['DateTime', 1879],
+]);
+var options = {
+vAxis: { logScale: true, baseline: 1 },
+title: 'Number of nodes by node type'
+};
+var chart = new google.visualization.ColumnChart(document.getElementById('hist12'));
+chart.draw(data, options);
+var data = google.visualization.arrayToDataTable([
+['Predicate type', 'Number of predicates'], 
+['knows', 0],
+['hasInterest', 0],
+['hasModerator', 0],
+['hasMember', 0],
+['studyAt', 0],
+['worksAt', 0],
+['isLocatedIn', 0],
+['isPartOf', 0],
+['likes', 0],
+['hasCreator', 0],
+['containerOf', 0],
+['hasTag', 0],
+['hasType', 0],
+['isSubclassOf', 0],
+['replyOf', 0],
+['creationDate', 0],
+['name', 0],
+['gender', 0],
+['birthday', 0],
+['email', 0],
+['speaks', 0],
+['browserUsed', 0],
+['locationIP', 0],
+['content', 0],
+['language', 0],
+['imageFile', 0],
+['length', 0],
+]);
+var options = {
+vAxis: { logScale: true, baseline: 1 },
+title: 'Number of predicates by type'
+};
+var chart = new google.visualization.ColumnChart(document.getElementById('hist21'));
+chart.draw(data, options);
+var data = google.visualization.arrayToDataTable([
+['Predicate type', 'Number of predicates'], 
+['knows', 700],
+['hasInterest', 528],
+['hasModerator', 611],
+['hasMember', 675],
+['studyAt', 814],
+['worksAt', 572],
+['isLocatedIn', 1704],
+['isPartOf', 999],
+['likes', 426],
+['hasCreator', 381],
+['containerOf', 299],
+['hasTag', 944],
+['hasType', 432],
+['isSubclassOf', 1014],
+['replyOf', 182],
+['creationDate', 1865],
+['name', 5295],
+['gender', 691],
+['birthday', 691],
+['email', 961],
+['speaks', 887],
+['browserUsed', 1191],
+['locationIP', 1191],
+['content', 317],
+['language', 343],
+['imageFile', 139],
+['length', 674],
+]);
+var options = {
+vAxis: { logScale: true, baseline: 1 },
+title: 'Number of predicates by type'
+};
+var chart = new google.visualization.ColumnChart(document.getElementById('hist22'));
+chart.draw(data, options);
+}
+</script></head>
+<body>
+<table border="1">
+<tr><td>Size</td><td width="600">10000 nodes</td><td width="600">10000 nodes (24526 edges)</td></tr>
+<tr><td>Execution time</td><td></td><td>0.025 seconds</td></tr>
+<tr><td></td><td><div id="hist11"/></td><td><div id="hist12"/></td></tr>
+<tr><td></td><td><div id="hist21"/></td><td><div id="hist22"/></td></tr>
+</table>
+</body></html>

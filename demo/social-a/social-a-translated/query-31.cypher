@@ -1,0 +1,1 @@
+MATCH (x0)-[:planguage*]->(x1), (x1)<-[:planguage]-()-[:preplyOf]->()-[:pisLocatedIn]->()<-[:pisLocatedIn]-(x2), (x2)-[:pname|pname|pname*]->(x3), (x3)-[:pname]->()<-[:pname]-()<-[:pisPartOf]-()<-[:pisLocatedIn]-(x4) RETURN DISTINCT x2, x1, x0;

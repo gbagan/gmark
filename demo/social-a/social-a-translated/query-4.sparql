@@ -1,0 +1,1 @@
+PREFIX : <http://example.org/gmark/> ASK {  {  ?x0 (((:pname/^:pname))){,3} ?x1 . ?x1 (((:pname/^:pname/:pname/^:pname)|(:pname/^:pimageFile/:pcontent/^:pname))){,3} ?x2 . ?x2 (((:pname/^:pname)|(:pname/^:pname/:pgender/^:pname)|(:pname/^:pname/:pgender/^:pname))){,3} ?x3 . ?x3 (((:pname/^:planguage/:pimageFile/^:pname)|(:pname/^:pname/:pgender/^:pname))){,3} ?x4 . } }

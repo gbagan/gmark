@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Visualize query workload</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" href="../../style/style.css"/>
+	<script src="../../style/animation.js"></script>
+</head>
+<body>
+
+<div id="top">
+
+<div id="left">
+<h3>Stats for Query 18</h3>
+<ul>
+<li><i>Dataset</i>: ../use-cases/social-network.xml</li>
+<li><i>Arity</i>: 0</li>
+<li><i>Selectivity</i>: -</li>
+<li><i>Size</i>: C[4-4], D[1-2], L[3-4]</li>
+<li><i>Recursion</i>: 0%</li>
+</ul>
+<hr/>
+<h3>Generate concrete syntaxes</h3>
+<input type="checkbox" id="sparql-checkbox"/>SPARQL<br/>
+<input type="checkbox" id="opencypher-checkbox"/>openCypher<br/>
+<input type="checkbox" id="sql-checkbox"/>SQL<br/>
+<input type="checkbox" id="datalog-checkbox"/>Datalog<br/>
+<hr/>
+<a href="query-17.html">&lt;&lt;Previous query</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="query-19.html">Next query&gt;&gt;</a>
+</div> <!-- end left -->
+
+<div id="right">
+<img src="query-18.png"/>
+</div> <!-- end right -->
+
+</div> <!-- end top -->
+
+<div id="bottom">
+<br/><br/>
+
+<table border="1">
+<tr>
+<th id="sparql-header">SPARQL</th>
+<th id="opencypher-header">openCypher*</th>
+<th id="sql-header">SQL</th>
+<th id="datalog-header">Datalog</th>
+</tr>
+<tr>
+<td valign="top" id="sparql-syntax">PREFIX : &lt;http://example.org/gmark/&gt;<br/> ASK {  {  ?x0 ((^:p4/:p17/^:p19/:p5)|(^:p4/^:p0/:p5)) ?x1 . ?x1 ((^:p5/:p16/^:p16)) ?x2 . ?x0 ((:p16/^:p16/:p16/^:p16)) ?x3 . ?x2 ((:p16/^:p17/:p22/^:p16)|(:p16/^:p21/:p16/^:p16)) ?x4 . }  UNION  {  } }<br/></td>
+<td valign="top" id="opencypher-syntax">MATCH (x0)<-[:p4]-()-[:p17]->()<-[:p19]-()-[:p5]->(x1), (x1)<-[:p5]-()-[:p16]->()<-[:p16]-(x2), (x0)-[:p16]->()<-[:p16]-()-[:p16]->()<-[:p16]-(x3), (x2)-[:p16]->()<-[:p17]-()-[:p22]->()<-[:p16]-(x4) RETURN "true" LIMIT 1 UNION ;<br/><br/><br/>*Note: This query may have a different semantics than the intended one because openCypher does not allow Kleene star above concatenation and/or inverses.</td>
+<td valign="top" id="sql-syntax">WITH RECURSIVE c0(src, trg) AS ((SELECT s0.src, s3.trg FROM (SELECT trg as src, src as trg, label FROM edge) as s0, edge s1, (SELECT trg as src, src as trg, label FROM edge) as s2, edge s3 WHERE s0.trg = s1.src AND s1.trg = s2.src AND s2.trg = s3.src AND s0.label = 4 AND s1.label = 17  AND s2.label = 19  AND s3.label = 5  UNION SELECT s0.src, s2.trg FROM (SELECT trg as src, src as trg, label FROM edge) as s0, (SELECT trg as src, src as trg, label FROM edge) as s1, edge s2 WHERE s0.trg = s1.src AND s1.trg = s2.src AND s0.label = 4 AND s1.label = 0  AND s2.label = 5 )) , c1(src, trg) AS ((SELECT s0.src, s2.trg FROM (SELECT trg as src, src as trg, label FROM edge) as s0, edge s1, (SELECT trg as src, src as trg, label FROM edge) as s2 WHERE s0.trg = s1.src AND s1.trg = s2.src AND s0.label = 5 AND s1.label = 16  AND s2.label = 16 )) , c2(src, trg) AS ((SELECT s0.src, s3.trg FROM edge s0, (SELECT trg as src, src as trg, label FROM edge) as s1, edge s2, (SELECT trg as src, src as trg, label FROM edge) as s3 WHERE s0.trg = s1.src AND s1.trg = s2.src AND s2.trg = s3.src AND s0.label = 16 AND s1.label = 16  AND s2.label = 16  AND s3.label = 16 )) , c3(src, trg) AS ((SELECT s0.src, s3.trg FROM edge s0, (SELECT trg as src, src as trg, label FROM edge) as s1, edge s2, (SELECT trg as src, src as trg, label FROM edge) as s3 WHERE s0.trg = s1.src AND s1.trg = s2.src AND s2.trg = s3.src AND s0.label = 16 AND s1.label = 17  AND s2.label = 22  AND s3.label = 16  UNION SELECT s0.src, s3.trg FROM edge s0, (SELECT trg as src, src as trg, label FROM edge) as s1, edge s2, (SELECT trg as src, src as trg, label FROM edge) as s3 WHERE s0.trg = s1.src AND s1.trg = s2.src AND s2.trg = s3.src AND s0.label = 16 AND s1.label = 21  AND s2.label = 16  AND s3.label = 16 )) SELECT "true" FROM edge WHERE EXISTS (SELECT * FROM c0, c1, c2, c3 WHERE c0.src = c2.src AND c1.src = c0.trg AND c3.src = c1.trg) UNION ;<br/></td>
+<td valign="top" id="datalog-syntax">BEGIN<br/>gmarkSubquery00(x, y) <- core:edge:edge(x1, 4, x0), core:edge:edge(x1, 17, x2), core:edge:edge(x3, 19, x2), core:edge:edge(x3, 5, x4), x = x0, y = x4.<br/>gmarkSubquery00(x, y) <- core:edge:edge(x1, 4, x0), core:edge:edge(x2, 0, x1), core:edge:edge(x2, 5, x3), x = x0, y = x3.<br/>gmarkSubquery01(x, y) <- core:edge:edge(x1, 5, x0), core:edge:edge(x1, 16, x2), core:edge:edge(x3, 16, x2), x = x0, y = x3.<br/>gmarkSubquery02(x, y) <- core:edge:edge(x0, 16, x1), core:edge:edge(x2, 16, x1), core:edge:edge(x2, 16, x3), core:edge:edge(x4, 16, x3), x = x0, y = x4.<br/>gmarkSubquery03(x, y) <- core:edge:edge(x0, 16, x1), core:edge:edge(x2, 17, x1), core:edge:edge(x2, 22, x3), core:edge:edge(x4, 16, x3), x = x0, y = x4.<br/>gmarkSubquery03(x, y) <- core:edge:edge(x0, 16, x1), core:edge:edge(x2, 21, x1), core:edge:edge(x2, 16, x3), core:edge:edge(x4, 16, x3), x = x0, y = x4.<br/>query() <- gmarkSubquery00(x0, x1), gmarkSubquery01(x1, x2), gmarkSubquery02(x0, x3), gmarkSubquery03(x2, x4).<br/>query() <- .<br/>END<br/></td>
+</tr>
+</table>
+</div><!-- end bottom -->
+
+</body>
+</html>
