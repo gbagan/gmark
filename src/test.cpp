@@ -147,12 +147,13 @@ int main(int argc, char ** argv) {
     string conf_file = "../use-cases/test.xml";
     string graph_file;
     string workload_file;
+    string report_directory = ".";
     int c;
     bool selectivity = true;
     long nb_nodes = -1;
     bool print_alias = false;    
 
-    while ((c = getopt(argc, argv, "c:g:w:an:")) != -1) {
+    while ((c = getopt(argc, argv, "c:g:w:an:r:")) != -1) {
         switch(c) {
             case 'c':
                 conf_file = optarg;
@@ -166,8 +167,12 @@ int main(int argc, char ** argv) {
             case 'a':
                 print_alias = true;
                 break;
+            case 'r':
+                report_directory = optarg;
+                break;
             case 'n':
                 nb_nodes = atol(optarg);
+                break;
         }
     }
     
@@ -197,7 +202,7 @@ int main(int argc, char ** argv) {
         graph_stream.close();
 
         ofstream report_stream;
-        report_stream.open("report.html");
+        report_stream.open(report_directory + "/graph.html");
         html_graph_report(conf, rep, report_stream);
     }
     
@@ -217,7 +222,7 @@ int main(int argc, char ** argv) {
         workload_stream.close();
 
         ofstream report_stream;
-        report_stream.open("workload.html");
+        report_stream.open(report_directory + "/workload.html");
         html_workload_report(conf, rep, report_stream);  
 
         /*
