@@ -1,1 +1,1 @@
-MATCH (x0)-[:precordNumber]->()<-[:pprice]-()-[:pincludes]->(x1), (x1)<-[:plike]-()<-[:pdirector]-(x2), (x2)-[:phasReview*]->(x3) RETURN DISTINCT x3, x1, x2, x0;
+MATCH (x0)<-[:ptitle]-()-[:pkeywords]->()<-[:pfamilyName]-()-[:pgender]->(x1), (x0)<-[:pemail]-()-[:pgender]->(x2), (x0)<-[:pemail]-()-[:pfollows]->()-[:pgender]->(x3) RETURN DISTINCT x0, x1;

@@ -1,9 +1,11 @@
 digraph g {
-	x0 [shape=circle, label="?x0"];
-	x1 [shape=circle, label="?x1"];
-	x0 -> x1 [label="((nationality-.conductor-.conductor.type)+(nationality-.follows-.type)+(nationality-.type))"];
-	x2 [shape=circle, label="?x2"];
-	x0 -> x2 [label="((editor-.includes.author.type)+(parentContry-.location-.type)+(nationality-.follows.type))"];
-	x3 [shape=circle, label="?x3"];
-	x0 -> x3 [label="((nationality-.type))"];
+	x2 [fillcolor="yellow", style="filled," shape=circle, label="?x2"];
+	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
+	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
+	x3 [fillcolor="yellow", style="filled," shape=circle, label="?x3"];
+	x0 -> x1 [label="(((includes.hasReview.hasReview-.includes-)+(includes.hasReview.hasReview-.includes-)+(includes.editor.author-.includes-)))*"];
+	x0 -> x2 [label="(((includes.purchaseFor-.purchaseFor.includes-)))*"];
+	x0 -> x3 [label="(((includes.includes-)+(includes.editor.actor-.includes-)+(includes.homepage.homepage-.includes-)))*"];
+	x4 [shape=circle, label="?x4"];
+	x0 -> x4 [label="(((includes.actor.actor-.includes-)+(includes.hasReview.hasReview-.includes-)))*"];
 }

@@ -1,1 +1,1 @@
-MATCH (x0)-[:pgender|pbrowserUsed|pcontent*]->(x1), (x0)-[:pbrowserUsed|pbrowserUsed*]->(x2), (x1)-[:pgender|pname|pname*]->(x3) RETURN "true" LIMIT 1;
+MATCH (x0)<-[:phasMember]-()-[:pcontainerOf]->(x1), (x0)<-[:pknows]-()-[:pemail]->()<-[:pcontent]-(x2), (x0)-[:plikes]->()<-[:pisSubclassOf]-(x3), (x0)-[:pname]->()<-[:pemail]-()-[:pspeaks]->()<-[:pcontent]-(x4) RETURN DISTINCT x2, x0, x1 UNION  UNION ;

@@ -1,9 +1,8 @@
 BEGIN
-gmarkSubquery00(x, y) <- core:edge:edge(x1, tag, x0), core:edge:edge(x2, like, x1), core:edge:edge(x2, age, x3), x = x0, y = x3.
-gmarkSubquery01(x, y) <- core:edge:edge(x1, tag, x0), core:edge:edge(x2, like, x1), core:edge:edge(x2, type, x3), x = x0, y = x3.
-gmarkSubquery01(x, y) <- core:edge:edge(x1, tag, x0), core:edge:edge(x1, contentRating, x2), core:edge:edge(x3, userId, x2), core:edge:edge(x3, type, x4), x = x0, y = x4.
-gmarkSubquery01(x, y) <- core:edge:edge(x1, tag, x0), core:edge:edge(x2, like, x1), core:edge:edge(x2, type, x3), x = x0, y = x3.
-gmarkSubquery02(x, y) <- core:edge:edge(x1, tag, x0), core:edge:edge(x2, like, x1), core:edge:edge(x2, type, x3), x = x0, y = x3.
-gmarkSubquery02(x, y) <- core:edge:edge(x1, tag, x0), core:edge:edge(x1, conductor, x2), core:edge:edge(x2, type, x3), x = x0, y = x3.
+gmarkSubquery00(x, y) <- core:edge:edge(x0, artist, x1), core:edge:edge(x2, reviewer, x1), core:edge:edge(x3, hasReview, x2), x = x0, y = x3.
+gmarkSubquery01(x, y) <- core:edge:edge(x1, includes, x0), core:edge:edge(x1, includes, x2), core:edge:edge(x2, homepage, x3), core:edge:edge(x4, homepage, x3), x = x0, y = x4.
+gmarkSubquery01(x, y) <- core:edge:edge(x1, purchaseFor, x0), core:edge:edge(x1, purchaseFor, x2), core:edge:edge(x3, includes, x2), core:edge:edge(x3, includes, x4), x = x0, y = x4.
+gmarkSubquery02(x, y) <- core:edge:edge(x1, includes, x0), core:edge:edge(x1, includes, x2), core:edge:edge(x3, purchaseFor, x2), core:edge:edge(x3, purchaseFor, x4), x = x0, y = x4.
+gmarkSubquery02(x, y) <- core:edge:edge(x1, purchaseFor, x0), core:edge:edge(x1, purchaseFor, x2), x = x0, y = x2.
 query(x0, x1, x2) <- gmarkSubquery00(x0, x1), gmarkSubquery01(x0, x2), gmarkSubquery02(x1, x3).
 END

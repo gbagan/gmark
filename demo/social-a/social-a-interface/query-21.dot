@@ -1,9 +1,9 @@
 digraph g {
+	x2 [fillcolor="yellow", style="filled," shape=circle, label="?x2"];
 	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
-	x1 [shape=circle, label="?x1"];
-	x0 -> x1 [label="(((name.imageFile-.imageFile.name-)+(name.locationIP-.locationIP.name-)))*"];
-	x2 [shape=circle, label="?x2"];
-	x0 -> x2 [label="(((name.name-.name.name-)))*"];
-	x3 [shape=circle, label="?x3"];
-	x0 -> x3 [label="(((name.name-.name.name-)+(name.content-.content.name-)+(name.name-)))*"];
+	x3 [fillcolor="yellow", style="filled," shape=circle, label="?x3"];
+	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
+	x0 -> x1 [label="(((name.locationIP-.name.name-)))*"];
+	x1 -> x2 [label="((worksAt-.locationIP))"];
+	x2 -> x3 [label="(((language-.content.gender-.locationIP)))*"];
 }

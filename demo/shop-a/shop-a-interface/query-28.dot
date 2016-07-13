@@ -1,11 +1,11 @@
 digraph g {
-	x3 [fillcolor="yellow", style="filled," shape=circle, label="?x3"];
 	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
-	x2 [fillcolor="yellow", style="filled," shape=circle, label="?x2"];
-	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
-	x0 -> x1 [label="(((includes-.includes.hasReview.hasReview-)))*"];
-	x1 -> x2 [label="((like-.editor-))"];
-	x2 -> x3 [label="(((author.subscribes.homepage-)+(hasReview.hasReview-.homepage.homepage-)+(purchaseFor-.makesPurchase-.editor-)))*"];
+	x1 [shape=circle, label="?x1"];
+	x0 -> x1 [label="((caption.description-.text.title-)+(tag.tag-.text.keywords-)+(text.caption-.caption.description-))"];
+	x2 [shape=circle, label="?x2"];
+	x1 -> x2 [label="((includes-.includes.author.like)+(director.like.homepage.homepage-)+(homepage.homepage-.like))"];
+	x3 [shape=circle, label="?x3"];
+	x0 -> x3 [label="((author.editor-))"];
 	x4 [shape=circle, label="?x4"];
-	x3 -> x4 [label="(((hasReview.reviewer.author-)))*"];
+	x2 -> x4 [label="((purchaseFor-.purchaseFor.homepage.homepage-))"];
 }

@@ -1,1 +1,1 @@
-MATCH (x0)-[:p24*]->(x1), (x1)<-[:p24]-()-[:p13]->()<-[:p13]-(x2), (x2)-[:p25*]->(x3) RETURN DISTINCT x2, x1, x0;
+MATCH (x0)-[:p16|p16*]->(x1), (x0)-[:p16|p16*]->(x2), (x0)-[:p16|p16*]->(x3), (x0)-[:p16*]->(x4) RETURN DISTINCT x0, x1, x2, x3 UNION ;

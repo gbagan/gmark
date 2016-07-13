@@ -1,1 +1,1 @@
-MATCH (x0)-[:pname|pname*]->(x1), (x0)-[:pname|pname*]->(x2), (x0)-[:pname|pname*]->(x3), (x0)-[:pname|pname*]->(x4) RETURN DISTINCT x0;
+MATCH (x0)-[:pname]->()<-[:plocationIP]-()-[:pisLocatedIn]->()<-[:pisLocatedIn]-(x1), (x0)-[:pname]->()<-[:pemail]-()-[:pemail]->()<-[:pname]-(x2), (x0)<-[:pisLocatedIn]-()-[:pisLocatedIn]->()<-[:pisLocatedIn]-(x3) RETURN DISTINCT x2, x3, x1, x0;

@@ -1,9 +1,12 @@
 BEGIN
-gmarkSubquery00(x, y) <- core:edge:edge(x0, includes, x1), core:edge:edge(x1, editor, x2), core:edge:edge(x2, like, x3), x = x0, y = x3.
-gmarkSubquery01(x, y) <- core:edge:edge(x0, includes, x1), core:edge:edge(x1, hasReview, x2), core:edge:edge(x3, hasReview, x2), core:edge:edge(x4, includes, x3), x = x0, y = x4.
-gmarkSubquery01(x, y) <- core:edge:edge(x0, includes, x1), core:edge:edge(x2, includes, x1), x = x0, y = x2.
-gmarkSubquery01(x, y) <- core:edge:edge(x0, includes, x1), core:edge:edge(x1, actor, x2), core:edge:edge(x3, conductor, x2), core:edge:edge(x4, includes, x3), x = x0, y = x4.
-gmarkSubquery02(x, y) <- core:edge:edge(x0, includes, x1), core:edge:edge(x2, includes, x1), core:edge:edge(x2, includes, x3), core:edge:edge(x4, includes, x3), x = x0, y = x4.
-gmarkSubquery02(x, y) <- core:edge:edge(x0, includes, x1), core:edge:edge(x1, homepage, x2), core:edge:edge(x3, homepage, x2), core:edge:edge(x4, includes, x3), x = x0, y = x4.
-query(x0) <- gmarkSubquery00(x0, x1), gmarkSubquery01(x0, x2), gmarkSubquery02(x1, x3).
+gmarkSubquery00(x, y) <- core:edge:edge(x0, hasReview, x1), core:edge:edge(x2, hasReview, x1), core:edge:edge(x2, artist, x3), core:edge:edge(x3, like, x4), x = x0, y = x4.
+gmarkSubquery00(x, y) <- core:edge:edge(x0, artist, x1), core:edge:edge(x1, like, x2), x = x0, y = x2.
+gmarkSubquery01(x, y) <- core:edge:edge(x0, conductor, x1), core:edge:edge(x2, reviewer, x1), core:edge:edge(x2, reviewer, x3), core:edge:edge(x4, conductor, x3), x = x0, y = x4.
+gmarkSubquery01(x, x) <- core:edge:edge(x, r, y).
+gmarkSubquery01(y, y) <- core:edge:edge(x, r, y).
+gmarkSubquery01(x, y) <- gmarkSubquery01(x, z), gmarkSubquery01(z, y).
+gmarkSubquery02(x, y) <- core:edge:edge(x0, conductor, x1), core:edge:edge(x1, follows, x2), x = x0, y = x2.
+gmarkSubquery02(x, y) <- core:edge:edge(x0, conductor, x1), core:edge:edge(x2, reviewer, x1), core:edge:edge(x2, reviewer, x3), core:edge:edge(x3, follows, x4), x = x0, y = x4.
+gmarkSubquery02(x, y) <- core:edge:edge(x1, purchaseFor, x0), core:edge:edge(x1, purchaseFor, x2), core:edge:edge(x2, artist, x3), x = x0, y = x3.
+query(x0) <- gmarkSubquery00(x0, x1), gmarkSubquery01(x1, x2), gmarkSubquery02(x2, x3).
 END

@@ -1,1 +1,1 @@
-MATCH (x0)-[:pisLocatedIn]->()-[:pisPartOf]->()<-[:pisPartOf]-(x1), (x0)<-[:pknows]-()-[:pspeaks]->()<-[:pname]-(x2), (x0)-[:pisLocatedIn]->()-[:pisPartOf]->()<-[:pisPartOf]-(x3), (x0)<-[:pknows]-()-[:pknows]->()-[:pisLocatedIn]->(x4) RETURN DISTINCT x1, x0, x2;
+MATCH (x0)<-[:pbrowserUsed]-()-[:plikes]->()<-[:preplyOf]-()-[:planguage]->(x1), (x0)<-[:pname]-()-[:pname]->()<-[:planguage]-()-[:planguage]->(x2), (x1)<-[:pcontent]-()-[:pcontent]->(x3) RETURN "true" LIMIT 1;

@@ -1,1 +1,1 @@
-MATCH (x0)<-[:peditor]-()-[:pprice]->()<-[:peligibleQuantity]-(x1), (x1)-[:pincludes|pincludes*]->(x2), (x2)-[:pincludes|pincludes|pincludes*]->(x3), (x3)-[:pincludes]->()-[:partist]->()<-[:pfollows]-()<-[:pactor]-(x4) RETURN DISTINCT x0, x1, x3, x2;
+MATCH (x0)-[:ppublished]->()<-[:pdescription]-()-[:pkeywords]->()<-[:ptext]-(x1), (x0)-[:pauthor]->()-[:puserId]->()<-[:pcontentSize]-(x2), (x0)-[:pdescription]->()<-[:pkeywords]-(x3) RETURN DISTINCT x0, x1;

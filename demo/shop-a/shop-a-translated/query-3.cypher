@@ -1,1 +1,1 @@
-MATCH (x0)<-[:pperformedIn]-()-[:pperformer]->()<-[:ptext]-()-[:pcontentSize]->(x1), (x0)<-[:pperformedIn]-()<-[:plike]-()<-[:pauthor]-()-[:pprintEdition]->(x2), (x0)<-[:plocation]-()-[:pfollows]->()-[:plike]->()-[:pcontentSize]->(x3) RETURN "true" LIMIT 1;
+MATCH (x0)-[:peditor]->()-[:plike]->()<-[:plike]-()<-[:pactor]-(x1), (x1)-[:pactor]->()-[:plike]->()-[:phasReview]->(x2), (x0)<-[:pincludes]-()-[:pincludes]->(x3), (x2)-[:pauthor]->()<-[:pfriendOf]-()<-[:pauthor]-(x4) RETURN DISTINCT x0;

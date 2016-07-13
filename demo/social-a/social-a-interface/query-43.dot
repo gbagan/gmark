@@ -1,9 +1,9 @@
 digraph g {
-	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
-	x3 [fillcolor="yellow", style="filled," shape=circle, label="?x3"];
-	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
-	x2 [fillcolor="yellow", style="filled," shape=circle, label="?x2"];
-	x0 -> x1 [label="((hasCreator-.locationIP.gender-.gender)+(hasCreator-.browserUsed))"];
-	x0 -> x2 [label="((likes.isLocatedIn)+(hasCreator-.isLocatedIn))"];
-	x1 -> x3 [label="((hasCreator-.hasTag.name.name-)+(hasModerator-.hasModerator.gender.name-)+(hasModerator-.hasMember.browserUsed.name-))"];
+	x0 [shape=circle, label="?x0"];
+	x1 [shape=circle, label="?x1"];
+	x0 -> x1 [label="(((content.browserUsed-.browserUsed.content-)+(content.content-)+(content.name-.name.content-)))*"];
+	x2 [shape=circle, label="?x2"];
+	x0 -> x2 [label="(((content.content-)+(content.gender-.name.content-)))*"];
+	x3 [shape=circle, label="?x3"];
+	x1 -> x3 [label="(((language.language-.content.content-)+(content.content-)))*"];
 }

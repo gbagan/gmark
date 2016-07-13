@@ -1,1 +1,1 @@
-MATCH (x0)<-[:pgender]-()-[:pjobTitle]->()<-[:pname]-(x1), (x0)<-[:pgender]-()<-[:pemployee]-(x2), (x0)<-[:pgender]-()<-[:pconductor]-()-[:pcontentRating]->()<-[:pfaxNumber]-(x3) RETURN "true" LIMIT 1;
+MATCH (x0)-[:phasReview]->()-[:previewer]->()-[:plike]->()<-[:plike]-(x1), (x1)-[:phomepage|pfriendOf|previewer*]->(x2), (x2)-[:pmakesPurchase]->()-[:ppurchaseFor]->(x3) RETURN DISTINCT x0, x2, x1;

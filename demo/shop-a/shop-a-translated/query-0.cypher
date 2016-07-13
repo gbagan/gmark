@@ -1,1 +1,1 @@
-MATCH (x0)-[:pincludes]->()-[:phomepage]->()<-[:phomepage]-(x1), (x1)-[:ppurchaseFor|peditor*]->(x2), (x2)-[:pcontentSize]->()<-[:pprintPage]-()-[:pdescription]->()<-[:ptitle]-(x3), (x3)-[:phasReview]->()-[:previewer]->()<-[:pemployee]-(x4) RETURN DISTINCT x1, x0, x2;
+MATCH (x0)<-[:plike]-()<-[:pauthor]-()-[:phasReview]->(x1), (x0)<-[:plike]-()<-[:pcontactPoint]-()-[:pemployee]->()<-[:previewer]-(x2), (x0)<-[:plike]-()<-[:pconductor]-()-[:phasReview]->(x3) RETURN "true" LIMIT 1;

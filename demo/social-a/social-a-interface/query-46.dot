@@ -1,11 +1,11 @@
 digraph g {
-	x0 [shape=circle, label="?x0"];
-	x1 [shape=circle, label="?x1"];
-	x0 -> x1 [label="(((imageFile-.imageFile.locationIP-.name)+(gender-.browserUsed.browserUsed-.name)))*"];
-	x2 [shape=circle, label="?x2"];
-	x1 -> x2 [label="(((browserUsed-.locationIP.language-.content)+(content-.language.language-.content)+(browserUsed-.name.browserUsed-.name)))*"];
-	x3 [shape=circle, label="?x3"];
-	x0 -> x3 [label="(((name-.name)))*"];
+	x3 [fillcolor="yellow", style="filled," shape=circle, label="?x3"];
+	x2 [fillcolor="yellow", style="filled," shape=circle, label="?x2"];
+	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
+	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
+	x0 -> x1 [label="((replyOf-.content.locationIP-.hasModerator-)+(replyOf-.content.locationIP-.hasModerator-)+(browserUsed.browserUsed-.speaks.length-))"];
+	x1 -> x2 [label="((containerOf.content.content-)+(length.locationIP-.isSubclassOf-)+(length.browserUsed-.speaks.content-))"];
+	x2 -> x3 [label="(((content.browserUsed-.gender.content-)+(content.content-.language.language-)+(content.gender-.locationIP.content-)))*"];
 	x4 [shape=circle, label="?x4"];
-	x2 -> x4 [label="(((gender-.name)+(name-.locationIP.locationIP-.browserUsed)+(locationIP-.gender)))*"];
+	x3 -> x4 [label="(((content.browserUsed-.browserUsed.content-)+(content.content-)+(content.content-)))*"];
 }

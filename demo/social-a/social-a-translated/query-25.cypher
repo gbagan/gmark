@@ -1,1 +1,1 @@
-MATCH (x0)-[:phasInterest]->()-[:phasType]->(x1), (x0)-[:phasInterest]->()-[:phasType]->(x2), (x0)-[:pisLocatedIn]->()<-[:pisLocatedIn]-()-[:pspeaks]->()<-[:pname]-(x3), (x0)-[:plikes]->()-[:phasTag]->()-[:phasType]->(x4) RETURN DISTINCT x0, x1;
+MATCH (x0)-[:pname|pname*]->(x1), (x1)<-[:phasType]-()-[:pname]->()<-[:pcontent]-()-[:planguage]->(x2), (x2)-[:planguage|planguage|planguage*]->(x3), (x3)<-[:planguage]-()-[:pcontent]->()<-[:pname]-()<-[:pworksAt]-(x4) RETURN DISTINCT x0, x4;

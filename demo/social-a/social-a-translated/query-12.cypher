@@ -1,1 +1,1 @@
-MATCH (x0)-[:pisLocatedIn]->()-[:pname]->()<-[:plength]-(x1), (x1)-[:pcreationDate|plength|plength*]->(x2), (x2)-[:plength]->()<-[:pcontent]-()-[:planguage]->(x3) RETURN "true" LIMIT 1;
+MATCH (x0)<-[:pbirthday]-()-[:plikes]->()<-[:preplyOf]-(x1), (x0)<-[:pbirthday]-()<-[:pknows]-()-[:pspeaks]->()<-[:pname]-(x2), (x1)<-[:pcreationDate]-()<-[:pknows]-()-[:plikes]->()-[:pisLocatedIn]->(x3) RETURN DISTINCT x0, x2, x1;

@@ -1,1 +1,1 @@
-MATCH (x0)-[:pname*]->(x1), (x1)-[:pname|pname*]->(x2), (x2)-[:pname|pname|pname*]->(x3), (x3)-[:pname|pname*]->(x4) RETURN "true" LIMIT 1;
+MATCH (x0)<-[:pisPartOf]-()<-[:pisLocatedIn]-()-[:pgender]->(x1), (x0)-[:pname]->()<-[:plocationIP]-(x2), (x1)-[:pname]->()<-[:pname]-()-[:pname]->()<-[:plocationIP]-(x3) RETURN DISTINCT x0;

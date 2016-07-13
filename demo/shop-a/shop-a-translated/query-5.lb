@@ -1,9 +1,9 @@
 BEGIN
-gmarkSubquery00(x, y) <- core:edge:edge(x0, description, x1), core:edge:edge(x2, description, x1), core:edge:edge(x2, hasGenre, x3), core:edge:edge(x3, type, x4), x = x0, y = x4.
-gmarkSubquery00(x, y) <- core:edge:edge(x0, hasGenre, x1), core:edge:edge(x1, type, x2), x = x0, y = x2.
-gmarkSubquery01(x, y) <- core:edge:edge(x1, type, x0), core:edge:edge(x2, hasGenre, x1), core:edge:edge(x2, performedIn, x3), x = x0, y = x3.
-gmarkSubquery02(x, y) <- core:edge:edge(x1, purchaseFor, x0), core:edge:edge(x1, purchaseFor, x2), core:edge:edge(x3, includes, x2), core:edge:edge(x3, includes, x4), x = x0, y = x4.
-gmarkSubquery02(x, y) <- core:edge:edge(x0, hasReview, x1), core:edge:edge(x2, hasReview, x1), core:edge:edge(x2, trailer, x3), core:edge:edge(x4, homepage, x3), x = x0, y = x4.
-gmarkSubquery03(x, y) <- core:edge:edge(x0, hasReview, x1), core:edge:edge(x2, hasReview, x1), core:edge:edge(x2, trailer, x3), core:edge:edge(x4, homepage, x3), x = x0, y = x4.
-query(x1, x0, x2) <- gmarkSubquery00(x0, x1), gmarkSubquery01(x1, x2), gmarkSubquery02(x0, x3), gmarkSubquery03(x2, x4).
+gmarkSubquery00(x, y) <- core:edge:edge(x1, type, x0), core:edge:edge(x1, like, x2), core:edge:edge(x2, keywords, x3), core:edge:edge(x4, title, x3), x = x0, y = x4.
+gmarkSubquery01(x, y) <- core:edge:edge(x0, director, x1), core:edge:edge(x2, friendOf, x1), core:edge:edge(x2, age, x3), x = x0, y = x3.
+gmarkSubquery01(x, y) <- core:edge:edge(x0, contentRating, x1), core:edge:edge(x2, duration, x1), core:edge:edge(x3, like, x2), core:edge:edge(x3, age, x4), x = x0, y = x4.
+gmarkSubquery01(x, y) <- core:edge:edge(x0, description, x1), core:edge:edge(x2, jobTitle, x1), core:edge:edge(x2, age, x3), x = x0, y = x3.
+gmarkSubquery02(x, y) <- core:edge:edge(x1, age, x0), core:edge:edge(x1, userId, x2), core:edge:edge(x3, contentRating, x2), core:edge:edge(x3, text, x4), x = x0, y = x4.
+gmarkSubquery02(x, y) <- core:edge:edge(x1, age, x0), core:edge:edge(x1, like, x2), core:edge:edge(x2, text, x3), x = x0, y = x3.
+query() <- gmarkSubquery00(x0, x1), gmarkSubquery01(x1, x2), gmarkSubquery02(x2, x3).
 END

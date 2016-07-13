@@ -1,1 +1,1 @@
-PREFIX : <http://example.org/gmark/> SELECT DISTINCT ?x0 ?x2 ?x3 ?x1 WHERE {  {  ?x0 ((^:pvalidForm/:pincludes/:pexpires)) ?x1 . ?x0 ((^:pexpires/:pmovement/^:pprintPage/:ptext)) ?x2 . ?x1 ((^:pexpires/:peditor/:pfamilyName)|(^:ppriceValidUntil/:pincludes/:pcomposer)) ?x3 . } }
+PREFIX : <http://example.org/gmark/> SELECT DISTINCT ?x0 WHERE {  {  ?x0 ((:phomepage/:phits/^:pcontentSize)|(:pcaption/^:pkeywords)) ?x1 . ?x0 ((:pconductor/:pgivenName/^:ptext)) ?x2 . ?x0 ((:ptext/^:pdescription)) ?x3 . ?x0 ((:ptitle/^:ptitle)|(:pcaption/^:pcaption)|(:pkeywords/^:ptext)) ?x4 . } }

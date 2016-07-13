@@ -1,1 +1,1 @@
-MATCH (x0)-[:ptag]->()<-[:ptag]-(x1), (x0)-[:phomepage]->()-[:purl]->()<-[:pproducer]-(x2), (x0)-[:pcontentSize]->()<-[:pduration]-(x3), (x0)-[:pkeywords]->()<-[:pjobTitle]-()<-[:pactor]-(x4) RETURN DISTINCT x0, x1;
+MATCH (x0)<-[:pparentContry]-()<-[:plocation]-(x1), (x0)<-[:pnationality]-()-[:pgivenName]->()<-[:pkeywords]-()-[:pactor]->(x2), (x0)<-[:pnationality]-()-[:pemail]->()<-[:pemail]-(x3) RETURN "true" LIMIT 1;

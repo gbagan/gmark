@@ -1,1 +1,1 @@
-MATCH (x0)-[:planguage|pcontent|pcontent*]->(x1), (x1)-[:pcontent*]->(x2), (x0)-[:planguage|pcontent*]->(x3), (x2)-[:pcontent|pcontent*]->(x4) RETURN DISTINCT x0;
+MATCH (x0)-[:pname*]->(x1), (x1)-[:pname]->()<-[:plength]-()-[:phasMember]->()-[:pemail]->(x2), (x2)-[:pname|plength|pname*]->(x3) RETURN DISTINCT x2, x0, x1;

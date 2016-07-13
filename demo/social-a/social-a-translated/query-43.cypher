@@ -1,1 +1,1 @@
-MATCH (x0)<-[:phasCreator]-()-[:plocationIP]->()<-[:pgender]-()-[:pgender]->(x1), (x0)-[:plikes]->()-[:pisLocatedIn]->(x2), (x1)<-[:phasCreator]-()-[:phasTag]->()-[:pname]->()<-[:pname]-(x3) RETURN DISTINCT x0, x3, x1, x2 UNION  UNION ;
+MATCH (x0)-[:pcontent|pcontent|pcontent*]->(x1), (x0)-[:pcontent|pcontent*]->(x2), (x1)-[:planguage|pcontent*]->(x3) RETURN "true" LIMIT 1;

@@ -1,1 +1,1 @@
-MATCH (x0)-[:pcontent*]->(x1), (x1)-[:pcontent*]->(x2), (x2)-[:pcontent*]->(x3), (x3)-[:pcontent|pcontent|pcontent*]->(x4) RETURN DISTINCT x0, x4 UNION  UNION ;
+MATCH (x0)-[:pname|pname*]->(x1), (x0)-[:pname*]->(x2), (x0)-[:pname|pname*]->(x3) RETURN DISTINCT x0, x2, x1 UNION ;

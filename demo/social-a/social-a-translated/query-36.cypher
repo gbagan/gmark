@@ -1,1 +1,1 @@
-MATCH (x0)-[:pcreationDate*]->(x1), (x1)-[:pcreationDate|pcreationDate|pbirthday*]->(x2), (x0)-[:pcreationDate|pbirthday|pcreationDate*]->(x3), (x2)-[:pcreationDate|pcreationDate*]->(x4) RETURN DISTINCT x0, x1, x2 UNION ;
+MATCH (x0)-[:pbrowserUsed|pbrowserUsed|plocationIP*]->(x1), (x1)<-[:pisSubclassOf]-()-[:pcontent]->()<-[:pemail]-()-[:pbirthday]->(x2), (x2)<-[:pcreationDate]-()<-[:phasModerator]-()-[:plength]->()<-[:pname]-(x3) RETURN "true" LIMIT 1;

@@ -1,1 +1,1 @@
-MATCH (x0)-[:pcontent|pbrowserUsed*]->(x1), (x1)-[:pgender|pname|pcontent*]->(x2), (x2)<-[:pgender]-()-[:pspeaks]->()<-[:planguage]-(x3), (x3)-[:pcontent|pcontent*]->(x4) RETURN DISTINCT x0, x4;
+MATCH (x0)<-[:planguage]-()-[:pcontent]->()<-[:plocationIP]-()<-[:phasCreator]-(x1), (x1)-[:plocationIP*]->(x2), (x2)-[:pbrowserUsed*]->(x3) RETURN DISTINCT x0, x3 UNION ;

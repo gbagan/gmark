@@ -1,17 +1,21 @@
 BEGIN
-gmarkSubquery00(x, y) <- core:edge:edge(x1, language, x0), core:edge:edge(x1, content, x2), core:edge:edge(x3, content, x2), core:edge:edge(x3, language, x4), x = x0, y = x4.
+gmarkSubquery00(x, y) <- core:edge:edge(x1, language, x0), core:edge:edge(x1, imageFile, x2), core:edge:edge(x3, name, x2), core:edge:edge(x3, name, x4), x = x0, y = x4.
 gmarkSubquery00(x, x) <- core:edge:edge(x, r, y).
 gmarkSubquery00(y, y) <- core:edge:edge(x, r, y).
 gmarkSubquery00(x, y) <- gmarkSubquery00(x, z), gmarkSubquery00(z, y).
-gmarkSubquery01(x, y) <- core:edge:edge(x1, language, x0), core:edge:edge(x1, replyOf, x2), core:edge:edge(x2, isLocatedIn, x3), core:edge:edge(x4, isLocatedIn, x3), x = x0, y = x4.
-gmarkSubquery01(x, y) <- core:edge:edge(x1, language, x0), core:edge:edge(x1, replyOf, x2), core:edge:edge(x2, isLocatedIn, x3), core:edge:edge(x4, isLocatedIn, x3), x = x0, y = x4.
-gmarkSubquery02(x, y) <- core:edge:edge(x0, name, x1), core:edge:edge(x2, name, x1), x = x0, y = x2.
-gmarkSubquery02(x, y) <- core:edge:edge(x0, name, x1), core:edge:edge(x2, name, x1), x = x0, y = x2.
-gmarkSubquery02(x, y) <- core:edge:edge(x0, name, x1), core:edge:edge(x2, content, x1), core:edge:edge(x2, language, x3), core:edge:edge(x4, name, x3), x = x0, y = x4.
-gmarkSubquery02(x, x) <- core:edge:edge(x, r, y).
-gmarkSubquery02(y, y) <- core:edge:edge(x, r, y).
-gmarkSubquery02(x, y) <- gmarkSubquery02(x, z), gmarkSubquery02(z, y).
-gmarkSubquery03(x, y) <- core:edge:edge(x0, name, x1), core:edge:edge(x2, name, x1), core:edge:edge(x3, isPartOf, x2), core:edge:edge(x4, isLocatedIn, x3), x = x0, y = x4.
-gmarkSubquery03(x, y) <- core:edge:edge(x0, name, x1), core:edge:edge(x2, name, x1), core:edge:edge(x2, speaks, x3), core:edge:edge(x4, name, x3), x = x0, y = x4.
-query(x2, x1, x0) <- gmarkSubquery00(x0, x1), gmarkSubquery01(x1, x2), gmarkSubquery02(x2, x3), gmarkSubquery03(x3, x4).
+gmarkSubquery01(x, y) <- core:edge:edge(x1, name, x0), core:edge:edge(x1, isLocatedIn, x2), core:edge:edge(x3, isLocatedIn, x2), x = x0, y = x3.
+gmarkSubquery01(x, y) <- core:edge:edge(x1, name, x0), core:edge:edge(x1, isLocatedIn, x2), core:edge:edge(x3, isLocatedIn, x2), x = x0, y = x3.
+gmarkSubquery01(x, y) <- core:edge:edge(x1, name, x0), core:edge:edge(x2, hasTag, x1), core:edge:edge(x3, likes, x2), core:edge:edge(x3, worksAt, x4), x = x0, y = x4.
+gmarkSubquery02(x, y) <- core:edge:edge(x1, worksAt, x0), core:edge:edge(x1, hasInterest, x2), x = x0, y = x2.
+gmarkSubquery02(x, y) <- core:edge:edge(x1, worksAt, x0), core:edge:edge(x1, hasInterest, x2), x = x0, y = x2.
+gmarkSubquery03(x, y) <- core:edge:edge(x0, name, x1), core:edge:edge(x2, name, x1), core:edge:edge(x3, isPartOf, x2), x = x0, y = x3.
+query(x0, x1, x2) <- gmarkSubquery00(x0, x1), gmarkSubquery01(x1, x2), gmarkSubquery02(x2, x3), gmarkSubquery03(x3, x4).
+query(x0, x1, x2) <- .
+query(x0, x1, x2) <- .
+query(x0, x1, x2) <- .
+query(x0, x1, x2) <- .
+query(x0, x1, x2) <- .
+query(x0, x1, x2) <- .
+query(x0, x1, x2) <- .
+query(x0, x1, x2) <- .
 END

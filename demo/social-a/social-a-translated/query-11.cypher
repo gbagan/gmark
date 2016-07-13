@@ -1,1 +1,1 @@
-MATCH (x0)-[:pname|planguage|pcontent*]->(x1), (x1)<-[:pname]-()-[:pisLocatedIn]->()<-[:pisLocatedIn]-(x2), (x0)-[:pspeaks|pemail|pspeaks*]->(x3), (x2)-[:pspeaks|pemail|pemail*]->(x4) RETURN DISTINCT x0 UNION ;
+MATCH (x0)-[:pisSubclassOf]->()-[:phasCreator]->()-[:pspeaks]->()<-[:pname]-(x1), (x0)-[:pisSubclassOf]->()<-[:plikes]-()-[:plocationIP]->()<-[:pname]-(x2), (x0)-[:preplyOf]->()<-[:plikes]-()-[:pstudyAt]->(x3) RETURN "true" LIMIT 1 UNION  UNION  UNION ;

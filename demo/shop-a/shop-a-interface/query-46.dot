@@ -1,9 +1,9 @@
 digraph g {
-	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
+	x0 [shape=circle, label="?x0"];
 	x1 [shape=circle, label="?x1"];
-	x0 -> x1 [label="((birthDate-.gender))"];
+	x0 -> x1 [label="(((author-.author)))*"];
 	x2 [shape=circle, label="?x2"];
-	x0 -> x2 [label="((expires-.like-.follows.gender)+(release-.like-.gender)+(priceValidUntil-.validForm.birthDate-.gender))"];
+	x0 -> x2 [label="(((homepage.subscribes-.friendOf-)+(friendOf-.friendOf.actor-.actor)+(editor-.author.friendOf-)))*"];
 	x3 [shape=circle, label="?x3"];
-	x0 -> x3 [label="((expires-.author.gender)+(purchaseDate-.purchaseFor.conductor.gender))"];
+	x0 -> x3 [label="(((actor-.trailer.subscribes-.friendOf)+(friendOf-.friendOf-)))*"];
 }

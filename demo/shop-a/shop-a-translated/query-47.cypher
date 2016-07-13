@@ -1,1 +1,1 @@
-MATCH (x0)<-[:pgender]-()<-[:pfollows]-()<-[:pconductor]-()-[:pperformedIn]->(x1), (x1)-[:pparentContry]->()<-[:pparentContry]-(x2), (x0)<-[:pgender]-()-[:plike]->()-[:phasGenre]->(x3), (x2)<-[:pgender]-()<-[:pauthor]-()-[:phasGenre]->(x4) RETURN DISTINCT x0;
+MATCH (x0)<-[:phomepage]-()-[:pbookEdition]->()<-[:pcontentSize]-(x1), (x0)-[:purl]->()<-[:pemail]-(x2), (x1)-[:purl]->()<-[:pname]-()-[:ppaymentAccepted]->()<-[:ppaymentAccepted]-(x3) RETURN DISTINCT x0, x1;

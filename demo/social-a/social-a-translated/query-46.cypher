@@ -1,1 +1,1 @@
-MATCH (x0)-[:pimageFile|pgender*]->(x1), (x1)-[:pbrowserUsed|pcontent|pbrowserUsed*]->(x2), (x0)-[:pname*]->(x3), (x2)-[:pgender|pname|plocationIP*]->(x4) RETURN "true" LIMIT 1;
+MATCH (x0)<-[:preplyOf]-()-[:pcontent]->()<-[:plocationIP]-()<-[:phasModerator]-(x1), (x1)-[:pcontainerOf]->()-[:pcontent]->()<-[:pcontent]-(x2), (x2)-[:pcontent|pcontent|pcontent*]->(x3), (x3)-[:pcontent|pcontent|pcontent*]->(x4) RETURN DISTINCT x3, x2, x0, x1 UNION  UNION  UNION ;

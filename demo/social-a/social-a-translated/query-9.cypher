@@ -1,1 +1,1 @@
-MATCH (x0)-[:pname|pname|pname*]->(x1), (x0)-[:pname*]->(x2), (x0)-[:pname|pname|pname*]->(x3), (x0)-[:pname|pname|pname*]->(x4) RETURN DISTINCT x0, x1;
+MATCH (x0)-[:pcontent]->()<-[:pbrowserUsed]-()-[:pname]->()<-[:pname]-(x1), (x1)-[:pname*]->(x2), (x2)<-[:phasCreator]-()<-[:pisSubclassOf]-()-[:pisSubclassOf]->(x3) RETURN DISTINCT x0, x1, x2;

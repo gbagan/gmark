@@ -1,1 +1,1 @@
-MATCH (x0)-[:ppurchaseFor*]->(x1), (x0)-[:phomepage|peditor*]->(x2), (x1)-[:pincludes|peditor*]->(x3) RETURN DISTINCT x0, x1;
+MATCH (x0)<-[:phasReview]-()-[:pactor]->()<-[:pdirector]-(x1), (x0)<-[:phasReview]-()<-[:pincludes]-()-[:pincludes]->()<-[:ppurchaseFor]-(x2), (x1)-[:previewer]->()-[:phomepage]->()<-[:phomepage]-()<-[:ppurchaseFor]-(x3) RETURN "true" LIMIT 1;

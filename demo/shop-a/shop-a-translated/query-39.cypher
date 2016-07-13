@@ -1,1 +1,1 @@
-MATCH (x0)<-[:pcontactPoint]-()-[:pdescription]->()<-[:pproducer]-()-[:pexpires]->(x1), (x0)-[:plike]->()-[:phasGenre]->()-[:ptype]->(x2), (x1)<-[:pauthor]-()-[:phasGenre]->()-[:ptype]->(x3) RETURN DISTINCT x0, x1;
+MATCH (x0)<-[:phasGenre]-()-[:ptitle]->()<-[:pdescription]-()-[:pexpires]->(x1), (x1)<-[:ppurchaseDate]-()-[:pprice]->()<-[:pprintColumn]-()-[:pprintPage]->(x2), (x2)<-[:pcontentRating]-()-[:pcaption]->()<-[:ptitle]-()-[:phasGenre]->(x3), (x3)<-[:phasGenre]-()<-[:plike]-()-[:pgender]->(x4) RETURN "true" LIMIT 1;

@@ -1,1 +1,1 @@
-MATCH (x0)<-[:pvalidForm]-()-[:pincludes]->()-[:pexpires]->(x1), (x0)<-[:pexpires]-()-[:pmovement]->()<-[:pprintPage]-()-[:ptext]->(x2), (x1)<-[:pexpires]-()-[:peditor]->()-[:pfamilyName]->(x3) RETURN DISTINCT x0, x2, x3, x1;
+MATCH (x0)-[:phomepage]->()-[:phits]->()<-[:pcontentSize]-(x1), (x0)-[:pconductor]->()-[:pgivenName]->()<-[:ptext]-(x2), (x0)-[:ptext]->()<-[:pdescription]-(x3), (x0)-[:ptitle]->()<-[:ptitle]-(x4) RETURN DISTINCT x0;

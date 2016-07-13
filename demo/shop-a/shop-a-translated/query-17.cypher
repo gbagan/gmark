@@ -1,1 +1,1 @@
-MATCH (x0)<-[:pbirthDate]-()-[:pgender]->(x1), (x0)<-[:pexpires]-()-[:peditor]->()-[:pgender]->(x2), (x0)<-[:ppriceValidUntil]-()-[:pincludes]->()-[:pauthor]->()-[:pgender]->(x3), (x0)<-[:pexpires]-()<-[:plike]-()-[:pgender]->(x4) RETURN "true" LIMIT 1;
+MATCH (x0)-[:pincludes|ppurchaseFor*]->(x1), (x1)-[:pcaption]->()<-[:pcaption]-()-[:pdescription]->()<-[:pkeywords]-(x2), (x2)-[:pactor|phasReview*]->(x3) RETURN DISTINCT x2, x1, x0, x3;

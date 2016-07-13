@@ -1,1 +1,1 @@
-MATCH (x0)<-[:ptag]-()<-[:plike]-()-[:page]->(x1), (x0)<-[:ptag]-()<-[:plike]-()-[:ptype]->(x2), (x1)<-[:ptag]-()<-[:plike]-()-[:ptype]->(x3) RETURN DISTINCT x0, x1, x2;
+MATCH (x0)-[:partist]->()<-[:previewer]-()<-[:phasReview]-(x1), (x0)<-[:pincludes]-()-[:pincludes]->()-[:phomepage]->()<-[:phomepage]-(x2), (x1)<-[:pincludes]-()-[:pincludes]->()<-[:ppurchaseFor]-()-[:ppurchaseFor]->(x3) RETURN DISTINCT x0, x1, x2;

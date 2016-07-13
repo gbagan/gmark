@@ -1,11 +1,9 @@
 digraph g {
-	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
 	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
-	x0 -> x1 [label="(((21.22-.21.22-)+(21.21-)))*"];
-	x2 [shape=circle, label="?x2"];
-	x0 -> x2 [label="(((16.16-.16.17-)))*"];
+	x2 [fillcolor="yellow", style="filled," shape=circle, label="?x2"];
+	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
+	x0 -> x1 [label="(((16.23-.24.16-)+(16.16-)+(16.21-.16.16-)))*"];
+	x0 -> x2 [label="(((16.22-.22.16-)+(16.23-.23.16-)))*"];
 	x3 [shape=circle, label="?x3"];
-	x0 -> x3 [label="(((15.18-)+(18.18-.21.22-)))*"];
-	x4 [shape=circle, label="?x4"];
-	x0 -> x4 [label="(((16.25-.24.16-)))*"];
+	x0 -> x3 [label="(((16.16-.22.16-)+(16.16-.16.16-)+(16.16-)))*"];
 }

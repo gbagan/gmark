@@ -1,1 +1,1 @@
-MATCH (x0)-[:pname|pname*]->(x1), (x1)-[:pname]->()<-[:pimageFile]-()-[:pimageFile]->()<-[:pname]-(x2), (x0)-[:pname|pname|pname*]->(x3), (x2)-[:pname*]->(x4) RETURN DISTINCT x3, x0, x2, x1 UNION  UNION ;
+MATCH (x0)<-[:pisLocatedIn]-()-[:phasInterest]->()-[:phasType]->(x1), (x0)<-[:pisLocatedIn]-()-[:phasInterest]->()-[:phasType]->(x2), (x0)<-[:pisLocatedIn]-()<-[:pknows]-()-[:phasInterest]->()-[:phasType]->(x3) RETURN DISTINCT x0, x1 UNION ;

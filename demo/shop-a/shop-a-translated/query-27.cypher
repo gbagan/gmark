@@ -1,1 +1,1 @@
-MATCH (x0)-[:ppurchaseFor*]->(x1), (x1)-[:phomepage|pconductor*]->(x2), (x2)-[:pcomposer]->()<-[:pcaption]-()<-[:plike]-()-[:page]->(x3) RETURN DISTINCT x0, x3;
+MATCH (x0)<-[:page]-()<-[:pfollows]-(x1), (x1)<-[:pfriendOf]-()-[:phomepage]->()<-[:phomepage]-()<-[:peditor]-(x2), (x2)-[:pexpires]->()<-[:pvalidThrough]-()-[:peditor]->(x3) RETURN DISTINCT x2, x1, x3, x0;

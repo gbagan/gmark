@@ -1,9 +1,11 @@
 digraph g {
 	x0 [shape=circle, label="?x0"];
 	x1 [shape=circle, label="?x1"];
-	x0 -> x1 [label="(((name.name-)+(name.name-)+(name.content-.content.name-)))*"];
+	x0 -> x1 [label="((birthday-.email.browserUsed-.likes)+(creationDate-.likes-.gender.locationIP-))"];
 	x2 [shape=circle, label="?x2"];
-	x1 -> x2 [label="((isLocatedIn.isLocatedIn-.isLocatedIn))"];
+	x1 -> x2 [label="((locationIP.name-.hasTag-.creationDate)+(likes-.birthday))"];
 	x3 [shape=circle, label="?x3"];
-	x2 -> x3 [label="((isPartOf.name.name-)+(name.name-.isSubclassOf))"];
+	x2 -> x3 [label="(((creationDate-.creationDate)))*"];
+	x4 [shape=circle, label="?x4"];
+	x3 -> x4 [label="((creationDate-.likes.isLocatedIn)+(birthday-.hasCreator-.isLocatedIn)+(birthday-.likes.isLocatedIn))"];
 }

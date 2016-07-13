@@ -1,11 +1,9 @@
 digraph g {
 	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
-	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
-	x2 [fillcolor="yellow", style="filled," shape=circle, label="?x2"];
-	x0 -> x1 [label="((hasType.isSubclassOf-)+(hasType.isSubclassOf-))"];
-	x0 -> x2 [label="((name.name-.hasType-.hasType)+(hasInterest-.hasInterest.hasType))"];
+	x1 [shape=circle, label="?x1"];
+	x0 -> x1 [label="((replyOf.likes-.locationIP.name-))"];
+	x2 [shape=circle, label="?x2"];
+	x1 -> x2 [label="(((name.locationIP-.locationIP.name-)))*"];
 	x3 [shape=circle, label="?x3"];
-	x0 -> x3 [label="((hasInterest-.likes.browserUsed.name-))"];
-	x4 [shape=circle, label="?x4"];
-	x0 -> x4 [label="((hasType.isSubclassOf-))"];
+	x2 -> x3 [label="((name.browserUsed-.email.name-))"];
 }

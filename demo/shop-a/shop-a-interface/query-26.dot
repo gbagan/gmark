@@ -1,11 +1,9 @@
 digraph g {
-	x2 [fillcolor="yellow", style="filled," shape=circle, label="?x2"];
-	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
-	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
-	x0 -> x1 [label="((tag-.like-.type)+(tag-.conductor.type))"];
-	x0 -> x2 [label="((tag-.like-.type)+(tag-.like-.type)+(tag-.description.givenName-.type))"];
+	x0 [shape=circle, label="?x0"];
+	x1 [shape=circle, label="?x1"];
+	x0 -> x1 [label="((age-.director-.like-.friendOf)+(age-.author-.editor))"];
+	x2 [shape=circle, label="?x2"];
+	x0 -> x2 [label="((age-.friendOf-.like))"];
 	x3 [shape=circle, label="?x3"];
-	x0 -> x3 [label="((tag-.director.type)+(tag-.contentRating.userId-.type))"];
-	x4 [shape=circle, label="?x4"];
-	x0 -> x4 [label="((tag-.author.type)+(tag-.like-.type)+(tag-.editor.type))"];
+	x1 -> x3 [label="((age-.userId.printSection-)+(age-.like.contentSize.contentSize-))"];
 }

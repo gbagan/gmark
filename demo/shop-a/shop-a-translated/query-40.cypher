@@ -1,1 +1,1 @@
-MATCH (x0)-[:pkeywords]->()<-[:pkeywords]-()-[:pisbn]->()<-[:pprintEdition]-(x1), (x0)-[:phomepage]->()-[:phits]->()<-[:puserId]-(x2), (x1)-[:ptitle]->()<-[:ptitle]-()<-[:ppurchaseFor]-()<-[:pmakesPurchase]-(x3) RETURN DISTINCT x0, x1;
+MATCH (x0)<-[:pdatePublished]-()-[:peditor]->()-[:pfamilyName]->()<-[:ptext]-(x1), (x1)-[:pdirector]->()-[:plike]->()<-[:pincludes]-()-[:pincludes]->(x2), (x2)-[:pconductor]->()-[:pfollows]->()-[:pmakesPurchase]->(x3), (x3)<-[:pmakesPurchase]-()-[:pemail]->()<-[:pkeywords]-()-[:phasGenre]->(x4) RETURN DISTINCT x0, x4;

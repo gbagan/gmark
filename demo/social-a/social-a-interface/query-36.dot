@@ -1,11 +1,9 @@
 digraph g {
-	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
-	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
-	x2 [fillcolor="yellow", style="filled," shape=circle, label="?x2"];
-	x0 -> x1 [label="(((creationDate-.locationIP.locationIP-.creationDate)))*"];
-	x1 -> x2 [label="(((creationDate-.birthday)+(creationDate-.creationDate)+(birthday-.locationIP.name-.creationDate)))*"];
+	x0 [shape=circle, label="?x0"];
+	x1 [shape=circle, label="?x1"];
+	x0 -> x1 [label="(((browserUsed.locationIP-)+(browserUsed.content-.content.browserUsed-)+(locationIP.locationIP-)))*"];
+	x2 [shape=circle, label="?x2"];
+	x1 -> x2 [label="((isSubclassOf-.content.email-.birthday)+(isSubclassOf-.containerOf-.creationDate)+(likes-.creationDate.creationDate-.birthday))"];
 	x3 [shape=circle, label="?x3"];
-	x0 -> x3 [label="(((creationDate-.likes-.isLocatedIn.isLocatedIn-)+(birthday-.isLocatedIn.isLocatedIn-)+(creationDate-.isLocatedIn.isLocatedIn-)))*"];
-	x4 [shape=circle, label="?x4"];
-	x2 -> x4 [label="(((creationDate-.isLocatedIn.isLocatedIn-)+(creationDate-.isLocatedIn.isLocatedIn-)))*"];
+	x2 -> x3 [label="((creationDate-.hasModerator-.length.name-)+(birthday-.email.name-))"];
 }

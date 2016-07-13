@@ -1,1 +1,1 @@
-MATCH (x0)-[:pisSubclassOf]->()<-[:phasType]-()<-[:phasTag]-(x1), (x0)<-[:pisSubclassOf]-()-[:pname]->()<-[:pemail]-()<-[:phasModerator]-(x2), (x0)-[:pname]->()<-[:pemail]-()<-[:phasModerator]-(x3), (x0)<-[:phasType]-()<-[:phasInterest]-()<-[:phasModerator]-(x4) RETURN "true" LIMIT 1;
+MATCH (x0)-[:pname|pname|pname*]->(x1), (x1)<-[:pworksAt]-()-[:plikes]->()<-[:preplyOf]-(x2), (x2)-[:planguage|pcontent*]->(x3) RETURN "true" LIMIT 1;

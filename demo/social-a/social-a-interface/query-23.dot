@@ -1,11 +1,9 @@
 digraph g {
-	x3 [fillcolor="yellow", style="filled," shape=circle, label="?x3"];
 	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
-	x2 [fillcolor="yellow", style="filled," shape=circle, label="?x2"];
 	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
-	x0 -> x1 [label="(((name.name-)+(name.browserUsed-.name.name-)))*"];
-	x1 -> x2 [label="((name.imageFile-.imageFile.name-))"];
-	x0 -> x3 [label="(((name.gender-.locationIP.name-)+(name.name-)+(name.name-)))*"];
-	x4 [shape=circle, label="?x4"];
-	x2 -> x4 [label="(((name.name-)))*"];
+	x0 -> x1 [label="((isLocatedIn-.hasInterest.hasType)+(isLocatedIn-.hasInterest.hasType))"];
+	x2 [shape=circle, label="?x2"];
+	x0 -> x2 [label="((isLocatedIn-.hasInterest.hasType)+(isLocatedIn-.hasInterest.hasType)+(isLocatedIn-.hasInterest.hasType))"];
+	x3 [shape=circle, label="?x3"];
+	x0 -> x3 [label="((isLocatedIn-.knows-.hasInterest.hasType)+(isLocatedIn-.hasCreator-.hasTag.hasType))"];
 }

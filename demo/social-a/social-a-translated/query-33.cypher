@@ -1,1 +1,1 @@
-MATCH (x0)-[:planguage]->()<-[:pgender]-()-[:pstudyAt]->(x1), (x1)-[:pname*]->(x2), (x0)-[:pimageFile]->()<-[:pimageFile]-()-[:pcontent]->()<-[:pcontent]-(x3), (x2)-[:pimageFile]->()<-[:pimageFile]-(x4) RETURN "true" LIMIT 1;
+MATCH (x0)<-[:pbirthday]-()<-[:pknows]-()-[:pemail]->()<-[:pname]-(x1), (x0)<-[:pcreationDate]-()-[:phasModerator]->()-[:pspeaks]->()<-[:pname]-(x2), (x0)<-[:pbirthday]-()<-[:pknows]-()-[:pspeaks]->()<-[:pname]-(x3) RETURN DISTINCT x0, x1, x2 UNION ;

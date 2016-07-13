@@ -1,1 +1,1 @@
-MATCH (x0)<-[:pnationality]-()-[:pfriendOf]->()-[:plike]->()<-[:ppurchaseFor]-(x1), (x1)-[:pmakesPurchase*]->(x2), (x2)-[:ppurchaseFor|pmakesPurchase*]->(x3), (x3)-[:pmakesPurchase|ppurchaseFor*]->(x4) RETURN DISTINCT x1, x2, x0;
+MATCH (x0)<-[:pkeywords]-()-[:ptext]->()<-[:pgivenName]-()-[:plike]->(x1), (x1)-[:phasReview|pincludes|phomepage*]->(x2), (x2)-[:ptitle]->()<-[:pcaption]-()-[:pexpires]->()<-[:pexpires]-(x3), (x3)-[:phomepage]->()<-[:phomepage]-(x4) RETURN DISTINCT x1, x2, x0;

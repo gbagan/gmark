@@ -1,1 +1,1 @@
-MATCH (x0)<-[:pcontentSize]-()-[:phasGenre]->(x1), (x1)<-[:phasGenre]-()-[:phomepage]->(x2), (x2)<-[:phomepage]-()<-[:pincludes]-()-[:ppriceValidUntil]->(x3), (x3)<-[:pexpires]-()-[:peditor]->()-[:pbirthDate]->(x4) RETURN DISTINCT x1, x0, x2;
+MATCH (x0)<-[:ptag]-()-[:pcontentSize]->()<-[:pmovement]-()-[:pperformedIn]->(x1), (x0)<-[:ptag]-()-[:ptext]->()<-[:pkeywords]-()-[:pcaption]->(x2), (x1)<-[:ptag]-()-[:phasReview]->()-[:ptitle]->(x3) RETURN DISTINCT x0, x2, x1, x3;

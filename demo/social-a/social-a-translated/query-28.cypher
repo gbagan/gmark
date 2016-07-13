@@ -1,1 +1,1 @@
-MATCH (x0)<-[:pbirthday]-()-[:pemail]->()<-[:pname]-(x1), (x1)-[:pname]->()<-[:pname]-()-[:pbrowserUsed]->()<-[:plength]-(x2), (x2)-[:plength|pcreationDate|plength*]->(x3), (x3)-[:plength]->()<-[:pgender]-()-[:pemail]->()<-[:plocationIP]-(x4) RETURN DISTINCT x0, x1, x2, x3;
+MATCH (x0)-[:pname*]->(x1), (x0)-[:pname|pname|pname*]->(x2), (x1)-[:pname*]->(x3) RETURN DISTINCT x0, x1;

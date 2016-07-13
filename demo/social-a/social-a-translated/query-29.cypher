@@ -1,1 +1,1 @@
-MATCH (x0)-[:pcontent*]->(x1), (x0)-[:pcontent*]->(x2), (x1)-[:pcontent|pcontent*]->(x3) RETURN "true" LIMIT 1 UNION ;
+MATCH (x0)-[:pname|pname*]->(x1), (x0)-[:pname|pname*]->(x2), (x0)-[:pname|pname|pname*]->(x3), (x0)-[:pname|pname*]->(x4) RETURN DISTINCT x1, x2, x0 UNION  UNION ;

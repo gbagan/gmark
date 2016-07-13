@@ -4,73 +4,6 @@
     <id>0</id>
     <number>0</number>
     <input>../use-cases/shop.xml</input>
-    <arity>3</arity>
-    <selectivity>-</selectivity>
-    <multiplicity>0.25</multiplicity>
-    <conjunct>4</conjunct>
-    <disjuncts>1-2</disjuncts>
-    <length>2-4</length>
-  </metadata>
-  <head>
-    <var>?x1</var>
-    <var>?x0</var>
-    <var>?x2</var>
-  </head>
-  <bodies>
-    <body>
-      <conjunct src="?x0" trg="?x1">
-      <disj>
-        <concat>
-          <symbol>includes</symbol>
-          <symbol>homepage</symbol>
-          <symbol inverse="true">homepage</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x1" trg="?x2">
-      <star>
-      <disj>
-        <concat>
-          <symbol inverse="true">purchaseFor</symbol>
-          <symbol inverse="true">makesPurchase</symbol>
-          <symbol>friendOf</symbol>
-          <symbol inverse="true">author</symbol>
-        </concat>
-        <concat>
-          <symbol>editor</symbol>
-          <symbol inverse="true">editor</symbol>
-        </concat>
-      </disj>
-      </star>
-      </conjunct>
-      <conjunct src="?x2" trg="?x3">
-      <disj>
-        <concat>
-          <symbol>contentSize</symbol>
-          <symbol inverse="true">printPage</symbol>
-          <symbol>description</symbol>
-          <symbol inverse="true">title</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x3" trg="?x4">
-      <disj>
-        <concat>
-          <symbol>hasReview</symbol>
-          <symbol>reviewer</symbol>
-          <symbol inverse="true">employee</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-    </body>
-  </bodies>
-</query>
-
-<query>
-  <metadata>
-    <id>0</id>
-    <number>1</number>
-    <input>../use-cases/shop.xml</input>
     <arity>0</arity>
     <selectivity>-</selectivity>
     <multiplicity>0</multiplicity>
@@ -85,47 +18,125 @@
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol inverse="true">editor</symbol>
-          <symbol>eligibleQuantity</symbol>
-          <symbol inverse="true">recordNumber</symbol>
-          <symbol>release</symbol>
+          <symbol inverse="true">like</symbol>
+          <symbol inverse="true">author</symbol>
+          <symbol>hasReview</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">editor</symbol>
+          <symbol inverse="true">like</symbol>
+          <symbol>makesPurchase</symbol>
+          <symbol>purchaseFor</symbol>
+          <symbol>hasReview</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">includes</symbol>
           <symbol>includes</symbol>
-          <symbol>release</symbol>
+          <symbol inverse="true">like</symbol>
+          <symbol inverse="true">reviewer</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x0" trg="?x2">
       <disj>
         <concat>
-          <symbol inverse="true">nationality</symbol>
-          <symbol>friendOf</symbol>
-          <symbol>gender</symbol>
+          <symbol inverse="true">like</symbol>
+          <symbol inverse="true">contactPoint</symbol>
+          <symbol>employee</symbol>
+          <symbol inverse="true">reviewer</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">nationality</symbol>
-          <symbol>gender</symbol>
+          <symbol inverse="true">like</symbol>
+          <symbol inverse="true">author</symbol>
+          <symbol>hasReview</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">nationality</symbol>
-          <symbol>follows</symbol>
-          <symbol>gender</symbol>
+          <symbol inverse="true">like</symbol>
+          <symbol inverse="true">reviewer</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x1" trg="?x3">
+      <conjunct src="?x0" trg="?x3">
       <disj>
         <concat>
-          <symbol inverse="true">nationality</symbol>
-          <symbol>gender</symbol>
+          <symbol inverse="true">like</symbol>
+          <symbol inverse="true">conductor</symbol>
+          <symbol>hasReview</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">nationality</symbol>
-          <symbol>gender</symbol>
+          <symbol inverse="true">like</symbol>
+          <symbol inverse="true">reviewer</symbol>
         </concat>
       </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>1</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>3</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>0.666667</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>2-2</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x1</var>
+    <var>?x0</var>
+    <var>?x2</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">hasReview</symbol>
+          <symbol inverse="true">includes</symbol>
+          <symbol>includes</symbol>
+          <symbol>hasReview</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">hasReview</symbol>
+          <symbol inverse="true">includes</symbol>
+          <symbol>includes</symbol>
+          <symbol>hasReview</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
+          <symbol>reviewer</symbol>
+          <symbol inverse="true">follows</symbol>
+          <symbol inverse="true">contactPoint</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">hasReview</symbol>
+          <symbol inverse="true">like</symbol>
+          <symbol inverse="true">employee</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol>contactPoint</symbol>
+          <symbol inverse="true">employee</symbol>
+        </concat>
+        <concat>
+          <symbol>employee</symbol>
+          <symbol>friendOf</symbol>
+          <symbol inverse="true">employee</symbol>
+        </concat>
+      </disj>
+      </star>
       </conjunct>
     </body>
   </bodies>
@@ -136,59 +147,74 @@
     <id>0</id>
     <number>2</number>
     <input>../use-cases/shop.xml</input>
-    <arity>1</arity>
+    <arity>3</arity>
     <selectivity>-</selectivity>
-    <multiplicity>0</multiplicity>
+    <multiplicity>1</multiplicity>
     <conjunct>3</conjunct>
-    <disjuncts>1-3</disjuncts>
+    <disjuncts>2-3</disjuncts>
     <length>2-4</length>
   </metadata>
   <head>
+    <var>?x2</var>
+    <var>?x1</var>
     <var>?x0</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
+      <star>
       <disj>
         <concat>
-          <symbol inverse="true">makesPurchase</symbol>
-          <symbol inverse="true">conductor</symbol>
+          <symbol inverse="true">includes</symbol>
+          <symbol>includes</symbol>
+        </concat>
+        <concat>
+          <symbol>author</symbol>
+          <symbol>homepage</symbol>
+          <symbol inverse="true">homepage</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">purchaseFor</symbol>
+          <symbol>purchaseFor</symbol>
+          <symbol inverse="true">includes</symbol>
+          <symbol>includes</symbol>
         </concat>
       </disj>
+      </star>
       </conjunct>
       <conjunct src="?x0" trg="?x2">
+      <star>
       <disj>
         <concat>
-          <symbol>purchaseFor</symbol>
           <symbol>hasReview</symbol>
-          <symbol>reviewer</symbol>
-          <symbol>makesPurchase</symbol>
+          <symbol inverse="true">hasReview</symbol>
         </concat>
         <concat>
-          <symbol>purchaseFor</symbol>
-          <symbol inverse="true">purchaseFor</symbol>
-          <symbol inverse="true">makesPurchase</symbol>
-          <symbol>makesPurchase</symbol>
+          <symbol>hasReview</symbol>
+          <symbol inverse="true">hasReview</symbol>
         </concat>
       </disj>
+      </star>
       </conjunct>
       <conjunct src="?x1" trg="?x3">
+      <star>
       <disj>
         <concat>
-          <symbol>purchaseFor</symbol>
-          <symbol>conductor</symbol>
-          <symbol>makesPurchase</symbol>
+          <symbol>editor</symbol>
+          <symbol inverse="true">author</symbol>
         </concat>
         <concat>
-          <symbol>purchaseFor</symbol>
-          <symbol inverse="true">purchaseFor</symbol>
+          <symbol>editor</symbol>
+          <symbol inverse="true">actor</symbol>
+          <symbol>trailer</symbol>
+          <symbol inverse="true">homepage</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">makesPurchase</symbol>
-          <symbol inverse="true">editor</symbol>
-          <symbol inverse="true">purchaseFor</symbol>
+          <symbol>homepage</symbol>
+          <symbol inverse="true">homepage</symbol>
         </concat>
       </disj>
+      </star>
       </conjunct>
     </body>
   </bodies>
@@ -199,65 +225,65 @@
     <id>0</id>
     <number>3</number>
     <input>../use-cases/shop.xml</input>
-    <arity>0</arity>
+    <arity>1</arity>
     <selectivity>-</selectivity>
     <multiplicity>0</multiplicity>
-    <conjunct>3</conjunct>
-    <disjuncts>1-3</disjuncts>
+    <conjunct>4</conjunct>
+    <disjuncts>1-2</disjuncts>
     <length>2-4</length>
   </metadata>
   <head>
+    <var>?x0</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol inverse="true">performedIn</symbol>
-          <symbol>performer</symbol>
-          <symbol inverse="true">text</symbol>
-          <symbol>contentSize</symbol>
+          <symbol>editor</symbol>
+          <symbol>like</symbol>
+          <symbol inverse="true">like</symbol>
+          <symbol inverse="true">actor</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">location</symbol>
-          <symbol>makesPurchase</symbol>
-          <symbol>purchaseFor</symbol>
-          <symbol>contentRating</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">location</symbol>
-          <symbol>userId</symbol>
+          <symbol>editor</symbol>
+          <symbol>like</symbol>
+          <symbol inverse="true">like</symbol>
+          <symbol inverse="true">actor</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x0" trg="?x2">
+      <conjunct src="?x1" trg="?x2">
       <disj>
         <concat>
-          <symbol inverse="true">performedIn</symbol>
-          <symbol inverse="true">like</symbol>
-          <symbol inverse="true">author</symbol>
-          <symbol>printEdition</symbol>
+          <symbol>actor</symbol>
+          <symbol>like</symbol>
+          <symbol>hasReview</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x0" trg="?x3">
       <disj>
         <concat>
-          <symbol inverse="true">location</symbol>
-          <symbol>follows</symbol>
-          <symbol>like</symbol>
-          <symbol>contentSize</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">location</symbol>
-          <symbol inverse="true">artist</symbol>
           <symbol inverse="true">includes</symbol>
-          <symbol>price</symbol>
+          <symbol>includes</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">location</symbol>
-          <symbol>friendOf</symbol>
-          <symbol>telephone</symbol>
+          <symbol inverse="true">purchaseFor</symbol>
+          <symbol>purchaseFor</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x4">
+      <disj>
+        <concat>
+          <symbol>author</symbol>
+          <symbol inverse="true">friendOf</symbol>
+          <symbol inverse="true">author</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">purchaseFor</symbol>
+          <symbol>purchaseFor</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -270,44 +296,39 @@
     <id>0</id>
     <number>4</number>
     <input>../use-cases/shop.xml</input>
-    <arity>1</arity>
+    <arity>0</arity>
     <selectivity>-</selectivity>
-    <multiplicity>0.5</multiplicity>
-    <conjunct>4</conjunct>
-    <disjuncts>2-2</disjuncts>
+    <multiplicity>0.666667</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-2</disjuncts>
     <length>2-4</length>
   </metadata>
   <head>
-    <var>?x0</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
+      <star>
       <disj>
         <concat>
-          <symbol inverse="true">type</symbol>
-          <symbol inverse="true">hasGenre</symbol>
-          <symbol>text</symbol>
-          <symbol inverse="true">url</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">type</symbol>
-          <symbol inverse="true">hasGenre</symbol>
-          <symbol>homepage</symbol>
+          <symbol>hasReview</symbol>
+          <symbol inverse="true">hasReview</symbol>
+          <symbol inverse="true">purchaseFor</symbol>
+          <symbol>purchaseFor</symbol>
         </concat>
       </disj>
+      </star>
       </conjunct>
       <conjunct src="?x1" trg="?x2">
       <disj>
         <concat>
-          <symbol inverse="true">trailer</symbol>
-          <symbol>trailer</symbol>
-          <symbol>url</symbol>
-          <symbol inverse="true">name</symbol>
+          <symbol>actor</symbol>
+          <symbol inverse="true">reviewer</symbol>
         </concat>
         <concat>
-          <symbol>url</symbol>
-          <symbol inverse="true">email</symbol>
+          <symbol>homepage</symbol>
+          <symbol inverse="true">subscribes</symbol>
+          <symbol inverse="true">reviewer</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -315,30 +336,16 @@
       <star>
       <disj>
         <concat>
-          <symbol>employee</symbol>
-          <symbol>homepage</symbol>
-          <symbol inverse="true">subscribes</symbol>
-          <symbol inverse="true">employee</symbol>
-        </concat>
-        <concat>
-          <symbol>employee</symbol>
-          <symbol inverse="true">employee</symbol>
-        </concat>
-      </disj>
-      </star>
-      </conjunct>
-      <conjunct src="?x3" trg="?x4">
-      <star>
-      <disj>
-        <concat>
-          <symbol>employee</symbol>
-          <symbol inverse="true">contactPoint</symbol>
-        </concat>
-        <concat>
-          <symbol>contactPoint</symbol>
-          <symbol inverse="true">reviewer</symbol>
           <symbol>reviewer</symbol>
-          <symbol inverse="true">employee</symbol>
+          <symbol>makesPurchase</symbol>
+          <symbol>purchaseFor</symbol>
+          <symbol>hasReview</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">hasReview</symbol>
+          <symbol>homepage</symbol>
+          <symbol inverse="true">homepage</symbol>
+          <symbol>hasReview</symbol>
         </concat>
       </disj>
       </star>
@@ -352,66 +359,59 @@
     <id>0</id>
     <number>5</number>
     <input>../use-cases/shop.xml</input>
-    <arity>3</arity>
+    <arity>0</arity>
     <selectivity>-</selectivity>
     <multiplicity>0</multiplicity>
-    <conjunct>4</conjunct>
-    <disjuncts>1-2</disjuncts>
-    <length>2-4</length>
+    <conjunct>3</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>3-4</length>
   </metadata>
   <head>
-    <var>?x1</var>
-    <var>?x0</var>
-    <var>?x2</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol>description</symbol>
-          <symbol inverse="true">description</symbol>
-          <symbol>hasGenre</symbol>
-          <symbol>type</symbol>
-        </concat>
-        <concat>
-          <symbol>hasGenre</symbol>
-          <symbol>type</symbol>
+          <symbol inverse="true">type</symbol>
+          <symbol>like</symbol>
+          <symbol>keywords</symbol>
+          <symbol inverse="true">title</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x1" trg="?x2">
       <disj>
         <concat>
-          <symbol inverse="true">type</symbol>
-          <symbol inverse="true">hasGenre</symbol>
-          <symbol>performedIn</symbol>
+          <symbol>director</symbol>
+          <symbol inverse="true">friendOf</symbol>
+          <symbol>age</symbol>
+        </concat>
+        <concat>
+          <symbol>contentRating</symbol>
+          <symbol inverse="true">duration</symbol>
+          <symbol inverse="true">like</symbol>
+          <symbol>age</symbol>
+        </concat>
+        <concat>
+          <symbol>description</symbol>
+          <symbol inverse="true">jobTitle</symbol>
+          <symbol>age</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x0" trg="?x3">
+      <conjunct src="?x2" trg="?x3">
       <disj>
         <concat>
-          <symbol inverse="true">purchaseFor</symbol>
-          <symbol>purchaseFor</symbol>
-          <symbol inverse="true">includes</symbol>
-          <symbol>includes</symbol>
+          <symbol inverse="true">age</symbol>
+          <symbol>userId</symbol>
+          <symbol inverse="true">contentRating</symbol>
+          <symbol>text</symbol>
         </concat>
         <concat>
-          <symbol>hasReview</symbol>
-          <symbol inverse="true">hasReview</symbol>
-          <symbol>trailer</symbol>
-          <symbol inverse="true">homepage</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x2" trg="?x4">
-      <disj>
-        <concat>
-          <symbol>hasReview</symbol>
-          <symbol inverse="true">hasReview</symbol>
-          <symbol>trailer</symbol>
-          <symbol inverse="true">homepage</symbol>
+          <symbol inverse="true">age</symbol>
+          <symbol>like</symbol>
+          <symbol>text</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -424,97 +424,66 @@
     <id>0</id>
     <number>6</number>
     <input>../use-cases/shop.xml</input>
-    <arity>3</arity>
+    <arity>0</arity>
     <selectivity>-</selectivity>
-    <multiplicity>1</multiplicity>
-    <conjunct>4</conjunct>
+    <multiplicity>0</multiplicity>
+    <conjunct>3</conjunct>
     <disjuncts>2-3</disjuncts>
     <length>2-4</length>
   </metadata>
   <head>
-    <var>?x1</var>
-    <var>?x2</var>
-    <var>?x0</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
-      <star>
       <disj>
         <concat>
-          <symbol inverse="true">employee</symbol>
-          <symbol>contactPoint</symbol>
-          <symbol inverse="true">friendOf</symbol>
-          <symbol>friendOf</symbol>
+          <symbol>duration</symbol>
+          <symbol inverse="true">duration</symbol>
+          <symbol>award</symbol>
+          <symbol inverse="true">caption</symbol>
         </concat>
         <concat>
-          <symbol>homepage</symbol>
-          <symbol inverse="true">subscribes</symbol>
+          <symbol>director</symbol>
+          <symbol>jobTitle</symbol>
+          <symbol inverse="true">caption</symbol>
+        </concat>
+        <concat>
+          <symbol>description</symbol>
+          <symbol inverse="true">keywords</symbol>
         </concat>
       </disj>
-      </star>
       </conjunct>
       <conjunct src="?x0" trg="?x2">
-      <star>
       <disj>
         <concat>
-          <symbol inverse="true">author</symbol>
-          <symbol>editor</symbol>
+          <symbol>duration</symbol>
+          <symbol inverse="true">aggregateRating</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">conductor</symbol>
-          <symbol>conductor</symbol>
+          <symbol>text</symbol>
+          <symbol inverse="true">legalName</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">director</symbol>
-          <symbol>director</symbol>
-          <symbol>friendOf</symbol>
+          <symbol>contentSize</symbol>
+          <symbol inverse="true">faxNumber</symbol>
         </concat>
       </disj>
-      </star>
       </conjunct>
-      <conjunct src="?x0" trg="?x3">
-      <star>
+      <conjunct src="?x1" trg="?x3">
       <disj>
         <concat>
-          <symbol>friendOf</symbol>
-          <symbol>friendOf</symbol>
-          <symbol inverse="true">employee</symbol>
-          <symbol>contactPoint</symbol>
+          <symbol>trailer</symbol>
+          <symbol>url</symbol>
+          <symbol inverse="true">legalName</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">editor</symbol>
-          <symbol>author</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">editor</symbol>
-          <symbol>author</symbol>
-          <symbol>friendOf</symbol>
+          <symbol>award</symbol>
+          <symbol inverse="true">award</symbol>
+          <symbol>caption</symbol>
+          <symbol inverse="true">email</symbol>
         </concat>
       </disj>
-      </star>
-      </conjunct>
-      <conjunct src="?x0" trg="?x4">
-      <star>
-      <disj>
-        <concat>
-          <symbol>makesPurchase</symbol>
-          <symbol>purchaseFor</symbol>
-          <symbol>conductor</symbol>
-        </concat>
-        <concat>
-          <symbol>friendOf</symbol>
-          <symbol>friendOf</symbol>
-          <symbol>homepage</symbol>
-          <symbol inverse="true">subscribes</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">friendOf</symbol>
-          <symbol inverse="true">friendOf</symbol>
-          <symbol inverse="true">friendOf</symbol>
-        </concat>
-      </disj>
-      </star>
       </conjunct>
     </body>
   </bodies>
@@ -525,67 +494,85 @@
     <id>0</id>
     <number>7</number>
     <input>../use-cases/shop.xml</input>
-    <arity>1</arity>
-    <selectivity>-</selectivity>
+    <arity>2</arity>
+    <selectivity>2</selectivity>
     <multiplicity>0</multiplicity>
     <conjunct>4</conjunct>
-    <disjuncts>1-2</disjuncts>
-    <length>4-4</length>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
   </metadata>
   <head>
     <var>?x0</var>
+    <var>?x4</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol>reviewer</symbol>
-          <symbol>like</symbol>
+          <symbol>hasReview</symbol>
+          <symbol inverse="true">hasReview</symbol>
           <symbol inverse="true">like</symbol>
-          <symbol inverse="true">actor</symbol>
+          <symbol>friendOf</symbol>
         </concat>
         <concat>
-          <symbol>reviewer</symbol>
+          <symbol inverse="true">like</symbol>
+          <symbol>subscribes</symbol>
+          <symbol inverse="true">homepage</symbol>
+          <symbol inverse="true">like</symbol>
+        </concat>
+        <concat>
+          <symbol>hasReview</symbol>
+          <symbol inverse="true">hasReview</symbol>
+          <symbol inverse="true">like</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
+          <symbol>like</symbol>
+          <symbol inverse="true">like</symbol>
+          <symbol>homepage</symbol>
+        </concat>
+        <concat>
+          <symbol>like</symbol>
+          <symbol inverse="true">like</symbol>
+          <symbol>homepage</symbol>
+        </concat>
+        <concat>
           <symbol>follows</symbol>
-          <symbol inverse="true">follows</symbol>
-          <symbol inverse="true">director</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x0" trg="?x2">
-      <disj>
-        <concat>
-          <symbol>reviewer</symbol>
           <symbol>like</symbol>
           <symbol inverse="true">like</symbol>
-          <symbol inverse="true">director</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">hasReview</symbol>
-          <symbol>artist</symbol>
-          <symbol inverse="true">follows</symbol>
-          <symbol inverse="true">director</symbol>
+          <symbol>homepage</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x0" trg="?x3">
+      <conjunct src="?x2" trg="?x3">
       <disj>
         <concat>
-          <symbol inverse="true">hasReview</symbol>
-          <symbol>artist</symbol>
-          <symbol inverse="true">follows</symbol>
-          <symbol inverse="true">director</symbol>
+          <symbol inverse="true">homepage</symbol>
+          <symbol>description</symbol>
+          <symbol inverse="true">description</symbol>
+          <symbol inverse="true">includes</symbol>
+        </concat>
+        <concat>
+          <symbol>hits</symbol>
+          <symbol inverse="true">price</symbol>
+        </concat>
+        <concat>
+          <symbol>hits</symbol>
+          <symbol inverse="true">price</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x0" trg="?x4">
+      <conjunct src="?x3" trg="?x4">
       <disj>
         <concat>
-          <symbol>reviewer</symbol>
-          <symbol>like</symbol>
-          <symbol inverse="true">like</symbol>
-          <symbol inverse="true">director</symbol>
+          <symbol>includes</symbol>
+          <symbol>artist</symbol>
+          <symbol inverse="true">follows</symbol>
+          <symbol inverse="true">actor</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -598,8 +585,293 @@
     <id>0</id>
     <number>8</number>
     <input>../use-cases/shop.xml</input>
+    <arity>4</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>1</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x1</var>
+    <var>?x2</var>
+    <var>?x0</var>
+    <var>?x3</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">homepage</symbol>
+          <symbol>homepage</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">homepage</symbol>
+          <symbol>homepage</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">homepage</symbol>
+          <symbol>trailer</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">subscribes</symbol>
+          <symbol>friendOf</symbol>
+          <symbol>homepage</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">homepage</symbol>
+          <symbol>friendOf</symbol>
+          <symbol>homepage</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">homepage</symbol>
+          <symbol>homepage</symbol>
+          <symbol inverse="true">homepage</symbol>
+          <symbol>subscribes</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">homepage</symbol>
+          <symbol inverse="true">purchaseFor</symbol>
+          <symbol>purchaseFor</symbol>
+          <symbol>homepage</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x2" trg="?x4">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">homepage</symbol>
+          <symbol>homepage</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">homepage</symbol>
+          <symbol>makesPurchase</symbol>
+          <symbol>purchaseFor</symbol>
+          <symbol>homepage</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">homepage</symbol>
+          <symbol>homepage</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>9</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>4</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>3-4</length>
+  </metadata>
+  <head>
+    <var>?x3</var>
+    <var>?x0</var>
+    <var>?x1</var>
+    <var>?x2</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol inverse="true">language</symbol>
+          <symbol>keywords</symbol>
+          <symbol inverse="true">email</symbol>
+          <symbol>location</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">language</symbol>
+          <symbol inverse="true">like</symbol>
+          <symbol>location</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">language</symbol>
+          <symbol>actor</symbol>
+          <symbol>nationality</symbol>
+          <symbol inverse="true">parentContry</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <disj>
+        <concat>
+          <symbol inverse="true">language</symbol>
+          <symbol inverse="true">like</symbol>
+          <symbol>location</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <disj>
+        <concat>
+          <symbol inverse="true">language</symbol>
+          <symbol>isbn</symbol>
+          <symbol inverse="true">userId</symbol>
+          <symbol>location</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">language</symbol>
+          <symbol inverse="true">like</symbol>
+          <symbol>location</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x4">
+      <disj>
+        <concat>
+          <symbol inverse="true">language</symbol>
+          <symbol>editor</symbol>
+          <symbol>location</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">language</symbol>
+          <symbol inverse="true">homepage</symbol>
+          <symbol>location</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">language</symbol>
+          <symbol>contentSize</symbol>
+          <symbol inverse="true">telephone</symbol>
+          <symbol>location</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>10</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>4</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>1</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x2</var>
+    <var>?x0</var>
+    <var>?x1</var>
+    <var>?x3</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol>includes</symbol>
+          <symbol>hasReview</symbol>
+          <symbol inverse="true">hasReview</symbol>
+          <symbol inverse="true">includes</symbol>
+        </concat>
+        <concat>
+          <symbol>includes</symbol>
+          <symbol>hasReview</symbol>
+          <symbol inverse="true">hasReview</symbol>
+          <symbol inverse="true">includes</symbol>
+        </concat>
+        <concat>
+          <symbol>includes</symbol>
+          <symbol>editor</symbol>
+          <symbol inverse="true">author</symbol>
+          <symbol inverse="true">includes</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol>includes</symbol>
+          <symbol inverse="true">purchaseFor</symbol>
+          <symbol>purchaseFor</symbol>
+          <symbol inverse="true">includes</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol>includes</symbol>
+          <symbol inverse="true">includes</symbol>
+        </concat>
+        <concat>
+          <symbol>includes</symbol>
+          <symbol>editor</symbol>
+          <symbol inverse="true">actor</symbol>
+          <symbol inverse="true">includes</symbol>
+        </concat>
+        <concat>
+          <symbol>includes</symbol>
+          <symbol>homepage</symbol>
+          <symbol inverse="true">homepage</symbol>
+          <symbol inverse="true">includes</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x4">
+      <star>
+      <disj>
+        <concat>
+          <symbol>includes</symbol>
+          <symbol>actor</symbol>
+          <symbol inverse="true">actor</symbol>
+          <symbol inverse="true">includes</symbol>
+        </concat>
+        <concat>
+          <symbol>includes</symbol>
+          <symbol>hasReview</symbol>
+          <symbol inverse="true">hasReview</symbol>
+          <symbol inverse="true">includes</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>11</number>
+    <input>../use-cases/shop.xml</input>
     <arity>2</arity>
-    <selectivity>0</selectivity>
+    <selectivity>2</selectivity>
     <multiplicity>0</multiplicity>
     <conjunct>4</conjunct>
     <disjuncts>1-3</disjuncts>
@@ -614,54 +886,64 @@
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol inverse="true">contentRating</symbol>
-          <symbol>language</symbol>
+          <symbol>hasReview</symbol>
+          <symbol>text</symbol>
+          <symbol inverse="true">text</symbol>
+        </concat>
+        <concat>
+          <symbol>published</symbol>
+          <symbol inverse="true">email</symbol>
+          <symbol>like</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x0" trg="?x2">
       <disj>
         <concat>
-          <symbol inverse="true">isbn</symbol>
-          <symbol>language</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">printPage</symbol>
-          <symbol>homepage</symbol>
-          <symbol>language</symbol>
+          <symbol>description</symbol>
+          <symbol inverse="true">title</symbol>
+          <symbol inverse="true">purchaseFor</symbol>
+          <symbol>purchaseFor</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x0" trg="?x3">
       <disj>
         <concat>
-          <symbol inverse="true">contentRating</symbol>
-          <symbol>language</symbol>
+          <symbol>printColumn</symbol>
+          <symbol inverse="true">duration</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">printColumn</symbol>
-          <symbol>editor</symbol>
-          <symbol>subscribes</symbol>
-          <symbol>language</symbol>
+          <symbol>keywords</symbol>
+          <symbol inverse="true">title</symbol>
+          <symbol>bookEdition</symbol>
+          <symbol inverse="true">duration</symbol>
+        </concat>
+        <concat>
+          <symbol>text</symbol>
+          <symbol inverse="true">text</symbol>
+          <symbol>totalVotes</symbol>
+          <symbol inverse="true">duration</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x0" trg="?x4">
       <disj>
         <concat>
-          <symbol inverse="true">isbn</symbol>
-          <symbol>contentSize</symbol>
+          <symbol>printEdition</symbol>
           <symbol inverse="true">contentSize</symbol>
-          <symbol>language</symbol>
+          <symbol>caption</symbol>
+          <symbol inverse="true">award</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">numberOfPages</symbol>
-          <symbol>language</symbol>
+          <symbol>text</symbol>
+          <symbol inverse="true">award</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">telephone</symbol>
-          <symbol inverse="true">author</symbol>
-          <symbol>language</symbol>
+          <symbol>printSection</symbol>
+          <symbol inverse="true">contentSize</symbol>
+          <symbol inverse="true">like</symbol>
+          <symbol>like</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -672,28 +954,174 @@
 <query>
   <metadata>
     <id>0</id>
-    <number>9</number>
+    <number>12</number>
     <input>../use-cases/shop.xml</input>
-    <arity>3</arity>
+    <arity>0</arity>
     <selectivity>-</selectivity>
-    <multiplicity>0</multiplicity>
+    <multiplicity>1</multiplicity>
     <conjunct>3</conjunct>
-    <disjuncts>1-2</disjuncts>
-    <length>2-3</length>
+    <disjuncts>3-3</disjuncts>
+    <length>2-4</length>
   </metadata>
   <head>
-    <var>?x1</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol>author</symbol>
+          <symbol inverse="true">author</symbol>
+        </concat>
+        <concat>
+          <symbol>author</symbol>
+          <symbol inverse="true">friendOf</symbol>
+          <symbol inverse="true">editor</symbol>
+        </concat>
+        <concat>
+          <symbol>author</symbol>
+          <symbol>friendOf</symbol>
+          <symbol inverse="true">author</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol>author</symbol>
+          <symbol>follows</symbol>
+          <symbol inverse="true">follows</symbol>
+          <symbol>subscribes</symbol>
+        </concat>
+        <concat>
+          <symbol>editor</symbol>
+          <symbol>like</symbol>
+          <symbol inverse="true">like</symbol>
+          <symbol>subscribes</symbol>
+        </concat>
+        <concat>
+          <symbol>author</symbol>
+          <symbol>follows</symbol>
+          <symbol inverse="true">follows</symbol>
+          <symbol>homepage</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x1" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol>author</symbol>
+          <symbol>like</symbol>
+          <symbol inverse="true">like</symbol>
+          <symbol>homepage</symbol>
+        </concat>
+        <concat>
+          <symbol>editor</symbol>
+          <symbol>follows</symbol>
+          <symbol inverse="true">artist</symbol>
+          <symbol>homepage</symbol>
+        </concat>
+        <concat>
+          <symbol>author</symbol>
+          <symbol>like</symbol>
+          <symbol inverse="true">like</symbol>
+          <symbol>homepage</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>13</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>1</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-2</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
     <var>?x0</var>
-    <var>?x2</var>
+    <var>?x1</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">makesPurchase</symbol>
+          <symbol>friendOf</symbol>
+          <symbol inverse="true">editor</symbol>
+          <symbol inverse="true">purchaseFor</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol>purchaseFor</symbol>
+          <symbol inverse="true">purchaseFor</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol>purchaseFor</symbol>
+          <symbol inverse="true">purchaseFor</symbol>
+        </concat>
+        <concat>
+          <symbol>purchaseFor</symbol>
+          <symbol inverse="true">includes</symbol>
+          <symbol>includes</symbol>
+          <symbol inverse="true">purchaseFor</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>14</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>0</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol>producer</symbol>
-          <symbol inverse="true">description</symbol>
-          <symbol>language</symbol>
+          <symbol inverse="true">like</symbol>
+          <symbol inverse="true">reviewer</symbol>
+          <symbol inverse="true">hasReview</symbol>
+          <symbol>homepage</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -702,19 +1130,37 @@
         <concat>
           <symbol inverse="true">purchaseFor</symbol>
           <symbol>purchaseFor</symbol>
-          <symbol>language</symbol>
+          <symbol inverse="true">like</symbol>
+          <symbol>homepage</symbol>
         </concat>
         <concat>
+          <symbol inverse="true">like</symbol>
+          <symbol>friendOf</symbol>
+          <symbol inverse="true">follows</symbol>
           <symbol>homepage</symbol>
-          <symbol>language</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">includes</symbol>
+          <symbol>includes</symbol>
+          <symbol inverse="true">like</symbol>
+          <symbol>subscribes</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x0" trg="?x3">
       <disj>
         <concat>
+          <symbol>editor</symbol>
+          <symbol inverse="true">artist</symbol>
           <symbol>homepage</symbol>
-          <symbol>language</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x4">
+      <disj>
+        <concat>
+          <symbol inverse="true">like</symbol>
+          <symbol>subscribes</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -725,7 +1171,7 @@
 <query>
   <metadata>
     <id>0</id>
-    <number>10</number>
+    <number>15</number>
     <input>../use-cases/shop.xml</input>
     <arity>0</arity>
     <selectivity>-</selectivity>
@@ -741,445 +1187,42 @@
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol inverse="true">nationality</symbol>
-          <symbol inverse="true">conductor</symbol>
-          <symbol>conductor</symbol>
-          <symbol>type</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">nationality</symbol>
-          <symbol inverse="true">follows</symbol>
-          <symbol>type</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">nationality</symbol>
-          <symbol>type</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x0" trg="?x2">
-      <disj>
-        <concat>
-          <symbol inverse="true">editor</symbol>
-          <symbol>includes</symbol>
-          <symbol>author</symbol>
-          <symbol>type</symbol>
-        </concat>
-        <concat>
           <symbol inverse="true">parentContry</symbol>
           <symbol inverse="true">location</symbol>
-          <symbol>type</symbol>
         </concat>
         <concat>
           <symbol inverse="true">nationality</symbol>
-          <symbol>follows</symbol>
-          <symbol>type</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x0" trg="?x3">
-      <disj>
-        <concat>
-          <symbol inverse="true">nationality</symbol>
-          <symbol>type</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-    </body>
-  </bodies>
-</query>
-
-<query>
-  <metadata>
-    <id>0</id>
-    <number>11</number>
-    <input>../use-cases/shop.xml</input>
-    <arity>3</arity>
-    <selectivity>-</selectivity>
-    <multiplicity>1</multiplicity>
-    <conjunct>4</conjunct>
-    <disjuncts>2-3</disjuncts>
-    <length>2-4</length>
-  </metadata>
-  <head>
-    <var>?x0</var>
-    <var>?x2</var>
-    <var>?x1</var>
-  </head>
-  <bodies>
-    <body>
-      <conjunct src="?x0" trg="?x1">
-      <star>
-      <disj>
-        <concat>
-          <symbol>homepage</symbol>
-          <symbol inverse="true">subscribes</symbol>
-          <symbol>subscribes</symbol>
-          <symbol inverse="true">homepage</symbol>
-        </concat>
-        <concat>
-          <symbol>hasReview</symbol>
-          <symbol inverse="true">hasReview</symbol>
-        </concat>
-        <concat>
-          <symbol>hasReview</symbol>
-          <symbol inverse="true">hasReview</symbol>
-          <symbol>homepage</symbol>
-          <symbol inverse="true">homepage</symbol>
-        </concat>
-      </disj>
-      </star>
-      </conjunct>
-      <conjunct src="?x1" trg="?x2">
-      <star>
-      <disj>
-        <concat>
-          <symbol>hasReview</symbol>
-          <symbol inverse="true">hasReview</symbol>
-          <symbol>homepage</symbol>
-          <symbol inverse="true">homepage</symbol>
-        </concat>
-        <concat>
-          <symbol>homepage</symbol>
-          <symbol inverse="true">homepage</symbol>
-        </concat>
-      </disj>
-      </star>
-      </conjunct>
-      <conjunct src="?x0" trg="?x3">
-      <star>
-      <disj>
-        <concat>
-          <symbol inverse="true">purchaseFor</symbol>
-          <symbol>purchaseFor</symbol>
-        </concat>
-        <concat>
-          <symbol>homepage</symbol>
-          <symbol inverse="true">homepage</symbol>
-          <symbol>homepage</symbol>
-          <symbol inverse="true">homepage</symbol>
-        </concat>
-        <concat>
-          <symbol>hasReview</symbol>
-          <symbol inverse="true">hasReview</symbol>
-          <symbol>homepage</symbol>
-          <symbol inverse="true">homepage</symbol>
-        </concat>
-      </disj>
-      </star>
-      </conjunct>
-      <conjunct src="?x2" trg="?x4">
-      <star>
-      <disj>
-        <concat>
-          <symbol>homepage</symbol>
-          <symbol inverse="true">subscribes</symbol>
-          <symbol>homepage</symbol>
-          <symbol inverse="true">homepage</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">includes</symbol>
-          <symbol>includes</symbol>
-          <symbol>homepage</symbol>
-          <symbol inverse="true">homepage</symbol>
-        </concat>
-        <concat>
-          <symbol>hasReview</symbol>
-          <symbol inverse="true">hasReview</symbol>
-        </concat>
-      </disj>
-      </star>
-      </conjunct>
-    </body>
-  </bodies>
-</query>
-
-<query>
-  <metadata>
-    <id>0</id>
-    <number>12</number>
-    <input>../use-cases/shop.xml</input>
-    <arity>3</arity>
-    <selectivity>-</selectivity>
-    <multiplicity>1</multiplicity>
-    <conjunct>3</conjunct>
-    <disjuncts>1-3</disjuncts>
-    <length>2-4</length>
-  </metadata>
-  <head>
-    <var>?x2</var>
-    <var>?x1</var>
-    <var>?x0</var>
-  </head>
-  <bodies>
-    <body>
-      <conjunct src="?x0" trg="?x1">
-      <star>
-      <disj>
-        <concat>
-          <symbol>hasReview</symbol>
-          <symbol inverse="true">hasReview</symbol>
-        </concat>
-        <concat>
-          <symbol>hasReview</symbol>
-          <symbol inverse="true">hasReview</symbol>
-          <symbol inverse="true">purchaseFor</symbol>
-          <symbol>purchaseFor</symbol>
-        </concat>
-        <concat>
-          <symbol>homepage</symbol>
-          <symbol inverse="true">trailer</symbol>
-        </concat>
-      </disj>
-      </star>
-      </conjunct>
-      <conjunct src="?x1" trg="?x2">
-      <star>
-      <disj>
-        <concat>
-          <symbol>director</symbol>
-          <symbol inverse="true">actor</symbol>
-          <symbol>actor</symbol>
-          <symbol inverse="true">director</symbol>
-        </concat>
-      </disj>
-      </star>
-      </conjunct>
-      <conjunct src="?x2" trg="?x3">
-      <star>
-      <disj>
-        <concat>
-          <symbol>actor</symbol>
-          <symbol>homepage</symbol>
-          <symbol inverse="true">trailer</symbol>
-        </concat>
-        <concat>
-          <symbol>trailer</symbol>
-          <symbol inverse="true">trailer</symbol>
-          <symbol>director</symbol>
-          <symbol inverse="true">director</symbol>
-        </concat>
-        <concat>
-          <symbol>homepage</symbol>
-          <symbol inverse="true">homepage</symbol>
-          <symbol inverse="true">director</symbol>
-        </concat>
-      </disj>
-      </star>
-      </conjunct>
-    </body>
-  </bodies>
-</query>
-
-<query>
-  <metadata>
-    <id>0</id>
-    <number>13</number>
-    <input>../use-cases/shop.xml</input>
-    <arity>1</arity>
-    <selectivity>-</selectivity>
-    <multiplicity>0.333333</multiplicity>
-    <conjunct>3</conjunct>
-    <disjuncts>1-2</disjuncts>
-    <length>3-4</length>
-  </metadata>
-  <head>
-    <var>?x0</var>
-  </head>
-  <bodies>
-    <body>
-      <conjunct src="?x0" trg="?x1">
-      <disj>
-        <concat>
-          <symbol>author</symbol>
-          <symbol>like</symbol>
-          <symbol inverse="true">like</symbol>
-          <symbol inverse="true">contactPoint</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x1" trg="?x2">
-      <star>
-      <disj>
-        <concat>
-          <symbol>employee</symbol>
-          <symbol>friendOf</symbol>
-          <symbol inverse="true">contactPoint</symbol>
-        </concat>
-      </disj>
-      </star>
-      </conjunct>
-      <conjunct src="?x2" trg="?x3">
-      <disj>
-        <concat>
-          <symbol>contactPoint</symbol>
-          <symbol>like</symbol>
-          <symbol inverse="true">like</symbol>
-        </concat>
-        <concat>
-          <symbol>employee</symbol>
-          <symbol>like</symbol>
-          <symbol inverse="true">like</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-    </body>
-  </bodies>
-</query>
-
-<query>
-  <metadata>
-    <id>0</id>
-    <number>14</number>
-    <input>../use-cases/shop.xml</input>
-    <arity>2</arity>
-    <selectivity>2</selectivity>
-    <multiplicity>0.5</multiplicity>
-    <conjunct>4</conjunct>
-    <disjuncts>1-3</disjuncts>
-    <length>2-4</length>
-  </metadata>
-  <head>
-    <var>?x0</var>
-    <var>?x4</var>
-  </head>
-  <bodies>
-    <body>
-      <conjunct src="?x0" trg="?x1">
-      <star>
-      <disj>
-        <concat>
-          <symbol>director</symbol>
           <symbol inverse="true">friendOf</symbol>
-          <symbol inverse="true">director</symbol>
         </concat>
         <concat>
-          <symbol>homepage</symbol>
-          <symbol inverse="true">trailer</symbol>
-          <symbol>director</symbol>
-          <symbol inverse="true">director</symbol>
-        </concat>
-      </disj>
-      </star>
-      </conjunct>
-      <conjunct src="?x1" trg="?x2">
-      <star>
-      <disj>
-        <concat>
-          <symbol inverse="true">includes</symbol>
-          <symbol>includes</symbol>
-          <symbol>homepage</symbol>
-          <symbol inverse="true">trailer</symbol>
-        </concat>
-      </disj>
-      </star>
-      </conjunct>
-      <conjunct src="?x2" trg="?x3">
-      <disj>
-        <concat>
-          <symbol>director</symbol>
-          <symbol>like</symbol>
-          <symbol inverse="true">like</symbol>
-          <symbol inverse="true">reviewer</symbol>
-        </concat>
-        <concat>
-          <symbol>actor</symbol>
-          <symbol>like</symbol>
-          <symbol inverse="true">like</symbol>
-          <symbol inverse="true">reviewer</symbol>
-        </concat>
-        <concat>
-          <symbol>director</symbol>
-          <symbol>like</symbol>
-          <symbol inverse="true">like</symbol>
-          <symbol inverse="true">reviewer</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x3" trg="?x4">
-      <disj>
-        <concat>
-          <symbol>title</symbol>
-          <symbol inverse="true">title</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-    </body>
-  </bodies>
-</query>
-
-<query>
-  <metadata>
-    <id>0</id>
-    <number>15</number>
-    <input>../use-cases/shop.xml</input>
-    <arity>2</arity>
-    <selectivity>2</selectivity>
-    <multiplicity>0</multiplicity>
-    <conjunct>4</conjunct>
-    <disjuncts>1-3</disjuncts>
-    <length>2-4</length>
-  </metadata>
-  <head>
-    <var>?x0</var>
-    <var>?x1</var>
-  </head>
-  <bodies>
-    <body>
-      <conjunct src="?x0" trg="?x1">
-      <disj>
-        <concat>
-          <symbol>tag</symbol>
-          <symbol inverse="true">tag</symbol>
-        </concat>
-        <concat>
+          <symbol inverse="true">nationality</symbol>
+          <symbol inverse="true">editor</symbol>
           <symbol>description</symbol>
-          <symbol inverse="true">title</symbol>
+          <symbol inverse="true">familyName</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x0" trg="?x2">
       <disj>
         <concat>
-          <symbol>homepage</symbol>
-          <symbol>url</symbol>
-          <symbol inverse="true">producer</symbol>
+          <symbol inverse="true">nationality</symbol>
+          <symbol>givenName</symbol>
+          <symbol inverse="true">keywords</symbol>
+          <symbol>actor</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x0" trg="?x3">
       <disj>
         <concat>
-          <symbol>contentSize</symbol>
-          <symbol inverse="true">duration</symbol>
+          <symbol inverse="true">nationality</symbol>
+          <symbol>email</symbol>
+          <symbol inverse="true">email</symbol>
         </concat>
         <concat>
-          <symbol>published</symbol>
-          <symbol inverse="true">text</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">like</symbol>
-          <symbol>like</symbol>
-          <symbol>text</symbol>
-          <symbol inverse="true">text</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x0" trg="?x4">
-      <disj>
-        <concat>
-          <symbol>keywords</symbol>
-          <symbol inverse="true">jobTitle</symbol>
-          <symbol inverse="true">actor</symbol>
-        </concat>
-        <concat>
-          <symbol>printColumn</symbol>
-          <symbol inverse="true">duration</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">includes</symbol>
-          <symbol>serialNumber</symbol>
-          <symbol inverse="true">duration</symbol>
+          <symbol inverse="true">nationality</symbol>
+          <symbol inverse="true">contactPoint</symbol>
+          <symbol>contactPoint</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -1194,7 +1237,7 @@
     <input>../use-cases/shop.xml</input>
     <arity>1</arity>
     <selectivity>-</selectivity>
-    <multiplicity>0</multiplicity>
+    <multiplicity>0.333333</multiplicity>
     <conjunct>3</conjunct>
     <disjuncts>1-3</disjuncts>
     <length>2-4</length>
@@ -1207,45 +1250,45 @@
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol>includes</symbol>
-          <symbol>editor</symbol>
+          <symbol>hasReview</symbol>
+          <symbol inverse="true">hasReview</symbol>
+          <symbol>artist</symbol>
+          <symbol>like</symbol>
+        </concat>
+        <concat>
+          <symbol>artist</symbol>
           <symbol>like</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x0" trg="?x2">
+      <conjunct src="?x1" trg="?x2">
+      <star>
       <disj>
         <concat>
-          <symbol>includes</symbol>
-          <symbol>hasReview</symbol>
-          <symbol inverse="true">hasReview</symbol>
-          <symbol inverse="true">includes</symbol>
-        </concat>
-        <concat>
-          <symbol>includes</symbol>
-          <symbol inverse="true">includes</symbol>
-        </concat>
-        <concat>
-          <symbol>includes</symbol>
-          <symbol>actor</symbol>
+          <symbol>conductor</symbol>
+          <symbol inverse="true">reviewer</symbol>
+          <symbol>reviewer</symbol>
           <symbol inverse="true">conductor</symbol>
-          <symbol inverse="true">includes</symbol>
         </concat>
       </disj>
+      </star>
       </conjunct>
-      <conjunct src="?x1" trg="?x3">
+      <conjunct src="?x2" trg="?x3">
       <disj>
         <concat>
-          <symbol>includes</symbol>
-          <symbol inverse="true">includes</symbol>
-          <symbol>includes</symbol>
-          <symbol inverse="true">includes</symbol>
+          <symbol>conductor</symbol>
+          <symbol>follows</symbol>
         </concat>
         <concat>
-          <symbol>includes</symbol>
-          <symbol>homepage</symbol>
-          <symbol inverse="true">homepage</symbol>
-          <symbol inverse="true">includes</symbol>
+          <symbol>conductor</symbol>
+          <symbol inverse="true">reviewer</symbol>
+          <symbol>reviewer</symbol>
+          <symbol>follows</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">purchaseFor</symbol>
+          <symbol>purchaseFor</symbol>
+          <symbol>artist</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -1258,66 +1301,62 @@
     <id>0</id>
     <number>17</number>
     <input>../use-cases/shop.xml</input>
-    <arity>0</arity>
+    <arity>4</arity>
     <selectivity>-</selectivity>
-    <multiplicity>0</multiplicity>
-    <conjunct>4</conjunct>
-    <disjuncts>1-3</disjuncts>
+    <multiplicity>0.666667</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-2</disjuncts>
     <length>2-4</length>
   </metadata>
   <head>
+    <var>?x2</var>
+    <var>?x1</var>
+    <var>?x0</var>
+    <var>?x3</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
+      <star>
       <disj>
         <concat>
-          <symbol inverse="true">birthDate</symbol>
-          <symbol>gender</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">birthDate</symbol>
-          <symbol>gender</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">birthDate</symbol>
-          <symbol>gender</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x0" trg="?x2">
-      <disj>
-        <concat>
-          <symbol inverse="true">expires</symbol>
-          <symbol>editor</symbol>
-          <symbol>gender</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x0" trg="?x3">
-      <disj>
-        <concat>
-          <symbol inverse="true">priceValidUntil</symbol>
+          <symbol inverse="true">includes</symbol>
           <symbol>includes</symbol>
-          <symbol>author</symbol>
-          <symbol>gender</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">purchaseFor</symbol>
+          <symbol inverse="true">makesPurchase</symbol>
+          <symbol inverse="true">reviewer</symbol>
+          <symbol inverse="true">hasReview</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
+          <symbol>caption</symbol>
+          <symbol inverse="true">caption</symbol>
+          <symbol>description</symbol>
+          <symbol inverse="true">keywords</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x0" trg="?x4">
+      <conjunct src="?x2" trg="?x3">
+      <star>
       <disj>
         <concat>
-          <symbol inverse="true">expires</symbol>
-          <symbol inverse="true">like</symbol>
-          <symbol>gender</symbol>
+          <symbol>actor</symbol>
+          <symbol inverse="true">director</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">release</symbol>
-          <symbol>recordNumber</symbol>
-          <symbol inverse="true">userId</symbol>
-          <symbol>gender</symbol>
+          <symbol>hasReview</symbol>
+          <symbol inverse="true">hasReview</symbol>
+          <symbol>homepage</symbol>
+          <symbol inverse="true">trailer</symbol>
         </concat>
       </disj>
+      </star>
       </conjunct>
     </body>
   </bodies>
@@ -1329,11 +1368,11 @@
     <number>18</number>
     <input>../use-cases/shop.xml</input>
     <arity>2</arity>
-    <selectivity>1</selectivity>
+    <selectivity>2</selectivity>
     <multiplicity>0.333333</multiplicity>
     <conjunct>3</conjunct>
     <disjuncts>1-3</disjuncts>
-    <length>2-3</length>
+    <length>2-4</length>
   </metadata>
   <head>
     <var>?x0</var>
@@ -1342,46 +1381,56 @@
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol inverse="true">subscribes</symbol>
+          <symbol>like</symbol>
+          <symbol inverse="true">like</symbol>
+          <symbol inverse="true">author</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">homepage</symbol>
+          <symbol>like</symbol>
+          <symbol inverse="true">like</symbol>
+          <symbol inverse="true">editor</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">subscribes</symbol>
+          <symbol>like</symbol>
+          <symbol inverse="true">like</symbol>
+          <symbol inverse="true">editor</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
+          <symbol inverse="true">like</symbol>
+          <symbol inverse="true">conductor</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">like</symbol>
+          <symbol inverse="true">director</symbol>
+          <symbol>actor</symbol>
+          <symbol inverse="true">conductor</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">like</symbol>
+          <symbol inverse="true">follows</symbol>
+          <symbol inverse="true">conductor</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
       <star>
       <disj>
         <concat>
           <symbol inverse="true">purchaseFor</symbol>
           <symbol inverse="true">makesPurchase</symbol>
-          <symbol inverse="true">director</symbol>
+          <symbol inverse="true">conductor</symbol>
         </concat>
       </disj>
       </star>
-      </conjunct>
-      <conjunct src="?x1" trg="?x2">
-      <disj>
-        <concat>
-          <symbol>director</symbol>
-          <symbol inverse="true">friendOf</symbol>
-          <symbol>like</symbol>
-        </concat>
-        <concat>
-          <symbol>trailer</symbol>
-          <symbol inverse="true">homepage</symbol>
-          <symbol>like</symbol>
-        </concat>
-        <concat>
-          <symbol>director</symbol>
-          <symbol>friendOf</symbol>
-          <symbol>like</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x2" trg="?x3">
-      <disj>
-        <concat>
-          <symbol>hasGenre</symbol>
-          <symbol>type</symbol>
-        </concat>
-        <concat>
-          <symbol>hasGenre</symbol>
-          <symbol>type</symbol>
-        </concat>
-      </disj>
       </conjunct>
     </body>
   </bodies>
@@ -1392,53 +1441,71 @@
     <id>0</id>
     <number>19</number>
     <input>../use-cases/shop.xml</input>
-    <arity>2</arity>
-    <selectivity>1</selectivity>
-    <multiplicity>0</multiplicity>
-    <conjunct>3</conjunct>
-    <disjuncts>1-2</disjuncts>
+    <arity>1</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>0.5</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>1-3</disjuncts>
     <length>2-4</length>
   </metadata>
   <head>
     <var>?x0</var>
-    <var>?x1</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol inverse="true">tag</symbol>
-          <symbol inverse="true">like</symbol>
-          <symbol inverse="true">friendOf</symbol>
           <symbol>like</symbol>
+          <symbol inverse="true">like</symbol>
+          <symbol inverse="true">reviewer</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">tag</symbol>
-          <symbol inverse="true">hasGenre</symbol>
+          <symbol>like</symbol>
+          <symbol>author</symbol>
+          <symbol inverse="true">follows</symbol>
+          <symbol inverse="true">reviewer</symbol>
+        </concat>
+        <concat>
+          <symbol>like</symbol>
+          <symbol inverse="true">like</symbol>
+          <symbol inverse="true">editor</symbol>
+          <symbol>hasReview</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x0" trg="?x2">
+      <conjunct src="?x1" trg="?x2">
+      <star>
       <disj>
         <concat>
-          <symbol inverse="true">tag</symbol>
-          <symbol>editor</symbol>
-          <symbol>familyName</symbol>
-          <symbol inverse="true">text</symbol>
+          <symbol inverse="true">hasReview</symbol>
+          <symbol>hasReview</symbol>
         </concat>
       </disj>
+      </star>
       </conjunct>
-      <conjunct src="?x0" trg="?x3">
+      <conjunct src="?x2" trg="?x3">
+      <star>
       <disj>
         <concat>
-          <symbol inverse="true">tag</symbol>
-          <symbol inverse="true">hasGenre</symbol>
+          <symbol>reviewer</symbol>
+          <symbol inverse="true">director</symbol>
+          <symbol>hasReview</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x3" trg="?x4">
+      <disj>
+        <concat>
+          <symbol inverse="true">hasReview</symbol>
+          <symbol>artist</symbol>
+          <symbol inverse="true">artist</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">tag</symbol>
-          <symbol>producer</symbol>
-          <symbol inverse="true">caption</symbol>
+          <symbol>reviewer</symbol>
+          <symbol>follows</symbol>
+          <symbol inverse="true">artist</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -1451,45 +1518,63 @@
     <id>0</id>
     <number>20</number>
     <input>../use-cases/shop.xml</input>
-    <arity>0</arity>
+    <arity>3</arity>
     <selectivity>-</selectivity>
-    <multiplicity>0</multiplicity>
+    <multiplicity>0.333333</multiplicity>
     <conjunct>3</conjunct>
-    <disjuncts>1-2</disjuncts>
+    <disjuncts>1-3</disjuncts>
     <length>2-4</length>
   </metadata>
   <head>
+    <var>?x0</var>
+    <var>?x2</var>
+    <var>?x1</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol inverse="true">gender</symbol>
-          <symbol>jobTitle</symbol>
-          <symbol inverse="true">name</symbol>
+          <symbol>hasReview</symbol>
+          <symbol>reviewer</symbol>
+          <symbol>like</symbol>
+          <symbol inverse="true">like</symbol>
+        </concat>
+        <concat>
+          <symbol>conductor</symbol>
+          <symbol>like</symbol>
+          <symbol inverse="true">like</symbol>
+        </concat>
+        <concat>
+          <symbol>conductor</symbol>
+          <symbol>like</symbol>
+          <symbol inverse="true">like</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x0" trg="?x2">
+      <conjunct src="?x1" trg="?x2">
+      <star>
       <disj>
         <concat>
-          <symbol inverse="true">gender</symbol>
-          <symbol inverse="true">employee</symbol>
+          <symbol>homepage</symbol>
+          <symbol inverse="true">homepage</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">gender</symbol>
-          <symbol inverse="true">contactPoint</symbol>
+          <symbol>friendOf</symbol>
+          <symbol inverse="true">friendOf</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">reviewer</symbol>
+          <symbol>reviewer</symbol>
         </concat>
       </disj>
+      </star>
       </conjunct>
-      <conjunct src="?x0" trg="?x3">
+      <conjunct src="?x2" trg="?x3">
       <disj>
         <concat>
-          <symbol inverse="true">gender</symbol>
-          <symbol inverse="true">conductor</symbol>
-          <symbol>contentRating</symbol>
-          <symbol inverse="true">faxNumber</symbol>
+          <symbol>makesPurchase</symbol>
+          <symbol>purchaseFor</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -1502,65 +1587,58 @@
     <id>0</id>
     <number>21</number>
     <input>../use-cases/shop.xml</input>
-    <arity>1</arity>
+    <arity>3</arity>
     <selectivity>-</selectivity>
     <multiplicity>0</multiplicity>
-    <conjunct>4</conjunct>
-    <disjuncts>1-2</disjuncts>
-    <length>2-4</length>
+    <conjunct>3</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>3-4</length>
   </metadata>
   <head>
+    <var>?x2</var>
     <var>?x0</var>
+    <var>?x1</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol inverse="true">age</symbol>
-          <symbol inverse="true">follows</symbol>
-          <symbol inverse="true">actor</symbol>
-          <symbol>keywords</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">age</symbol>
-          <symbol>like</symbol>
-          <symbol>text</symbol>
+          <symbol inverse="true">purchaseFor</symbol>
+          <symbol>purchaseFor</symbol>
+          <symbol inverse="true">like</symbol>
+          <symbol>subscribes</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x0" trg="?x2">
       <disj>
         <concat>
-          <symbol inverse="true">age</symbol>
-          <symbol>familyName</symbol>
-          <symbol inverse="true">jobTitle</symbol>
-          <symbol>familyName</symbol>
+          <symbol>editor</symbol>
+          <symbol inverse="true">author</symbol>
+          <symbol inverse="true">purchaseFor</symbol>
+          <symbol>purchaseFor</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x0" trg="?x3">
+      <conjunct src="?x1" trg="?x3">
       <disj>
         <concat>
-          <symbol inverse="true">age</symbol>
-          <symbol>familyName</symbol>
+          <symbol>homepage</symbol>
+          <symbol inverse="true">subscribes</symbol>
+          <symbol inverse="true">friendOf</symbol>
+          <symbol inverse="true">author</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">age</symbol>
-          <symbol>jobTitle</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x0" trg="?x4">
-      <disj>
-        <concat>
-          <symbol inverse="true">age</symbol>
-          <symbol inverse="true">actor</symbol>
-          <symbol>producer</symbol>
+          <symbol inverse="true">purchaseFor</symbol>
+          <symbol inverse="true">makesPurchase</symbol>
+          <symbol inverse="true">author</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">age</symbol>
-          <symbol>givenName</symbol>
+          <symbol inverse="true">purchaseFor</symbol>
+          <symbol>purchaseFor</symbol>
+          <symbol>trailer</symbol>
+          <symbol inverse="true">homepage</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -1573,66 +1651,60 @@
     <id>0</id>
     <number>22</number>
     <input>../use-cases/shop.xml</input>
-    <arity>4</arity>
+    <arity>3</arity>
     <selectivity>-</selectivity>
-    <multiplicity>1</multiplicity>
+    <multiplicity>0</multiplicity>
     <conjunct>3</conjunct>
-    <disjuncts>1-2</disjuncts>
-    <length>3-4</length>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
   </metadata>
   <head>
-    <var>?x3</var>
+    <var>?x0</var>
     <var>?x1</var>
     <var>?x2</var>
-    <var>?x0</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
-      <star>
       <disj>
         <concat>
-          <symbol>includes</symbol>
-          <symbol>conductor</symbol>
-          <symbol inverse="true">director</symbol>
-          <symbol inverse="true">includes</symbol>
+          <symbol inverse="true">nationality</symbol>
+          <symbol>jobTitle</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">nationality</symbol>
+          <symbol>jobTitle</symbol>
         </concat>
       </disj>
-      </star>
       </conjunct>
       <conjunct src="?x0" trg="?x2">
-      <star>
       <disj>
         <concat>
-          <symbol>price</symbol>
-          <symbol inverse="true">contentSize</symbol>
-          <symbol inverse="true">includes</symbol>
-          <symbol>editor</symbol>
-        </concat>
-        <concat>
-          <symbol>includes</symbol>
-          <symbol>author</symbol>
-          <symbol>nationality</symbol>
+          <symbol inverse="true">nationality</symbol>
+          <symbol>jobTitle</symbol>
         </concat>
       </disj>
-      </star>
       </conjunct>
-      <conjunct src="?x1" trg="?x3">
-      <star>
+      <conjunct src="?x0" trg="?x3">
       <disj>
         <concat>
-          <symbol>editor</symbol>
-          <symbol inverse="true">parentContry</symbol>
-          <symbol>parentContry</symbol>
+          <symbol inverse="true">nationality</symbol>
+          <symbol>familyName</symbol>
+          <symbol inverse="true">performer</symbol>
+          <symbol>performer</symbol>
         </concat>
         <concat>
-          <symbol>price</symbol>
-          <symbol inverse="true">contentRating</symbol>
-          <symbol inverse="true">like</symbol>
-          <symbol>nationality</symbol>
+          <symbol inverse="true">nationality</symbol>
+          <symbol>userId</symbol>
+          <symbol inverse="true">contentSize</symbol>
+          <symbol>description</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">parentContry</symbol>
+          <symbol inverse="true">performedIn</symbol>
+          <symbol>description</symbol>
         </concat>
       </disj>
-      </star>
       </conjunct>
     </body>
   </bodies>
@@ -1643,71 +1715,58 @@
     <id>0</id>
     <number>23</number>
     <input>../use-cases/shop.xml</input>
-    <arity>2</arity>
-    <selectivity>2</selectivity>
-    <multiplicity>1</multiplicity>
+    <arity>4</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>0</multiplicity>
     <conjunct>3</conjunct>
-    <disjuncts>2-3</disjuncts>
+    <disjuncts>1-3</disjuncts>
     <length>2-4</length>
   </metadata>
   <head>
+    <var>?x3</var>
     <var>?x0</var>
     <var>?x1</var>
+    <var>?x2</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
-      <star>
       <disj>
         <concat>
-          <symbol inverse="true">homepage</symbol>
-          <symbol>homepage</symbol>
-          <symbol inverse="true">trailer</symbol>
-          <symbol>homepage</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">subscribes</symbol>
-          <symbol inverse="true">author</symbol>
-          <symbol>homepage</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">trailer</symbol>
-          <symbol>trailer</symbol>
+          <symbol>producer</symbol>
+          <symbol inverse="true">email</symbol>
+          <symbol inverse="true">actor</symbol>
         </concat>
       </disj>
-      </star>
       </conjunct>
       <conjunct src="?x0" trg="?x2">
-      <star>
       <disj>
         <concat>
-          <symbol inverse="true">homepage</symbol>
-          <symbol>homepage</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">trailer</symbol>
           <symbol>hasReview</symbol>
           <symbol inverse="true">hasReview</symbol>
-          <symbol>homepage</symbol>
+          <symbol>conductor</symbol>
+          <symbol inverse="true">director</symbol>
         </concat>
       </disj>
-      </star>
       </conjunct>
-      <conjunct src="?x0" trg="?x3">
-      <star>
+      <conjunct src="?x1" trg="?x3">
       <disj>
         <concat>
+          <symbol>director</symbol>
+          <symbol>friendOf</symbol>
+          <symbol>homepage</symbol>
           <symbol inverse="true">homepage</symbol>
-          <symbol>homepage</symbol>
-          <symbol inverse="true">trailer</symbol>
-          <symbol>homepage</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">homepage</symbol>
           <symbol>homepage</symbol>
+          <symbol inverse="true">homepage</symbol>
+        </concat>
+        <concat>
+          <symbol>homepage</symbol>
+          <symbol inverse="true">subscribes</symbol>
+          <symbol inverse="true">actor</symbol>
         </concat>
       </disj>
-      </star>
       </conjunct>
     </body>
   </bodies>
@@ -1718,51 +1777,61 @@
     <id>0</id>
     <number>24</number>
     <input>../use-cases/shop.xml</input>
-    <arity>4</arity>
+    <arity>1</arity>
     <selectivity>-</selectivity>
     <multiplicity>0</multiplicity>
-    <conjunct>3</conjunct>
-    <disjuncts>1-2</disjuncts>
-    <length>3-4</length>
+    <conjunct>4</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-3</length>
   </metadata>
   <head>
     <var>?x0</var>
-    <var>?x2</var>
-    <var>?x3</var>
-    <var>?x1</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol inverse="true">validForm</symbol>
-          <symbol>includes</symbol>
-          <symbol>expires</symbol>
+          <symbol>homepage</symbol>
+          <symbol>hits</symbol>
+          <symbol inverse="true">contentSize</symbol>
+        </concat>
+        <concat>
+          <symbol>caption</symbol>
+          <symbol inverse="true">keywords</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x0" trg="?x2">
       <disj>
         <concat>
-          <symbol inverse="true">expires</symbol>
-          <symbol>movement</symbol>
-          <symbol inverse="true">printPage</symbol>
-          <symbol>text</symbol>
+          <symbol>conductor</symbol>
+          <symbol>givenName</symbol>
+          <symbol inverse="true">text</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x1" trg="?x3">
+      <conjunct src="?x0" trg="?x3">
       <disj>
         <concat>
-          <symbol inverse="true">expires</symbol>
-          <symbol>editor</symbol>
-          <symbol>familyName</symbol>
+          <symbol>text</symbol>
+          <symbol inverse="true">description</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x4">
+      <disj>
+        <concat>
+          <symbol>title</symbol>
+          <symbol inverse="true">title</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">priceValidUntil</symbol>
-          <symbol>includes</symbol>
-          <symbol>composer</symbol>
+          <symbol>caption</symbol>
+          <symbol inverse="true">caption</symbol>
+        </concat>
+        <concat>
+          <symbol>keywords</symbol>
+          <symbol inverse="true">text</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -1775,62 +1844,55 @@
     <id>0</id>
     <number>25</number>
     <input>../use-cases/shop.xml</input>
-    <arity>2</arity>
-    <selectivity>1</selectivity>
-    <multiplicity>1</multiplicity>
+    <arity>0</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>0</multiplicity>
     <conjunct>3</conjunct>
     <disjuncts>1-2</disjuncts>
     <length>2-4</length>
   </metadata>
   <head>
-    <var>?x0</var>
-    <var>?x1</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
-      <star>
       <disj>
         <concat>
-          <symbol inverse="true">purchaseFor</symbol>
-          <symbol>purchaseFor</symbol>
+          <symbol inverse="true">hasReview</symbol>
+          <symbol>actor</symbol>
+          <symbol inverse="true">director</symbol>
         </concat>
       </disj>
-      </star>
       </conjunct>
       <conjunct src="?x0" trg="?x2">
-      <star>
       <disj>
         <concat>
-          <symbol>homepage</symbol>
-          <symbol inverse="true">homepage</symbol>
-          <symbol>homepage</symbol>
-          <symbol inverse="true">homepage</symbol>
+          <symbol inverse="true">hasReview</symbol>
+          <symbol inverse="true">includes</symbol>
+          <symbol>includes</symbol>
+          <symbol inverse="true">purchaseFor</symbol>
         </concat>
         <concat>
-          <symbol>editor</symbol>
-          <symbol inverse="true">editor</symbol>
-          <symbol>homepage</symbol>
-          <symbol inverse="true">homepage</symbol>
+          <symbol inverse="true">hasReview</symbol>
+          <symbol inverse="true">purchaseFor</symbol>
         </concat>
       </disj>
-      </star>
       </conjunct>
       <conjunct src="?x1" trg="?x3">
-      <star>
       <disj>
         <concat>
-          <symbol inverse="true">includes</symbol>
-          <symbol>includes</symbol>
-          <symbol inverse="true">includes</symbol>
-          <symbol>includes</symbol>
+          <symbol>reviewer</symbol>
+          <symbol>homepage</symbol>
+          <symbol inverse="true">homepage</symbol>
+          <symbol inverse="true">purchaseFor</symbol>
         </concat>
         <concat>
-          <symbol>editor</symbol>
-          <symbol inverse="true">author</symbol>
+          <symbol inverse="true">hasReview</symbol>
+          <symbol>homepage</symbol>
+          <symbol inverse="true">trailer</symbol>
+          <symbol inverse="true">purchaseFor</symbol>
         </concat>
       </disj>
-      </star>
       </conjunct>
     </body>
   </bodies>
@@ -1841,85 +1903,53 @@
     <id>0</id>
     <number>26</number>
     <input>../use-cases/shop.xml</input>
-    <arity>3</arity>
+    <arity>0</arity>
     <selectivity>-</selectivity>
     <multiplicity>0</multiplicity>
-    <conjunct>4</conjunct>
-    <disjuncts>2-3</disjuncts>
+    <conjunct>3</conjunct>
+    <disjuncts>1-2</disjuncts>
     <length>3-4</length>
   </metadata>
   <head>
-    <var>?x2</var>
-    <var>?x1</var>
-    <var>?x0</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol inverse="true">tag</symbol>
+          <symbol inverse="true">age</symbol>
+          <symbol inverse="true">director</symbol>
           <symbol inverse="true">like</symbol>
-          <symbol>type</symbol>
+          <symbol>friendOf</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">tag</symbol>
-          <symbol>conductor</symbol>
-          <symbol>type</symbol>
+          <symbol inverse="true">age</symbol>
+          <symbol inverse="true">author</symbol>
+          <symbol>editor</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x0" trg="?x2">
       <disj>
         <concat>
-          <symbol inverse="true">tag</symbol>
-          <symbol inverse="true">like</symbol>
-          <symbol>type</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">tag</symbol>
-          <symbol inverse="true">like</symbol>
-          <symbol>type</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">tag</symbol>
-          <symbol>description</symbol>
-          <symbol inverse="true">givenName</symbol>
-          <symbol>type</symbol>
+          <symbol inverse="true">age</symbol>
+          <symbol inverse="true">friendOf</symbol>
+          <symbol>like</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x0" trg="?x3">
+      <conjunct src="?x1" trg="?x3">
       <disj>
         <concat>
-          <symbol inverse="true">tag</symbol>
-          <symbol>director</symbol>
-          <symbol>type</symbol>
+          <symbol inverse="true">age</symbol>
+          <symbol>userId</symbol>
+          <symbol inverse="true">printSection</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">tag</symbol>
-          <symbol>contentRating</symbol>
-          <symbol inverse="true">userId</symbol>
-          <symbol>type</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x0" trg="?x4">
-      <disj>
-        <concat>
-          <symbol inverse="true">tag</symbol>
-          <symbol>author</symbol>
-          <symbol>type</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">tag</symbol>
-          <symbol inverse="true">like</symbol>
-          <symbol>type</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">tag</symbol>
-          <symbol>editor</symbol>
-          <symbol>type</symbol>
+          <symbol inverse="true">age</symbol>
+          <symbol>like</symbol>
+          <symbol>contentSize</symbol>
+          <symbol inverse="true">contentSize</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -1932,53 +1962,55 @@
     <id>0</id>
     <number>27</number>
     <input>../use-cases/shop.xml</input>
-    <arity>2</arity>
-    <selectivity>1</selectivity>
-    <multiplicity>0.666667</multiplicity>
+    <arity>4</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>0</multiplicity>
     <conjunct>3</conjunct>
     <disjuncts>1-2</disjuncts>
     <length>2-4</length>
   </metadata>
   <head>
-    <var>?x0</var>
+    <var>?x2</var>
+    <var>?x1</var>
     <var>?x3</var>
+    <var>?x0</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
-      <star>
       <disj>
         <concat>
-          <symbol inverse="true">purchaseFor</symbol>
-          <symbol inverse="true">makesPurchase</symbol>
-          <symbol inverse="true">conductor</symbol>
+          <symbol inverse="true">age</symbol>
+          <symbol inverse="true">follows</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">age</symbol>
+          <symbol inverse="true">friendOf</symbol>
+          <symbol>birthDate</symbol>
+          <symbol inverse="true">birthDate</symbol>
         </concat>
       </disj>
-      </star>
       </conjunct>
       <conjunct src="?x1" trg="?x2">
-      <star>
       <disj>
         <concat>
+          <symbol inverse="true">friendOf</symbol>
           <symbol>homepage</symbol>
-          <symbol inverse="true">trailer</symbol>
-          <symbol>hasReview</symbol>
-          <symbol inverse="true">hasReview</symbol>
-        </concat>
-        <concat>
-          <symbol>conductor</symbol>
-          <symbol inverse="true">conductor</symbol>
+          <symbol inverse="true">homepage</symbol>
+          <symbol inverse="true">editor</symbol>
         </concat>
       </disj>
-      </star>
       </conjunct>
       <conjunct src="?x2" trg="?x3">
       <disj>
         <concat>
-          <symbol>composer</symbol>
-          <symbol inverse="true">caption</symbol>
+          <symbol>expires</symbol>
+          <symbol inverse="true">validThrough</symbol>
+          <symbol>editor</symbol>
+        </concat>
+        <concat>
           <symbol inverse="true">like</symbol>
-          <symbol>age</symbol>
+          <symbol>nationality</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -1991,73 +2023,78 @@
     <id>0</id>
     <number>28</number>
     <input>../use-cases/shop.xml</input>
-    <arity>4</arity>
+    <arity>1</arity>
     <selectivity>-</selectivity>
-    <multiplicity>0.75</multiplicity>
+    <multiplicity>0</multiplicity>
     <conjunct>4</conjunct>
     <disjuncts>1-3</disjuncts>
     <length>2-4</length>
   </metadata>
   <head>
-    <var>?x3</var>
     <var>?x0</var>
-    <var>?x2</var>
-    <var>?x1</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
-      <star>
       <disj>
         <concat>
-          <symbol inverse="true">includes</symbol>
-          <symbol>includes</symbol>
-          <symbol>hasReview</symbol>
-          <symbol inverse="true">hasReview</symbol>
+          <symbol>caption</symbol>
+          <symbol inverse="true">description</symbol>
+          <symbol>text</symbol>
+          <symbol inverse="true">title</symbol>
+        </concat>
+        <concat>
+          <symbol>tag</symbol>
+          <symbol inverse="true">tag</symbol>
+          <symbol>text</symbol>
+          <symbol inverse="true">keywords</symbol>
+        </concat>
+        <concat>
+          <symbol>text</symbol>
+          <symbol inverse="true">caption</symbol>
+          <symbol>caption</symbol>
+          <symbol inverse="true">description</symbol>
         </concat>
       </disj>
-      </star>
       </conjunct>
       <conjunct src="?x1" trg="?x2">
       <disj>
         <concat>
-          <symbol inverse="true">like</symbol>
-          <symbol inverse="true">editor</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x2" trg="?x3">
-      <star>
-      <disj>
-        <concat>
+          <symbol inverse="true">includes</symbol>
+          <symbol>includes</symbol>
           <symbol>author</symbol>
-          <symbol>subscribes</symbol>
-          <symbol inverse="true">homepage</symbol>
+          <symbol>like</symbol>
         </concat>
         <concat>
-          <symbol>hasReview</symbol>
-          <symbol inverse="true">hasReview</symbol>
+          <symbol>director</symbol>
+          <symbol>like</symbol>
           <symbol>homepage</symbol>
           <symbol inverse="true">homepage</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">purchaseFor</symbol>
-          <symbol inverse="true">makesPurchase</symbol>
+          <symbol>homepage</symbol>
+          <symbol inverse="true">homepage</symbol>
+          <symbol>like</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <disj>
+        <concat>
+          <symbol>author</symbol>
           <symbol inverse="true">editor</symbol>
         </concat>
       </disj>
-      </star>
       </conjunct>
-      <conjunct src="?x3" trg="?x4">
-      <star>
+      <conjunct src="?x2" trg="?x4">
       <disj>
         <concat>
-          <symbol>hasReview</symbol>
-          <symbol>reviewer</symbol>
-          <symbol inverse="true">author</symbol>
+          <symbol inverse="true">purchaseFor</symbol>
+          <symbol>purchaseFor</symbol>
+          <symbol>homepage</symbol>
+          <symbol inverse="true">homepage</symbol>
         </concat>
       </disj>
-      </star>
       </conjunct>
     </body>
   </bodies>
@@ -2068,67 +2105,62 @@
     <id>0</id>
     <number>29</number>
     <input>../use-cases/shop.xml</input>
-    <arity>3</arity>
+    <arity>1</arity>
     <selectivity>-</selectivity>
     <multiplicity>0</multiplicity>
     <conjunct>3</conjunct>
-    <disjuncts>2-3</disjuncts>
+    <disjuncts>1-3</disjuncts>
     <length>2-4</length>
   </metadata>
   <head>
     <var>?x0</var>
-    <var>?x2</var>
-    <var>?x1</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol>givenName</symbol>
-          <symbol inverse="true">keywords</symbol>
+          <symbol inverse="true">type</symbol>
+          <symbol>like</symbol>
         </concat>
         <concat>
-          <symbol>homepage</symbol>
-          <symbol>url</symbol>
-          <symbol inverse="true">description</symbol>
+          <symbol inverse="true">type</symbol>
+          <symbol inverse="true">author</symbol>
+          <symbol>contentSize</symbol>
+          <symbol inverse="true">contentRating</symbol>
         </concat>
         <concat>
-          <symbol>email</symbol>
-          <symbol inverse="true">composer</symbol>
+          <symbol inverse="true">type</symbol>
+          <symbol inverse="true">follows</symbol>
+          <symbol inverse="true">actor</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x0" trg="?x2">
+      <conjunct src="?x1" trg="?x2">
       <disj>
         <concat>
-          <symbol inverse="true">contactPoint</symbol>
-          <symbol>description</symbol>
-          <symbol inverse="true">keywords</symbol>
+          <symbol>director</symbol>
+          <symbol inverse="true">friendOf</symbol>
+          <symbol inverse="true">editor</symbol>
         </concat>
         <concat>
-          <symbol>givenName</symbol>
-          <symbol inverse="true">title</symbol>
+          <symbol>trailer</symbol>
+          <symbol inverse="true">homepage</symbol>
+          <symbol inverse="true">editor</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">employee</symbol>
-          <symbol>openingHours</symbol>
-          <symbol inverse="true">serialNumber</symbol>
+          <symbol>actor</symbol>
+          <symbol inverse="true">editor</symbol>
+          <symbol inverse="true">includes</symbol>
           <symbol>includes</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x0" trg="?x3">
+      <conjunct src="?x2" trg="?x3">
       <disj>
         <concat>
-          <symbol>telephone</symbol>
-          <symbol inverse="true">contentRating</symbol>
-          <symbol>hasReview</symbol>
-          <symbol inverse="true">hasReview</symbol>
-        </concat>
-        <concat>
-          <symbol>jobTitle</symbol>
-          <symbol inverse="true">keywords</symbol>
+          <symbol>author</symbol>
+          <symbol>location</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -2141,86 +2173,80 @@
     <id>0</id>
     <number>30</number>
     <input>../use-cases/shop.xml</input>
-    <arity>0</arity>
+    <arity>4</arity>
     <selectivity>-</selectivity>
     <multiplicity>0</multiplicity>
     <conjunct>4</conjunct>
-    <disjuncts>2-3</disjuncts>
-    <length>2-4</length>
+    <disjuncts>1-3</disjuncts>
+    <length>3-4</length>
   </metadata>
   <head>
+    <var>?x3</var>
+    <var>?x0</var>
+    <var>?x2</var>
+    <var>?x1</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol inverse="true">contentSize</symbol>
-          <symbol inverse="true">like</symbol>
-          <symbol>telephone</symbol>
-          <symbol inverse="true">contentRating</symbol>
+          <symbol>purchaseFor</symbol>
+          <symbol>hasReview</symbol>
+          <symbol>rating</symbol>
+          <symbol inverse="true">hits</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">duration</symbol>
-          <symbol>text</symbol>
-          <symbol inverse="true">keywords</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">rating</symbol>
-          <symbol>text</symbol>
-          <symbol inverse="true">text</symbol>
+          <symbol>purchaseFor</symbol>
+          <symbol>keywords</symbol>
+          <symbol inverse="true">description</symbol>
+          <symbol>homepage</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x0" trg="?x2">
+      <conjunct src="?x1" trg="?x2">
       <disj>
         <concat>
-          <symbol inverse="true">telephone</symbol>
+          <symbol inverse="true">homepage</symbol>
           <symbol>like</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">duration</symbol>
-          <symbol>caption</symbol>
-          <symbol inverse="true">description</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">printEdition</symbol>
-          <symbol>caption</symbol>
-          <symbol inverse="true">caption</symbol>
+          <symbol inverse="true">like</symbol>
+          <symbol inverse="true">author</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x0" trg="?x3">
       <disj>
         <concat>
-          <symbol inverse="true">faxNumber</symbol>
-          <symbol>employee</symbol>
-          <symbol>email</symbol>
+          <symbol>purchaseFor</symbol>
+          <symbol>contentSize</symbol>
+          <symbol inverse="true">price</symbol>
+          <symbol>includes</symbol>
+        </concat>
+        <concat>
+          <symbol>price</symbol>
+          <symbol inverse="true">contentSize</symbol>
+          <symbol>description</symbol>
+          <symbol inverse="true">keywords</symbol>
+        </concat>
+        <concat>
+          <symbol>purchaseFor</symbol>
+          <symbol>award</symbol>
           <symbol inverse="true">description</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">hits</symbol>
-          <symbol inverse="true">trailer</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">aggregateRating</symbol>
-          <symbol>telephone</symbol>
-          <symbol inverse="true">contentRating</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x0" trg="?x4">
+      <conjunct src="?x2" trg="?x4">
       <disj>
         <concat>
-          <symbol inverse="true">userId</symbol>
-          <symbol>friendOf</symbol>
-          <symbol>userId</symbol>
-          <symbol inverse="true">contentSize</symbol>
+          <symbol>purchaseFor</symbol>
+          <symbol inverse="true">like</symbol>
+          <symbol>familyName</symbol>
+          <symbol inverse="true">title</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">bookEdition</symbol>
-          <symbol>contentRating</symbol>
-          <symbol inverse="true">contentSize</symbol>
+          <symbol>purchaseFor</symbol>
+          <symbol>opus</symbol>
+          <symbol inverse="true">printEdition</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -2233,83 +2259,63 @@
     <id>0</id>
     <number>31</number>
     <input>../use-cases/shop.xml</input>
-    <arity>3</arity>
+    <arity>4</arity>
     <selectivity>-</selectivity>
     <multiplicity>0</multiplicity>
-    <conjunct>4</conjunct>
-    <disjuncts>2-3</disjuncts>
+    <conjunct>3</conjunct>
+    <disjuncts>1-3</disjuncts>
     <length>2-4</length>
   </metadata>
   <head>
-    <var>?x1</var>
     <var>?x0</var>
     <var>?x2</var>
+    <var>?x1</var>
+    <var>?x3</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol inverse="true">contentSize</symbol>
-          <symbol>hasGenre</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">numberOfPages</symbol>
-          <symbol>caption</symbol>
-          <symbol inverse="true">caption</symbol>
-          <symbol>hasGenre</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">eligibleQuantity</symbol>
-          <symbol>serialNumber</symbol>
-          <symbol inverse="true">printColumn</symbol>
-          <symbol>hasGenre</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x1" trg="?x2">
-      <disj>
-        <concat>
-          <symbol inverse="true">hasGenre</symbol>
-          <symbol>homepage</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">hasGenre</symbol>
+          <symbol inverse="true">tag</symbol>
           <symbol>contentSize</symbol>
-          <symbol inverse="true">contentRating</symbol>
-          <symbol>homepage</symbol>
+          <symbol inverse="true">movement</symbol>
+          <symbol>performedIn</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">tag</symbol>
+          <symbol>caption</symbol>
+          <symbol inverse="true">description</symbol>
+          <symbol>performedIn</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x2" trg="?x3">
+      <conjunct src="?x0" trg="?x2">
       <disj>
         <concat>
-          <symbol inverse="true">homepage</symbol>
-          <symbol inverse="true">includes</symbol>
-          <symbol>priceValidUntil</symbol>
+          <symbol inverse="true">tag</symbol>
+          <symbol>text</symbol>
+          <symbol inverse="true">keywords</symbol>
+          <symbol>caption</symbol>
         </concat>
         <concat>
-          <symbol>url</symbol>
-          <symbol inverse="true">producer</symbol>
-          <symbol>release</symbol>
+          <symbol inverse="true">tag</symbol>
+          <symbol>description</symbol>
+          <symbol inverse="true">description</symbol>
+          <symbol>description</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">tag</symbol>
+          <symbol>description</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x3" trg="?x4">
+      <conjunct src="?x1" trg="?x3">
       <disj>
         <concat>
-          <symbol inverse="true">expires</symbol>
-          <symbol>editor</symbol>
-          <symbol>birthDate</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">expires</symbol>
-          <symbol>release</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">expires</symbol>
-          <symbol>editor</symbol>
-          <symbol>birthDate</symbol>
+          <symbol inverse="true">tag</symbol>
+          <symbol>hasReview</symbol>
+          <symbol>title</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -2322,91 +2328,64 @@
     <id>0</id>
     <number>32</number>
     <input>../use-cases/shop.xml</input>
-    <arity>4</arity>
-    <selectivity>-</selectivity>
-    <multiplicity>0.5</multiplicity>
-    <conjunct>4</conjunct>
+    <arity>2</arity>
+    <selectivity>2</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>3</conjunct>
     <disjuncts>1-3</disjuncts>
-    <length>3-4</length>
+    <length>2-4</length>
   </metadata>
   <head>
     <var>?x0</var>
     <var>?x1</var>
-    <var>?x3</var>
-    <var>?x2</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol inverse="true">editor</symbol>
-          <symbol>price</symbol>
-          <symbol inverse="true">eligibleQuantity</symbol>
+          <symbol>published</symbol>
+          <symbol inverse="true">description</symbol>
+          <symbol>keywords</symbol>
+          <symbol inverse="true">text</symbol>
+        </concat>
+        <concat>
+          <symbol>keywords</symbol>
+          <symbol inverse="true">description</symbol>
+        </concat>
+        <concat>
+          <symbol>published</symbol>
+          <symbol inverse="true">caption</symbol>
+          <symbol>caption</symbol>
+          <symbol inverse="true">text</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x1" trg="?x2">
-      <star>
+      <conjunct src="?x0" trg="?x2">
       <disj>
         <concat>
-          <symbol>includes</symbol>
-          <symbol inverse="true">includes</symbol>
-          <symbol>includes</symbol>
-          <symbol inverse="true">includes</symbol>
-        </concat>
-        <concat>
-          <symbol>includes</symbol>
-          <symbol inverse="true">includes</symbol>
-          <symbol>includes</symbol>
-          <symbol inverse="true">includes</symbol>
+          <symbol>author</symbol>
+          <symbol>userId</symbol>
+          <symbol inverse="true">contentSize</symbol>
         </concat>
       </disj>
-      </star>
       </conjunct>
-      <conjunct src="?x2" trg="?x3">
-      <star>
+      <conjunct src="?x0" trg="?x3">
       <disj>
         <concat>
-          <symbol>includes</symbol>
-          <symbol>homepage</symbol>
-          <symbol inverse="true">homepage</symbol>
-          <symbol inverse="true">includes</symbol>
+          <symbol>description</symbol>
+          <symbol inverse="true">keywords</symbol>
         </concat>
         <concat>
-          <symbol>includes</symbol>
-          <symbol inverse="true">includes</symbol>
-          <symbol>includes</symbol>
-          <symbol inverse="true">includes</symbol>
+          <symbol>description</symbol>
+          <symbol inverse="true">title</symbol>
+          <symbol inverse="true">hasReview</symbol>
         </concat>
         <concat>
-          <symbol>includes</symbol>
-          <symbol>actor</symbol>
-          <symbol inverse="true">editor</symbol>
-          <symbol inverse="true">includes</symbol>
-        </concat>
-      </disj>
-      </star>
-      </conjunct>
-      <conjunct src="?x3" trg="?x4">
-      <disj>
-        <concat>
-          <symbol>includes</symbol>
-          <symbol>artist</symbol>
-          <symbol inverse="true">follows</symbol>
-          <symbol inverse="true">actor</symbol>
-        </concat>
-        <concat>
-          <symbol>includes</symbol>
-          <symbol>artist</symbol>
-          <symbol inverse="true">follows</symbol>
-          <symbol inverse="true">actor</symbol>
-        </concat>
-        <concat>
-          <symbol>includes</symbol>
-          <symbol>artist</symbol>
-          <symbol inverse="true">follows</symbol>
-          <symbol inverse="true">actor</symbol>
+          <symbol>printColumn</symbol>
+          <symbol inverse="true">userId</symbol>
+          <symbol>email</symbol>
+          <symbol inverse="true">text</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -2419,66 +2398,58 @@
     <id>0</id>
     <number>33</number>
     <input>../use-cases/shop.xml</input>
-    <arity>0</arity>
+    <arity>4</arity>
     <selectivity>-</selectivity>
-    <multiplicity>0</multiplicity>
-    <conjunct>4</conjunct>
+    <multiplicity>0.666667</multiplicity>
+    <conjunct>3</conjunct>
     <disjuncts>1-3</disjuncts>
     <length>2-4</length>
   </metadata>
   <head>
+    <var>?x3</var>
+    <var>?x1</var>
+    <var>?x2</var>
+    <var>?x0</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
+      <star>
       <disj>
         <concat>
-          <symbol inverse="true">language</symbol>
-          <symbol>hasGenre</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">language</symbol>
-          <symbol inverse="true">homepage</symbol>
-          <symbol>hasGenre</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">language</symbol>
-          <symbol>hasGenre</symbol>
+          <symbol>hasReview</symbol>
+          <symbol inverse="true">hasReview</symbol>
         </concat>
       </disj>
+      </star>
       </conjunct>
-      <conjunct src="?x0" trg="?x2">
+      <conjunct src="?x1" trg="?x2">
+      <star>
       <disj>
         <concat>
-          <symbol inverse="true">language</symbol>
-          <symbol>contentSize</symbol>
+          <symbol>editor</symbol>
+          <symbol inverse="true">editor</symbol>
+          <symbol>editor</symbol>
+          <symbol inverse="true">author</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <disj>
+        <concat>
+          <symbol>printColumn</symbol>
+          <symbol inverse="true">hits</symbol>
+        </concat>
+        <concat>
+          <symbol>printColumn</symbol>
           <symbol inverse="true">contentRating</symbol>
-          <symbol>hasGenre</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x0" trg="?x3">
-      <disj>
-        <concat>
-          <symbol inverse="true">language</symbol>
-          <symbol inverse="true">homepage</symbol>
-          <symbol>hasGenre</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x0" trg="?x4">
-      <disj>
-        <concat>
-          <symbol inverse="true">language</symbol>
-          <symbol>producer</symbol>
-          <symbol inverse="true">award</symbol>
-          <symbol>hasGenre</symbol>
+          <symbol>text</symbol>
+          <symbol inverse="true">url</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">language</symbol>
-          <symbol>isbn</symbol>
-          <symbol inverse="true">opus</symbol>
-          <symbol>hasGenre</symbol>
+          <symbol>printPage</symbol>
+          <symbol inverse="true">hits</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -2491,60 +2462,67 @@
     <id>0</id>
     <number>34</number>
     <input>../use-cases/shop.xml</input>
-    <arity>0</arity>
+    <arity>1</arity>
     <selectivity>-</selectivity>
     <multiplicity>0</multiplicity>
     <conjunct>4</conjunct>
-    <disjuncts>1-2</disjuncts>
-    <length>2-4</length>
+    <disjuncts>1-3</disjuncts>
+    <length>3-4</length>
   </metadata>
   <head>
+    <var>?x0</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol inverse="true">location</symbol>
-          <symbol inverse="true">editor</symbol>
-          <symbol>hasGenre</symbol>
+          <symbol inverse="true">age</symbol>
+          <symbol inverse="true">director</symbol>
+          <symbol>language</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">location</symbol>
-          <symbol>givenName</symbol>
-          <symbol inverse="true">caption</symbol>
-          <symbol>hasGenre</symbol>
+          <symbol inverse="true">age</symbol>
+          <symbol>subscribes</symbol>
+          <symbol>language</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x1" trg="?x2">
       <disj>
         <concat>
-          <symbol inverse="true">hasGenre</symbol>
-          <symbol>expires</symbol>
-          <symbol inverse="true">release</symbol>
-          <symbol>contentSize</symbol>
+          <symbol inverse="true">language</symbol>
+          <symbol inverse="true">homepage</symbol>
+          <symbol>tag</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x0" trg="?x3">
       <disj>
         <concat>
-          <symbol inverse="true">performedIn</symbol>
-          <symbol>tag</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">performedIn</symbol>
-          <symbol>tag</symbol>
+          <symbol inverse="true">age</symbol>
+          <symbol inverse="true">conductor</symbol>
+          <symbol>hasGenre</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x2" trg="?x4">
       <disj>
         <concat>
-          <symbol inverse="true">performedIn</symbol>
+          <symbol inverse="true">age</symbol>
+          <symbol>userId</symbol>
+          <symbol inverse="true">contentSize</symbol>
           <symbol>hasGenre</symbol>
-          <symbol>tag</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">age</symbol>
+          <symbol inverse="true">director</symbol>
+          <symbol>hasGenre</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">age</symbol>
+          <symbol>like</symbol>
+          <symbol>hasGenre</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -2559,7 +2537,7 @@
     <input>../use-cases/shop.xml</input>
     <arity>3</arity>
     <selectivity>-</selectivity>
-    <multiplicity>0.75</multiplicity>
+    <multiplicity>0.25</multiplicity>
     <conjunct>4</conjunct>
     <disjuncts>1-3</disjuncts>
     <length>2-4</length>
@@ -2574,20 +2552,10 @@
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol inverse="true">nationality</symbol>
-          <symbol>friendOf</symbol>
+          <symbol inverse="true">keywords</symbol>
+          <symbol>text</symbol>
+          <symbol inverse="true">givenName</symbol>
           <symbol>like</symbol>
-          <symbol inverse="true">purchaseFor</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">editor</symbol>
-          <symbol>serialNumber</symbol>
-          <symbol inverse="true">contentSize</symbol>
-          <symbol inverse="true">purchaseFor</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">nationality</symbol>
-          <symbol>makesPurchase</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -2595,47 +2563,55 @@
       <star>
       <disj>
         <concat>
-          <symbol inverse="true">makesPurchase</symbol>
-          <symbol>subscribes</symbol>
+          <symbol>hasReview</symbol>
+          <symbol inverse="true">hasReview</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">includes</symbol>
+          <symbol>includes</symbol>
+          <symbol>homepage</symbol>
           <symbol inverse="true">homepage</symbol>
-          <symbol inverse="true">purchaseFor</symbol>
+        </concat>
+        <concat>
+          <symbol>homepage</symbol>
+          <symbol inverse="true">subscribes</symbol>
+          <symbol inverse="true">editor</symbol>
         </concat>
       </disj>
       </star>
       </conjunct>
       <conjunct src="?x2" trg="?x3">
-      <star>
       <disj>
         <concat>
-          <symbol>purchaseFor</symbol>
-          <symbol>author</symbol>
-          <symbol inverse="true">editor</symbol>
-          <symbol inverse="true">purchaseFor</symbol>
+          <symbol>title</symbol>
+          <symbol inverse="true">caption</symbol>
+          <symbol>expires</symbol>
+          <symbol inverse="true">expires</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">makesPurchase</symbol>
-          <symbol>friendOf</symbol>
-          <symbol>makesPurchase</symbol>
+          <symbol>printEdition</symbol>
+          <symbol inverse="true">price</symbol>
+          <symbol>purchaseFor</symbol>
+        </concat>
+        <concat>
+          <symbol>text</symbol>
+          <symbol inverse="true">text</symbol>
+          <symbol>text</symbol>
+          <symbol inverse="true">keywords</symbol>
         </concat>
       </disj>
-      </star>
       </conjunct>
       <conjunct src="?x3" trg="?x4">
-      <star>
       <disj>
         <concat>
-          <symbol inverse="true">makesPurchase</symbol>
-          <symbol inverse="true">actor</symbol>
-          <symbol>actor</symbol>
-          <symbol>makesPurchase</symbol>
+          <symbol>homepage</symbol>
+          <symbol inverse="true">homepage</symbol>
         </concat>
         <concat>
-          <symbol>purchaseFor</symbol>
-          <symbol>director</symbol>
-          <symbol>makesPurchase</symbol>
+          <symbol>homepage</symbol>
+          <symbol inverse="true">homepage</symbol>
         </concat>
       </disj>
-      </star>
       </conjunct>
     </body>
   </bodies>
@@ -2646,80 +2622,66 @@
     <id>0</id>
     <number>36</number>
     <input>../use-cases/shop.xml</input>
-    <arity>0</arity>
+    <arity>1</arity>
     <selectivity>-</selectivity>
-    <multiplicity>0</multiplicity>
-    <conjunct>4</conjunct>
+    <multiplicity>1</multiplicity>
+    <conjunct>3</conjunct>
     <disjuncts>1-3</disjuncts>
     <length>2-4</length>
   </metadata>
   <head>
+    <var>?x0</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
+      <star>
       <disj>
         <concat>
-          <symbol>caption</symbol>
-          <symbol inverse="true">description</symbol>
-          <symbol>title</symbol>
-          <symbol inverse="true">title</symbol>
+          <symbol inverse="true">includes</symbol>
+          <symbol>includes</symbol>
+          <symbol>homepage</symbol>
+          <symbol inverse="true">trailer</symbol>
         </concat>
         <concat>
-          <symbol>description</symbol>
-          <symbol inverse="true">producer</symbol>
-        </concat>
-        <concat>
-          <symbol>text</symbol>
-          <symbol inverse="true">award</symbol>
+          <symbol>director</symbol>
+          <symbol inverse="true">director</symbol>
+          <symbol>actor</symbol>
+          <symbol inverse="true">actor</symbol>
         </concat>
       </disj>
+      </star>
       </conjunct>
       <conjunct src="?x0" trg="?x2">
+      <star>
       <disj>
         <concat>
-          <symbol>editor</symbol>
-          <symbol>familyName</symbol>
-          <symbol inverse="true">producer</symbol>
-        </concat>
-        <concat>
-          <symbol>author</symbol>
-          <symbol>givenName</symbol>
-          <symbol inverse="true">producer</symbol>
-        </concat>
-        <concat>
-          <symbol>text</symbol>
-          <symbol inverse="true">text</symbol>
-          <symbol inverse="true">hasReview</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x0" trg="?x3">
-      <disj>
-        <concat>
-          <symbol>keywords</symbol>
-          <symbol inverse="true">description</symbol>
-        </concat>
-        <concat>
-          <symbol>hasReview</symbol>
           <symbol>title</symbol>
-          <symbol inverse="true">keywords</symbol>
+          <symbol inverse="true">text</symbol>
         </concat>
         <concat>
-          <symbol>homepage</symbol>
-          <symbol>url</symbol>
-          <symbol inverse="true">description</symbol>
+          <symbol>contentRating</symbol>
+          <symbol inverse="true">contentSize</symbol>
+          <symbol>conductor</symbol>
+          <symbol inverse="true">reviewer</symbol>
+        </concat>
+        <concat>
+          <symbol>award</symbol>
+          <symbol inverse="true">title</symbol>
         </concat>
       </disj>
+      </star>
       </conjunct>
-      <conjunct src="?x0" trg="?x4">
+      <conjunct src="?x1" trg="?x3">
+      <star>
       <disj>
         <concat>
-          <symbol>contentSize</symbol>
-          <symbol inverse="true">userId</symbol>
-          <symbol inverse="true">director</symbol>
+          <symbol>actor</symbol>
+          <symbol>userId</symbol>
+          <symbol inverse="true">rating</symbol>
         </concat>
       </disj>
+      </star>
       </conjunct>
     </body>
   </bodies>
@@ -2730,51 +2692,51 @@
     <id>0</id>
     <number>37</number>
     <input>../use-cases/shop.xml</input>
-    <arity>1</arity>
+    <arity>4</arity>
     <selectivity>-</selectivity>
     <multiplicity>0</multiplicity>
-    <conjunct>3</conjunct>
-    <disjuncts>2-3</disjuncts>
-    <length>4-7</length>
+    <conjunct>4</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
   </metadata>
   <head>
     <var>?x0</var>
+    <var>?x3</var>
+    <var>?x2</var>
+    <var>?x1</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol inverse="true">performedIn</symbol>
-          <symbol>composer</symbol>
-          <symbol inverse="true">title</symbol>
-          <symbol inverse="true">release</symbol>
-          <symbol>producer</symbol>
-          <symbol inverse="true">keywords</symbol>
+          <symbol>includes</symbol>
+          <symbol>wordCount</symbol>
+          <symbol inverse="true">totalVotes</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">location</symbol>
-          <symbol>like</symbol>
-          <symbol inverse="true">expires</symbol>
-          <symbol>homepage</symbol>
-          <symbol inverse="true">homepage</symbol>
+          <symbol>eligibleQuantity</symbol>
+          <symbol inverse="true">rating</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x0" trg="?x2">
       <disj>
         <concat>
-          <symbol inverse="true">purchaseFor</symbol>
-          <symbol>purchaseFor</symbol>
-          <symbol inverse="true">validThrough</symbol>
-          <symbol>includes</symbol>
+          <symbol>validThrough</symbol>
+          <symbol inverse="true">release</symbol>
+          <symbol>caption</symbol>
+          <symbol inverse="true">text</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">purchaseFor</symbol>
-          <symbol>purchaseFor</symbol>
-          <symbol inverse="true">validForm</symbol>
+          <symbol>price</symbol>
+          <symbol inverse="true">wordCount</symbol>
+          <symbol>caption</symbol>
+          <symbol inverse="true">title</symbol>
+        </concat>
+        <concat>
           <symbol>includes</symbol>
-          <symbol>keywords</symbol>
+          <symbol>caption</symbol>
           <symbol inverse="true">title</symbol>
         </concat>
       </disj>
@@ -2782,30 +2744,33 @@
       <conjunct src="?x0" trg="?x3">
       <disj>
         <concat>
-          <symbol inverse="true">performedIn</symbol>
-          <symbol>hasReview</symbol>
-          <symbol>rating</symbol>
-          <symbol inverse="true">datePublished</symbol>
-          <symbol inverse="true">purchaseFor</symbol>
-          <symbol>price</symbol>
-          <symbol inverse="true">isbn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">birthDate</symbol>
-          <symbol inverse="true">editor</symbol>
+          <symbol>includes</symbol>
           <symbol>title</symbol>
-          <symbol inverse="true">text</symbol>
+          <symbol inverse="true">title</symbol>
         </concat>
         <concat>
+          <symbol>priceValidUntil</symbol>
           <symbol inverse="true">expires</symbol>
-          <symbol inverse="true">like</symbol>
-          <symbol>email</symbol>
-          <symbol inverse="true">keywords</symbol>
+          <symbol>composer</symbol>
+          <symbol inverse="true">title</symbol>
+        </concat>
+        <concat>
+          <symbol>eligibleQuantity</symbol>
+          <symbol inverse="true">opus</symbol>
+          <symbol>hasReview</symbol>
         </concat>
       </disj>
       </conjunct>
-    </body>
-    <body>
+      <conjunct src="?x0" trg="?x4">
+      <disj>
+        <concat>
+          <symbol>includes</symbol>
+          <symbol>caption</symbol>
+          <symbol inverse="true">caption</symbol>
+          <symbol>hasReview</symbol>
+        </concat>
+      </disj>
+      </conjunct>
     </body>
   </bodies>
 </query>
@@ -2817,9 +2782,9 @@
     <input>../use-cases/shop.xml</input>
     <arity>0</arity>
     <selectivity>-</selectivity>
-    <multiplicity>0</multiplicity>
-    <conjunct>3</conjunct>
-    <disjuncts>2-3</disjuncts>
+    <multiplicity>0.25</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>1-3</disjuncts>
     <length>2-4</length>
   </metadata>
   <head>
@@ -2829,52 +2794,65 @@
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol>description</symbol>
+          <symbol inverse="true">age</symbol>
+          <symbol>jobTitle</symbol>
           <symbol inverse="true">description</symbol>
         </concat>
         <concat>
-          <symbol>contentSize</symbol>
-          <symbol inverse="true">contentSize</symbol>
+          <symbol inverse="true">age</symbol>
+          <symbol inverse="true">friendOf</symbol>
+          <symbol inverse="true">follows</symbol>
+          <symbol>like</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">age</symbol>
+          <symbol>jobTitle</symbol>
+          <symbol inverse="true">text</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <star>
+      <disj>
+        <concat>
           <symbol>homepage</symbol>
           <symbol inverse="true">homepage</symbol>
         </concat>
         <concat>
-          <symbol>keywords</symbol>
-          <symbol inverse="true">title</symbol>
-          <symbol>description</symbol>
-          <symbol inverse="true">text</symbol>
+          <symbol inverse="true">purchaseFor</symbol>
+          <symbol>purchaseFor</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <disj>
+        <concat>
+          <symbol>homepage</symbol>
+          <symbol inverse="true">homepage</symbol>
+          <symbol>like</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x0" trg="?x2">
+      <conjunct src="?x3" trg="?x4">
       <disj>
-        <concat>
-          <symbol>contentRating</symbol>
-          <symbol inverse="true">printPage</symbol>
-        </concat>
         <concat>
           <symbol>text</symbol>
-          <symbol inverse="true">title</symbol>
-        </concat>
-        <concat>
-          <symbol>keywords</symbol>
-          <symbol inverse="true">jobTitle</symbol>
-          <symbol inverse="true">author</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x0" trg="?x3">
-      <disj>
-        <concat>
-          <symbol inverse="true">like</symbol>
-          <symbol>familyName</symbol>
-          <symbol inverse="true">text</symbol>
-        </concat>
-        <concat>
+          <symbol inverse="true">caption</symbol>
           <symbol>hasGenre</symbol>
-          <symbol>tag</symbol>
-          <symbol inverse="true">tag</symbol>
-          <symbol inverse="true">hasGenre</symbol>
+          <symbol>type</symbol>
+        </concat>
+        <concat>
+          <symbol>printEdition</symbol>
+          <symbol inverse="true">contentRating</symbol>
+          <symbol>hasGenre</symbol>
+          <symbol>type</symbol>
+        </concat>
+        <concat>
+          <symbol>expires</symbol>
+          <symbol inverse="true">expires</symbol>
+          <symbol>hasGenre</symbol>
+          <symbol>type</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -2887,54 +2865,63 @@
     <id>0</id>
     <number>39</number>
     <input>../use-cases/shop.xml</input>
-    <arity>2</arity>
-    <selectivity>1</selectivity>
+    <arity>0</arity>
+    <selectivity>-</selectivity>
     <multiplicity>0</multiplicity>
-    <conjunct>3</conjunct>
+    <conjunct>4</conjunct>
     <disjuncts>1-2</disjuncts>
     <length>3-4</length>
   </metadata>
   <head>
-    <var>?x0</var>
-    <var>?x1</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol inverse="true">contactPoint</symbol>
-          <symbol>description</symbol>
-          <symbol inverse="true">producer</symbol>
+          <symbol inverse="true">hasGenre</symbol>
+          <symbol>title</symbol>
+          <symbol inverse="true">description</symbol>
           <symbol>expires</symbol>
         </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x0" trg="?x2">
-      <disj>
         <concat>
-          <symbol>like</symbol>
-          <symbol>hasGenre</symbol>
-          <symbol>type</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">conductor</symbol>
-          <symbol>hasGenre</symbol>
-          <symbol>type</symbol>
+          <symbol inverse="true">hasGenre</symbol>
+          <symbol inverse="true">includes</symbol>
+          <symbol>priceValidUntil</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x1" trg="?x3">
+      <conjunct src="?x1" trg="?x2">
       <disj>
         <concat>
-          <symbol inverse="true">author</symbol>
-          <symbol>hasGenre</symbol>
-          <symbol>type</symbol>
+          <symbol inverse="true">purchaseDate</symbol>
+          <symbol>price</symbol>
+          <symbol inverse="true">printColumn</symbol>
+          <symbol>printPage</symbol>
         </concat>
         <concat>
-          <symbol>like</symbol>
+          <symbol inverse="true">birthDate</symbol>
+          <symbol inverse="true">director</symbol>
+          <symbol>duration</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <disj>
+        <concat>
+          <symbol inverse="true">contentRating</symbol>
+          <symbol>caption</symbol>
+          <symbol inverse="true">title</symbol>
           <symbol>hasGenre</symbol>
-          <symbol>type</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x3" trg="?x4">
+      <disj>
+        <concat>
+          <symbol inverse="true">hasGenre</symbol>
+          <symbol inverse="true">like</symbol>
+          <symbol>gender</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -2948,68 +2935,86 @@
     <number>40</number>
     <input>../use-cases/shop.xml</input>
     <arity>2</arity>
-    <selectivity>2</selectivity>
+    <selectivity>0</selectivity>
     <multiplicity>0</multiplicity>
-    <conjunct>3</conjunct>
+    <conjunct>4</conjunct>
     <disjuncts>2-3</disjuncts>
     <length>2-4</length>
   </metadata>
   <head>
     <var>?x0</var>
-    <var>?x1</var>
+    <var>?x4</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol>keywords</symbol>
-          <symbol inverse="true">keywords</symbol>
-          <symbol>isbn</symbol>
-          <symbol inverse="true">printEdition</symbol>
+          <symbol inverse="true">datePublished</symbol>
+          <symbol>editor</symbol>
+          <symbol>familyName</symbol>
+          <symbol inverse="true">text</symbol>
         </concat>
         <concat>
-          <symbol>producer</symbol>
-          <symbol inverse="true">title</symbol>
-        </concat>
-        <concat>
-          <symbol>contentSize</symbol>
-          <symbol inverse="true">printPage</symbol>
+          <symbol inverse="true">expires</symbol>
+          <symbol>caption</symbol>
+          <symbol inverse="true">text</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x0" trg="?x2">
+      <conjunct src="?x1" trg="?x2">
       <disj>
         <concat>
-          <symbol>homepage</symbol>
-          <symbol>hits</symbol>
-          <symbol inverse="true">userId</symbol>
+          <symbol>director</symbol>
+          <symbol>like</symbol>
+          <symbol inverse="true">includes</symbol>
+          <symbol>includes</symbol>
         </concat>
         <concat>
-          <symbol>contentSize</symbol>
-          <symbol inverse="true">rating</symbol>
-          <symbol>reviewer</symbol>
-        </concat>
-        <concat>
-          <symbol>keywords</symbol>
-          <symbol inverse="true">description</symbol>
-          <symbol>performer</symbol>
-          <symbol inverse="true">jobTitle</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x1" trg="?x3">
-      <disj>
-        <concat>
-          <symbol>title</symbol>
-          <symbol inverse="true">title</symbol>
-          <symbol inverse="true">purchaseFor</symbol>
-          <symbol inverse="true">makesPurchase</symbol>
-        </concat>
-        <concat>
-          <symbol>tag</symbol>
-          <symbol inverse="true">tag</symbol>
           <symbol>actor</symbol>
+          <symbol inverse="true">contactPoint</symbol>
+          <symbol>offers</symbol>
+          <symbol>includes</symbol>
+        </concat>
+        <concat>
+          <symbol>director</symbol>
+          <symbol>like</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <disj>
+        <concat>
+          <symbol>conductor</symbol>
+          <symbol>follows</symbol>
+          <symbol>makesPurchase</symbol>
+        </concat>
+        <concat>
+          <symbol>conductor</symbol>
+          <symbol>like</symbol>
+          <symbol inverse="true">purchaseFor</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x3" trg="?x4">
+      <disj>
+        <concat>
+          <symbol inverse="true">makesPurchase</symbol>
+          <symbol>email</symbol>
+          <symbol inverse="true">keywords</symbol>
+          <symbol>hasGenre</symbol>
+        </concat>
+        <concat>
+          <symbol>purchaseFor</symbol>
+          <symbol>text</symbol>
+          <symbol inverse="true">text</symbol>
+          <symbol>hasGenre</symbol>
+        </concat>
+        <concat>
+          <symbol>purchaseFor</symbol>
+          <symbol>duration</symbol>
+          <symbol inverse="true">contentRating</symbol>
+          <symbol>hasGenre</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -3026,8 +3031,8 @@
     <selectivity>-</selectivity>
     <multiplicity>0</multiplicity>
     <conjunct>3</conjunct>
-    <disjuncts>1-3</disjuncts>
-    <length>3-4</length>
+    <disjuncts>1-2</disjuncts>
+    <length>2-4</length>
   </metadata>
   <head>
     <var>?x0</var>
@@ -3039,43 +3044,39 @@
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol inverse="true">tag</symbol>
-          <symbol inverse="true">like</symbol>
-          <symbol>age</symbol>
+          <symbol>artist</symbol>
+          <symbol inverse="true">reviewer</symbol>
+          <symbol inverse="true">hasReview</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x0" trg="?x2">
       <disj>
         <concat>
-          <symbol inverse="true">tag</symbol>
-          <symbol inverse="true">like</symbol>
-          <symbol>type</symbol>
+          <symbol inverse="true">includes</symbol>
+          <symbol>includes</symbol>
+          <symbol>homepage</symbol>
+          <symbol inverse="true">homepage</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">tag</symbol>
-          <symbol>contentRating</symbol>
-          <symbol inverse="true">userId</symbol>
-          <symbol>type</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">tag</symbol>
-          <symbol inverse="true">like</symbol>
-          <symbol>type</symbol>
+          <symbol inverse="true">purchaseFor</symbol>
+          <symbol>purchaseFor</symbol>
+          <symbol inverse="true">includes</symbol>
+          <symbol>includes</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x1" trg="?x3">
       <disj>
         <concat>
-          <symbol inverse="true">tag</symbol>
-          <symbol inverse="true">like</symbol>
-          <symbol>type</symbol>
+          <symbol inverse="true">includes</symbol>
+          <symbol>includes</symbol>
+          <symbol inverse="true">purchaseFor</symbol>
+          <symbol>purchaseFor</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">tag</symbol>
-          <symbol>conductor</symbol>
-          <symbol>type</symbol>
+          <symbol inverse="true">purchaseFor</symbol>
+          <symbol>purchaseFor</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -3087,6 +3088,304 @@
   <metadata>
     <id>0</id>
     <number>42</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>2</arity>
+    <selectivity>0</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>3-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x1</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol inverse="true">language</symbol>
+          <symbol>text</symbol>
+          <symbol inverse="true">title</symbol>
+          <symbol>numberOfPages</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <disj>
+        <concat>
+          <symbol inverse="true">language</symbol>
+          <symbol>title</symbol>
+          <symbol inverse="true">title</symbol>
+          <symbol>contentSize</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">language</symbol>
+          <symbol inverse="true">homepage</symbol>
+          <symbol>contentRating</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">language</symbol>
+          <symbol>hasReview</symbol>
+          <symbol>totalVotes</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <disj>
+        <concat>
+          <symbol inverse="true">language</symbol>
+          <symbol>keywords</symbol>
+          <symbol inverse="true">published</symbol>
+          <symbol>printPage</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">language</symbol>
+          <symbol>caption</symbol>
+          <symbol inverse="true">caption</symbol>
+          <symbol>printColumn</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>43</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>0</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol inverse="true">language</symbol>
+          <symbol inverse="true">subscribes</symbol>
+          <symbol>givenName</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
+          <symbol inverse="true">description</symbol>
+          <symbol>editor</symbol>
+          <symbol>birthDate</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">title</symbol>
+          <symbol inverse="true">includes</symbol>
+          <symbol>validForm</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">producer</symbol>
+          <symbol>release</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <disj>
+        <concat>
+          <symbol inverse="true">language</symbol>
+          <symbol>text</symbol>
+          <symbol inverse="true">text</symbol>
+          <symbol>printPage</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">language</symbol>
+          <symbol inverse="true">homepage</symbol>
+          <symbol>contentRating</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x4">
+      <disj>
+        <concat>
+          <symbol inverse="true">language</symbol>
+          <symbol inverse="true">purchaseFor</symbol>
+          <symbol>purchaseFor</symbol>
+          <symbol>numberOfPages</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">language</symbol>
+          <symbol>expires</symbol>
+          <symbol inverse="true">datePublished</symbol>
+          <symbol>printPage</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">language</symbol>
+          <symbol>isbn</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>44</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>3</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>0.25</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x1</var>
+    <var>?x2</var>
+    <var>?x0</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol>actor</symbol>
+          <symbol>like</symbol>
+          <symbol inverse="true">like</symbol>
+          <symbol>subscribes</symbol>
+        </concat>
+        <concat>
+          <symbol>director</symbol>
+          <symbol>like</symbol>
+          <symbol inverse="true">like</symbol>
+          <symbol>homepage</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">homepage</symbol>
+          <symbol>actor</symbol>
+          <symbol>subscribes</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">homepage</symbol>
+          <symbol>homepage</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <disj>
+        <concat>
+          <symbol inverse="true">homepage</symbol>
+          <symbol inverse="true">like</symbol>
+          <symbol inverse="true">actor</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">homepage</symbol>
+          <symbol inverse="true">like</symbol>
+          <symbol>makesPurchase</symbol>
+          <symbol>purchaseFor</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">homepage</symbol>
+          <symbol inverse="true">like</symbol>
+          <symbol inverse="true">actor</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x3" trg="?x4">
+      <disj>
+        <concat>
+          <symbol>hasReview</symbol>
+          <symbol>reviewer</symbol>
+          <symbol>like</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>45</number>
+    <input>../use-cases/shop.xml</input>
+    <arity>0</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol inverse="true">homepage</symbol>
+          <symbol>description</symbol>
+          <symbol inverse="true">name</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">homepage</symbol>
+          <symbol>keywords</symbol>
+          <symbol inverse="true">jobTitle</symbol>
+          <symbol inverse="true">employee</symbol>
+        </concat>
+        <concat>
+          <symbol>hits</symbol>
+          <symbol inverse="true">openingHours</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <disj>
+        <concat>
+          <symbol>hits</symbol>
+          <symbol inverse="true">faxNumber</symbol>
+        </concat>
+        <concat>
+          <symbol>url</symbol>
+          <symbol inverse="true">paymentAccepted</symbol>
+        </concat>
+        <concat>
+          <symbol>url</symbol>
+          <symbol inverse="true">email</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <disj>
+        <concat>
+          <symbol inverse="true">subscribes</symbol>
+          <symbol inverse="true">author</symbol>
+          <symbol>wordCount</symbol>
+          <symbol inverse="true">faxNumber</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>46</number>
     <input>../use-cases/shop.xml</input>
     <arity>0</arity>
     <selectivity>-</selectivity>
@@ -3103,334 +3402,49 @@
       <star>
       <disj>
         <concat>
+          <symbol inverse="true">author</symbol>
+          <symbol>author</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <star>
+      <disj>
+        <concat>
           <symbol>homepage</symbol>
           <symbol inverse="true">subscribes</symbol>
-          <symbol inverse="true">conductor</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">includes</symbol>
-          <symbol>includes</symbol>
-          <symbol inverse="true">includes</symbol>
-          <symbol>includes</symbol>
-        </concat>
-        <concat>
-          <symbol>conductor</symbol>
-          <symbol>homepage</symbol>
-          <symbol inverse="true">homepage</symbol>
-        </concat>
-      </disj>
-      </star>
-      </conjunct>
-      <conjunct src="?x0" trg="?x2">
-      <star>
-      <disj>
-        <concat>
-          <symbol>movement</symbol>
-          <symbol inverse="true">printPage</symbol>
-          <symbol>editor</symbol>
-        </concat>
-        <concat>
-          <symbol>keywords</symbol>
-          <symbol inverse="true">producer</symbol>
-          <symbol>director</symbol>
-        </concat>
-        <concat>
-          <symbol>movement</symbol>
-          <symbol inverse="true">contentSize</symbol>
-          <symbol inverse="true">purchaseFor</symbol>
-          <symbol inverse="true">makesPurchase</symbol>
-        </concat>
-      </disj>
-      </star>
-      </conjunct>
-      <conjunct src="?x1" trg="?x3">
-      <star>
-      <disj>
-        <concat>
-          <symbol>composer</symbol>
-          <symbol inverse="true">email</symbol>
-        </concat>
-      </disj>
-      </star>
-      </conjunct>
-    </body>
-  </bodies>
-</query>
-
-<query>
-  <metadata>
-    <id>0</id>
-    <number>43</number>
-    <input>../use-cases/shop.xml</input>
-    <arity>1</arity>
-    <selectivity>-</selectivity>
-    <multiplicity>0</multiplicity>
-    <conjunct>4</conjunct>
-    <disjuncts>1-3</disjuncts>
-    <length>2-4</length>
-  </metadata>
-  <head>
-    <var>?x0</var>
-  </head>
-  <bodies>
-    <body>
-      <conjunct src="?x0" trg="?x1">
-      <disj>
-        <concat>
-          <symbol inverse="true">like</symbol>
-          <symbol inverse="true">director</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">like</symbol>
-          <symbol inverse="true">director</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x1" trg="?x2">
-      <disj>
-        <concat>
-          <symbol>actor</symbol>
-          <symbol>like</symbol>
-        </concat>
-        <concat>
-          <symbol>actor</symbol>
           <symbol inverse="true">friendOf</symbol>
-          <symbol>like</symbol>
         </concat>
         <concat>
-          <symbol>director</symbol>
-          <symbol>follows</symbol>
           <symbol inverse="true">friendOf</symbol>
-          <symbol inverse="true">author</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x2" trg="?x3">
-      <disj>
-        <concat>
-          <symbol>author</symbol>
-          <symbol>like</symbol>
-          <symbol>hasReview</symbol>
-          <symbol inverse="true">hasReview</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x3" trg="?x4">
-      <disj>
-        <concat>
-          <symbol>caption</symbol>
-          <symbol inverse="true">familyName</symbol>
-          <symbol>age</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-    </body>
-  </bodies>
-</query>
-
-<query>
-  <metadata>
-    <id>0</id>
-    <number>44</number>
-    <input>../use-cases/shop.xml</input>
-    <arity>0</arity>
-    <selectivity>-</selectivity>
-    <multiplicity>0</multiplicity>
-    <conjunct>4</conjunct>
-    <disjuncts>1-2</disjuncts>
-    <length>2-4</length>
-  </metadata>
-  <head>
-  </head>
-  <bodies>
-    <body>
-      <conjunct src="?x0" trg="?x1">
-      <disj>
-        <concat>
-          <symbol>employee</symbol>
           <symbol>friendOf</symbol>
-          <symbol>like</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x0" trg="?x2">
-      <disj>
-        <concat>
-          <symbol>employee</symbol>
-          <symbol>like</symbol>
+          <symbol inverse="true">actor</symbol>
+          <symbol>actor</symbol>
         </concat>
         <concat>
-          <symbol>employee</symbol>
-          <symbol>like</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x0" trg="?x3">
-      <disj>
-        <concat>
-          <symbol>offers</symbol>
-          <symbol>includes</symbol>
-          <symbol inverse="true">includes</symbol>
-          <symbol>includes</symbol>
-        </concat>
-        <concat>
-          <symbol>employee</symbol>
-          <symbol>follows</symbol>
-          <symbol>like</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x0" trg="?x4">
-      <disj>
-        <concat>
-          <symbol>employee</symbol>
-          <symbol>like</symbol>
-        </concat>
-        <concat>
-          <symbol>employee</symbol>
-          <symbol>like</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-    </body>
-  </bodies>
-</query>
-
-<query>
-  <metadata>
-    <id>0</id>
-    <number>45</number>
-    <input>../use-cases/shop.xml</input>
-    <arity>2</arity>
-    <selectivity>0</selectivity>
-    <multiplicity>0</multiplicity>
-    <conjunct>4</conjunct>
-    <disjuncts>1-3</disjuncts>
-    <length>2-4</length>
-  </metadata>
-  <head>
-    <var>?x0</var>
-    <var>?x2</var>
-  </head>
-  <bodies>
-    <body>
-      <conjunct src="?x0" trg="?x1">
-      <disj>
-        <concat>
-          <symbol inverse="true">language</symbol>
-          <symbol>editor</symbol>
-          <symbol>birthDate</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">language</symbol>
-          <symbol inverse="true">homepage</symbol>
-          <symbol>birthDate</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">language</symbol>
-          <symbol inverse="true">like</symbol>
           <symbol inverse="true">editor</symbol>
-          <symbol>datePublished</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x1" trg="?x2">
-      <disj>
-        <concat>
-          <symbol inverse="true">release</symbol>
-          <symbol>caption</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x0" trg="?x3">
-      <disj>
-        <concat>
-          <symbol inverse="true">language</symbol>
-          <symbol inverse="true">homepage</symbol>
-          <symbol>type</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">language</symbol>
-          <symbol>description</symbol>
-          <symbol inverse="true">givenName</symbol>
-          <symbol>type</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x2" trg="?x4">
-      <disj>
-        <concat>
-          <symbol inverse="true">language</symbol>
-          <symbol inverse="true">homepage</symbol>
-          <symbol>editor</symbol>
-          <symbol>type</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-    </body>
-  </bodies>
-</query>
-
-<query>
-  <metadata>
-    <id>0</id>
-    <number>46</number>
-    <input>../use-cases/shop.xml</input>
-    <arity>1</arity>
-    <selectivity>-</selectivity>
-    <multiplicity>0</multiplicity>
-    <conjunct>3</conjunct>
-    <disjuncts>1-3</disjuncts>
-    <length>2-4</length>
-  </metadata>
-  <head>
-    <var>?x0</var>
-  </head>
-  <bodies>
-    <body>
-      <conjunct src="?x0" trg="?x1">
-      <disj>
-        <concat>
-          <symbol inverse="true">birthDate</symbol>
-          <symbol>gender</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x0" trg="?x2">
-      <disj>
-        <concat>
-          <symbol inverse="true">expires</symbol>
-          <symbol inverse="true">like</symbol>
-          <symbol>follows</symbol>
-          <symbol>gender</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">release</symbol>
-          <symbol inverse="true">like</symbol>
-          <symbol>gender</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">priceValidUntil</symbol>
-          <symbol>validForm</symbol>
-          <symbol inverse="true">birthDate</symbol>
-          <symbol>gender</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x0" trg="?x3">
-      <disj>
-        <concat>
-          <symbol inverse="true">expires</symbol>
           <symbol>author</symbol>
-          <symbol>gender</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">purchaseDate</symbol>
-          <symbol>purchaseFor</symbol>
-          <symbol>conductor</symbol>
-          <symbol>gender</symbol>
+          <symbol inverse="true">friendOf</symbol>
         </concat>
       </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">actor</symbol>
+          <symbol>trailer</symbol>
+          <symbol inverse="true">subscribes</symbol>
+          <symbol>friendOf</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">friendOf</symbol>
+          <symbol inverse="true">friendOf</symbol>
+        </concat>
+      </disj>
+      </star>
       </conjunct>
     </body>
   </bodies>
@@ -3441,79 +3455,54 @@
     <id>0</id>
     <number>47</number>
     <input>../use-cases/shop.xml</input>
-    <arity>1</arity>
-    <selectivity>-</selectivity>
+    <arity>2</arity>
+    <selectivity>2</selectivity>
     <multiplicity>0</multiplicity>
-    <conjunct>4</conjunct>
-    <disjuncts>2-3</disjuncts>
+    <conjunct>3</conjunct>
+    <disjuncts>1-2</disjuncts>
     <length>2-4</length>
   </metadata>
   <head>
     <var>?x0</var>
+    <var>?x1</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol inverse="true">gender</symbol>
-          <symbol inverse="true">follows</symbol>
-          <symbol inverse="true">conductor</symbol>
-          <symbol>performedIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">gender</symbol>
-          <symbol>like</symbol>
-          <symbol inverse="true">like</symbol>
-          <symbol>location</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x1" trg="?x2">
-      <disj>
-        <concat>
-          <symbol>parentContry</symbol>
-          <symbol inverse="true">parentContry</symbol>
-        </concat>
-        <concat>
-          <symbol>parentContry</symbol>
-          <symbol inverse="true">nationality</symbol>
-          <symbol>location</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x0" trg="?x3">
-      <disj>
-        <concat>
-          <symbol inverse="true">gender</symbol>
-          <symbol>like</symbol>
-          <symbol>hasGenre</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">gender</symbol>
-          <symbol>telephone</symbol>
+          <symbol inverse="true">homepage</symbol>
+          <symbol>bookEdition</symbol>
           <symbol inverse="true">contentSize</symbol>
-          <symbol>hasGenre</symbol>
+        </concat>
+        <concat>
+          <symbol>url</symbol>
+          <symbol inverse="true">caption</symbol>
+          <symbol>description</symbol>
+          <symbol inverse="true">caption</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x2" trg="?x4">
+      <conjunct src="?x0" trg="?x2">
       <disj>
         <concat>
-          <symbol inverse="true">gender</symbol>
-          <symbol inverse="true">author</symbol>
-          <symbol>hasGenre</symbol>
+          <symbol>url</symbol>
+          <symbol inverse="true">email</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">gender</symbol>
-          <symbol>familyName</symbol>
-          <symbol inverse="true">description</symbol>
-          <symbol>hasGenre</symbol>
+          <symbol inverse="true">homepage</symbol>
+          <symbol>printEdition</symbol>
+          <symbol inverse="true">faxNumber</symbol>
         </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x3">
+      <disj>
         <concat>
-          <symbol inverse="true">gender</symbol>
-          <symbol>like</symbol>
-          <symbol>hasGenre</symbol>
+          <symbol>url</symbol>
+          <symbol inverse="true">name</symbol>
+          <symbol>paymentAccepted</symbol>
+          <symbol inverse="true">paymentAccepted</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -3528,7 +3517,7 @@
     <input>../use-cases/shop.xml</input>
     <arity>4</arity>
     <selectivity>-</selectivity>
-    <multiplicity>1</multiplicity>
+    <multiplicity>0</multiplicity>
     <conjunct>4</conjunct>
     <disjuncts>1-3</disjuncts>
     <length>2-4</length>
@@ -3536,88 +3525,73 @@
   <head>
     <var>?x1</var>
     <var>?x2</var>
-    <var>?x3</var>
     <var>?x0</var>
+    <var>?x3</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
-      <star>
       <disj>
         <concat>
-          <symbol>homepage</symbol>
-          <symbol inverse="true">homepage</symbol>
-          <symbol>homepage</symbol>
-          <symbol inverse="true">homepage</symbol>
+          <symbol inverse="true">hasGenre</symbol>
+          <symbol>contentSize</symbol>
+          <symbol inverse="true">contentSize</symbol>
         </concat>
         <concat>
-          <symbol>actor</symbol>
-          <symbol inverse="true">actor</symbol>
-          <symbol>trailer</symbol>
-          <symbol inverse="true">homepage</symbol>
+          <symbol inverse="true">hasGenre</symbol>
+          <symbol>duration</symbol>
+          <symbol inverse="true">duration</symbol>
         </concat>
         <concat>
-          <symbol>homepage</symbol>
-          <symbol inverse="true">homepage</symbol>
-          <symbol>subscribes</symbol>
-          <symbol inverse="true">trailer</symbol>
+          <symbol inverse="true">hasGenre</symbol>
+          <symbol>contentSize</symbol>
+          <symbol inverse="true">duration</symbol>
         </concat>
       </disj>
-      </star>
       </conjunct>
       <conjunct src="?x1" trg="?x2">
-      <star>
       <disj>
         <concat>
-          <symbol>homepage</symbol>
-          <symbol inverse="true">homepage</symbol>
+          <symbol>director</symbol>
+          <symbol>like</symbol>
+          <symbol inverse="true">like</symbol>
+          <symbol>makesPurchase</symbol>
         </concat>
         <concat>
-          <symbol>actor</symbol>
-          <symbol inverse="true">author</symbol>
-          <symbol>editor</symbol>
-          <symbol inverse="true">director</symbol>
+          <symbol>director</symbol>
+          <symbol>follows</symbol>
+          <symbol inverse="true">follows</symbol>
+          <symbol>makesPurchase</symbol>
         </concat>
         <concat>
-          <symbol>trailer</symbol>
-          <symbol inverse="true">subscribes</symbol>
-          <symbol inverse="true">director</symbol>
+          <symbol>director</symbol>
+          <symbol>follows</symbol>
+          <symbol inverse="true">artist</symbol>
+          <symbol inverse="true">purchaseFor</symbol>
         </concat>
       </disj>
-      </star>
       </conjunct>
       <conjunct src="?x0" trg="?x3">
-      <star>
       <disj>
         <concat>
-          <symbol inverse="true">includes</symbol>
-          <symbol>includes</symbol>
-        </concat>
-        <concat>
-          <symbol>director</symbol>
-          <symbol inverse="true">author</symbol>
-          <symbol>author</symbol>
-          <symbol inverse="true">director</symbol>
-        </concat>
-        <concat>
-          <symbol>director</symbol>
-          <symbol>homepage</symbol>
-          <symbol inverse="true">trailer</symbol>
+          <symbol inverse="true">hasGenre</symbol>
+          <symbol inverse="true">purchaseFor</symbol>
+          <symbol>purchaseFor</symbol>
         </concat>
       </disj>
-      </star>
       </conjunct>
       <conjunct src="?x2" trg="?x4">
-      <star>
       <disj>
         <concat>
-          <symbol inverse="true">includes</symbol>
-          <symbol>includes</symbol>
-          <symbol>director</symbol>
-          <symbol inverse="true">actor</symbol>
+          <symbol inverse="true">hasGenre</symbol>
+          <symbol>author</symbol>
+          <symbol inverse="true">author</symbol>
+        </concat>
+        <concat>
+          <symbol>tag</symbol>
+          <symbol inverse="true">tag</symbol>
         </concat>
       </disj>
-      </star>
       </conjunct>
     </body>
   </bodies>
@@ -3628,64 +3602,56 @@
     <id>0</id>
     <number>49</number>
     <input>../use-cases/shop.xml</input>
-    <arity>4</arity>
-    <selectivity>-</selectivity>
-    <multiplicity>0.333333</multiplicity>
+    <arity>2</arity>
+    <selectivity>0</selectivity>
+    <multiplicity>0</multiplicity>
     <conjunct>3</conjunct>
-    <disjuncts>1-3</disjuncts>
+    <disjuncts>1-2</disjuncts>
     <length>2-4</length>
   </metadata>
   <head>
-    <var>?x3</var>
-    <var>?x1</var>
-    <var>?x2</var>
     <var>?x0</var>
+    <var>?x1</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol>recordNumber</symbol>
-          <symbol inverse="true">price</symbol>
-          <symbol>includes</symbol>
-        </concat>
-        <concat>
-          <symbol>recordNumber</symbol>
-          <symbol inverse="true">opus</symbol>
-          <symbol inverse="true">purchaseFor</symbol>
-          <symbol>purchaseFor</symbol>
+          <symbol inverse="true">title</symbol>
+          <symbol>keywords</symbol>
+          <symbol inverse="true">familyName</symbol>
+          <symbol>gender</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x1" trg="?x2">
+      <conjunct src="?x0" trg="?x2">
       <disj>
         <concat>
-          <symbol inverse="true">like</symbol>
-          <symbol inverse="true">director</symbol>
+          <symbol inverse="true">email</symbol>
+          <symbol>gender</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">like</symbol>
-          <symbol inverse="true">actor</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">like</symbol>
-          <symbol>subscribes</symbol>
-          <symbol inverse="true">trailer</symbol>
+          <symbol inverse="true">description</symbol>
+          <symbol>editor</symbol>
+          <symbol>gender</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x2" trg="?x3">
-      <star>
+      <conjunct src="?x0" trg="?x3">
       <disj>
         <concat>
-          <symbol>hasReview</symbol>
-          <symbol inverse="true">hasReview</symbol>
-          <symbol>hasReview</symbol>
-          <symbol inverse="true">hasReview</symbol>
+          <symbol inverse="true">email</symbol>
+          <symbol>follows</symbol>
+          <symbol>gender</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">caption</symbol>
+          <symbol>contentRating</symbol>
+          <symbol inverse="true">userId</symbol>
+          <symbol>gender</symbol>
         </concat>
       </disj>
-      </star>
       </conjunct>
     </body>
   </bodies>

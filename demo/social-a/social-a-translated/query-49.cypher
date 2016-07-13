@@ -1,1 +1,1 @@
-MATCH (x0)-[:pname|pname*]->(x1), (x1)<-[:pisPartOf]-()-[:pisPartOf]->()-[:pisPartOf]->(x2), (x0)-[:pname|pname|pname*]->(x3), (x2)-[:pname|pname*]->(x4) RETURN DISTINCT x1, x2, x0 UNION ;
+MATCH (x0)<-[:pisSubclassOf]-()-[:pcontent]->()<-[:pname]-(x1), (x1)<-[:pisLocatedIn]-()-[:pstudyAt]->(x2), (x2)-[:pname]->()<-[:pbrowserUsed]-()-[:pemail]->(x3) RETURN "true" LIMIT 1;

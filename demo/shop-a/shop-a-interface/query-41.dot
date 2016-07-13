@@ -2,8 +2,8 @@ digraph g {
 	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
 	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
 	x2 [fillcolor="yellow", style="filled," shape=circle, label="?x2"];
-	x0 -> x1 [label="((tag-.like-.age))"];
-	x0 -> x2 [label="((tag-.like-.type)+(tag-.contentRating.userId-.type)+(tag-.like-.type))"];
+	x0 -> x1 [label="((artist.reviewer-.hasReview-))"];
+	x0 -> x2 [label="((includes-.includes.homepage.homepage-)+(purchaseFor-.purchaseFor.includes-.includes))"];
 	x3 [shape=circle, label="?x3"];
-	x1 -> x3 [label="((tag-.like-.type)+(tag-.conductor.type))"];
+	x1 -> x3 [label="((includes-.includes.purchaseFor-.purchaseFor)+(purchaseFor-.purchaseFor))"];
 }

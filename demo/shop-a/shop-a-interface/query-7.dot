@@ -1,11 +1,11 @@
 digraph g {
 	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
+	x4 [fillcolor="yellow", style="filled," shape=circle, label="?x4"];
 	x1 [shape=circle, label="?x1"];
-	x0 -> x1 [label="((reviewer.like.like-.actor-)+(reviewer.follows.follows-.director-))"];
+	x0 -> x1 [label="((hasReview.hasReview-.like-.friendOf)+(like-.subscribes.homepage-.like-)+(hasReview.hasReview-.like-))"];
 	x2 [shape=circle, label="?x2"];
-	x0 -> x2 [label="((reviewer.like.like-.director-)+(hasReview-.artist.follows-.director-))"];
+	x1 -> x2 [label="((like.like-.homepage)+(like.like-.homepage)+(follows.like.like-.homepage))"];
 	x3 [shape=circle, label="?x3"];
-	x0 -> x3 [label="((hasReview-.artist.follows-.director-))"];
-	x4 [shape=circle, label="?x4"];
-	x0 -> x4 [label="((reviewer.like.like-.director-))"];
+	x2 -> x3 [label="((homepage-.description.description-.includes-)+(hits.price-)+(hits.price-))"];
+	x3 -> x4 [label="((includes.artist.follows-.actor-))"];
 }

@@ -1,1 +1,1 @@
-MATCH (x0)-[:pgivenName]->()<-[:pkeywords]-(x1), (x0)<-[:pcontactPoint]-()-[:pdescription]->()<-[:pkeywords]-(x2), (x0)-[:ptelephone]->()<-[:pcontentRating]-()-[:phasReview]->()<-[:phasReview]-(x3) RETURN DISTINCT x0, x2, x1;
+MATCH (x0)<-[:ptype]-()-[:plike]->(x1), (x1)-[:pdirector]->()<-[:pfriendOf]-()<-[:peditor]-(x2), (x2)-[:pauthor]->()-[:plocation]->(x3) RETURN DISTINCT x0;

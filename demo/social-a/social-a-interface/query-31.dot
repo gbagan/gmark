@@ -1,11 +1,11 @@
 digraph g {
-	x2 [fillcolor="yellow", style="filled," shape=circle, label="?x2"];
-	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
 	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
-	x0 -> x1 [label="(((language-.content.content-.language)))*"];
-	x1 -> x2 [label="((language-.replyOf.isLocatedIn.isLocatedIn-)+(language-.replyOf.isLocatedIn.isLocatedIn-))"];
+	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
+	x2 [fillcolor="yellow", style="filled," shape=circle, label="?x2"];
+	x0 -> x1 [label="(((language-.imageFile.name-.name)))*"];
+	x1 -> x2 [label="((name-.isLocatedIn.isLocatedIn-)+(name-.isLocatedIn.isLocatedIn-)+(name-.hasTag-.likes-.worksAt))"];
 	x3 [shape=circle, label="?x3"];
-	x2 -> x3 [label="(((name.name-)+(name.name-)+(name.content-.language.name-)))*"];
+	x2 -> x3 [label="((worksAt-.hasInterest)+(worksAt-.hasInterest))"];
 	x4 [shape=circle, label="?x4"];
-	x3 -> x4 [label="((name.name-.isPartOf-.isLocatedIn-)+(name.name-.speaks.name-))"];
+	x3 -> x4 [label="((name.name-.isPartOf-))"];
 }

@@ -1,9 +1,9 @@
 digraph g {
-	x0 [shape=circle, label="?x0"];
-	x1 [shape=circle, label="?x1"];
-	x0 -> x1 [label="(((homepage.subscribes-.conductor-)+(includes-.includes.includes-.includes)+(conductor.homepage.homepage-)))*"];
+	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
+	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
+	x0 -> x1 [label="((language-.text.title-.numberOfPages))"];
 	x2 [shape=circle, label="?x2"];
-	x0 -> x2 [label="(((movement.printPage-.editor)+(keywords.producer-.director)+(movement.contentSize-.purchaseFor-.makesPurchase-)))*"];
+	x0 -> x2 [label="((language-.title.title-.contentSize)+(language-.homepage-.contentRating)+(language-.hasReview.totalVotes))"];
 	x3 [shape=circle, label="?x3"];
-	x1 -> x3 [label="(((composer.email-)))*"];
+	x0 -> x3 [label="((language-.keywords.published-.printPage)+(language-.caption.caption-.printColumn))"];
 }

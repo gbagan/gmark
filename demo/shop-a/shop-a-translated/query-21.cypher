@@ -1,1 +1,1 @@
-MATCH (x0)<-[:page]-()<-[:pfollows]-()<-[:pactor]-()-[:pkeywords]->(x1), (x0)<-[:page]-()-[:pfamilyName]->()<-[:pjobTitle]-()-[:pfamilyName]->(x2), (x0)<-[:page]-()-[:pfamilyName]->(x3), (x0)<-[:page]-()<-[:pactor]-()-[:pproducer]->(x4) RETURN DISTINCT x0;
+MATCH (x0)<-[:ppurchaseFor]-()-[:ppurchaseFor]->()<-[:plike]-()-[:psubscribes]->(x1), (x0)-[:peditor]->()<-[:pauthor]-()<-[:ppurchaseFor]-()-[:ppurchaseFor]->(x2), (x1)-[:phomepage]->()<-[:psubscribes]-()<-[:pfriendOf]-()<-[:pauthor]-(x3) RETURN DISTINCT x2, x0, x1;

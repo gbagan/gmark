@@ -1,1 +1,1 @@
-MATCH (x0)<-[:planguage]-()-[:peditor]->()-[:pbirthDate]->(x1), (x1)<-[:prelease]-()-[:pcaption]->(x2), (x0)<-[:planguage]-()<-[:phomepage]-()-[:ptype]->(x3), (x2)<-[:planguage]-()<-[:phomepage]-()-[:peditor]->()-[:ptype]->(x4) RETURN DISTINCT x0, x2;
+MATCH (x0)<-[:phomepage]-()-[:pdescription]->()<-[:pname]-(x1), (x0)-[:phits]->()<-[:pfaxNumber]-(x2), (x0)<-[:psubscribes]-()<-[:pauthor]-()-[:pwordCount]->()<-[:pfaxNumber]-(x3) RETURN "true" LIMIT 1;

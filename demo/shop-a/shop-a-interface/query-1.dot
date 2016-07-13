@@ -1,9 +1,9 @@
 digraph g {
-	x0 [shape=circle, label="?x0"];
-	x1 [shape=circle, label="?x1"];
-	x0 -> x1 [label="((editor-.eligibleQuantity.recordNumber-.release)+(editor-.includes.release))"];
-	x2 [shape=circle, label="?x2"];
-	x0 -> x2 [label="((nationality-.friendOf.gender)+(nationality-.gender)+(nationality-.follows.gender))"];
+	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
+	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
+	x2 [fillcolor="yellow", style="filled," shape=circle, label="?x2"];
+	x0 -> x1 [label="(((hasReview-.includes-.includes.hasReview)+(hasReview-.includes-.includes.hasReview)))*"];
+	x1 -> x2 [label="((reviewer.follows-.contactPoint-)+(hasReview-.like-.employee-))"];
 	x3 [shape=circle, label="?x3"];
-	x1 -> x3 [label="((nationality-.gender)+(nationality-.gender))"];
+	x2 -> x3 [label="(((contactPoint.employee-)+(employee.friendOf.employee-)))*"];
 }

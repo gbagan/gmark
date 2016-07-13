@@ -1,1 +1,1 @@
-MATCH (x0)-[:pcreationDate*]->(x1), (x0)-[:pcreationDate|pcreationDate|pcreationDate*]->(x2), (x0)-[:pcreationDate|pcreationDate*]->(x3) RETURN DISTINCT x0;
+MATCH (x0)-[:plength]->()<-[:planguage]-()-[:pcontent]->()<-[:pname]-(x1), (x1)-[:pname|pname*]->(x2), (x2)-[:pisLocatedIn]->()<-[:pisLocatedIn]-()-[:pcreationDate]->(x3) RETURN DISTINCT x2, x0, x1, x3;

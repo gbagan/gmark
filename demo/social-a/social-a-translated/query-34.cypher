@@ -1,1 +1,1 @@
-MATCH (x0)<-[:pstudyAt]-()-[:plikes]->()<-[:preplyOf]-(x1), (x0)-[:pname]->()<-[:pemail]-()-[:phasInterest]->(x2), (x1)-[:pname]->()<-[:plocationIP]-()-[:plikes]->()-[:phasTag]->(x3) RETURN DISTINCT x3, x1, x2, x0;
+MATCH (x0)-[:pisLocatedIn]->()-[:pname]->()<-[:pcontent]-()-[:planguage]->(x1), (x0)-[:pisLocatedIn]->()-[:pname]->()<-[:pcontent]-()-[:planguage]->(x2), (x0)-[:pisLocatedIn]->()-[:pname]->()<-[:pcontent]-()-[:planguage]->(x3) RETURN DISTINCT x0, x1;

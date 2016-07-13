@@ -1,1 +1,1 @@
-MATCH (x0)-[:pname|pname|pname*]->(x1), (x1)-[:pname]->()<-[:pspeaks]-()-[:plocationIP]->()<-[:pname]-(x2), (x2)-[:pname*]->(x3) RETURN DISTINCT x0, x3 UNION  UNION ;
+MATCH (x0)<-[:plocationIP]-()-[:pbrowserUsed]->()<-[:pname]-(x1), (x1)-[:pname]->()<-[:pbrowserUsed]-()<-[:phasModerator]-(x2), (x0)<-[:pname]-()<-[:pknows]-()-[:pstudyAt]->(x3), (x2)<-[:pbrowserUsed]-()<-[:phasCreator]-()-[:phasCreator]->()-[:pstudyAt]->(x4) RETURN DISTINCT x0, x2 UNION  UNION  UNION ;

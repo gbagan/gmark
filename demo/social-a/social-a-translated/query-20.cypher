@@ -1,1 +1,1 @@
-MATCH (x0)-[:pname]->()<-[:pbrowserUsed]-()-[:pspeaks]->()<-[:pname]-(x1), (x1)-[:pname]->()<-[:pgender]-()-[:pbirthday]->(x2), (x2)-[:pbirthday|pcreationDate|pcreationDate*]->(x3) RETURN DISTINCT x0, x3 UNION ;
+MATCH (x0)-[:pcreationDate|plocationIP*]->(x1), (x0)-[:pcreationDate|pbrowserUsed*]->(x2), (x1)-[:pbrowserUsed*]->(x3) RETURN DISTINCT x1, x2, x0;

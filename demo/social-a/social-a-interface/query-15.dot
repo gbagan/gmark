@@ -1,11 +1,11 @@
 digraph g {
+	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
+	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
 	x2 [fillcolor="yellow", style="filled," shape=circle, label="?x2"];
 	x3 [fillcolor="yellow", style="filled," shape=circle, label="?x3"];
-	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
-	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
-	x0 -> x1 [label="(((name-.gender)+(gender-.birthday.creationDate-.browserUsed)+(language-.content)))*"];
-	x1 -> x2 [label="((email-.likes.replyOf-)+(email-.hasCreator-.isSubclassOf-)+(content-.isSubclassOf.replyOf-))"];
-	x0 -> x3 [label="(((browserUsed-.likes-.hasCreator-.isLocatedIn)+(email-.hasCreator-.isLocatedIn)+(locationIP-.hasCreator.hasCreator-.isLocatedIn)))*"];
+	x0 -> x1 [label="(((gender.browserUsed-.creationDate.birthday-)+(browserUsed.imageFile-.language.locationIP-)+(locationIP.browserUsed-)))*"];
+	x1 -> x2 [label="(((browserUsed.browserUsed-.browserUsed.name-)))*"];
+	x0 -> x3 [label="(((knows.hasCreator-)+(knows.likes)+(knows-.knows-.likes)))*"];
 	x4 [shape=circle, label="?x4"];
-	x2 -> x4 [label="(((speaks-.email.name-)+(email-.hasCreator-.isLocatedIn)))*"];
+	x2 -> x4 [label="(((worksAt.worksAt-.knows-.likes)+(browserUsed.email-.likes)+(knows-.hasCreator-)))*"];
 }

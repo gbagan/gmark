@@ -1,1 +1,1 @@
-MATCH (x0)-[:pname|pname|pname*]->(x1), (x1)-[:pisLocatedIn]->()<-[:pisLocatedIn]-()-[:pisLocatedIn]->(x2), (x2)-[:pisPartOf]->()-[:pname]->()<-[:pname]-(x3) RETURN "true" LIMIT 1;
+MATCH (x0)<-[:pbirthday]-()-[:pemail]->()<-[:pbrowserUsed]-()-[:plikes]->(x1), (x1)-[:plocationIP]->()<-[:pname]-()<-[:phasTag]-()-[:pcreationDate]->(x2), (x2)-[:pcreationDate*]->(x3), (x3)<-[:pcreationDate]-()-[:plikes]->()-[:pisLocatedIn]->(x4) RETURN "true" LIMIT 1;

@@ -1,1 +1,1 @@
-MATCH (x0)<-[:pcontentRating]-()-[:planguage]->(x1), (x0)<-[:pisbn]-()-[:planguage]->(x2), (x0)<-[:pcontentRating]-()-[:planguage]->(x3), (x0)<-[:pisbn]-()-[:pcontentSize]->()<-[:pcontentSize]-()-[:planguage]->(x4) RETURN DISTINCT x0, x1;
+MATCH (x0)-[:phomepage|phomepage|phomepage*]->(x1), (x1)-[:psubscribes|phomepage|phomepage*]->(x2), (x0)-[:phomepage*]->(x3), (x2)-[:phomepage|phomepage|phomepage*]->(x4) RETURN DISTINCT x1, x2, x0, x3;

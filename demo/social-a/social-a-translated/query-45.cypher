@@ -1,1 +1,1 @@
-MATCH (x0)-[:pcreationDate*]->(x1), (x0)-[:pbirthday*]->(x2), (x1)-[:pcreationDate*]->(x3) RETURN DISTINCT x0, x1, x2;
+MATCH (x0)-[:plocationIP|plocationIP|pbirthday*]->(x1), (x1)-[:pbrowserUsed*]->(x2), (x2)-[:pbrowserUsed|pcreationDate*]->(x3) RETURN DISTINCT x0, x3;

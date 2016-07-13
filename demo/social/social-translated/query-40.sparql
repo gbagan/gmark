@@ -1,1 +1,1 @@
-PREFIX : <http://example.org/gmark/> SELECT DISTINCT ?x3 ?x0 ?x2 ?x1 WHERE {  {  ?x0 ((:p2/:p0/:p19/^:p16)|(:p3/:p19/^:p16)|(:p2/:p20/^:p16)) ?x1 . ?x0 ((:p2/:p19/^:p16)|(:p2/:p0/:p16/^:p16)) ?x2 . ?x0 ((:p2/:p20/^:p16)|(:p2/:p20/^:p16)) ?x3 . } }
+PREFIX : <http://example.org/gmark/> SELECT DISTINCT ?x2 ?x0 ?x1 WHERE {  {  ?x0 ((:p16/^:p23/:p13)|(:p16/^:p20/:p17/^:p22)|(:p6/:p16/^:p22)) ?x1 . ?x0 ((:p16/^:p23/:p13)) ?x2 . ?x0 ((:p16/^:p25/:p13)|(:p6/:p16/^:p23/:p13)) ?x3 . ?x0 ((:p6/:p16/^:p23/:p13)|(:p16/^:p23/:p13)) ?x4 . }  UNION  {  } }

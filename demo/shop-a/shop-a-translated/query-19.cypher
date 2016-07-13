@@ -1,1 +1,1 @@
-MATCH (x0)<-[:ptag]-()<-[:plike]-()<-[:pfriendOf]-()-[:plike]->(x1), (x0)<-[:ptag]-()-[:peditor]->()-[:pfamilyName]->()<-[:ptext]-(x2), (x0)<-[:ptag]-()<-[:phasGenre]-(x3) RETURN DISTINCT x0, x1;
+MATCH (x0)-[:plike]->()<-[:plike]-()<-[:previewer]-(x1), (x1)-[:phasReview*]->(x2), (x2)-[:previewer*]->(x3), (x3)<-[:phasReview]-()-[:partist]->()<-[:partist]-(x4) RETURN DISTINCT x0;

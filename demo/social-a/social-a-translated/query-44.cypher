@@ -1,1 +1,1 @@
-MATCH (x0)-[:pcontent*]->(x1), (x0)-[:pcontent|planguage|planguage*]->(x2), (x0)-[:pimageFile*]->(x3) RETURN "true" LIMIT 1;
+MATCH (x0)-[:pname]->()<-[:pname]-()-[:pisPartOf]->(x1), (x1)-[:pname]->()<-[:pname]-(x2), (x2)-[:pname|pname|pname*]->(x3), (x3)-[:pname|pname*]->(x4) RETURN DISTINCT x2, x1, x0;

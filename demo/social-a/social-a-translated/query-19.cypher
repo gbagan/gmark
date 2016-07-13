@@ -1,1 +1,1 @@
-MATCH (x0)-[:plocationIP|pbrowserUsed|pname*]->(x1), (x0)-[:pbrowserUsed*]->(x2), (x0)-[:pbrowserUsed|pname*]->(x3), (x0)-[:pimageFile|pbrowserUsed*]->(x4) RETURN DISTINCT x2, x1, x0 UNION  UNION ;
+MATCH (x0)-[:pcontent]->()<-[:pgender]-()-[:pbirthday]->(x1), (x1)-[:pbirthday*]->(x2), (x2)<-[:pcreationDate]-()-[:pgender]->()<-[:pname]-()<-[:phasTag]-(x3) RETURN DISTINCT x0, x3;

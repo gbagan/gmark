@@ -1,1 +1,1 @@
-MATCH (x0)<-[:plocation]-()<-[:peditor]-()-[:phasGenre]->(x1), (x1)<-[:phasGenre]-()-[:pexpires]->()<-[:prelease]-()-[:pcontentSize]->(x2), (x0)<-[:pperformedIn]-()-[:ptag]->(x3), (x2)<-[:pperformedIn]-()-[:phasGenre]->()-[:ptag]->(x4) RETURN "true" LIMIT 1;
+MATCH (x0)<-[:page]-()<-[:pdirector]-()-[:planguage]->(x1), (x1)<-[:planguage]-()<-[:phomepage]-()-[:ptag]->(x2), (x0)<-[:page]-()<-[:pconductor]-()-[:phasGenre]->(x3), (x2)<-[:page]-()-[:puserId]->()<-[:pcontentSize]-()-[:phasGenre]->(x4) RETURN DISTINCT x0;

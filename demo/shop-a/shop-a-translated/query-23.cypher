@@ -1,1 +1,1 @@
-MATCH (x0)-[:phomepage|psubscribes|ptrailer*]->(x1), (x0)-[:phomepage|ptrailer*]->(x2), (x0)-[:phomepage|phomepage*]->(x3) RETURN DISTINCT x0, x1;
+MATCH (x0)-[:pproducer]->()<-[:pemail]-()<-[:pactor]-(x1), (x0)-[:phasReview]->()<-[:phasReview]-()-[:pconductor]->()<-[:pdirector]-(x2), (x1)-[:pdirector]->()-[:pfriendOf]->()-[:phomepage]->()<-[:phomepage]-(x3) RETURN DISTINCT x3, x0, x1, x2;

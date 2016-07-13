@@ -1,6 +1,6 @@
 <generator>
 	<graph>
-		<nodes>1000000</nodes>
+		<nodes>100000</nodes>
 	</graph>
 
 	<predicates>
@@ -104,7 +104,7 @@
 		<multiplicity star="0.5"/>
 
 		<!-- the arity of the generated queries, we allow 0 for Boolean queries -->
-		<arity min="0" max="2"/>
+		<arity min="0" max="4"/>
 
 		<!-- we want only linear queries, but not constant nor quadratic -->
 		<selectivity constant="1" linear="1" quadratic="1"/>

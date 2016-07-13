@@ -1,1 +1,1 @@
-MATCH (x0)-[:pname]->()<-[:planguage]-()-[:pimageFile]->()<-[:pname]-(x1), (x1)-[:pname|pname*]->(x2), (x2)-[:pisPartOf]->()-[:pname]->()<-[:pcontent]-(x3) RETURN "true" LIMIT 1 UNION  UNION ;
+MATCH (x0)-[:pname]->()<-[:pname]-()<-[:pisSubclassOf]-(x1), (x1)-[:pname|pname*]->(x2), (x0)-[:pname]->()<-[:pbrowserUsed]-(x3), (x2)-[:pname]->()<-[:pname]-()-[:pname]->()<-[:plocationIP]-(x4) RETURN "true" LIMIT 1 UNION ;

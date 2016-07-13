@@ -1,11 +1,9 @@
 digraph g {
 	x0 [shape=circle, label="?x0"];
 	x1 [shape=circle, label="?x1"];
-	x0 -> x1 [label="((isSubclassOf.hasType-.hasTag-)+(name.email-.hasModerator-))"];
+	x0 -> x1 [label="(((name.name-)+(name.language-.content.name-)+(name.gender-.name.name-)))*"];
 	x2 [shape=circle, label="?x2"];
-	x0 -> x2 [label="((isSubclassOf-.name.email-.hasModerator-))"];
+	x1 -> x2 [label="((worksAt-.likes.replyOf-))"];
 	x3 [shape=circle, label="?x3"];
-	x0 -> x3 [label="((name.email-.hasModerator-))"];
-	x4 [shape=circle, label="?x4"];
-	x0 -> x4 [label="((hasType-.hasInterest-.hasModerator-)+(hasType-.hasTag-))"];
+	x2 -> x3 [label="(((language.language-)+(content.language-.content.content-)))*"];
 }

@@ -1,9 +1,11 @@
 digraph g {
 	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
-	x2 [fillcolor="yellow", style="filled," shape=circle, label="?x2"];
-	x3 [fillcolor="yellow", style="filled," shape=circle, label="?x3"];
-	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
-	x0 -> x1 [label="((validForm-.includes.expires))"];
-	x0 -> x2 [label="((expires-.movement.printPage-.text))"];
-	x1 -> x3 [label="((expires-.editor.familyName)+(priceValidUntil-.includes.composer))"];
+	x1 [shape=circle, label="?x1"];
+	x0 -> x1 [label="((homepage.hits.contentSize-)+(caption.keywords-))"];
+	x2 [shape=circle, label="?x2"];
+	x0 -> x2 [label="((conductor.givenName.text-))"];
+	x3 [shape=circle, label="?x3"];
+	x0 -> x3 [label="((text.description-))"];
+	x4 [shape=circle, label="?x4"];
+	x0 -> x4 [label="((title.title-)+(caption.caption-)+(keywords.text-))"];
 }
