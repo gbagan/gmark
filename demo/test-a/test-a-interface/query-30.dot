@@ -1,9 +1,9 @@
 digraph g {
-	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
 	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
-	x3 [fillcolor="yellow", style="filled," shape=circle, label="?x3"];
-	x2 [fillcolor="yellow", style="filled," shape=circle, label="?x2"];
-	x0 -> x1 [label="((heldIn-.heldIn.heldIn-.publishedIn-.heldIn-.publishedIn-.publishedIn.heldIn)+(heldIn-.publishedIn-.heldIn-.publishedIn-.publishedIn.heldIn)+(heldIn-.publishedIn-.authors-.authors.heldIn-.publishedIn-.publishedIn.heldIn))"];
-	x0 -> x2 [label="((publishedIn.publishedIn-.publishedIn.publishedIn-.heldIn-.publishedIn-.publishedIn.heldIn)+(heldIn-.publishedIn-.publishedIn.heldIn))"];
-	x0 -> x3 [label="((heldIn-.heldIn.heldIn-.heldIn.heldIn-.publishedIn-.publishedIn.heldIn)+(heldIn-.heldIn.heldIn-.heldIn))"];
+	x1 [shape=circle, label="?x1"];
+	x0 -> x1 [label="((heldIn-.publishedIn-.authors-)+(heldIn-.publishedIn-.authors-)+(heldIn-.publishedIn-.authors-))"];
+	x2 [shape=circle, label="?x2"];
+	x1 -> x2 [label="((authors.publishedIn.publishedIn-))"];
+	x3 [shape=circle, label="?x3"];
+	x2 -> x3 [label="((extendedTo.extendedTo-.publishedIn.heldIn)+(authors-.authors.publishedIn.heldIn)+(publishedIn.heldIn.heldIn-.heldIn))"];
 }

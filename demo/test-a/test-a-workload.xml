@@ -4,61 +4,59 @@
     <id>0</id>
     <number>0</number>
     <input>../use-cases/test.xml</input>
-    <arity>2</arity>
-    <selectivity>1</selectivity>
-    <multiplicity>0</multiplicity>
+    <arity>3</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>0.666667</multiplicity>
     <conjunct>3</conjunct>
     <disjuncts>1-3</disjuncts>
     <length>2-4</length>
   </metadata>
   <head>
+    <var>?x2</var>
     <var>?x0</var>
     <var>?x1</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
+      <star>
       <disj>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
           <symbol inverse="true">publishedIn</symbol>
           <symbol>publishedIn</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-          <symbol inverse="true">heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-          <symbol inverse="true">heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
         </concat>
       </disj>
+      </star>
       </conjunct>
-      <conjunct src="?x0" trg="?x2">
+      <conjunct src="?x2" trg="?x3">
       <disj>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x1" trg="?x3">
-      <disj>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
           <symbol inverse="true">publishedIn</symbol>
           <symbol>extendedTo</symbol>
           <symbol inverse="true">extendedTo</symbol>
+          <symbol inverse="true">authors</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -71,7 +69,7 @@
     <id>0</id>
     <number>1</number>
     <input>../use-cases/test.xml</input>
-    <arity>1</arity>
+    <arity>0</arity>
     <selectivity>-</selectivity>
     <multiplicity>0</multiplicity>
     <conjunct>4</conjunct>
@@ -79,70 +77,57 @@
     <length>4-4</length>
   </metadata>
   <head>
-    <var>?x0</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol inverse="true">extendedTo</symbol>
-          <symbol>extendedTo</symbol>
-          <symbol inverse="true">extendedTo</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
           <symbol inverse="true">authors</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">extendedTo</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
           <symbol inverse="true">authors</symbol>
-          <symbol>authors</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
           <symbol inverse="true">authors</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x0" trg="?x2">
+      <conjunct src="?x1" trg="?x2">
       <disj>
         <concat>
-          <symbol inverse="true">extendedTo</symbol>
+          <symbol>authors</symbol>
           <symbol>extendedTo</symbol>
           <symbol inverse="true">extendedTo</symbol>
-          <symbol inverse="true">authors</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">extendedTo</symbol>
           <symbol>extendedTo</symbol>
-          <symbol inverse="true">extendedTo</symbol>
-          <symbol inverse="true">authors</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x0" trg="?x3">
       <disj>
         <concat>
-          <symbol inverse="true">extendedTo</symbol>
+          <symbol inverse="true">publishedIn</symbol>
           <symbol inverse="true">authors</symbol>
           <symbol>authors</symbol>
           <symbol inverse="true">authors</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x0" trg="?x4">
+      <conjunct src="?x2" trg="?x4">
       <disj>
         <concat>
-          <symbol inverse="true">extendedTo</symbol>
-          <symbol inverse="true">authors</symbol>
-          <symbol>authors</symbol>
-          <symbol inverse="true">authors</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">extendedTo</symbol>
-          <symbol>extendedTo</symbol>
-          <symbol inverse="true">extendedTo</symbol>
-          <symbol inverse="true">authors</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">extendedTo</symbol>
-          <symbol inverse="true">authors</symbol>
-          <symbol>authors</symbol>
+          <symbol>heldIn</symbol>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
           <symbol inverse="true">authors</symbol>
         </concat>
       </disj>
@@ -158,14 +143,14 @@
     <input>../use-cases/test.xml</input>
     <arity>2</arity>
     <selectivity>0</selectivity>
-    <multiplicity>0.5</multiplicity>
-    <conjunct>4</conjunct>
+    <multiplicity>0</multiplicity>
+    <conjunct>3</conjunct>
     <disjuncts>1-3</disjuncts>
     <length>2-4</length>
   </metadata>
   <head>
     <var>?x0</var>
-    <var>?x4</var>
+    <var>?x1</var>
   </head>
   <bodies>
     <body>
@@ -173,62 +158,39 @@
       <disj>
         <concat>
           <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
+          <symbol>heldIn</symbol>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol>heldIn</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <disj>
+        <concat>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol>heldIn</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <disj>
+        <concat>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol>heldIn</symbol>
         </concat>
         <concat>
           <symbol inverse="true">heldIn</symbol>
           <symbol>heldIn</symbol>
           <symbol inverse="true">heldIn</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x1" trg="?x2">
-      <disj>
-        <concat>
           <symbol>heldIn</symbol>
+        </concat>
+        <concat>
           <symbol inverse="true">heldIn</symbol>
           <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol>heldIn</symbol>
         </concat>
       </disj>
-      </conjunct>
-      <conjunct src="?x2" trg="?x3">
-      <star>
-      <disj>
-        <concat>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-        </concat>
-        <concat>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-        </concat>
-        <concat>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-        </concat>
-      </disj>
-      </star>
-      </conjunct>
-      <conjunct src="?x3" trg="?x4">
-      <star>
-      <disj>
-        <concat>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-        </concat>
-        <concat>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-        </concat>
-      </disj>
-      </star>
       </conjunct>
     </body>
   </bodies>
@@ -240,182 +202,7 @@
     <number>3</number>
     <input>../use-cases/test.xml</input>
     <arity>2</arity>
-    <selectivity>1</selectivity>
-    <multiplicity>1</multiplicity>
-    <conjunct>4</conjunct>
-    <disjuncts>1-3</disjuncts>
-    <length>2-4</length>
-  </metadata>
-  <head>
-    <var>?x0</var>
-    <var>?x1</var>
-  </head>
-  <bodies>
-    <body>
-      <conjunct src="?x0" trg="?x1">
-      <star>
-      <disj>
-        <concat>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-        </concat>
-      </disj>
-      </star>
-      </conjunct>
-      <conjunct src="?x0" trg="?x2">
-      <star>
-      <disj>
-        <concat>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-        </concat>
-      </disj>
-      </star>
-      </conjunct>
-      <conjunct src="?x0" trg="?x3">
-      <star>
-      <disj>
-        <concat>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-        </concat>
-      </disj>
-      </star>
-      </conjunct>
-      <conjunct src="?x0" trg="?x4">
-      <star>
-      <disj>
-        <concat>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-        </concat>
-      </disj>
-      </star>
-      </conjunct>
-    </body>
-  </bodies>
-</query>
-
-<query>
-  <metadata>
-    <id>0</id>
-    <number>4</number>
-    <input>../use-cases/test.xml</input>
-    <arity>0</arity>
-    <selectivity>-</selectivity>
-    <multiplicity>0</multiplicity>
-    <conjunct>4</conjunct>
-    <disjuncts>2-3</disjuncts>
-    <length>2-4</length>
-  </metadata>
-  <head>
-  </head>
-  <bodies>
-    <body>
-      <conjunct src="?x0" trg="?x1">
-      <disj>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol inverse="true">authors</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol inverse="true">authors</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol inverse="true">authors</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x1" trg="?x2">
-      <disj>
-        <concat>
-          <symbol>authors</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
-        <concat>
-          <symbol>authors</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x0" trg="?x3">
-      <disj>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x2" trg="?x4">
-      <disj>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-    </body>
-  </bodies>
-</query>
-
-<query>
-  <metadata>
-    <id>0</id>
-    <number>5</number>
-    <input>../use-cases/test.xml</input>
-    <arity>2</arity>
-    <selectivity>0</selectivity>
+    <selectivity>2</selectivity>
     <multiplicity>0</multiplicity>
     <conjunct>3</conjunct>
     <disjuncts>1-2</disjuncts>
@@ -430,24 +217,22 @@
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
           <symbol inverse="true">publishedIn</symbol>
-          <symbol inverse="true">authors</symbol>
-          <symbol>authors</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol>heldIn</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
           <symbol inverse="true">publishedIn</symbol>
-          <symbol>extendedTo</symbol>
-          <symbol inverse="true">extendedTo</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol>heldIn</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x1" trg="?x2">
       <disj>
         <concat>
-          <symbol>extendedTo</symbol>
-          <symbol inverse="true">extendedTo</symbol>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
           <symbol inverse="true">authors</symbol>
         </concat>
       </disj>
@@ -456,7 +241,157 @@
       <disj>
         <concat>
           <symbol>authors</symbol>
+          <symbol>extendedTo</symbol>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol>extendedTo</symbol>
+        </concat>
+        <concat>
+          <symbol>authors</symbol>
+          <symbol inverse="true">authors</symbol>
+          <symbol>authors</symbol>
+          <symbol>extendedTo</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>4</number>
+    <input>../use-cases/test.xml</input>
+    <arity>4</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x1</var>
+    <var>?x0</var>
+    <var>?x3</var>
+    <var>?x2</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
           <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <disj>
+        <concat>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+        </concat>
+        <concat>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+        </concat>
+        <concat>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <disj>
+        <concat>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+        </concat>
+        <concat>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x4">
+      <disj>
+        <concat>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>5</number>
+    <input>../use-cases/test.xml</input>
+    <arity>3</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-2</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x1</var>
+    <var>?x0</var>
+    <var>?x2</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol>heldIn</symbol>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol>heldIn</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol>heldIn</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <disj>
+        <concat>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol>heldIn</symbol>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol>heldIn</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol>heldIn</symbol>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol>heldIn</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <disj>
+        <concat>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol>heldIn</symbol>
+          <symbol inverse="true">heldIn</symbol>
           <symbol>heldIn</symbol>
         </concat>
       </disj>
@@ -470,73 +405,50 @@
     <id>0</id>
     <number>6</number>
     <input>../use-cases/test.xml</input>
-    <arity>3</arity>
+    <arity>0</arity>
     <selectivity>-</selectivity>
-    <multiplicity>0.25</multiplicity>
-    <conjunct>4</conjunct>
+    <multiplicity>0</multiplicity>
+    <conjunct>3</conjunct>
     <disjuncts>1-3</disjuncts>
     <length>2-4</length>
   </metadata>
   <head>
-    <var>?x1</var>
-    <var>?x0</var>
-    <var>?x2</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol inverse="true">extendedTo</symbol>
-          <symbol inverse="true">authors</symbol>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol>heldIn</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">extendedTo</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol inverse="true">authors</symbol>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol>heldIn</symbol>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol>heldIn</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">extendedTo</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol inverse="true">authors</symbol>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol>heldIn</symbol>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol>heldIn</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x1" trg="?x2">
       <disj>
         <concat>
-          <symbol>authors</symbol>
-          <symbol>publishedIn</symbol>
+          <symbol inverse="true">heldIn</symbol>
           <symbol inverse="true">publishedIn</symbol>
-        </concat>
-        <concat>
-          <symbol>authors</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
+          <symbol inverse="true">authors</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x2" trg="?x3">
-      <star>
       <disj>
         <concat>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-        </concat>
-        <concat>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-        </concat>
-      </disj>
-      </star>
-      </conjunct>
-      <conjunct src="?x3" trg="?x4">
-      <disj>
-        <concat>
+          <symbol>authors</symbol>
           <symbol>publishedIn</symbol>
           <symbol inverse="true">publishedIn</symbol>
           <symbol>extendedTo</symbol>
@@ -556,12 +468,12 @@
     <selectivity>-</selectivity>
     <multiplicity>0</multiplicity>
     <conjunct>3</conjunct>
-    <disjuncts>2-3</disjuncts>
+    <disjuncts>1-3</disjuncts>
     <length>2-4</length>
   </metadata>
   <head>
-    <var>?x0</var>
     <var>?x1</var>
+    <var>?x0</var>
     <var>?x3</var>
     <var>?x2</var>
   </head>
@@ -570,54 +482,43 @@
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol inverse="true">authors</symbol>
           <symbol>authors</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">authors</symbol>
           <symbol>authors</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+        </concat>
+        <concat>
+          <symbol>authors</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x0" trg="?x2">
       <disj>
         <concat>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-        </concat>
-        <concat>
+          <symbol>authors</symbol>
           <symbol>publishedIn</symbol>
           <symbol inverse="true">publishedIn</symbol>
           <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-        </concat>
-        <concat>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x1" trg="?x3">
       <disj>
         <concat>
+          <symbol>authors</symbol>
           <symbol>publishedIn</symbol>
           <symbol inverse="true">publishedIn</symbol>
           <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
         </concat>
         <concat>
+          <symbol>authors</symbol>
           <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-        </concat>
-        <concat>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -630,63 +531,76 @@
     <id>0</id>
     <number>8</number>
     <input>../use-cases/test.xml</input>
-    <arity>1</arity>
+    <arity>4</arity>
     <selectivity>-</selectivity>
-    <multiplicity>0</multiplicity>
-    <conjunct>3</conjunct>
-    <disjuncts>2-2</disjuncts>
-    <length>3-4</length>
+    <multiplicity>1</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
   </metadata>
   <head>
+    <var>?x2</var>
     <var>?x0</var>
+    <var>?x1</var>
+    <var>?x3</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
+      <star>
       <disj>
         <concat>
-          <symbol inverse="true">extendedTo</symbol>
-          <symbol inverse="true">authors</symbol>
-          <symbol>authors</symbol>
-          <symbol inverse="true">authors</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">extendedTo</symbol>
-          <symbol inverse="true">authors</symbol>
-          <symbol>authors</symbol>
-          <symbol inverse="true">authors</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+        </concat>
+        <concat>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
         </concat>
       </disj>
+      </star>
       </conjunct>
-      <conjunct src="?x1" trg="?x2">
-      <disj>
-        <concat>
-          <symbol>authors</symbol>
-          <symbol>extendedTo</symbol>
-          <symbol inverse="true">extendedTo</symbol>
-        </concat>
-        <concat>
-          <symbol>authors</symbol>
-          <symbol inverse="true">authors</symbol>
-          <symbol>authors</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x2" trg="?x3">
+      <conjunct src="?x0" trg="?x2">
+      <star>
       <disj>
         <concat>
           <symbol>publishedIn</symbol>
           <symbol inverse="true">publishedIn</symbol>
           <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">authors</symbol>
-          <symbol>authors</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
         </concat>
       </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x4">
+      <star>
+      <disj>
+        <concat>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+        </concat>
+      </disj>
+      </star>
       </conjunct>
     </body>
   </bodies>
@@ -697,63 +611,53 @@
     <id>0</id>
     <number>9</number>
     <input>../use-cases/test.xml</input>
-    <arity>3</arity>
+    <arity>1</arity>
     <selectivity>-</selectivity>
     <multiplicity>0</multiplicity>
     <conjunct>3</conjunct>
-    <disjuncts>1-3</disjuncts>
+    <disjuncts>1-2</disjuncts>
     <length>2-4</length>
   </metadata>
   <head>
     <var>?x0</var>
-    <var>?x2</var>
-    <var>?x1</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol inverse="true">authors</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol inverse="true">authors</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x0" trg="?x2">
       <disj>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol>publishedIn</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x1" trg="?x3">
       <disj>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol>publishedIn</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -766,245 +670,12 @@
     <id>0</id>
     <number>10</number>
     <input>../use-cases/test.xml</input>
-    <arity>3</arity>
-    <selectivity>-</selectivity>
-    <multiplicity>0.75</multiplicity>
-    <conjunct>4</conjunct>
-    <disjuncts>1-2</disjuncts>
-    <length>2-4</length>
-  </metadata>
-  <head>
-    <var>?x0</var>
-    <var>?x1</var>
-    <var>?x2</var>
-  </head>
-  <bodies>
-    <body>
-      <conjunct src="?x0" trg="?x1">
-      <disj>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x1" trg="?x2">
-      <star>
-      <disj>
-        <concat>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-        </concat>
-      </disj>
-      </star>
-      </conjunct>
-      <conjunct src="?x2" trg="?x3">
-      <star>
-      <disj>
-        <concat>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-        </concat>
-      </disj>
-      </star>
-      </conjunct>
-      <conjunct src="?x3" trg="?x4">
-      <star>
-      <disj>
-        <concat>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-        </concat>
-      </disj>
-      </star>
-      </conjunct>
-    </body>
-  </bodies>
-</query>
-
-<query>
-  <metadata>
-    <id>0</id>
-    <number>11</number>
-    <input>../use-cases/test.xml</input>
-    <arity>3</arity>
-    <selectivity>-</selectivity>
-    <multiplicity>0</multiplicity>
-    <conjunct>4</conjunct>
-    <disjuncts>1-2</disjuncts>
-    <length>2-4</length>
-  </metadata>
-  <head>
-    <var>?x1</var>
-    <var>?x2</var>
-    <var>?x0</var>
-  </head>
-  <bodies>
-    <body>
-      <conjunct src="?x0" trg="?x1">
-      <disj>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol inverse="true">authors</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol inverse="true">authors</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x1" trg="?x2">
-      <disj>
-        <concat>
-          <symbol>authors</symbol>
-          <symbol inverse="true">authors</symbol>
-          <symbol>authors</symbol>
-          <symbol inverse="true">authors</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x0" trg="?x3">
-      <disj>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol inverse="true">authors</symbol>
-          <symbol>authors</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x2" trg="?x4">
-      <disj>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-    </body>
-  </bodies>
-</query>
-
-<query>
-  <metadata>
-    <id>0</id>
-    <number>12</number>
-    <input>../use-cases/test.xml</input>
-    <arity>1</arity>
-    <selectivity>-</selectivity>
-    <multiplicity>0.25</multiplicity>
-    <conjunct>4</conjunct>
-    <disjuncts>1-3</disjuncts>
-    <length>2-4</length>
-  </metadata>
-  <head>
-    <var>?x0</var>
-  </head>
-  <bodies>
-    <body>
-      <conjunct src="?x0" trg="?x1">
-      <disj>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x1" trg="?x2">
-      <star>
-      <disj>
-        <concat>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-        </concat>
-        <concat>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-        </concat>
-        <concat>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-        </concat>
-      </disj>
-      </star>
-      </conjunct>
-      <conjunct src="?x2" trg="?x3">
-      <disj>
-        <concat>
-          <symbol>extendedTo</symbol>
-          <symbol inverse="true">extendedTo</symbol>
-        </concat>
-        <concat>
-          <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x3" trg="?x4">
-      <disj>
-        <concat>
-          <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
-        <concat>
-          <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
-        <concat>
-          <symbol>extendedTo</symbol>
-          <symbol inverse="true">extendedTo</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-    </body>
-  </bodies>
-</query>
-
-<query>
-  <metadata>
-    <id>0</id>
-    <number>13</number>
-    <input>../use-cases/test.xml</input>
     <arity>4</arity>
     <selectivity>-</selectivity>
     <multiplicity>0</multiplicity>
-    <conjunct>3</conjunct>
+    <conjunct>4</conjunct>
     <disjuncts>1-3</disjuncts>
-    <length>2-4</length>
+    <length>3-4</length>
   </metadata>
   <head>
     <var>?x3</var>
@@ -1019,6 +690,224 @@
         <concat>
           <symbol inverse="true">heldIn</symbol>
           <symbol>heldIn</symbol>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol>heldIn</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol>heldIn</symbol>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol>heldIn</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol>heldIn</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>extendedTo</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <disj>
+        <concat>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol inverse="true">authors</symbol>
+          <symbol>authors</symbol>
+          <symbol>extendedTo</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol inverse="true">authors</symbol>
+          <symbol>authors</symbol>
+          <symbol>extendedTo</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x3" trg="?x4">
+      <disj>
+        <concat>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol>extendedTo</symbol>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol>publishedIn</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>11</number>
+    <input>../use-cases/test.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>3-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x3</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol inverse="true">authors</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol inverse="true">authors</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
+          <symbol>authors</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol inverse="true">authors</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <disj>
+        <concat>
+          <symbol>authors</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol>heldIn</symbol>
+        </concat>
+        <concat>
+          <symbol>authors</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol>heldIn</symbol>
+        </concat>
+        <concat>
+          <symbol>authors</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol>heldIn</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>12</number>
+    <input>../use-cases/test.xml</input>
+    <arity>2</arity>
+    <selectivity>2</selectivity>
+    <multiplicity>0.333333</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>4-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x3</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol>authors</symbol>
+          <symbol>extendedTo</symbol>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol inverse="true">authors</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
+          <symbol>authors</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol>heldIn</symbol>
+          <symbol inverse="true">heldIn</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>13</number>
+    <input>../use-cases/test.xml</input>
+    <arity>0</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-2</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol>heldIn</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol>heldIn</symbol>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol>heldIn</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -1026,27 +915,13 @@
       <disj>
         <concat>
           <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
           <symbol>heldIn</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x1" trg="?x3">
+      <conjunct src="?x0" trg="?x3">
       <disj>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
           <symbol inverse="true">heldIn</symbol>
           <symbol>heldIn</symbol>
         </concat>
@@ -1065,52 +940,54 @@
     <id>0</id>
     <number>14</number>
     <input>../use-cases/test.xml</input>
-    <arity>3</arity>
+    <arity>1</arity>
     <selectivity>-</selectivity>
-    <multiplicity>0.333333</multiplicity>
+    <multiplicity>0</multiplicity>
     <conjunct>3</conjunct>
-    <disjuncts>2-2</disjuncts>
+    <disjuncts>1-3</disjuncts>
     <length>2-4</length>
   </metadata>
   <head>
     <var>?x0</var>
-    <var>?x1</var>
-    <var>?x2</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
-      <star>
       <disj>
         <concat>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol inverse="true">authors</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">publishedIn</symbol>
+          <symbol inverse="true">extendedTo</symbol>
           <symbol>publishedIn</symbol>
-        </concat>
-      </disj>
-      </star>
-      </conjunct>
-      <conjunct src="?x1" trg="?x2">
-      <disj>
-        <concat>
           <symbol inverse="true">publishedIn</symbol>
           <symbol inverse="true">authors</symbol>
-          <symbol>authors</symbol>
-          <symbol>extendedTo</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>extendedTo</symbol>
           <symbol inverse="true">extendedTo</symbol>
-          <symbol>extendedTo</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol inverse="true">authors</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x2" trg="?x3">
+      <conjunct src="?x0" trg="?x2">
       <disj>
+        <concat>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol>heldIn</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x3">
+      <disj>
+        <concat>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol>heldIn</symbol>
+        </concat>
         <concat>
           <symbol inverse="true">extendedTo</symbol>
           <symbol>publishedIn</symbol>
@@ -1132,56 +1009,56 @@
     <id>0</id>
     <number>15</number>
     <input>../use-cases/test.xml</input>
-    <arity>2</arity>
-    <selectivity>0</selectivity>
+    <arity>0</arity>
+    <selectivity>-</selectivity>
     <multiplicity>0</multiplicity>
     <conjunct>3</conjunct>
     <disjuncts>1-3</disjuncts>
     <length>2-4</length>
   </metadata>
   <head>
-    <var>?x0</var>
-    <var>?x1</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol>publishedIn</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x0" trg="?x2">
       <disj>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol inverse="true">authors</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol inverse="true">authors</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol inverse="true">authors</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x0" trg="?x3">
+      <conjunct src="?x1" trg="?x3">
       <disj>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol inverse="true">authors</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol inverse="true">authors</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol inverse="true">authors</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -1194,23 +1071,43 @@
     <id>0</id>
     <number>16</number>
     <input>../use-cases/test.xml</input>
-    <arity>0</arity>
+    <arity>1</arity>
     <selectivity>-</selectivity>
-    <multiplicity>0</multiplicity>
-    <conjunct>3</conjunct>
-    <disjuncts>1-2</disjuncts>
-    <length>3-4</length>
+    <multiplicity>0.25</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>2-3</disjuncts>
+    <length>2-4</length>
   </metadata>
   <head>
+    <var>?x0</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol>authors</symbol>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
           <symbol inverse="true">authors</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol inverse="true">authors</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol inverse="true">authors</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
           <symbol>authors</symbol>
+          <symbol>extendedTo</symbol>
+          <symbol inverse="true">extendedTo</symbol>
         </concat>
         <concat>
           <symbol>authors</symbol>
@@ -1219,29 +1116,45 @@
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x0" trg="?x2">
+      <conjunct src="?x2" trg="?x3">
+      <star>
       <disj>
         <concat>
-          <symbol>authors</symbol>
-          <symbol>extendedTo</symbol>
-          <symbol inverse="true">extendedTo</symbol>
-          <symbol>extendedTo</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+        </concat>
+        <concat>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+        </concat>
+        <concat>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
         </concat>
       </disj>
+      </star>
       </conjunct>
-      <conjunct src="?x1" trg="?x3">
+      <conjunct src="?x3" trg="?x4">
       <disj>
         <concat>
+          <symbol inverse="true">authors</symbol>
           <symbol>authors</symbol>
-          <symbol>extendedTo</symbol>
-          <symbol inverse="true">extendedTo</symbol>
-          <symbol>extendedTo</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol>heldIn</symbol>
         </concat>
         <concat>
-          <symbol>authors</symbol>
-          <symbol>extendedTo</symbol>
-          <symbol inverse="true">extendedTo</symbol>
-          <symbol>extendedTo</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol>heldIn</symbol>
+        </concat>
+        <concat>
+          <symbol>publishedIn</symbol>
+          <symbol>heldIn</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -1254,59 +1167,78 @@
     <id>0</id>
     <number>17</number>
     <input>../use-cases/test.xml</input>
-    <arity>1</arity>
+    <arity>4</arity>
     <selectivity>-</selectivity>
-    <multiplicity>0</multiplicity>
+    <multiplicity>1</multiplicity>
     <conjunct>3</conjunct>
-    <disjuncts>1-3</disjuncts>
+    <disjuncts>2-3</disjuncts>
     <length>2-4</length>
   </metadata>
   <head>
     <var>?x0</var>
+    <var>?x2</var>
+    <var>?x1</var>
+    <var>?x3</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
+      <star>
       <disj>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x0" trg="?x2">
-      <disj>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x1" trg="?x3">
-      <disj>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
           <symbol inverse="true">publishedIn</symbol>
           <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
         </concat>
       </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x1" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+        </concat>
+      </disj>
+      </star>
       </conjunct>
     </body>
   </bodies>
@@ -1319,78 +1251,86 @@
     <input>../use-cases/test.xml</input>
     <arity>4</arity>
     <selectivity>-</selectivity>
-    <multiplicity>0</multiplicity>
+    <multiplicity>1</multiplicity>
     <conjunct>4</conjunct>
-    <disjuncts>2-2</disjuncts>
+    <disjuncts>1-3</disjuncts>
     <length>2-4</length>
   </metadata>
   <head>
-    <var>?x3</var>
-    <var>?x2</var>
-    <var>?x0</var>
     <var>?x1</var>
+    <var>?x3</var>
+    <var>?x0</var>
+    <var>?x2</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
+      <star>
       <disj>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
           <symbol inverse="true">publishedIn</symbol>
           <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
           <symbol inverse="true">publishedIn</symbol>
           <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
         </concat>
       </disj>
+      </star>
       </conjunct>
-      <conjunct src="?x0" trg="?x2">
+      <conjunct src="?x1" trg="?x2">
+      <star>
       <disj>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
           <symbol inverse="true">publishedIn</symbol>
           <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
         </concat>
       </disj>
+      </star>
       </conjunct>
       <conjunct src="?x0" trg="?x3">
+      <star>
       <disj>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
           <symbol inverse="true">publishedIn</symbol>
           <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
           <symbol inverse="true">publishedIn</symbol>
           <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
         </concat>
       </disj>
+      </star>
       </conjunct>
-      <conjunct src="?x0" trg="?x4">
+      <conjunct src="?x2" trg="?x4">
+      <star>
       <disj>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
           <symbol inverse="true">publishedIn</symbol>
           <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
         </concat>
       </disj>
+      </star>
       </conjunct>
     </body>
   </bodies>
@@ -1405,7 +1345,7 @@
     <selectivity>-</selectivity>
     <multiplicity>0</multiplicity>
     <conjunct>4</conjunct>
-    <disjuncts>1-3</disjuncts>
+    <disjuncts>2-2</disjuncts>
     <length>2-4</length>
   </metadata>
   <head>
@@ -1416,49 +1356,37 @@
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
+          <symbol>authors</symbol>
+          <symbol>extendedTo</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">publishedIn</symbol>
+          <symbol>authors</symbol>
           <symbol>publishedIn</symbol>
-        </concat>
-        <concat>
           <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
+          <symbol>extendedTo</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x1" trg="?x2">
       <disj>
         <concat>
-          <symbol>heldIn</symbol>
-          <symbol inverse="true">heldIn</symbol>
-        </concat>
-        <concat>
-          <symbol>heldIn</symbol>
-          <symbol inverse="true">heldIn</symbol>
-        </concat>
-        <concat>
-          <symbol>heldIn</symbol>
-          <symbol inverse="true">heldIn</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x0" trg="?x3">
-      <disj>
-        <concat>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>extendedTo</symbol>
           <symbol inverse="true">extendedTo</symbol>
-          <symbol inverse="true">authors</symbol>
+          <symbol>publishedIn</symbol>
         </concat>
         <concat>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol>publishedIn</symbol>
           <symbol inverse="true">publishedIn</symbol>
-          <symbol inverse="true">authors</symbol>
-          <symbol>authors</symbol>
+          <symbol>publishedIn</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <disj>
+        <concat>
+          <symbol>heldIn</symbol>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
           <symbol inverse="true">authors</symbol>
         </concat>
         <concat>
@@ -1469,13 +1397,17 @@
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x2" trg="?x4">
+      <conjunct src="?x3" trg="?x4">
       <disj>
         <concat>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol inverse="true">authors</symbol>
           <symbol>authors</symbol>
-          <symbol inverse="true">authors</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol>heldIn</symbol>
+        </concat>
+        <concat>
+          <symbol>authors</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol>heldIn</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -1489,42 +1421,69 @@
     <number>20</number>
     <input>../use-cases/test.xml</input>
     <arity>2</arity>
-    <selectivity>2</selectivity>
-    <multiplicity>0</multiplicity>
-    <conjunct>3</conjunct>
-    <disjuncts>1-1</disjuncts>
-    <length>3-3</length>
+    <selectivity>1</selectivity>
+    <multiplicity>0.5</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>1-2</disjuncts>
+    <length>3-4</length>
   </metadata>
   <head>
     <var>?x0</var>
-    <var>?x1</var>
+    <var>?x4</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
+          <symbol>authors</symbol>
+          <symbol>publishedIn</symbol>
           <symbol>heldIn</symbol>
           <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
+        </concat>
+        <concat>
+          <symbol>authors</symbol>
+          <symbol inverse="true">authors</symbol>
+          <symbol>authors</symbol>
+          <symbol>publishedIn</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x0" trg="?x2">
+      <conjunct src="?x1" trg="?x2">
+      <star>
       <disj>
         <concat>
           <symbol inverse="true">publishedIn</symbol>
-          <symbol inverse="true">authors</symbol>
-          <symbol>authors</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
         </concat>
       </disj>
+      </star>
       </conjunct>
-      <conjunct src="?x1" trg="?x3">
+      <conjunct src="?x2" trg="?x3">
+      <star>
       <disj>
         <concat>
           <symbol inverse="true">publishedIn</symbol>
-          <symbol inverse="true">authors</symbol>
-          <symbol>authors</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x3" trg="?x4">
+      <disj>
+        <concat>
+          <symbol>heldIn</symbol>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol>heldIn</symbol>
+        </concat>
+        <concat>
+          <symbol>heldIn</symbol>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol>heldIn</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -1537,17 +1496,14 @@
     <id>0</id>
     <number>21</number>
     <input>../use-cases/test.xml</input>
-    <arity>3</arity>
+    <arity>0</arity>
     <selectivity>-</selectivity>
     <multiplicity>0</multiplicity>
-    <conjunct>3</conjunct>
-    <disjuncts>1-3</disjuncts>
-    <length>3-4</length>
+    <conjunct>4</conjunct>
+    <disjuncts>2-3</disjuncts>
+    <length>2-4</length>
   </metadata>
   <head>
-    <var>?x2</var>
-    <var>?x0</var>
-    <var>?x1</var>
   </head>
   <bodies>
     <body>
@@ -1556,33 +1512,63 @@
         <concat>
           <symbol inverse="true">heldIn</symbol>
           <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x1" trg="?x2">
       <disj>
         <concat>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>extendedTo</symbol>
-          <symbol inverse="true">extendedTo</symbol>
-        </concat>
-        <concat>
+          <symbol>publishedIn</symbol>
           <symbol>heldIn</symbol>
           <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
+          <symbol>heldIn</symbol>
         </concat>
         <concat>
+          <symbol>publishedIn</symbol>
+          <symbol>heldIn</symbol>
+        </concat>
+        <concat>
+          <symbol>publishedIn</symbol>
           <symbol inverse="true">publishedIn</symbol>
-          <symbol inverse="true">authors</symbol>
-          <symbol>authors</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol>heldIn</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x2" trg="?x3">
+      <conjunct src="?x0" trg="?x3">
       <disj>
         <concat>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
           <symbol>publishedIn</symbol>
+          <symbol>heldIn</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol>heldIn</symbol>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol>heldIn</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol>heldIn</symbol>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol>heldIn</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x4">
+      <disj>
+        <concat>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol>heldIn</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">heldIn</symbol>
           <symbol inverse="true">publishedIn</symbol>
           <symbol>publishedIn</symbol>
           <symbol>heldIn</symbol>
@@ -1598,86 +1584,64 @@
     <id>0</id>
     <number>22</number>
     <input>../use-cases/test.xml</input>
-    <arity>1</arity>
+    <arity>0</arity>
     <selectivity>-</selectivity>
-    <multiplicity>0.75</multiplicity>
-    <conjunct>4</conjunct>
-    <disjuncts>2-3</disjuncts>
-    <length>2-4</length>
+    <multiplicity>0</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>4-4</length>
   </metadata>
   <head>
-    <var>?x0</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
-      <star>
       <disj>
         <concat>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol inverse="true">authors</symbol>
+          <symbol>authors</symbol>
+          <symbol inverse="true">authors</symbol>
         </concat>
         <concat>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol inverse="true">authors</symbol>
+          <symbol>authors</symbol>
+          <symbol inverse="true">authors</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol>extendedTo</symbol>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol inverse="true">authors</symbol>
         </concat>
       </disj>
-      </star>
       </conjunct>
-      <conjunct src="?x1" trg="?x2">
-      <star>
+      <conjunct src="?x0" trg="?x2">
       <disj>
         <concat>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol>extendedTo</symbol>
+          <symbol inverse="true">extendedTo</symbol>
           <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-        </concat>
-        <concat>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
         </concat>
       </disj>
-      </star>
       </conjunct>
-      <conjunct src="?x2" trg="?x3">
+      <conjunct src="?x1" trg="?x3">
       <disj>
         <concat>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol>extendedTo</symbol>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol>publishedIn</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">extendedTo</symbol>
           <symbol inverse="true">authors</symbol>
           <symbol>authors</symbol>
           <symbol>publishedIn</symbol>
         </concat>
-        <concat>
-          <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
-          <symbol inverse="true">heldIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">authors</symbol>
-          <symbol>authors</symbol>
-          <symbol>publishedIn</symbol>
-        </concat>
       </disj>
-      </conjunct>
-      <conjunct src="?x3" trg="?x4">
-      <star>
-      <disj>
-        <concat>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-        </concat>
-      </disj>
-      </star>
       </conjunct>
     </body>
   </bodies>
@@ -1692,24 +1656,19 @@
     <selectivity>-</selectivity>
     <multiplicity>0</multiplicity>
     <conjunct>3</conjunct>
-    <disjuncts>1-3</disjuncts>
+    <disjuncts>1-1</disjuncts>
     <length>3-4</length>
   </metadata>
   <head>
     <var>?x3</var>
-    <var>?x2</var>
     <var>?x1</var>
     <var>?x0</var>
+    <var>?x2</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
       <disj>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol inverse="true">authors</symbol>
-        </concat>
         <concat>
           <symbol inverse="true">heldIn</symbol>
           <symbol inverse="true">publishedIn</symbol>
@@ -1721,24 +1680,14 @@
       <disj>
         <concat>
           <symbol>authors</symbol>
-          <symbol inverse="true">authors</symbol>
-          <symbol>authors</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
           <symbol inverse="true">authors</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x2" trg="?x3">
       <disj>
-        <concat>
-          <symbol>authors</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
-        <concat>
-          <symbol>authors</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
         <concat>
           <symbol>authors</symbol>
           <symbol>publishedIn</symbol>
@@ -1755,83 +1704,60 @@
     <id>0</id>
     <number>24</number>
     <input>../use-cases/test.xml</input>
-    <arity>4</arity>
+    <arity>0</arity>
     <selectivity>-</selectivity>
-    <multiplicity>0.25</multiplicity>
+    <multiplicity>0</multiplicity>
     <conjunct>4</conjunct>
-    <disjuncts>1-3</disjuncts>
+    <disjuncts>1-2</disjuncts>
     <length>2-4</length>
   </metadata>
   <head>
-    <var>?x3</var>
-    <var>?x2</var>
-    <var>?x0</var>
-    <var>?x1</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol>publishedIn</symbol>
           <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol>publishedIn</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x1" trg="?x2">
-      <star>
+      <conjunct src="?x0" trg="?x2">
       <disj>
         <concat>
+          <symbol inverse="true">extendedTo</symbol>
           <symbol>publishedIn</symbol>
           <symbol inverse="true">publishedIn</symbol>
           <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-        </concat>
-        <concat>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-        </concat>
-        <concat>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
         </concat>
       </disj>
-      </star>
       </conjunct>
       <conjunct src="?x0" trg="?x3">
       <disj>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>extendedTo</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>extendedTo</symbol>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol>publishedIn</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x2" trg="?x4">
+      <conjunct src="?x0" trg="?x4">
       <disj>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol>publishedIn</symbol>
           <symbol inverse="true">publishedIn</symbol>
-          <symbol>extendedTo</symbol>
+          <symbol>publishedIn</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>extendedTo</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>extendedTo</symbol>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol>publishedIn</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -1844,18 +1770,14 @@
     <id>0</id>
     <number>25</number>
     <input>../use-cases/test.xml</input>
-    <arity>4</arity>
+    <arity>0</arity>
     <selectivity>-</selectivity>
-    <multiplicity>0.5</multiplicity>
-    <conjunct>4</conjunct>
+    <multiplicity>0</multiplicity>
+    <conjunct>3</conjunct>
     <disjuncts>1-3</disjuncts>
-    <length>2-4</length>
+    <length>3-4</length>
   </metadata>
   <head>
-    <var>?x3</var>
-    <var>?x0</var>
-    <var>?x2</var>
-    <var>?x1</var>
   </head>
   <bodies>
     <body>
@@ -1863,66 +1785,39 @@
       <disj>
         <concat>
           <symbol inverse="true">heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">heldIn</symbol>
           <symbol>heldIn</symbol>
           <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol>heldIn</symbol>
+          <symbol inverse="true">heldIn</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x1" trg="?x2">
-      <star>
       <disj>
         <concat>
-          <symbol>publishedIn</symbol>
           <symbol inverse="true">publishedIn</symbol>
           <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-        </concat>
-        <concat>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-        </concat>
-        <concat>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
+          <symbol>heldIn</symbol>
         </concat>
       </disj>
-      </star>
       </conjunct>
       <conjunct src="?x2" trg="?x3">
       <disj>
         <concat>
-          <symbol>publishedIn</symbol>
+          <symbol inverse="true">heldIn</symbol>
           <symbol inverse="true">publishedIn</symbol>
           <symbol>publishedIn</symbol>
+          <symbol>heldIn</symbol>
         </concat>
       </disj>
-      </conjunct>
-      <conjunct src="?x3" trg="?x4">
-      <star>
-      <disj>
-        <concat>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-        </concat>
-      </disj>
-      </star>
       </conjunct>
     </body>
   </bodies>
@@ -1933,7 +1828,7 @@
     <id>0</id>
     <number>26</number>
     <input>../use-cases/test.xml</input>
-    <arity>3</arity>
+    <arity>4</arity>
     <selectivity>-</selectivity>
     <multiplicity>0</multiplicity>
     <conjunct>3</conjunct>
@@ -1944,46 +1839,49 @@
     <var>?x1</var>
     <var>?x2</var>
     <var>?x0</var>
+    <var>?x3</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
+          <symbol>extendedTo</symbol>
           <symbol inverse="true">extendedTo</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">authors</symbol>
+          <symbol>authors</symbol>
           <symbol>publishedIn</symbol>
           <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x0" trg="?x2">
       <disj>
         <concat>
-          <symbol inverse="true">extendedTo</symbol>
-          <symbol>publishedIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">extendedTo</symbol>
           <symbol>publishedIn</symbol>
           <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">extendedTo</symbol>
-          <symbol>publishedIn</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x0" trg="?x3">
+      <conjunct src="?x1" trg="?x3">
       <disj>
         <concat>
-          <symbol inverse="true">extendedTo</symbol>
           <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">extendedTo</symbol>
           <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+        </concat>
+        <concat>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -1996,7 +1894,7 @@
     <id>0</id>
     <number>27</number>
     <input>../use-cases/test.xml</input>
-    <arity>4</arity>
+    <arity>3</arity>
     <selectivity>-</selectivity>
     <multiplicity>0</multiplicity>
     <conjunct>3</conjunct>
@@ -2004,19 +1902,27 @@
     <length>2-4</length>
   </metadata>
   <head>
-    <var>?x1</var>
-    <var>?x3</var>
-    <var>?x0</var>
     <var>?x2</var>
+    <var>?x0</var>
+    <var>?x1</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol>publishedIn</symbol>
           <symbol>heldIn</symbol>
-          <symbol inverse="true">heldIn</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol>heldIn</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol>publishedIn</symbol>
           <symbol>heldIn</symbol>
         </concat>
       </disj>
@@ -2024,34 +1930,24 @@
       <conjunct src="?x0" trg="?x2">
       <disj>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol>publishedIn</symbol>
           <symbol inverse="true">publishedIn</symbol>
           <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x1" trg="?x3">
       <disj>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol>publishedIn</symbol>
           <symbol inverse="true">publishedIn</symbol>
           <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol>publishedIn</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -2064,73 +1960,76 @@
     <id>0</id>
     <number>28</number>
     <input>../use-cases/test.xml</input>
-    <arity>3</arity>
+    <arity>4</arity>
     <selectivity>-</selectivity>
     <multiplicity>0</multiplicity>
     <conjunct>3</conjunct>
-    <disjuncts>2-3</disjuncts>
+    <disjuncts>3-3</disjuncts>
     <length>2-4</length>
   </metadata>
   <head>
     <var>?x1</var>
-    <var>?x0</var>
     <var>?x2</var>
+    <var>?x3</var>
+    <var>?x0</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
+          <symbol>authors</symbol>
+          <symbol>publishedIn</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
+          <symbol>authors</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+        </concat>
+        <concat>
+          <symbol>authors</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x0" trg="?x2">
       <disj>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
+          <symbol>authors</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
+          <symbol>authors</symbol>
           <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
+          <symbol>authors</symbol>
           <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x0" trg="?x3">
+      <conjunct src="?x1" trg="?x3">
       <disj>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
+          <symbol>authors</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
+          <symbol>authors</symbol>
           <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
+          <symbol>authors</symbol>
           <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -2143,58 +2042,63 @@
     <id>0</id>
     <number>29</number>
     <input>../use-cases/test.xml</input>
-    <arity>3</arity>
+    <arity>1</arity>
     <selectivity>-</selectivity>
     <multiplicity>0</multiplicity>
     <conjunct>3</conjunct>
     <disjuncts>1-3</disjuncts>
-    <length>3-4</length>
+    <length>2-4</length>
   </metadata>
   <head>
     <var>?x0</var>
-    <var>?x2</var>
-    <var>?x1</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
+          <symbol>authors</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>extendedTo</symbol>
+        </concat>
+        <concat>
+          <symbol>authors</symbol>
+          <symbol>extendedTo</symbol>
+        </concat>
+        <concat>
+          <symbol>authors</symbol>
+          <symbol>publishedIn</symbol>
           <symbol inverse="true">publishedIn</symbol>
           <symbol>extendedTo</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x1" trg="?x2">
+      <conjunct src="?x0" trg="?x2">
       <disj>
         <concat>
-          <symbol inverse="true">extendedTo</symbol>
-          <symbol>extendedTo</symbol>
-          <symbol inverse="true">extendedTo</symbol>
-          <symbol>extendedTo</symbol>
+          <symbol>authors</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+        </concat>
+        <concat>
+          <symbol>authors</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+        </concat>
+        <concat>
+          <symbol>authors</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x2" trg="?x3">
+      <conjunct src="?x1" trg="?x3">
       <disj>
         <concat>
-          <symbol inverse="true">extendedTo</symbol>
-          <symbol inverse="true">authors</symbol>
           <symbol>authors</symbol>
           <symbol>publishedIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">extendedTo</symbol>
-          <symbol>extendedTo</symbol>
-          <symbol inverse="true">extendedTo</symbol>
-          <symbol>publishedIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">extendedTo</symbol>
-          <symbol>extendedTo</symbol>
-          <symbol inverse="true">extendedTo</symbol>
-          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -2207,18 +2111,15 @@
     <id>0</id>
     <number>30</number>
     <input>../use-cases/test.xml</input>
-    <arity>4</arity>
+    <arity>1</arity>
     <selectivity>-</selectivity>
     <multiplicity>0</multiplicity>
     <conjunct>3</conjunct>
-    <disjuncts>2-3</disjuncts>
-    <length>4-8</length>
+    <disjuncts>1-3</disjuncts>
+    <length>3-4</length>
   </metadata>
   <head>
-    <var>?x1</var>
     <var>?x0</var>
-    <var>?x3</var>
-    <var>?x2</var>
   </head>
   <bodies>
     <body>
@@ -2226,76 +2127,52 @@
       <disj>
         <concat>
           <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-          <symbol inverse="true">heldIn</symbol>
           <symbol inverse="true">publishedIn</symbol>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
+          <symbol inverse="true">authors</symbol>
         </concat>
         <concat>
           <symbol inverse="true">heldIn</symbol>
           <symbol inverse="true">publishedIn</symbol>
           <symbol inverse="true">authors</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol inverse="true">authors</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
           <symbol>authors</symbol>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
           <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x0" trg="?x2">
+      <conjunct src="?x2" trg="?x3">
       <disj>
         <concat>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
+          <symbol>extendedTo</symbol>
+          <symbol inverse="true">extendedTo</symbol>
           <symbol>publishedIn</symbol>
           <symbol>heldIn</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x0" trg="?x3">
-      <disj>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
+          <symbol inverse="true">authors</symbol>
+          <symbol>authors</symbol>
           <symbol>publishedIn</symbol>
           <symbol>heldIn</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
+          <symbol>publishedIn</symbol>
           <symbol>heldIn</symbol>
           <symbol inverse="true">heldIn</symbol>
           <symbol>heldIn</symbol>
         </concat>
       </disj>
       </conjunct>
-    </body>
-    <body>
     </body>
   </bodies>
 </query>
@@ -2305,90 +2182,63 @@
     <id>0</id>
     <number>31</number>
     <input>../use-cases/test.xml</input>
-    <arity>2</arity>
-    <selectivity>1</selectivity>
-    <multiplicity>0.75</multiplicity>
-    <conjunct>4</conjunct>
-    <disjuncts>1-3</disjuncts>
-    <length>2-4</length>
+    <arity>0</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>2-3</disjuncts>
+    <length>3-3</length>
   </metadata>
   <head>
-    <var>?x0</var>
-    <var>?x4</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
-      <star>
       <disj>
         <concat>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
+          <symbol>extendedTo</symbol>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol inverse="true">authors</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
+          <symbol inverse="true">authors</symbol>
+          <symbol>authors</symbol>
+          <symbol inverse="true">authors</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-        </concat>
-      </disj>
-      </star>
-      </conjunct>
-      <conjunct src="?x1" trg="?x2">
-      <star>
-      <disj>
-        <concat>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-        </concat>
-      </disj>
-      </star>
-      </conjunct>
-      <conjunct src="?x2" trg="?x3">
-      <disj>
-        <concat>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
+          <symbol inverse="true">authors</symbol>
+          <symbol>authors</symbol>
+          <symbol inverse="true">authors</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x3" trg="?x4">
-      <star>
+      <conjunct src="?x0" trg="?x2">
       <disj>
         <concat>
-          <symbol inverse="true">publishedIn</symbol>
+          <symbol inverse="true">authors</symbol>
+          <symbol>authors</symbol>
           <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
+        </concat>
+        <concat>
+          <symbol>publishedIn</symbol>
+          <symbol>heldIn</symbol>
+          <symbol inverse="true">heldIn</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x3">
+      <disj>
+        <concat>
+          <symbol>publishedIn</symbol>
+          <symbol>heldIn</symbol>
+          <symbol inverse="true">heldIn</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">authors</symbol>
+          <symbol>authors</symbol>
           <symbol>publishedIn</symbol>
         </concat>
       </disj>
-      </star>
       </conjunct>
     </body>
   </bodies>
@@ -2399,84 +2249,94 @@
     <id>0</id>
     <number>32</number>
     <input>../use-cases/test.xml</input>
-    <arity>0</arity>
+    <arity>4</arity>
     <selectivity>-</selectivity>
-    <multiplicity>0</multiplicity>
+    <multiplicity>1</multiplicity>
     <conjunct>4</conjunct>
     <disjuncts>1-3</disjuncts>
     <length>2-4</length>
   </metadata>
   <head>
+    <var>?x1</var>
+    <var>?x2</var>
+    <var>?x0</var>
+    <var>?x3</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
+      <star>
       <disj>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
         </concat>
       </disj>
+      </star>
       </conjunct>
       <conjunct src="?x0" trg="?x2">
+      <star>
       <disj>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
           <symbol inverse="true">publishedIn</symbol>
           <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
         </concat>
       </disj>
+      </star>
       </conjunct>
       <conjunct src="?x0" trg="?x3">
+      <star>
       <disj>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
         </concat>
       </disj>
+      </star>
       </conjunct>
       <conjunct src="?x0" trg="?x4">
+      <star>
       <disj>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
           <symbol inverse="true">publishedIn</symbol>
           <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
           <symbol inverse="true">publishedIn</symbol>
           <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
         </concat>
       </disj>
+      </star>
       </conjunct>
     </body>
   </bodies>
@@ -2487,10 +2347,10 @@
     <id>0</id>
     <number>33</number>
     <input>../use-cases/test.xml</input>
-    <arity>3</arity>
+    <arity>4</arity>
     <selectivity>-</selectivity>
     <multiplicity>0</multiplicity>
-    <conjunct>4</conjunct>
+    <conjunct>3</conjunct>
     <disjuncts>2-3</disjuncts>
     <length>2-4</length>
   </metadata>
@@ -2498,6 +2358,7 @@
     <var>?x0</var>
     <var>?x2</var>
     <var>?x1</var>
+    <var>?x3</var>
   </head>
   <bodies>
     <body>
@@ -2506,14 +2367,12 @@
         <concat>
           <symbol inverse="true">heldIn</symbol>
           <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
+          <symbol inverse="true">authors</symbol>
         </concat>
         <concat>
           <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol inverse="true">authors</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -2521,49 +2380,35 @@
       <disj>
         <concat>
           <symbol inverse="true">heldIn</symbol>
+          <symbol>heldIn</symbol>
+          <symbol inverse="true">heldIn</symbol>
           <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
         </concat>
         <concat>
           <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x0" trg="?x3">
+      <conjunct src="?x1" trg="?x3">
       <disj>
         <concat>
           <symbol inverse="true">heldIn</symbol>
           <symbol>heldIn</symbol>
           <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x0" trg="?x4">
-      <disj>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
         </concat>
         <concat>
           <symbol inverse="true">heldIn</symbol>
           <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
+          <symbol inverse="true">authors</symbol>
+          <symbol>authors</symbol>
         </concat>
         <concat>
           <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol inverse="true">authors</symbol>
+          <symbol>authors</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -2576,40 +2421,46 @@
     <id>0</id>
     <number>34</number>
     <input>../use-cases/test.xml</input>
-    <arity>1</arity>
+    <arity>3</arity>
     <selectivity>-</selectivity>
     <multiplicity>0</multiplicity>
-    <conjunct>3</conjunct>
-    <disjuncts>1-3</disjuncts>
-    <length>3-3</length>
+    <conjunct>4</conjunct>
+    <disjuncts>1-2</disjuncts>
+    <length>3-4</length>
   </metadata>
   <head>
     <var>?x0</var>
+    <var>?x2</var>
+    <var>?x1</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol>extendedTo</symbol>
+          <symbol inverse="true">extendedTo</symbol>
           <symbol inverse="true">authors</symbol>
         </concat>
         <concat>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
+          <symbol inverse="true">extendedTo</symbol>
           <symbol inverse="true">authors</symbol>
-        </concat>
-        <concat>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
+          <symbol>authors</symbol>
           <symbol inverse="true">authors</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x0" trg="?x2">
+      <conjunct src="?x1" trg="?x2">
       <disj>
         <concat>
+          <symbol>authors</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol inverse="true">authors</symbol>
+        </concat>
+        <concat>
+          <symbol>authors</symbol>
           <symbol>publishedIn</symbol>
           <symbol inverse="true">publishedIn</symbol>
           <symbol inverse="true">authors</symbol>
@@ -2619,9 +2470,18 @@
       <conjunct src="?x0" trg="?x3">
       <disj>
         <concat>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol inverse="true">authors</symbol>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol>extendedTo</symbol>
+          <symbol inverse="true">extendedTo</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x4">
+      <disj>
+        <concat>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol>extendedTo</symbol>
+          <symbol inverse="true">extendedTo</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -2634,69 +2494,64 @@
     <id>0</id>
     <number>35</number>
     <input>../use-cases/test.xml</input>
-    <arity>1</arity>
+    <arity>4</arity>
     <selectivity>-</selectivity>
-    <multiplicity>0</multiplicity>
+    <multiplicity>0.5</multiplicity>
     <conjunct>4</conjunct>
-    <disjuncts>1-3</disjuncts>
+    <disjuncts>1-2</disjuncts>
     <length>2-4</length>
   </metadata>
   <head>
+    <var>?x3</var>
     <var>?x0</var>
+    <var>?x2</var>
+    <var>?x1</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
+          <symbol>authors</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x0" trg="?x2">
+      <conjunct src="?x1" trg="?x2">
+      <star>
       <disj>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x0" trg="?x3">
-      <disj>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
+          <symbol>publishedIn</symbol>
           <symbol inverse="true">publishedIn</symbol>
           <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
         </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <disj>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x0" trg="?x4">
+      <conjunct src="?x3" trg="?x4">
+      <star>
       <disj>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
         </concat>
       </disj>
+      </star>
       </conjunct>
     </body>
   </bodies>
@@ -2707,54 +2562,44 @@
     <id>0</id>
     <number>36</number>
     <input>../use-cases/test.xml</input>
-    <arity>4</arity>
+    <arity>1</arity>
     <selectivity>-</selectivity>
     <multiplicity>0</multiplicity>
     <conjunct>3</conjunct>
     <disjuncts>1-3</disjuncts>
-    <length>2-4</length>
+    <length>4-4</length>
   </metadata>
   <head>
-    <var>?x1</var>
-    <var>?x3</var>
     <var>?x0</var>
-    <var>?x2</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol inverse="true">authors</symbol>
+          <symbol>authors</symbol>
+          <symbol>extendedTo</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">publishedIn</symbol>
           <symbol>extendedTo</symbol>
           <symbol inverse="true">extendedTo</symbol>
-          <symbol>publishedIn</symbol>
+          <symbol>extendedTo</symbol>
         </concat>
         <concat>
-          <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
-          <symbol inverse="true">heldIn</symbol>
-        </concat>
-        <concat>
-          <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
-          <symbol inverse="true">heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol inverse="true">authors</symbol>
+          <symbol>authors</symbol>
+          <symbol>extendedTo</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x1" trg="?x2">
       <disj>
         <concat>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>extendedTo</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>extendedTo</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">publishedIn</symbol>
+          <symbol inverse="true">extendedTo</symbol>
           <symbol>publishedIn</symbol>
           <symbol inverse="true">publishedIn</symbol>
           <symbol>extendedTo</symbol>
@@ -2765,8 +2610,15 @@
       <disj>
         <concat>
           <symbol inverse="true">extendedTo</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
+          <symbol inverse="true">authors</symbol>
+          <symbol>authors</symbol>
+          <symbol inverse="true">authors</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol>extendedTo</symbol>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol inverse="true">authors</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -2778,83 +2630,6 @@
   <metadata>
     <id>0</id>
     <number>37</number>
-    <input>../use-cases/test.xml</input>
-    <arity>4</arity>
-    <selectivity>-</selectivity>
-    <multiplicity>0.5</multiplicity>
-    <conjunct>4</conjunct>
-    <disjuncts>1-3</disjuncts>
-    <length>2-4</length>
-  </metadata>
-  <head>
-    <var>?x2</var>
-    <var>?x1</var>
-    <var>?x0</var>
-    <var>?x3</var>
-  </head>
-  <bodies>
-    <body>
-      <conjunct src="?x0" trg="?x1">
-      <disj>
-        <concat>
-          <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
-          <symbol inverse="true">heldIn</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x1" trg="?x2">
-      <star>
-      <disj>
-        <concat>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-        </concat>
-      </disj>
-      </star>
-      </conjunct>
-      <conjunct src="?x2" trg="?x3">
-      <star>
-      <disj>
-        <concat>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-        </concat>
-      </disj>
-      </star>
-      </conjunct>
-      <conjunct src="?x3" trg="?x4">
-      <disj>
-        <concat>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>extendedTo</symbol>
-          <symbol inverse="true">extendedTo</symbol>
-          <symbol>extendedTo</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-    </body>
-  </bodies>
-</query>
-
-<query>
-  <metadata>
-    <id>0</id>
-    <number>38</number>
     <input>../use-cases/test.xml</input>
     <arity>2</arity>
     <selectivity>2</selectivity>
@@ -2873,14 +2648,14 @@
       <disj>
         <concat>
           <symbol inverse="true">extendedTo</symbol>
-          <symbol inverse="true">authors</symbol>
-          <symbol>authors</symbol>
+          <symbol>extendedTo</symbol>
+          <symbol inverse="true">extendedTo</symbol>
           <symbol inverse="true">authors</symbol>
         </concat>
         <concat>
           <symbol inverse="true">extendedTo</symbol>
-          <symbol>extendedTo</symbol>
-          <symbol inverse="true">extendedTo</symbol>
+          <symbol inverse="true">authors</symbol>
+          <symbol>authors</symbol>
           <symbol inverse="true">authors</symbol>
         </concat>
         <concat>
@@ -2895,8 +2670,8 @@
       <disj>
         <concat>
           <symbol inverse="true">extendedTo</symbol>
-          <symbol inverse="true">authors</symbol>
-          <symbol>authors</symbol>
+          <symbol>extendedTo</symbol>
+          <symbol inverse="true">extendedTo</symbol>
           <symbol inverse="true">authors</symbol>
         </concat>
         <concat>
@@ -2924,16 +2699,18 @@
 <query>
   <metadata>
     <id>0</id>
-    <number>39</number>
+    <number>38</number>
     <input>../use-cases/test.xml</input>
-    <arity>0</arity>
-    <selectivity>-</selectivity>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
     <multiplicity>0</multiplicity>
-    <conjunct>3</conjunct>
-    <disjuncts>1-2</disjuncts>
-    <length>2-4</length>
+    <conjunct>4</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>3-4</length>
   </metadata>
   <head>
+    <var>?x0</var>
+    <var>?x4</var>
   </head>
   <bodies>
     <body>
@@ -2942,11 +2719,115 @@
         <concat>
           <symbol inverse="true">heldIn</symbol>
           <symbol>heldIn</symbol>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol>heldIn</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x0" trg="?x2">
+      <conjunct src="?x1" trg="?x2">
       <disj>
+        <concat>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>extendedTo</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>extendedTo</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>extendedTo</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <disj>
+        <concat>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>extendedTo</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x3" trg="?x4">
+      <disj>
+        <concat>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol inverse="true">authors</symbol>
+          <symbol>authors</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>39</number>
+    <input>../use-cases/test.xml</input>
+    <arity>4</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>2-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x3</var>
+    <var>?x2</var>
+    <var>?x0</var>
+    <var>?x1</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>extendedTo</symbol>
+          <symbol inverse="true">extendedTo</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
+          <symbol>extendedTo</symbol>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol>heldIn</symbol>
+        </concat>
+        <concat>
+          <symbol>publishedIn</symbol>
+          <symbol>heldIn</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <disj>
+        <concat>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol>heldIn</symbol>
+        </concat>
         <concat>
           <symbol inverse="true">heldIn</symbol>
           <symbol inverse="true">publishedIn</symbol>
@@ -2959,12 +2840,16 @@
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x1" trg="?x3">
+      <conjunct src="?x2" trg="?x4">
       <disj>
         <concat>
           <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
+          <symbol>heldIn</symbol>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol>heldIn</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">heldIn</symbol>
           <symbol>heldIn</symbol>
         </concat>
         <concat>
@@ -2982,75 +2867,61 @@
     <id>0</id>
     <number>40</number>
     <input>../use-cases/test.xml</input>
-    <arity>3</arity>
+    <arity>0</arity>
     <selectivity>-</selectivity>
     <multiplicity>0</multiplicity>
-    <conjunct>4</conjunct>
-    <disjuncts>1-3</disjuncts>
+    <conjunct>3</conjunct>
+    <disjuncts>2-3</disjuncts>
     <length>2-4</length>
   </metadata>
   <head>
-    <var>?x0</var>
-    <var>?x1</var>
-    <var>?x2</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
+          <symbol>authors</symbol>
+          <symbol inverse="true">authors</symbol>
+        </concat>
+        <concat>
+          <symbol>authors</symbol>
           <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol inverse="true">authors</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x1" trg="?x2">
+      <conjunct src="?x0" trg="?x2">
       <disj>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>extendedTo</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>extendedTo</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>extendedTo</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x2" trg="?x3">
-      <disj>
-        <concat>
-          <symbol inverse="true">extendedTo</symbol>
-          <symbol>extendedTo</symbol>
-          <symbol inverse="true">extendedTo</symbol>
+          <symbol>authors</symbol>
           <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol inverse="true">authors</symbol>
+        </concat>
+        <concat>
+          <symbol>authors</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol inverse="true">authors</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x3" trg="?x4">
+      <conjunct src="?x0" trg="?x3">
       <disj>
         <concat>
+          <symbol>authors</symbol>
+          <symbol>publishedIn</symbol>
           <symbol inverse="true">publishedIn</symbol>
-          <symbol>extendedTo</symbol>
-          <symbol inverse="true">extendedTo</symbol>
+          <symbol inverse="true">authors</symbol>
+        </concat>
+        <concat>
+          <symbol>authors</symbol>
+          <symbol inverse="true">authors</symbol>
+        </concat>
+        <concat>
+          <symbol>authors</symbol>
           <symbol inverse="true">authors</symbol>
         </concat>
       </disj>
@@ -3064,11 +2935,99 @@
     <id>0</id>
     <number>41</number>
     <input>../use-cases/test.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>2-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x2</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>extendedTo</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>extendedTo</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>extendedTo</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol>publishedIn</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <disj>
+        <concat>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>extendedTo</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>extendedTo</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x4">
+      <disj>
+        <concat>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>extendedTo</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>extendedTo</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>extendedTo</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>42</number>
+    <input>../use-cases/test.xml</input>
     <arity>0</arity>
     <selectivity>-</selectivity>
     <multiplicity>0</multiplicity>
-    <conjunct>3</conjunct>
-    <disjuncts>1-3</disjuncts>
+    <conjunct>4</conjunct>
+    <disjuncts>2-3</disjuncts>
     <length>2-4</length>
   </metadata>
   <head>
@@ -3078,12 +3037,114 @@
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
+          <symbol>authors</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+        </concat>
+        <concat>
+          <symbol>authors</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+        </concat>
+        <concat>
+          <symbol>authors</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <disj>
+        <concat>
+          <symbol>authors</symbol>
+          <symbol>publishedIn</symbol>
+        </concat>
+        <concat>
+          <symbol>authors</symbol>
+          <symbol>publishedIn</symbol>
+        </concat>
+        <concat>
+          <symbol>authors</symbol>
+          <symbol>publishedIn</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <disj>
+        <concat>
+          <symbol>authors</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+        </concat>
+        <concat>
+          <symbol>authors</symbol>
+          <symbol>publishedIn</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x4">
+      <disj>
+        <concat>
+          <symbol>authors</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+        </concat>
+        <concat>
+          <symbol>authors</symbol>
+          <symbol>publishedIn</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>43</number>
+    <input>../use-cases/test.xml</input>
+    <arity>2</arity>
+    <selectivity>0</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-2</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x1</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol>heldIn</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol>heldIn</symbol>
           <symbol inverse="true">heldIn</symbol>
           <symbol>heldIn</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x0" trg="?x2">
+      <disj>
+        <concat>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol>heldIn</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
       <disj>
         <concat>
           <symbol inverse="true">heldIn</symbol>
@@ -3094,6 +3155,120 @@
         <concat>
           <symbol inverse="true">heldIn</symbol>
           <symbol>heldIn</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>44</number>
+    <input>../use-cases/test.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>3-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x4</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol>authors</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol>heldIn</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>extendedTo</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <disj>
+        <concat>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol>heldIn</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol>heldIn</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol>heldIn</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x3" trg="?x4">
+      <disj>
+        <concat>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol>heldIn</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol>heldIn</symbol>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol>heldIn</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>45</number>
+    <input>../use-cases/test.xml</input>
+    <arity>3</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x1</var>
+    <var>?x0</var>
+    <var>?x2</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol inverse="true">heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol>heldIn</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <disj>
+        <concat>
           <symbol inverse="true">heldIn</symbol>
           <symbol>heldIn</symbol>
         </concat>
@@ -3110,305 +3285,7 @@
         <concat>
           <symbol inverse="true">heldIn</symbol>
           <symbol>heldIn</symbol>
-        </concat>
-        <concat>
           <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-    </body>
-  </bodies>
-</query>
-
-<query>
-  <metadata>
-    <id>0</id>
-    <number>42</number>
-    <input>../use-cases/test.xml</input>
-    <arity>2</arity>
-    <selectivity>2</selectivity>
-    <multiplicity>0</multiplicity>
-    <conjunct>3</conjunct>
-    <disjuncts>1-3</disjuncts>
-    <length>2-4</length>
-  </metadata>
-  <head>
-    <var>?x0</var>
-    <var>?x3</var>
-  </head>
-  <bodies>
-    <body>
-      <conjunct src="?x0" trg="?x1">
-      <disj>
-        <concat>
-          <symbol inverse="true">extendedTo</symbol>
-          <symbol>extendedTo</symbol>
-          <symbol inverse="true">extendedTo</symbol>
-          <symbol>extendedTo</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">extendedTo</symbol>
-          <symbol>extendedTo</symbol>
-          <symbol inverse="true">extendedTo</symbol>
-          <symbol>extendedTo</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x1" trg="?x2">
-      <disj>
-        <concat>
-          <symbol inverse="true">extendedTo</symbol>
-          <symbol inverse="true">authors</symbol>
-          <symbol>authors</symbol>
-          <symbol inverse="true">authors</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x2" trg="?x3">
-      <disj>
-        <concat>
-          <symbol>authors</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol inverse="true">authors</symbol>
-        </concat>
-        <concat>
-          <symbol>authors</symbol>
-          <symbol inverse="true">authors</symbol>
-        </concat>
-        <concat>
-          <symbol>authors</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol inverse="true">authors</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-    </body>
-  </bodies>
-</query>
-
-<query>
-  <metadata>
-    <id>0</id>
-    <number>43</number>
-    <input>../use-cases/test.xml</input>
-    <arity>3</arity>
-    <selectivity>-</selectivity>
-    <multiplicity>0</multiplicity>
-    <conjunct>4</conjunct>
-    <disjuncts>1-2</disjuncts>
-    <length>2-4</length>
-  </metadata>
-  <head>
-    <var>?x2</var>
-    <var>?x1</var>
-    <var>?x0</var>
-  </head>
-  <bodies>
-    <body>
-      <conjunct src="?x0" trg="?x1">
-      <disj>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>extendedTo</symbol>
-          <symbol inverse="true">extendedTo</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x1" trg="?x2">
-      <disj>
-        <concat>
-          <symbol inverse="true">authors</symbol>
-          <symbol>authors</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x2" trg="?x3">
-      <disj>
-        <concat>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x3" trg="?x4">
-      <disj>
-        <concat>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>extendedTo</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-    </body>
-  </bodies>
-</query>
-
-<query>
-  <metadata>
-    <id>0</id>
-    <number>44</number>
-    <input>../use-cases/test.xml</input>
-    <arity>0</arity>
-    <selectivity>-</selectivity>
-    <multiplicity>0</multiplicity>
-    <conjunct>4</conjunct>
-    <disjuncts>1-3</disjuncts>
-    <length>2-4</length>
-  </metadata>
-  <head>
-  </head>
-  <bodies>
-    <body>
-      <conjunct src="?x0" trg="?x1">
-      <disj>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x0" trg="?x2">
-      <disj>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x0" trg="?x3">
-      <disj>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x0" trg="?x4">
-      <disj>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-    </body>
-  </bodies>
-</query>
-
-<query>
-  <metadata>
-    <id>0</id>
-    <number>45</number>
-    <input>../use-cases/test.xml</input>
-    <arity>4</arity>
-    <selectivity>-</selectivity>
-    <multiplicity>0</multiplicity>
-    <conjunct>4</conjunct>
-    <disjuncts>1-3</disjuncts>
-    <length>3-4</length>
-  </metadata>
-  <head>
-    <var>?x2</var>
-    <var>?x1</var>
-    <var>?x3</var>
-    <var>?x0</var>
-  </head>
-  <bodies>
-    <body>
-      <conjunct src="?x0" trg="?x1">
-      <disj>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x1" trg="?x2">
-      <disj>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>extendedTo</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>extendedTo</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>extendedTo</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x2" trg="?x3">
-      <disj>
-        <concat>
-          <symbol inverse="true">extendedTo</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x3" trg="?x4">
-      <disj>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
           <symbol>heldIn</symbol>
         </concat>
         <concat>
@@ -3430,8 +3307,8 @@
     <input>../use-cases/test.xml</input>
     <arity>1</arity>
     <selectivity>-</selectivity>
-    <multiplicity>0</multiplicity>
-    <conjunct>3</conjunct>
+    <multiplicity>0.5</multiplicity>
+    <conjunct>4</conjunct>
     <disjuncts>1-3</disjuncts>
     <length>2-4</length>
   </metadata>
@@ -3441,46 +3318,61 @@
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
+      <star>
       <disj>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+        </concat>
+        <concat>
+          <symbol>publishedIn</symbol>
           <symbol inverse="true">publishedIn</symbol>
           <symbol>publishedIn</symbol>
           <symbol inverse="true">publishedIn</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
+          <symbol>publishedIn</symbol>
           <symbol inverse="true">publishedIn</symbol>
-          <symbol inverse="true">authors</symbol>
-          <symbol>authors</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x0" trg="?x2">
-      <disj>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol inverse="true">authors</symbol>
-          <symbol>authors</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
+          <symbol>publishedIn</symbol>
           <symbol inverse="true">publishedIn</symbol>
         </concat>
       </disj>
+      </star>
       </conjunct>
-      <conjunct src="?x1" trg="?x3">
+      <conjunct src="?x2" trg="?x3">
       <disj>
         <concat>
-          <symbol inverse="true">heldIn</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x3" trg="?x4">
+      <disj>
+        <concat>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>extendedTo</symbol>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol>publishedIn</symbol>
+        </concat>
+        <concat>
           <symbol>heldIn</symbol>
           <symbol inverse="true">heldIn</symbol>
           <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -3492,6 +3384,85 @@
   <metadata>
     <id>0</id>
     <number>47</number>
+    <input>../use-cases/test.xml</input>
+    <arity>1</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>4-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol inverse="true">authors</symbol>
+          <symbol>authors</symbol>
+          <symbol>extendedTo</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <disj>
+        <concat>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol inverse="true">authors</symbol>
+          <symbol>authors</symbol>
+          <symbol>extendedTo</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <disj>
+        <concat>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol inverse="true">authors</symbol>
+          <symbol>authors</symbol>
+          <symbol>extendedTo</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol inverse="true">authors</symbol>
+          <symbol>authors</symbol>
+          <symbol>extendedTo</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol inverse="true">authors</symbol>
+          <symbol>authors</symbol>
+          <symbol>extendedTo</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x4">
+      <disj>
+        <concat>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol>extendedTo</symbol>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol>extendedTo</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol inverse="true">authors</symbol>
+          <symbol>authors</symbol>
+          <symbol>extendedTo</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>48</number>
     <input>../use-cases/test.xml</input>
     <arity>0</arity>
     <selectivity>-</selectivity>
@@ -3508,20 +3479,6 @@
       <disj>
         <concat>
           <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol>heldIn</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>publishedIn</symbol>
           <symbol>heldIn</symbol>
         </concat>
       </disj>
@@ -3536,10 +3493,12 @@
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x0" trg="?x3">
+      <conjunct src="?x1" trg="?x3">
       <disj>
         <concat>
           <symbol inverse="true">heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol>publishedIn</symbol>
           <symbol>heldIn</symbol>
         </concat>
         <concat>
@@ -3548,67 +3507,11 @@
           <symbol>publishedIn</symbol>
           <symbol>heldIn</symbol>
         </concat>
-      </disj>
-      </conjunct>
-    </body>
-  </bodies>
-</query>
-
-<query>
-  <metadata>
-    <id>0</id>
-    <number>48</number>
-    <input>../use-cases/test.xml</input>
-    <arity>3</arity>
-    <selectivity>-</selectivity>
-    <multiplicity>0</multiplicity>
-    <conjunct>3</conjunct>
-    <disjuncts>1-3</disjuncts>
-    <length>3-4</length>
-  </metadata>
-  <head>
-    <var>?x0</var>
-    <var>?x2</var>
-    <var>?x1</var>
-  </head>
-  <bodies>
-    <body>
-      <conjunct src="?x0" trg="?x1">
-      <disj>
         <concat>
+          <symbol inverse="true">heldIn</symbol>
           <symbol>heldIn</symbol>
           <symbol inverse="true">heldIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>extendedTo</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x1" trg="?x2">
-      <disj>
-        <concat>
-          <symbol inverse="true">extendedTo</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol inverse="true">publishedIn</symbol>
-          <symbol>extendedTo</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x2" trg="?x3">
-      <disj>
-        <concat>
-          <symbol inverse="true">extendedTo</symbol>
-          <symbol>extendedTo</symbol>
-          <symbol inverse="true">extendedTo</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">extendedTo</symbol>
-          <symbol>extendedTo</symbol>
-          <symbol inverse="true">extendedTo</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">extendedTo</symbol>
-          <symbol inverse="true">authors</symbol>
-          <symbol>authors</symbol>
+          <symbol>heldIn</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -3621,16 +3524,17 @@
     <id>0</id>
     <number>49</number>
     <input>../use-cases/test.xml</input>
-    <arity>2</arity>
-    <selectivity>1</selectivity>
+    <arity>3</arity>
+    <selectivity>-</selectivity>
     <multiplicity>0</multiplicity>
     <conjunct>4</conjunct>
-    <disjuncts>1-2</disjuncts>
-    <length>3-3</length>
+    <disjuncts>2-3</disjuncts>
+    <length>2-4</length>
   </metadata>
   <head>
-    <var>?x0</var>
     <var>?x1</var>
+    <var>?x2</var>
+    <var>?x0</var>
   </head>
   <bodies>
     <body>
@@ -3639,21 +3543,30 @@
         <concat>
           <symbol inverse="true">extendedTo</symbol>
           <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol inverse="true">authors</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol inverse="true">authors</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol>publishedIn</symbol>
+          <symbol inverse="true">publishedIn</symbol>
+          <symbol inverse="true">authors</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x0" trg="?x2">
+      <conjunct src="?x1" trg="?x2">
       <disj>
         <concat>
-          <symbol inverse="true">extendedTo</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
+          <symbol>authors</symbol>
+          <symbol>extendedTo</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">extendedTo</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
+          <symbol>authors</symbol>
+          <symbol>extendedTo</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -3661,27 +3574,37 @@
       <disj>
         <concat>
           <symbol inverse="true">extendedTo</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
+          <symbol>extendedTo</symbol>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol inverse="true">authors</symbol>
         </concat>
         <concat>
           <symbol inverse="true">extendedTo</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
+          <symbol inverse="true">authors</symbol>
+          <symbol>authors</symbol>
+          <symbol inverse="true">authors</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">extendedTo</symbol>
+          <symbol inverse="true">authors</symbol>
+          <symbol>authors</symbol>
+          <symbol inverse="true">authors</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x0" trg="?x4">
+      <conjunct src="?x2" trg="?x4">
       <disj>
         <concat>
           <symbol inverse="true">extendedTo</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
+          <symbol inverse="true">authors</symbol>
+          <symbol>authors</symbol>
+          <symbol inverse="true">authors</symbol>
         </concat>
         <concat>
           <symbol inverse="true">extendedTo</symbol>
-          <symbol>publishedIn</symbol>
-          <symbol>heldIn</symbol>
+          <symbol inverse="true">authors</symbol>
+          <symbol>authors</symbol>
+          <symbol inverse="true">authors</symbol>
         </concat>
       </disj>
       </conjunct>
