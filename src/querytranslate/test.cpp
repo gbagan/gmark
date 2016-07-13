@@ -22,11 +22,34 @@
 #include <cstdlib>
 #include <iostream>
 #include <vector>
+#include <unistd.h>
+#include <fstream>
 #include "querytranslate.h"
 
-int main() {
+int main(int argc, char ** argv)  {
 
-  qtranslate("../../xml/queries.xml", "translated");
+// ./test -w ../../xml/queries.xml -o translated
+
+//  qtranslate("../../xml/queries.xml", "translated");
+
+	string inputfilename, output_directory;
+	int c;
+
+	while ((c = getopt(argc, argv, "w:o:")) != -1) {
+	switch(c) {
+		case 'w':
+			inputfilename = optarg;
+			break;
+		case 'o':
+			output_directory = optarg;
+			break;
+	}
+	}
+
+	qtranslate (inputfilename.c_str(), output_directory.c_str());
+
+
+
   exit(EXIT_SUCCESS);
 
 }
