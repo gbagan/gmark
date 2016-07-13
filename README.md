@@ -55,6 +55,7 @@ where the parameters are:
 - -o : the output directory for the query workload interface
 
 **Provided examples**
+
 We provide several examples of generated graphs, query workloads in internal format, html reports, translated queries, and query workload interfaces.
 
 You can find them in the directory *demo*, subdirectories *test*, *test-a*, *shop*, *shop-a*, *social*, *social-a*, *uniprot*, *uniprot-a*. 
