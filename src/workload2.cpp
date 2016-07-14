@@ -21,9 +21,6 @@ size_t NB_STARS = 0;
 size_t NB_STARCHAINS = 0;
 size_t NB_CYCLES = 0;
 
-size_t NB_CONSTANT = 0;
-size_t NB_LINEAR = 0;
-size_t NB_QUADRATIC = 0;
 
 namespace SELECTIVITY {
     vector<type> types = { ONEONE, NONE, ONEN, EQUALS, LESS, GREATER, LESS_GREATER, CROSS };
@@ -525,7 +522,6 @@ config::selectivity::type generate_random_selectivity(const config::workload & w
     if (wconf.selectivity.constant) {
         i++;
         if(i == n) {
-            NB_CONSTANT++;
             return config::selectivity::CONSTANT;
         }
     }
@@ -533,7 +529,6 @@ config::selectivity::type generate_random_selectivity(const config::workload & w
     if (wconf.selectivity.linear) {
         i++;
         if(i == n) {
-            NB_LINEAR++;
             return config::selectivity::LINEAR;
         }
     }
@@ -541,11 +536,9 @@ config::selectivity::type generate_random_selectivity(const config::workload & w
     if (wconf.selectivity.quadratic) {
         i++;
         if(i == n) {
-            NB_QUADRATIC++;
             return config::selectivity::QUADRATIC;
         }
     }
-    NB_LINEAR++;
     return config::selectivity::LINEAR;
 }
 
@@ -877,6 +870,10 @@ void generate_workload(const config::config & conf, workload::workload & wl, rep
 
     size_t size = 0;
     size_t c = 0;
+    size_t nb_arity_2 = 0;
+    size_t nb_constant = 0;
+    size_t nb_linear = 0;
+    size_t nb_quadratic = 0;
     
     for (const auto & wconf : conf.workloads) {
         size += wconf.size;
@@ -931,6 +928,17 @@ void generate_workload(const config::config & conf, workload::workload & wl, rep
             query.info.disjuncts.second = max_disjunct;
             query.info.length.first = min_length;
             query.info.length.second = max_length;
+
+            if (query.info.arity == 2) {
+                 nb_arity_2++;
+                 if (query.info.selectivity == config::selectivity::CONSTANT)
+                     nb_constant++;
+                 else if (query.info.selectivity == config::selectivity::LINEAR)
+                     nb_linear++;
+                 else
+                     nb_quadratic++;
+            }
+
             c++;
         }
     }
@@ -945,9 +953,10 @@ void generate_workload(const config::config & conf, workload::workload & wl, rep
     rep.nb_stars = NB_STARS;
     rep.nb_starchains =  NB_STARCHAINS;
     rep.nb_cycles = NB_CYCLES;
-    rep.nb_constant = NB_CONSTANT;
-    rep.nb_linear = NB_LINEAR;
-    rep.nb_quadratic = NB_QUADRATIC;
+    rep.nb_arity_2 = nb_arity_2;
+    rep.nb_constant = nb_constant;
+    rep.nb_linear = nb_linear;
+    rep.nb_quadratic = nb_quadratic;
 
     rep.percentage_of_stars = ((double) NUMBER_OF_STARS) / ((double) NUMBER_OF_DISJUNCTS);
 

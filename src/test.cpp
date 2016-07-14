@@ -132,9 +132,9 @@ void html_workload_report(config::config & conf, report::workload_report & rep, 
     stream << "constant: " << (wconf.selectivity.constant * 100) / seltotal << "%<br/>";
     stream << "linear: " << (wconf.selectivity.linear * 100) / seltotal << "%<br/>";
     stream << "quadratic: " << (wconf.selectivity.quadratic * 100) / seltotal << "%</td><td>";
-    stream << "constant: " << (rep.nb_constant * 100) / wconf.size << "%<br/>";
-    stream << "linear: " << (rep.nb_linear * 100) / wconf.size << "%<br/>";
-    stream << "quadratic: " << (rep.nb_quadratic * 100) / wconf.size << "%</td></tr>";
+    stream << "constant: " << (rep.nb_constant * 100) / rep.nb_arity_2 << "%<br/>";
+    stream << "linear: " << (rep.nb_linear * 100) / rep.nb_arity_2 << "%<br/>";
+    stream << "quadratic: " << (rep.nb_quadratic * 100) / rep.nb_arity_2 << "%</td></tr>";
     stream << "</table>\n";
     stream << "</body></html>\n";
 
