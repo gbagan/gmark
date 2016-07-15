@@ -31,6 +31,8 @@ public:
     size_t max_disjuncts;
     size_t min_length;
     size_t max_length;
+    size_t min_arity;
+    size_t max_arity;
     double percentage_of_stars;
     size_t nb_chains;
     size_t nb_stars;

@@ -16,7 +16,7 @@ public:
     int number;
     string input;
     config::selectivity::type selectivity;
-    int arity;
+    size_t arity;
     string dataset;
     double multiplicity;
     size_t conjunct;

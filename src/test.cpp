@@ -106,6 +106,9 @@ void html_workload_report(config::config & conf, report::workload_report & rep, 
     stream << "<body>\n";
     stream << "<table border=\"1\">\n";
     stream << "<tr><td>Number of queries</td><td width=\"600\">" << wconf.size << "</td><td width=\"600\">" << wconf.size << "</td></tr>\n";
+    stream << "<tr><td>Arity</td><td>" << wconf.arity.first << "-" << wconf.arity.second; 
+    stream << "</td><td>" << rep.min_arity << "-" << rep.max_arity;
+    stream << " (" << rep.nb_arity_2 << " queries are binary)</td></tr>\n";
     stream << "<tr><td>Number of conjuncts</td><td>" << wconf.conjuncts.first << "-" << wconf.conjuncts.second; 
     stream << "</td><td>" << rep.min_conjuncts << "-" << rep.max_conjuncts << "</td></tr>\n";
     stream << "<tr><td>Number of disjuncts</td><td>" << wconf.disjuncts.first << "-" << wconf.disjuncts.second; 

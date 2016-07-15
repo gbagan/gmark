@@ -874,6 +874,8 @@ void generate_workload(const config::config & conf, workload::workload & wl, rep
     size_t nb_constant = 0;
     size_t nb_linear = 0;
     size_t nb_quadratic = 0;
+    size_t min_arity = 100000000;
+    size_t max_arity = 0;
     
     for (const auto & wconf : conf.workloads) {
         size += wconf.size;
@@ -929,6 +931,11 @@ void generate_workload(const config::config & conf, workload::workload & wl, rep
             query.info.length.first = min_length;
             query.info.length.second = max_length;
 
+            if (query.info.arity < min_arity)
+                min_arity = query.info.arity;
+            if (query.info.arity > max_arity)
+                max_arity = query.info.arity;
+
             if (query.info.arity == 2) {
                  nb_arity_2++;
                  if (query.info.selectivity == config::selectivity::CONSTANT)
@@ -949,6 +956,8 @@ void generate_workload(const config::config & conf, workload::workload & wl, rep
     rep.max_disjuncts = MAX_DISJUNCTS;
     rep.min_length = MIN_LENGTH;
     rep.max_length = MAX_LENGTH;
+    rep.min_arity = min_arity;
+    rep.max_arity = max_arity;
     rep.nb_chains = NB_CHAINS;
     rep.nb_stars = NB_STARS;
     rep.nb_starchains =  NB_STARCHAINS;
