@@ -1,1 +1,1 @@
-MATCH (x0)<-[:plike]-()-[:pfriendOf]->()<-[:pactor]-(x1), (x0)<-[:ppurchaseFor]-()-[:ppurchaseFor]->()<-[:plike]-()<-[:pdirector]-(x2), (x0)<-[:plike]-()-[:psubscribes]->()<-[:ptrailer]-(x3), (x0)<-[:plike]-()<-[:pfriendOf]-()<-[:pdirector]-(x4) RETURN "true" LIMIT 1;
+MATCH (x0)<-[:ptag]-()-[:pcaption]->(x1), (x0)<-[:ptag]-()<-[:phasGenre]-()-[:pproducer]->(x2), (x0)<-[:ptag]-()-[:pkeywords]->()<-[:pcaption]-()-[:ptitle]->(x3) RETURN DISTINCT x0, x1;

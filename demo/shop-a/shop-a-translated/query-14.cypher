@@ -1,1 +1,1 @@
-MATCH (x0)-[:pauthor]->()-[:plike]->()<-[:plike]-()<-[:pauthor]-(x1), (x1)<-[:plike]-()<-[:pauthor]-()<-[:pincludes]-(x2), (x2)-[:pincludes|pincludes*]->(x3) RETURN "true" LIMIT 1;
+MATCH (x0)<-[:pnationality]-()<-[:pauthor]-()-[:planguage]->(x1), (x0)<-[:pnationality]-()-[:plike]->(x2), (x2)-[:phasReview|ppurchaseFor|peditor*]->(x1) RETURN DISTINCT x0, x1, x2;

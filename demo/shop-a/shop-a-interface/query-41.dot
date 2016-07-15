@@ -1,9 +1,11 @@
 digraph g {
-	x3 [fillcolor="yellow", style="filled," shape=circle, label="?x3"];
-	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
-	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
-	x2 [fillcolor="yellow", style="filled," shape=circle, label="?x2"];
-	x0 -> x1 [label="((performedIn-.hasGenre.type)+(location-.like.hasGenre.type)+(location-.author-.hasGenre.type))"];
-	x0 -> x2 [label="((performedIn-.caption.keywords-.language)+(location-.like.language)+(performedIn-.composer.description-.language))"];
-	x1 -> x3 [label="((performedIn-.homepage.language)+(performedIn-.composer.producer-.language))"];
+	x0 [shape=circle, label="?x0"];
+	x1 [shape=circle, label="?x1"];
+	x0 -> x1 [label="(((homepage.subscribes-.reviewer-.hasReview-)))*"];
+	x2 [shape=circle, label="?x2"];
+	x0 -> x2 [label="(((hasReview.hasReview-.editor.author-)+(hasReview.hasReview-.director.author-)))*"];
+	x3 [shape=circle, label="?x3"];
+	x0 -> x3 [label="(((editor.makesPurchase.purchaseFor)+(editor.editor-.purchaseFor-.purchaseFor)+(homepage.subscribes-.author-)))*"];
+	x4 [shape=circle, label="?x4"];
+	x0 -> x4 [label="(((editor.makesPurchase.purchaseFor)+(hasReview.hasReview-)+(homepage.homepage-.friendOf.author-)))*"];
 }

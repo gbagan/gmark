@@ -1,11 +1,10 @@
 digraph g {
 	x0 [shape=circle, label="?x0"];
 	x1 [shape=circle, label="?x1"];
-	x0 -> x1 [label="((PublishedIn-.AuthoredBy.AuthoredBy-)+(PublishedIn-.AuthoredBy.AuthoredBy-)+(PublishedIn-.PublishedIn.PublishedIn-))"];
+	x0 -> x1 [label="((EncodedOn-.Reference.AuthoredBy))"];
 	x2 [shape=circle, label="?x2"];
-	x1 -> x2 [label="((Reference-.Interacts.EncodedOn)+(Reference-.Interacts-.EncodedOn)+(Reference-.Interacts-.Interacts.EncodedOn))"];
+	x1 -> x2 [label="((AuthoredBy-.PublishedIn.PublishedIn-.AuthoredBy)+(AuthoredBy-.AuthoredBy.AuthoredBy-.AuthoredBy)+(AuthoredBy-.AuthoredBy.AuthoredBy-.AuthoredBy))"];
 	x3 [shape=circle, label="?x3"];
-	x2 -> x3 [label="((EncodedOn-.Reference.AuthoredBy)+(EncodedOn-.Reference.AuthoredBy)+(EncodedOn-.Interacts.Reference.AuthoredBy))"];
-	x4 [shape=circle, label="?x4"];
-	x3 -> x4 [label="((AuthoredBy-.Reference-.Reference.PublishedIn)+(AuthoredBy-.PublishedIn)+(AuthoredBy-.Reference-.Reference.PublishedIn))"];
+	x0 -> x3 [label="((EncodedOn-.HasKeyword)+(EncodedOn-.HasKeyword)+(EncodedOn-.HasKeyword))"];
+	x3 -> x2 [label="((HasKeyword-.Reference)+(HasKeyword-.Reference.AuthoredBy.AuthoredBy-))"];
 }

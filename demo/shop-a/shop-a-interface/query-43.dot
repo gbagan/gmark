@@ -1,11 +1,10 @@
 digraph g {
-	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
-	x2 [fillcolor="yellow", style="filled," shape=circle, label="?x2"];
 	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
-	x3 [fillcolor="yellow", style="filled," shape=circle, label="?x3"];
-	x0 -> x1 [label="((location-.gender)+(location-.gender)+(location-.gender))"];
-	x0 -> x2 [label="((performedIn-.like-.follows.gender))"];
-	x0 -> x3 [label="((performedIn-.like-.gender))"];
-	x4 [shape=circle, label="?x4"];
-	x0 -> x4 [label="((location-.gender))"];
+	x1 [shape=circle, label="?x1"];
+	x0 -> x1 [label="((type-.gender)+(type-.director-.actor.gender))"];
+	x2 [shape=circle, label="?x2"];
+	x1 -> x2 [label="((gender-.actor-.hasGenre.type)+(gender-.like.hasGenre.type)+(gender-.artist-.hasGenre.type))"];
+	x3 [shape=circle, label="?x3"];
+	x0 -> x3 [label="((type-.familyName.paymentAccepted-.contactPoint)+(type-.givenName.text-.author))"];
+	x3 -> x2 [label="((subscribes.subscribes-.nationality)+(friendOf-.nationality)+(jobTitle.paymentAccepted-.offers.editor))"];
 }

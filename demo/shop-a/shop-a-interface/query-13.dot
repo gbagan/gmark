@@ -1,11 +1,11 @@
 digraph g {
-	x0 [shape=circle, label="?x0"];
+	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
 	x1 [shape=circle, label="?x1"];
-	x0 -> x1 [label="(((homepage.homepage-)+(includes-.includes)))*"];
+	x0 -> x1 [label="((contentRating-.tag.tag-))"];
 	x2 [shape=circle, label="?x2"];
-	x1 -> x2 [label="((artist.homepage.homepage-)+(artist.makesPurchase.purchaseFor)+(artist.reviewer-.hasReview-))"];
+	x0 -> x2 [label="((opus-.text.description-.hasGenre)+(printPage-.tag.tag-))"];
 	x3 [shape=circle, label="?x3"];
-	x2 -> x3 [label="(((includes-.includes)+(purchaseFor-.purchaseFor)))*"];
+	x0 -> x3 [label="((contentRating-.hasGenre)+(hits-.homepage-.hasGenre))"];
 	x4 [shape=circle, label="?x4"];
-	x3 -> x4 [label="((homepage.subscribes-)+(purchaseFor-.purchaseFor.purchaseFor-.makesPurchase-)+(purchaseFor-.makesPurchase-))"];
+	x0 -> x4 [label="((serialNumber-.includes.hasGenre)+(contentRating-.hasGenre)+(telephone-.like.hasGenre))"];
 }

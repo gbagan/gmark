@@ -1,1 +1,1 @@
-MATCH (x0)<-[:plocation]-()-[:pgender]->(x1), (x0)<-[:pperformedIn]-()<-[:plike]-()-[:pfollows]->()-[:pgender]->(x2), (x0)<-[:pperformedIn]-()<-[:plike]-()-[:pgender]->(x3), (x0)<-[:plocation]-()-[:pgender]->(x4) RETURN DISTINCT x1, x2, x0, x3;
+MATCH (x0)<-[:ptype]-()-[:pgender]->(x1), (x1)<-[:pgender]-()<-[:pactor]-()-[:phasGenre]->()-[:ptype]->(x2), (x0)<-[:ptype]-()-[:pfamilyName]->()<-[:ppaymentAccepted]-()-[:pcontactPoint]->(x3), (x3)-[:psubscribes]->()<-[:psubscribes]-()-[:pnationality]->(x2) RETURN DISTINCT x0;

@@ -1,1 +1,1 @@
-MATCH (x0)<-[:pbirthday]-()<-[:pknows]-()-[:pemail]->()<-[:pname]-(x1), (x0)<-[:pcreationDate]-()-[:phasModerator]->()-[:pspeaks]->()<-[:pname]-(x2), (x0)<-[:pbirthday]-()<-[:pknows]-()-[:pspeaks]->()<-[:pname]-(x3) RETURN DISTINCT x0, x1, x2 UNION ;
+MATCH (x0)-[:pname*]->(x1), (x1)-[:pname|pname*]->(x2), (x0)-[:pname*]->(x3), (x3)-[:pname]->()<-[:pbrowserUsed]-()-[:pstudyAt]->(x2) RETURN DISTINCT x2, x1, x0;

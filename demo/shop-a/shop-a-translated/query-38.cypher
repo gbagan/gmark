@@ -1,1 +1,1 @@
-MATCH (x0)-[:pincludes*]->(x1), (x1)-[:pincludes|pincludes*]->(x2), (x2)-[:pincludes]->()<-[:plike]-()<-[:partist]-(x3), (x3)-[:partist]->()-[:phomepage]->(x4) RETURN DISTINCT x0, x4;
+MATCH (x0)<-[:pbirthDate]-()-[:plocation]->(x1), (x0)<-[:pvalidForm]-()-[:peligibleQuantity]->()<-[:popus]-()-[:pperformedIn]->(x2), (x1)<-[:pbirthDate]-()-[:plocation]->(x3) RETURN DISTINCT x0;

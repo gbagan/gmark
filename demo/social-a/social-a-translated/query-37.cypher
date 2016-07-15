@@ -1,1 +1,1 @@
-MATCH (x0)-[:pname|pname|planguage*]->(x1), (x1)-[:pname*]->(x2), (x2)-[:planguage|pcontent|plength*]->(x3), (x3)<-[:plocationIP]-()-[:plikes]->()-[:phasCreator]->()<-[:phasCreator]-(x4) RETURN DISTINCT x1, x2, x0 UNION ;
+MATCH (x0)-[:pname|pname*]->(x1), (x1)-[:pname|pname*]->(x2), (x0)-[:pname|pname|pname*]->(x3), (x3)-[:pname|pname|pname*]->(x2) RETURN DISTINCT x0 UNION ;

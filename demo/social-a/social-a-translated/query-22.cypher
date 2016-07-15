@@ -1,1 +1,1 @@
-MATCH (x0)-[:pname]->()<-[:pname]-()<-[:pisSubclassOf]-(x1), (x1)-[:pname|pname*]->(x2), (x0)-[:pname]->()<-[:pbrowserUsed]-(x3), (x2)-[:pname]->()<-[:pname]-()-[:pname]->()<-[:plocationIP]-(x4) RETURN "true" LIMIT 1 UNION ;
+MATCH (x0)-[:pname*]->(x1), (x0)-[:pname|pname*]->(x2), (x0)-[:pname*]->(x3), (x0)-[:pname|pname|pname*]->(x4) RETURN DISTINCT x1, x3, x2, x0 UNION ;

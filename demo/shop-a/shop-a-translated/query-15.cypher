@@ -1,1 +1,1 @@
-MATCH (x0)<-[:pgender]-()<-[:pfollows]-()-[:plike]->(x1), (x1)-[:pkeywords]->()<-[:pdescription]-()-[:plegalName]->()<-[:pfamilyName]-(x2), (x2)-[:previewer*]->(x3) RETURN DISTINCT x0, x3;
+MATCH (x0)<-[:pdatePublished]-()-[:pcontentRating]->()<-[:pcontentSize]-()-[:phomepage]->(x1), (x0)<-[:ppriceValidUntil]-()-[:pincludes]->()-[:phomepage]->(x2), (x0)<-[:pexpires]-()-[:phomepage]->(x3), (x0)<-[:ppurchaseDate]-()-[:ppurchaseFor]->()-[:pdescription]->()<-[:purl]-(x4) RETURN DISTINCT x0, x1;

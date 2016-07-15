@@ -1,1 +1,1 @@
-PREFIX : <http://example.org/gmark/> ASK {  {  ?x0 ((^:pPublishedIn/^:pReference/:pHasKeyword)) ?x1 . ?x0 ((^:pPublishedIn/^:pReference/:pHasKeyword)) ?x2 . ?x1 ((^:pPublishedIn/^:pReference/:pHasKeyword)|(^:pPublishedIn/^:pReference/^:pInteracts/:pHasKeyword)) ?x3 . } }
+PREFIX : <http://example.org/gmark/> SELECT DISTINCT ?x1 ?x2 ?x3 ?x0 WHERE {  {  ?x0 ((^:pOccursIn/:pReference/:pPublishedIn)|(^:pOccursIn/:pReference/:pPublishedIn)) ?x1 . ?x0 ((^:pOccursIn/:pOccursIn)|(^:pOccursIn/:pOccursIn)) ?x2 . ?x1 ((^:pOccursIn/:pOccursIn)) ?x3 . } }

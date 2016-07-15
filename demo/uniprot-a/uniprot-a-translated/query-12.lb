@@ -1,13 +1,11 @@
 BEGIN
-gmarkSubquery00(x, y) <- core:edge:edge(x1, EncodedOn, x0), core:edge:edge(x1, Interacts, x2), core:edge:edge(x3, Interacts, x2), x = x0, y = x3.
-gmarkSubquery01(x, y) <- core:edge:edge(x1, EncodedOn, x0), core:edge:edge(x2, Interacts, x1), x = x0, y = x2.
-gmarkSubquery01(x, y) <- core:edge:edge(x1, EncodedOn, x0), core:edge:edge(x2, Interacts, x1), core:edge:edge(x2, Interacts, x3), core:edge:edge(x3, Interacts, x4), x = x0, y = x4.
-gmarkSubquery01(x, y) <- core:edge:edge(x1, EncodedOn, x0), core:edge:edge(x1, Interacts, x2), core:edge:edge(x2, Interacts, x3), x = x0, y = x3.
-gmarkSubquery02(x, y) <- core:edge:edge(x1, EncodedOn, x0), core:edge:edge(x1, Interacts, x2), x = x0, y = x2.
-gmarkSubquery02(x, y) <- core:edge:edge(x1, EncodedOn, x0), core:edge:edge(x2, Interacts, x1), x = x0, y = x2.
-gmarkSubquery02(x, y) <- core:edge:edge(x1, EncodedOn, x0), core:edge:edge(x1, Interacts, x2), core:edge:edge(x3, Interacts, x2), x = x0, y = x3.
-gmarkSubquery03(x, y) <- core:edge:edge(x1, EncodedOn, x0), core:edge:edge(x2, Interacts, x1), core:edge:edge(x3, Interacts, x2), x = x0, y = x3.
-gmarkSubquery03(x, y) <- core:edge:edge(x1, EncodedOn, x0), core:edge:edge(x1, Interacts, x2), x = x0, y = x2.
-gmarkSubquery03(x, y) <- core:edge:edge(x1, EncodedOn, x0), core:edge:edge(x1, Interacts, x2), x = x0, y = x2.
-query(x0, x1) <- gmarkSubquery00(x0, x1), gmarkSubquery01(x0, x2), gmarkSubquery02(x0, x3), gmarkSubquery03(x0, x4).
+gmarkSubquery00(x, y) <- core:edge:edge(x1, Reference, x0), core:edge:edge(x1, HasKeyword, x2), core:edge:edge(x3, HasKeyword, x2), core:edge:edge(x3, OccursIn, x4), x = x0, y = x4.
+gmarkSubquery01(x, y) <- core:edge:edge(x1, Reference, x0), core:edge:edge(x2, Interacts, x1), core:edge:edge(x2, OccursIn, x3), x = x0, y = x3.
+gmarkSubquery01(x, y) <- core:edge:edge(x1, Reference, x0), core:edge:edge(x1, Interacts, x2), core:edge:edge(x3, Interacts, x2), core:edge:edge(x3, OccursIn, x4), x = x0, y = x4.
+gmarkSubquery02(x, y) <- core:edge:edge(x1, Reference, x0), core:edge:edge(x1, Interacts, x2), core:edge:edge(x2, OccursIn, x3), x = x0, y = x3.
+gmarkSubquery02(x, y) <- core:edge:edge(x1, Reference, x0), core:edge:edge(x1, OccursIn, x2), x = x0, y = x2.
+gmarkSubquery03(x, y) <- core:edge:edge(x1, Reference, x0), core:edge:edge(x1, OccursIn, x2), core:edge:edge(x3, OccursIn, x2), core:edge:edge(x3, OccursIn, x4), x = x0, y = x4.
+gmarkSubquery03(x, y) <- core:edge:edge(x1, Reference, x0), core:edge:edge(x1, Interacts, x2), core:edge:edge(x3, Interacts, x2), core:edge:edge(x3, OccursIn, x4), x = x0, y = x4.
+gmarkSubquery03(x, y) <- core:edge:edge(x1, Reference, x0), core:edge:edge(x1, OccursIn, x2), x = x0, y = x2.
+query(x0) <- gmarkSubquery00(x0, x1), gmarkSubquery01(x0, x2), gmarkSubquery02(x0, x3), gmarkSubquery03(x0, x4).
 END

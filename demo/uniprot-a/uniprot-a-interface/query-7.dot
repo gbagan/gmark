@@ -1,11 +1,11 @@
 digraph g {
-	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
-	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
-	x0 -> x1 [label="((Reference-.Interacts-)+(Reference-.Interacts-.Interacts))"];
+	x0 [shape=circle, label="?x0"];
+	x1 [shape=circle, label="?x1"];
+	x0 -> x1 [label="(((Interacts.Interacts.Interacts-)+(Interacts.Interacts.Interacts.Interacts)+(Interacts-.Interacts-)))*"];
 	x2 [shape=circle, label="?x2"];
-	x0 -> x2 [label="((Reference-.Interacts-.Interacts))"];
+	x1 -> x2 [label="((Reference.Reference-))"];
 	x3 [shape=circle, label="?x3"];
-	x0 -> x3 [label="((Reference-.Interacts-.Interacts.Interacts)+(Reference-.Interacts)+(Reference-.Interacts.Interacts))"];
+	x2 -> x3 [label="((Interacts-.Interacts.Interacts)+(Interacts.Interacts-)+(Interacts-.Interacts-))"];
 	x4 [shape=circle, label="?x4"];
-	x0 -> x4 [label="((Reference-.Interacts-)+(Reference-.Interacts-))"];
+	x3 -> x4 [label="((Interacts.OccursIn.OccursIn-.Interacts-))"];
 }

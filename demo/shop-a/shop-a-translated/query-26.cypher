@@ -1,1 +1,1 @@
-MATCH (x0)-[:pincludes]->()-[:pauthor]->()<-[:pauthor]-(x1), (x1)-[:phomepage*]->(x2), (x0)-[:pincludes]->()-[:phomepage]->()<-[:phomepage]-(x3), (x2)-[:pincludes]->()-[:peditor]->()-[:psubscribes]->()<-[:phomepage]-(x4) RETURN DISTINCT x0, x2, x3, x1;
+MATCH (x0)-[:pincludes]->()-[:pperformer]->()<-[:pdescription]-(x1), (x1)-[:pconductor|phomepage|phasReview*]->(x2), (x0)-[:pincludes*]->(x3), (x3)-[:pincludes|pincludes|pincludes*]->(x2) RETURN DISTINCT x0;

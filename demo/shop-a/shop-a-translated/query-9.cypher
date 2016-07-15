@@ -1,1 +1,1 @@
-MATCH (x0)-[:pincludes|pincludes|pincludes*]->(x1), (x0)-[:pincludes*]->(x2), (x0)-[:pincludes*]->(x3), (x0)-[:pincludes|pincludes*]->(x4) RETURN DISTINCT x0, x1;
+MATCH (x0)-[:pauthor|phomepage|pauthor*]->(x1), (x1)-[:pauthor|peditor|peditor*]->(x2), (x0)-[:ptext]->()<-[:ptext]-()-[:pexpires]->()<-[:pvalidThrough]-(x3), (x3)-[:pincludes|pincludes|pincludes*]->(x2) RETURN DISTINCT x3, x0, x2, x1;

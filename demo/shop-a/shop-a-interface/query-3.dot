@@ -1,11 +1,8 @@
 digraph g {
-	x0 [shape=circle, label="?x0"];
-	x1 [shape=circle, label="?x1"];
-	x0 -> x1 [label="((like.homepage.homepage-)+(friendOf-.friendOf.follows.like))"];
-	x2 [shape=circle, label="?x2"];
-	x1 -> x2 [label="(((includes-.includes.includes-.includes)))*"];
-	x3 [shape=circle, label="?x3"];
-	x0 -> x3 [label="((editor-.editor.friendOf)+(subscribes.subscribes-.friendOf)+(subscribes.subscribes-.friendOf-))"];
-	x4 [shape=circle, label="?x4"];
-	x2 -> x4 [label="((actor-.actor.subscribes.subscribes-))"];
+	x2 [fillcolor="yellow", style="filled," shape=circle, label="?x2"];
+	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
+	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
+	x0 -> x1 [label="((age-.editor-.like-.type)+(age-.type))"];
+	x0 -> x2 [label="((age-.email.email-.friendOf-)+(age-.follows-)+(age-.follows))"];
+	x2 -> x1 [label="((homepage.language)+(editor-.homepage.language))"];
 }

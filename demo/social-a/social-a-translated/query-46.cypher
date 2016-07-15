@@ -1,1 +1,1 @@
-MATCH (x0)<-[:preplyOf]-()-[:pcontent]->()<-[:plocationIP]-()<-[:phasModerator]-(x1), (x1)-[:pcontainerOf]->()-[:pcontent]->()<-[:pcontent]-(x2), (x2)-[:pcontent|pcontent|pcontent*]->(x3), (x3)-[:pcontent|pcontent|pcontent*]->(x4) RETURN DISTINCT x3, x2, x0, x1 UNION  UNION  UNION ;
+MATCH (x0)-[:planguage|planguage|planguage*]->(x1), (x0)-[:planguage|planguage|planguage*]->(x2), (x1)-[:planguage|planguage|planguage*]->(x3) RETURN DISTINCT x0, x1;

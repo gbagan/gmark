@@ -1,1 +1,1 @@
-MATCH (x0)<-[:pheldIn]-()<-[:ppublishedIn]-()-[:ppublishedIn]->()-[:pheldIn]->(x1), (x0)<-[:pheldIn]-()-[:pheldIn]->(x2), (x0)<-[:pheldIn]-()-[:pheldIn]->(x3) RETURN "true" LIMIT 1;
+MATCH (x0)-[:pauthors]->()-[:pextendedTo]->()<-[:pextendedTo]-()-[:ppublishedIn]->(x1), (x0)-[:pauthors]->()-[:ppublishedIn]->()<-[:ppublishedIn]-()-[:ppublishedIn]->(x2), (x2)<-[:ppublishedIn]-()-[:pextendedTo]->()<-[:pextendedTo]-()<-[:pauthors]-(x1) RETURN DISTINCT x0;

@@ -1,11 +1,9 @@
 digraph g {
 	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
-	x2 [fillcolor="yellow", style="filled," shape=circle, label="?x2"];
-	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
 	x3 [fillcolor="yellow", style="filled," shape=circle, label="?x3"];
-	x0 -> x1 [label="(((homepage.trailer-.hasReview.hasReview-)+(includes-.includes.includes-.includes)+(homepage.homepage-.homepage.homepage-)))*"];
-	x0 -> x2 [label="(((includes-.includes.includes-.includes)+(purchaseFor-.purchaseFor)+(homepage.homepage-)))*"];
-	x0 -> x3 [label="(((homepage.homepage-.subscribes.homepage-)+(homepage.homepage-.homepage.homepage-)+(homepage.trailer-.trailer.homepage-)))*"];
-	x4 [shape=circle, label="?x4"];
-	x0 -> x4 [label="(((purchaseFor-.purchaseFor.purchaseFor-.purchaseFor)))*"];
+	x1 [shape=circle, label="?x1"];
+	x0 -> x1 [label="(((editor.editor-.hasReview.hasReview-)+(author.editor-)))*"];
+	x2 [shape=circle, label="?x2"];
+	x1 -> x2 [label="((purchaseFor-.purchaseFor.homepage.homepage-)+(hasReview.hasReview-)+(author.subscribes.homepage-))"];
+	x2 -> x3 [label="(((hasReview.hasReview-.purchaseFor-.purchaseFor)+(homepage.homepage-.hasReview.hasReview-)+(hasReview.hasReview-)))*"];
 }

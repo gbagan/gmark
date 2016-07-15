@@ -1,1 +1,1 @@
-MATCH (x0)<-[:pisLocatedIn]-()-[:phasInterest]->()-[:phasType]->(x1), (x0)<-[:pisLocatedIn]-()-[:phasInterest]->()-[:phasType]->(x2), (x0)<-[:pisLocatedIn]-()<-[:pknows]-()-[:phasInterest]->()-[:phasType]->(x3) RETURN DISTINCT x0, x1 UNION ;
+MATCH (x0)<-[:phasTag]-()<-[:pisSubclassOf]-()-[:planguage]->(x1), (x0)-[:pname]->()<-[:pcontent]-()-[:pimageFile]->()<-[:pname]-(x2), (x2)-[:pisLocatedIn]->()<-[:pisLocatedIn]-()-[:pisLocatedIn]->(x1) RETURN DISTINCT x0;

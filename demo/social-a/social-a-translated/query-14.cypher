@@ -1,1 +1,1 @@
-MATCH (x0)-[:pname*]->(x1), (x1)-[:pname]->()<-[:plength]-()-[:phasMember]->()-[:pemail]->(x2), (x2)-[:pname|plength|pname*]->(x3) RETURN DISTINCT x2, x0, x1;
+MATCH (x0)-[:pname|pname*]->(x1), (x0)-[:pname*]->(x2), (x0)-[:pname|pname|pname*]->(x3), (x0)-[:pname|pname|pname*]->(x4) RETURN DISTINCT x1, x2, x0 UNION  UNION ;

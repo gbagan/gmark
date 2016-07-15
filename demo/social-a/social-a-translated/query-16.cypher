@@ -1,1 +1,1 @@
-MATCH (x0)-[:pimageFile|planguage*]->(x1), (x1)-[:pcontent*]->(x2), (x2)<-[:pcontainerOf]-()-[:phasMember]->()-[:plocationIP]->(x3) RETURN DISTINCT x0, x3, x2, x1;
+MATCH (x0)<-[:pcreationDate]-()-[:pbirthday]->()<-[:pcreationDate]-(x1), (x0)<-[:pcreationDate]-()-[:pcreationDate]->()<-[:pcreationDate]-(x2), (x0)<-[:pcreationDate]-()-[:pbrowserUsed]->()<-[:plength]-(x3), (x0)<-[:pcreationDate]-()-[:plocationIP]->()<-[:plength]-(x4) RETURN DISTINCT x0;

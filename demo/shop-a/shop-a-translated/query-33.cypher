@@ -1,1 +1,1 @@
-MATCH (x0)<-[:ptype]-()-[:pfollows]->()-[:pgender]->(x1), (x1)<-[:pgender]-()-[:pbirthDate]->(x2), (x2)<-[:pvalidForm]-()-[:pprice]->()<-[:pcontentSize]-()-[:ptag]->(x3), (x3)<-[:ptag]-()-[:prelease]->(x4) RETURN "true" LIMIT 1;
+MATCH (x0)<-[:ptype]-()<-[:pfriendOf]-()-[:ptype]->(x1), (x0)<-[:ptype]-()-[:ptelephone]->()<-[:pprintColumn]-()-[:phasGenre]->(x2), (x1)<-[:ptype]-()-[:pjobTitle]->()<-[:ptext]-()-[:phasGenre]->(x3) RETURN DISTINCT x0;

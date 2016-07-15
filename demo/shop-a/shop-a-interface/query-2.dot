@@ -1,11 +1,9 @@
 digraph g {
-	x0 [shape=circle, label="?x0"];
+	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
+	x3 [fillcolor="yellow", style="filled," shape=circle, label="?x3"];
 	x1 [shape=circle, label="?x1"];
-	x0 -> x1 [label="(((purchaseFor.purchaseFor-)))*"];
+	x0 -> x1 [label="(((contactPoint.employee-)))*"];
 	x2 [shape=circle, label="?x2"];
-	x0 -> x2 [label="(((purchaseFor.purchaseFor-)))*"];
-	x3 [shape=circle, label="?x3"];
-	x0 -> x3 [label="(((makesPurchase-.makesPurchase)+(purchaseFor.editor.makesPurchase)+(purchaseFor.purchaseFor-)))*"];
-	x4 [shape=circle, label="?x4"];
-	x0 -> x4 [label="(((purchaseFor.homepage.homepage-.makesPurchase)))*"];
+	x1 -> x2 [label="((contactPoint.friendOf.like))"];
+	x2 -> x3 [label="(((homepage.homepage-.author-)))*"];
 }

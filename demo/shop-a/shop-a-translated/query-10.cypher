@@ -1,1 +1,1 @@
-MATCH (x0)-[:pcontentRating]->()<-[:puserId]-()<-[:partist]-(x1), (x1)-[:partist]->()-[:plike]->(x2), (x2)-[:peditor]->()<-[:partist]-()<-[:ppurchaseFor]-(x3) RETURN DISTINCT x0;
+MATCH (x0)<-[:page]-()-[:pfollows]->()-[:puserId]->()<-[:pisbn]-(x1), (x1)-[:pauthor*]->(x2), (x0)<-[:page]-()-[:pgivenName]->()<-[:pkeywords]-(x3), (x3)<-[:plike]-()-[:pfriendOf]->()-[:pmakesPurchase]->()-[:pprice]->(x2) RETURN "true" LIMIT 1;

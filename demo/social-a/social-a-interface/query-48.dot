@@ -1,9 +1,10 @@
 digraph g {
 	x0 [shape=circle, label="?x0"];
 	x1 [shape=circle, label="?x1"];
-	x0 -> x1 [label="(((gender.browserUsed-.locationIP.browserUsed-)+(name.gender-.browserUsed.gender-)+(gender.locationIP-.locationIP.locationIP-)))*"];
+	x0 -> x1 [label="((language-.isSubclassOf.browserUsed.name-))"];
 	x2 [shape=circle, label="?x2"];
-	x0 -> x2 [label="(((gender.name-)+(creationDate.birthday-.locationIP.browserUsed-)+(locationIP.gender-.browserUsed.browserUsed-)))*"];
+	x1 -> x2 [label="((name.language-.containerOf-.creationDate)+(name.language-.containerOf-.creationDate)+(name.speaks-.birthday))"];
 	x3 [shape=circle, label="?x3"];
-	x1 -> x3 [label="(((birthday.creationDate-)+(name.imageFile-.content.gender-)))*"];
+	x0 -> x3 [label="((language-.content.name-))"];
+	x3 -> x2 [label="((name.speaks-.locationIP.locationIP-)+(isLocatedIn.name.imageFile-.isSubclassOf))"];
 }

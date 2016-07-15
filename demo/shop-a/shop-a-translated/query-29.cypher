@@ -1,1 +1,1 @@
-MATCH (x0)-[:pcontentSize]->()<-[:pmovement]-()-[:pperformer]->()<-[:pjobTitle]-(x1), (x0)-[:pkeywords]->()<-[:purl]-(x2), (x1)-[:pdescription]->()<-[:pdescription]-()-[:pcaption]->()<-[:purl]-(x3) RETURN DISTINCT x0, x1;
+MATCH (x0)-[:ppurchaseFor*]->(x1), (x0)-[:pdescription|pkeywords*]->(x2), (x1)-[:pdescription|pcaption|pdescription*]->(x3) RETURN DISTINCT x0, x1, x2;

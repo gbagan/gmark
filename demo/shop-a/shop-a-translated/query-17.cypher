@@ -1,1 +1,1 @@
-MATCH (x0)<-[:pcontentSize]-()-[:ptag]->(x1), (x0)<-[:ptelephone]-()-[:ptelephone]->()<-[:pcontentRating]-()-[:ptag]->(x2), (x0)<-[:pcontentRating]-()-[:ptag]->(x3) RETURN "true" LIMIT 1;
+MATCH (x0)-[:phasReview*]->(x1), (x0)-[:peditor*]->(x2), (x0)-[:phomepage|pauthor|peditor*]->(x3) RETURN DISTINCT x0, x2, x1;

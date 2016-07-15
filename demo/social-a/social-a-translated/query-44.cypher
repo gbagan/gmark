@@ -1,1 +1,1 @@
-MATCH (x0)-[:pname]->()<-[:pname]-()-[:pisPartOf]->(x1), (x1)-[:pname]->()<-[:pname]-(x2), (x2)-[:pname|pname|pname*]->(x3), (x3)-[:pname|pname*]->(x4) RETURN DISTINCT x2, x1, x0;
+MATCH (x0)-[:pname|pname|pname*]->(x1), (x0)-[:phasInterest*]->(x2), (x1)-[:phasInterest|phasInterest|phasInterest*]->(x3) RETURN DISTINCT x0, x1, x2, x3;

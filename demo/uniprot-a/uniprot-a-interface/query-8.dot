@@ -1,11 +1,10 @@
 digraph g {
 	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
-	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
-	x0 -> x1 [label="((Reference-.Reference.AuthoredBy)+(Reference-.Reference.AuthoredBy)+(Reference-.Reference.AuthoredBy))"];
-	x2 [shape=circle, label="?x2"];
-	x0 -> x2 [label="((Reference-.Reference.AuthoredBy)+(Reference-.Reference.AuthoredBy)+(Reference-.Reference.AuthoredBy))"];
+	x2 [fillcolor="yellow", style="filled," shape=circle, label="?x2"];
+	x1 [shape=circle, label="?x1"];
+	x0 -> x1 [label="((OccursIn-.HasKeyword)+(OccursIn-.HasKeyword.HasKeyword-.HasKeyword))"];
+	x1 -> x2 [label="((HasKeyword-.Interacts-.OccursIn)+(HasKeyword-.Interacts-.OccursIn))"];
 	x3 [shape=circle, label="?x3"];
-	x0 -> x3 [label="((Reference-.Reference.AuthoredBy))"];
-	x4 [shape=circle, label="?x4"];
-	x0 -> x4 [label="((Reference-.Interacts-.Reference.AuthoredBy)+(Reference-.Reference.AuthoredBy))"];
+	x0 -> x3 [label="((OccursIn-.Reference.PublishedIn)+(OccursIn-.Interacts-.Reference.PublishedIn))"];
+	x3 -> x2 [label="((PublishedIn-.Reference-.Interacts-.HasKeyword))"];
 }

@@ -1,1 +1,1 @@
-MATCH (x0)-[:pcontent]->()<-[:pbrowserUsed]-()-[:plocationIP]->()<-[:pname]-(x1), (x1)-[:pname*]->(x2), (x2)<-[:pstudyAt]-()-[:phasInterest]->()-[:phasType]->(x3) RETURN DISTINCT x1, x2, x0;
+MATCH (x0)-[:pisLocatedIn]->()-[:pname]->()<-[:pname]-(x1), (x1)-[:pname]->()<-[:pname]-()-[:pname]->(x2), (x2)<-[:pname]-()-[:pgender]->()<-[:pname]-(x3), (x3)-[:pname|pname|pname*]->(x4) RETURN "true" LIMIT 1;

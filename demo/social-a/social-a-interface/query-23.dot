@@ -1,9 +1,8 @@
 digraph g {
 	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
-	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
-	x0 -> x1 [label="((isLocatedIn-.hasInterest.hasType)+(isLocatedIn-.hasInterest.hasType))"];
+	x1 [shape=circle, label="?x1"];
+	x0 -> x1 [label="((hasTag-.isSubclassOf-.language)+(hasInterest-.hasCreator-.replyOf-.language)+(hasTag-.replyOf-.language))"];
 	x2 [shape=circle, label="?x2"];
-	x0 -> x2 [label="((isLocatedIn-.hasInterest.hasType)+(isLocatedIn-.hasInterest.hasType)+(isLocatedIn-.hasInterest.hasType))"];
-	x3 [shape=circle, label="?x3"];
-	x0 -> x3 [label="((isLocatedIn-.knows-.hasInterest.hasType)+(isLocatedIn-.hasCreator-.hasTag.hasType))"];
+	x0 -> x2 [label="((name.content-.imageFile.name-)+(name.name-.name.name-)+(name.browserUsed-.browserUsed.name-))"];
+	x2 -> x1 [label="((isLocatedIn.isLocatedIn-.isLocatedIn)+(isLocatedIn.isLocatedIn-.email.name-))"];
 }

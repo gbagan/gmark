@@ -1,9 +1,11 @@
 digraph g {
+	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
+	x2 [fillcolor="yellow", style="filled," shape=circle, label="?x2"];
 	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
 	x3 [fillcolor="yellow", style="filled," shape=circle, label="?x3"];
-	x1 [shape=circle, label="?x1"];
-	x0 -> x1 [label="((PublishedIn-.Reference-.Interacts))"];
-	x2 [shape=circle, label="?x2"];
-	x1 -> x2 [label="((Interacts.Reference.PublishedIn)+(Reference.PublishedIn)+(Interacts.Reference.PublishedIn))"];
-	x2 -> x3 [label="((PublishedIn-.Reference-.OccursIn))"];
+	x0 -> x1 [label="((PublishedIn-.Reference-.Reference.PublishedIn)+(PublishedIn-.Reference-.Reference.PublishedIn)+(PublishedIn-.PublishedIn))"];
+	x1 -> x2 [label="((PublishedIn-.Reference-.EncodedOn)+(PublishedIn-.Reference-.Interacts.EncodedOn)+(PublishedIn-.Reference-.EncodedOn))"];
+	x2 -> x3 [label="((EncodedOn-.Reference)+(EncodedOn-.Reference)+(EncodedOn-.Interacts.Reference))"];
+	x4 [shape=circle, label="?x4"];
+	x3 -> x4 [label="((Reference-.Interacts.Interacts.EncodedOn)+(Reference-.Interacts-.EncodedOn))"];
 }

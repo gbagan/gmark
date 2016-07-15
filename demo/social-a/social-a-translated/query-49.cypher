@@ -1,1 +1,1 @@
-MATCH (x0)<-[:pisSubclassOf]-()-[:pcontent]->()<-[:pname]-(x1), (x1)<-[:pisLocatedIn]-()-[:pstudyAt]->(x2), (x2)-[:pname]->()<-[:pbrowserUsed]-()-[:pemail]->(x3) RETURN "true" LIMIT 1;
+MATCH (x0)-[:pcreationDate|plength|plength*]->(x1), (x0)-[:plength|plength|plength*]->(x2), (x0)-[:plength|plength*]->(x3) RETURN "true" LIMIT 1 UNION  UNION  UNION ;

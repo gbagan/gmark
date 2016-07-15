@@ -1,9 +1,10 @@
 digraph g {
-	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
+	x0 [shape=circle, label="?x0"];
 	x1 [shape=circle, label="?x1"];
-	x0 -> x1 [label="((contentRating.userId-.artist-)+(isbn.eligibleQuantity-.includes))"];
+	x0 -> x1 [label="((age-.follows.userId.isbn-))"];
 	x2 [shape=circle, label="?x2"];
-	x1 -> x2 [label="((artist.like)+(artist.friendOf.author-)+(artist.author-))"];
+	x1 -> x2 [label="(((author.friendOf-.author-)))*"];
 	x3 [shape=circle, label="?x3"];
-	x2 -> x3 [label="((editor.artist-.purchaseFor-)+(like-.friendOf.makesPurchase))"];
+	x0 -> x3 [label="((age-.givenName.keywords-)+(age-.makesPurchase.purchaseFor)+(age-.jobTitle.caption-))"];
+	x3 -> x2 [label="((like-.friendOf.makesPurchase.price)+(like-.userId.hits-.hits)+(text.award-.contentSize))"];
 }

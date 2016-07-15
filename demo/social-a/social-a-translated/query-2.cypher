@@ -1,1 +1,1 @@
-MATCH (x0)<-[:phasMember]-()-[:pcontainerOf]->(x1), (x0)<-[:pknows]-()-[:pemail]->()<-[:pcontent]-(x2), (x0)-[:plikes]->()<-[:pisSubclassOf]-(x3), (x0)-[:pname]->()<-[:pemail]-()-[:pspeaks]->()<-[:pcontent]-(x4) RETURN DISTINCT x2, x0, x1 UNION  UNION ;
+MATCH (x0)-[:pname|pname*]->(x1), (x1)-[:pname*]->(x2), (x2)-[:pname|pname*]->(x3), (x3)-[:pname|pname*]->(x4) RETURN DISTINCT x0, x4;

@@ -1,1 +1,1 @@
-PREFIX : <http://example.org/gmark/> ASK {  {  ?x0 ((^:pheldIn/^:ppublishedIn/:ppublishedIn)|(^:pheldIn/:pheldIn/^:pheldIn)|(^:pheldIn/:pheldIn/^:pheldIn)) ?x1 . ?x1 ((^:ppublishedIn/:ppublishedIn/:pheldIn)) ?x2 . ?x2 ((^:pheldIn/^:ppublishedIn/:ppublishedIn/:pheldIn)) ?x3 . } }
+PREFIX : <http://example.org/gmark/> SELECT DISTINCT ?x0 WHERE {  {  ?x0 ((:ppublishedIn/^:ppublishedIn)) ?x1 . ?x1 ((:pextendedTo/^:pextendedTo/:ppublishedIn/:pheldIn)|(:ppublishedIn/:pheldIn)) ?x2 . ?x0 ((:ppublishedIn/^:ppublishedIn)) ?x3 . ?x2 ((:ppublishedIn/^:ppublishedIn)) ?x4 . } }

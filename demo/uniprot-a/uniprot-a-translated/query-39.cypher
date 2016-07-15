@@ -1,1 +1,1 @@
-MATCH (x0)-[:pPublishedIn]->()<-[:pPublishedIn]-()-[:pPublishedIn]->(x1), (x1)<-[:pPublishedIn]-()<-[:pReference]-()-[:pInteracts]->(x2), (x2)<-[:pInteracts]-()<-[:pInteracts]-()-[:pReference]->(x3) RETURN "true" LIMIT 1;
+MATCH (x0)<-[:pHasKeyword]-()-[:pInteracts]->()-[:pEncodedOn]->(x1), (x0)<-[:pHasKeyword]-()<-[:pInteracts]-()-[:pEncodedOn]->(x2), (x0)<-[:pHasKeyword]-()<-[:pInteracts]-()-[:pInteracts]->()-[:pEncodedOn]->(x3) RETURN DISTINCT x1, x0, x2, x3;

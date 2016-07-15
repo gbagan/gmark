@@ -1,1 +1,1 @@
-MATCH (x0)<-[:ptext]-()-[:partist]->()-[:plocation]->(x1), (x0)<-[:ptext]-()-[:ptag]->(x2), (x1)<-[:pcomposer]-()-[:ptag]->(x3) RETURN DISTINCT x0, x2, x1;
+MATCH (x0)-[:ppurchaseFor]->()-[:pproducer]->()<-[:pkeywords]-()-[:phasReview]->(x1), (x1)-[:previewer|previewer*]->(x2), (x2)-[:previewer]->()-[:plike]->()<-[:plike]-()-[:phomepage]->(x3) RETURN "true" LIMIT 1;

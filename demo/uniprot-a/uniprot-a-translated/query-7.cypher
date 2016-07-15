@@ -1,1 +1,1 @@
-MATCH (x0)<-[:pReference]-()<-[:pInteracts]-(x1), (x0)<-[:pReference]-()<-[:pInteracts]-()-[:pInteracts]->(x2), (x0)<-[:pReference]-()<-[:pInteracts]-()-[:pInteracts]->()-[:pInteracts]->(x3), (x0)<-[:pReference]-()<-[:pInteracts]-(x4) RETURN DISTINCT x0, x1;
+MATCH (x0)-[:pInteracts|pInteracts|pInteracts*]->(x1), (x1)-[:pReference]->()<-[:pReference]-(x2), (x2)<-[:pInteracts]-()-[:pInteracts]->()-[:pInteracts]->(x3), (x3)-[:pInteracts]->()-[:pOccursIn]->()<-[:pOccursIn]-()<-[:pInteracts]-(x4) RETURN "true" LIMIT 1;

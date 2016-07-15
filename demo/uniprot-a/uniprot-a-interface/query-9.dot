@@ -1,9 +1,8 @@
 digraph g {
-	x0 [shape=circle, label="?x0"];
-	x1 [shape=circle, label="?x1"];
-	x0 -> x1 [label="((AuthoredBy-.AuthoredBy.AuthoredBy-.AuthoredBy)+(AuthoredBy-.AuthoredBy.AuthoredBy-.AuthoredBy))"];
-	x2 [shape=circle, label="?x2"];
-	x0 -> x2 [label="((AuthoredBy-.AuthoredBy.AuthoredBy-)+(AuthoredBy-.AuthoredBy.AuthoredBy-)+(AuthoredBy-.PublishedIn.PublishedIn-))"];
-	x3 [shape=circle, label="?x3"];
-	x1 -> x3 [label="((AuthoredBy-.PublishedIn.PublishedIn-)+(AuthoredBy-.PublishedIn.PublishedIn-)+(AuthoredBy-.AuthoredBy.AuthoredBy-))"];
+	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
+	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
+	x2 [fillcolor="yellow", style="filled," shape=circle, label="?x2"];
+	x0 -> x1 [label="((PublishedIn.PublishedIn-.Reference-.EncodedOn))"];
+	x0 -> x2 [label="((Reference-.HasKeyword.HasKeyword-.EncodedOn)+(Reference-.Reference.Reference-.EncodedOn)+(Reference-.HasKeyword.HasKeyword-.EncodedOn))"];
+	x2 -> x1 [label="((EncodedOn-.Reference))"];
 }

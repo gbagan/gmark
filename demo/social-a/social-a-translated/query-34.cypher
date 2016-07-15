@@ -1,1 +1,1 @@
-MATCH (x0)-[:pisLocatedIn]->()-[:pname]->()<-[:pcontent]-()-[:planguage]->(x1), (x0)-[:pisLocatedIn]->()-[:pname]->()<-[:pcontent]-()-[:planguage]->(x2), (x0)-[:pisLocatedIn]->()-[:pname]->()<-[:pcontent]-()-[:planguage]->(x3) RETURN DISTINCT x0, x1;
+MATCH (x0)<-[:pbrowserUsed]-()<-[:pisSubclassOf]-(x1), (x0)<-[:pgender]-()-[:pname]->()<-[:pname]-(x2), (x1)<-[:pgender]-()-[:pbrowserUsed]->()<-[:pname]-(x3) RETURN DISTINCT x0, x1;

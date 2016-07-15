@@ -1,1 +1,1 @@
-MATCH (x0)-[:pcontent|pcontent|pcontent*]->(x1), (x0)-[:pcontent|pcontent*]->(x2), (x1)-[:planguage|pcontent*]->(x3) RETURN "true" LIMIT 1;
+MATCH (x0)-[:pisSubclassOf]->()-[:pname]->()<-[:planguage]-()-[:pcontent]->(x1), (x1)-[:plength|pcontent*]->(x2), (x0)<-[:phasType]-()-[:phasType]->(x3), (x3)<-[:pisSubclassOf]-()-[:pname]->()<-[:plocationIP]-()-[:pcreationDate]->(x2) RETURN DISTINCT x2, x0, x1;

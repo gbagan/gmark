@@ -1,9 +1,18 @@
 BEGIN
-gmarkSubquery00(x, y) <- core:edge:edge(x1, isPartOf, x0), core:edge:edge(x2, isLocatedIn, x1), core:edge:edge(x2, gender, x3), x = x0, y = x3.
-gmarkSubquery00(x, y) <- core:edge:edge(x0, name, x1), core:edge:edge(x2, browserUsed, x1), core:edge:edge(x2, speaks, x3), x = x0, y = x3.
-gmarkSubquery00(x, y) <- core:edge:edge(x1, isLocatedIn, x0), core:edge:edge(x1, name, x2), x = x0, y = x2.
-gmarkSubquery01(x, y) <- core:edge:edge(x0, name, x1), core:edge:edge(x2, locationIP, x1), x = x0, y = x2.
-gmarkSubquery01(x, y) <- core:edge:edge(x0, name, x1), core:edge:edge(x2, browserUsed, x1), x = x0, y = x2.
-gmarkSubquery02(x, y) <- core:edge:edge(x0, name, x1), core:edge:edge(x2, name, x1), core:edge:edge(x2, name, x3), core:edge:edge(x4, locationIP, x3), x = x0, y = x4.
-query(x0) <- gmarkSubquery00(x0, x1), gmarkSubquery01(x0, x2), gmarkSubquery02(x1, x3).
+gmarkSubquery00(x, y) <- core:edge:edge(x0, name, x1), core:edge:edge(x2, locationIP, x1), core:edge:edge(x2, locationIP, x3), core:edge:edge(x4, browserUsed, x3), x = x0, y = x4.
+gmarkSubquery00(x, x) <- core:edge:edge(x, r, y).
+gmarkSubquery00(y, y) <- core:edge:edge(x, r, y).
+gmarkSubquery00(x, y) <- gmarkSubquery00(x, z), gmarkSubquery00(z, y).
+gmarkSubquery01(x, y) <- core:edge:edge(x0, browserUsed, x1), core:edge:edge(x2, browserUsed, x1), core:edge:edge(x2, locationIP, x3), core:edge:edge(x4, browserUsed, x3), x = x0, y = x4.
+gmarkSubquery01(x, y) <- core:edge:edge(x0, locationIP, x1), core:edge:edge(x2, content, x1), core:edge:edge(x2, language, x3), core:edge:edge(x4, gender, x3), x = x0, y = x4.
+gmarkSubquery01(x, x) <- core:edge:edge(x, r, y).
+gmarkSubquery01(y, y) <- core:edge:edge(x, r, y).
+gmarkSubquery01(x, y) <- gmarkSubquery01(x, z), gmarkSubquery01(z, y).
+gmarkSubquery02(x, y) <- core:edge:edge(x0, gender, x1), core:edge:edge(x2, browserUsed, x1), core:edge:edge(x2, name, x3), core:edge:edge(x4, locationIP, x3), x = x0, y = x4.
+gmarkSubquery02(x, y) <- core:edge:edge(x0, name, x1), core:edge:edge(x2, content, x1), core:edge:edge(x2, content, x3), core:edge:edge(x4, locationIP, x3), x = x0, y = x4.
+gmarkSubquery02(x, y) <- core:edge:edge(x0, gender, x1), core:edge:edge(x2, name, x1), core:edge:edge(x2, name, x3), core:edge:edge(x4, browserUsed, x3), x = x0, y = x4.
+gmarkSubquery02(x, x) <- core:edge:edge(x, r, y).
+gmarkSubquery02(y, y) <- core:edge:edge(x, r, y).
+gmarkSubquery02(x, y) <- gmarkSubquery02(x, z), gmarkSubquery02(z, y).
+query() <- gmarkSubquery00(x0, x1), gmarkSubquery01(x1, x2), gmarkSubquery02(x2, x3).
 END

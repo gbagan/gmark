@@ -1,1 +1,1 @@
-MATCH (x0)-[:phomepage]->()<-[:phomepage]-()<-[:pconductor]-(x1), (x1)-[:pconductor]->()-[:pfriendOf]->()-[:plike]->(x2), (x0)-[:phasReview]->()<-[:phasReview]-()-[:phomepage]->(x3), (x2)<-[:pincludes]-()-[:pincludes]->()-[:phomepage]->(x4) RETURN DISTINCT x0, x2;
+MATCH (x0)<-[:pnationality]-()-[:plike]->()-[:pdatePublished]->(x1), (x0)<-[:pnationality]-()-[:pjobTitle]->()<-[:pdescription]-()-[:pexpires]->(x2), (x0)<-[:pnationality]-()<-[:pauthor]-()-[:pdatePublished]->(x3) RETURN DISTINCT x0;

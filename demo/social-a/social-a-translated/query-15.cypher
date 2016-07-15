@@ -1,1 +1,1 @@
-MATCH (x0)-[:pgender|pbrowserUsed|plocationIP*]->(x1), (x1)-[:pbrowserUsed*]->(x2), (x0)-[:pknows|pknows|pknows*]->(x3), (x2)-[:pworksAt|pbrowserUsed|pknows*]->(x4) RETURN DISTINCT x1, x0, x2, x3;
+MATCH (x0)<-[:pemail]-()-[:pspeaks]->()<-[:pname]-()-[:pstudyAt]->(x1), (x0)<-[:plocationIP]-()-[:pisLocatedIn]->()<-[:pisLocatedIn]-(x2), (x0)<-[:pspeaks]-()-[:pemail]->()<-[:pname]-(x3) RETURN DISTINCT x3, x0, x2, x1;

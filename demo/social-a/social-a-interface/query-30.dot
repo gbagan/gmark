@@ -1,9 +1,11 @@
 digraph g {
 	x2 [fillcolor="yellow", style="filled," shape=circle, label="?x2"];
 	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
-	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
 	x3 [fillcolor="yellow", style="filled," shape=circle, label="?x3"];
-	x0 -> x1 [label="((length.language-.content.name-))"];
-	x1 -> x2 [label="(((name.language-.content.name-)+(name.name-.name.name-)))*"];
-	x2 -> x3 [label="((isLocatedIn.isLocatedIn-.creationDate)+(isLocatedIn.isLocatedIn-.creationDate))"];
+	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
+	x0 -> x1 [label="((creationDate-.knows.isLocatedIn)+(creationDate-.likes-.isLocatedIn)+(creationDate-.hasMember.isLocatedIn))"];
+	x1 -> x2 [label="((isPartOf.isPartOf))"];
+	x0 -> x3 [label="((creationDate-.studyAt.name)+(creationDate-.isLocatedIn.name))"];
+	x4 [shape=circle, label="?x4"];
+	x2 -> x4 [label="((birthday-.worksAt.name)+(creationDate-.hasCreator.locationIP))"];
 }

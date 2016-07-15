@@ -1,1 +1,1 @@
-MATCH (x0)-[:ppurchaseFor*]->(x1), (x0)-[:ppurchaseFor*]->(x2), (x0)-[:pmakesPurchase|ppurchaseFor|ppurchaseFor*]->(x3), (x0)-[:ppurchaseFor*]->(x4) RETURN "true" LIMIT 1;
+MATCH (x0)-[:pcontactPoint*]->(x1), (x1)-[:pcontactPoint]->()-[:pfriendOf]->()-[:plike]->(x2), (x2)-[:phomepage*]->(x3) RETURN DISTINCT x0, x3;

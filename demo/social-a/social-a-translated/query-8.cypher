@@ -1,1 +1,1 @@
-MATCH (x0)-[:preplyOf]->()<-[:plikes]-()-[:plocationIP]->()<-[:pname]-(x1), (x1)-[:pname*]->(x2), (x2)-[:pname]->()<-[:pbrowserUsed]-()-[:pemail]->()<-[:pname]-(x3) RETURN DISTINCT x0;
+MATCH (x0)-[:planguage|planguage|planguage*]->(x1), (x1)<-[:planguage]-()-[:preplyOf]->()-[:pisLocatedIn]->()<-[:pisLocatedIn]-(x2), (x0)-[:planguage|planguage*]->(x3), (x2)-[:planguage*]->(x4) RETURN DISTINCT x0, x2;

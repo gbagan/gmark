@@ -1,1 +1,1 @@
-MATCH (x0)-[:planguage*]->(x1), (x1)<-[:pname]-()-[:pisLocatedIn]->()<-[:pisLocatedIn]-(x2), (x2)<-[:pworksAt]-()-[:phasInterest]->(x3), (x3)-[:pname]->()<-[:pname]-()<-[:pisPartOf]-(x4) RETURN DISTINCT x0, x1, x2 UNION  UNION  UNION  UNION  UNION  UNION  UNION  UNION ;
+MATCH (x0)<-[:pbirthday]-()-[:pstudyAt]->()-[:pname]->()<-[:pcontent]-(x1), (x0)<-[:pcreationDate]-()-[:phasInterest]->()-[:pname]->()<-[:pname]-(x2), (x1)<-[:pbirthday]-()-[:pname]->()<-[:pname]-()-[:phasType]->(x3) RETURN DISTINCT x0, x1;

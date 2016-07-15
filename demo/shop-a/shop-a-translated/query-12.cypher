@@ -1,1 +1,1 @@
-MATCH (x0)<-[:ptag]-()<-[:ppurchaseFor]-()-[:ppurchaseDate]->(x1), (x0)<-[:ptag]-()-[:ptrailer]->()<-[:psubscribes]-()-[:pnationality]->(x2), (x1)<-[:ptag]-()-[:pdirector]->()-[:pnationality]->(x3) RETURN DISTINCT x0, x2, x1, x3;
+MATCH (x0)<-[:pgender]-()<-[:peditor]-()-[:pkeywords]->()<-[:pcaption]-(x1), (x1)-[:phomepage|ppurchaseFor|ppurchaseFor*]->(x2), (x2)<-[:ppurchaseFor]-()-[:ppurchaseFor]->()-[:phasReview]->(x3), (x3)-[:previewer]->()-[:plike]->()<-[:plike]-()<-[:pconductor]-(x4) RETURN "true" LIMIT 1;

@@ -1,11 +1,9 @@
 digraph g {
-	x3 [fillcolor="yellow", style="filled," shape=circle, label="?x3"];
-	x2 [fillcolor="yellow", style="filled," shape=circle, label="?x2"];
 	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
 	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
-	x0 -> x1 [label="((replyOf-.content.locationIP-.hasModerator-)+(replyOf-.content.locationIP-.hasModerator-)+(browserUsed.browserUsed-.speaks.length-))"];
-	x1 -> x2 [label="((containerOf.content.content-)+(length.locationIP-.isSubclassOf-)+(length.browserUsed-.speaks.content-))"];
-	x2 -> x3 [label="(((content.browserUsed-.gender.content-)+(content.content-.language.language-)+(content.gender-.locationIP.content-)))*"];
-	x4 [shape=circle, label="?x4"];
-	x3 -> x4 [label="(((content.browserUsed-.browserUsed.content-)+(content.content-)+(content.content-)))*"];
+	x0 -> x1 [label="(((language-.content.content-.language)+(language-.language)+(language-.language)))*"];
+	x2 [shape=circle, label="?x2"];
+	x0 -> x2 [label="(((language-.language.language-.language)+(language-.language.language-.language)+(language-.content.content-.language)))*"];
+	x3 [shape=circle, label="?x3"];
+	x1 -> x3 [label="(((language-.language)+(language-.content.content-.language)+(language-.language.language-.language)))*"];
 }

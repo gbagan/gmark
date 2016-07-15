@@ -1,1 +1,1 @@
-MATCH (x0)-[:pname|pname|pname*]->(x1), (x1)<-[:pworksAt]-()-[:plikes]->()<-[:preplyOf]-(x2), (x2)-[:planguage|pcontent*]->(x3) RETURN "true" LIMIT 1;
+MATCH (x0)<-[:pisPartOf]-()-[:pname]->()<-[:pname]-(x1), (x1)-[:pname|pname*]->(x2), (x0)-[:pname]->()<-[:pspeaks]-()-[:pname]->()<-[:planguage]-(x3), (x2)-[:pname]->()<-[:pspeaks]-()-[:pbrowserUsed]->()<-[:planguage]-(x4) RETURN DISTINCT x3, x0, x1, x2;

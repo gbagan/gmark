@@ -1,11 +1,9 @@
 digraph g {
-	x2 [fillcolor="yellow", style="filled," shape=circle, label="?x2"];
-	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
 	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
-	x0 -> x1 [label="((language-.expires)+(language-.expires)+(language-.homepage-.expires))"];
-	x1 -> x2 [label="((expires-.hasReview.hasReview-))"];
-	x3 [shape=circle, label="?x3"];
-	x2 -> x3 [label="(((hasReview.hasReview-.author.conductor-)))*"];
-	x4 [shape=circle, label="?x4"];
-	x3 -> x4 [label="(((conductor.editor-.author.conductor-)+(hasReview.hasReview-)))*"];
+	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
+	x2 [fillcolor="yellow", style="filled," shape=circle, label="?x2"];
+	x3 [fillcolor="yellow", style="filled," shape=circle, label="?x3"];
+	x0 -> x1 [label="((author.familyName.text-)+(description.keywords-))"];
+	x0 -> x2 [label="((keywords.description-.description.url-)+(contentSize.hits-)+(wordCount.printPage-.homepage))"];
+	x1 -> x3 [label="((printSection.hits-))"];
 }

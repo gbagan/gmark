@@ -1,11 +1,10 @@
 digraph g {
-	x2 [fillcolor="yellow", style="filled," shape=circle, label="?x2"];
 	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
-	x3 [fillcolor="yellow", style="filled," shape=circle, label="?x3"];
 	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
-	x0 -> x1 [label="((homepage-.contentRating.wordCount-)+(subscribes-.follows.familyName.published-)+(url.caption-.like-.author-))"];
-	x0 -> x2 [label="((url.description-.director.editor-)+(hits.printEdition-))"];
-	x0 -> x3 [label="((url.title-)+(homepage-.text.title-))"];
-	x4 [shape=circle, label="?x4"];
-	x0 -> x4 [label="((homepage-.caption.text-.hasReview-))"];
+	x2 [fillcolor="yellow", style="filled," shape=circle, label="?x2"];
+	x0 -> x1 [label="((gender-.director-.contentSize.contentRating-))"];
+	x1 -> x2 [label="((includes-.includes.text)+(like-.email))"];
+	x3 [shape=circle, label="?x3"];
+	x0 -> x3 [label="((gender-.author-.contentSize.contentRating-)+(gender-.conductor-.movement.printSection-)+(gender-.actor-.director.editor-))"];
+	x3 -> x2 [label="((published.title-.tag))"];
 }

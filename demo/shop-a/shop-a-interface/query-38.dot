@@ -1,11 +1,9 @@
 digraph g {
 	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
-	x4 [fillcolor="yellow", style="filled," shape=circle, label="?x4"];
 	x1 [shape=circle, label="?x1"];
-	x0 -> x1 [label="(((includes.hasReview.hasReview-.includes-)))*"];
+	x0 -> x1 [label="((birthDate-.location)+(validThrough-.serialNumber.contentSize-.performedIn))"];
 	x2 [shape=circle, label="?x2"];
-	x1 -> x2 [label="(((includes.includes-)+(includes.hasReview.hasReview-.includes-)))*"];
+	x0 -> x2 [label="((validForm-.eligibleQuantity.opus-.performedIn)+(expires-.performedIn)+(expires-.text.givenName-.location))"];
 	x3 [shape=circle, label="?x3"];
-	x2 -> x3 [label="((includes.like-.artist-)+(includes.author.artist-))"];
-	x3 -> x4 [label="((artist.homepage)+(homepage.homepage-.like.homepage))"];
+	x1 -> x3 [label="((birthDate-.location)+(validThrough-.editor.parentContry-)+(birthDate-.location))"];
 }

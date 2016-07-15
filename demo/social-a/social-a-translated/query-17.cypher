@@ -1,1 +1,1 @@
-MATCH (x0)-[:pname*]->(x1), (x1)-[:pname|pname*]->(x2), (x0)-[:pname|pname|pname*]->(x3), (x2)-[:pname*]->(x4) RETURN DISTINCT x2, x0, x1 UNION ;
+MATCH (x0)-[:plocationIP|pbrowserUsed*]->(x1), (x0)<-[:plikes]-()-[:pknows]->()-[:pspeaks]->()<-[:pimageFile]-(x2), (x2)-[:pcontent]->()<-[:pname]-()<-[:pisPartOf]-(x1) RETURN DISTINCT x2, x1, x0 UNION ;

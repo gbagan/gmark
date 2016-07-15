@@ -1,9 +1,9 @@
 digraph g {
 	x2 [fillcolor="yellow", style="filled," shape=circle, label="?x2"];
-	x3 [fillcolor="yellow", style="filled," shape=circle, label="?x3"];
 	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
 	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
-	x0 -> x1 [label="((name.locationIP-.isLocatedIn.isLocatedIn-)+(isPartOf.isPartOf-.isLocatedIn-)+(isLocatedIn-.isLocatedIn.isLocatedIn-))"];
-	x0 -> x2 [label="((name.email-.email.name-)+(isPartOf.isPartOf-.isLocatedIn-))"];
-	x0 -> x3 [label="((isLocatedIn-.isLocatedIn.isLocatedIn-)+(isPartOf.isPartOf-.isLocatedIn-))"];
+	x3 [fillcolor="yellow", style="filled," shape=circle, label="?x3"];
+	x0 -> x1 [label="(((language-.language)))*"];
+	x0 -> x2 [label="(((language-.language.language-.language)))*"];
+	x0 -> x3 [label="(((language-.content.content-.language)+(language-.language.language-.language)+(language-.content.content-.language)))*"];
 }

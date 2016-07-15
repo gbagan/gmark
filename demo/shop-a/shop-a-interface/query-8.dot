@@ -1,11 +1,9 @@
 digraph g {
-	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
+	x0 [shape=circle, label="?x0"];
 	x1 [shape=circle, label="?x1"];
-	x0 -> x1 [label="((conductor-.keywords.title-)+(familyName.keywords-.keywords.award-)+(friendOf.subscribes.url.description-))"];
+	x0 -> x1 [label="((nationality-.contactPoint-)+(nationality-.conductor-.description.name-)+(nationality-.employee-))"];
 	x2 [shape=circle, label="?x2"];
-	x0 -> x2 [label="((jobTitle.title-)+(actor-.hasGenre.tag.tag-)+(conductor-.text.text-))"];
+	x1 -> x2 [label="((faxNumber.printPage-)+(offers.eligibleQuantity.printEdition-)+(employee.userId.contentRating-))"];
 	x3 [shape=circle, label="?x3"];
-	x0 -> x3 [label="((email.caption-.isbn.duration-)+(follows.follows-.email.producer-))"];
-	x4 [shape=circle, label="?x4"];
-	x0 -> x4 [label="((jobTitle.description-.contentSize.contentSize-)+(friendOf.jobTitle.keywords-)+(familyName.text-))"];
+	x2 -> x3 [label="((author.like.like-.age))"];
 }

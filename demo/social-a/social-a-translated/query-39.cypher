@@ -1,1 +1,1 @@
-MATCH (x0)-[:planguage*]->(x1), (x0)-[:planguage|planguage*]->(x2), (x1)-[:planguage*]->(x3) RETURN DISTINCT x0;
+MATCH (x0)-[:pknows]->()<-[:phasCreator]-()-[:plocationIP]->()<-[:pname]-(x1), (x0)<-[:pknows]-()<-[:pknows]-()-[:pworksAt]->(x2), (x0)<-[:pknows]-()<-[:pknows]-()-[:pworksAt]->(x3) RETURN DISTINCT x0, x1;

@@ -1,1 +1,1 @@
-MATCH (x0)<-[:pbirthday]-()<-[:phasModerator]-(x1), (x1)-[:plength]->()<-[:pcontent]-(x2), (x0)<-[:pcreationDate]-()-[:pbrowserUsed]->()<-[:pname]-(x3), (x2)<-[:pcreationDate]-()-[:pgender]->()<-[:pname]-(x4) RETURN DISTINCT x2, x0, x1 UNION ;
+MATCH (x0)-[:pisLocatedIn]->()-[:pname]->()<-[:pemail]-()-[:pcreationDate]->(x1), (x1)-[:pbirthday|pcreationDate*]->(x2), (x2)<-[:pbirthday]-()-[:pgender]->()<-[:pname]-(x3), (x3)-[:pname|pname|pname*]->(x4) RETURN DISTINCT x0;

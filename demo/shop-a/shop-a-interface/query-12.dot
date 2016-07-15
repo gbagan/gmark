@@ -1,9 +1,11 @@
 digraph g {
-	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
-	x2 [fillcolor="yellow", style="filled," shape=circle, label="?x2"];
-	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
-	x3 [fillcolor="yellow", style="filled," shape=circle, label="?x3"];
-	x0 -> x1 [label="((tag-.purchaseFor-.purchaseDate)+(tag-.includes-.validThrough)+(tag-.hasGenre-.expires))"];
-	x0 -> x2 [label="((tag-.trailer.subscribes-.nationality))"];
-	x1 -> x3 [label="((tag-.director.nationality)+(tag-.author.nationality))"];
+	x0 [shape=circle, label="?x0"];
+	x1 [shape=circle, label="?x1"];
+	x0 -> x1 [label="((gender-.editor-.keywords.caption-)+(gender-.like.producer.caption-))"];
+	x2 [shape=circle, label="?x2"];
+	x1 -> x2 [label="(((homepage.homepage-.includes-.includes)+(purchaseFor-.makesPurchase-.makesPurchase.purchaseFor)+(purchaseFor-.makesPurchase-.subscribes.homepage-)))*"];
+	x3 [shape=circle, label="?x3"];
+	x2 -> x3 [label="((purchaseFor-.purchaseFor.hasReview))"];
+	x4 [shape=circle, label="?x4"];
+	x3 -> x4 [label="((reviewer.like.like-.conductor-)+(hasReview-.artist.follows-.conductor-))"];
 }

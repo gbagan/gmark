@@ -1,1 +1,1 @@
-MATCH (x0)-[:pname]->()<-[:pname]-(x1), (x1)-[:pname]->()<-[:pcontent]-()-[:planguage]->(x2), (x0)-[:pname]->()<-[:pgender]-()-[:pgender]->()<-[:pname]-(x3), (x2)-[:pname]->()<-[:plocationIP]-()-[:pbrowserUsed]->()<-[:pname]-(x4) RETURN DISTINCT x1, x2, x0;
+MATCH (x0)-[:pname]->()<-[:pname]-(x1), (x0)-[:pname|pname*]->(x2), (x2)-[:pname|pname*]->(x1) RETURN "true" LIMIT 1;

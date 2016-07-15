@@ -1,1 +1,1 @@
-MATCH (x0)<-[:pAuthoredBy]-()<-[:pReference]-()-[:pHasKeyword]->(x1), (x1)<-[:pHasKeyword]-()<-[:pInteracts]-()-[:pReference]->(x2), (x2)<-[:pReference]-()-[:pInteracts]->()-[:pOccursIn]->(x3) RETURN DISTINCT x0;
+MATCH (x0)<-[:pPublishedIn]-()-[:pAuthoredBy]->()<-[:pAuthoredBy]-(x1), (x1)<-[:pReference]-()-[:pInteracts]->()-[:pInteracts]->(x2), (x2)-[:pInteracts*]->(x3), (x3)-[:pInteracts*]->(x4) RETURN DISTINCT x0, x4;

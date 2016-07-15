@@ -1,11 +1,11 @@
 digraph g {
 	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
-	x2 [fillcolor="yellow", style="filled," shape=circle, label="?x2"];
 	x1 [shape=circle, label="?x1"];
-	x0 -> x1 [label="((locationIP-.browserUsed.name-)+(language-.content.name-)+(name-.gender.name-))"];
-	x1 -> x2 [label="((name.browserUsed-.hasModerator-)+(name.name-.worksAt-.hasModerator-)+(name.browserUsed-.email.length-))"];
+	x0 -> x1 [label="((creationDate.creationDate-.hasModerator-))"];
+	x2 [shape=circle, label="?x2"];
+	x1 -> x2 [label="(((length.name-.name.length-)))*"];
 	x3 [shape=circle, label="?x3"];
-	x0 -> x3 [label="((name-.knows-.studyAt)+(gender-.knows-.studyAt))"];
+	x0 -> x3 [label="((creationDate.creationDate-.gender.length-))"];
 	x4 [shape=circle, label="?x4"];
-	x2 -> x4 [label="((browserUsed-.hasCreator-.hasCreator.studyAt)+(locationIP-.likes-.studyAt))"];
+	x2 -> x4 [label="((creationDate.creationDate-))"];
 }

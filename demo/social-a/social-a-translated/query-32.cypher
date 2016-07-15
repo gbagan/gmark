@@ -1,1 +1,1 @@
-MATCH (x0)-[:pname|pname*]->(x1), (x0)-[:pname*]->(x2), (x0)-[:pname|pname*]->(x3) RETURN DISTINCT x0, x2, x1 UNION ;
+MATCH (x0)<-[:pisPartOf]-()-[:pname]->()<-[:pname]-(x1), (x1)<-[:pisLocatedIn]-()<-[:pisSubclassOf]-()-[:planguage]->(x2), (x2)-[:planguage*]->(x3), (x3)-[:planguage|planguage|planguage*]->(x4) RETURN DISTINCT x2, x1, x0;

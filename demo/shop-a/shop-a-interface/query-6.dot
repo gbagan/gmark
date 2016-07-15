@@ -1,11 +1,11 @@
 digraph g {
-	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
-	x3 [fillcolor="yellow", style="filled," shape=circle, label="?x3"];
 	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
 	x2 [fillcolor="yellow", style="filled," shape=circle, label="?x2"];
-	x0 -> x1 [label="(((includes.includes-)+(includes.hasReview.hasReview-.includes-)+(includes.trailer.homepage-.includes-)))*"];
-	x1 -> x2 [label="(((includes.includes-)+(includes.includes-)))*"];
-	x0 -> x3 [label="(((includes.homepage.homepage-.includes-)))*"];
+	x1 [shape=circle, label="?x1"];
+	x0 -> x1 [label="(((author-.includes-.includes.director)+(reviewer-.reviewer.director-.director)))*"];
+	x1 -> x2 [label="((follows.follows-.actor-)+(like.like-.actor-))"];
+	x3 [shape=circle, label="?x3"];
+	x0 -> x3 [label="(((makesPurchase.purchaseFor.editor)+(conductor-.conductor)+(friendOf-.friendOf-.subscribes.homepage-)))*"];
 	x4 [shape=circle, label="?x4"];
-	x2 -> x4 [label="(((includes.editor.editor-.includes-)+(includes.hasReview.hasReview-.includes-)+(includes.hasReview.hasReview-.includes-)))*"];
+	x2 -> x4 [label="(((editor-.author.employee-.employee)+(author-.author.editor-.editor)))*"];
 }

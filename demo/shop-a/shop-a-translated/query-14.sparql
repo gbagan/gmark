@@ -1,1 +1,1 @@
-PREFIX : <http://example.org/gmark/> ASK {  {  ?x0 ((:pauthor/:plike/^:plike/^:pauthor)) ?x1 . ?x1 ((^:plike/^:pauthor/^:pincludes)) ?x2 . ?x2 (((:pincludes/:ptrailer/^:phomepage/^:pincludes)|(:pincludes/^:pincludes))){,3} ?x3 . } }
+PREFIX : <http://example.org/gmark/> SELECT DISTINCT ?x0 ?x1 ?x2 WHERE {  {  ?x0 ((^:pnationality/^:pauthor/:planguage)|(^:pnationality/^:pconductor/:phomepage/:planguage)) ?x1 . ?x0 ((^:pnationality/:plike)) ?x2 . ?x2 (((:phasReview/:previewer/^:pauthor)|(^:ppurchaseFor/:ppurchaseFor)|(:peditor/^:pauthor))){,3} ?x1 . } }

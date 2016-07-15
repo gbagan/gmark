@@ -1,1 +1,1 @@
-MATCH (x0)<-[:pconductor]-()-[:pkeywords]->()<-[:ptitle]-(x1), (x0)-[:pjobTitle]->()<-[:ptitle]-(x2), (x0)-[:pemail]->()<-[:pcaption]-()-[:pisbn]->()<-[:pduration]-(x3), (x0)-[:pjobTitle]->()<-[:pdescription]-()-[:pcontentSize]->()<-[:pcontentSize]-(x4) RETURN DISTINCT x0;
+MATCH (x0)<-[:pnationality]-()<-[:pcontactPoint]-(x1), (x1)-[:pfaxNumber]->()<-[:pprintPage]-(x2), (x2)-[:pauthor]->()-[:plike]->()<-[:plike]-()-[:page]->(x3) RETURN "true" LIMIT 1;

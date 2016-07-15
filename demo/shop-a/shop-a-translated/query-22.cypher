@@ -1,1 +1,1 @@
-MATCH (x0)<-[:ptype]-()<-[:pactor]-()-[:ptag]->(x1), (x0)<-[:ptype]-()<-[:peditor]-()-[:ptag]->(x2), (x0)<-[:ptype]-()-[:plike]->()-[:ptag]->(x3) RETURN DISTINCT x1, x2, x3, x0;
+MATCH (x0)<-[:planguage]-()-[:phasGenre]->(x1), (x1)<-[:phasGenre]-()-[:ptag]->(x2), (x0)<-[:planguage]-()<-[:ptrailer]-()-[:phasGenre]->()-[:ptype]->(x3), (x3)<-[:ptype]-()<-[:phasGenre]-()-[:pperformedIn]->(x2) RETURN DISTINCT x0, x2;

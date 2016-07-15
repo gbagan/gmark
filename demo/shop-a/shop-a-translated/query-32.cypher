@@ -1,1 +1,1 @@
-MATCH (x0)-[:partist]->()-[:plike]->()<-[:ppurchaseFor]-(x1), (x1)-[:ppurchaseFor*]->(x2), (x0)-[:partist]->()-[:plike]->()-[:phasReview]->()<-[:phasReview]-(x3), (x2)-[:partist]->()-[:plike]->(x4) RETURN DISTINCT x0;
+MATCH (x0)-[:ptrailer|psubscribes|psubscribes*]->(x1), (x1)<-[:phomepage]-()<-[:partist]-()-[:phasReview]->(x2), (x2)-[:phasReview*]->(x3) RETURN "true" LIMIT 1;

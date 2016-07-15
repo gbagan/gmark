@@ -1,1 +1,1 @@
-MATCH (x0)-[:ppurchaseFor|peditor*]->(x1), (x1)-[:pwordCount]->()<-[:puserId]-()-[:pemail]->(x2), (x2)<-[:pjobTitle]-()-[:plocation]->(x3), (x3)<-[:plocation]-()<-[:pauthor]-(x4) RETURN "true" LIMIT 1;
+MATCH (x0)-[:ppurchaseFor*]->(x1), (x1)-[:phomepage]->()<-[:phomepage]-()<-[:plike]-()<-[:pauthor]-(x2), (x2)-[:phomepage|pincludes*]->(x3) RETURN "true" LIMIT 1;

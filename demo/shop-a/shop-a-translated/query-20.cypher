@@ -1,1 +1,1 @@
-MATCH (x0)-[:ppurchaseFor]->()-[:ptext]->()<-[:pcaption]-(x1), (x0)-[:ppurchaseFor]->()<-[:ppurchaseFor]-(x2), (x1)-[:ppurchaseFor]->()-[:pauthor]->()<-[:pdirector]-()<-[:ppurchaseFor]-(x3) RETURN DISTINCT x0;
+MATCH (x0)-[:phomepage|phomepage|pactor*]->(x1), (x0)-[:pdirector|ptrailer|pdirector*]->(x2), (x2)-[:phasReview|ptrailer|pactor*]->(x1) RETURN DISTINCT x0, x2, x1;

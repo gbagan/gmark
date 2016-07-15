@@ -1,9 +1,10 @@
 digraph g {
-	x0 [shape=circle, label="?x0"];
-	x1 [shape=circle, label="?x1"];
-	x0 -> x1 [label="(((content.browserUsed-.browserUsed.content-)+(content.content-)+(content.name-.name.content-)))*"];
-	x2 [shape=circle, label="?x2"];
-	x0 -> x2 [label="(((content.content-)+(content.gender-.name.content-)))*"];
+	x2 [fillcolor="yellow", style="filled," shape=circle, label="?x2"];
+	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
+	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
+	x0 -> x1 [label="((isSubclassOf.name.language-.content)+(isSubclassOf.name.name-.name))"];
+	x1 -> x2 [label="(((length-.length)+(content-.content.name-.locationIP)))*"];
 	x3 [shape=circle, label="?x3"];
-	x1 -> x3 [label="(((language.language-.content.content-)+(content.content-)))*"];
+	x0 -> x3 [label="((hasType-.hasType))"];
+	x3 -> x2 [label="((isSubclassOf-.name.locationIP-.creationDate)+(name.locationIP-.hasModerator-.creationDate)+(isSubclassOf-.name.locationIP-.creationDate))"];
 }

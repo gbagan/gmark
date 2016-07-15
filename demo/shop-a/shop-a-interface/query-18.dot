@@ -1,9 +1,11 @@
 digraph g {
-	x2 [fillcolor="yellow", style="filled," shape=circle, label="?x2"];
-	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
-	x3 [fillcolor="yellow", style="filled," shape=circle, label="?x3"];
-	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
-	x0 -> x1 [label="(((makesPurchase-.author-.purchaseFor-)+(purchaseFor.author.friendOf-.makesPurchase)+(purchaseFor.purchaseFor-)))*"];
-	x0 -> x2 [label="(((purchaseFor.includes-.includes.purchaseFor-)))*"];
-	x0 -> x3 [label="(((makesPurchase-.homepage.trailer-.purchaseFor-)+(makesPurchase-.conductor-.purchaseFor-)+(purchaseFor.hasReview.hasReview-.purchaseFor-)))*"];
+	x0 [shape=circle, label="?x0"];
+	x1 [shape=circle, label="?x1"];
+	x0 -> x1 [label="(((homepage-.purchaseFor-.purchaseFor.homepage)+(homepage-.purchaseFor-.purchaseFor.homepage)))*"];
+	x2 [shape=circle, label="?x2"];
+	x1 -> x2 [label="(((subscribes-.homepage)))*"];
+	x3 [shape=circle, label="?x3"];
+	x2 -> x3 [label="((homepage-.homepage.homepage-)+(homepage-.conductor.subscribes.subscribes-)+(homepage-.editor.friendOf-))"];
+	x4 [shape=circle, label="?x4"];
+	x3 -> x4 [label="(((homepage.homepage-.conductor)+(friendOf.makesPurchase.makesPurchase-)+(author-.author)))*"];
 }

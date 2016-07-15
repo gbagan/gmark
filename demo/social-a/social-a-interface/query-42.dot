@@ -1,9 +1,9 @@
 digraph g {
 	x0 [shape=circle, label="?x0"];
 	x1 [shape=circle, label="?x1"];
-	x0 -> x1 [label="((browserUsed-.likes.replyOf-.language)+(email-.hasCreator-.isSubclassOf-.language))"];
+	x0 -> x1 [label="(((name.browserUsed-.locationIP.name-)+(name.name-.locationIP.name-)))*"];
 	x2 [shape=circle, label="?x2"];
-	x0 -> x2 [label="((name-.name.language-.language)+(content-.imageFile.browserUsed-.gender)+(content-.imageFile.language-.language))"];
+	x0 -> x2 [label="(((isLocatedIn-.knows-.speaks)))*"];
 	x3 [shape=circle, label="?x3"];
-	x1 -> x3 [label="((content-.content)+(content-.language.length-.length))"];
+	x1 -> x3 [label="(((isLocatedIn-.knows-.speaks)+(name.speaks-.speaks)+(isPartOf.isLocatedIn-.isSubclassOf-.content)))*"];
 }

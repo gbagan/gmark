@@ -1,9 +1,11 @@
 digraph g {
 	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
+	x2 [fillcolor="yellow", style="filled," shape=circle, label="?x2"];
+	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
 	x3 [fillcolor="yellow", style="filled," shape=circle, label="?x3"];
-	x1 [shape=circle, label="?x1"];
-	x0 -> x1 [label="((email-.author-)+(givenName-.like.contentSize.wordCount-)+(jobTitle-.author-))"];
-	x2 [shape=circle, label="?x2"];
-	x1 -> x2 [label="(((includes-.includes.actor.editor-)+(author.friendOf-.author-)+(purchaseFor-.purchaseFor.includes-.includes)))*"];
-	x2 -> x3 [label="(((includes-.includes.homepage.homepage-)+(includes-.includes)+(homepage.homepage-.editor-)))*"];
+	x0 -> x1 [label="(((homepage.homepage-.subscribes.homepage-)+(homepage.homepage-.hasReview.hasReview-)))*"];
+	x0 -> x2 [label="(((purchaseFor-.purchaseFor.hasReview.hasReview-)+(hasReview.hasReview-.hasReview.hasReview-)))*"];
+	x0 -> x3 [label="(((homepage.homepage-)+(homepage.homepage-.includes-.includes)))*"];
+	x4 [shape=circle, label="?x4"];
+	x0 -> x4 [label="(((purchaseFor-.purchaseFor.trailer.homepage-)+(homepage.homepage-)+(homepage.homepage-)))*"];
 }

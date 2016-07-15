@@ -1,9 +1,10 @@
 digraph g {
-	x1 [fillcolor="yellow", style="filled," shape=circle, label="?x1"];
 	x0 [fillcolor="yellow", style="filled," shape=circle, label="?x0"];
 	x2 [fillcolor="yellow", style="filled," shape=circle, label="?x2"];
-	x0 -> x1 [label="(((reviewer.friendOf-.reviewer-)+(reviewer.editor-.editor.reviewer-)))*"];
-	x0 -> x2 [label="(((hasReview-.hasReview)+(reviewer.author-.author.reviewer-)+(reviewer.friendOf-.reviewer-)))*"];
+	x1 [shape=circle, label="?x1"];
+	x0 -> x1 [label="((title-.title.keywords-))"];
+	x1 -> x2 [label="((text.familyName-.nationality)+(like-.nationality)+(description.email-.nationality))"];
 	x3 [shape=circle, label="?x3"];
-	x0 -> x3 [label="(((hasReview-.conductor.reviewer-)+(reviewer.reviewer-)+(reviewer.actor-.hasReview)))*"];
+	x0 -> x3 [label="((award-.director.location)+(keywords-.actor.location)+(title-.performedIn))"];
+	x3 -> x2 [label="((location-.author-.hasGenre.type)+(performedIn-.hasGenre.type))"];
 }

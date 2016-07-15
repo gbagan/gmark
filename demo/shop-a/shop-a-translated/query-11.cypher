@@ -1,1 +1,1 @@
-MATCH (x0)<-[:pgender]-()<-[:peditor]-()-[:ptag]->(x1), (x1)<-[:ptag]-()-[:pcontentRating]->()<-[:pprice]-(x2), (x2)-[:pmakesPurchase|ppurchaseFor*]->(x3), (x3)-[:ppurchaseFor]->()-[:pmovement]->()<-[:pcontentSize]-()-[:pexpires]->(x4) RETURN DISTINCT x0, x4;
+MATCH (x0)-[:pmakesPurchase]->()-[:ppurchaseFor]->(x1), (x1)-[:ptitle]->()<-[:ppaymentAccepted]-()-[:poffers]->(x2), (x2)-[:pincludes]->()-[:ptag]->(x3) RETURN DISTINCT x0, x3;

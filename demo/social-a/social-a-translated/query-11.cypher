@@ -1,1 +1,1 @@
-MATCH (x0)-[:pisSubclassOf]->()-[:phasCreator]->()-[:pspeaks]->()<-[:pname]-(x1), (x0)-[:pisSubclassOf]->()<-[:plikes]-()-[:plocationIP]->()<-[:pname]-(x2), (x0)-[:preplyOf]->()<-[:plikes]-()-[:pstudyAt]->(x3) RETURN "true" LIMIT 1 UNION  UNION  UNION ;
+MATCH (x0)-[:pname*]->(x1), (x1)-[:pname|pname|pname*]->(x2), (x2)-[:pisLocatedIn]->()-[:pname]->()<-[:pname]-()<-[:pisPartOf]-(x3) RETURN DISTINCT x0, x3;

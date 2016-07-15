@@ -1,1 +1,1 @@
-MATCH (x0)-[:pconductor|pconductor|phomepage*]->(x1), (x1)<-[:plike]-()-[:psubscribes]->()<-[:phomepage]-()-[:pauthor]->(x2), (x2)<-[:previewer]-()-[:previewer]->()-[:plike]->(x3) RETURN DISTINCT x2, x0, x1, x3;
+MATCH (x0)<-[:ptype]-()<-[:phasGenre]-()-[:peditor]->()-[:pemail]->(x1), (x0)<-[:ptype]-()<-[:phasGenre]-()-[:ptext]->(x2), (x0)<-[:ptype]-()<-[:phasGenre]-()-[:ptext]->(x3) RETURN DISTINCT x0, x1, x2;

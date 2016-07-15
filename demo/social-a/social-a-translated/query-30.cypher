@@ -1,1 +1,1 @@
-MATCH (x0)-[:plength]->()<-[:planguage]-()-[:pcontent]->()<-[:pname]-(x1), (x1)-[:pname|pname*]->(x2), (x2)-[:pisLocatedIn]->()<-[:pisLocatedIn]-()-[:pcreationDate]->(x3) RETURN DISTINCT x2, x0, x1, x3;
+MATCH (x0)<-[:pcreationDate]-()-[:pknows]->()-[:pisLocatedIn]->(x1), (x1)-[:pisPartOf]->()-[:pisPartOf]->(x2), (x0)<-[:pcreationDate]-()-[:pstudyAt]->()-[:pname]->(x3), (x2)<-[:pbirthday]-()-[:pworksAt]->()-[:pname]->(x4) RETURN DISTINCT x2, x0, x3, x1;

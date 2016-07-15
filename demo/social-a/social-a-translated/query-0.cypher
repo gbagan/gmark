@@ -1,1 +1,1 @@
-MATCH (x0)-[:plocationIP*]->(x1), (x0)-[:pgender|pname|plocationIP*]->(x2), (x0)-[:pgender|pname|pgender*]->(x3), (x0)-[:pcreationDate|pcreationDate|pgender*]->(x4) RETURN "true" LIMIT 1;
+MATCH (x0)-[:pname*]->(x1), (x1)-[:pname]->()<-[:plocationIP]-()-[:pworksAt]->(x2), (x2)-[:pname*]->(x3), (x3)-[:pname|pname|pname*]->(x4) RETURN DISTINCT x0, x4 UNION ;

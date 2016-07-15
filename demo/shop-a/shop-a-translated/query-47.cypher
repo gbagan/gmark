@@ -1,1 +1,1 @@
-MATCH (x0)-[:paggregateRating]->()<-[:pcontentRating]-()-[:pexpires]->(x1), (x1)<-[:pbirthDate]-()<-[:pemployee]-()-[:ptelephone]->(x2), (x2)<-[:pnumberOfPages]-()-[:pcaption]->()<-[:pdescription]-()-[:ptag]->(x3), (x3)<-[:ptag]-()<-[:phasGenre]-()<-[:plike]-()-[:pgender]->(x4) RETURN DISTINCT x0;
+MATCH (x0)-[:pincludes]->()-[:pcontentRating]->()<-[:pprintSection]-(x1), (x0)-[:pincludes*]->(x2), (x2)-[:pincludes|pincludes|pincludes*]->(x1) RETURN DISTINCT x0;

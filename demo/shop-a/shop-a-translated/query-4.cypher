@@ -1,1 +1,1 @@
-MATCH (x0)-[:pdirector*]->(x1), (x0)-[:ptrailer|pactor*]->(x2), (x0)-[:pdirector|phomepage|pactor*]->(x3) RETURN DISTINCT x0;
+MATCH (x0)-[:pdirector|pactor|pincludes*]->(x1), (x1)-[:pcaption]->()<-[:pkeywords]-()-[:phasReview]->(x2), (x0)-[:pincludes|ptrailer|phomepage*]->(x3), (x3)-[:pdescription]->()<-[:pdescription]-(x2) RETURN DISTINCT x1, x2, x3, x0;

@@ -4,76 +4,80 @@
     <id>0</id>
     <number>0</number>
     <input>../use-cases/test.xml</input>
-    <arity>0</arity>
-    <selectivity>-</selectivity>
-    <multiplicity>0</multiplicity>
+    <arity>2</arity>
+    <selectivity>2</selectivity>
+    <multiplicity>1</multiplicity>
     <conjunct>4</conjunct>
     <disjuncts>1-3</disjuncts>
-    <length>3-4</length>
+    <length>2-4</length>
   </metadata>
   <head>
+    <var>?x0</var>
+    <var>?x1</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
+      <star>
       <disj>
         <concat>
-          <symbol inverse="true">2</symbol>
+          <symbol>1</symbol>
           <symbol inverse="true">1</symbol>
-          <symbol>3</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">2</symbol>
+          <symbol>1</symbol>
           <symbol inverse="true">1</symbol>
-          <symbol>3</symbol>
         </concat>
       </disj>
+      </star>
       </conjunct>
-      <conjunct src="?x1" trg="?x2">
+      <conjunct src="?x0" trg="?x2">
+      <star>
       <disj>
         <concat>
-          <symbol inverse="true">3</symbol>
           <symbol>1</symbol>
-          <symbol>2</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">3</symbol>
+          <symbol inverse="true">1</symbol>
           <symbol>1</symbol>
-          <symbol>2</symbol>
+          <symbol inverse="true">1</symbol>
         </concat>
       </disj>
+      </star>
       </conjunct>
       <conjunct src="?x0" trg="?x3">
+      <star>
       <disj>
         <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">2</symbol>
+          <symbol>1</symbol>
           <symbol inverse="true">1</symbol>
           <symbol>1</symbol>
-          <symbol>2</symbol>
+          <symbol inverse="true">1</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol inverse="true">1</symbol>
           <symbol>1</symbol>
-          <symbol>2</symbol>
+          <symbol inverse="true">1</symbol>
         </concat>
       </disj>
+      </star>
       </conjunct>
-      <conjunct src="?x2" trg="?x4">
+      <conjunct src="?x0" trg="?x4">
+      <star>
       <disj>
         <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+        </concat>
+        <concat>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+        </concat>
+        <concat>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
         </concat>
       </disj>
+      </star>
       </conjunct>
     </body>
   </bodies>
@@ -84,17 +88,14 @@
     <id>0</id>
     <number>1</number>
     <input>../use-cases/test.xml</input>
-    <arity>4</arity>
+    <arity>1</arity>
     <selectivity>-</selectivity>
     <multiplicity>0</multiplicity>
-    <conjunct>3</conjunct>
-    <disjuncts>3-3</disjuncts>
+    <conjunct>4</conjunct>
+    <disjuncts>2-3</disjuncts>
     <length>2-4</length>
   </metadata>
   <head>
-    <var>?x1</var>
-    <var>?x3</var>
-    <var>?x2</var>
     <var>?x0</var>
   </head>
   <bodies>
@@ -102,58 +103,61 @@
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol inverse="true">2</symbol>
+          <symbol>1</symbol>
           <symbol inverse="true">1</symbol>
           <symbol>1</symbol>
-          <symbol>2</symbol>
+          <symbol inverse="true">1</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">2</symbol>
+          <symbol>1</symbol>
           <symbol inverse="true">1</symbol>
           <symbol>1</symbol>
-          <symbol>2</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
+          <symbol inverse="true">1</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x0" trg="?x2">
+      <conjunct src="?x1" trg="?x2">
       <disj>
         <concat>
-          <symbol inverse="true">2</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+        </concat>
+        <concat>
+          <symbol>1</symbol>
           <symbol inverse="true">1</symbol>
           <symbol>1</symbol>
-          <symbol>2</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
+          <symbol inverse="true">1</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x0" trg="?x3">
       <disj>
         <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">2</symbol>
+          <symbol>1</symbol>
           <symbol inverse="true">1</symbol>
+          <symbol inverse="true">0</symbol>
+        </concat>
+        <concat>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol inverse="true">0</symbol>
+        </concat>
+        <concat>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol inverse="true">0</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x3" trg="?x2">
+      <disj>
+        <concat>
+          <symbol>0</symbol>
+          <symbol>1</symbol>
+          <symbol>2</symbol>
+        </concat>
+        <concat>
+          <symbol>0</symbol>
           <symbol>1</symbol>
           <symbol>2</symbol>
         </concat>
@@ -168,18 +172,17 @@
     <id>0</id>
     <number>2</number>
     <input>../use-cases/test.xml</input>
-    <arity>4</arity>
+    <arity>3</arity>
     <selectivity>-</selectivity>
     <multiplicity>0</multiplicity>
     <conjunct>3</conjunct>
-    <disjuncts>1-3</disjuncts>
-    <length>4-4</length>
+    <disjuncts>2-3</disjuncts>
+    <length>2-4</length>
   </metadata>
   <head>
-    <var>?x3</var>
     <var>?x1</var>
-    <var>?x2</var>
     <var>?x0</var>
+    <var>?x2</var>
   </head>
   <bodies>
     <body>
@@ -187,15 +190,18 @@
       <disj>
         <concat>
           <symbol>0</symbol>
-          <symbol>3</symbol>
-          <symbol inverse="true">3</symbol>
           <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
         </concat>
         <concat>
           <symbol>0</symbol>
-          <symbol>3</symbol>
-          <symbol inverse="true">3</symbol>
           <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+        </concat>
+        <concat>
+          <symbol>0</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -204,29 +210,33 @@
         <concat>
           <symbol>0</symbol>
           <symbol>1</symbol>
-          <symbol>2</symbol>
-          <symbol inverse="true">2</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
         </concat>
         <concat>
           <symbol>0</symbol>
           <symbol>1</symbol>
-          <symbol>2</symbol>
-          <symbol inverse="true">2</symbol>
         </concat>
         <concat>
           <symbol>0</symbol>
           <symbol>1</symbol>
-          <symbol>2</symbol>
-          <symbol inverse="true">2</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x0" trg="?x3">
+      <conjunct src="?x1" trg="?x3">
       <disj>
         <concat>
           <symbol>0</symbol>
-          <symbol inverse="true">0</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+        </concat>
+        <concat>
           <symbol>0</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
           <symbol>1</symbol>
         </concat>
       </disj>
@@ -240,17 +250,16 @@
     <id>0</id>
     <number>3</number>
     <input>../use-cases/test.xml</input>
-    <arity>4</arity>
+    <arity>3</arity>
     <selectivity>-</selectivity>
-    <multiplicity>0.25</multiplicity>
-    <conjunct>4</conjunct>
-    <disjuncts>2-3</disjuncts>
-    <length>3-4</length>
+    <multiplicity>0</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-2</disjuncts>
+    <length>2-4</length>
   </metadata>
   <head>
-    <var>?x2</var>
     <var>?x0</var>
-    <var>?x3</var>
+    <var>?x2</var>
     <var>?x1</var>
   </head>
   <bodies>
@@ -258,70 +267,38 @@
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol inverse="true">3</symbol>
-          <symbol inverse="true">0</symbol>
-          <symbol>0</symbol>
+          <symbol inverse="true">2</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol>2</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">3</symbol>
-          <symbol inverse="true">0</symbol>
-          <symbol>0</symbol>
+          <symbol inverse="true">2</symbol>
+          <symbol>2</symbol>
+          <symbol inverse="true">2</symbol>
+          <symbol>2</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x1" trg="?x2">
-      <star>
+      <conjunct src="?x0" trg="?x2">
       <disj>
         <concat>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
+          <symbol inverse="true">2</symbol>
+          <symbol>2</symbol>
         </concat>
         <concat>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
-        </concat>
-        <concat>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
-        </concat>
-      </disj>
-      </star>
-      </conjunct>
-      <conjunct src="?x0" trg="?x3">
-      <disj>
-        <concat>
-          <symbol inverse="true">3</symbol>
-          <symbol>3</symbol>
-          <symbol inverse="true">3</symbol>
-          <symbol inverse="true">0</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">3</symbol>
-          <symbol>3</symbol>
-          <symbol inverse="true">3</symbol>
-          <symbol inverse="true">0</symbol>
+          <symbol inverse="true">2</symbol>
+          <symbol>2</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x2" trg="?x4">
+      <conjunct src="?x1" trg="?x3">
       <disj>
         <concat>
-          <symbol inverse="true">3</symbol>
-          <symbol inverse="true">0</symbol>
-          <symbol>0</symbol>
-          <symbol inverse="true">0</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">3</symbol>
-          <symbol inverse="true">0</symbol>
-          <symbol>0</symbol>
-          <symbol inverse="true">0</symbol>
+          <symbol inverse="true">2</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol>2</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -336,10 +313,10 @@
     <input>../use-cases/test.xml</input>
     <arity>0</arity>
     <selectivity>-</selectivity>
-    <multiplicity>0</multiplicity>
+    <multiplicity>0.25</multiplicity>
     <conjunct>4</conjunct>
     <disjuncts>1-3</disjuncts>
-    <length>2-3</length>
+    <length>2-4</length>
   </metadata>
   <head>
   </head>
@@ -348,50 +325,58 @@
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol inverse="true">1</symbol>
+          <symbol>0</symbol>
+          <symbol inverse="true">0</symbol>
+          <symbol>0</symbol>
+          <symbol>3</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x1" trg="?x2">
       <disj>
         <concat>
+          <symbol inverse="true">3</symbol>
           <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>3</symbol>
-        </concat>
-        <concat>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>3</symbol>
-        </concat>
-        <concat>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>3</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x0" trg="?x3">
-      <disj>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x2" trg="?x4">
-      <disj>
-        <concat>
-          <symbol inverse="true">2</symbol>
           <symbol>2</symbol>
           <symbol inverse="true">2</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">2</symbol>
+          <symbol inverse="true">3</symbol>
+          <symbol inverse="true">0</symbol>
+          <symbol>0</symbol>
+          <symbol>1</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">3</symbol>
+          <symbol>1</symbol>
           <symbol>2</symbol>
           <symbol inverse="true">2</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x3" trg="?x4">
+      <disj>
+        <concat>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -404,40 +389,57 @@
     <id>0</id>
     <number>5</number>
     <input>../use-cases/test.xml</input>
-    <arity>2</arity>
-    <selectivity>0</selectivity>
+    <arity>3</arity>
+    <selectivity>-</selectivity>
     <multiplicity>0</multiplicity>
     <conjunct>3</conjunct>
-    <disjuncts>1-3</disjuncts>
+    <disjuncts>2-3</disjuncts>
     <length>2-4</length>
   </metadata>
   <head>
-    <var>?x0</var>
+    <var>?x2</var>
     <var>?x1</var>
+    <var>?x0</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">2</symbol>
           <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>3</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>3</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>3</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
+          <symbol inverse="true">3</symbol>
+          <symbol>1</symbol>
+          <symbol>2</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">3</symbol>
           <symbol>1</symbol>
           <symbol>2</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x0" trg="?x2">
+      <conjunct src="?x2" trg="?x3">
       <disj>
         <concat>
           <symbol inverse="true">2</symbol>
@@ -445,10 +447,6 @@
           <symbol inverse="true">2</symbol>
           <symbol>2</symbol>
         </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x1" trg="?x3">
-      <disj>
         <concat>
           <symbol inverse="true">2</symbol>
           <symbol inverse="true">1</symbol>
@@ -457,8 +455,6 @@
         </concat>
         <concat>
           <symbol inverse="true">2</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
           <symbol>2</symbol>
         </concat>
       </disj>
@@ -472,76 +468,98 @@
     <id>0</id>
     <number>6</number>
     <input>../use-cases/test.xml</input>
-    <arity>0</arity>
-    <selectivity>-</selectivity>
-    <multiplicity>0</multiplicity>
-    <conjunct>3</conjunct>
+    <arity>2</arity>
+    <selectivity>2</selectivity>
+    <multiplicity>1</multiplicity>
+    <conjunct>4</conjunct>
     <disjuncts>2-3</disjuncts>
-    <length>4-4</length>
+    <length>2-4</length>
   </metadata>
   <head>
+    <var>?x0</var>
+    <var>?x1</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
+      <star>
       <disj>
         <concat>
-          <symbol inverse="true">3</symbol>
-          <symbol inverse="true">0</symbol>
-          <symbol>0</symbol>
-          <symbol>3</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">3</symbol>
-          <symbol inverse="true">0</symbol>
-          <symbol>0</symbol>
-          <symbol>3</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">3</symbol>
-          <symbol inverse="true">0</symbol>
-          <symbol>0</symbol>
-          <symbol>3</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
         </concat>
       </disj>
+      </star>
       </conjunct>
       <conjunct src="?x0" trg="?x2">
+      <star>
       <disj>
         <concat>
-          <symbol inverse="true">3</symbol>
-          <symbol inverse="true">0</symbol>
-          <symbol>0</symbol>
-          <symbol>3</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">3</symbol>
-          <symbol>3</symbol>
-          <symbol inverse="true">3</symbol>
-          <symbol>3</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">3</symbol>
-          <symbol inverse="true">0</symbol>
-          <symbol>0</symbol>
-          <symbol>3</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
         </concat>
       </disj>
+      </star>
       </conjunct>
       <conjunct src="?x0" trg="?x3">
+      <star>
       <disj>
         <concat>
-          <symbol inverse="true">3</symbol>
-          <symbol>3</symbol>
-          <symbol inverse="true">3</symbol>
-          <symbol>3</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">3</symbol>
-          <symbol inverse="true">0</symbol>
-          <symbol>0</symbol>
-          <symbol>3</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
         </concat>
       </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x4">
+      <star>
+      <disj>
+        <concat>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+        </concat>
+        <concat>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+        </concat>
+        <concat>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+        </concat>
+      </disj>
+      </star>
       </conjunct>
     </body>
   </bodies>
@@ -552,14 +570,17 @@
     <id>0</id>
     <number>7</number>
     <input>../use-cases/test.xml</input>
-    <arity>0</arity>
+    <arity>3</arity>
     <selectivity>-</selectivity>
-    <multiplicity>0.666667</multiplicity>
-    <conjunct>3</conjunct>
-    <disjuncts>1-3</disjuncts>
-    <length>2-4</length>
+    <multiplicity>0</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>2-3</disjuncts>
+    <length>3-3</length>
   </metadata>
   <head>
+    <var>?x1</var>
+    <var>?x0</var>
+    <var>?x2</var>
   </head>
   <bodies>
     <body>
@@ -568,48 +589,71 @@
         <concat>
           <symbol inverse="true">2</symbol>
           <symbol inverse="true">1</symbol>
+          <symbol inverse="true">0</symbol>
         </concat>
         <concat>
           <symbol inverse="true">2</symbol>
           <symbol inverse="true">1</symbol>
+          <symbol inverse="true">0</symbol>
         </concat>
         <concat>
           <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-          <symbol inverse="true">2</symbol>
           <symbol inverse="true">1</symbol>
+          <symbol inverse="true">0</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x1" trg="?x2">
-      <star>
       <disj>
         <concat>
+          <symbol>0</symbol>
           <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
+          <symbol>2</symbol>
         </concat>
         <concat>
+          <symbol>0</symbol>
           <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
+          <symbol>2</symbol>
+        </concat>
+        <concat>
+          <symbol>0</symbol>
           <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
+          <symbol>2</symbol>
         </concat>
       </disj>
-      </star>
       </conjunct>
       <conjunct src="?x2" trg="?x3">
-      <star>
       <disj>
         <concat>
-          <symbol>1</symbol>
+          <symbol inverse="true">2</symbol>
           <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
+          <symbol>3</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">2</symbol>
           <symbol inverse="true">1</symbol>
+          <symbol>3</symbol>
         </concat>
       </disj>
-      </star>
+      </conjunct>
+      <conjunct src="?x3" trg="?x4">
+      <disj>
+        <concat>
+          <symbol inverse="true">3</symbol>
+          <symbol>1</symbol>
+          <symbol>2</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">3</symbol>
+          <symbol>1</symbol>
+          <symbol>2</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">3</symbol>
+          <symbol>1</symbol>
+          <symbol>2</symbol>
+        </concat>
+      </disj>
       </conjunct>
     </body>
   </bodies>
@@ -620,14 +664,18 @@
     <id>0</id>
     <number>8</number>
     <input>../use-cases/test.xml</input>
-    <arity>0</arity>
+    <arity>4</arity>
     <selectivity>-</selectivity>
     <multiplicity>0</multiplicity>
     <conjunct>3</conjunct>
-    <disjuncts>1-3</disjuncts>
-    <length>2-4</length>
+    <disjuncts>1-2</disjuncts>
+    <length>3-4</length>
   </metadata>
   <head>
+    <var>?x0</var>
+    <var>?x1</var>
+    <var>?x3</var>
+    <var>?x2</var>
   </head>
   <bodies>
     <body>
@@ -635,8 +683,8 @@
       <disj>
         <concat>
           <symbol>0</symbol>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
+          <symbol>3</symbol>
+          <symbol inverse="true">3</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -644,19 +692,9 @@
       <disj>
         <concat>
           <symbol>0</symbol>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
           <symbol>3</symbol>
-        </concat>
-        <concat>
-          <symbol>0</symbol>
-          <symbol>3</symbol>
-        </concat>
-        <concat>
-          <symbol>0</symbol>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>3</symbol>
+          <symbol inverse="true">3</symbol>
+          <symbol inverse="true">0</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -665,10 +703,14 @@
         <concat>
           <symbol>0</symbol>
           <symbol>3</symbol>
+          <symbol inverse="true">3</symbol>
+          <symbol inverse="true">0</symbol>
         </concat>
         <concat>
           <symbol>0</symbol>
           <symbol>3</symbol>
+          <symbol inverse="true">3</symbol>
+          <symbol inverse="true">0</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -685,8 +727,8 @@
     <selectivity>-</selectivity>
     <multiplicity>0.333333</multiplicity>
     <conjunct>3</conjunct>
-    <disjuncts>1-2</disjuncts>
-    <length>2-3</length>
+    <disjuncts>2-3</disjuncts>
+    <length>2-4</length>
   </metadata>
   <head>
   </head>
@@ -696,6 +738,27 @@
       <disj>
         <concat>
           <symbol inverse="true">2</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol>2</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">2</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol>2</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
+          <symbol inverse="true">2</symbol>
+          <symbol>2</symbol>
+          <symbol inverse="true">2</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">2</symbol>
           <symbol>2</symbol>
           <symbol inverse="true">2</symbol>
         </concat>
@@ -706,10 +769,18 @@
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x1" trg="?x2">
+      <conjunct src="?x2" trg="?x3">
       <star>
       <disj>
         <concat>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
           <symbol inverse="true">1</symbol>
           <symbol>1</symbol>
         </concat>
@@ -719,15 +790,6 @@
         </concat>
       </disj>
       </star>
-      </conjunct>
-      <conjunct src="?x2" trg="?x3">
-      <disj>
-        <concat>
-          <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
-          <symbol>2</symbol>
-        </concat>
-      </disj>
       </conjunct>
     </body>
   </bodies>
@@ -740,10 +802,10 @@
     <input>../use-cases/test.xml</input>
     <arity>0</arity>
     <selectivity>-</selectivity>
-    <multiplicity>0.666667</multiplicity>
+    <multiplicity>0</multiplicity>
     <conjunct>3</conjunct>
-    <disjuncts>1-2</disjuncts>
-    <length>2-4</length>
+    <disjuncts>2-3</disjuncts>
+    <length>3-3</length>
   </metadata>
   <head>
   </head>
@@ -752,46 +814,49 @@
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol>0</symbol>
           <symbol>1</symbol>
           <symbol>2</symbol>
           <symbol inverse="true">2</symbol>
         </concat>
+        <concat>
+          <symbol>3</symbol>
+          <symbol inverse="true">3</symbol>
+          <symbol>1</symbol>
+        </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x1" trg="?x2">
-      <star>
+      <conjunct src="?x0" trg="?x2">
       <disj>
         <concat>
-          <symbol inverse="true">1</symbol>
           <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
+          <symbol>2</symbol>
+          <symbol inverse="true">2</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">1</symbol>
           <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
+          <symbol>2</symbol>
+          <symbol inverse="true">2</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">0</symbol>
+          <symbol>0</symbol>
           <symbol>1</symbol>
         </concat>
       </disj>
-      </star>
       </conjunct>
-      <conjunct src="?x2" trg="?x3">
-      <star>
+      <conjunct src="?x0" trg="?x3">
       <disj>
         <concat>
-          <symbol inverse="true">1</symbol>
           <symbol>1</symbol>
+          <symbol>2</symbol>
+          <symbol inverse="true">2</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
+          <symbol>3</symbol>
+          <symbol inverse="true">3</symbol>
           <symbol>1</symbol>
         </concat>
       </disj>
-      </star>
       </conjunct>
     </body>
   </bodies>
@@ -806,8 +871,8 @@
     <selectivity>-</selectivity>
     <multiplicity>0</multiplicity>
     <conjunct>3</conjunct>
-    <disjuncts>1-2</disjuncts>
-    <length>2-4</length>
+    <disjuncts>2-3</disjuncts>
+    <length>3-3</length>
   </metadata>
   <head>
     <var>?x0</var>
@@ -817,40 +882,47 @@
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
+          <symbol>0</symbol>
+          <symbol inverse="true">0</symbol>
+          <symbol>0</symbol>
+        </concat>
+        <concat>
+          <symbol>0</symbol>
+          <symbol>3</symbol>
+          <symbol inverse="true">3</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x0" trg="?x2">
       <disj>
         <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
-          <symbol>2</symbol>
+          <symbol>0</symbol>
+          <symbol inverse="true">0</symbol>
+          <symbol>0</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
-          <symbol>2</symbol>
+          <symbol>0</symbol>
+          <symbol>3</symbol>
+          <symbol inverse="true">3</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x0" trg="?x3">
       <disj>
         <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
+          <symbol>0</symbol>
+          <symbol inverse="true">0</symbol>
+          <symbol>0</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
+          <symbol>0</symbol>
+          <symbol inverse="true">0</symbol>
+          <symbol>0</symbol>
+        </concat>
+        <concat>
+          <symbol>0</symbol>
+          <symbol>3</symbol>
+          <symbol inverse="true">3</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -863,77 +935,78 @@
     <id>0</id>
     <number>12</number>
     <input>../use-cases/test.xml</input>
-    <arity>2</arity>
-    <selectivity>2</selectivity>
-    <multiplicity>0.75</multiplicity>
+    <arity>0</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>0</multiplicity>
     <conjunct>4</conjunct>
-    <disjuncts>1-3</disjuncts>
+    <disjuncts>2-2</disjuncts>
     <length>2-4</length>
   </metadata>
   <head>
-    <var>?x0</var>
-    <var>?x2</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
-      <star>
       <disj>
         <concat>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
+          <symbol inverse="true">0</symbol>
+          <symbol>0</symbol>
           <symbol>1</symbol>
           <symbol inverse="true">1</symbol>
         </concat>
         <concat>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
+          <symbol inverse="true">0</symbol>
+          <symbol>0</symbol>
           <symbol>1</symbol>
           <symbol inverse="true">1</symbol>
         </concat>
       </disj>
-      </star>
       </conjunct>
-      <conjunct src="?x1" trg="?x2">
+      <conjunct src="?x0" trg="?x2">
       <disj>
+        <concat>
+          <symbol inverse="true">0</symbol>
+          <symbol>0</symbol>
+        </concat>
         <concat>
           <symbol>3</symbol>
           <symbol inverse="true">3</symbol>
           <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x0" trg="?x3">
-      <star>
       <disj>
         <concat>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
-        </concat>
-        <concat>
+          <symbol inverse="true">0</symbol>
+          <symbol>0</symbol>
           <symbol>1</symbol>
           <symbol inverse="true">1</symbol>
         </concat>
         <concat>
           <symbol>1</symbol>
+          <symbol>2</symbol>
+          <symbol inverse="true">2</symbol>
           <symbol inverse="true">1</symbol>
         </concat>
       </disj>
-      </star>
       </conjunct>
-      <conjunct src="?x2" trg="?x4">
-      <star>
+      <conjunct src="?x0" trg="?x4">
       <disj>
         <concat>
           <symbol>1</symbol>
           <symbol inverse="true">1</symbol>
+          <symbol>3</symbol>
+          <symbol inverse="true">3</symbol>
+        </concat>
+        <concat>
           <symbol>1</symbol>
+          <symbol>2</symbol>
+          <symbol inverse="true">2</symbol>
           <symbol inverse="true">1</symbol>
         </concat>
       </disj>
-      </star>
       </conjunct>
     </body>
   </bodies>
@@ -949,54 +1022,50 @@
     <multiplicity>0</multiplicity>
     <conjunct>3</conjunct>
     <disjuncts>1-3</disjuncts>
-    <length>3-3</length>
+    <length>2-4</length>
   </metadata>
   <head>
-    <var>?x1</var>
     <var>?x0</var>
     <var>?x2</var>
+    <var>?x1</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol inverse="true">3</symbol>
+          <symbol>0</symbol>
           <symbol>1</symbol>
           <symbol inverse="true">1</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">3</symbol>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
+          <symbol>3</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x0" trg="?x2">
       <disj>
         <concat>
-          <symbol inverse="true">3</symbol>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">3</symbol>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">3</symbol>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
+          <symbol>0</symbol>
+          <symbol>3</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x0" trg="?x3">
       <disj>
         <concat>
-          <symbol inverse="true">3</symbol>
+          <symbol>0</symbol>
           <symbol>1</symbol>
           <symbol inverse="true">1</symbol>
+          <symbol>3</symbol>
+        </concat>
+        <concat>
+          <symbol>0</symbol>
+          <symbol>3</symbol>
+        </concat>
+        <concat>
+          <symbol>0</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>3</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -1009,61 +1078,68 @@
     <id>0</id>
     <number>14</number>
     <input>../use-cases/test.xml</input>
-    <arity>0</arity>
+    <arity>1</arity>
     <selectivity>-</selectivity>
-    <multiplicity>1</multiplicity>
-    <conjunct>3</conjunct>
-    <disjuncts>1-2</disjuncts>
-    <length>4-4</length>
+    <multiplicity>0.5</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
   </metadata>
   <head>
+    <var>?x0</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol>0</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+        </concat>
+        <concat>
+          <symbol>0</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
       <star>
       <disj>
         <concat>
           <symbol>1</symbol>
           <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+        </concat>
+        <concat>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+        </concat>
+        <concat>
           <symbol>1</symbol>
           <symbol inverse="true">1</symbol>
         </concat>
       </disj>
       </star>
       </conjunct>
-      <conjunct src="?x0" trg="?x2">
-      <star>
+      <conjunct src="?x0" trg="?x3">
       <disj>
         <concat>
+          <symbol>0</symbol>
           <symbol>1</symbol>
           <symbol inverse="true">1</symbol>
           <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
-        </concat>
-        <concat>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
         </concat>
       </disj>
-      </star>
       </conjunct>
-      <conjunct src="?x1" trg="?x3">
+      <conjunct src="?x3" trg="?x2">
       <star>
       <disj>
         <concat>
-          <symbol>1</symbol>
           <symbol inverse="true">1</symbol>
           <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
-        </concat>
-        <concat>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
         </concat>
       </disj>
       </star>
@@ -1080,65 +1156,75 @@
     <arity>4</arity>
     <selectivity>-</selectivity>
     <multiplicity>0</multiplicity>
-    <conjunct>3</conjunct>
-    <disjuncts>2-3</disjuncts>
+    <conjunct>4</conjunct>
+    <disjuncts>1-3</disjuncts>
     <length>3-4</length>
   </metadata>
   <head>
-    <var>?x3</var>
     <var>?x1</var>
     <var>?x2</var>
     <var>?x0</var>
+    <var>?x3</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol>3</symbol>
           <symbol inverse="true">3</symbol>
-          <symbol>3</symbol>
+          <symbol inverse="true">0</symbol>
+          <symbol>0</symbol>
         </concat>
         <concat>
-          <symbol>3</symbol>
           <symbol inverse="true">3</symbol>
           <symbol>3</symbol>
+          <symbol inverse="true">3</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">3</symbol>
+          <symbol>3</symbol>
+          <symbol inverse="true">3</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x1" trg="?x2">
       <disj>
         <concat>
+          <symbol inverse="true">0</symbol>
+          <symbol>0</symbol>
+          <symbol>3</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <disj>
+        <concat>
           <symbol inverse="true">3</symbol>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
+          <symbol>3</symbol>
+          <symbol inverse="true">3</symbol>
           <symbol inverse="true">0</symbol>
         </concat>
         <concat>
           <symbol inverse="true">3</symbol>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol inverse="true">0</symbol>
-        </concat>
-        <concat>
+          <symbol>3</symbol>
           <symbol inverse="true">3</symbol>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
           <symbol inverse="true">0</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x2" trg="?x3">
+      <conjunct src="?x2" trg="?x4">
       <disj>
         <concat>
-          <symbol>0</symbol>
-          <symbol>3</symbol>
           <symbol inverse="true">3</symbol>
+          <symbol inverse="true">0</symbol>
+          <symbol>0</symbol>
+          <symbol inverse="true">0</symbol>
         </concat>
         <concat>
-          <symbol>0</symbol>
-          <symbol>3</symbol>
           <symbol inverse="true">3</symbol>
+          <symbol inverse="true">0</symbol>
+          <symbol>0</symbol>
+          <symbol inverse="true">0</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -1151,57 +1237,81 @@
     <id>0</id>
     <number>16</number>
     <input>../use-cases/test.xml</input>
-    <arity>2</arity>
-    <selectivity>1</selectivity>
-    <multiplicity>0</multiplicity>
-    <conjunct>3</conjunct>
+    <arity>4</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>0.5</multiplicity>
+    <conjunct>4</conjunct>
     <disjuncts>1-3</disjuncts>
-    <length>3-3</length>
+    <length>2-4</length>
   </metadata>
   <head>
-    <var>?x0</var>
     <var>?x1</var>
+    <var>?x3</var>
+    <var>?x0</var>
+    <var>?x2</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
+      <star>
       <disj>
         <concat>
-          <symbol inverse="true">2</symbol>
           <symbol inverse="true">1</symbol>
-          <symbol>3</symbol>
+          <symbol>1</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <disj>
+        <concat>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x0" trg="?x2">
+      <conjunct src="?x3" trg="?x4">
       <disj>
         <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol inverse="true">1</symbol>
+          <symbol inverse="true">0</symbol>
+          <symbol>0</symbol>
           <symbol>3</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>3</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x0" trg="?x3">
-      <disj>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol inverse="true">1</symbol>
+          <symbol inverse="true">0</symbol>
+          <symbol>0</symbol>
           <symbol>3</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>3</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol inverse="true">1</symbol>
+          <symbol inverse="true">0</symbol>
+          <symbol>0</symbol>
           <symbol>3</symbol>
         </concat>
       </disj>
@@ -1215,75 +1325,11 @@
     <id>0</id>
     <number>17</number>
     <input>../use-cases/test.xml</input>
-    <arity>0</arity>
-    <selectivity>-</selectivity>
-    <multiplicity>0.25</multiplicity>
-    <conjunct>4</conjunct>
-    <disjuncts>1-2</disjuncts>
-    <length>2-4</length>
-  </metadata>
-  <head>
-  </head>
-  <bodies>
-    <body>
-      <conjunct src="?x0" trg="?x1">
-      <disj>
-        <concat>
-          <symbol inverse="true">3</symbol>
-          <symbol inverse="true">0</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x1" trg="?x2">
-      <disj>
-        <concat>
-          <symbol>0</symbol>
-          <symbol>3</symbol>
-          <symbol inverse="true">3</symbol>
-          <symbol>3</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x2" trg="?x3">
-      <disj>
-        <concat>
-          <symbol inverse="true">3</symbol>
-          <symbol>1</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x3" trg="?x4">
-      <star>
-      <disj>
-        <concat>
-          <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
-        </concat>
-      </disj>
-      </star>
-      </conjunct>
-    </body>
-  </bodies>
-</query>
-
-<query>
-  <metadata>
-    <id>0</id>
-    <number>18</number>
-    <input>../use-cases/test.xml</input>
     <arity>1</arity>
     <selectivity>-</selectivity>
     <multiplicity>0</multiplicity>
     <conjunct>3</conjunct>
-    <disjuncts>2-3</disjuncts>
+    <disjuncts>1-3</disjuncts>
     <length>2-4</length>
   </metadata>
   <head>
@@ -1294,56 +1340,139 @@
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol inverse="true">3</symbol>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
+          <symbol inverse="true">2</symbol>
+          <symbol>2</symbol>
+          <symbol inverse="true">2</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">3</symbol>
-          <symbol>1</symbol>
+          <symbol inverse="true">2</symbol>
+          <symbol>2</symbol>
+          <symbol inverse="true">2</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
           <symbol inverse="true">1</symbol>
           <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <disj>
+        <concat>
+          <symbol>1</symbol>
+          <symbol>2</symbol>
+        </concat>
+        <concat>
+          <symbol>3</symbol>
+          <symbol inverse="true">3</symbol>
+          <symbol>1</symbol>
+          <symbol>2</symbol>
+        </concat>
+        <concat>
+          <symbol>3</symbol>
+          <symbol inverse="true">3</symbol>
+          <symbol>1</symbol>
+          <symbol>2</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>18</number>
+    <input>../use-cases/test.xml</input>
+    <arity>0</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>3-3</disjuncts>
+    <length>3-3</length>
+  </metadata>
+  <head>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol inverse="true">2</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>3</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">2</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>3</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">2</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>3</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x0" trg="?x2">
       <disj>
         <concat>
-          <symbol inverse="true">3</symbol>
-          <symbol>1</symbol>
+          <symbol inverse="true">2</symbol>
           <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
+          <symbol>3</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">3</symbol>
-          <symbol>1</symbol>
+          <symbol inverse="true">2</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>3</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">3</symbol>
-          <symbol>1</symbol>
+          <symbol inverse="true">2</symbol>
           <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
+          <symbol>3</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x0" trg="?x3">
       <disj>
         <concat>
-          <symbol inverse="true">3</symbol>
-          <symbol>1</symbol>
+          <symbol inverse="true">2</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>3</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">3</symbol>
-          <symbol>1</symbol>
+          <symbol inverse="true">2</symbol>
           <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
+          <symbol>3</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">3</symbol>
-          <symbol>1</symbol>
+          <symbol inverse="true">2</symbol>
           <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
+          <symbol>3</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x4">
+      <disj>
+        <concat>
+          <symbol inverse="true">2</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>3</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">2</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>3</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">2</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>3</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -1355,62 +1484,6 @@
   <metadata>
     <id>0</id>
     <number>19</number>
-    <input>../use-cases/test.xml</input>
-    <arity>2</arity>
-    <selectivity>2</selectivity>
-    <multiplicity>1</multiplicity>
-    <conjunct>3</conjunct>
-    <disjuncts>1-1</disjuncts>
-    <length>2-4</length>
-  </metadata>
-  <head>
-    <var>?x0</var>
-    <var>?x1</var>
-  </head>
-  <bodies>
-    <body>
-      <conjunct src="?x0" trg="?x1">
-      <star>
-      <disj>
-        <concat>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
-        </concat>
-      </disj>
-      </star>
-      </conjunct>
-      <conjunct src="?x0" trg="?x2">
-      <star>
-      <disj>
-        <concat>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
-        </concat>
-      </disj>
-      </star>
-      </conjunct>
-      <conjunct src="?x0" trg="?x3">
-      <star>
-      <disj>
-        <concat>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
-        </concat>
-      </disj>
-      </star>
-      </conjunct>
-    </body>
-  </bodies>
-</query>
-
-<query>
-  <metadata>
-    <id>0</id>
-    <number>20</number>
     <input>../use-cases/test.xml</input>
     <arity>2</arity>
     <selectivity>0</selectivity>
@@ -1430,16 +1503,6 @@
         <concat>
           <symbol inverse="true">2</symbol>
           <symbol>2</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
           <symbol inverse="true">2</symbol>
           <symbol>2</symbol>
         </concat>
@@ -1449,8 +1512,18 @@
       <disj>
         <concat>
           <symbol inverse="true">2</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
+          <symbol>2</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">2</symbol>
+          <symbol>2</symbol>
+          <symbol inverse="true">2</symbol>
+          <symbol>2</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">2</symbol>
+          <symbol>2</symbol>
+          <symbol inverse="true">2</symbol>
           <symbol>2</symbol>
         </concat>
       </disj>
@@ -1459,8 +1532,8 @@
       <disj>
         <concat>
           <symbol inverse="true">2</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
+          <symbol>2</symbol>
+          <symbol inverse="true">2</symbol>
           <symbol>2</symbol>
         </concat>
         <concat>
@@ -1475,9 +1548,88 @@
       <disj>
         <concat>
           <symbol inverse="true">2</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol>2</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">2</symbol>
+          <symbol>2</symbol>
+          <symbol inverse="true">2</symbol>
+          <symbol>2</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">2</symbol>
+          <symbol>2</symbol>
+          <symbol inverse="true">2</symbol>
           <symbol>2</symbol>
         </concat>
       </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>20</number>
+    <input>../use-cases/test.xml</input>
+    <arity>3</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>1</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>1-2</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x2</var>
+    <var>?x1</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+        </concat>
+      </disj>
+      </star>
       </conjunct>
     </body>
   </bodies>
@@ -1488,62 +1640,76 @@
     <id>0</id>
     <number>21</number>
     <input>../use-cases/test.xml</input>
-    <arity>4</arity>
-    <selectivity>-</selectivity>
-    <multiplicity>0</multiplicity>
+    <arity>2</arity>
+    <selectivity>2</selectivity>
+    <multiplicity>1</multiplicity>
     <conjunct>3</conjunct>
-    <disjuncts>1-3</disjuncts>
-    <length>3-3</length>
+    <disjuncts>2-3</disjuncts>
+    <length>2-4</length>
   </metadata>
   <head>
-    <var>?x3</var>
-    <var>?x1</var>
     <var>?x0</var>
-    <var>?x2</var>
+    <var>?x1</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
+      <star>
       <disj>
         <concat>
-          <symbol>2</symbol>
-          <symbol inverse="true">2</symbol>
+          <symbol>1</symbol>
           <symbol inverse="true">1</symbol>
         </concat>
         <concat>
+          <symbol>1</symbol>
           <symbol inverse="true">1</symbol>
-          <symbol>3</symbol>
-          <symbol inverse="true">3</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
         </concat>
       </disj>
+      </star>
       </conjunct>
       <conjunct src="?x0" trg="?x2">
+      <star>
       <disj>
         <concat>
+          <symbol>1</symbol>
           <symbol inverse="true">1</symbol>
-          <symbol>3</symbol>
-          <symbol inverse="true">3</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
         </concat>
         <concat>
+          <symbol>1</symbol>
           <symbol inverse="true">1</symbol>
-          <symbol inverse="true">0</symbol>
-          <symbol>0</symbol>
         </concat>
         <concat>
+          <symbol>1</symbol>
           <symbol inverse="true">1</symbol>
-          <symbol inverse="true">0</symbol>
-          <symbol>0</symbol>
         </concat>
       </disj>
+      </star>
       </conjunct>
       <conjunct src="?x0" trg="?x3">
+      <star>
       <disj>
         <concat>
-          <symbol>2</symbol>
-          <symbol inverse="true">2</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+        </concat>
+        <concat>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+        </concat>
+        <concat>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
           <symbol inverse="true">1</symbol>
         </concat>
       </disj>
+      </star>
       </conjunct>
     </body>
   </bodies>
@@ -1554,10 +1720,10 @@
     <id>0</id>
     <number>22</number>
     <input>../use-cases/test.xml</input>
-    <arity>4</arity>
+    <arity>3</arity>
     <selectivity>-</selectivity>
-    <multiplicity>0.75</multiplicity>
-    <conjunct>4</conjunct>
+    <multiplicity>1</multiplicity>
+    <conjunct>3</conjunct>
     <disjuncts>1-3</disjuncts>
     <length>2-4</length>
   </metadata>
@@ -1565,23 +1731,10 @@
     <var>?x2</var>
     <var>?x0</var>
     <var>?x1</var>
-    <var>?x3</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
-      <disj>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol inverse="true">1</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol inverse="true">1</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x1" trg="?x2">
       <star>
       <disj>
         <concat>
@@ -1591,30 +1744,34 @@
       </disj>
       </star>
       </conjunct>
-      <conjunct src="?x2" trg="?x3">
+      <conjunct src="?x0" trg="?x2">
       <star>
       <disj>
         <concat>
           <symbol>1</symbol>
           <symbol inverse="true">1</symbol>
-        </concat>
-        <concat>
           <symbol>1</symbol>
           <symbol inverse="true">1</symbol>
         </concat>
         <concat>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+        </concat>
+        <concat>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
           <symbol>1</symbol>
           <symbol inverse="true">1</symbol>
         </concat>
       </disj>
       </star>
       </conjunct>
-      <conjunct src="?x3" trg="?x4">
+      <conjunct src="?x1" trg="?x3">
       <star>
       <disj>
         <concat>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
           <symbol>1</symbol>
           <symbol inverse="true">1</symbol>
         </concat>
@@ -1634,8 +1791,8 @@
     <selectivity>-</selectivity>
     <multiplicity>0</multiplicity>
     <conjunct>3</conjunct>
-    <disjuncts>2-3</disjuncts>
-    <length>4-4</length>
+    <disjuncts>1-3</disjuncts>
+    <length>3-4</length>
   </metadata>
   <head>
     <var>?x0</var>
@@ -1646,58 +1803,42 @@
       <disj>
         <concat>
           <symbol inverse="true">3</symbol>
-          <symbol>3</symbol>
-          <symbol inverse="true">3</symbol>
-          <symbol>1</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">3</symbol>
-          <symbol>3</symbol>
-          <symbol inverse="true">3</symbol>
-          <symbol>1</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">3</symbol>
-          <symbol>3</symbol>
-          <symbol inverse="true">3</symbol>
-          <symbol>1</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x0" trg="?x2">
-      <disj>
-        <concat>
-          <symbol inverse="true">3</symbol>
           <symbol>1</symbol>
           <symbol>2</symbol>
-          <symbol inverse="true">2</symbol>
         </concat>
         <concat>
           <symbol inverse="true">3</symbol>
           <symbol>1</symbol>
           <symbol>2</symbol>
-          <symbol inverse="true">2</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">3</symbol>
+          <symbol>1</symbol>
+          <symbol>2</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x0" trg="?x3">
+      <conjunct src="?x1" trg="?x2">
       <disj>
         <concat>
-          <symbol inverse="true">3</symbol>
-          <symbol inverse="true">0</symbol>
-          <symbol>0</symbol>
+          <symbol inverse="true">2</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <disj>
+        <concat>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
           <symbol>1</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">3</symbol>
-          <symbol inverse="true">0</symbol>
-          <symbol>0</symbol>
+          <symbol inverse="true">1</symbol>
           <symbol>1</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">3</symbol>
-          <symbol>3</symbol>
-          <symbol inverse="true">3</symbol>
+          <symbol inverse="true">1</symbol>
           <symbol>1</symbol>
         </concat>
       </disj>
@@ -1711,56 +1852,64 @@
     <id>0</id>
     <number>24</number>
     <input>../use-cases/test.xml</input>
-    <arity>3</arity>
-    <selectivity>-</selectivity>
-    <multiplicity>0.333333</multiplicity>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>0</multiplicity>
     <conjunct>3</conjunct>
-    <disjuncts>1-3</disjuncts>
+    <disjuncts>2-3</disjuncts>
     <length>2-4</length>
   </metadata>
   <head>
     <var>?x0</var>
     <var>?x1</var>
-    <var>?x2</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol inverse="true">1</symbol>
+          <symbol inverse="true">3</symbol>
           <symbol>1</symbol>
           <symbol inverse="true">1</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x1" trg="?x2">
-      <disj>
-        <concat>
           <symbol inverse="true">0</symbol>
-          <symbol>0</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">3</symbol>
+          <symbol inverse="true">0</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x2" trg="?x3">
-      <star>
+      <conjunct src="?x0" trg="?x2">
       <disj>
         <concat>
+          <symbol inverse="true">3</symbol>
           <symbol>1</symbol>
           <symbol inverse="true">1</symbol>
+          <symbol inverse="true">0</symbol>
         </concat>
         <concat>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
-        </concat>
-        <concat>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
+          <symbol inverse="true">3</symbol>
+          <symbol inverse="true">0</symbol>
         </concat>
       </disj>
-      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <disj>
+        <concat>
+          <symbol inverse="true">3</symbol>
+          <symbol inverse="true">0</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">3</symbol>
+          <symbol inverse="true">0</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">3</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol inverse="true">0</symbol>
+        </concat>
+      </disj>
       </conjunct>
     </body>
   </bodies>
@@ -1771,16 +1920,17 @@
     <id>0</id>
     <number>25</number>
     <input>../use-cases/test.xml</input>
-    <arity>2</arity>
-    <selectivity>1</selectivity>
+    <arity>3</arity>
+    <selectivity>-</selectivity>
     <multiplicity>0</multiplicity>
     <conjunct>3</conjunct>
-    <disjuncts>2-3</disjuncts>
+    <disjuncts>1-3</disjuncts>
     <length>2-4</length>
   </metadata>
   <head>
+    <var>?x1</var>
+    <var>?x2</var>
     <var>?x0</var>
-    <var>?x3</var>
   </head>
   <bodies>
     <body>
@@ -1788,54 +1938,39 @@
       <disj>
         <concat>
           <symbol inverse="true">2</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>3</symbol>
+          <symbol>2</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <disj>
+        <concat>
+          <symbol inverse="true">2</symbol>
+          <symbol>2</symbol>
         </concat>
         <concat>
           <symbol inverse="true">2</symbol>
           <symbol inverse="true">1</symbol>
-          <symbol>3</symbol>
+          <symbol>1</symbol>
+          <symbol>2</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x3">
+      <disj>
+        <concat>
+          <symbol inverse="true">2</symbol>
+          <symbol>2</symbol>
         </concat>
         <concat>
           <symbol inverse="true">2</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>3</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x1" trg="?x2">
-      <disj>
-        <concat>
-          <symbol inverse="true">3</symbol>
-          <symbol inverse="true">0</symbol>
-          <symbol>0</symbol>
-          <symbol>3</symbol>
+          <symbol>2</symbol>
+          <symbol inverse="true">2</symbol>
+          <symbol>2</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">3</symbol>
-          <symbol inverse="true">0</symbol>
-          <symbol>0</symbol>
-          <symbol>3</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x2" trg="?x3">
-      <disj>
-        <concat>
-          <symbol inverse="true">3</symbol>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>3</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">3</symbol>
-          <symbol>3</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">3</symbol>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>3</symbol>
+          <symbol inverse="true">2</symbol>
+          <symbol>2</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -1848,72 +1983,76 @@
     <id>0</id>
     <number>26</number>
     <input>../use-cases/test.xml</input>
-    <arity>1</arity>
-    <selectivity>-</selectivity>
-    <multiplicity>0.25</multiplicity>
+    <arity>2</arity>
+    <selectivity>2</selectivity>
+    <multiplicity>1</multiplicity>
     <conjunct>4</conjunct>
     <disjuncts>1-2</disjuncts>
     <length>2-4</length>
   </metadata>
   <head>
     <var>?x0</var>
+    <var>?x1</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
-      <disj>
-        <concat>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x1" trg="?x2">
-      <disj>
-        <concat>
-          <symbol inverse="true">1</symbol>
-          <symbol inverse="true">0</symbol>
-          <symbol>0</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">1</symbol>
-          <symbol>3</symbol>
-          <symbol inverse="true">3</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x2" trg="?x3">
       <star>
       <disj>
         <concat>
-          <symbol>1</symbol>
           <symbol inverse="true">1</symbol>
           <symbol>1</symbol>
           <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
         </concat>
         <concat>
-          <symbol>1</symbol>
           <symbol inverse="true">1</symbol>
           <symbol>1</symbol>
           <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
         </concat>
       </disj>
       </star>
       </conjunct>
-      <conjunct src="?x3" trg="?x4">
+      <conjunct src="?x0" trg="?x2">
+      <star>
       <disj>
         <concat>
+          <symbol inverse="true">1</symbol>
           <symbol>1</symbol>
-          <symbol>2</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
         </concat>
         <concat>
-          <symbol>3</symbol>
-          <symbol inverse="true">3</symbol>
+          <symbol inverse="true">1</symbol>
           <symbol>1</symbol>
-          <symbol>2</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
         </concat>
       </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x4">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+        </concat>
+      </disj>
+      </star>
       </conjunct>
     </body>
   </bodies>
@@ -1927,20 +2066,253 @@
     <arity>4</arity>
     <selectivity>-</selectivity>
     <multiplicity>0</multiplicity>
-    <conjunct>3</conjunct>
-    <disjuncts>1-2</disjuncts>
-    <length>3-4</length>
+    <conjunct>4</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
   </metadata>
   <head>
+    <var>?x0</var>
     <var>?x2</var>
     <var>?x1</var>
     <var>?x3</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>3</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <disj>
+        <concat>
+          <symbol inverse="true">1</symbol>
+          <symbol>3</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <disj>
+        <concat>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>3</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x4">
+      <disj>
+        <concat>
+          <symbol inverse="true">1</symbol>
+          <symbol>3</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">1</symbol>
+          <symbol>3</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>3</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>28</number>
+    <input>../use-cases/test.xml</input>
+    <arity>3</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>2-3</disjuncts>
+    <length>3-3</length>
+  </metadata>
+  <head>
+    <var>?x1</var>
+    <var>?x0</var>
+    <var>?x2</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol inverse="true">0</symbol>
+        </concat>
+        <concat>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol inverse="true">0</symbol>
+        </concat>
+        <concat>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol inverse="true">0</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <disj>
+        <concat>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol inverse="true">0</symbol>
+        </concat>
+        <concat>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol inverse="true">0</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <disj>
+        <concat>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol inverse="true">0</symbol>
+        </concat>
+        <concat>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol inverse="true">0</symbol>
+        </concat>
+        <concat>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol inverse="true">0</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>29</number>
+    <input>../use-cases/test.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>1</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x2</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+        </concat>
+        <concat>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+        </concat>
+        <concat>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x3" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+        </concat>
+        <concat>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>30</number>
+    <input>../use-cases/test.xml</input>
+    <arity>1</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>0.25</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>2-3</disjuncts>
+    <length>3-4</length>
+  </metadata>
+  <head>
     <var>?x0</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
       <disj>
+        <concat>
+          <symbol inverse="true">2</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol inverse="true">0</symbol>
+        </concat>
         <concat>
           <symbol inverse="true">2</symbol>
           <symbol inverse="true">1</symbol>
@@ -1954,242 +2326,56 @@
           <symbol>0</symbol>
           <symbol>3</symbol>
           <symbol inverse="true">3</symbol>
+          <symbol>3</symbol>
+        </concat>
+        <concat>
+          <symbol>0</symbol>
           <symbol inverse="true">0</symbol>
+          <symbol>0</symbol>
+          <symbol>3</symbol>
+        </concat>
+        <concat>
+          <symbol>0</symbol>
+          <symbol inverse="true">0</symbol>
+          <symbol>0</symbol>
+          <symbol>3</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x2" trg="?x3">
-      <disj>
-        <concat>
-          <symbol>0</symbol>
-          <symbol>1</symbol>
-          <symbol>2</symbol>
-        </concat>
-        <concat>
-          <symbol>0</symbol>
-          <symbol>1</symbol>
-          <symbol>2</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-    </body>
-  </bodies>
-</query>
-
-<query>
-  <metadata>
-    <id>0</id>
-    <number>28</number>
-    <input>../use-cases/test.xml</input>
-    <arity>2</arity>
-    <selectivity>0</selectivity>
-    <multiplicity>0</multiplicity>
-    <conjunct>4</conjunct>
-    <disjuncts>1-3</disjuncts>
-    <length>2-4</length>
-  </metadata>
-  <head>
-    <var>?x0</var>
-    <var>?x1</var>
-  </head>
-  <bodies>
-    <body>
-      <conjunct src="?x0" trg="?x1">
-      <disj>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
-          <symbol>2</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x0" trg="?x2">
-      <disj>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
-          <symbol>2</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x0" trg="?x3">
-      <disj>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
-          <symbol>2</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x0" trg="?x4">
-      <disj>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-    </body>
-  </bodies>
-</query>
-
-<query>
-  <metadata>
-    <id>0</id>
-    <number>29</number>
-    <input>../use-cases/test.xml</input>
-    <arity>0</arity>
-    <selectivity>-</selectivity>
-    <multiplicity>0</multiplicity>
-    <conjunct>4</conjunct>
-    <disjuncts>1-3</disjuncts>
-    <length>3-3</length>
-  </metadata>
-  <head>
-  </head>
-  <bodies>
-    <body>
-      <conjunct src="?x0" trg="?x1">
-      <disj>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-          <symbol inverse="true">2</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x0" trg="?x2">
-      <disj>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-          <symbol inverse="true">2</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x0" trg="?x3">
-      <disj>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-          <symbol inverse="true">2</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x0" trg="?x4">
-      <disj>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-          <symbol inverse="true">2</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-    </body>
-  </bodies>
-</query>
-
-<query>
-  <metadata>
-    <id>0</id>
-    <number>30</number>
-    <input>../use-cases/test.xml</input>
-    <arity>1</arity>
-    <selectivity>-</selectivity>
-    <multiplicity>0.666667</multiplicity>
-    <conjunct>3</conjunct>
-    <disjuncts>1-3</disjuncts>
-    <length>2-4</length>
-  </metadata>
-  <head>
-    <var>?x0</var>
-  </head>
-  <bodies>
-    <body>
-      <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
           <symbol inverse="true">3</symbol>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
+          <symbol inverse="true">0</symbol>
+          <symbol>0</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">3</symbol>
+          <symbol inverse="true">0</symbol>
+          <symbol>0</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x1" trg="?x2">
+      <conjunct src="?x3" trg="?x4">
       <star>
       <disj>
         <concat>
-          <symbol inverse="true">1</symbol>
           <symbol>1</symbol>
           <symbol inverse="true">1</symbol>
           <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">1</symbol>
           <symbol>1</symbol>
           <symbol inverse="true">1</symbol>
           <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
-        </concat>
-      </disj>
-      </star>
-      </conjunct>
-      <conjunct src="?x2" trg="?x3">
-      <star>
-      <disj>
-        <concat>
-          <symbol inverse="true">1</symbol>
           <symbol>1</symbol>
           <symbol inverse="true">1</symbol>
           <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
         </concat>
       </disj>
       </star>
@@ -2203,35 +2389,31 @@
     <id>0</id>
     <number>31</number>
     <input>../use-cases/test.xml</input>
-    <arity>0</arity>
-    <selectivity>-</selectivity>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
     <multiplicity>0</multiplicity>
     <conjunct>3</conjunct>
-    <disjuncts>3-3</disjuncts>
-    <length>4-4</length>
+    <disjuncts>2-3</disjuncts>
+    <length>2-4</length>
   </metadata>
   <head>
+    <var>?x0</var>
+    <var>?x1</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol>0</symbol>
-          <symbol>3</symbol>
           <symbol inverse="true">3</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
           <symbol>3</symbol>
         </concat>
         <concat>
-          <symbol>0</symbol>
-          <symbol inverse="true">0</symbol>
-          <symbol>0</symbol>
-          <symbol>3</symbol>
-        </concat>
-        <concat>
-          <symbol>0</symbol>
-          <symbol inverse="true">0</symbol>
-          <symbol>0</symbol>
+          <symbol inverse="true">3</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
           <symbol>3</symbol>
         </concat>
       </disj>
@@ -2239,43 +2421,41 @@
       <conjunct src="?x0" trg="?x2">
       <disj>
         <concat>
-          <symbol>0</symbol>
-          <symbol inverse="true">0</symbol>
-          <symbol>0</symbol>
+          <symbol inverse="true">3</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
           <symbol>3</symbol>
         </concat>
         <concat>
-          <symbol>0</symbol>
-          <symbol>3</symbol>
           <symbol inverse="true">3</symbol>
           <symbol>3</symbol>
         </concat>
         <concat>
-          <symbol>0</symbol>
-          <symbol inverse="true">0</symbol>
-          <symbol>0</symbol>
+          <symbol inverse="true">3</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
           <symbol>3</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x0" trg="?x3">
+      <conjunct src="?x1" trg="?x3">
       <disj>
         <concat>
-          <symbol>0</symbol>
-          <symbol>3</symbol>
           <symbol inverse="true">3</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
           <symbol>3</symbol>
         </concat>
         <concat>
-          <symbol>0</symbol>
-          <symbol>3</symbol>
           <symbol inverse="true">3</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
           <symbol>3</symbol>
         </concat>
         <concat>
-          <symbol>0</symbol>
-          <symbol inverse="true">0</symbol>
-          <symbol>0</symbol>
+          <symbol inverse="true">3</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
           <symbol>3</symbol>
         </concat>
       </disj>
@@ -2289,63 +2469,71 @@
     <id>0</id>
     <number>32</number>
     <input>../use-cases/test.xml</input>
-    <arity>1</arity>
+    <arity>0</arity>
     <selectivity>-</selectivity>
     <multiplicity>0</multiplicity>
-    <conjunct>3</conjunct>
+    <conjunct>4</conjunct>
     <disjuncts>1-3</disjuncts>
-    <length>4-4</length>
+    <length>2-4</length>
   </metadata>
   <head>
-    <var>?x0</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
+          <symbol inverse="true">2</symbol>
+          <symbol inverse="true">1</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">2</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol inverse="true">0</symbol>
           <symbol>0</symbol>
-          <symbol>3</symbol>
-          <symbol inverse="true">3</symbol>
-          <symbol>3</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x0" trg="?x2">
+      <conjunct src="?x1" trg="?x2">
       <disj>
         <concat>
-          <symbol>0</symbol>
-          <symbol>3</symbol>
-          <symbol inverse="true">3</symbol>
-          <symbol>3</symbol>
-        </concat>
-        <concat>
-          <symbol>0</symbol>
           <symbol inverse="true">0</symbol>
           <symbol>0</symbol>
-          <symbol>3</symbol>
+          <symbol>1</symbol>
         </concat>
         <concat>
-          <symbol>0</symbol>
           <symbol inverse="true">0</symbol>
           <symbol>0</symbol>
-          <symbol>3</symbol>
+          <symbol>1</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x0" trg="?x3">
+      <conjunct src="?x2" trg="?x3">
+      <disj>
+        <concat>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol inverse="true">0</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol inverse="true">0</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">1</symbol>
+          <symbol inverse="true">0</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x3" trg="?x4">
       <disj>
         <concat>
           <symbol>0</symbol>
-          <symbol inverse="true">0</symbol>
-          <symbol>0</symbol>
-          <symbol>3</symbol>
-        </concat>
-        <concat>
-          <symbol>0</symbol>
-          <symbol inverse="true">0</symbol>
-          <symbol>0</symbol>
-          <symbol>3</symbol>
+          <symbol>1</symbol>
+          <symbol>2</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -2358,14 +2546,15 @@
     <id>0</id>
     <number>33</number>
     <input>../use-cases/test.xml</input>
-    <arity>2</arity>
-    <selectivity>2</selectivity>
+    <arity>3</arity>
+    <selectivity>-</selectivity>
     <multiplicity>0</multiplicity>
-    <conjunct>3</conjunct>
-    <disjuncts>2-3</disjuncts>
+    <conjunct>4</conjunct>
+    <disjuncts>1-3</disjuncts>
     <length>3-3</length>
   </metadata>
   <head>
+    <var>?x2</var>
     <var>?x0</var>
     <var>?x1</var>
   </head>
@@ -2374,47 +2563,56 @@
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol>3</symbol>
-          <symbol inverse="true">3</symbol>
-          <symbol inverse="true">0</symbol>
+          <symbol inverse="true">2</symbol>
+          <symbol>2</symbol>
+          <symbol inverse="true">2</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">0</symbol>
-          <symbol>0</symbol>
-          <symbol inverse="true">0</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">0</symbol>
-          <symbol>0</symbol>
-          <symbol inverse="true">0</symbol>
+          <symbol inverse="true">2</symbol>
+          <symbol>2</symbol>
+          <symbol inverse="true">2</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x0" trg="?x2">
+      <conjunct src="?x1" trg="?x2">
       <disj>
         <concat>
-          <symbol inverse="true">0</symbol>
-          <symbol>0</symbol>
-          <symbol inverse="true">0</symbol>
+          <symbol>2</symbol>
+          <symbol inverse="true">2</symbol>
+          <symbol>2</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">0</symbol>
-          <symbol>0</symbol>
-          <symbol inverse="true">0</symbol>
+          <symbol>2</symbol>
+          <symbol inverse="true">2</symbol>
+          <symbol>2</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x0" trg="?x3">
       <disj>
         <concat>
-          <symbol>3</symbol>
-          <symbol inverse="true">3</symbol>
+          <symbol inverse="true">2</symbol>
+          <symbol inverse="true">1</symbol>
           <symbol inverse="true">0</symbol>
         </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x3" trg="?x2">
+      <disj>
         <concat>
-          <symbol>3</symbol>
-          <symbol inverse="true">3</symbol>
-          <symbol inverse="true">0</symbol>
+          <symbol>0</symbol>
+          <symbol>1</symbol>
+          <symbol>2</symbol>
+        </concat>
+        <concat>
+          <symbol>0</symbol>
+          <symbol>1</symbol>
+          <symbol>2</symbol>
+        </concat>
+        <concat>
+          <symbol>0</symbol>
+          <symbol>1</symbol>
+          <symbol>2</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -2427,70 +2625,48 @@
     <id>0</id>
     <number>34</number>
     <input>../use-cases/test.xml</input>
-    <arity>1</arity>
+    <arity>0</arity>
     <selectivity>-</selectivity>
     <multiplicity>0</multiplicity>
-    <conjunct>4</conjunct>
-    <disjuncts>1-3</disjuncts>
+    <conjunct>3</conjunct>
+    <disjuncts>1-2</disjuncts>
     <length>2-4</length>
   </metadata>
   <head>
-    <var>?x0</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol inverse="true">2</symbol>
+          <symbol>0</symbol>
+          <symbol>1</symbol>
           <symbol inverse="true">1</symbol>
-          <symbol inverse="true">0</symbol>
+          <symbol>1</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x1" trg="?x2">
+      <conjunct src="?x0" trg="?x2">
       <disj>
         <concat>
           <symbol>0</symbol>
           <symbol>1</symbol>
-          <symbol>2</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>3</symbol>
         </concat>
         <concat>
           <symbol>0</symbol>
-          <symbol>1</symbol>
-          <symbol>2</symbol>
+          <symbol>3</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x0" trg="?x3">
+      <conjunct src="?x1" trg="?x3">
       <disj>
         <concat>
-          <symbol inverse="true">2</symbol>
+          <symbol>0</symbol>
+          <symbol>1</symbol>
           <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
-          <symbol>2</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x2" trg="?x4">
-      <disj>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
+          <symbol>3</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -2506,8 +2682,8 @@
     <arity>1</arity>
     <selectivity>-</selectivity>
     <multiplicity>0</multiplicity>
-    <conjunct>3</conjunct>
-    <disjuncts>1-3</disjuncts>
+    <conjunct>4</conjunct>
+    <disjuncts>2-3</disjuncts>
     <length>2-4</length>
   </metadata>
   <head>
@@ -2519,48 +2695,67 @@
       <disj>
         <concat>
           <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
+          <symbol inverse="true">1</symbol>
         </concat>
         <concat>
           <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol inverse="true">0</symbol>
+          <symbol>0</symbol>
         </concat>
         <concat>
           <symbol inverse="true">2</symbol>
           <symbol inverse="true">1</symbol>
           <symbol>1</symbol>
-          <symbol>2</symbol>
+          <symbol inverse="true">1</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x0" trg="?x2">
+      <conjunct src="?x1" trg="?x2">
       <disj>
         <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol inverse="true">0</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol inverse="true">0</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol inverse="true">0</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x0" trg="?x3">
+      <conjunct src="?x2" trg="?x3">
       <disj>
         <concat>
-          <symbol inverse="true">2</symbol>
+          <symbol>0</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+        </concat>
+        <concat>
+          <symbol>0</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x3" trg="?x4">
+      <disj>
+        <concat>
+          <symbol>3</symbol>
+          <symbol inverse="true">3</symbol>
+          <symbol>1</symbol>
           <symbol>2</symbol>
-          <symbol inverse="true">2</symbol>
+        </concat>
+        <concat>
+          <symbol>3</symbol>
+          <symbol inverse="true">3</symbol>
+          <symbol>1</symbol>
           <symbol>2</symbol>
         </concat>
       </disj>
@@ -2574,16 +2769,14 @@
     <id>0</id>
     <number>36</number>
     <input>../use-cases/test.xml</input>
-    <arity>3</arity>
+    <arity>1</arity>
     <selectivity>-</selectivity>
-    <multiplicity>0</multiplicity>
-    <conjunct>3</conjunct>
+    <multiplicity>0.25</multiplicity>
+    <conjunct>4</conjunct>
     <disjuncts>1-3</disjuncts>
     <length>2-4</length>
   </metadata>
   <head>
-    <var>?x2</var>
-    <var>?x1</var>
     <var>?x0</var>
   </head>
   <bodies>
@@ -2593,50 +2786,66 @@
         <concat>
           <symbol>0</symbol>
           <symbol>3</symbol>
+          <symbol inverse="true">3</symbol>
+        </concat>
+        <concat>
+          <symbol>0</symbol>
+          <symbol inverse="true">0</symbol>
+          <symbol>0</symbol>
+        </concat>
+        <concat>
+          <symbol>0</symbol>
+          <symbol inverse="true">0</symbol>
+          <symbol>0</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x0" trg="?x2">
+      <conjunct src="?x1" trg="?x2">
       <disj>
         <concat>
+          <symbol inverse="true">0</symbol>
           <symbol>0</symbol>
           <symbol>3</symbol>
         </concat>
         <concat>
+          <symbol inverse="true">0</symbol>
           <symbol>0</symbol>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
           <symbol>3</symbol>
         </concat>
         <concat>
-          <symbol>0</symbol>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
+          <symbol>3</symbol>
+          <symbol inverse="true">3</symbol>
           <symbol>3</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x0" trg="?x3">
+      <conjunct src="?x2" trg="?x3">
       <disj>
         <concat>
-          <symbol>0</symbol>
+          <symbol inverse="true">3</symbol>
           <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>3</symbol>
         </concat>
         <concat>
-          <symbol>0</symbol>
+          <symbol inverse="true">3</symbol>
           <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>3</symbol>
         </concat>
         <concat>
-          <symbol>0</symbol>
+          <symbol inverse="true">3</symbol>
           <symbol>1</symbol>
           <symbol inverse="true">1</symbol>
-          <symbol>3</symbol>
+          <symbol>1</symbol>
         </concat>
       </disj>
+      </conjunct>
+      <conjunct src="?x3" trg="?x4">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+        </concat>
+      </disj>
+      </star>
       </conjunct>
     </body>
   </bodies>
@@ -2647,18 +2856,14 @@
     <id>0</id>
     <number>37</number>
     <input>../use-cases/test.xml</input>
-    <arity>4</arity>
+    <arity>0</arity>
     <selectivity>-</selectivity>
     <multiplicity>0</multiplicity>
-    <conjunct>4</conjunct>
-    <disjuncts>1-3</disjuncts>
+    <conjunct>3</conjunct>
+    <disjuncts>2-2</disjuncts>
     <length>2-4</length>
   </metadata>
   <head>
-    <var>?x2</var>
-    <var>?x0</var>
-    <var>?x1</var>
-    <var>?x3</var>
   </head>
   <bodies>
     <body>
@@ -2666,33 +2871,27 @@
       <disj>
         <concat>
           <symbol inverse="true">2</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol inverse="true">0</symbol>
+          <symbol>2</symbol>
         </concat>
         <concat>
           <symbol inverse="true">2</symbol>
           <symbol inverse="true">1</symbol>
-          <symbol inverse="true">0</symbol>
+          <symbol>1</symbol>
+          <symbol>2</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x1" trg="?x2">
+      <conjunct src="?x0" trg="?x2">
       <disj>
         <concat>
-          <symbol>0</symbol>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
+          <symbol inverse="true">2</symbol>
+          <symbol>2</symbol>
+          <symbol inverse="true">2</symbol>
+          <symbol>2</symbol>
         </concat>
         <concat>
-          <symbol>0</symbol>
-          <symbol>1</symbol>
-        </concat>
-        <concat>
-          <symbol>0</symbol>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
+          <symbol inverse="true">2</symbol>
+          <symbol>2</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -2701,21 +2900,12 @@
         <concat>
           <symbol inverse="true">2</symbol>
           <symbol inverse="true">1</symbol>
-          <symbol>3</symbol>
+          <symbol>1</symbol>
+          <symbol>2</symbol>
         </concat>
         <concat>
           <symbol inverse="true">2</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>3</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x2" trg="?x4">
-      <disj>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>3</symbol>
+          <symbol>2</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -2728,18 +2918,17 @@
     <id>0</id>
     <number>38</number>
     <input>../use-cases/test.xml</input>
-    <arity>4</arity>
+    <arity>3</arity>
     <selectivity>-</selectivity>
     <multiplicity>0</multiplicity>
     <conjunct>4</conjunct>
     <disjuncts>1-3</disjuncts>
-    <length>3-4</length>
+    <length>2-4</length>
   </metadata>
   <head>
-    <var>?x3</var>
+    <var>?x2</var>
     <var>?x1</var>
     <var>?x0</var>
-    <var>?x2</var>
   </head>
   <bodies>
     <body>
@@ -2747,26 +2936,32 @@
       <disj>
         <concat>
           <symbol inverse="true">2</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>3</symbol>
+          <symbol>2</symbol>
+          <symbol inverse="true">2</symbol>
+          <symbol>2</symbol>
         </concat>
         <concat>
           <symbol inverse="true">2</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>3</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>3</symbol>
+          <symbol>2</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x1" trg="?x2">
       <disj>
         <concat>
-          <symbol inverse="true">3</symbol>
+          <symbol inverse="true">2</symbol>
+          <symbol>2</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">2</symbol>
+          <symbol inverse="true">1</symbol>
           <symbol>1</symbol>
+          <symbol>2</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">2</symbol>
+          <symbol>2</symbol>
+          <symbol inverse="true">2</symbol>
           <symbol>2</symbol>
         </concat>
       </disj>
@@ -2776,16 +2971,24 @@
         <concat>
           <symbol inverse="true">2</symbol>
           <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
-          <symbol>2</symbol>
+          <symbol inverse="true">0</symbol>
         </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x2" trg="?x4">
-      <disj>
         <concat>
           <symbol inverse="true">2</symbol>
           <symbol inverse="true">1</symbol>
+          <symbol inverse="true">0</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">2</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol inverse="true">0</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x3" trg="?x2">
+      <disj>
+        <concat>
+          <symbol>0</symbol>
           <symbol>1</symbol>
           <symbol>2</symbol>
         </concat>
@@ -2800,12 +3003,606 @@
     <id>0</id>
     <number>39</number>
     <input>../use-cases/test.xml</input>
+    <arity>0</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>0.25</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+        </concat>
+        <concat>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+        </concat>
+        <concat>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <disj>
+        <concat>
+          <symbol inverse="true">1</symbol>
+          <symbol>3</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">1</symbol>
+          <symbol>3</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>3</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x3" trg="?x4">
+      <disj>
+        <concat>
+          <symbol inverse="true">3</symbol>
+          <symbol>1</symbol>
+          <symbol>2</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">3</symbol>
+          <symbol>1</symbol>
+          <symbol>2</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">3</symbol>
+          <symbol>1</symbol>
+          <symbol>2</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>40</number>
+    <input>../use-cases/test.xml</input>
+    <arity>1</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>0.25</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol>0</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+        </concat>
+        <concat>
+          <symbol>0</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+        </concat>
+        <concat>
+          <symbol>0</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <disj>
+        <concat>
+          <symbol inverse="true">0</symbol>
+          <symbol>0</symbol>
+          <symbol>3</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">0</symbol>
+          <symbol>0</symbol>
+          <symbol>3</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x3" trg="?x4">
+      <disj>
+        <concat>
+          <symbol inverse="true">3</symbol>
+          <symbol>1</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">3</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>41</number>
+    <input>../use-cases/test.xml</input>
     <arity>2</arity>
     <selectivity>0</selectivity>
     <multiplicity>0</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>2-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x1</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol inverse="true">2</symbol>
+          <symbol>2</symbol>
+          <symbol inverse="true">2</symbol>
+          <symbol>2</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">2</symbol>
+          <symbol>2</symbol>
+          <symbol inverse="true">2</symbol>
+          <symbol>2</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">2</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol>2</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <disj>
+        <concat>
+          <symbol inverse="true">2</symbol>
+          <symbol>2</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">2</symbol>
+          <symbol>2</symbol>
+          <symbol inverse="true">2</symbol>
+          <symbol>2</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <disj>
+        <concat>
+          <symbol inverse="true">2</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol>2</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">2</symbol>
+          <symbol>2</symbol>
+          <symbol inverse="true">2</symbol>
+          <symbol>2</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>42</number>
+    <input>../use-cases/test.xml</input>
+    <arity>3</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>3</conjunct>
+    <disjuncts>3-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x1</var>
+    <var>?x0</var>
+    <var>?x2</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol inverse="true">2</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol>2</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">2</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol>2</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">2</symbol>
+          <symbol>2</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <disj>
+        <concat>
+          <symbol inverse="true">2</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol>2</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">2</symbol>
+          <symbol>2</symbol>
+          <symbol inverse="true">2</symbol>
+          <symbol>2</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">2</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol>2</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x3">
+      <disj>
+        <concat>
+          <symbol inverse="true">2</symbol>
+          <symbol>2</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">2</symbol>
+          <symbol>2</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">2</symbol>
+          <symbol>2</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>43</number>
+    <input>../use-cases/test.xml</input>
+    <arity>3</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>1</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>2-3</disjuncts>
+    <length>2-8</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x1</var>
+    <var>?x2</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">2</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>3</symbol>
+          <symbol inverse="true">3</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+        </concat>
+        <concat>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+        </concat>
+        <concat>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <star>
+      <disj>
+        <concat>
+          <symbol inverse="true">2</symbol>
+          <symbol>2</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">2</symbol>
+          <symbol>2</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+        </concat>
+        <concat>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x4">
+      <star>
+      <disj>
+        <concat>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+        </concat>
+        <concat>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+    </body>
+    <body>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>44</number>
+    <input>../use-cases/test.xml</input>
+    <arity>3</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>0.25</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>2-4</length>
+  </metadata>
+  <head>
+    <var>?x2</var>
+    <var>?x1</var>
+    <var>?x0</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol inverse="true">0</symbol>
+          <symbol>0</symbol>
+        </concat>
+        <concat>
+          <symbol>1</symbol>
+          <symbol>2</symbol>
+          <symbol inverse="true">2</symbol>
+          <symbol inverse="true">1</symbol>
+        </concat>
+        <concat>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol inverse="true">0</symbol>
+          <symbol>0</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <star>
+      <disj>
+        <concat>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+        </concat>
+        <concat>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+        </concat>
+      </disj>
+      </star>
+      </conjunct>
+      <conjunct src="?x0" trg="?x3">
+      <disj>
+        <concat>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+        </concat>
+        <concat>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+        </concat>
+        <concat>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x4">
+      <disj>
+        <concat>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>45</number>
+    <input>../use-cases/test.xml</input>
+    <arity>3</arity>
+    <selectivity>-</selectivity>
+    <multiplicity>0</multiplicity>
+    <conjunct>4</conjunct>
+    <disjuncts>1-3</disjuncts>
+    <length>3-4</length>
+  </metadata>
+  <head>
+    <var>?x0</var>
+    <var>?x2</var>
+    <var>?x1</var>
+  </head>
+  <bodies>
+    <body>
+      <conjunct src="?x0" trg="?x1">
+      <disj>
+        <concat>
+          <symbol inverse="true">2</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>3</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">2</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>3</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">2</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>3</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
+          <symbol inverse="true">3</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>3</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x2" trg="?x3">
+      <disj>
+        <concat>
+          <symbol inverse="true">3</symbol>
+          <symbol>1</symbol>
+          <symbol>2</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x3" trg="?x4">
+      <disj>
+        <concat>
+          <symbol inverse="true">2</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>3</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">2</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol>3</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+    </body>
+  </bodies>
+</query>
+
+<query>
+  <metadata>
+    <id>0</id>
+    <number>46</number>
+    <input>../use-cases/test.xml</input>
+    <arity>2</arity>
+    <selectivity>1</selectivity>
+    <multiplicity>0</multiplicity>
     <conjunct>4</conjunct>
     <disjuncts>1-2</disjuncts>
-    <length>3-3</length>
+    <length>3-4</length>
   </metadata>
   <head>
     <var>?x0</var>
@@ -2820,302 +3617,40 @@
           <symbol inverse="true">1</symbol>
           <symbol inverse="true">0</symbol>
         </concat>
+        <concat>
+          <symbol inverse="true">2</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol inverse="true">0</symbol>
+        </concat>
       </disj>
       </conjunct>
       <conjunct src="?x1" trg="?x2">
       <disj>
         <concat>
           <symbol>0</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
           <symbol>3</symbol>
-          <symbol inverse="true">3</symbol>
-        </concat>
-        <concat>
-          <symbol>0</symbol>
-          <symbol>3</symbol>
-          <symbol inverse="true">3</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x2" trg="?x3">
       <disj>
         <concat>
+          <symbol inverse="true">3</symbol>
           <symbol>1</symbol>
           <symbol>2</symbol>
-          <symbol inverse="true">2</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">3</symbol>
+          <symbol>1</symbol>
+          <symbol>2</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x3" trg="?x4">
       <disj>
         <concat>
-          <symbol>2</symbol>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-    </body>
-  </bodies>
-</query>
-
-<query>
-  <metadata>
-    <id>0</id>
-    <number>40</number>
-    <input>../use-cases/test.xml</input>
-    <arity>3</arity>
-    <selectivity>-</selectivity>
-    <multiplicity>0</multiplicity>
-    <conjunct>3</conjunct>
-    <disjuncts>1-3</disjuncts>
-    <length>3-3</length>
-  </metadata>
-  <head>
-    <var>?x1</var>
-    <var>?x2</var>
-    <var>?x0</var>
-  </head>
-  <bodies>
-    <body>
-      <conjunct src="?x0" trg="?x1">
-      <disj>
-        <concat>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>3</symbol>
-        </concat>
-        <concat>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>3</symbol>
-        </concat>
-        <concat>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>3</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x0" trg="?x2">
-      <disj>
-        <concat>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>3</symbol>
-        </concat>
-        <concat>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>3</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x0" trg="?x3">
-      <disj>
-        <concat>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>3</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-    </body>
-  </bodies>
-</query>
-
-<query>
-  <metadata>
-    <id>0</id>
-    <number>41</number>
-    <input>../use-cases/test.xml</input>
-    <arity>3</arity>
-    <selectivity>-</selectivity>
-    <multiplicity>0</multiplicity>
-    <conjunct>4</conjunct>
-    <disjuncts>2-3</disjuncts>
-    <length>2-4</length>
-  </metadata>
-  <head>
-    <var>?x0</var>
-    <var>?x1</var>
-    <var>?x2</var>
-  </head>
-  <bodies>
-    <body>
-      <conjunct src="?x0" trg="?x1">
-      <disj>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
-          <symbol>2</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
-          <symbol>2</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x0" trg="?x2">
-      <disj>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
-          <symbol>2</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x0" trg="?x3">
-      <disj>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x0" trg="?x4">
-      <disj>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
-          <symbol>2</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-    </body>
-  </bodies>
-</query>
-
-<query>
-  <metadata>
-    <id>0</id>
-    <number>42</number>
-    <input>../use-cases/test.xml</input>
-    <arity>4</arity>
-    <selectivity>-</selectivity>
-    <multiplicity>0</multiplicity>
-    <conjunct>3</conjunct>
-    <disjuncts>1-2</disjuncts>
-    <length>3-4</length>
-  </metadata>
-  <head>
-    <var>?x2</var>
-    <var>?x1</var>
-    <var>?x3</var>
-    <var>?x0</var>
-  </head>
-  <bodies>
-    <body>
-      <conjunct src="?x0" trg="?x1">
-      <disj>
-        <concat>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
-        </concat>
-        <concat>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x1" trg="?x2">
-      <disj>
-        <concat>
-          <symbol>2</symbol>
-          <symbol inverse="true">2</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol inverse="true">0</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x2" trg="?x3">
-      <disj>
-        <concat>
-          <symbol>0</symbol>
-          <symbol>1</symbol>
-          <symbol>2</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-    </body>
-  </bodies>
-</query>
-
-<query>
-  <metadata>
-    <id>0</id>
-    <number>43</number>
-    <input>../use-cases/test.xml</input>
-    <arity>2</arity>
-    <selectivity>1</selectivity>
-    <multiplicity>0</multiplicity>
-    <conjunct>3</conjunct>
-    <disjuncts>1-2</disjuncts>
-    <length>3-3</length>
-  </metadata>
-  <head>
-    <var>?x0</var>
-    <var>?x1</var>
-  </head>
-  <bodies>
-    <body>
-      <conjunct src="?x0" trg="?x1">
-      <disj>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol inverse="true">0</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x0" trg="?x2">
-      <disj>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol inverse="true">0</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x0" trg="?x3">
-      <disj>
-        <concat>
           <symbol inverse="true">2</symbol>
           <symbol inverse="true">1</symbol>
           <symbol inverse="true">0</symbol>
@@ -3124,218 +3659,6 @@
           <symbol inverse="true">2</symbol>
           <symbol inverse="true">1</symbol>
           <symbol inverse="true">0</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-    </body>
-  </bodies>
-</query>
-
-<query>
-  <metadata>
-    <id>0</id>
-    <number>44</number>
-    <input>../use-cases/test.xml</input>
-    <arity>2</arity>
-    <selectivity>0</selectivity>
-    <multiplicity>0</multiplicity>
-    <conjunct>4</conjunct>
-    <disjuncts>1-3</disjuncts>
-    <length>2-4</length>
-  </metadata>
-  <head>
-    <var>?x0</var>
-    <var>?x1</var>
-  </head>
-  <bodies>
-    <body>
-      <conjunct src="?x0" trg="?x1">
-      <disj>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
-          <symbol>2</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x0" trg="?x2">
-      <disj>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
-          <symbol>2</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x0" trg="?x3">
-      <disj>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x0" trg="?x4">
-      <disj>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
-          <symbol>2</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-    </body>
-  </bodies>
-</query>
-
-<query>
-  <metadata>
-    <id>0</id>
-    <number>45</number>
-    <input>../use-cases/test.xml</input>
-    <arity>1</arity>
-    <selectivity>-</selectivity>
-    <multiplicity>0</multiplicity>
-    <conjunct>4</conjunct>
-    <disjuncts>1-3</disjuncts>
-    <length>2-4</length>
-  </metadata>
-  <head>
-    <var>?x0</var>
-  </head>
-  <bodies>
-    <body>
-      <conjunct src="?x0" trg="?x1">
-      <disj>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>3</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>3</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>3</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x1" trg="?x2">
-      <disj>
-        <concat>
-          <symbol inverse="true">3</symbol>
-          <symbol>1</symbol>
-          <symbol>2</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x0" trg="?x3">
-      <disj>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x2" trg="?x4">
-      <disj>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
-          <symbol>2</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-    </body>
-  </bodies>
-</query>
-
-<query>
-  <metadata>
-    <id>0</id>
-    <number>46</number>
-    <input>../use-cases/test.xml</input>
-    <arity>1</arity>
-    <selectivity>-</selectivity>
-    <multiplicity>0</multiplicity>
-    <conjunct>3</conjunct>
-    <disjuncts>1-2</disjuncts>
-    <length>3-4</length>
-  </metadata>
-  <head>
-    <var>?x0</var>
-  </head>
-  <bodies>
-    <body>
-      <conjunct src="?x0" trg="?x1">
-      <disj>
-        <concat>
-          <symbol>3</symbol>
-          <symbol inverse="true">3</symbol>
-          <symbol inverse="true">0</symbol>
-        </concat>
-        <concat>
-          <symbol>3</symbol>
-          <symbol inverse="true">3</symbol>
-          <symbol inverse="true">0</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x0" trg="?x2">
-      <disj>
-        <concat>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol inverse="true">0</symbol>
-          <symbol>0</symbol>
-        </concat>
-        <concat>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>3</symbol>
-          <symbol inverse="true">3</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x1" trg="?x3">
-      <disj>
-        <concat>
-          <symbol inverse="true">0</symbol>
-          <symbol>0</symbol>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -3348,58 +3671,62 @@
     <id>0</id>
     <number>47</number>
     <input>../use-cases/test.xml</input>
-    <arity>2</arity>
-    <selectivity>1</selectivity>
+    <arity>3</arity>
+    <selectivity>-</selectivity>
     <multiplicity>0</multiplicity>
     <conjunct>3</conjunct>
     <disjuncts>1-3</disjuncts>
-    <length>3-3</length>
+    <length>2-4</length>
   </metadata>
   <head>
-    <var>?x0</var>
     <var>?x1</var>
+    <var>?x2</var>
+    <var>?x0</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
+          <symbol>3</symbol>
           <symbol inverse="true">3</symbol>
           <symbol>1</symbol>
+          <symbol>2</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">0</symbol>
+          <symbol>0</symbol>
+          <symbol>1</symbol>
+          <symbol>2</symbol>
+        </concat>
+        <concat>
+          <symbol>3</symbol>
+          <symbol inverse="true">3</symbol>
+          <symbol>1</symbol>
+          <symbol>2</symbol>
+        </concat>
+      </disj>
+      </conjunct>
+      <conjunct src="?x1" trg="?x2">
+      <disj>
+        <concat>
+          <symbol inverse="true">2</symbol>
+          <symbol>2</symbol>
+          <symbol inverse="true">2</symbol>
+          <symbol inverse="true">1</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">2</symbol>
           <symbol inverse="true">1</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x0" trg="?x2">
+      <conjunct src="?x2" trg="?x3">
       <disj>
         <concat>
-          <symbol inverse="true">3</symbol>
           <symbol>1</symbol>
           <symbol inverse="true">1</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">3</symbol>
           <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
-        </concat>
-      </disj>
-      </conjunct>
-      <conjunct src="?x0" trg="?x3">
-      <disj>
-        <concat>
-          <symbol inverse="true">3</symbol>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">3</symbol>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">3</symbol>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -3412,77 +3739,78 @@
     <id>0</id>
     <number>48</number>
     <input>../use-cases/test.xml</input>
-    <arity>2</arity>
-    <selectivity>2</selectivity>
+    <arity>3</arity>
+    <selectivity>-</selectivity>
     <multiplicity>0</multiplicity>
     <conjunct>4</conjunct>
     <disjuncts>1-3</disjuncts>
-    <length>2-4</length>
+    <length>3-3</length>
   </metadata>
   <head>
-    <var>?x0</var>
+    <var>?x1</var>
     <var>?x2</var>
+    <var>?x0</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
+          <symbol inverse="true">3</symbol>
           <symbol>3</symbol>
+          <symbol inverse="true">3</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x1" trg="?x2">
+      <conjunct src="?x0" trg="?x2">
       <disj>
         <concat>
           <symbol inverse="true">3</symbol>
-          <symbol>1</symbol>
-          <symbol>2</symbol>
-          <symbol inverse="true">2</symbol>
+          <symbol>3</symbol>
+          <symbol inverse="true">3</symbol>
         </concat>
         <concat>
           <symbol inverse="true">3</symbol>
-          <symbol inverse="true">0</symbol>
-          <symbol>0</symbol>
-          <symbol>1</symbol>
+          <symbol>3</symbol>
+          <symbol inverse="true">3</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x0" trg="?x3">
       <disj>
         <concat>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
+          <symbol inverse="true">3</symbol>
+          <symbol>3</symbol>
+          <symbol inverse="true">3</symbol>
         </concat>
         <concat>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
+          <symbol inverse="true">3</symbol>
+          <symbol>3</symbol>
+          <symbol inverse="true">3</symbol>
         </concat>
         <concat>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
+          <symbol inverse="true">3</symbol>
+          <symbol inverse="true">0</symbol>
+          <symbol>0</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x2" trg="?x4">
+      <conjunct src="?x0" trg="?x4">
       <disj>
         <concat>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
+          <symbol inverse="true">3</symbol>
+          <symbol inverse="true">0</symbol>
+          <symbol>0</symbol>
         </concat>
         <concat>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
+          <symbol inverse="true">3</symbol>
+          <symbol>3</symbol>
+          <symbol inverse="true">3</symbol>
         </concat>
         <concat>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
-          <symbol>1</symbol>
-          <symbol inverse="true">1</symbol>
+          <symbol inverse="true">3</symbol>
+          <symbol inverse="true">0</symbol>
+          <symbol>0</symbol>
         </concat>
       </disj>
       </conjunct>
@@ -3495,57 +3823,66 @@
     <id>0</id>
     <number>49</number>
     <input>../use-cases/test.xml</input>
-    <arity>1</arity>
+    <arity>3</arity>
     <selectivity>-</selectivity>
     <multiplicity>0</multiplicity>
     <conjunct>3</conjunct>
-    <disjuncts>1-3</disjuncts>
-    <length>2-4</length>
+    <disjuncts>2-3</disjuncts>
+    <length>3-4</length>
   </metadata>
   <head>
     <var>?x0</var>
+    <var>?x1</var>
+    <var>?x2</var>
   </head>
   <bodies>
     <body>
       <conjunct src="?x0" trg="?x1">
       <disj>
         <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
+          <symbol inverse="true">3</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol inverse="true">0</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-        </concat>
-        <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
+          <symbol inverse="true">3</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+          <symbol inverse="true">0</symbol>
         </concat>
       </disj>
       </conjunct>
       <conjunct src="?x0" trg="?x2">
       <disj>
         <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol inverse="true">1</symbol>
+          <symbol inverse="true">3</symbol>
           <symbol>1</symbol>
-          <symbol>2</symbol>
+          <symbol inverse="true">1</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">3</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
         </concat>
       </disj>
       </conjunct>
-      <conjunct src="?x0" trg="?x3">
+      <conjunct src="?x1" trg="?x3">
       <disj>
         <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
+          <symbol inverse="true">3</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
         </concat>
         <concat>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
-          <symbol inverse="true">2</symbol>
-          <symbol>2</symbol>
+          <symbol inverse="true">3</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
+        </concat>
+        <concat>
+          <symbol inverse="true">3</symbol>
+          <symbol>1</symbol>
+          <symbol inverse="true">1</symbol>
         </concat>
       </disj>
       </conjunct>

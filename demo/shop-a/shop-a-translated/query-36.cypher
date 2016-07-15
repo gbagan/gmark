@@ -1,1 +1,1 @@
-MATCH (x0)-[:ppublished]->()<-[:ptext]-()-[:pkeywords]->()<-[:pcaption]-(x1), (x0)-[:pwordCount]->()<-[:pcontentSize]-()<-[:plike]-()<-[:pauthor]-(x2), (x0)-[:pcaption]->()<-[:ptext]-(x3), (x0)-[:pwordCount]->()<-[:pcontentSize]-(x4) RETURN DISTINCT x0, x1;
+MATCH (x0)-[:pincludes*]->(x1), (x1)-[:pvalidThrough]->()<-[:prelease]-(x2), (x0)-[:pincludes|pincludes*]->(x3), (x3)-[:pincludes|pincludes*]->(x2) RETURN DISTINCT x3, x2, x0, x1;

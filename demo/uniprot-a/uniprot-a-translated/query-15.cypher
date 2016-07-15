@@ -1,1 +1,1 @@
-MATCH (x0)<-[:pPublishedIn]-()<-[:pReference]-()-[:pReference]->(x1), (x1)<-[:pReference]-()-[:pInteracts]->()-[:pInteracts]->()-[:pInteracts]->(x2), (x2)-[:pInteracts]->()<-[:pInteracts]-()-[:pEncodedOn]->(x3) RETURN DISTINCT x3, x2, x0, x1;
+MATCH (x0)<-[:pReference]-()-[:pReference]->()<-[:pReference]-(x1), (x1)-[:pInteracts|pInteracts|pInteracts*]->(x2), (x0)<-[:pReference]-()<-[:pInteracts]-()-[:pEncodedOn]->(x3), (x3)<-[:pEncodedOn]-()-[:pEncodedOn]->(x2) RETURN DISTINCT x2, x1, x0;

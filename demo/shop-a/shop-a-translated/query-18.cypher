@@ -1,1 +1,1 @@
-MATCH (x0)-[:pmakesPurchase|ppurchaseFor|ppurchaseFor*]->(x1), (x0)-[:ppurchaseFor*]->(x2), (x0)-[:pmakesPurchase|pmakesPurchase|ppurchaseFor*]->(x3) RETURN DISTINCT x2, x1, x3, x0;
+MATCH (x0)-[:phomepage|phomepage*]->(x1), (x1)-[:psubscribes*]->(x2), (x2)<-[:phomepage]-()-[:phomepage]->()<-[:phomepage]-(x3), (x3)-[:phomepage|pfriendOf|pauthor*]->(x4) RETURN "true" LIMIT 1;
