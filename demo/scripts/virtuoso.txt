@@ -1,0 +1,64 @@
+=================================
+Loading graphs
+=================================
+ld_dir('/home/user/gmark/demo/selectivity-estimation', '1k.ntriples', 'graph1');
+ld_dir('/home/user/gmark/demo/selectivity-estimation', '2k.ntriples', 'graph2');
+ld_dir('/home/user/gmark/demo/selectivity-estimation', '4k.ntriples', 'graph4');
+ld_dir('/home/user/gmark/demo/selectivity-estimation', '8k.ntriples', 'graph8');
+ld_dir('/home/user/gmark/demo/selectivity-estimation', '16k.ntriples', 'graph16');
+ld_dir('/home/user/gmark/demo/selectivity-estimation', '32k.ntriples', 'graph32');
+ld_dir('/home/user/gmark/demo/selectivity-estimation', '64k.ntriples', 'graph64');
+ld_dir('/home/user/gmark/demo/selectivity-estimation', '128k.ntriples', 'graph128');
+rdf_loader_run();
+
+
+=================================
+Q-constant
+=================================
+SPARQL PREFIX : <http://example.org/gMark1k/> SELECT (COUNT(*) AS ?count1k) { SELECT DISTINCT ?x0 ?x4 WHERE {  {  ?x0 ((^:p4/^:p2)|(^:p4/^:p2)) ?x1 . ?x1 ((^:p1/:p1)) ?x2 . ?x2 ((:p2/^:p2)|(:p2/^:p2)) ?x3 . ?x3 ((:p2/:p4)) ?x4 . } } };
+SPARQL PREFIX : <http://example.org/gMark2k/> SELECT (COUNT(*) AS ?count2k) { SELECT DISTINCT ?x0 ?x4 WHERE {  {  ?x0 ((^:p4/^:p2)|(^:p4/^:p2)) ?x1 . ?x1 ((^:p1/:p1)) ?x2 . ?x2 ((:p2/^:p2)|(:p2/^:p2)) ?x3 . ?x3 ((:p2/:p4)) ?x4 . } } };
+SPARQL PREFIX : <http://example.org/gMark4k/> SELECT (COUNT(*) AS ?count4k) { SELECT DISTINCT ?x0 ?x4 WHERE {  {  ?x0 ((^:p4/^:p2)|(^:p4/^:p2)) ?x1 . ?x1 ((^:p1/:p1)) ?x2 . ?x2 ((:p2/^:p2)|(:p2/^:p2)) ?x3 . ?x3 ((:p2/:p4)) ?x4 . } } };
+SPARQL PREFIX : <http://example.org/gMark8k/> SELECT (COUNT(*) AS ?count8k) { SELECT DISTINCT ?x0 ?x4 WHERE {  {  ?x0 ((^:p4/^:p2)|(^:p4/^:p2)) ?x1 . ?x1 ((^:p1/:p1)) ?x2 . ?x2 ((:p2/^:p2)|(:p2/^:p2)) ?x3 . ?x3 ((:p2/:p4)) ?x4 . } } };
+SPARQL PREFIX : <http://example.org/gMark16k/> SELECT (COUNT(*) AS ?count16k) { SELECT DISTINCT ?x0 ?x4 WHERE {  {  ?x0 ((^:p4/^:p2)|(^:p4/^:p2)) ?x1 . ?x1 ((^:p1/:p1)) ?x2 . ?x2 ((:p2/^:p2)|(:p2/^:p2)) ?x3 . ?x3 ((:p2/:p4)) ?x4 . } } };
+SPARQL PREFIX : <http://example.org/gMark32k/> SELECT (COUNT(*) AS ?count32k) { SELECT DISTINCT ?x0 ?x4 WHERE {  {  ?x0 ((^:p4/^:p2)|(^:p4/^:p2)) ?x1 . ?x1 ((^:p1/:p1)) ?x2 . ?x2 ((:p2/^:p2)|(:p2/^:p2)) ?x3 . ?x3 ((:p2/:p4)) ?x4 . } } };
+SPARQL PREFIX : <http://example.org/gMark64k/> SELECT (COUNT(*) AS ?count64k) { SELECT DISTINCT ?x0 ?x4 WHERE {  {  ?x0 ((^:p4/^:p2)|(^:p4/^:p2)) ?x1 . ?x1 ((^:p1/:p1)) ?x2 . ?x2 ((:p2/^:p2)|(:p2/^:p2)) ?x3 . ?x3 ((:p2/:p4)) ?x4 . } } };
+SPARQL PREFIX : <http://example.org/gMark128k/> SELECT (COUNT(*) AS ?count128k) { SELECT DISTINCT ?x0 ?x4 WHERE {  {  ?x0 ((^:p4/^:p2)|(^:p4/^:p2)) ?x1 . ?x1 ((^:p1/:p1)) ?x2 . ?x2 ((:p2/^:p2)|(:p2/^:p2)) ?x3 . ?x3 ((:p2/:p4)) ?x4 . } } };
+
+
+=================================
+Q-linear
+=================================
+SPARQL PREFIX : <http://example.org/gMark1k/> SELECT (COUNT(*) AS ?count1k) { SELECT DISTINCT ?x0 ?x3 WHERE {  {  ?x0 ((^:p2)|(^:p2)) ?x1 . ?x1 (((^:p1/:p1))){,3} ?x2 . ?x2 ((^:p1)) ?x3 . } } };
+SPARQL PREFIX : <http://example.org/gMark2k/> SELECT (COUNT(*) AS ?count2k) { SELECT DISTINCT ?x0 ?x3 WHERE {  {  ?x0 ((^:p2)|(^:p2)) ?x1 . ?x1 (((^:p1/:p1))){,3} ?x2 . ?x2 ((^:p1)) ?x3 . } } };
+SPARQL PREFIX : <http://example.org/gMark4k/> SELECT (COUNT(*) AS ?count4k) { SELECT DISTINCT ?x0 ?x3 WHERE {  {  ?x0 ((^:p2)|(^:p2)) ?x1 . ?x1 (((^:p1/:p1))){,3} ?x2 . ?x2 ((^:p1)) ?x3 . } } };
+SPARQL PREFIX : <http://example.org/gMark8k/> SELECT (COUNT(*) AS ?count8k) { SELECT DISTINCT ?x0 ?x3 WHERE {  {  ?x0 ((^:p2)|(^:p2)) ?x1 . ?x1 (((^:p1/:p1))){,3} ?x2 . ?x2 ((^:p1)) ?x3 . } } };
+SPARQL PREFIX : <http://example.org/gMark16k/> SELECT (COUNT(*) AS ?count16k) { SELECT DISTINCT ?x0 ?x3 WHERE {  {  ?x0 ((^:p2)|(^:p2)) ?x1 . ?x1 (((^:p1/:p1))){,3} ?x2 . ?x2 ((^:p1)) ?x3 . } } };
+SPARQL PREFIX : <http://example.org/gMark32k/> SELECT (COUNT(*) AS ?count32k) { SELECT DISTINCT ?x0 ?x3 WHERE {  {  ?x0 ((^:p2)|(^:p2)) ?x1 . ?x1 (((^:p1/:p1))){,3} ?x2 . ?x2 ((^:p1)) ?x3 . } } };
+SPARQL PREFIX : <http://example.org/gMark64k/> SELECT (COUNT(*) AS ?count64k) { SELECT DISTINCT ?x0 ?x3 WHERE {  {  ?x0 ((^:p2)|(^:p2)) ?x1 . ?x1 (((^:p1/:p1))){,3} ?x2 . ?x2 ((^:p1)) ?x3 . } } };
+SPARQL PREFIX : <http://example.org/gMark128k/> SELECT (COUNT(*) AS ?count128k) { SELECT DISTINCT ?x0 ?x3 WHERE {  {  ?x0 ((^:p2)|(^:p2)) ?x1 . ?x1 (((^:p1/:p1))){,3} ?x2 . ?x2 ((^:p1)) ?x3 . } } };
+
+
+=================================
+Q-quadratic
+=================================
+SPARQL PREFIX : <http://example.org/gMark1k/> SELECT (COUNT(*) AS ?count1k) { SELECT DISTINCT ?x0 ?x2 WHERE {  {  ?x0 ((:p0/^:p0)|(:p0/^:p0)) ?x1 . ?x1 ((:p0/^:p0)|(:p0/^:p0)) ?x2 . } } };
+SPARQL PREFIX : <http://example.org/gMark2k/> SELECT (COUNT(*) AS ?count2k) { SELECT DISTINCT ?x0 ?x2 WHERE {  {  ?x0 ((:p0/^:p0)|(:p0/^:p0)) ?x1 . ?x1 ((:p0/^:p0)|(:p0/^:p0)) ?x2 . } } };
+SPARQL PREFIX : <http://example.org/gMark4k/> SELECT (COUNT(*) AS ?count4k) { SELECT DISTINCT ?x0 ?x2 WHERE {  {  ?x0 ((:p0/^:p0)|(:p0/^:p0)) ?x1 . ?x1 ((:p0/^:p0)|(:p0/^:p0)) ?x2 . } } };
+SPARQL PREFIX : <http://example.org/gMark8k/> SELECT (COUNT(*) AS ?count8k) { SELECT DISTINCT ?x0 ?x2 WHERE {  {  ?x0 ((:p0/^:p0)|(:p0/^:p0)) ?x1 . ?x1 ((:p0/^:p0)|(:p0/^:p0)) ?x2 . } } };
+SPARQL PREFIX : <http://example.org/gMark16k/> SELECT (COUNT(*) AS ?count16k) { SELECT DISTINCT ?x0 ?x2 WHERE {  {  ?x0 ((:p0/^:p0)|(:p0/^:p0)) ?x1 . ?x1 ((:p0/^:p0)|(:p0/^:p0)) ?x2 . } } };
+SPARQL PREFIX : <http://example.org/gMark32k/> SELECT (COUNT(*) AS ?count32k) { SELECT DISTINCT ?x0 ?x2 WHERE {  {  ?x0 ((:p0/^:p0)|(:p0/^:p0)) ?x1 . ?x1 ((:p0/^:p0)|(:p0/^:p0)) ?x2 . } } };
+SPARQL PREFIX : <http://example.org/gMark64k/> SELECT (COUNT(*) AS ?count64k) { SELECT DISTINCT ?x0 ?x2 WHERE {  {  ?x0 ((:p0/^:p0)|(:p0/^:p0)) ?x1 . ?x1 ((:p0/^:p0)|(:p0/^:p0)) ?x2 . } } };
+SPARQL PREFIX : <http://example.org/gMark128k/> SELECT (COUNT(*) AS ?count128k) { SELECT DISTINCT ?x0 ?x2 WHERE {  {  ?x0 ((:p0/^:p0)|(:p0/^:p0)) ?x1 . ?x1 ((:p0/^:p0)|(:p0/^:p0)) ?x2 . } } };
+
+
+=================================
+Prerequisite
+=================================
+./start-virtuoso.sh
+./start-isql.sh
+
+sudo gedit /usr/local/virtuoso-opensource/var/lib/virtuoso/db/virtuoso.ini
+on the line DirsAllowed
+add 
+/home/user/gmark/demo/selectivity-estimation
+
