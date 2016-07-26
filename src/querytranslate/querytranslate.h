@@ -1,7 +1,7 @@
 /* gMark
  * Copyright (C) 2015-2016 Guillaume Bagan <guillaume.bagan@liris.cnrs.fr>
  * Copyright (C) 2015-2016 Angela Bonifati <angela.bonifati@univ-lyon1.fr>
- * Copyright (C) 2015-2016 Radu Ciucanu <radu.ciucanu@cs.ox.ac.uk>
+ * Copyright (C) 2015-2016 Radu Ciucanu <ciucanu@isima.fr>
  * Copyright (C) 2015-2016 George Fletcher <g.h.l.fletcher@tue.nl>
  * Copyright (C) 2015-2016 Aurélien Lemay <aurelien.lemay@univ-lille3.fr>
  *
