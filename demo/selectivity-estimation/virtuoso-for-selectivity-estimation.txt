@@ -65,3 +65,6 @@ on the line DirsAllowed
 add 
 /home/user/gmark/demo/selectivity-estimation
 
+Install Virtuoso from
+https://github.com/openlink/virtuoso-opensource
+
