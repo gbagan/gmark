@@ -71,11 +71,12 @@ These scenarios basically correspond to the aforementioned four configuration fi
 If you use gMark, please cite:
 
     @article{BBCFLA16,
-      author = {G. Bagan and A. Bonifati and R. Ciucanu and G. H. L. Fletcher and A. Lemay and N. Advokaat},
+      author = {Bagan, G. and Bonifati, A. and Ciucanu, R. and Fletcher, G. H. L. and Lemay, A. and Advokaat, N.},
       title = {Generating Flexible Workloads for Graph Databases},
       journal = {PVLDB},
       volume = {9},
       number = {13},
+      pages = {1457--1460},
       year = {2016}
     }
 
