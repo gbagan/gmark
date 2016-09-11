@@ -2,7 +2,7 @@
 
 gMark is a domain- and query language-independent framework targeting highly tunable generation of both graph instances and graph query workloads based on user-defined schemas.
 
-**For more technical details about gMark, please refer to our technical report: http://arxiv.org/abs/1511.08386**
+**For more details about the gMark project, please refer to our technical report: http://arxiv.org/abs/1511.08386**
 
 **gMark was demonstrated in VLDB 2016**
 
