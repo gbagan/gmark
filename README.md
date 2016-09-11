@@ -1,5 +1,26 @@
 # gMark
 
+gMark is a domain- and query language-independent framework targeting highly tunable generation of both graph instances and graph query workloads based on user-defined schemas.
+
+**gMark was demonstrated in VLDB 2016: http://www.vldb.org/pvldb/vol9/p1457-bagan.pdf**
+
+If you use gMark, please cite:
+
+    @article{BBCFLA16,
+      author = {Bagan, G. and Bonifati, A. and Ciucanu, R. and Fletcher, G. H. L. and Lemay, A. and Advokaat, N.},
+      title = {Generating Flexible Workloads for Graph Databases},
+      journal = {PVLDB},
+      volume = {9},
+      number = {13},
+      pages = {1457--1460},
+      year = {2016}
+    }
+
+
+**For more technical details about gMark, please refer to our technical report: http://arxiv.org/abs/1511.08386**
+
+# How to use gMark
+
 **To compile the code:**
 
     cd demo/scripts
@@ -61,23 +82,3 @@ We provide several examples of generated graphs, query workloads in internal for
 You can find them in the directory *demo*, subdirectories *test*, *test-a*, *shop*, *shop-a*, *social*, *social-a*, *uniprot*, *uniprot-a*. 
 
 These scenarios basically correspond to the aforementioned four configuration files from *use-cases*, and for each of them we generated versions without or with aliases (i.e., using integers as predicates or using real-world predicates specified in the configuration file, respectively).
-
-
-## For more details about the gMark project, please refer to our technical report: http://arxiv.org/abs/1511.08386
-
-
-## gMark will be demonstrated in VLDB 2016
-
-If you use gMark, please cite:
-
-    @article{BBCFLA16,
-      author = {Bagan, G. and Bonifati, A. and Ciucanu, R. and Fletcher, G. H. L. and Lemay, A. and Advokaat, N.},
-      title = {Generating Flexible Workloads for Graph Databases},
-      journal = {PVLDB},
-      volume = {9},
-      number = {13},
-      pages = {1457--1460},
-      year = {2016}
-    }
-
-
