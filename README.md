@@ -2,7 +2,9 @@
 
 gMark is a domain- and query language-independent framework targeting highly tunable generation of both graph instances and graph query workloads based on user-defined schemas.
 
-**gMark was demonstrated in VLDB 2016: http://www.vldb.org/pvldb/vol9/p1457-bagan.pdf**
+**For more technical details about gMark, please refer to our technical report: http://arxiv.org/abs/1511.08386**
+
+**gMark was demonstrated in VLDB 2016**
 
 If you use gMark, please cite:
 
@@ -17,7 +19,6 @@ If you use gMark, please cite:
     }
 
 
-**For more technical details about gMark, please refer to our technical report: http://arxiv.org/abs/1511.08386**
 
 # How to use gMark
 
