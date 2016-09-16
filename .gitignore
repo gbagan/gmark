@@ -2,3 +2,6 @@ demo/*
 src/test
 src/querytranslate/test
 src/queryinterface/test
+
+src/.project
+src/.cproject

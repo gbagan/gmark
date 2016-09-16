@@ -7,6 +7,7 @@
 #include "workload.h"
 #include "workload2.h"
 #include "report.h"
+#include "incrementalDeterministicGraphGenerator.h"
 
 void print_report(report::report & rep) {
     cout << "report:" << endl;
@@ -147,12 +148,12 @@ void html_workload_report(config::config & conf, report::workload_report & rep, 
 
 
 int main(int argc, char ** argv) {
-    string conf_file = "../use-cases/test.xml";
+    string conf_file = "../use-cases/smallTest.xml";
     string graph_file;
     string workload_file;
     string report_directory = ".";
     int c;
-    bool selectivity = true;
+//    bool selectivity = true;
     long nb_nodes = -1;
     bool print_alias = false;    
 
@@ -193,55 +194,58 @@ int main(int argc, char ** argv) {
     cout << "complete config" << endl;
     conf.complete_config();
     
+    incrementalDeterministicGraphGenerator graphGenerator = incrementalDeterministicGraphGenerator(conf);
+    graphGenerator.generateIncDetGraph();
     
-    if(graph_file != "") {
-        report::report rep;
-
-        ofstream graph_stream;
-        graph_stream.open(graph_file);
-        cout << "graph generation" << endl;
-        graph::ntriple_graph_writer writer(graph_stream);
-        writer.build_graph(conf, rep);
-        graph_stream.close();
-
-        ofstream report_stream;
-        report_stream.open(report_directory + "/graph.html");
-        html_graph_report(conf, rep, report_stream);
-    }
     
-    if (workload_file != "") {
-        report::workload_report rep;
-
-        ofstream workload_stream;
-        workload_stream.open(workload_file);
-        workload::workload wl;
-        if(selectivity) {
-            workload2::generate_workload(conf, wl, rep);
-        }
-        else {
-            workload::generate_workload(conf, wl);
-        }
-        workload::write_xml(wl, workload_stream, conf);
-        workload_stream.close();
-
-        ofstream report_stream;
-        report_stream.open(report_directory + "/workload.html");
-        html_workload_report(conf, rep, report_stream);  
-
-        /*
-        workload2::matrix mat;
-        workload2::distance_matrix_between_types(conf, mat);
-        cout << mat << endl;
-        workload2::graph graph;
-        compute_graph_from_matrix(mat, 4, graph);
-        workload2::matrix_of_paths mat2;
-        number_of_paths(graph, config::selectivity::CONSTANT, 3, mat2);
-        vector<workload2::triple> path;
-        generate_random_path(graph, mat2, -1, 3, path);
-        for (auto & triple : path) {
-            cout << triple << endl;
-        }
-        */
-    }
+//    if(graph_file != "") {
+//        report::report rep;
+//
+//        ofstream graph_stream;
+//        graph_stream.open(graph_file);
+//        cout << "graph generation" << endl;
+//        graph::ntriple_graph_writer writer(graph_stream);
+//        writer.build_graph(conf, rep);
+//        graph_stream.close();
+//
+//        ofstream report_stream;
+//        report_stream.open(report_directory + "/graph.html");
+//        html_graph_report(conf, rep, report_stream);
+//    }
+//
+//    if (workload_file != "") {
+//        report::workload_report rep;
+//
+//        ofstream workload_stream;
+//        workload_stream.open(workload_file);
+//        workload::workload wl;
+//        if(selectivity) {
+//            workload2::generate_workload(conf, wl, rep);
+//        }
+//        else {
+//            workload::generate_workload(conf, wl);
+//        }
+//        workload::write_xml(wl, workload_stream, conf);
+//        workload_stream.close();
+//
+//        ofstream report_stream;
+//        report_stream.open(report_directory + "/workload.html");
+//        html_workload_report(conf, rep, report_stream);
+//
+//        /*
+//        workload2::matrix mat;
+//        workload2::distance_matrix_between_types(conf, mat);
+//        cout << mat << endl;
+//        workload2::graph graph;
+//        compute_graph_from_matrix(mat, 4, graph);
+//        workload2::matrix_of_paths mat2;
+//        number_of_paths(graph, config::selectivity::CONSTANT, 3, mat2);
+//        vector<workload2::triple> path;
+//        generate_random_path(graph, mat2, -1, 3, path);
+//        for (auto & triple : path) {
+//            cout << triple << endl;
+//        }
+//        */
+//    }
 }
 
