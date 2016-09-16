@@ -8,6 +8,8 @@
 #ifndef GRAPHNODE_H_
 #define GRAPHNODE_H_
 
+#include <vector>
+
 namespace std {
 
 class graphNode {

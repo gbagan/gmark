@@ -135,6 +135,7 @@ void parse_schema(pugi::xml_node node, config::config & conf) {
             size_t target_type = target_node.attribute("type").as_uint();
             size_t symbol = target_node.attribute("symbol").as_uint();
             string mult_string = target_node.attribute("multiplicity").value();
+            size_t edgeTypeId = target_node.attribute("edgeTypeId").as_uint();
             if (mult_string.size() > 0 && (mult_string[0] == '?' || mult_string[0] == '+' || mult_string[0] == '1')) {
                 multiplicity = mult_string[0];
             }
@@ -156,7 +157,7 @@ void parse_schema(pugi::xml_node node, config::config & conf) {
             
             
             
-            conf.schema.add_edge(source_type, symbol, target_type, multiplicity, outdistribution, indistribution);
+            conf.schema.add_edge(source_type, symbol, target_type, multiplicity, edgeTypeId, outdistribution, indistribution);
             //cout << "conf.add_edge "  << source_type << " " << symbol << " " << target_type << " " << multiplicity << " " << outdistribution << " " << indistribution <<endl;
             
         }

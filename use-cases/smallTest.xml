@@ -31,7 +31,7 @@
 
 	<schema>
 		<source type="0"> <!-- person -->
-			<target type="1" symbol="0" multiplicity="*"> <!-- livesIn a city -->
+			<target type="1" symbol="0" multiplicity="*" edgeTypeId="0"> <!-- livesIn a city -->
 				<outdistribution type="uniform">
 					<min>1</min>
 					<max>1</max>
@@ -42,7 +42,7 @@
 				</indistribution>
 			</target>
 
-			<target type="2" symbol="1" multiplicity="*"> <!-- studiesAt a university -->
+			<target type="2" symbol="1" multiplicity="*" edgeTypeId="1"> <!-- studiesAt a university -->
 				<outdistribution type="uniform">
 					<min>1</min>
 					<max>1</max>
