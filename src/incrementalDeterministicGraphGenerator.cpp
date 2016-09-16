@@ -105,8 +105,26 @@ void incrementalDeterministicGraphGenerator::findOrCreateNode(config::edge & edg
 
 
 
-int incrementalDeterministicGraphGenerator::getNumberOfEdgesPerIteration() {
-	// TODO: Remove magic number
+int incrementalDeterministicGraphGenerator::getNumberOfEdgesPerIteration(config::edge & edgeType, int iterationNumber) {
+	// Both not Zipfian or undefined
+	if((edgeType.incoming_distrib.type == DISTRIBUTION::UNIFORM || edgeType.incoming_distrib.type == DISTRIBUTION::NORMAL)
+			&& (edgeType.outgoing_distrib.type == DISTRIBUTION::UNIFORM || edgeType.outgoing_distrib.type != DISTRIBUTION::NORMAL)) {
+		int openConnectionsOfSubject = graph.nodes.at(edgeType.subject_type).at(iterationNumber).getNumberOfOpenInterfaceConnections(edgeType.edge_type_id, true);
+		int openConnectionsOfObject = graph.nodes.at(edgeType.object_type).at(iterationNumber).getNumberOfOpenInterfaceConnections(edgeType.edge_type_id, false);
+		return min(openConnectionsOfSubject, openConnectionsOfObject);
+	}
+
+	// Out-distribution is Zipfian or undefined
+	if(edgeType.incoming_distrib.type == DISTRIBUTION::UNIFORM || edgeType.incoming_distrib.type == DISTRIBUTION::NORMAL) {
+		return graph.nodes.at(edgeType.object_type).at(iterationNumber).getNumberOfOpenInterfaceConnections(edgeType.edge_type_id, false);
+	}
+
+	// In-distribution is Zipfian or undefined
+	if(edgeType.outgoing_distrib.type == DISTRIBUTION::UNIFORM || edgeType.outgoing_distrib.type == DISTRIBUTION::NORMAL) {
+		return graph.nodes.at(edgeType.subject_type).at(iterationNumber).getNumberOfOpenInterfaceConnections(edgeType.edge_type_id, true);
+	}
+
+	// In - and out-distribution are Zipfian or undefined
 	return 2;
 }
 
@@ -202,7 +220,8 @@ void incrementalDeterministicGraphGenerator::processIteration(int iterationNumbe
 		return;
 	}
 
-	int n = getNumberOfEdgesPerIteration();
+	int n = getNumberOfEdgesPerIteration(edgeType, iterationNumber);
+	cout << "This iteration will try to create " << to_string(n) << " edges" << endl;
 	for (int i=0; i<n; i++) {
 		graphNode sourceNode = findSourceNode(edgeType, iterationNumber);
 		graphNode targetNode = findTargetNode(edgeType, iterationNumber);

@@ -31,7 +31,7 @@ private:
 
 	// For each iteration
 	void findOrCreateNode(config::edge & edgeType, bool findSourceNode, int iterationNumber);
-	int getNumberOfEdgesPerIteration();
+	int getNumberOfEdgesPerIteration(config::edge & edgeType, int iterationNumber);
 	void addInterfaceConnectionsToNode(graphNode &n, distribution distr, int edgeTypeNumber, bool findSourceNode);
 	void addNode(graphNode n);
 
