@@ -3,8 +3,8 @@ CFLAGS=-g -O3 -Wall -std=c++11
 
 all: test 
 
-test: test.o gmark.o configparser.o pugixml.o randomgen.o config.o workload.o workload2.o incrementalDeterministicGraphGenerator.o incrementalDeterministicGraph.o graphEdge.o graphNode.o
-	$(CC) test.o gmark.o configparser.o randomgen.o pugixml.o config.o workload.o workload2.o incrementalDeterministicGraphGenerator.o incrementalDeterministicGraph.o -o test
+test: test.o gmark.o configparser.o pugixml.o randomgen.o config.o workload.o workload2.o incrementalDeterministicGraphGenerator.o incrementalDeterministicGraph.o graphEdge.o graphNode.o cumulativeDistributionUtils.o
+	$(CC) test.o gmark.o configparser.o randomgen.o pugixml.o config.o workload.o workload2.o incrementalDeterministicGraphGenerator.o incrementalDeterministicGraph.o graphEdge.o graphNode.o cumulativeDistributionUtils.o -o test
 
 test.o: test.cpp configparser.h config.h gmark.h workload.h incrementalDeterministicGraphGenerator.h
 	$(CC) $(CFLAGS) -c test.cpp
@@ -31,11 +31,14 @@ configparser.o: configparser.cpp config.h configparser.h
 pugixml.o: pugixml.cpp pugixml.hpp 
 	$(CC) $(CFLAGS) -c pugixml.cpp
 
-incrementalDeterministicGraphGenerator.o: incrementalDeterministicGraphGenerator.cpp config.h incrementalDeterministicGraph.h
+incrementalDeterministicGraphGenerator.o: incrementalDeterministicGraphGenerator.cpp config.h incrementalDeterministicGraph.h graphNode.h graphEdge.h
 	$(CC) $(CFLAGS) -c incrementalDeterministicGraphGenerator.cpp
 
-incrementalDeterministicGraph.o: incrementalDeterministicGraph.cpp graphNode.h graphEdge.h
+incrementalDeterministicGraph.o: incrementalDeterministicGraph.cpp graphNode.h graphEdge.h cumulativeDistributionUtils.h
 	$(CC) $(CFLAGS) -c incrementalDeterministicGraph.cpp
+
+cumulativeDistributionUtils.o: cumulativeDistributionUtils.cpp graphNode.h graphEdge.h config.h
+	$(CC) $(CFLAGS) -c cumulativeDistributionUtils.cpp
 	
 graphEdge.o: graphEdge.cpp graphNode.h
 	$(CC) $(CFLAGS) -c graphEdge.cpp

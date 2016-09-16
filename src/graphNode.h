@@ -17,13 +17,22 @@ public:
 	int id;
 	int iterationId;
 	int type;
-	bool isVirtual;
+	bool is_virtual;
 
-	vector<pair<int,int>> positions;
-	vector<pair<int,int>> numberOfOpenInterfaceConnections;
+	pair<int,int>* positions;
+	pair<int,int>* numberOfOpenInterfaceConnections;
 
 	graphNode();
+	graphNode(int id, int iterationId, int type, bool isVirtual, int numberOfEdgeTypes);
 	virtual ~graphNode();
+
+	int getNumberOfOpenInterfaceConnections(int edgeTypeNumber, bool first);
+	int getPosition(int edgeTypeNumber, bool first);
+
+	void setPosition(int index, float pos, bool isSource);
+	void setNumberOfOpenInterfaceConnections(int index, int number, bool isSource);
+
+	void decrementOpenInterfaceConnections(int index, bool isSource);
 };
 
 } /* namespace std */

@@ -1,6 +1,6 @@
 <generator>
 	<graph>
-		<nodes>15</nodes>
+		<nodes>30</nodes>
 		<output ntriples="1"/>
 	</graph>
 
@@ -31,14 +31,14 @@
 
 	<schema>
 		<source type="0"> <!-- person -->
-			<target type="1" symbol="0" multiplicity="*" edgeTypeId="0"> <!-- livesIn a city -->
+			<target type="0" symbol="0" multiplicity="*" edgeTypeId="0"> <!-- livesIn a city -->
 				<outdistribution type="uniform">
 					<min>1</min>
 					<max>1</max>
 				</outdistribution>
 				<indistribution type="zipfian">
-                    <n>100</n>
-					<alpha>2.5</alpha>
+                    <n>10</n>
+					<alpha>2.0</alpha>
 				</indistribution>
 			</target>
 

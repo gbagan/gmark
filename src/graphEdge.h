@@ -8,6 +8,7 @@
 #ifndef GRAPHEDGE_H_
 #define GRAPHEDGE_H_
 
+#include <string>
 #include "graphNode.h"
 
 namespace std {
@@ -15,11 +16,13 @@ namespace std {
 class graphEdge {
 public:
 	graphNode source;
-	int predicate;
+	size_t predicate;
 	graphNode target;
 
-	graphEdge();
+	graphEdge(graphNode sourceNode, size_t pred, graphNode targetNode);
 	virtual ~graphEdge();
+
+	string toString();
 };
 
 } /* namespace std */
