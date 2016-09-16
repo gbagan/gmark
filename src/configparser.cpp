@@ -128,14 +128,16 @@ void parse_types(pugi::xml_node node, config::config & conf) {
 }
 
 void parse_schema(pugi::xml_node node, config::config & conf) {
-    for (pugi::xml_node source_node : node.children("source")) {
+    int currentEdgeTypeId = 0;
+	for (pugi::xml_node source_node : node.children("source")) {
         size_t source_type = source_node.attribute("type").as_uint();
         for (pugi::xml_node target_node : source_node.children("target")) {
             char multiplicity = '*';
             size_t target_type = target_node.attribute("type").as_uint();
             size_t symbol = target_node.attribute("symbol").as_uint();
             string mult_string = target_node.attribute("multiplicity").value();
-            size_t edgeTypeId = target_node.attribute("edgeTypeId").as_uint();
+            size_t edgeTypeId = currentEdgeTypeId;
+            currentEdgeTypeId++;
             if (mult_string.size() > 0 && (mult_string[0] == '?' || mult_string[0] == '+' || mult_string[0] == '1')) {
                 multiplicity = mult_string[0];
             }
