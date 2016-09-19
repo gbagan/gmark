@@ -29,19 +29,19 @@ vector<float> cumulativeDistributionUtils::calculateUnifGausCumulPercentagesForN
 
 	for(graphNode & n: nodes) {
 		if (i > iterationNumber) {
-			cout << "Breaking loop, because of iteration\n";
+//			cout << "Breaking loop, because of iteration\n";
 			break;
 		}
 //		cout << "Node:" << n.getId() << " NodeType:" << n.getType() << " checking with nodeType:" << nodeType << "\n";
 
-		cout << "Node" << n.id << " found with openConnections: " << n.getNumberOfOpenInterfaceConnections(currentEdgeTypeNumber, findSource) << "\n";
+//		cout << "Node" << n.id << " found with openConnections: " << n.getNumberOfOpenInterfaceConnections(currentEdgeTypeNumber, findSource) << "\n";
 		nonNormalizedResults.push_back(n.getNumberOfOpenInterfaceConnections(currentEdgeTypeNumber, findSource));
 		sum += n.getNumberOfOpenInterfaceConnections(currentEdgeTypeNumber, findSource);
 		i++;
 	}
 
 	if(sum == 0) {
-		cout << "Sum of the cumulRes of unifGaus is 0\n";
+//		cout << "Sum of the cumulRes of unifGaus is 0\n";
 		vector<float> dummy;
 		dummy.push_back(-1);
 		return dummy;
@@ -49,13 +49,13 @@ vector<float> cumulativeDistributionUtils::calculateUnifGausCumulPercentagesForN
 
 	float temp = 0;
 	vector<float> normalizedCumulResults;
-	cout << "normalizedCumulResults size: " << nonNormalizedResults.size() << ": ";
+//	cout << "normalizedCumulResults size: " << nonNormalizedResults.size() << ": ";
 	for(int i=0; i<nonNormalizedResults.size(); i++) {
 		temp += (float) nonNormalizedResults.at(i) / sum;
 		normalizedCumulResults.push_back(temp);
-		cout << to_string(temp) << ", ";
+//		cout << to_string(temp) << ", ";
 	}
-	cout << "\n";
+//	cout << "\n";
 
 	return normalizedCumulResults;
 }
@@ -76,13 +76,13 @@ vector<float> cumulativeDistributionUtils::calculateZipfCumulPercentagesForNnode
 	float step;
 	for(graphNode n: nodes) {
 		if (i > iterationNumber) {
-			cout << "Breaking loop, because of iteration\n";
+//			cout << "Breaking loop, because of iteration\n";
 			break;
 		}
 
 		i++;
-		cout << "Node" << n.id << " found with pos: " << n.getPosition(currentEdgeTypeNumber, findSource) << "\n";
-		step = pow(i, -1.0*alpha);
+//		cout << "Node" << n.id << " found with pos: " << n.getPosition(currentEdgeTypeNumber, findSource) << "\n";
+		step = ( alpha*pow(i, -1.0*alpha)) / pow(i, -1*alpha + 1);
 		sum += step;
 		nonNormalizedNonCumul.push_back(step);
 		posIdPairs.push_back(make_pair(n.getPosition(currentEdgeTypeNumber, findSource), i));
@@ -122,13 +122,13 @@ vector<float> cumulativeDistributionUtils::calculateZipfCumulPercentagesForNnode
 	vector<float> normalizedCumulValues;
 	float tempSum = 0;
 //	cout << "Sum=" << sum << "\n";
-	cout << "\nCumulArray: [";
+//	cout << "\nCumulArray: [";
 	for(int i=0; i<posIdPairsWithProbs.size(); i++) {
 		tempSum += posIdPairsWithProbs.at(i).zipfProb / sum;
-		cout << tempSum << "\n";
+//		cout << tempSum << "\n";
 		normalizedCumulValues.push_back(tempSum);
 	}
-	cout << "]\n\n";
+//	cout << "]\n\n";
 
 	return normalizedCumulValues;
 }

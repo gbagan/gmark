@@ -68,7 +68,7 @@ void incrementalDeterministicGraphGenerator::findOrCreateNode(config::edge & edg
 	graphNode* n;
 	if(graph.nodes.at(type).size() > iterationNumber) {
 		// Node already exists in the graph
-		cout << "NodeType" << type << "n" << iterationNumber << " already exists in the graph\n";
+//		cout << "NodeType" << type << "n" << iterationNumber << " already exists in the graph\n";
 
 		n = &graph.nodes.at(type).at(iterationNumber);
 		addInterfaceConnectionsToNode(*n, distr, edgeType.edge_type_id, findSourceNode);
@@ -94,8 +94,8 @@ void incrementalDeterministicGraphGenerator::findOrCreateNode(config::edge & edg
 		n = new graphNode(nextNodeId, iterationNumber, type, isVirtual, conf.schema.edges.size());
 		addInterfaceConnectionsToNode(*n, distr, edgeType.edge_type_id, findSourceNode);
 
-		cout << "Creating a node at iteration " << iterationNumber << " of type:" << type <<
-				". Size of that type=" << conf.types.at(type).size << "\n";
+//		cout << "Creating a node at iteration " << iterationNumber << " of type:" << type <<
+//				". Size of that type=" << conf.types.at(type).size << "\n";
 
 
 		addNode(*n);
@@ -108,7 +108,7 @@ void incrementalDeterministicGraphGenerator::findOrCreateNode(config::edge & edg
 int incrementalDeterministicGraphGenerator::getNumberOfEdgesPerIteration(config::edge & edgeType, int iterationNumber) {
 	// Both not Zipfian or undefined
 	if((edgeType.incoming_distrib.type == DISTRIBUTION::UNIFORM || edgeType.incoming_distrib.type == DISTRIBUTION::NORMAL)
-			&& (edgeType.outgoing_distrib.type == DISTRIBUTION::UNIFORM || edgeType.outgoing_distrib.type != DISTRIBUTION::NORMAL)) {
+			&& (edgeType.outgoing_distrib.type == DISTRIBUTION::UNIFORM || edgeType.outgoing_distrib.type == DISTRIBUTION::NORMAL)) {
 		int openConnectionsOfSubject = graph.nodes.at(edgeType.subject_type).at(iterationNumber).getNumberOfOpenInterfaceConnections(edgeType.edge_type_id, true);
 		int openConnectionsOfObject = graph.nodes.at(edgeType.object_type).at(iterationNumber).getNumberOfOpenInterfaceConnections(edgeType.edge_type_id, false);
 		return min(openConnectionsOfSubject, openConnectionsOfObject);
@@ -135,7 +135,7 @@ graphNode incrementalDeterministicGraphGenerator::findNodeIdFromCumulProbs(vecto
 	int i = 0;
 	uniform_real_distribution<double> distribution(0.0,1.0);
 	double randomValue = distribution(randomGenerator);
-	cout << "RandomValue(0.0, 1.0)=" << randomValue << "\n";
+//	cout << "RandomValue(0.0, 1.0)=" << randomValue << "\n";
 	for(float cumulProbValue: cumulProbs) {
 		if(randomValue <= cumulProbValue) {
 			break;
@@ -148,7 +148,7 @@ graphNode incrementalDeterministicGraphGenerator::findNodeIdFromCumulProbs(vecto
 
 vector<float> incrementalDeterministicGraphGenerator::getCdf(distribution distr, int nodeType, int edgeTypeNumber, int iterationNumber, bool findSourceNode) {
 	vector<float> cumulProbs;
-	cout << "Searching for a node in the distribution: " + to_string(distr.arg1) << ", " << to_string(distr.arg2) << "\n";
+//	cout << "Searching for a node in the distribution: " + to_string(distr.arg1) << ", " << to_string(distr.arg2) << "\n";
 
 	if(distr.type == DISTRIBUTION::ZIPFIAN) {
 		cumulProbs = cumDistrUtils.calculateZipfCumulPercentagesForNnodes(graph.nodes.at(nodeType), edgeTypeNumber, distr.arg2, iterationNumber, findSourceNode);
@@ -168,7 +168,7 @@ graphNode incrementalDeterministicGraphGenerator::findSourceNode(config::edge & 
 	vector<float> cdf = getCdf(distr, nodeType, edgeTypeNumber, iterationNumber, true);
 
 	if(cdf.at(0) == -1) {
-		cout << "Cannot find a node\n";
+//		cout << "Cannot find a node\n";
 		return graphNode();
 	} else {
 		return findNodeIdFromCumulProbs(cdf, nodeType);
@@ -183,7 +183,7 @@ graphNode incrementalDeterministicGraphGenerator::findTargetNode(config::edge & 
 	vector<float> cdf = getCdf(distr, nodeType, edgeTypeNumber, iterationNumber, false);
 
 	if(cdf.at(0) == -1) {
-		cout << "Cannot find a node\n";
+//		cout << "Cannot find a node\n";
 		return graphNode();
 	} else {
 		return findNodeIdFromCumulProbs(cdf, nodeType);
@@ -209,46 +209,47 @@ void incrementalDeterministicGraphGenerator::addEdge(graphEdge e, config::edge &
 
 
 void incrementalDeterministicGraphGenerator::processIteration(int iterationNumber, config::edge & edgeType) {
-	cout << endl<< "---Process interationNumber " << to_string(iterationNumber) << " of edgeType " << to_string(edgeType.edge_type_id) << "---" << endl;
-
+//	if (iterationNumber % 1000 == 0) {
+//		cout << endl<< "---Process interationNumber " << to_string(iterationNumber) << " of edgeType " << to_string(edgeType.edge_type_id) << "---" << endl;
+//	}
 	findOrCreateNode(edgeType, true, iterationNumber);
 	findOrCreateNode(edgeType, false, iterationNumber);
 
-	if(iterationNumber == 0) {
-		// This will increase the graph connectivity, but slightly decrease the distributions
-		// TODO: analysis with and without this part
-		return;
-	}
+//	if(iterationNumber == 0) {
+//		// This will increase the graph connectivity, but slightly decrease the distributions
+//		// TODO: analysis with and without this part
+//		return;
+//	}
 
 	int n = getNumberOfEdgesPerIteration(edgeType, iterationNumber);
-	cout << "This iteration will try to create " << to_string(n) << " edges" << endl;
+//	cout << "This iteration will try to create " << to_string(n) << " edges" << endl;
 	for (int i=0; i<n; i++) {
 		graphNode sourceNode = findSourceNode(edgeType, iterationNumber);
 		graphNode targetNode = findTargetNode(edgeType, iterationNumber);
 		if(sourceNode.is_virtual || targetNode.is_virtual) {
-			cout << "Edge is not added because source or target is virtual" << endl;
+//			cout << "Edge is not added because source or target is virtual" << endl;
 		} else {
 			graphEdge edge(sourceNode, edgeType.predicate, targetNode);
 			addEdge(edge, edgeType);
-			cout << "Edge added:" << edge.toString() << endl;
+//			cout << "Edge added:" << edge.toString() << endl;
 		}
 	}
 }
 
 void incrementalDeterministicGraphGenerator::processEdgeType(config::edge & edgeType) {
-	cout << endl << endl << "-----Processing edge-type " << to_string(edgeType.edge_type_id) << "-----" << endl;
+//	cout << endl << endl << "-----Processing edge-type " << to_string(edgeType.edge_type_id) << "-----" << endl;
 	int newSeed = randomGeneratorForSeeding();
 	randomGenerator.seed(newSeed);
 
 	int nmOfIterations = max(conf.types.at(edgeType.object_type).size, conf.types.at(edgeType.subject_type).size);
-	cout << "Total number of iterations: " << nmOfIterations << endl;
+//	cout << "Total number of iterations: " << nmOfIterations << endl;
 	for(int i=0; i<nmOfIterations; i++) {
 		processIteration(i, edgeType);
 	}
 }
 
 void incrementalDeterministicGraphGenerator::generateIncDetGraph() {
-	cout << "Generate a incremental deterministic graph (given a seed)" << endl;
+//	cout << "Generate a incremental deterministic graph (given a seed)" << endl;
 
 	// TODO: get the seed from the XML instead of this magic number
 	randomGeneratorForSeeding.seed(222);
@@ -258,29 +259,29 @@ void incrementalDeterministicGraphGenerator::generateIncDetGraph() {
 		processEdgeType(edgeType);
 	}
 
-	// Print nodes:
-	cout << "\n\n\n###NODES###" << endl;
-	int i = 0;
-	for(vector<graphNode> nodeVector: graph.nodes) {
-		cout << "Expected number of nodes: " << to_string(conf.types.at(i).size) << endl;
-		i++;
-		for(graphNode node: nodeVector) {
-			if (!node.is_virtual) {
-				cout << conf.types.at(node.type).alias  << to_string(node.iterationId) << endl;
-			}
-		}
-	}
-
-	// Print edges:
-	cout << "\n###EDGES###" << endl;
-	for(vector<graphEdge> edgeVector: graph.edges) {
-		for(graphEdge edge: edgeVector) {
-			cout << conf.types.at(edge.source.type).alias << to_string(edge.source.iterationId) << " (id=" << to_string(edge.source.id) << ")" <<
-					" - " << conf.predicates.at(edge.predicate).alias << " - " <<
-					conf.types.at(edge.target.type).alias << to_string(edge.target.iterationId) << " (id=" << to_string(edge.target.id) << ")" << endl;
-		}
-		cout << endl;
-	}
+//	// Print nodes:
+//	cout << "\n\n\n###NODES###" << endl;
+//	int i = 0;
+//	for(vector<graphNode> nodeVector: graph.nodes) {
+//		cout << "Expected number of nodes: " << to_string(conf.types.at(i).size) << endl;
+//		i++;
+//		for(graphNode node: nodeVector) {
+//			if (!node.is_virtual) {
+//				cout << conf.types.at(node.type).alias  << to_string(node.iterationId) << endl;
+//			}
+//		}
+//	}
+//
+//	// Print edges:
+//	cout << "\n###EDGES###" << endl;
+//	for(vector<graphEdge> edgeVector: graph.edges) {
+//		for(graphEdge edge: edgeVector) {
+//			cout << conf.types.at(edge.source.type).alias << to_string(edge.source.iterationId) << " (id=" << to_string(edge.source.id) << ")" <<
+//					" - " << conf.predicates.at(edge.predicate).alias << " - " <<
+//					conf.types.at(edge.target.type).alias << to_string(edge.target.iterationId) << " (id=" << to_string(edge.target.id) << ")" << endl;
+//		}
+//		cout << endl;
+//	}
 }
 
 } /* namespace std */

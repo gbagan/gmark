@@ -45,6 +45,9 @@ public:
 	virtual ~incrementalDeterministicGraphGenerator();
 
 	void generateIncDetGraph();
+	incrementalDeterministicGraph getGraph() {
+		return graph;
+	}
 };
 
 } /* namespace std */
