@@ -82,7 +82,7 @@ vector<float> cumulativeDistributionUtils::calculateZipfCumulPercentagesForNnode
 
 		i++;
 //		cout << "Node" << n.id << " found with pos: " << n.getPosition(currentEdgeTypeNumber, findSource) << "\n";
-		step = ( alpha*pow(i, -1.0*alpha)) / pow(i, -1*alpha + 1);
+		step = pow(i, -1.0*alpha);
 		sum += step;
 		nonNormalizedNonCumul.push_back(step);
 		posIdPairs.push_back(make_pair(n.getPosition(currentEdgeTypeNumber, findSource), i));

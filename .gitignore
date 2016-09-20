@@ -5,3 +5,5 @@ src/queryinterface/test
 
 src/.project
 src/.cproject
+
+src/distributionAnalysis.r
