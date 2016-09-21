@@ -19,7 +19,7 @@ public:
 	int type;
 	bool is_virtual;
 
-	pair<int,int>* positions;
+	pair<float, float>* position;
 	pair<int,int>* numberOfOpenInterfaceConnections;
 
 	graphNode();
@@ -27,12 +27,11 @@ public:
 	virtual ~graphNode();
 
 	int getNumberOfOpenInterfaceConnections(int edgeTypeNumber, bool first);
-	int getPosition(int edgeTypeNumber, bool first);
-
-	void setPosition(int index, float pos, bool isSource);
 	void setNumberOfOpenInterfaceConnections(int index, int number, bool isSource);
 
 	void decrementOpenInterfaceConnections(int index, bool isSource);
+
+	void setPosition(int number, int maxNumber, int index, bool isSource);
 };
 
 } /* namespace std */

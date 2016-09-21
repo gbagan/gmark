@@ -27,18 +27,18 @@ struct posIdProbTripple {
 
 class cumulativeDistributionUtils {
 private:
-	void printKeyValuesVector(vector<pair<float, int>> keyValues);
-	void printTripples(vector<posIdProbTripple> tripple);
+//	void printKeyValuesVector(vector<pair<float, int>> keyValues);
+//	void printTripples(vector<posIdProbTripple> tripple);
 public:
 	cumulativeDistributionUtils();
 	virtual ~cumulativeDistributionUtils();
 
 	vector<float> calculateUnifGausCumulPercentagesForNnodes(vector<graphNode> & nodes, int currentEdgeTypeNumber, int iterationNumber, bool findSource);
-	vector<float> calculateZipfCumulPercentagesForNnodes(vector<graphNode> & nodes, int currentEdgeTypeNumber, float alpha, int iterationNumber, bool findSource);
-
+//	vector<float> calculateZipfCumulPercentagesForNnodes(vector<graphNode> & nodes, int currentEdgeTypeNumber, float alpha, int iterationNumber, bool findSource);
+	vector<float> zipfCdf(distribution zipfDistr);
 
 	// For sorting
-	bool compare(const pair<pair<float, int>, float> & first, const pair<pair<float, int>, float> & second);
+//	bool compare(const pair<pair<float, int>, float> & first, const pair<pair<float, int>, float> & second);
 };
 
 } /* namespace std */

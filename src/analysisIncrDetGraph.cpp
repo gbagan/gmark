@@ -77,7 +77,6 @@ void analysisIncrDetGraph::distributionAnalysis(int edgeType, ofstream & rFile) 
 		outDistr.push_back(0);
 	}
 
-
 	// Initialize inDistr-vector
 	int objectType = conf.schema.edges.at(edgeType).object_type;
 	int numberOfNodesWithObjectType = 0;
@@ -111,7 +110,6 @@ void analysisIncrDetGraph::distributionAnalysis(int edgeType, ofstream & rFile) 
 	rFile << ")" << endl;
 	printToRfile(rFile, true, conf.schema.edges.at(edgeType));
 
-
 	i=0;
 	rFile << "InDistribution <- c(";
 	for (int nm: inDistr) {
@@ -143,46 +141,58 @@ void analysisIncrDetGraph::printToRfile(ofstream& rFile, bool outDistr, config::
 		nodeType = edge.object_type;
 	}
 
-
+	rFile << "par(pch=22, col=\"black\")" << endl;
+	rFile << "hist(" << distributionVar <<", xlab=\"Number of edges per " << conf.types.at(nodeType).alias << "\", breaks=c(seq(min("<< distributionVar <<")-0.5, max("<< distributionVar <<")+0.5,1)), main=\""<< distributionVar <<" of edge-type " << edge.edge_type_id << "\", prob=TRUE)" << endl;
 	if(distr->type == DISTRIBUTION::UNIFORM) {
-		rFile << "hist(" << distributionVar <<", xlab=\"Number of edges per " << conf.types.at(nodeType).alias << "\", breaks=c(seq(min("<< distributionVar <<")-0.5, max("<< distributionVar <<")+0.5,1)), main=\""<< distributionVar <<" of edge-type " << edge.edge_type_id << "\", prob=TRUE)" << endl;
+
 		rFile << "xRange = c(" << distr->arg1 - 0.5 << ", " << distr->arg2 + 0.5 << ")" << endl;
 		rFile << "yMean = c(rep(1/" << (distr->arg2 - distr->arg1)+1 << ", 2))" << endl;
+		rFile << "par(pch=22, col=\"blue\")" << endl;
 		rFile << "lines(xRange, yMean, lty=2)" << endl;
 	} else if(distr->type == DISTRIBUTION::ZIPFIAN) {
-		rFile << "sortedDistr = sort("<< distributionVar <<", decreasing=TRUE)" << endl;
+		rFile << "x = c(1:max("<< distributionVar <<"))" << endl;
+		rFile << "y = x^-2.5" << endl;
 		rFile << "sum = 0" << endl;
-		rFile << "for(i in 1:length(" << distributionVar << ")) {" << endl;
-		rFile << "  sum = sum+sortedDistr[i]" << endl;
+		rFile << "for(i in 1:length(x)) {" << endl;
+		rFile << "  sum = sum + y[i]" << endl;
 		rFile << "}" << endl;
-		rFile << "pdf = sortedDistr/sum" << endl;
-		rFile << "par(pch=22, col=\"black\")" << endl;
-		rFile << "plot(pdf, main=\""<< distributionVar <<" of edge-type " << edge.edge_type_id << "\", xlab=\"" << conf.types.at(nodeType).alias << " sorted on the number of out-going edges with edge-type " << edge.edge_type_id << "\", ylab=\"Density\")" << endl;
-		rFile << "xValues = c(1:sortedDistr[1])" << endl;
-		rFile << "zipf = xValues^-" << distr->arg2 << endl;
-		rFile << "zipfSum = 0" << endl;
-		rFile << "for(i in 1:length(xValues)) {" << endl;
-		rFile << "  zipfSum = zipfSum + zipf[i]" << endl;
-		rFile << "}" << endl;
-		rFile << "zipf = zipf / zipfSum" << endl;
 		rFile << "par(pch=22, col=\"blue\")" << endl;
-		rFile << "lines(xValues, zipf, type=\"l\")" << endl;
+		rFile << "lines(x-1,y/sum)" << endl;
 
-		rFile << "\n# Zoomed view" << endl;
-		rFile << "par(pch=22, col=\"black\")" << endl;
-		rFile << "plot(pdf, main=\""<< distributionVar <<" of edge-type " << edge.edge_type_id << "\", xlab=\"" << conf.types.at(nodeType).alias << " sorted on the number of out-going edges with edge-type " << edge.edge_type_id << "\", ylab=\"Density\", xlim=c(0,50))" << endl;
-		rFile << "par(pch=22, col=\"blue\")" << endl;
-		rFile << "lines(xValues, zipf, type=\"l\")" << endl;
 
-		rFile << "\n# Log view" << endl;
-		rFile << "par(pch=22, col=\"black\")" << endl;
-		rFile << "plot(pdf, main=\""<< distributionVar <<" of edge-type " << edge.edge_type_id << "\", xlab=\"" << conf.types.at(nodeType).alias << " sorted on the number of out-going edges with edge-type " << edge.edge_type_id << "\", ylab=\"Density\", log=\"xy\")" << endl;
-		rFile << "par(pch=22, col=\"blue\")" << endl;
-		rFile << "lines(xValues, zipf, type=\"l\")" << endl;
+//		rFile << "sortedDistr = sort("<< distributionVar <<", decreasing=TRUE)" << endl;
+//		rFile << "sum = 0" << endl;
+//		rFile << "for(i in 1:length(" << distributionVar << ")) {" << endl;
+//		rFile << "  sum = sum+sortedDistr[i]" << endl;
+//		rFile << "}" << endl;
+//		rFile << "pdf = sortedDistr/sum" << endl;
+//		rFile << "par(pch=22, col=\"black\")" << endl;
+//		rFile << "plot(pdf, main=\""<< distributionVar <<" of edge-type " << edge.edge_type_id << "\", xlab=\"" << conf.types.at(nodeType).alias << " sorted on the number of out-going edges with edge-type " << edge.edge_type_id << "\", ylab=\"Density\")" << endl;
+//		rFile << "xValues = c(1:sortedDistr[1])" << endl;
+//		rFile << "zipf = xValues^-" << distr->arg2 << endl;
+//		rFile << "zipfSum = 0" << endl;
+//		rFile << "for(i in 1:length(xValues)) {" << endl;
+//		rFile << "  zipfSum = zipfSum + zipf[i]" << endl;
+//		rFile << "}" << endl;
+//		rFile << "zipf = zipf / zipfSum" << endl;
+//		rFile << "par(pch=22, col=\"blue\")" << endl;
+//		rFile << "lines(xValues, zipf, type=\"l\")" << endl;
+//
+//		rFile << "\n# Zoomed view" << endl;
+//		rFile << "par(pch=22, col=\"black\")" << endl;
+//		rFile << "plot(pdf, main=\""<< distributionVar <<" of edge-type " << edge.edge_type_id << "\", xlab=\"" << conf.types.at(nodeType).alias << " sorted on the number of out-going edges with edge-type " << edge.edge_type_id << "\", ylab=\"Density\", xlim=c(0,50))" << endl;
+//		rFile << "par(pch=22, col=\"blue\")" << endl;
+//		rFile << "lines(xValues, zipf, type=\"l\")" << endl;
+//
+//		rFile << "\n# Log view" << endl;
+//		rFile << "par(pch=22, col=\"black\")" << endl;
+//		rFile << "plot(pdf, main=\""<< distributionVar <<" of edge-type " << edge.edge_type_id << "\", xlab=\"" << conf.types.at(nodeType).alias << " sorted on the number of out-going edges with edge-type " << edge.edge_type_id << "\", ylab=\"Density\", log=\"xy\")" << endl;
+//		rFile << "par(pch=22, col=\"blue\")" << endl;
+//		rFile << "lines(xValues, zipf, type=\"l\")" << endl;
 	} else if(distr->type == DISTRIBUTION::NORMAL) {
-		rFile << "hist(" << distributionVar <<", xlab=\"Number of edges per " << conf.types.at(nodeType).alias << "\", breaks=c(seq(min("<< distributionVar <<")-0.5, max("<< distributionVar <<")+0.5,1)), main=\""<< distributionVar <<" of edge-type " << edge.edge_type_id << "\", prob=TRUE)" << endl;
 		rFile << "xValues = seq(min(" << distributionVar << ")-0.5, max(" << distributionVar << ")+0.5, 0.01)" << endl;
 		rFile << "norm = dnorm(xValues, mean=" << distr->arg1 << ", sd=" << distr->arg2 << ")" << endl;
+		rFile << "par(pch=22, col=\"blue\")" << endl;
 		rFile << "lines(xValues, norm, type=\"l\")" << endl;
 	}
 	rFile << endl;

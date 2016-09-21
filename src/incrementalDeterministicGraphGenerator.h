@@ -27,17 +27,18 @@ private:
 
 	void initializeNodesAndEdges();
 	void processEdgeType(config::edge & edgeType);
-	void processIteration(int iterationNumber, config::edge & edgeType);
+	void processIteration(int iterationNumber, config::edge & edgeType, vector<float> zipfInCdf, vector<float> zipfOutCdf);
 
 	// For each iteration
-	void findOrCreateNode(config::edge & edgeType, bool findSourceNode, int iterationNumber);
+	void findOrCreateNode(config::edge & edgeType, bool findSourceNode, int iterationNumber, vector<float> zipfCdf);
 	int getNumberOfEdgesPerIteration(config::edge & edgeType, int iterationNumber);
-	void addInterfaceConnectionsToNode(graphNode &n, distribution distr, int edgeTypeNumber, bool findSourceNode);
+	void addInterfaceConnectionsToNode(graphNode &n, distribution distr, int edgeTypeNumber, vector<float> zipfianCdf, bool findSourceNode);
 	void addNode(graphNode n);
 
 	graphNode findSourceNode(config::edge & edgeType, int iterationNumber);
 	graphNode findTargetNode(config::edge & edgeType, int iterationNumber);
 	graphNode findNodeIdFromCumulProbs(vector<float> & cumulProbs, int nodeType);
+	int findNmOfInterfaceConnectionsForZipf(vector<float> & zipfianCdf);
 	vector<float> getCdf(distribution distr, int nodeType, int edgeTypeNumber, int iterationNumber, bool findSourceNode);
 	void addEdge(graphEdge e, config::edge & edgeType);
 public:

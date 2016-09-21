@@ -5,6 +5,7 @@
  *      Author: wilcovanleeuwen
  */
 
+#include <iostream>
 #include "graphNode.h"
 
 namespace std {
@@ -16,7 +17,6 @@ graphNode::graphNode() {
 	this->is_virtual = true;
 
 	this->numberOfOpenInterfaceConnections = new pair<int,int>[1];
-	this->positions = new pair<int,int>[1];
 }
 graphNode::graphNode(int globalId, int localId, int nodeType, bool isVirtual, int numberOfEdgeTypes) {
 	this->id = globalId;
@@ -25,23 +25,13 @@ graphNode::graphNode(int globalId, int localId, int nodeType, bool isVirtual, in
 	this->is_virtual = isVirtual;
 
 	this->numberOfOpenInterfaceConnections = new pair<int,int>[numberOfEdgeTypes];
-	this->positions = new pair<int,int>[numberOfEdgeTypes];
-
+	this->position = new pair<float,float>[numberOfEdgeTypes];
 }
 
 graphNode::~graphNode() {
 	// TODO Auto-generated destructor stub
 }
 
-int graphNode::getPosition(int edgeTypeNumber, bool first) {
-	int position;
-	if(first) {
-		position = positions[edgeTypeNumber].first;
-	} else {
-		position = positions[edgeTypeNumber].second;
-	}
-	return position;
-}
 
 int graphNode::getNumberOfOpenInterfaceConnections(int edgeTypeNumber, bool isSource) {
 	int openConnections;
@@ -53,13 +43,7 @@ int graphNode::getNumberOfOpenInterfaceConnections(int edgeTypeNumber, bool isSo
 	return openConnections;
 }
 
-void graphNode::setPosition(int index, float pos, bool isSource) {
-	if (isSource) {
-		this->positions[index].first = pos;
-	} else {
-		this->positions[index].second = pos;
-	}
-}
+
 void graphNode::setNumberOfOpenInterfaceConnections(int index, int number, bool isSource) {
 	if(isSource) {
 		this->numberOfOpenInterfaceConnections[index].first = number;
@@ -73,6 +57,17 @@ void graphNode::decrementOpenInterfaceConnections(int index, bool isSource) {
 		this->numberOfOpenInterfaceConnections[index].first--;
 	} else {
 		this->numberOfOpenInterfaceConnections[index].second--;
+	}
+}
+
+void graphNode::setPosition(int number, int maxNumber, int index, bool isSource) {
+//	cout << "MaxNUmber: " << maxNumber << endl;
+	float pos = (float) number / (float) maxNumber;
+//	cout << pos << endl;
+	if(isSource) {
+		this->position[index].first = pos;
+	} else {
+		this->position[index].second = pos;
 	}
 }
 
