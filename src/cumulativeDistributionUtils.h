@@ -15,15 +15,15 @@
 
 namespace std {
 
-struct posIdProbTripple {
-	float position;
-	int id;
-	float zipfProb;
-	bool operator<(posIdProbTripple other) const
-	{
-		return id < other.id;
-	}
-};
+//struct posIdProbTripple {
+//	float position;
+//	int id;
+//	float zipfProb;
+//	bool operator<(posIdProbTripple other) const
+//	{
+//		return id < other.id;
+//	}
+//};
 
 class cumulativeDistributionUtils {
 private:
@@ -35,7 +35,7 @@ public:
 
 	vector<float> calculateUnifGausCumulPercentagesForNnodes(vector<graphNode> & nodes, int currentEdgeTypeNumber, int iterationNumber, bool findSource);
 //	vector<float> calculateZipfCumulPercentagesForNnodes(vector<graphNode> & nodes, int currentEdgeTypeNumber, float alpha, int iterationNumber, bool findSource);
-	vector<float> zipfCdf(distribution zipfDistr);
+	vector<float> zipfCdf(distribution zipfDistr, int iterationNumber);
 
 	// For sorting
 //	bool compare(const pair<pair<float, int>, float> & first, const pair<pair<float, int>, float> & second);

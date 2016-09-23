@@ -151,12 +151,16 @@ void analysisIncrDetGraph::printToRfile(ofstream& rFile, bool outDistr, config::
 		rFile << "lines(xRange, yMean, lty=2)" << endl;
 	} else if(distr->type == DISTRIBUTION::ZIPFIAN) {
 		rFile << "x = c(1:max("<< distributionVar <<"))" << endl;
-		rFile << "y = x^-2.5" << endl;
+		rFile << "y = x^-" << distr->arg2 << endl;
 		rFile << "sum = 0" << endl;
 		rFile << "for(i in 1:length(x)) {" << endl;
 		rFile << "  sum = sum + y[i]" << endl;
 		rFile << "}" << endl;
 		rFile << "par(pch=22, col=\"blue\")" << endl;
+		rFile << "lines(x-1,y/sum)" << endl;
+
+		rFile << "\n# Zoomed view" << endl;
+		rFile << "hist(" << distributionVar <<", xlab=\"Number of edges per " << conf.types.at(nodeType).alias << "\", breaks=c(seq(min("<< distributionVar <<")-0.5, max("<< distributionVar <<")+0.5,1)), main=\""<< distributionVar <<" of edge-type " << edge.edge_type_id << "\", prob=TRUE, xlim=c(0,10))" << endl;
 		rFile << "lines(x-1,y/sum)" << endl;
 
 

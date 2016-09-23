@@ -17,6 +17,8 @@ graphNode::graphNode() {
 	this->is_virtual = true;
 
 	this->numberOfOpenInterfaceConnections = new pair<int,int>[1];
+	this->numberOfInterfaceConnections = new pair<int,int>[1];
+	this->position = new pair<float,float>[1];
 }
 graphNode::graphNode(int globalId, int localId, int nodeType, bool isVirtual, int numberOfEdgeTypes) {
 	this->id = globalId;
@@ -25,6 +27,7 @@ graphNode::graphNode(int globalId, int localId, int nodeType, bool isVirtual, in
 	this->is_virtual = isVirtual;
 
 	this->numberOfOpenInterfaceConnections = new pair<int,int>[numberOfEdgeTypes];
+	this->numberOfInterfaceConnections = new pair<int,int>[numberOfEdgeTypes];
 	this->position = new pair<float,float>[numberOfEdgeTypes];
 }
 
@@ -42,13 +45,29 @@ int graphNode::getNumberOfOpenInterfaceConnections(int edgeTypeNumber, bool isSo
 	}
 	return openConnections;
 }
-
-
 void graphNode::setNumberOfOpenInterfaceConnections(int index, int number, bool isSource) {
 	if(isSource) {
 		this->numberOfOpenInterfaceConnections[index].first = number;
 	} else {
 		this->numberOfOpenInterfaceConnections[index].second = number;
+	}
+}
+
+
+int graphNode::getNumberOfInterfaceConnections(int edgeTypeNumber, bool isSource) {
+	int initConnections;
+	if(isSource) {
+		initConnections = this->numberOfInterfaceConnections[edgeTypeNumber].first;
+	} else {
+		initConnections = this->numberOfInterfaceConnections[edgeTypeNumber].second;
+	}
+	return initConnections;
+}
+void graphNode::setNumberOfInterfaceConnections(int index, int number, bool isSource) {
+	if(isSource) {
+		this->numberOfInterfaceConnections[index].first = number;
+	} else {
+		this->numberOfInterfaceConnections[index].second = number;
 	}
 }
 
@@ -59,15 +78,26 @@ void graphNode::decrementOpenInterfaceConnections(int index, bool isSource) {
 		this->numberOfOpenInterfaceConnections[index].second--;
 	}
 }
-
-void graphNode::setPosition(int number, int maxNumber, int index, bool isSource) {
-//	cout << "MaxNUmber: " << maxNumber << endl;
-	float pos = (float) number / (float) maxNumber;
-//	cout << pos << endl;
+void graphNode::incrementOpenInterfaceConnectionsByN(int index, int number, bool isSource) {
 	if(isSource) {
-		this->position[index].first = pos;
+		this->numberOfOpenInterfaceConnections[index].first += number;
 	} else {
-		this->position[index].second = pos;
+		this->numberOfOpenInterfaceConnections[index].second += number;
+	}
+}
+
+void graphNode::setPosition(int index, double number, bool isSource) {
+	if(isSource) {
+		this->position[index].first = number;
+	} else {
+		this->position[index].second = number;
+	}
+}
+float graphNode::getPosition(int index, bool isSource) {
+	if(isSource) {
+		return this->position[index].first;
+	} else {
+		return this->position[index].second;
 	}
 }
 

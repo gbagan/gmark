@@ -27,20 +27,24 @@ private:
 
 	void initializeNodesAndEdges();
 	void processEdgeType(config::edge & edgeType);
-	void processIteration(int iterationNumber, config::edge & edgeType, vector<float> zipfInCdf, vector<float> zipfOutCdf);
+	void processIteration(int iterationNumber, config::edge & edgeType);
 
 	// For each iteration
-	void findOrCreateNode(config::edge & edgeType, bool findSourceNode, int iterationNumber, vector<float> zipfCdf);
+	void findOrCreateNode(config::edge & edgeType, bool findSourceNode, int iterationNumber);
 	int getNumberOfEdgesPerIteration(config::edge & edgeType, int iterationNumber);
-	void addInterfaceConnectionsToNode(graphNode &n, distribution distr, int edgeTypeNumber, vector<float> zipfianCdf, bool findSourceNode);
+	void addInterfaceConnectionsToNode(graphNode &n, distribution distr, int edgeTypeNumber, bool findSourceNode);
 	void addNode(graphNode n);
 
 	graphNode findSourceNode(config::edge & edgeType, int iterationNumber);
 	graphNode findTargetNode(config::edge & edgeType, int iterationNumber);
 	graphNode findNodeIdFromCumulProbs(vector<float> & cumulProbs, int nodeType);
-	int findNmOfInterfaceConnectionsForZipf(vector<float> & zipfianCdf);
+	int findPositionInCdf(vector<float> & cdf);
+	int findPositionInCdf(vector<float> & cdf, double randomValue);
 	vector<float> getCdf(distribution distr, int nodeType, int edgeTypeNumber, int iterationNumber, bool findSourceNode);
 	void addEdge(graphEdge e, config::edge & edgeType);
+
+	void updateInterfaceConnectionsForZipfianDistributions(vector<graphNode> nodes, int iterationNumber, int edgeTypeId, distribution distr, bool outDistr);
+	void updateInterfaceConnectionsForZipfianDistributions(config::edge & edgeType, int iterationNumber);
 public:
 	incrementalDeterministicGraphGenerator(config::config configuration);
 	virtual ~incrementalDeterministicGraphGenerator();
