@@ -22,19 +22,19 @@ cumulativeDistributionUtils::~cumulativeDistributionUtils() {
 	// TODO Auto-generated destructor stub
 }
 
-vector<float> cumulativeDistributionUtils::calculateUnifGausCumulPercentagesForNnodes(vector<graphNode> & nodes, int currentEdgeTypeNumber, int iterationNumber, bool findSource) {
+vector<float> cumulativeDistributionUtils::calculateUnifGausCumulPercentagesForNnodes(vector<graphNode> & nodes, int currentEdgeTypeNumber, int nmNodes, bool findSource) {
 	int sum = 0;
 	vector<int> nonNormalizedResults;
 	int i = 0;
 
 	for(graphNode & n: nodes) {
-		if (i > iterationNumber) {
+		if (i > nmNodes) {
 //			cout << "Breaking loop, because of iteration\n";
 			break;
 		}
-//		cout << "Node:" << n.getId() << " NodeType:" << n.getType() << " checking with nodeType:" << nodeType << "\n";
 
 //		cout << "Node" << n.id << " found with openConnections: " << n.getNumberOfOpenInterfaceConnections(currentEdgeTypeNumber, findSource) << "\n";
+
 		nonNormalizedResults.push_back(n.getNumberOfOpenInterfaceConnections(currentEdgeTypeNumber, findSource));
 		sum += n.getNumberOfOpenInterfaceConnections(currentEdgeTypeNumber, findSource);
 		i++;
@@ -80,16 +80,39 @@ vector<float> cumulativeDistributionUtils::zipfCdf(distribution zipfDistr, int i
 
 
 	vector<float> cdf;
+//	cout << endl << "CDF: " << endl;
+	// Rmoving the 0 ICs
+	cdf.push_back(0.0);
+//	cout << "0.0, ";
 	float tempSum = 0.0;
 	for(int i=0; i<n; i++) {
 		tempSum += zipfian.at(i) / sum;
 //		cout << tempSum << ", ";
 		cdf.push_back(tempSum);
 	}
+//	cout << endl;
 
 	return cdf;
 }
 
+
+
+int cumulativeDistributionUtils::findPositionInCdf(vector<float> & cdf, double randomValue) {
+	int i = 0;
+//	cout << "Random value: " << randomValue << endl;
+	for(float cumulProbValue: cdf) {
+//		cout << "i=" << i << ", cumulProbValue=" << cumulProbValue << endl;
+		if(randomValue <= cumulProbValue) {
+			break;
+		}
+		i++;
+	}
+	if (i >= cdf.size() && i != 0) {
+		 i= cdf.size()-1;
+	}
+//	cout << "Returning: " << i << endl;
+	return i;
+}
 
 
 //vector<float> cumulativeDistributionUtils::calculateZipfCumulPercentagesForNnodes(vector<graphNode> & nodes, int currentEdgeTypeNumber, float alpha, int iterationNumber, bool findSource) {

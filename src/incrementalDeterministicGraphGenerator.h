@@ -12,39 +12,45 @@
 #include "config.h"
 #include "incrementalDeterministicGraph.h"
 #include "cumulativeDistributionUtils.h"
+#include "nodeGenerator.h"
 
 namespace std {
+
 
 class incrementalDeterministicGraphGenerator {
 private:
 	config::config conf;
 	incrementalDeterministicGraph graph;
-	int nextNodeId;
 	cumulativeDistributionUtils cumDistrUtils;
 
 	std::default_random_engine randomGeneratorForSeeding;
 	std::default_random_engine randomGenerator;
 
+	nodeGenerator nodeGen;
+
 	void initializeNodesAndEdges();
 	void processEdgeType(config::edge & edgeType);
-	void processIteration(int iterationNumber, config::edge & edgeType);
+	int processIteration(int iterationNumber, config::edge & edgeType, int numberOfNodesForMax, int numberOfEdgesPerIteration);
 
 	// For each iteration
-	void findOrCreateNode(config::edge & edgeType, bool findSourceNode, int iterationNumber);
 	int getNumberOfEdgesPerIteration(config::edge & edgeType, int iterationNumber);
-	void addInterfaceConnectionsToNode(graphNode &n, distribution distr, int edgeTypeNumber, bool findSourceNode);
-	void addNode(graphNode n);
+
+
+	double getMeanEdgesPerNode(config::edge & edgeType, distribution distr, int zipfMax);
+	int getNumberOfEdgesPerIteration(config::edge & edgeType);
 
 	graphNode findSourceNode(config::edge & edgeType, int iterationNumber);
 	graphNode findTargetNode(config::edge & edgeType, int iterationNumber);
 	graphNode findNodeIdFromCumulProbs(vector<float> & cumulProbs, int nodeType);
-	int findPositionInCdf(vector<float> & cdf);
-	int findPositionInCdf(vector<float> & cdf, double randomValue);
+
 	vector<float> getCdf(distribution distr, int nodeType, int edgeTypeNumber, int iterationNumber, bool findSourceNode);
 	void addEdge(graphEdge e, config::edge & edgeType);
 
-	void updateInterfaceConnectionsForZipfianDistributions(vector<graphNode> nodes, int iterationNumber, int edgeTypeId, distribution distr, bool outDistr);
-	void updateInterfaceConnectionsForZipfianDistributions(config::edge & edgeType, int iterationNumber);
+	int updateInterfaceConnectionsForZipfianDistributions(vector<graphNode> nodes, int iterationNumber, int edgeTypeId, distribution distr, bool outDistr);
+	pair<int,int> updateInterfaceConnectionsForZipfianDistributions(config::edge & edgeType, int nmNodesMax, int nmNodesMin);
+
+	void changeDistributionParams(config::edge & edgeType);
+	void changeDistributionParams(config::edge & edgeType, double meanICsPerNodeForOtherDistr, bool changeOutDistr);
 public:
 	incrementalDeterministicGraphGenerator(config::config configuration);
 	virtual ~incrementalDeterministicGraphGenerator();

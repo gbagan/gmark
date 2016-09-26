@@ -22,7 +22,7 @@ graphEdge::~graphEdge() {
 }
 
 string graphEdge::toString() {
-	string res = "Edge[\n source: node" + to_string(source.id) + "\n perdicate: " + to_string(predicate) + "\n target: node" + to_string(target.id) + "\n]\n";
+	string res = "Edge[\n source: node" + to_string(source.iterationId) + "\n perdicate: " + to_string(predicate) + "\n target: node" + to_string(target.iterationId) + "\n]\n";
 	return res;
 }
 

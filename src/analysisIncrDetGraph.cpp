@@ -33,9 +33,9 @@ void analysisIncrDetGraph::numberOfNodesAnalysis() {
 		cout << "NodeType:" << conf.types.at(i).alias << " should have size=" << to_string(shouldBe) << endl;
 		int tempSize = 0;
 		for (graphNode n: nodes.at(i)) {
-			if(!n.is_virtual) {
+//			if(!n.is_virtual) {
 				tempSize++;
-			}
+//			}
 		}
 		real = tempSize;
 		if(nodes.at(i).size() > 0) {
@@ -69,9 +69,9 @@ void analysisIncrDetGraph::distributionAnalysis(int edgeType, ofstream & rFile) 
 	int subjectType = conf.schema.edges.at(edgeType).subject_type;
 	int numberOfNodesWithSubjectType = 0;
 	for (graphNode n: nodes.at(subjectType)) {
-		if(!n.is_virtual) {
+//		if(!n.is_virtual) {
 			numberOfNodesWithSubjectType++;
-		}
+//		}
 	}
 	for (int i=0; i<numberOfNodesWithSubjectType; i++) {
 		outDistr.push_back(0);
@@ -81,9 +81,9 @@ void analysisIncrDetGraph::distributionAnalysis(int edgeType, ofstream & rFile) 
 	int objectType = conf.schema.edges.at(edgeType).object_type;
 	int numberOfNodesWithObjectType = 0;
 	for (graphNode n: nodes.at(objectType)) {
-		if(!n.is_virtual) {
+//		if(!n.is_virtual) {
 			numberOfNodesWithObjectType++;
-		}
+//		}
 	}
 	for (int i=0; i<numberOfNodesWithObjectType; i++) {
 		inDistr.push_back(0);

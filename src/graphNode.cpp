@@ -14,17 +14,15 @@ graphNode::graphNode() {
 	this->id = -1;
 	this->iterationId = -1;
 	this->type = -1;
-	this->is_virtual = true;
 
 	this->numberOfOpenInterfaceConnections = new pair<int,int>[1];
 	this->numberOfInterfaceConnections = new pair<int,int>[1];
 	this->position = new pair<float,float>[1];
 }
-graphNode::graphNode(int globalId, int localId, int nodeType, bool isVirtual, int numberOfEdgeTypes) {
+graphNode::graphNode(int globalId, int localId, int nodeType, int numberOfEdgeTypes) {
 	this->id = globalId;
 	this->iterationId = localId;
 	this->type = nodeType;
-	this->is_virtual = isVirtual;
 
 	this->numberOfOpenInterfaceConnections = new pair<int,int>[numberOfEdgeTypes];
 	this->numberOfInterfaceConnections = new pair<int,int>[numberOfEdgeTypes];

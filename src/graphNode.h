@@ -17,14 +17,14 @@ public:
 	int id;
 	int iterationId;
 	int type;
-	bool is_virtual;
+//	bool is_virtual;
 
 	pair<float, float>* position;
 	pair<int,int>* numberOfInterfaceConnections;
 	pair<int,int>* numberOfOpenInterfaceConnections;
 
 	graphNode();
-	graphNode(int id, int iterationId, int type, bool isVirtual, int numberOfEdgeTypes);
+	graphNode(int id, int iterationId, int type, int numberOfEdgeTypes);
 	virtual ~graphNode();
 
 	int getNumberOfOpenInterfaceConnections(int edgeTypeNumber, bool first);

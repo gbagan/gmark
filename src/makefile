@@ -3,8 +3,8 @@ CFLAGS=-g -O3 -Wall -std=c++11
 
 all: test 
 
-test: test.o gmark.o configparser.o pugixml.o randomgen.o config.o workload.o workload2.o incrementalDeterministicGraphGenerator.o incrementalDeterministicGraph.o graphEdge.o graphNode.o cumulativeDistributionUtils.o analysisIncrDetGraph.o
-	$(CC) test.o gmark.o configparser.o randomgen.o pugixml.o config.o workload.o workload2.o incrementalDeterministicGraphGenerator.o incrementalDeterministicGraph.o graphEdge.o graphNode.o cumulativeDistributionUtils.o analysisIncrDetGraph.o -o test
+test: test.o gmark.o configparser.o pugixml.o randomgen.o config.o workload.o workload2.o incrementalDeterministicGraphGenerator.o incrementalDeterministicGraph.o graphEdge.o graphNode.o cumulativeDistributionUtils.o analysisIncrDetGraph.o nodeGenerator.o
+	$(CC) test.o gmark.o configparser.o randomgen.o pugixml.o config.o workload.o workload2.o incrementalDeterministicGraphGenerator.o incrementalDeterministicGraph.o graphEdge.o graphNode.o cumulativeDistributionUtils.o analysisIncrDetGraph.o nodeGenerator.o -o test
 
 test.o: test.cpp configparser.h config.h gmark.h workload.h incrementalDeterministicGraphGenerator.h analysisIncrDetGraph.h
 	$(CC) $(CFLAGS) -c test.cpp
@@ -31,7 +31,7 @@ configparser.o: configparser.cpp config.h configparser.h
 pugixml.o: pugixml.cpp pugixml.hpp 
 	$(CC) $(CFLAGS) -c pugixml.cpp
 
-incrementalDeterministicGraphGenerator.o: incrementalDeterministicGraphGenerator.cpp config.h incrementalDeterministicGraph.h graphNode.h graphEdge.h
+incrementalDeterministicGraphGenerator.o: incrementalDeterministicGraphGenerator.cpp config.h incrementalDeterministicGraph.h graphNode.h graphEdge.h nodeGenerator.h
 	$(CC) $(CFLAGS) -c incrementalDeterministicGraphGenerator.cpp
 
 incrementalDeterministicGraph.o: incrementalDeterministicGraph.cpp graphNode.h graphEdge.h cumulativeDistributionUtils.h
@@ -48,6 +48,10 @@ graphNode.o: graphNode.cpp
 	
 analysisIncrDetGraph.o: analysisIncrDetGraph.cpp incrementalDeterministicGraph.h config.h
 	$(CC) $(CFLAGS) -c analysisIncrDetGraph.cpp
+
+nodeGenerator.o: nodeGenerator.cpp config.h incrementalDeterministicGraph.h
+	$(CC) $(CFLAGS) -c nodeGenerator.cpp
+
 
 clean:
 	rm -rf *.o test

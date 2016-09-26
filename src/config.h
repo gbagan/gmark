@@ -13,17 +13,20 @@ public:
     string alias;
     size_t size;
     bool scalable;
+    double proportion;
 
     type () {
         alias = "";
         size = 0;
         scalable = true;
+        proportion = 0.0;
     }
     
-    type (const string & alias_, size_t size_, bool scalable_) {
+    type (const string & alias_, size_t size_, bool scalable_, double proportion_) {
         alias = alias_;
         size = size_;
         scalable = scalable_;
+        proportion = proportion_;
     }
 };
 

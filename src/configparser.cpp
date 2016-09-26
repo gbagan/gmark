@@ -108,6 +108,7 @@ void parse_types(pugi::xml_node node, config::config & conf) {
         }
         conf.types[id].size = (size_t) (proportion * conf.nb_nodes);
         conf.types[id].scalable = true;
+        conf.types[id].proportion = proportion;
         
         if (proportion * conf.nb_nodes > 0 &&  conf.types[id].size == 0) {
             conf.types[id].size = 1;
@@ -124,6 +125,7 @@ void parse_types(pugi::xml_node node, config::config & conf) {
         }
         conf.types[id].size = size2;
         conf.types[id].scalable = false;
+        conf.types[id].proportion = -1;
     }    
 }
 
