@@ -48,6 +48,10 @@ void nodeGenerator::addInterfaceConnectionsToNode(graphNode &n, distribution dis
 	} else { // distr.type == DISTRIBUTION::UNDEFINED
 		numberOfConnections = 0;
 	}
+
+	if (numberOfConnections < 0) {
+		numberOfConnections = 0;
+	}
 	n.setNumberOfOpenInterfaceConnections(currentEdgeTypeNumber, numberOfConnections, findSourceNode);
 	n.setNumberOfInterfaceConnections(currentEdgeTypeNumber, numberOfConnections, findSourceNode);
 //	cout << "Node at iteration " << n.iterationId << " get " << numberOfConnections << " interface-connections" << endl;

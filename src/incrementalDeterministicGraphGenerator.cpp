@@ -399,12 +399,12 @@ int incrementalDeterministicGraphGenerator::processIteration(int iterationNumber
 
 		if (conf.types.at(edgeType.subject_type).proportion > conf.types.at(edgeType.object_type).proportion) {
 //			cout << "Find source node from nodes 0:" << nmNodesMax-1 << endl;
-			sourceNode = findSourceNode(edgeType, max(nmNodesMax-1,0));
+			sourceNode = findSourceNode(edgeType, max(nmNodesMax-1,iterationNumber));
 //			cout << "Find target node from nodes 0:" << iterationNumber << endl;
 			targetNode = findTargetNode(edgeType, iterationNumber);
 		} else {
 			sourceNode = findSourceNode(edgeType, iterationNumber);
-			targetNode = findTargetNode(edgeType, max(nmNodesMax-1,0));
+			targetNode = findTargetNode(edgeType, max(nmNodesMax-1,iterationNumber));
 		}
 
 		if(sourceNode.id == -1 || targetNode.id == -1) {
@@ -434,7 +434,7 @@ void incrementalDeterministicGraphGenerator::processEdgeType(config::edge & edge
 	} else {
 		nmOfIterations = max(conf.types.at(edgeType.object_type).size, conf.types.at(edgeType.subject_type).size);
 	}
-//	cout << "Total number of iterations: " << nmOfIterations << endl;
+	cout << "Total number of iterations: " << nmOfIterations << endl;
 
 
 	int numberOfEdgesPerIteration = getNumberOfEdgesPerIteration(edgeType);
@@ -456,7 +456,6 @@ void incrementalDeterministicGraphGenerator::generateIncDetGraph() {
 
 	for (config::edge & edgeType : conf.schema.edges) {
 		processEdgeType(edgeType);
-		break;
 	}
 
 //	// Print nodes:
