@@ -22,7 +22,7 @@ cumulativeDistributionUtils::~cumulativeDistributionUtils() {
 	// TODO Auto-generated destructor stub
 }
 
-vector<float> cumulativeDistributionUtils::calculateUnifGausCumulPercentagesForNnodes(vector<graphNode> & nodes, int currentEdgeTypeNumber, int nmNodes, bool findSource) {
+vector<float> cumulativeDistributionUtils::calculateUnifGausCumulPercentagesForNnodes(vector<graphNode> & nodes, int currentEdgeTypeNumber, int nmNodes, graphNode & sourceNode, bool findSource) {
 	int sum = 0;
 	vector<int> nonNormalizedResults;
 	int i = 0;
@@ -33,10 +33,16 @@ vector<float> cumulativeDistributionUtils::calculateUnifGausCumulPercentagesForN
 			break;
 		}
 
-//		cout << "Node" << n.id << " found with openConnections: " << n.getNumberOfOpenInterfaceConnections(currentEdgeTypeNumber, findSource) << "\n";
+//		cout << "Node" << n.iterationId << " found with openConnections: " << n.getNumberOfOpenInterfaceConnections(currentEdgeTypeNumber, findSource) << "\n";
 
-		nonNormalizedResults.push_back(n.getNumberOfOpenInterfaceConnections(currentEdgeTypeNumber, findSource));
-		sum += n.getNumberOfOpenInterfaceConnections(currentEdgeTypeNumber, findSource);
+		int possibleConnections = n.getNumberOfOpenInterfaceConnections(currentEdgeTypeNumber, findSource);
+		if (sourceNode.id != -1) {
+//			cout << "sourceNode.getConnection(i): " << sourceNode.getConnection(i) << endl;
+			possibleConnections = possibleConnections * (1 - sourceNode.getConnection(i));
+		}
+
+		nonNormalizedResults.push_back(possibleConnections);
+		sum += possibleConnections;
 		i++;
 	}
 

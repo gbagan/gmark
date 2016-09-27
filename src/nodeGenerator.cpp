@@ -14,6 +14,8 @@ nodeGenerator::nodeGenerator() {
 	this->graph = 0;
 	this->conf = 0;
 	this->nextNodeId = 0;
+	this->maxNumberForSubjectNodes = 0;
+	this->maxNumberForObjectNodes = 0;
 }
 
 nodeGenerator::nodeGenerator(default_random_engine* randomGenerator_, incrementalDeterministicGraph* graph_, config::config* conf_) {
@@ -21,13 +23,18 @@ nodeGenerator::nodeGenerator(default_random_engine* randomGenerator_, incrementa
 	this->graph = graph_;
 	this->conf = conf_;
 	this->nextNodeId = 0;
+	this->maxNumberForSubjectNodes = 0;
+	this->maxNumberForObjectNodes = 0;
 }
 nodeGenerator::~nodeGenerator() {
 	// TODO
 }
 
-
-// ####### Generate nodes #######
+void nodeGenerator::initializeConnections(graphNode &n, int maxNumberOfConnections) {
+	for (int i=0; i<maxNumberOfConnections; i++) {
+		n.setConnection(i, 0);
+	}
+}
 
 
 void nodeGenerator::addInterfaceConnectionsToNode(graphNode &n, distribution distr, int currentEdgeTypeNumber, bool findSourceNode) {
@@ -98,9 +105,14 @@ void nodeGenerator::findOrCreateNode(config::edge & edgeType, bool findSourceNod
 //		} else {
 //			isVirtual = false;
 //		}
-
-		n = new graphNode(nextNodeId, localNmNodes, type, conf->schema.edges.size());
+		n = new graphNode(nextNodeId, localNmNodes, type, conf->schema.edges.size(), max(maxNumberForObjectNodes, maxNumberForSubjectNodes));
 		addInterfaceConnectionsToNode(*n, distr, edgeType.edge_type_id, findSourceNode);
+
+		if (findSourceNode) {
+			initializeConnections(*n, (int)maxNumberForObjectNodes*1.5);
+		} else {
+			initializeConnections(*n, (int)maxNumberForSubjectNodes*1.5);
+		}
 
 //		cout << "Creating a node at iteration " << iterationNumber << " of type:" << type <<
 //				". Size of that type=" << conf.types.at(type).size << "\n";
@@ -158,12 +170,13 @@ int nodeGenerator::addOrUpdateNodes(config::edge & edgeType, int iterationNumber
 	return numberOfNodesOfMax;
 }
 
-int nodeGenerator::addOrUpdateSubjectNodes(config::edge & edgeType, int iterationNumber, int numberOfNodesOfMax) {
+int nodeGenerator::addOrUpdateSubjectNodes(config::edge & edgeType, int iterationNumber, int numberOfNodesOfMax, int maxNodesToConnectTo) {
+	this->maxNumberForObjectNodes = maxNodesToConnectTo;
 	return addOrUpdateNodes(edgeType, iterationNumber, numberOfNodesOfMax, edgeType.subject_type, edgeType.object_type, true);
 }
-int nodeGenerator::addOrUpdateObjectNodes(config::edge & edgeType, int iterationNumber, int numberOfNodesOfMax) {
+int nodeGenerator::addOrUpdateObjectNodes(config::edge & edgeType, int iterationNumber, int numberOfNodesOfMax, int maxNodesToConnectTo) {
+	this->maxNumberForSubjectNodes = maxNodesToConnectTo;
 	return addOrUpdateNodes(edgeType, iterationNumber, numberOfNodesOfMax, edgeType.object_type, edgeType.subject_type, false);
 }
-// ####### Generate nodes #######
 
 } /* namespace std */

@@ -8,6 +8,7 @@
 #include <iostream>
 #include "graphNode.h"
 
+
 namespace std {
 
 graphNode::graphNode() {
@@ -18,8 +19,10 @@ graphNode::graphNode() {
 	this->numberOfOpenInterfaceConnections = new pair<int,int>[1];
 	this->numberOfInterfaceConnections = new pair<int,int>[1];
 	this->position = new pair<float,float>[1];
+
+	this->connections = new int[1];
 }
-graphNode::graphNode(int globalId, int localId, int nodeType, int numberOfEdgeTypes) {
+graphNode::graphNode(int globalId, int localId, int nodeType, int numberOfEdgeTypes, int maxNumberOfConnections) {
 	this->id = globalId;
 	this->iterationId = localId;
 	this->type = nodeType;
@@ -27,6 +30,8 @@ graphNode::graphNode(int globalId, int localId, int nodeType, int numberOfEdgeTy
 	this->numberOfOpenInterfaceConnections = new pair<int,int>[numberOfEdgeTypes];
 	this->numberOfInterfaceConnections = new pair<int,int>[numberOfEdgeTypes];
 	this->position = new pair<float,float>[numberOfEdgeTypes];
+
+	this->connections = new int[(int) (maxNumberOfConnections*1.5)];
 }
 
 graphNode::~graphNode() {
@@ -97,6 +102,13 @@ float graphNode::getPosition(int index, bool isSource) {
 	} else {
 		return this->position[index].second;
 	}
+}
+
+void graphNode::setConnection(int connectionIterationId, int value) {
+	this->connections[connectionIterationId] = value;
+}
+int graphNode::getConnection(int connectionIterationId) {
+	return this->connections[connectionIterationId];
 }
 
 } /* namespace std */

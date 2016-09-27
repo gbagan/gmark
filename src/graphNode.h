@@ -23,8 +23,10 @@ public:
 	pair<int,int>* numberOfInterfaceConnections;
 	pair<int,int>* numberOfOpenInterfaceConnections;
 
+	int* connections;
+
 	graphNode();
-	graphNode(int id, int iterationId, int type, int numberOfEdgeTypes);
+	graphNode(int id, int iterationId, int type, int numberOfEdgeTypes, int maxNumberOfConnections);
 	virtual ~graphNode();
 
 	int getNumberOfOpenInterfaceConnections(int edgeTypeNumber, bool first);
@@ -38,6 +40,9 @@ public:
 
 	void setPosition(int index, double number, bool isSource);
 	float getPosition(int index, bool isSource);
+
+	void setConnection(int connectionIterationId, int value);
+	int getConnection(int connectionIterationId);
 };
 
 } /* namespace std */

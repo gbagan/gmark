@@ -40,11 +40,11 @@ private:
 	int getNumberOfEdgesPerIteration(config::edge & edgeType);
 
 	graphNode findSourceNode(config::edge & edgeType, int iterationNumber);
-	graphNode findTargetNode(config::edge & edgeType, int iterationNumber);
+	graphNode findTargetNode(config::edge & edgeType, int iterationNumber, graphNode sourceNode);
 	graphNode findNodeIdFromCumulProbs(vector<float> & cumulProbs, int nodeType);
 
-	vector<float> getCdf(distribution distr, int nodeType, int edgeTypeNumber, int iterationNumber, bool findSourceNode);
-	void addEdge(graphEdge e, config::edge & edgeType);
+	vector<float> getCdf(distribution distr, int nodeType, int edgeTypeNumber, int iterationNumber, graphNode sourceNode, bool findSourceNode);
+	void addEdge(graphEdge & e, config::edge & edgeType);
 
 	int updateInterfaceConnectionsForZipfianDistributions(vector<graphNode> nodes, int iterationNumber, int edgeTypeId, distribution distr, bool outDistr);
 	pair<int,int> updateInterfaceConnectionsForZipfianDistributions(config::edge & edgeType, int nmNodesMax, int nmNodesMin);

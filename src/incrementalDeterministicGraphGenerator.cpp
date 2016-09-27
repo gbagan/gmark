@@ -109,10 +109,11 @@ graphNode incrementalDeterministicGraphGenerator::findNodeIdFromCumulProbs(vecto
 	return graph.nodes.at(nodeType).at(i);
 }
 
-vector<float> incrementalDeterministicGraphGenerator::getCdf(distribution distr, int nodeType, int edgeTypeNumber, int nmNodes, bool findSourceNode) {
+vector<float> incrementalDeterministicGraphGenerator::getCdf(distribution distr, int nodeType, int edgeTypeNumber, int nmNodes, graphNode sourceNode, bool findSourceNode) {
 //	cout << "Searching for a node in the distribution: " + to_string(distr.arg1) << ", " << to_string(distr.arg2) << "\n";
 
-	return cumDistrUtils.calculateUnifGausCumulPercentagesForNnodes(graph.nodes.at(nodeType), edgeTypeNumber, nmNodes, findSourceNode);
+//	cout << "Source it=" << sourceNode.iterationId << " id=" << sourceNode.id << endl;
+	return cumDistrUtils.calculateUnifGausCumulPercentagesForNnodes(graph.nodes.at(nodeType), edgeTypeNumber, nmNodes, sourceNode, findSourceNode);
 }
 
 
@@ -121,7 +122,7 @@ graphNode incrementalDeterministicGraphGenerator::findSourceNode(config::edge & 
 	int nodeType = edgeType.subject_type;
 	int edgeTypeNumber = edgeType.edge_type_id;
 
-	vector<float> cdf = getCdf(distr, nodeType, edgeTypeNumber, nmNodes, true);
+	vector<float> cdf = getCdf(distr, nodeType, edgeTypeNumber, nmNodes, graphNode(), true);
 
 	if(cdf.at(0) == -1) {
 //		cout << "Cannot find a node\n";
@@ -131,12 +132,12 @@ graphNode incrementalDeterministicGraphGenerator::findSourceNode(config::edge & 
 	}
 }
 
-graphNode incrementalDeterministicGraphGenerator::findTargetNode(config::edge & edgeType, int iterationNumber) {
+graphNode incrementalDeterministicGraphGenerator::findTargetNode(config::edge & edgeType, int nmNodes, graphNode sourceNode) {
 	distribution distr = edgeType.incoming_distrib;
 	int nodeType = edgeType.object_type;
 	int edgeTypeNumber = edgeType.edge_type_id;
 
-	vector<float> cdf = getCdf(distr, nodeType, edgeTypeNumber, iterationNumber, false);
+	vector<float> cdf = getCdf(distr, nodeType, edgeTypeNumber, nmNodes, sourceNode, false);
 
 	if(cdf.at(0) == -1) {
 //		cout << "Cannot find a node\n";
@@ -147,13 +148,18 @@ graphNode incrementalDeterministicGraphGenerator::findTargetNode(config::edge & 
 }
 
 
-void incrementalDeterministicGraphGenerator::addEdge(graphEdge e, config::edge & edgeType) {
+void incrementalDeterministicGraphGenerator::addEdge(graphEdge & e, config::edge & edgeType) {
 //	if(edgeType.outgoing_distrib.type == DISTRIBUTION::NORMAL || edgeType.outgoing_distrib.type == DISTRIBUTION::UNIFORM) {
 		e.source.decrementOpenInterfaceConnections(edgeType.edge_type_id, true);
 //	}
 //	if(edgeType.incoming_distrib.type == DISTRIBUTION::NORMAL || edgeType.incoming_distrib.type == DISTRIBUTION::UNIFORM) {
 		e.target.decrementOpenInterfaceConnections(edgeType.edge_type_id, false);
 //	}
+
+//	cout << "before -> e.source.connections->at(e.target.iterationId): " << e.source.connections[e.target.iterationId] << endl;
+//
+	e.source.setConnection(e.target.iterationId, 1);
+//	cout << "after -> e.source.connections->at(e.target.iterationId): " << e.source.connections[e.target.iterationId] << endl;
 	graph.edges.at(edgeType.edge_type_id).push_back(e);
 }
 // ####### Generate edges #######
@@ -176,7 +182,8 @@ int incrementalDeterministicGraphGenerator::updateInterfaceConnectionsForZipfian
 
 //		cout << "Old NmOfInterfaceConnections: " << node.getNumberOfInterfaceConnections(edgeTypeId, outDistr) << endl;
 //		cout << "Old NmOfOpenInterfaceConnections: " << node.getNumberOfOpenInterfaceConnections(edgeTypeId, outDistr) << endl;
-
+//		cout << "node.getPosition(edgeTypeId, outDistr): " << node.getPosition(edgeTypeId, outDistr) << endl;
+//		cout << "zipfianCdf.size: " << zipfianCdf.size() << endl;
 		newInterfaceConnections = cumDistrUtils.findPositionInCdf(zipfianCdf, node.getPosition(edgeTypeId, outDistr));
 
 //		cout << "newInterfaceConnections: " << newInterfaceConnections << endl;
@@ -194,6 +201,9 @@ int incrementalDeterministicGraphGenerator::updateInterfaceConnectionsForZipfian
 }
 
 pair<int,int> incrementalDeterministicGraphGenerator::updateInterfaceConnectionsForZipfianDistributions(config::edge & edgeType, int nmSubjectNodes, int nmObjectNodes) {
+//	cout << "nmSubjectNodes: " << nmSubjectNodes << endl;
+//	cout << "nmObjectNodes: " << nmObjectNodes << endl;
+
 	pair<int,int> numberOfOpenInterfaceConnections;
 	numberOfOpenInterfaceConnections.first = -1;
 	numberOfOpenInterfaceConnections.second = -1;
@@ -362,23 +372,23 @@ int incrementalDeterministicGraphGenerator::processIteration(int iterationNumber
 //		cout << endl<< "---Process interationNumber " << to_string(iterationNumber) << " of edgeType " << to_string(edgeType.edge_type_id) << "---" << endl;
 //	}
 
-	int nmSubjectNodes = nodeGen.addOrUpdateSubjectNodes(edgeType, iterationNumber, numberOfNodesOfMax);
-	int nmObjectNodes = nodeGen.addOrUpdateObjectNodes(edgeType, iterationNumber, numberOfNodesOfMax);
+	int nmSubjectNodes = nodeGen.addOrUpdateSubjectNodes(edgeType, iterationNumber, numberOfNodesOfMax, conf.types.at(edgeType.object_type).size);
+	int nmObjectNodes = nodeGen.addOrUpdateObjectNodes(edgeType, iterationNumber, numberOfNodesOfMax, conf.types.at(edgeType.subject_type).size);
 	int nmNodesMax = max(nmSubjectNodes, nmObjectNodes);
-
+	nmNodesMax = max(nmNodesMax, iterationNumber+1);
 
 	pair<int, int> zipfOpenInterfaceConnections;
 	int subjectNodes;
 	int objectNodes;
 	if (conf.types.at(edgeType.subject_type).scalable ^ conf.types.at(edgeType.object_type).scalable) {
-		subjectNodes = iterationNumber;
-		objectNodes =iterationNumber;
+		subjectNodes = iterationNumber+1;
+		objectNodes = iterationNumber+1;
 	} else {
 		if (conf.types.at(edgeType.subject_type).size > conf.types.at(edgeType.object_type).size) {
 			subjectNodes = nmNodesMax;
-			objectNodes = iterationNumber;
+			objectNodes = iterationNumber+1;
 		} else {
-			subjectNodes = iterationNumber;
+			subjectNodes = iterationNumber+1;
 			objectNodes = nmNodesMax;
 		}
 	}
@@ -401,10 +411,10 @@ int incrementalDeterministicGraphGenerator::processIteration(int iterationNumber
 //			cout << "Find source node from nodes 0:" << nmNodesMax-1 << endl;
 			sourceNode = findSourceNode(edgeType, max(nmNodesMax-1,iterationNumber));
 //			cout << "Find target node from nodes 0:" << iterationNumber << endl;
-			targetNode = findTargetNode(edgeType, iterationNumber);
+			targetNode = findTargetNode(edgeType, iterationNumber, sourceNode);
 		} else {
 			sourceNode = findSourceNode(edgeType, iterationNumber);
-			targetNode = findTargetNode(edgeType, max(nmNodesMax-1,iterationNumber));
+			targetNode = findTargetNode(edgeType, max(nmNodesMax-1,iterationNumber), sourceNode);
 		}
 
 		if(sourceNode.id == -1 || targetNode.id == -1) {
@@ -434,7 +444,7 @@ void incrementalDeterministicGraphGenerator::processEdgeType(config::edge & edge
 	} else {
 		nmOfIterations = max(conf.types.at(edgeType.object_type).size, conf.types.at(edgeType.subject_type).size);
 	}
-	cout << "Total number of iterations: " << nmOfIterations << endl;
+//	cout << "Total number of iterations: " << nmOfIterations << endl;
 
 
 	int numberOfEdgesPerIteration = getNumberOfEdgesPerIteration(edgeType);
