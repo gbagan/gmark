@@ -107,9 +107,17 @@ void nodeGenerator::findOrCreateNode(config::edge & edgeType, bool findSourceNod
 }
 
 int nodeGenerator::addOrUpdateNodes(config::edge & edgeType, int iterationNumber, int numberOfNodesOfMax, int type1, int type2, bool isSubject) {
-	if (conf->types.at(edgeType.subject_type).scalable && conf->types.at(edgeType.object_type).scalable) {
-		double prob1 = conf->types.at(type1).proportion;
-		double prob2 = conf->types.at(type2).proportion;
+	if ((conf->types.at(edgeType.subject_type).scalable && conf->types.at(edgeType.object_type).scalable)
+			|| (!conf->types.at(edgeType.subject_type).scalable && !conf->types.at(edgeType.object_type).scalable)) {
+		double prob1;
+		double prob2;
+		if (conf->types.at(edgeType.subject_type).scalable) {
+			prob1 = conf->types.at(type1).proportion;
+			prob2 = conf->types.at(type2).proportion;
+		} else {
+			prob1 = conf->types.at(type1).size;
+			prob2 = conf->types.at(type2).size;
+		}
 		if (prob1 > prob2) {
 			int nmOfNodesPerIteration = floor(prob1 / prob2);
 

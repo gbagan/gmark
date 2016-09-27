@@ -57,28 +57,45 @@ void incrementalDeterministicGraphGenerator::initializeNodesAndEdges() {
 //}
 
 int incrementalDeterministicGraphGenerator::getNumberOfEdgesPerIteration(config::edge & edgeType) {
+	double subjectProb;
+	double objectProb;
+	if (conf.types.at(edgeType.subject_type).scalable ^ conf.types.at(edgeType.object_type).scalable) {
+		// One scalable and one not scalable
+		return 1;
+	} else if (!conf.types.at(edgeType.subject_type).scalable && !conf.types.at(edgeType.object_type).scalable) {
+		// both not scalable
+		subjectProb = conf.types.at(edgeType.subject_type).size;
+		objectProb = conf.types.at(edgeType.object_type).size;
+	} else {
+		// both scalable
+		subjectProb = conf.types.at(edgeType.subject_type).proportion;
+		objectProb = conf.types.at(edgeType.object_type).proportion;
+	}
+
 	if (edgeType.outgoing_distrib.type == DISTRIBUTION::ZIPFIAN && edgeType.incoming_distrib.type == DISTRIBUTION::ZIPFIAN) {
+		// Both Zipf
 		return -1;
 	} else if (edgeType.outgoing_distrib.type == DISTRIBUTION::ZIPFIAN || edgeType.incoming_distrib.type == DISTRIBUTION::ZIPFIAN) {
+		// One Zipf
 		if (edgeType.outgoing_distrib.type == DISTRIBUTION::ZIPFIAN) {
 			return max(getMeanEdgesPerNode(edgeType, edgeType.incoming_distrib, 0), 1.0);
 		} else {
 			return max(getMeanEdgesPerNode(edgeType, edgeType.outgoing_distrib, 0), 1.0);
 		}
 	} else {
-		double subjectProb = conf.types.at(edgeType.subject_type).proportion;
-		double objectProb = conf.types.at(edgeType.object_type).proportion;
-
-	//	cout << "subjectProb " << subjectProb << endl;
-	//	cout << "objectProb " << objectProb << endl;
-		int numberOfSubjectNodesPerIteration = max( round(subjectProb / objectProb), 1.0);
-		int numberOfObjecteNodesPerIteration = max( round(objectProb / subjectProb), 1.0);
+		// None Zipf
+		double numberOfSubjectNodesPerIteration = max( subjectProb / objectProb, 1.0);
+		double numberOfObjecteNodesPerIteration = max( objectProb / subjectProb, 1.0);
 
 		int meanNumberOfInterfaceConnectionsPerIterationForSource = floor(getMeanEdgesPerNode(edgeType, edgeType.outgoing_distrib, 0)) * numberOfSubjectNodesPerIteration;
 		int meanNumberOfInterfaceConnectionsPerIterationForTarget = floor(getMeanEdgesPerNode(edgeType, edgeType.incoming_distrib, 0)) * numberOfObjecteNodesPerIteration;
-
+//		cout << "getMeanEdgesPerNode(edgeType, edgeType.outgoing_distrib, 0):" << getMeanEdgesPerNode(edgeType, edgeType.outgoing_distrib, 0) << endl;
+//		cout << "numberOfSubjectNodesPerIteration:" << numberOfSubjectNodesPerIteration << endl;
+//
+//		cout << "meanNumberOfInterfaceConnectionsPerIterationForSource:" << meanNumberOfInterfaceConnectionsPerIterationForSource << endl;
+//		cout << "meanNumberOfInterfaceConnectionsPerIterationForTarget:" << meanNumberOfInterfaceConnectionsPerIterationForTarget << endl;
 		int result = min(meanNumberOfInterfaceConnectionsPerIterationForSource, meanNumberOfInterfaceConnectionsPerIterationForTarget);
-	//	cout << "Number of edges per iteration: " << max(result,1) << endl;
+//		cout << "Number of edges per iteration: " << max(result,1) << endl;
 		return max(result, 1);
 	}
 }
@@ -210,14 +227,14 @@ double incrementalDeterministicGraphGenerator::getMeanEdgesPerNode(config::edge 
 	return meanEdgesPerNode;
 }
 
-void incrementalDeterministicGraphGenerator::changeDistributionParams(config::edge & edgeType, double meanICsPerNodeForOtherDistr, bool changeOutDistr) {
+void incrementalDeterministicGraphGenerator::changeDistributionParams(config::edge & edgeType, double meanICsPerNodeForOtherDistr, bool changeOutDistr, double subjectProbOrSize, double objectProbOrSize) {
 	if (changeOutDistr) {
 		if (edgeType.outgoing_distrib.type == DISTRIBUTION::NORMAL) {
-			edgeType.outgoing_distrib.arg1 = round((conf.types.at(edgeType.object_type).proportion * meanICsPerNodeForOtherDistr) / conf.types.at(edgeType.subject_type).proportion);
+			edgeType.outgoing_distrib.arg1 = round((objectProbOrSize * meanICsPerNodeForOtherDistr) / subjectProbOrSize);
 			cout << "new normal mean: " << edgeType.outgoing_distrib.arg1 << endl;
 		} else if (edgeType.outgoing_distrib.type == DISTRIBUTION::UNIFORM) {
 			double diff = edgeType.outgoing_distrib.arg2 - edgeType.outgoing_distrib.arg1;
-			double newMean = (conf.types.at(edgeType.object_type).proportion * meanICsPerNodeForOtherDistr) / conf.types.at(edgeType.subject_type).proportion;
+			double newMean = (objectProbOrSize * meanICsPerNodeForOtherDistr) / subjectProbOrSize;
 			if (diff > 0.0) {
 				edgeType.outgoing_distrib.arg1 = max(round(newMean - (diff/2)), 0.0);
 				edgeType.outgoing_distrib.arg2 = round(newMean + (diff/2));
@@ -230,11 +247,11 @@ void incrementalDeterministicGraphGenerator::changeDistributionParams(config::ed
 		}
 	} else {
 		if (edgeType.incoming_distrib.type == DISTRIBUTION::NORMAL) {
-			edgeType.incoming_distrib.arg1 = round((conf.types.at(edgeType.subject_type).proportion * meanICsPerNodeForOtherDistr) / conf.types.at(edgeType.object_type).proportion);
+			edgeType.incoming_distrib.arg1 = round((subjectProbOrSize * meanICsPerNodeForOtherDistr) / objectProbOrSize);
 			cout << "new normal mean: " << edgeType.incoming_distrib.arg1 << endl;
 		} else if (edgeType.incoming_distrib.type == DISTRIBUTION::UNIFORM) {
 			double diff = edgeType.incoming_distrib.arg2 - edgeType.incoming_distrib.arg1;
-			double newMean = (conf.types.at(edgeType.subject_type).proportion * meanICsPerNodeForOtherDistr) / conf.types.at(edgeType.object_type).proportion;
+			double newMean = (subjectProbOrSize * meanICsPerNodeForOtherDistr) / objectProbOrSize;
 			if (diff > 0.0) {
 				edgeType.incoming_distrib.arg1 = max(round(newMean - (diff/2)), 0.0);
 				edgeType.incoming_distrib.arg2 = round(newMean + (diff/2));
@@ -251,20 +268,30 @@ void incrementalDeterministicGraphGenerator::changeDistributionParams(config::ed
 void incrementalDeterministicGraphGenerator::changeDistributionParams(config::edge & edgeType) {
 	cout << "Changing edge-type " << edgeType.edge_type_id << endl;
 
-	if (!conf.types.at(edgeType.subject_type).scalable || !conf.types.at(edgeType.object_type).scalable) {
-		cout << "No optimization due to non-scalable nodeType" << endl;
+	if (conf.types.at(edgeType.subject_type).scalable ^ conf.types.at(edgeType.object_type).scalable) {
+		cout << "No optimization due to one scalable and one non-scalable node-type" << endl;
 		return;
 	}
+	double subjectProbOrSize;
+	double objectProbOrSize;
+	if (conf.types.at(edgeType.subject_type).scalable) {
+		subjectProbOrSize = conf.types.at(edgeType.subject_type).proportion;
+		objectProbOrSize = conf.types.at(edgeType.object_type).proportion;
+	} else {
+		subjectProbOrSize = conf.types.at(edgeType.subject_type).size;
+		objectProbOrSize = conf.types.at(edgeType.object_type).size;
+	}
+
 	// Out-distr is Zipfian, so change the params of the in-distr
 	if (edgeType.outgoing_distrib.type == DISTRIBUTION::ZIPFIAN && edgeType.incoming_distrib.type != DISTRIBUTION::ZIPFIAN) {
 		double meanICsPerNodeForInDistr = getMeanEdgesPerNode(edgeType, edgeType.outgoing_distrib, 10000);
-		changeDistributionParams(edgeType, meanICsPerNodeForInDistr, false);
+		changeDistributionParams(edgeType, meanICsPerNodeForInDistr, false, subjectProbOrSize, objectProbOrSize);
 		return;
 	}
 	// In-distr is Zipfian, so change the params of the out-distr
 	if (edgeType.outgoing_distrib.type != DISTRIBUTION::ZIPFIAN && edgeType.incoming_distrib.type == DISTRIBUTION::ZIPFIAN) {
 		double meanICsPerNodeForInDistr = getMeanEdgesPerNode(edgeType, edgeType.incoming_distrib, 10000);
-		changeDistributionParams(edgeType, meanICsPerNodeForInDistr, true);
+		changeDistributionParams(edgeType, meanICsPerNodeForInDistr, true, subjectProbOrSize, objectProbOrSize);
 		return;
 	}
 	// Both are non-Zipfian
@@ -272,16 +299,16 @@ void incrementalDeterministicGraphGenerator::changeDistributionParams(config::ed
 		double meanICsPerNodeForOutDistr = getMeanEdgesPerNode(edgeType, edgeType.outgoing_distrib, 10000);
 		double meanICsPerNodeForInDistr = getMeanEdgesPerNode(edgeType, edgeType.incoming_distrib, 10000);
 
-		if (meanICsPerNodeForOutDistr * conf.types.at(edgeType.subject_type).proportion >
-			meanICsPerNodeForInDistr * conf.types.at(edgeType.object_type).proportion) {
+		if (meanICsPerNodeForOutDistr * subjectProbOrSize >
+			meanICsPerNodeForInDistr * objectProbOrSize) {
 			// Change in-distr
 			double meanICsPerNodeForInDistr = getMeanEdgesPerNode(edgeType, edgeType.outgoing_distrib, 10000);
-			changeDistributionParams(edgeType, meanICsPerNodeForInDistr, false);
+			changeDistributionParams(edgeType, meanICsPerNodeForInDistr, false, subjectProbOrSize, objectProbOrSize);
 			return;
 		} else {
 			// Change out-distr
 			double meanICsPerNodeForInDistr = getMeanEdgesPerNode(edgeType, edgeType.incoming_distrib, 10000);
-			changeDistributionParams(edgeType, meanICsPerNodeForInDistr, true);
+			changeDistributionParams(edgeType, meanICsPerNodeForInDistr, true, subjectProbOrSize, objectProbOrSize);
 			return;
 		}
 	}
@@ -337,6 +364,7 @@ int incrementalDeterministicGraphGenerator::processIteration(int iterationNumber
 	}
 
 	if (zipfOpenInterfaceConnections.first != -1 && zipfOpenInterfaceConnections.second != -1) {
+		// Zipf in- and out-distr case
 		numberOfEdgesPerIteration = min(zipfOpenInterfaceConnections.first, zipfOpenInterfaceConnections.second);
 	}
 
@@ -378,7 +406,8 @@ void incrementalDeterministicGraphGenerator::processEdgeType(config::edge & edge
 	changeDistributionParams(edgeType);
 
 	int nmOfIterations;
-	if (conf.types.at(edgeType.subject_type).scalable && conf.types.at(edgeType.object_type).scalable ) {
+	if ((conf.types.at(edgeType.subject_type).scalable && conf.types.at(edgeType.object_type).scalable)
+			|| (!conf.types.at(edgeType.subject_type).scalable && !conf.types.at(edgeType.object_type).scalable)) {
 		nmOfIterations = min(conf.types.at(edgeType.object_type).size, conf.types.at(edgeType.subject_type).size);
 	} else {
 		nmOfIterations = max(conf.types.at(edgeType.object_type).size, conf.types.at(edgeType.subject_type).size);
@@ -387,6 +416,7 @@ void incrementalDeterministicGraphGenerator::processEdgeType(config::edge & edge
 
 
 	int numberOfEdgesPerIteration = getNumberOfEdgesPerIteration(edgeType);
+//	cout << "numberOfEdgesPerIteration: " << numberOfEdgesPerIteration << endl;
 
 	int numberOfNodesOfMax = 0;
 	for(int i=0; i<nmOfIterations; i++) {
