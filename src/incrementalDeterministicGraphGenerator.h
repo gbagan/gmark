@@ -30,11 +30,11 @@ private:
 
 	void initializeNodesAndEdges();
 	void processEdgeType(config::edge & edgeType);
-	int processIteration(int iterationNumber, config::edge & edgeType, int numberOfNodesForMax, int numberOfEdgesPerIteration);
+	int processIteration(int iterationNumber, config::edge & edgeType, int numberOfNodesForMax);
 
 	// For each iteration
 	int getNumberOfEdgesPerIteration(config::edge & edgeType, int iterationNumber);
-
+	int getNumberOfOpenICs(vector<graphNode> nodes, int numberOfNodes, int edgeTypeId, bool isOutDistr);
 
 	double getMeanEdgesPerNode(config::edge & edgeType, distribution distr, int zipfMax);
 	int getNumberOfEdgesPerIteration(config::edge & edgeType);
