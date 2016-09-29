@@ -257,6 +257,10 @@ void incrementalDeterministicGraphGenerator::changeDistributionParams(config::ed
 
 	if (conf.types.at(edgeType.subject_type).scalable ^ conf.types.at(edgeType.object_type).scalable) {
 		cout << "No optimization due to one scalable and one non-scalable node-type" << endl;
+
+		if (edgeType.incoming_distrib.type == DISTRIBUTION::UNDEFINED) {
+			edgeType.incoming_distrib = distribution(DISTRIBUTION::UNIFORM, 1, 1);
+		}
 		return;
 	}
 	double subjectProbOrSize;
@@ -267,6 +271,12 @@ void incrementalDeterministicGraphGenerator::changeDistributionParams(config::ed
 	} else {
 		subjectProbOrSize = conf.types.at(edgeType.subject_type).size;
 		objectProbOrSize = conf.types.at(edgeType.object_type).size;
+	}
+
+	// In-distr is undefined, so change this in-distr
+	if (edgeType.incoming_distrib.type == DISTRIBUTION::UNDEFINED) {
+		double meanICsPerNodeForOutDistr = getMeanEdgesPerNode(edgeType, edgeType.outgoing_distrib, 10000);
+		changeDistributionParams(edgeType, meanICsPerNodeForOutDistr, false, subjectProbOrSize, objectProbOrSize);
 	}
 
 	// Out-distr is Zipfian, so change the params of the in-distr (only if )
@@ -335,9 +345,15 @@ int incrementalDeterministicGraphGenerator::processIteration(int iterationNumber
 	pair<int, int> zipfOpenInterfaceConnections;
 	int subjectNodes;
 	int objectNodes;
+	double subjectProbOrSize;
+	double objectProbOrSize;
 	if (conf.types.at(edgeType.subject_type).scalable ^ conf.types.at(edgeType.object_type).scalable) {
 		subjectNodes = iterationNumber+1;
 		objectNodes = iterationNumber+1;
+
+		subjectProbOrSize = -1;
+		objectProbOrSize = -1;
+
 	} else {
 		if (conf.types.at(edgeType.subject_type).size > conf.types.at(edgeType.object_type).size) {
 			subjectNodes = nmNodesMax;
@@ -345,6 +361,14 @@ int incrementalDeterministicGraphGenerator::processIteration(int iterationNumber
 		} else {
 			subjectNodes = iterationNumber+1;
 			objectNodes = nmNodesMax;
+		}
+
+		if (conf.types.at(edgeType.subject_type).scalable) {
+			subjectProbOrSize = conf.types.at(edgeType.subject_type).proportion;
+			objectProbOrSize = conf.types.at(edgeType.subject_type).proportion;
+		} else {
+			subjectProbOrSize = conf.types.at(edgeType.subject_type).size;
+			objectProbOrSize = conf.types.at(edgeType.subject_type).size;
 		}
 	}
 	zipfOpenInterfaceConnections = updateInterfaceConnectionsForZipfianDistributions(edgeType, subjectNodes, objectNodes);
@@ -365,18 +389,20 @@ int incrementalDeterministicGraphGenerator::processIteration(int iterationNumber
 		// Zipf out-distr case
 		int openICsForInDistr = getNumberOfOpenICs(graph.nodes.at(edgeType.object_type), objectNodes, edgeType.edge_type_id, false);
 		numberOfEdgesPerIteration = min(zipfOpenInterfaceConnections.first, openICsForInDistr);
-		c = round(getMeanEdgesPerNode(edgeType, edgeType.incoming_distrib, 0));
+		c = round(getMeanEdgesPerNode(edgeType, edgeType.incoming_distrib, 0) * max(1.0, objectProbOrSize / subjectProbOrSize));
 	} else if (zipfOpenInterfaceConnections.second != -1) {
 		// Zipf in-distr case
 		int openICsForOutDistr = getNumberOfOpenICs(graph.nodes.at(edgeType.subject_type), subjectNodes, edgeType.edge_type_id, true);
 		numberOfEdgesPerIteration = min(openICsForOutDistr, zipfOpenInterfaceConnections.second);
-		c = round(getMeanEdgesPerNode(edgeType, edgeType.outgoing_distrib, 0));
+		c = round(getMeanEdgesPerNode(edgeType, edgeType.outgoing_distrib, 0) * max(1.0, subjectProbOrSize / objectProbOrSize));
 	} else {
 		// Non Zipfian case
 		int openICsForInDistr = getNumberOfOpenICs(graph.nodes.at(edgeType.object_type), objectNodes, edgeType.edge_type_id, false);
 		int openICsForOutDistr = getNumberOfOpenICs(graph.nodes.at(edgeType.subject_type), subjectNodes, edgeType.edge_type_id, true);
 		numberOfEdgesPerIteration = min(openICsForOutDistr, openICsForInDistr);
-		c = round(min(getMeanEdgesPerNode(edgeType, edgeType.outgoing_distrib, 0), getMeanEdgesPerNode(edgeType, edgeType.incoming_distrib, 0)));
+
+		double maxSubjectObjectRatio = max(subjectProbOrSize /  objectProbOrSize, objectProbOrSize / subjectProbOrSize);
+		c = round(min(getMeanEdgesPerNode(edgeType, edgeType.outgoing_distrib, 0), getMeanEdgesPerNode(edgeType, edgeType.incoming_distrib, 0)) * maxSubjectObjectRatio);
 	}
 	numberOfEdgesPerIteration -= c*sf;
 

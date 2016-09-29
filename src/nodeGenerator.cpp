@@ -86,10 +86,6 @@ void nodeGenerator::findOrCreateNode(config::edge & edgeType, bool findSourceNod
 //		cout << "NodeType" << type << "n" << iterationNumber << " already exists in the graph\n";
 
 		n = &graph->nodes.at(type).at(localNmNodes);
-		addInterfaceConnectionsToNode(*n, distr, edgeType.edge_type_id, findSourceNode);
-//		if (iterationNumber <= conf.types.at(type).size) {
-//			n->is_virtual = false;
-//		}
 	} else {
 		// Node is not in the graph at this moment
 		if(!conf->types.at(type).scalable && localNmNodes > conf->types.at(type).size-1) {
@@ -99,26 +95,22 @@ void nodeGenerator::findOrCreateNode(config::edge & edgeType, bool findSourceNod
 			return; // So: Do NOT add the node
 		}
 
-//		bool isVirtual;
-//		if (iterationNumber > conf.types.at(type).size-1) {
-//			isVirtual = true;
-//		} else {
-//			isVirtual = false;
-//		}
 		n = new graphNode(nextNodeId, localNmNodes, type, conf->schema.edges.size(), max(maxNumberForObjectNodes, maxNumberForSubjectNodes));
-		addInterfaceConnectionsToNode(*n, distr, edgeType.edge_type_id, findSourceNode);
 
-		if (findSourceNode) {
-			initializeConnections(*n, (int)maxNumberForObjectNodes*1.5);
-		} else {
-			initializeConnections(*n, (int)maxNumberForSubjectNodes*1.5);
-		}
 
 //		cout << "Creating a node at iteration " << iterationNumber << " of type:" << type <<
 //				". Size of that type=" << conf.types.at(type).size << "\n";
 
 
 		addNode(*n);
+	}
+
+	addInterfaceConnectionsToNode(*n, distr, edgeType.edge_type_id, findSourceNode);
+
+	if (findSourceNode) {
+		initializeConnections(*n, (int)maxNumberForObjectNodes*1.5);
+	} else {
+		initializeConnections(*n, (int)maxNumberForSubjectNodes*1.5);
 	}
 }
 

@@ -142,7 +142,7 @@ void analysisIncrDetGraph::printToRfile(ofstream& rFile, bool outDistr, config::
 	}
 
 	rFile << "par(pch=22, col=\"black\")" << endl;
-	rFile << "hist(" << distributionVar <<", xlab=\"Number of edges per " << conf.types.at(nodeType).alias << "\", breaks=c(seq(min("<< distributionVar <<")-0.5, max("<< distributionVar <<")+0.5,1)), main=\""<< distributionVar <<" of edge-type " << edge.edge_type_id << "\", prob=TRUE)" << endl;
+	rFile << "hist(" << distributionVar <<", xlab=\"Number of edges per " << conf.types.at(nodeType).alias << "\", breaks=c(seq(min("<< distributionVar <<")-0.5, max("<< distributionVar <<")+0.5,1)), main=\""<< distributionVar <<" of edge-type " << edge.edge_type_id << "\", prob=TRUE, ylim=c(0,1))" << endl;
 	if(distr->type == DISTRIBUTION::UNIFORM) {
 
 		rFile << "xRange = c(" << distr->arg1 - 0.5 << ", " << distr->arg2 + 0.5 << ")" << endl;
@@ -161,6 +161,15 @@ void analysisIncrDetGraph::printToRfile(ofstream& rFile, bool outDistr, config::
 
 		rFile << "\n# Zoomed view" << endl;
 		rFile << "hist(" << distributionVar <<", xlab=\"Number of edges per " << conf.types.at(nodeType).alias << "\", breaks=c(seq(min("<< distributionVar <<")-0.5, max("<< distributionVar <<")+0.5,1)), main=\""<< distributionVar <<" of edge-type " << edge.edge_type_id << "\", prob=TRUE, xlim=c(0,10))" << endl;
+		rFile << "lines(x,y/sum)" << endl;
+
+		rFile << "\n# Remove the nodes with zero edges" << endl;
+		rFile << "noZeros = c()" << endl;
+		rFile << "for (i in 1:length(" << distributionVar <<")) {" << endl;
+		rFile << "if (" << distributionVar <<"[i] != 0)" << endl;
+		rFile << "noZeros = c(noZeros, " << distributionVar <<"[i])" << endl;
+		rFile << "}" << endl;
+		rFile << "hist(noZeros, xlab=\"Number of edges per person\", breaks=c(seq(min(" << distributionVar <<")-0.5, max(" << distributionVar <<")+0.5,1)), main=\"" << distributionVar <<" of edge-type  " << edge.edge_type_id << "\", prob=TRUE, xlim=c(0,10))" << endl;
 		rFile << "lines(x,y/sum)" << endl;
 
 
