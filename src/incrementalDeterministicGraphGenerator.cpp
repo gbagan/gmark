@@ -142,7 +142,7 @@ void incrementalDeterministicGraphGenerator::addEdge(graphEdge & e, config::edge
 // ####### Generate edges #######
 
 
-// ####### Update interface-connections of Zipfian distributions #######
+// ####### Update interface-connections #######
 int incrementalDeterministicGraphGenerator::updateInterfaceConnectionsForZipfianDistributions(vector<graphNode> nodes, int iterationNumber, int edgeTypeId, distribution distr, bool outDistr) {
 //	cout << "New Zipfian case" << endl;
 	int openInterfaceConnections = 0;
@@ -157,6 +157,7 @@ int incrementalDeterministicGraphGenerator::updateInterfaceConnectionsForZipfian
 		}
 		node = nodes.at(i);
 
+//		cout << "Postion of node" << i << ": " << node.getPosition(edgeTypeId, outDistr) << endl;
 //		cout << "Old NmOfInterfaceConnections: " << node.getNumberOfInterfaceConnections(edgeTypeId, outDistr) << endl;
 //		cout << "Old NmOfOpenInterfaceConnections: " << node.getNumberOfOpenInterfaceConnections(edgeTypeId, outDistr) << endl;
 //		cout << "node.getPosition(edgeTypeId, outDistr): " << node.getPosition(edgeTypeId, outDistr) << endl;
@@ -193,7 +194,43 @@ pair<int,int> incrementalDeterministicGraphGenerator::updateInterfaceConnections
 	}
 	return numberOfOpenInterfaceConnections;
 }
-// ####### Update interface-connections of Zipfian distributions #######
+
+void incrementalDeterministicGraphGenerator::updateICsForNonScalableType(vector<graphNode> nodes, int iterationNumber, double meanUpdateDistr, double meanNonUpdateDistr, distribution & distr, int edgeTypeId, bool updateSubjects) {
+	if (nodes.size() == 0) {
+		cout << "A fixed amount of nodes of one of the types is equal to 0" << endl;
+		return;
+	}
+
+	int increment = increment = floor((((iterationNumber + 1) * meanNonUpdateDistr) / nodes.size()) - meanUpdateDistr);
+	if (increment > 0) {
+		if (distr.type == DISTRIBUTION::NORMAL) {
+			cout << "Before distr.arg1: " << distr.arg1 << endl;
+			distr.arg1 += increment;
+			cout << "After distr.arg1: " << distr.arg1 << endl;
+		} else if (distr.type == DISTRIBUTION::UNIFORM) {
+			cout << "Before distr.arg1: " << distr.arg1 << endl;
+			cout << "Before distr.arg2: " << distr.arg2 << endl;
+			double diff = distr.arg2 - distr.arg1;
+			double newMean = ((distr.arg2 + distr.arg1) / 2) + (double) increment;
+			if (diff > 0.0) {
+				distr.arg1 = max(round(newMean - (diff/2)), 0.0);
+				distr.arg2 = round(newMean + (diff/2));
+			} else {
+				distr.arg1 = newMean;
+				distr.arg2 = newMean;
+			}
+			cout << "After distr.arg1: " << distr.arg1 << endl;
+			cout << "After distr.arg2: " << distr.arg2 << endl;
+		}
+		cout << "Update nodes with " << increment << endl;
+		for (graphNode node: nodes) {
+			node.incrementOpenInterfaceConnectionsByN(edgeTypeId, increment, updateSubjects);
+			node.incrementInterfaceConnectionsByN(edgeTypeId, increment, updateSubjects);
+
+		}
+	}
+}
+// ####### Update interface-connections #######
 
 double incrementalDeterministicGraphGenerator::getMeanEdgesPerNode(config::edge & edgeType, distribution distr, int zipfMax) {
 	float meanEdgesPerNode;
@@ -256,13 +293,25 @@ void incrementalDeterministicGraphGenerator::changeDistributionParams(config::ed
 	cout << "Changing edge-type " << edgeType.edge_type_id << endl;
 
 	if (conf.types.at(edgeType.subject_type).scalable ^ conf.types.at(edgeType.object_type).scalable) {
-		cout << "No optimization due to one scalable and one non-scalable node-type" << endl;
+		if (conf.types.at(edgeType.subject_type).scalable && edgeType.incoming_distrib.type != DISTRIBUTION::ZIPFIAN) {
+			// In-distr is not scalable, so change the in-distribution
+			double meanICsPerNodeForOutDistr = getMeanEdgesPerNode(edgeType, edgeType.outgoing_distrib, 10000);
+			changeDistributionParams(edgeType, meanICsPerNodeForOutDistr, false, conf.types.at(edgeType.object_type).size, conf.types.at(edgeType.object_type).size);
+		} else if (conf.types.at(edgeType.object_type).scalable && edgeType.outgoing_distrib.type != DISTRIBUTION::ZIPFIAN){
+			// Out-distr is not scalable, so change the out-distribution
+			double meanICsPerNodeForInDistr = getMeanEdgesPerNode(edgeType, edgeType.incoming_distrib, 10000);
+			changeDistributionParams(edgeType, meanICsPerNodeForInDistr, true, conf.types.at(edgeType.subject_type).size, conf.types.at(edgeType.subject_type).size);
+		} else {
+			cout << "No optimization due to one scalable and one non-scalable node-type and a Zipfian distr on the non-scalable side" << endl;
+		}
+
 
 		if (edgeType.incoming_distrib.type == DISTRIBUTION::UNDEFINED) {
 			edgeType.incoming_distrib = distribution(DISTRIBUTION::UNIFORM, 1, 1);
 		}
 		return;
 	}
+
 	double subjectProbOrSize;
 	double objectProbOrSize;
 	if (conf.types.at(edgeType.subject_type).scalable) {
@@ -318,7 +367,7 @@ void incrementalDeterministicGraphGenerator::changeDistributionParams(config::ed
 			return;
 		}
 	}
-	// Both are Zipfian or undefined TODO
+	// Do nothing wehn both distributions are Zipfian
 }
 
 int incrementalDeterministicGraphGenerator::getNumberOfOpenICs(vector<graphNode> nodes, int numberOfNodes, int edgeTypeId, bool isOutDistr) {
@@ -354,6 +403,24 @@ int incrementalDeterministicGraphGenerator::processIteration(int iterationNumber
 		subjectProbOrSize = -1;
 		objectProbOrSize = -1;
 
+		if (!conf.types.at(edgeType.subject_type).scalable) {
+			// Subject is not scalable so update the ICs of all the subject nodes
+			if (iterationNumber >= conf.types.at(edgeType.subject_type).size && edgeType.outgoing_distrib.type != DISTRIBUTION::ZIPFIAN) {
+				double meanOutDistr = getMeanEdgesPerNode(edgeType, edgeType.outgoing_distrib, 0);
+				cout << "meanOutDistr:" << meanOutDistr << endl;
+				double meanInDistr = getMeanEdgesPerNode(edgeType, edgeType.incoming_distrib, 10000);
+				cout << "meanInDistr:" << meanInDistr << endl;
+				updateICsForNonScalableType(graph.nodes.at(edgeType.subject_type), iterationNumber, meanOutDistr, meanInDistr, edgeType.outgoing_distrib, edgeType.edge_type_id, true);
+			}
+		} else {
+			// object is not scalable so update the ICs of all the object nodes
+			if (iterationNumber >= conf.types.at(edgeType.object_type).size && edgeType.incoming_distrib.type != DISTRIBUTION::ZIPFIAN) {
+				double meanOutDistr = getMeanEdgesPerNode(edgeType, edgeType.outgoing_distrib, 10000);
+				double meanInDistr = getMeanEdgesPerNode(edgeType, edgeType.incoming_distrib, 0);
+				updateICsForNonScalableType(graph.nodes.at(edgeType.object_type), iterationNumber, meanInDistr, meanOutDistr, edgeType.incoming_distrib, edgeType.edge_type_id, false);
+			}
+		}
+
 	} else {
 		if (conf.types.at(edgeType.subject_type).size > conf.types.at(edgeType.object_type).size) {
 			subjectNodes = nmNodesMax;
@@ -371,17 +438,13 @@ int incrementalDeterministicGraphGenerator::processIteration(int iterationNumber
 			objectProbOrSize = conf.types.at(edgeType.subject_type).size;
 		}
 	}
-	zipfOpenInterfaceConnections = updateInterfaceConnectionsForZipfianDistributions(edgeType, subjectNodes, objectNodes);
 
+	zipfOpenInterfaceConnections = updateInterfaceConnectionsForZipfianDistributions(edgeType, subjectNodes, objectNodes);
 
 	int numberOfEdgesPerIteration = 1;
 	int c = 0;
 	int sf = 2;
-	if (conf.types.at(edgeType.subject_type).scalable ^ conf.types.at(edgeType.object_type).scalable) {
-		// One scalable and one not scalable
-		numberOfEdgesPerIteration = 1;
-		c = 0;
-	} else if (zipfOpenInterfaceConnections.first != -1 && zipfOpenInterfaceConnections.second != -1) {
+	if (zipfOpenInterfaceConnections.first != -1 && zipfOpenInterfaceConnections.second != -1) {
 		// Zipf in- and out-distr case
 		numberOfEdgesPerIteration = min(zipfOpenInterfaceConnections.first, zipfOpenInterfaceConnections.second);
 		c = 0;

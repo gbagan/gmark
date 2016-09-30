@@ -88,6 +88,13 @@ void graphNode::incrementOpenInterfaceConnectionsByN(int index, int number, bool
 		this->numberOfOpenInterfaceConnections[index].second += number;
 	}
 }
+void graphNode::incrementInterfaceConnectionsByN(int index, int number, bool isSource) {
+	if(isSource) {
+		this->numberOfInterfaceConnections[index].first += number;
+	} else {
+		this->numberOfInterfaceConnections[index].second += number;
+	}
+}
 
 void graphNode::setPosition(int index, double number, bool isSource) {
 	if(isSource) {

@@ -37,6 +37,7 @@ public:
 
 	void decrementOpenInterfaceConnections(int index, bool isSource);
 	void incrementOpenInterfaceConnectionsByN(int index, int number, bool isSource);
+	void incrementInterfaceConnectionsByN(int index, int number, bool isSource);
 
 	void setPosition(int index, double number, bool isSource);
 	float getPosition(int index, bool isSource);
