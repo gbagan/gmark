@@ -143,19 +143,18 @@ void incrementalDeterministicGraphGenerator::addEdge(graphEdge & e, config::edge
 
 
 // ####### Update interface-connections #######
-int incrementalDeterministicGraphGenerator::updateInterfaceConnectionsForZipfianDistributions(vector<graphNode> nodes, int iterationNumber, int edgeTypeId, distribution distr, bool outDistr) {
+int incrementalDeterministicGraphGenerator::updateInterfaceConnectionsForZipfianDistributions(vector<graphNode> nodes, int nmNodes, int edgeTypeId, distribution distr, bool outDistr) {
 //	cout << "New Zipfian case" << endl;
 	int openInterfaceConnections = 0;
 
-	vector<float> zipfianCdf = cumDistrUtils.zipfCdf(distr, iterationNumber);
-	graphNode node;
+	vector<float> zipfianCdf = cumDistrUtils.zipfCdf(distr, nmNodes);
 	int newInterfaceConnections = 0;
 	int difference = 0;
 	for (int i=0; i<nodes.size(); i++) {
-		if (i > (iterationNumber+1)) {
+		if (i >= nmNodes) {
 			break;
 		}
-		node = nodes.at(i);
+		graphNode node = nodes.at(i);
 
 //		cout << "Postion of node" << i << ": " << node.getPosition(edgeTypeId, outDistr) << endl;
 //		cout << "Old NmOfInterfaceConnections: " << node.getNumberOfInterfaceConnections(edgeTypeId, outDistr) << endl;
@@ -170,7 +169,7 @@ int incrementalDeterministicGraphGenerator::updateInterfaceConnectionsForZipfian
 		node.incrementOpenInterfaceConnectionsByN(edgeTypeId, difference, outDistr);
 		node.setNumberOfInterfaceConnections(edgeTypeId, newInterfaceConnections, outDistr);
 
-
+//		cout << "difference: " << difference << endl;
 //		cout << "New NmOfInterfaceConnections: " << node.getNumberOfInterfaceConnections(edgeTypeId, outDistr) << endl;
 //		cout << "New NmOfOpenInterfaceConnections: " << node.getNumberOfOpenInterfaceConnections(edgeTypeId, outDistr) << endl;
 		openInterfaceConnections += node.getNumberOfOpenInterfaceConnections(edgeTypeId, outDistr);
@@ -179,23 +178,23 @@ int incrementalDeterministicGraphGenerator::updateInterfaceConnectionsForZipfian
 }
 
 pair<int,int> incrementalDeterministicGraphGenerator::updateInterfaceConnectionsForZipfianDistributions(config::edge & edgeType, int nmSubjectNodes, int nmObjectNodes) {
-//	cout << "nmSubjectNodes: " << nmSubjectNodes << endl;
-//	cout << "nmObjectNodes: " << nmObjectNodes << endl;
-
 	pair<int,int> numberOfOpenInterfaceConnections;
-	numberOfOpenInterfaceConnections.first = -1;
-	numberOfOpenInterfaceConnections.second = -1;
+	int nmOpenICsOutDistr = -1;
+	int nmOpenIcsInDistr = -1;
 
 	if(edgeType.outgoing_distrib.type == DISTRIBUTION::ZIPFIAN) {
-		numberOfOpenInterfaceConnections.first = updateInterfaceConnectionsForZipfianDistributions(graph.nodes.at(edgeType.subject_type), nmSubjectNodes, edgeType.edge_type_id, edgeType.outgoing_distrib, true);
+		nmOpenICsOutDistr = updateInterfaceConnectionsForZipfianDistributions(graph.nodes.at(edgeType.subject_type), nmSubjectNodes, edgeType.edge_type_id, edgeType.outgoing_distrib, true);
 	}
 	if(edgeType.incoming_distrib.type == DISTRIBUTION::ZIPFIAN) {
-		numberOfOpenInterfaceConnections.second = updateInterfaceConnectionsForZipfianDistributions(graph.nodes.at(edgeType.object_type), nmObjectNodes, edgeType.edge_type_id, edgeType.incoming_distrib, false);
+		nmOpenIcsInDistr = updateInterfaceConnectionsForZipfianDistributions(graph.nodes.at(edgeType.object_type), nmObjectNodes, edgeType.edge_type_id, edgeType.incoming_distrib, false);
 	}
+	numberOfOpenInterfaceConnections.first = nmOpenICsOutDistr;
+	numberOfOpenInterfaceConnections.second = nmOpenIcsInDistr;
 	return numberOfOpenInterfaceConnections;
 }
 
 void incrementalDeterministicGraphGenerator::updateICsForNonScalableType(vector<graphNode> nodes, int iterationNumber, double meanUpdateDistr, double meanNonUpdateDistr, distribution & distr, int edgeTypeId, bool updateSubjects) {
+	cout << "Updating ICs for non scalable type" << endl;
 	if (nodes.size() == 0) {
 		cout << "A fixed amount of nodes of one of the types is equal to 0" << endl;
 		return;
@@ -391,9 +390,8 @@ int incrementalDeterministicGraphGenerator::processIteration(int iterationNumber
 	int nmNodesMax = max(nmSubjectNodes, nmObjectNodes);
 	nmNodesMax = max(nmNodesMax, iterationNumber+1);
 
-	pair<int, int> zipfOpenInterfaceConnections;
-	int subjectNodes;
-	int objectNodes;
+	int subjectNodes = iterationNumber + 1;
+	int objectNodes = iterationNumber + 1;
 	double subjectProbOrSize;
 	double objectProbOrSize;
 	if (conf.types.at(edgeType.subject_type).scalable ^ conf.types.at(edgeType.object_type).scalable) {
@@ -439,7 +437,7 @@ int incrementalDeterministicGraphGenerator::processIteration(int iterationNumber
 		}
 	}
 
-	zipfOpenInterfaceConnections = updateInterfaceConnectionsForZipfianDistributions(edgeType, subjectNodes, objectNodes);
+	pair<int, int> zipfOpenInterfaceConnections = updateInterfaceConnectionsForZipfianDistributions(edgeType, subjectNodes, objectNodes);
 
 	int numberOfEdgesPerIteration = 1;
 	int c = 0;

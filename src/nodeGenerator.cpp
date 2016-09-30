@@ -95,7 +95,7 @@ void nodeGenerator::findOrCreateNode(config::edge & edgeType, bool findSourceNod
 			return; // So: Do NOT add the node
 		}
 
-		n = new graphNode(nextNodeId, localNmNodes, type, conf->schema.edges.size(), max(maxNumberForObjectNodes, maxNumberForSubjectNodes));
+		n = new graphNode(nextNodeId, localNmNodes, type, conf->schema.edges.size(), conf->nb_nodes);
 
 
 //		cout << "Creating a node at iteration " << iterationNumber << " of type:" << type <<
@@ -107,11 +107,9 @@ void nodeGenerator::findOrCreateNode(config::edge & edgeType, bool findSourceNod
 
 	addInterfaceConnectionsToNode(*n, distr, edgeType.edge_type_id, findSourceNode);
 
-	if (findSourceNode) {
-		initializeConnections(*n, (int)maxNumberForObjectNodes*1.5);
-	} else {
-		initializeConnections(*n, (int)maxNumberForSubjectNodes*1.5);
-	}
+
+	initializeConnections(*n, conf->nb_nodes);
+
 }
 
 int nodeGenerator::addOrUpdateNodes(config::edge & edgeType, int iterationNumber, int numberOfNodesOfMax, int type1, int type2, bool isSubject) {

@@ -31,7 +31,7 @@ graphNode::graphNode(int globalId, int localId, int nodeType, int numberOfEdgeTy
 	this->numberOfInterfaceConnections = new pair<int,int>[numberOfEdgeTypes];
 	this->position = new pair<float,float>[numberOfEdgeTypes];
 
-	this->connections = new int[(int) (maxNumberOfConnections*1.5)];
+	this->connections = new int[maxNumberOfConnections];
 }
 
 graphNode::~graphNode() {
