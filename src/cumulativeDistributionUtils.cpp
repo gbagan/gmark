@@ -69,7 +69,7 @@ vector<float> cumulativeDistributionUtils::calculateUnifGausCumulPercentagesForN
 
 
 
-vector<float> cumulativeDistributionUtils::zipfCdf(distribution zipfDistr, int iterationNumber) {
+vector<float> cumulativeDistributionUtils::zipfCdf(distribution zipfDistr, int iterationNumber, int zipfianStartValue) {
 	float alpha = zipfDistr.arg2;
 	int n = iterationNumber;
 //	cout << "Zipfian n=" << n << endl;
@@ -87,9 +87,14 @@ vector<float> cumulativeDistributionUtils::zipfCdf(distribution zipfDistr, int i
 
 	vector<float> cdf;
 //	cout << endl << "CDF: " << endl;
-	// Rmoving the 0 ICs
-	cdf.push_back(0.0);
-//	cout << "0.0, ";
+
+	// Fixing the start value
+	for (int i=0; i<zipfianStartValue; i++) {
+		cdf.push_back(0.0);
+		//	cout << "0.0, ";
+	}
+
+
 	float tempSum = 0.0;
 	for(int i=0; i<n; i++) {
 		tempSum += zipfian.at(i) / sum;

@@ -35,7 +35,7 @@ public:
 
 	vector<float> calculateUnifGausCumulPercentagesForNnodes(vector<graphNode> & nodes, int currentEdgeTypeNumber, int iterationNumber, graphNode & sourceNode, bool findSource);
 //	vector<float> calculateZipfCumulPercentagesForNnodes(vector<graphNode> & nodes, int currentEdgeTypeNumber, float alpha, int iterationNumber, bool findSource);
-	vector<float> zipfCdf(distribution zipfDistr, int iterationNumber);
+	vector<float> zipfCdf(distribution zipfDistr, int iterationNumber, int zipfianStartValue);
 
 	int findPositionInCdf(vector<float> & cdf, double randomValue);
 

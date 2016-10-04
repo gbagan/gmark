@@ -14,8 +14,6 @@ nodeGenerator::nodeGenerator() {
 	this->graph = 0;
 	this->conf = 0;
 	this->nextNodeId = 0;
-	this->maxNumberForSubjectNodes = 0;
-	this->maxNumberForObjectNodes = 0;
 }
 
 nodeGenerator::nodeGenerator(default_random_engine* randomGenerator_, incrementalDeterministicGraph* graph_, config::config* conf_) {
@@ -23,8 +21,6 @@ nodeGenerator::nodeGenerator(default_random_engine* randomGenerator_, incrementa
 	this->graph = graph_;
 	this->conf = conf_;
 	this->nextNodeId = 0;
-	this->maxNumberForSubjectNodes = 0;
-	this->maxNumberForObjectNodes = 0;
 }
 nodeGenerator::~nodeGenerator() {
 	// TODO
@@ -160,12 +156,10 @@ int nodeGenerator::addOrUpdateNodes(config::edge & edgeType, int iterationNumber
 	return numberOfNodesOfMax;
 }
 
-int nodeGenerator::addOrUpdateSubjectNodes(config::edge & edgeType, int iterationNumber, int numberOfNodesOfMax, int maxNodesToConnectTo) {
-	this->maxNumberForObjectNodes = maxNodesToConnectTo;
+int nodeGenerator::addOrUpdateSubjectNodes(config::edge & edgeType, int iterationNumber, int numberOfNodesOfMax) {
 	return addOrUpdateNodes(edgeType, iterationNumber, numberOfNodesOfMax, edgeType.subject_type, edgeType.object_type, true);
 }
-int nodeGenerator::addOrUpdateObjectNodes(config::edge & edgeType, int iterationNumber, int numberOfNodesOfMax, int maxNodesToConnectTo) {
-	this->maxNumberForSubjectNodes = maxNodesToConnectTo;
+int nodeGenerator::addOrUpdateObjectNodes(config::edge & edgeType, int iterationNumber, int numberOfNodesOfMax) {
 	return addOrUpdateNodes(edgeType, iterationNumber, numberOfNodesOfMax, edgeType.object_type, edgeType.subject_type, false);
 }
 

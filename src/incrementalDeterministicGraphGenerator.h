@@ -28,6 +28,9 @@ private:
 
 	nodeGenerator nodeGen;
 
+	int zipfianStartValueOut = 1;
+	int zipfianStartValueIn = 1;
+
 	void initializeNodesAndEdges();
 	void processEdgeType(config::edge & edgeType);
 	int processIteration(int iterationNumber, config::edge & edgeType, int numberOfNodesForMax);
@@ -49,6 +52,7 @@ private:
 	int updateInterfaceConnectionsForZipfianDistributions(vector<graphNode> nodes, int iterationNumber, int edgeTypeId, distribution distr, bool outDistr);
 	pair<int,int> updateInterfaceConnectionsForZipfianDistributions(config::edge & edgeType, int nmNodesMax, int nmNodesMin);
 	void updateICsForNonScalableType(vector<graphNode> nodes, int iterationNumber, double meanUpdateDistr, double meanNonUpdateDistr, distribution & distrToUpdate, int edgeTypeId, bool updateSubjects);
+//	void shiftZipfianDistribution(vector<graphNode> & nodes, int nmNodes, int edgeTypeId, bool changeSubjectNodes);
 
 	void changeDistributionParams(config::edge & edgeType);
 	void changeDistributionParams(config::edge & edgeType, double meanICsPerNodeForOtherDistr, bool changeOutDistr, double subjectProbOrSize, double ofjectProbOrSize);
