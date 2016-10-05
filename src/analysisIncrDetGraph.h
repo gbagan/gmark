@@ -9,6 +9,7 @@
 #define ANALYSISINCRDETGRAPH_H_
 
 #include <iostream>
+#include <string>
 #include "config.h"
 #include "incrementalDeterministicGraph.h"
 
@@ -16,16 +17,16 @@ namespace std {
 
 class analysisIncrDetGraph {
 private:
-	incrementalDeterministicGraph graph;
+	string outpuFile;
 	config::config conf;
 
 	void printToRfile(ofstream & rFile, bool outDistr, config::edge edge);
 public:
-	analysisIncrDetGraph(incrementalDeterministicGraph graph, config::config configuration);
+	analysisIncrDetGraph(string oututFile, config::config configuration);
 	virtual ~analysisIncrDetGraph();
 
 	void numberOfNodesAnalysis();
-	void distributionAnalysis(int edgeTypeNumber, ofstream & rFile);
+	void distributionAnalysis(config::edge edgeType, ofstream & rFile);
 };
 
 } /* namespace std */

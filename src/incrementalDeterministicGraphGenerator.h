@@ -9,6 +9,7 @@
 #define INCREMENTALDETERMINISTICGRAPHGENERATOR_H_
 
 #include <random>
+#include <fstream>
 #include "config.h"
 #include "incrementalDeterministicGraph.h"
 #include "cumulativeDistributionUtils.h"
@@ -32,8 +33,8 @@ private:
 	int zipfianStartValueIn = 1;
 
 	void initializeNodesAndEdges();
-	void processEdgeType(config::edge & edgeType);
-	int processIteration(int iterationNumber, config::edge & edgeType, int numberOfNodesForMax);
+	void processEdgeType(config::edge & edgeType, ofstream*  outputFile);
+	int processIteration(int iterationNumber, config::edge & edgeType, int numberOfNodesForMax, ofstream*  outputFile);
 
 	// For each iteration
 	int getNumberOfEdgesPerIteration(config::edge & edgeType, int iterationNumber);
@@ -47,7 +48,7 @@ private:
 	graphNode findNodeIdFromCumulProbs(vector<float> & cumulProbs, int nodeType);
 
 	vector<float> getCdf(distribution distr, int nodeType, int edgeTypeNumber, int iterationNumber, graphNode sourceNode, bool findSourceNode);
-	void addEdge(graphEdge & e, config::edge & edgeType);
+	void addEdge(graphEdge & e, config::edge & edgeType, ofstream*  outputFiles);
 
 	int updateInterfaceConnectionsForZipfianDistributions(vector<graphNode> nodes, int iterationNumber, int edgeTypeId, distribution distr, bool outDistr);
 	pair<int,int> updateInterfaceConnectionsForZipfianDistributions(config::edge & edgeType, int nmNodesMax, int nmNodesMin);
@@ -60,7 +61,7 @@ public:
 	incrementalDeterministicGraphGenerator(config::config configuration);
 	virtual ~incrementalDeterministicGraphGenerator();
 
-	void generateIncDetGraph();
+	void generateIncDetGraph(ofstream*  outputFile);
 	incrementalDeterministicGraph getGraph() {
 		return graph;
 	}

@@ -11,8 +11,8 @@
 
 namespace std {
 
-analysisIncrDetGraph::analysisIncrDetGraph(incrementalDeterministicGraph incDetGraph, config::config configuration) {
-	this->graph =  incDetGraph;
+analysisIncrDetGraph::analysisIncrDetGraph(string outputFile_, config::config configuration) {
+	this->outpuFile =  outputFile_;
 	this->conf = configuration;
 }
 
@@ -23,77 +23,80 @@ analysisIncrDetGraph::~analysisIncrDetGraph() {
 void analysisIncrDetGraph::numberOfNodesAnalysis() {
 	cout << "\n\n-----Node-size analysis-----\n";
 
-	vector<vector<graphNode>> nodes = graph.nodes;
-	float accuracy, relError;
-	float totalAccuracy = 0;
-	int shouldBe, real, absError;
-	for(int i=0; i<conf.types.size(); i++) {
-		shouldBe = conf.types.at(i).size;
-
-		cout << "NodeType:" << conf.types.at(i).alias << " should have size=" << to_string(shouldBe) << endl;
-		int tempSize = 0;
-		for (graphNode n: nodes.at(i)) {
-//			if(!n.is_virtual) {
-				tempSize++;
-//			}
-		}
-		real = tempSize;
-		if(nodes.at(i).size() > 0) {
-			cout << "NodeType:" << conf.types.at(nodes.at(i).at(0).type).alias << " has size=" << to_string(real) << endl;
-		} else {
-			cout << "NodeType:" << conf.types.at(i).alias << " has size=" << to_string(real) << endl;
-		}
-		absError = abs(shouldBe-real);
-		relError = (float)absError / (float)shouldBe;
-		accuracy = 1.0 - relError;
-		totalAccuracy += accuracy;
-		cout << "Accuracy=" << to_string(accuracy) << endl;
-	}
-
-	totalAccuracy = totalAccuracy / (float)conf.types.size();
-	cout << "Total accuracy: " << to_string(totalAccuracy) << endl;
+//	vector<vector<graphNode>> nodes = graph.nodes;
+//	float accuracy, relError;
+//	float totalAccuracy = 0;
+//	int shouldBe, real, absError;
+//	for(int i=0; i<conf.types.size(); i++) {
+//		shouldBe = conf.types.at(i).size;
+//
+//		cout << "NodeType:" << conf.types.at(i).alias << " should have size=" << to_string(shouldBe) << endl;
+//		int tempSize = 0;
+//		for (graphNode n: nodes.at(i)) {
+////			if(!n.is_virtual) {
+//				tempSize++;
+////			}
+//		}
+//		real = tempSize;
+//		if(nodes.at(i).size() > 0) {
+//			cout << "NodeType:" << conf.types.at(nodes.at(i).at(0).type).alias << " has size=" << to_string(real) << endl;
+//		} else {
+//			cout << "NodeType:" << conf.types.at(i).alias << " has size=" << to_string(real) << endl;
+//		}
+//		absError = abs(shouldBe-real);
+//		relError = (float)absError / (float)shouldBe;
+//		accuracy = 1.0 - relError;
+//		totalAccuracy += accuracy;
+//		cout << "Accuracy=" << to_string(accuracy) << endl;
+//	}
+//
+//	totalAccuracy = totalAccuracy / (float)conf.types.size();
+//	cout << "Total accuracy: " << to_string(totalAccuracy) << endl;
 }
 
 
-void analysisIncrDetGraph::distributionAnalysis(int edgeType, ofstream & rFile) {
+void analysisIncrDetGraph::distributionAnalysis(config::edge edgeType, ofstream & rFile) {
 //	cout << "\n\n-----Distribution analysis-----\n";
 //	cout << "EdgeType: " << to_string(edgeType) << endl;
 
-	vector<vector<graphNode>> nodes = graph.nodes;
-	vector<vector<graphEdge>> edges = graph.edges;
-	vector<graphEdge> edgesOfEdgeType = edges.at(edgeType);
+
 	vector<int> outDistr;
 	vector<int> inDistr;
 
 	// Initialize outDistr-vector
-	int subjectType = conf.schema.edges.at(edgeType).subject_type;
-	int numberOfNodesWithSubjectType = 0;
-	for (graphNode n: nodes.at(subjectType)) {
-//		if(!n.is_virtual) {
-			numberOfNodesWithSubjectType++;
-//		}
-	}
-	for (int i=0; i<numberOfNodesWithSubjectType; i++) {
+	for (int i=0; i<conf.types.at(edgeType.subject_type).size; i++) {
 		outDistr.push_back(0);
 	}
 
 	// Initialize inDistr-vector
-	int objectType = conf.schema.edges.at(edgeType).object_type;
-	int numberOfNodesWithObjectType = 0;
-	for (graphNode n: nodes.at(objectType)) {
-//		if(!n.is_virtual) {
-			numberOfNodesWithObjectType++;
-//		}
-	}
-	for (int i=0; i<numberOfNodesWithObjectType; i++) {
+	for (int i=0; i<conf.types.at(edgeType.object_type).size; i++) {
 		inDistr.push_back(0);
 	}
 
 	// Analyze all edges
-	for(graphEdge e: edgesOfEdgeType) {
-		outDistr.at(e.source.iterationId)++;
-		inDistr.at(e.target.iterationId)++;
+	string line;
+	ifstream myfile(outpuFile);
+	if (myfile.is_open()) {
+		while (getline(myfile, line)) {
+			string temp = line;
+			string getPred = temp.erase(0, temp.find(" ")+1);
+			string predicate = getPred.substr(0, getPred.find(" "));
+			if (stoi(predicate) == edgeType.predicate) {
+				temp = line;
+				string getSub = temp.erase(0, temp.find("-")+1);
+				string subject = getSub.substr(0, getSub.find(" "));
+				outDistr.at(stoi(subject))++;
+
+				string getObj = getPred.erase(0, getPred.find("-")+1);
+				string object = getObj.substr(0, getObj.length());
+				inDistr.at(stoi(object))++;
+			}
+		}
+		myfile.close();
+	} else {
+		cout << "Unable to open file";
 	}
+
 
 	int i = 0;
 	rFile << "OutDistribution <- c(";
@@ -108,7 +111,7 @@ void analysisIncrDetGraph::distributionAnalysis(int edgeType, ofstream & rFile) 
 		}
 	}
 	rFile << ")" << endl;
-	printToRfile(rFile, true, conf.schema.edges.at(edgeType));
+	printToRfile(rFile, true, edgeType);
 
 	i=0;
 	rFile << "InDistribution <- c(";
@@ -124,7 +127,7 @@ void analysisIncrDetGraph::distributionAnalysis(int edgeType, ofstream & rFile) 
 	}
 	rFile << ")" << endl;
 
-	printToRfile(rFile, false, conf.schema.edges.at(edgeType));
+	printToRfile(rFile, false, edgeType);
 }
 
 void analysisIncrDetGraph::printToRfile(ofstream& rFile, bool outDistr, config::edge edge) {

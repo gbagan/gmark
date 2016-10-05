@@ -7,3 +7,5 @@ src/.project
 src/.cproject
 
 src/distributionAnalysis.r
+src/output.txt
+
