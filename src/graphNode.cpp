@@ -12,24 +12,36 @@
 namespace std {
 
 graphNode::graphNode() {
-	this->id = -1;
+	this->id = "None";
 	this->iterationId = -1;
 	this->type = -1;
 
-	this->numberOfOpenInterfaceConnections = new pair<int,int>[1];
-	this->numberOfInterfaceConnections = new pair<int,int>[1];
-	this->position = new pair<float,float>[1];
+	pair<int,int> intPair;
+	intPair.first = 0;
+	intPair.second = 0;
+	this->numberOfOpenInterfaceConnections = intPair;
+	this->numberOfInterfaceConnections = intPair;
+	pair<float,float> floatPair;
+	floatPair.first = 0;
+	floatPair.second = 0;
+	this->position = floatPair;
 
 	this->connections = new int[1];
 }
-graphNode::graphNode(int globalId, int localId, int nodeType, int numberOfEdgeTypes, int maxNumberOfConnections) {
+graphNode::graphNode(string globalId, int localId, int nodeType, int numberOfEdgeTypes, int maxNumberOfConnections) {
 	this->id = globalId;
 	this->iterationId = localId;
 	this->type = nodeType;
 
-	this->numberOfOpenInterfaceConnections = new pair<int,int>[numberOfEdgeTypes];
-	this->numberOfInterfaceConnections = new pair<int,int>[numberOfEdgeTypes];
-	this->position = new pair<float,float>[numberOfEdgeTypes];
+	pair<int,int> intPair;
+	intPair.first = 0;
+	intPair.second = 0;
+	this->numberOfOpenInterfaceConnections = intPair;
+	this->numberOfInterfaceConnections = intPair;
+	pair<float,float> floatPair;
+	floatPair.first = 0;
+	floatPair.second = 0;
+	this->position = floatPair;
 
 	this->connections = new int[maxNumberOfConnections];
 }
@@ -39,75 +51,75 @@ graphNode::~graphNode() {
 }
 
 
-int graphNode::getNumberOfOpenInterfaceConnections(int edgeTypeNumber, bool isSource) {
+int graphNode::getNumberOfOpenInterfaceConnections(bool isSource) {
 	int openConnections;
 	if(isSource) {
-		openConnections = numberOfOpenInterfaceConnections[edgeTypeNumber].first;
+		openConnections = numberOfOpenInterfaceConnections.first;
 	} else {
-		openConnections = numberOfOpenInterfaceConnections[edgeTypeNumber].second;
+		openConnections = numberOfOpenInterfaceConnections.second;
 	}
 	return openConnections;
 }
-void graphNode::setNumberOfOpenInterfaceConnections(int index, int number, bool isSource) {
+void graphNode::setNumberOfOpenInterfaceConnections(int number, bool isSource) {
 	if(isSource) {
-		this->numberOfOpenInterfaceConnections[index].first = number;
+		this->numberOfOpenInterfaceConnections.first = number;
 	} else {
-		this->numberOfOpenInterfaceConnections[index].second = number;
+		this->numberOfOpenInterfaceConnections.second = number;
 	}
 }
 
 
-int graphNode::getNumberOfInterfaceConnections(int edgeTypeNumber, bool isSource) {
+int graphNode::getNumberOfInterfaceConnections(bool isSource) {
 	int initConnections;
 	if(isSource) {
-		initConnections = this->numberOfInterfaceConnections[edgeTypeNumber].first;
+		initConnections = this->numberOfInterfaceConnections.first;
 	} else {
-		initConnections = this->numberOfInterfaceConnections[edgeTypeNumber].second;
+		initConnections = this->numberOfInterfaceConnections.second;
 	}
 	return initConnections;
 }
-void graphNode::setNumberOfInterfaceConnections(int index, int number, bool isSource) {
+void graphNode::setNumberOfInterfaceConnections(int number, bool isSource) {
 	if(isSource) {
-		this->numberOfInterfaceConnections[index].first = number;
+		this->numberOfInterfaceConnections.first = number;
 	} else {
-		this->numberOfInterfaceConnections[index].second = number;
+		this->numberOfInterfaceConnections.second = number;
 	}
 }
 
-void graphNode::decrementOpenInterfaceConnections(int index, bool isSource) {
+void graphNode::decrementOpenInterfaceConnections(bool isSource) {
 	if(isSource) {
-		this->numberOfOpenInterfaceConnections[index].first--;
+		this->numberOfOpenInterfaceConnections.first--;
 	} else {
-		this->numberOfOpenInterfaceConnections[index].second--;
+		this->numberOfOpenInterfaceConnections.second--;
 	}
 }
-void graphNode::incrementOpenInterfaceConnectionsByN(int index, int number, bool isSource) {
+void graphNode::incrementOpenInterfaceConnectionsByN(int number, bool isSource) {
 	if(isSource) {
-		this->numberOfOpenInterfaceConnections[index].first += number;
+		this->numberOfOpenInterfaceConnections.first += number;
 	} else {
-		this->numberOfOpenInterfaceConnections[index].second += number;
+		this->numberOfOpenInterfaceConnections.second += number;
 	}
 }
-void graphNode::incrementInterfaceConnectionsByN(int index, int number, bool isSource) {
+void graphNode::incrementInterfaceConnectionsByN(int number, bool isSource) {
 	if(isSource) {
-		this->numberOfInterfaceConnections[index].first += number;
+		this->numberOfInterfaceConnections.first += number;
 	} else {
-		this->numberOfInterfaceConnections[index].second += number;
+		this->numberOfInterfaceConnections.second += number;
 	}
 }
 
-void graphNode::setPosition(int index, double number, bool isSource) {
+void graphNode::setPosition(double number, bool isSource) {
 	if(isSource) {
-		this->position[index].first = number;
+		this->position.first = number;
 	} else {
-		this->position[index].second = number;
+		this->position.second = number;
 	}
 }
-float graphNode::getPosition(int index, bool isSource) {
+float graphNode::getPosition(bool isSource) {
 	if(isSource) {
-		return this->position[index].first;
+		return this->position.first;
 	} else {
-		return this->position[index].second;
+		return this->position.second;
 	}
 }
 

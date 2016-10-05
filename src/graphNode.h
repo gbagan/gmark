@@ -9,38 +9,39 @@
 #define GRAPHNODE_H_
 
 #include <vector>
+#include <string>
 
 namespace std {
 
 class graphNode {
 public:
-	int id;
+	string id;
 	int iterationId;
 	int type;
 //	bool is_virtual;
 
-	pair<float, float>* position;
-	pair<int,int>* numberOfInterfaceConnections;
-	pair<int,int>* numberOfOpenInterfaceConnections;
+	pair<float, float> position;
+	pair<int,int> numberOfInterfaceConnections;
+	pair<int,int> numberOfOpenInterfaceConnections;
 
 	int* connections;
 
 	graphNode();
-	graphNode(int id, int iterationId, int type, int numberOfEdgeTypes, int maxNumberOfConnections);
+	graphNode(string id, int iterationId, int type, int numberOfEdgeTypes, int maxNumberOfConnections);
 	virtual ~graphNode();
 
-	int getNumberOfOpenInterfaceConnections(int edgeTypeNumber, bool first);
-	void setNumberOfOpenInterfaceConnections(int index, int number, bool isSource);
+	int getNumberOfOpenInterfaceConnections(bool first);
+	void setNumberOfOpenInterfaceConnections(int number, bool isSource);
 
-	int getNumberOfInterfaceConnections(int edgeTypeNumber, bool isSource);
-	void setNumberOfInterfaceConnections(int index, int number, bool isSource);
+	int getNumberOfInterfaceConnections(bool isSource);
+	void setNumberOfInterfaceConnections(int number, bool isSource);
 
-	void decrementOpenInterfaceConnections(int index, bool isSource);
-	void incrementOpenInterfaceConnectionsByN(int index, int number, bool isSource);
-	void incrementInterfaceConnectionsByN(int index, int number, bool isSource);
+	void decrementOpenInterfaceConnections(bool isSource);
+	void incrementOpenInterfaceConnectionsByN(int number, bool isSource);
+	void incrementInterfaceConnectionsByN(int number, bool isSource);
 
-	void setPosition(int index, double number, bool isSource);
-	float getPosition(int index, bool isSource);
+	void setPosition(double number, bool isSource);
+	float getPosition(bool isSource);
 
 	void setConnection(int connectionIterationId, int value);
 	int getConnection(int connectionIterationId);

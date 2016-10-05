@@ -13,14 +13,12 @@ nodeGenerator::nodeGenerator() {
 	this->randomGenerator = 0;
 	this->graph = 0;
 	this->conf = 0;
-	this->nextNodeId = 0;
 }
 
 nodeGenerator::nodeGenerator(default_random_engine* randomGenerator_, incrementalDeterministicGraph* graph_, config::config* conf_) {
 	this->randomGenerator = randomGenerator_;
 	this->graph = graph_;
 	this->conf = conf_;
-	this->nextNodeId = 0;
 }
 nodeGenerator::~nodeGenerator() {
 	// TODO
@@ -33,7 +31,7 @@ void nodeGenerator::initializeConnections(graphNode &n, int maxNumberOfConnectio
 }
 
 
-void nodeGenerator::addInterfaceConnectionsToNode(graphNode &n, distribution distr, int currentEdgeTypeNumber, bool findSourceNode) {
+void nodeGenerator::addInterfaceConnectionsToNode(graphNode &n, distribution distr, bool findSourceNode) {
 	int numberOfConnections;
 	if (distr.type == DISTRIBUTION::UNIFORM) {
 //		cout << "UNIFORM with " << distr.arg1 << " " << distr.arg2 << endl;
@@ -46,7 +44,7 @@ void nodeGenerator::addInterfaceConnectionsToNode(graphNode &n, distribution dis
 	} else if (distr.type == DISTRIBUTION::ZIPFIAN) {
 		uniform_real_distribution<double> distribution(0.0,1.0);
 		double randomValue = distribution(*randomGenerator);
-		n.setPosition(currentEdgeTypeNumber, randomValue, findSourceNode);
+		n.setPosition(randomValue, findSourceNode);
 		numberOfConnections = 0;
 	} else { // distr.type == DISTRIBUTION::UNDEFINED
 		numberOfConnections = 0;
@@ -55,60 +53,57 @@ void nodeGenerator::addInterfaceConnectionsToNode(graphNode &n, distribution dis
 	if (numberOfConnections < 0) {
 		numberOfConnections = 0;
 	}
-	n.setNumberOfOpenInterfaceConnections(currentEdgeTypeNumber, numberOfConnections, findSourceNode);
-	n.setNumberOfInterfaceConnections(currentEdgeTypeNumber, numberOfConnections, findSourceNode);
+//	cout << "Before: " << n.getNumberOfInterfaceConnections(findSourceNode) << endl;
+	n.setNumberOfOpenInterfaceConnections(numberOfConnections, findSourceNode);
+	n.setNumberOfInterfaceConnections(numberOfConnections, findSourceNode);
 //	cout << "Node at iteration " << n.iterationId << " get " << numberOfConnections << " interface-connections" << endl;
+//	cout << "After: " << n.getNumberOfInterfaceConnections(findSourceNode) << endl;
 }
 
-void nodeGenerator::addNode(graphNode n) {
-	graph->nodes.at(n.type).push_back(n);
-	nextNodeId++;
-}
 
-void nodeGenerator::findOrCreateNode(config::edge & edgeType, bool findSourceNode, int localNmNodes) {
+void nodeGenerator::addNode(config::edge & edgeType, bool addSourceNode) {
 	distribution distr;
 	size_t type;
-	if(findSourceNode) {
+	size_t otherType;
+	int numberOfNodes;
+	if(addSourceNode) {
 		distr = edgeType.outgoing_distrib;
 		type = edgeType.subject_type;
+		otherType = edgeType.object_type;
+		numberOfNodes = graph->nodes.first.size();
 	} else {
 		distr = edgeType.incoming_distrib;
 		type = edgeType.object_type;
+		otherType = edgeType.subject_type;
+		numberOfNodes = graph->nodes.second.size();
 	}
 
-	graphNode* n;
-	if(graph->nodes.at(type).size() > localNmNodes) {
-		// Node already exists in the graph
-//		cout << "NodeType" << type << "n" << iterationNumber << " already exists in the graph\n";
 
-		n = &graph->nodes.at(type).at(localNmNodes);
+	if(!conf->types.at(type).scalable && numberOfNodes > conf->types.at(type).size-1) {
+		// NodeType is not scalable and all nodes are already created and added to the graph
+		// !configuration.types.at(type).scalable <- NodeType is not scalable
+		// graph->nodes.at(type).size() > configuration.types.at(type).size <- all nodes are already created and added to the graph
+		return; // So: Do NOT add the node
+	}
+
+
+	graphNode *n = new graphNode(to_string(type) + "-" + to_string(numberOfNodes), numberOfNodes, type, conf->schema.edges.size(), conf->types.at(otherType).size*2);
+	addInterfaceConnectionsToNode(*n, distr, addSourceNode);
+	initializeConnections(*n, conf->types.at(otherType).size*2);
+	if (addSourceNode) {
+		graph->nodes.first.push_back(*n);
 	} else {
-		// Node is not in the graph at this moment
-		if(!conf->types.at(type).scalable && localNmNodes > conf->types.at(type).size-1) {
-			// NodeType is not scalable and all nodes are already created and added to the graph
-			// !configuration.types.at(type).scalable <- NodeType is not scalable
-			// iterationNumber > configuration.types.at(type).size <- all nodes are already created and added to the graph
-			return; // So: Do NOT add the node
-		}
-
-		n = new graphNode(nextNodeId, localNmNodes, type, conf->schema.edges.size(), conf->nb_nodes);
-
+		graph->nodes.second.push_back(*n);
+	}
 
 //		cout << "Creating a node at iteration " << iterationNumber << " of type:" << type <<
 //				". Size of that type=" << conf.types.at(type).size << "\n";
 
 
-		addNode(*n);
-	}
-
-	addInterfaceConnectionsToNode(*n, distr, edgeType.edge_type_id, findSourceNode);
-
-
-	initializeConnections(*n, conf->nb_nodes);
 
 }
 
-int nodeGenerator::addOrUpdateNodes(config::edge & edgeType, int iterationNumber, int numberOfNodesOfMax, int type1, int type2, bool isSubject) {
+void nodeGenerator::addNodes(config::edge & edgeType, int type1, int type2, bool isSubject) {
 	if ((conf->types.at(edgeType.subject_type).scalable && conf->types.at(edgeType.object_type).scalable)
 			|| (!conf->types.at(edgeType.subject_type).scalable && !conf->types.at(edgeType.object_type).scalable)) {
 		double prob1;
@@ -132,35 +127,32 @@ int nodeGenerator::addOrUpdateNodes(config::edge & edgeType, int iterationNumber
 
 //			cout << "Creating " << nmOfNodesPerIteration << " nodes for type " << type1 << endl;
 			for (int i=0; i<nmOfNodesPerIteration; i++) {
-				findOrCreateNode(edgeType, isSubject, numberOfNodesOfMax);
-				numberOfNodesOfMax++;
+				addNode(edgeType, isSubject);
 			}
 		} else {
 //			cout << "Creating " << 1 << " node for type " << type1 << endl;
-			findOrCreateNode(edgeType, isSubject, iterationNumber);
+			addNode(edgeType, isSubject);
 		}
 	} else {
 		if (isSubject) {
-			if (iterationNumber < conf->types.at(edgeType.subject_type).size) {
+			if (graph->nodes.first.size() < conf->types.at(edgeType.subject_type).size) {
 //				cout << "Creating " << 1 << " node for type " << type1 << endl;
-				findOrCreateNode(edgeType, isSubject, iterationNumber);
+				addNode(edgeType, isSubject);
 			}
 		} else {
-			if (iterationNumber < conf->types.at(edgeType.object_type).size) {
+			if (graph->nodes.second.size() < conf->types.at(edgeType.object_type).size) {
 //				cout << "Creating " << 1 << " node for type " << type1 << endl;
-				findOrCreateNode(edgeType, isSubject, iterationNumber);
+				addNode(edgeType, isSubject);
 			}
 		}
-		numberOfNodesOfMax = iterationNumber;
 	}
-	return numberOfNodesOfMax;
 }
 
-int nodeGenerator::addOrUpdateSubjectNodes(config::edge & edgeType, int iterationNumber, int numberOfNodesOfMax) {
-	return addOrUpdateNodes(edgeType, iterationNumber, numberOfNodesOfMax, edgeType.subject_type, edgeType.object_type, true);
+void nodeGenerator::addSubjectNodes(config::edge & edgeType) {
+	addNodes(edgeType, edgeType.subject_type, edgeType.object_type, true);
 }
-int nodeGenerator::addOrUpdateObjectNodes(config::edge & edgeType, int iterationNumber, int numberOfNodesOfMax) {
-	return addOrUpdateNodes(edgeType, iterationNumber, numberOfNodesOfMax, edgeType.object_type, edgeType.subject_type, false);
+void nodeGenerator::addObjectNodes(config::edge & edgeType) {
+	addNodes(edgeType, edgeType.object_type, edgeType.subject_type, false);
 }
 
 } /* namespace std */

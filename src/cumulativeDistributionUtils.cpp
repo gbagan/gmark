@@ -22,23 +22,17 @@ cumulativeDistributionUtils::~cumulativeDistributionUtils() {
 	// TODO Auto-generated destructor stub
 }
 
-vector<float> cumulativeDistributionUtils::calculateUnifGausCumulPercentagesForNnodes(vector<graphNode> & nodes, int currentEdgeTypeNumber, int nmNodes, graphNode & sourceNode, bool findSource) {
+vector<float> cumulativeDistributionUtils::calculateUnifGausCumulPercentagesForNnodes(vector<graphNode> & nodes, graphNode  *sourceNode, bool findSource) {
 	int sum = 0;
 	vector<int> nonNormalizedResults;
 	int i = 0;
 
 	for(graphNode & n: nodes) {
-		if (i > nmNodes) {
-//			cout << "Breaking loop, because of iteration\n";
-			break;
-		}
+//		cout << "Node" << n.iterationId << " found with openConnections: " << n.getNumberOfOpenInterfaceConnections(findSource) << "\n";
 
-//		cout << "Node" << n.iterationId << " found with openConnections: " << n.getNumberOfOpenInterfaceConnections(currentEdgeTypeNumber, findSource) << "\n";
-
-		int possibleConnections = n.getNumberOfOpenInterfaceConnections(currentEdgeTypeNumber, findSource);
-		if (sourceNode.id != -1) {
-//			cout << "sourceNode.getConnection(i): " << sourceNode.getConnection(i) << endl;
-			possibleConnections = possibleConnections * (1 - sourceNode.getConnection(i));
+		int possibleConnections = n.getNumberOfOpenInterfaceConnections(findSource);
+		if (sourceNode->iterationId != -1) {
+			possibleConnections = possibleConnections * (1 - sourceNode->getConnection(i));
 		}
 
 		nonNormalizedResults.push_back(possibleConnections);

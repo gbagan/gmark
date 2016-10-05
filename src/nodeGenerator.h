@@ -19,20 +19,18 @@ class nodeGenerator {
 public:
 	default_random_engine* randomGenerator;
 	incrementalDeterministicGraph* graph;
-	int nextNodeId;
 	config::config* conf;
 
 	nodeGenerator();
 	nodeGenerator(default_random_engine* randomGenerator, incrementalDeterministicGraph* graph, config::config* conf);
 	virtual ~nodeGenerator();
 
-	int addOrUpdateNodes(config::edge & edgeType, int iterationNumber, int numberOfNodesOfMax, int type1, int type2, bool subject);
-	int addOrUpdateSubjectNodes(config::edge & edgeType, int iterationNumber, int numberOfNodesOfMax);
-	int addOrUpdateObjectNodes(config::edge & edgeType, int iterationNumber, int numberOfNodesOfMax);
-	void findOrCreateNode(config::edge & edgeType, bool findSourceNode, int iterationNumber);
+	void addNodes(config::edge & edgeType, int type1, int type2, bool subject);
+	void addSubjectNodes(config::edge & edgeType);
+	void addObjectNodes(config::edge & edgeType);
+	void addNode(config::edge & edgeType, bool findSourceNode);
 
-	void addInterfaceConnectionsToNode(graphNode &n, distribution distr, int edgeTypeNumber, bool findSourceNode);
-	void addNode(graphNode n);
+	void addInterfaceConnectionsToNode(graphNode &n, distribution distr, bool findSourceNode);
 
 	void initializeConnections(graphNode &n, int maxNumberOfConnections);
 };

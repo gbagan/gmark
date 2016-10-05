@@ -11,7 +11,6 @@
 #include <vector>
 #include "graphNode.h"
 #include "config.h"
-#include "graphEdge.h"
 
 namespace std {
 
@@ -33,7 +32,7 @@ public:
 	cumulativeDistributionUtils();
 	virtual ~cumulativeDistributionUtils();
 
-	vector<float> calculateUnifGausCumulPercentagesForNnodes(vector<graphNode> & nodes, int currentEdgeTypeNumber, int iterationNumber, graphNode & sourceNode, bool findSource);
+	vector<float> calculateUnifGausCumulPercentagesForNnodes(vector<graphNode> & nodes, graphNode  *sourceNode, bool findSource);
 //	vector<float> calculateZipfCumulPercentagesForNnodes(vector<graphNode> & nodes, int currentEdgeTypeNumber, float alpha, int iterationNumber, bool findSource);
 	vector<float> zipfCdf(distribution zipfDistr, int iterationNumber, int zipfianStartValue);
 

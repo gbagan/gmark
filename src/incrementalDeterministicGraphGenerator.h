@@ -34,24 +34,24 @@ private:
 
 	void initializeNodesAndEdges();
 	void processEdgeType(config::edge & edgeType, ofstream*  outputFile);
-	int processIteration(int iterationNumber, config::edge & edgeType, int numberOfNodesForMax, ofstream*  outputFile);
+	void processIteration(int iterationNumber, config::edge & edgeType, ofstream*  outputFile);
 
 	// For each iteration
 	int getNumberOfEdgesPerIteration(config::edge & edgeType, int iterationNumber);
-	int getNumberOfOpenICs(vector<graphNode> nodes, int numberOfNodes, int edgeTypeId, bool isOutDistr);
+	int getNumberOfOpenICs(vector<graphNode> nodes, bool isOutDistr);
 
 	double getMeanEdgesPerNode(config::edge & edgeType, distribution distr, int zipfMax);
 	int getNumberOfEdgesPerIteration(config::edge & edgeType);
 
-	graphNode findSourceNode(config::edge & edgeType, int iterationNumber);
-	graphNode findTargetNode(config::edge & edgeType, int iterationNumber, graphNode sourceNode);
-	graphNode findNodeIdFromCumulProbs(vector<float> & cumulProbs, int nodeType);
+	graphNode *findSourceNode(config::edge & edgeType);
+	graphNode *findTargetNode(config::edge & edgeType, graphNode *sourceNode);
+	graphNode *findNodeIdFromCumulProbs(vector<float> & cumulProbs, bool findSourceNode);
 
-	vector<float> getCdf(distribution distr, int nodeType, int edgeTypeNumber, int iterationNumber, graphNode sourceNode, bool findSourceNode);
-	void addEdge(graphEdge & e, config::edge & edgeType, ofstream*  outputFiles);
+	vector<float> getCdf(distribution distr, int nodeType, graphNode *sourceNode, bool findSourceNode);
+	void addEdge(graphNode *sourceNode, graphNode *targetNode, int predicate, ofstream*  outputFiles);
 
-	int updateInterfaceConnectionsForZipfianDistributions(vector<graphNode> nodes, int iterationNumber, int edgeTypeId, distribution distr, bool outDistr);
-	pair<int,int> updateInterfaceConnectionsForZipfianDistributions(config::edge & edgeType, int nmNodesMax, int nmNodesMin);
+	int updateInterfaceConnectionsForZipfianDistributions(vector<graphNode> *nodes, distribution distr, bool outDistr);
+	pair<int,int> updateInterfaceConnectionsForZipfianDistributions(config::edge & edgeType);
 	void updateICsForNonScalableType(vector<graphNode> nodes, int iterationNumber, double meanUpdateDistr, double meanNonUpdateDistr, distribution & distrToUpdate, int edgeTypeId, bool updateSubjects);
 //	void shiftZipfianDistribution(vector<graphNode> & nodes, int nmNodes, int edgeTypeId, bool changeSubjectNodes);
 

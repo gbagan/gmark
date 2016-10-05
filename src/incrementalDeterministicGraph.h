@@ -10,7 +10,6 @@
 
 #include <vector>
 #include "graphNode.h"
-#include "graphEdge.h"
 
 namespace std {
 
@@ -19,8 +18,9 @@ public:
 	incrementalDeterministicGraph();
 	virtual ~incrementalDeterministicGraph();
 
-	vector<vector<graphNode>> nodes;
-	vector<vector<graphEdge>> edges;
+	pair<vector<graphNode>, vector<graphNode>> nodes;
+//	vector<vector<graphEdge>> edges;
+	graphNode temp = graphNode();
 };
 
 } /* namespace std */
