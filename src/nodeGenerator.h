@@ -30,7 +30,7 @@ public:
 	void addObjectNodes(config::edge & edgeType);
 	void addNode(config::edge & edgeType, bool findSourceNode);
 
-	void addInterfaceConnectionsToNode(graphNode &n, distribution distr, bool findSourceNode);
+	void addInterfaceConnectionsToNode(graphNode &n, distribution distr);
 
 	void initializeConnections(graphNode &n, int maxNumberOfConnections);
 };

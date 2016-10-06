@@ -22,7 +22,7 @@ cumulativeDistributionUtils::~cumulativeDistributionUtils() {
 	// TODO Auto-generated destructor stub
 }
 
-vector<float> cumulativeDistributionUtils::calculateUnifGausCumulPercentagesForNnodes(vector<graphNode> & nodes, graphNode  *sourceNode, bool findSource) {
+vector<float> cumulativeDistributionUtils::calculateUnifGausCumulPercentagesForNnodes(vector<graphNode> & nodes, graphNode  *sourceNode) {
 	int sum = 0;
 	vector<int> nonNormalizedResults;
 	int i = 0;
@@ -30,7 +30,7 @@ vector<float> cumulativeDistributionUtils::calculateUnifGausCumulPercentagesForN
 	for(graphNode & n: nodes) {
 //		cout << "Node" << n.iterationId << " found with openConnections: " << n.getNumberOfOpenInterfaceConnections(findSource) << "\n";
 
-		int possibleConnections = n.getNumberOfOpenInterfaceConnections(findSource);
+		int possibleConnections = n.getNumberOfOpenInterfaceConnections();
 		if (sourceNode->iterationId != -1) {
 			possibleConnections = possibleConnections * (1 - sourceNode->getConnection(i));
 		}

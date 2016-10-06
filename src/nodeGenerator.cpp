@@ -31,7 +31,7 @@ void nodeGenerator::initializeConnections(graphNode &n, int maxNumberOfConnectio
 }
 
 
-void nodeGenerator::addInterfaceConnectionsToNode(graphNode &n, distribution distr, bool findSourceNode) {
+void nodeGenerator::addInterfaceConnectionsToNode(graphNode &n, distribution distr) {
 	int numberOfConnections;
 	if (distr.type == DISTRIBUTION::UNIFORM) {
 //		cout << "UNIFORM with " << distr.arg1 << " " << distr.arg2 << endl;
@@ -44,7 +44,7 @@ void nodeGenerator::addInterfaceConnectionsToNode(graphNode &n, distribution dis
 	} else if (distr.type == DISTRIBUTION::ZIPFIAN) {
 		uniform_real_distribution<double> distribution(0.0,1.0);
 		double randomValue = distribution(*randomGenerator);
-		n.setPosition(randomValue, findSourceNode);
+		n.setPosition(randomValue);
 		numberOfConnections = 0;
 	} else { // distr.type == DISTRIBUTION::UNDEFINED
 		numberOfConnections = 0;
@@ -54,8 +54,8 @@ void nodeGenerator::addInterfaceConnectionsToNode(graphNode &n, distribution dis
 		numberOfConnections = 0;
 	}
 //	cout << "Before: " << n.getNumberOfInterfaceConnections(findSourceNode) << endl;
-	n.setNumberOfOpenInterfaceConnections(numberOfConnections, findSourceNode);
-	n.setNumberOfInterfaceConnections(numberOfConnections, findSourceNode);
+	n.setNumberOfOpenInterfaceConnections(numberOfConnections);
+	n.setNumberOfInterfaceConnections(numberOfConnections);
 //	cout << "Node at iteration " << n.iterationId << " get " << numberOfConnections << " interface-connections" << endl;
 //	cout << "After: " << n.getNumberOfInterfaceConnections(findSourceNode) << endl;
 }
@@ -88,7 +88,7 @@ void nodeGenerator::addNode(config::edge & edgeType, bool addSourceNode) {
 
 
 	graphNode *n = new graphNode(to_string(type) + "-" + to_string(numberOfNodes), numberOfNodes, type, conf->schema.edges.size(), conf->types.at(otherType).size*2);
-	addInterfaceConnectionsToNode(*n, distr, addSourceNode);
+	addInterfaceConnectionsToNode(*n, distr);
 	initializeConnections(*n, conf->types.at(otherType).size*2);
 	if (addSourceNode) {
 		graph->nodes.first.push_back(*n);

@@ -32,7 +32,7 @@ public:
 	cumulativeDistributionUtils();
 	virtual ~cumulativeDistributionUtils();
 
-	vector<float> calculateUnifGausCumulPercentagesForNnodes(vector<graphNode> & nodes, graphNode  *sourceNode, bool findSource);
+	vector<float> calculateUnifGausCumulPercentagesForNnodes(vector<graphNode> & nodes, graphNode  *sourceNode);
 //	vector<float> calculateZipfCumulPercentagesForNnodes(vector<graphNode> & nodes, int currentEdgeTypeNumber, float alpha, int iterationNumber, bool findSource);
 	vector<float> zipfCdf(distribution zipfDistr, int iterationNumber, int zipfianStartValue);
 

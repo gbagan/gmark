@@ -37,7 +37,7 @@ private:
 
 	// For each iteration
 	int getNumberOfEdgesPerIteration(config::edge & edgeType, int iterationNumber);
-	int getNumberOfOpenICs(vector<graphNode> nodes, bool isOutDistr);
+	int getNumberOfOpenICs(vector<graphNode> nodes);
 
 	double getMeanEdgesPerNode(config::edge & edgeType, distribution distr, int zipfMax);
 	int getNumberOfEdgesPerIteration(config::edge & edgeType);

@@ -20,9 +20,9 @@ public:
 	int type;
 //	bool is_virtual;
 
-	pair<float, float> position;
-	pair<int,int> numberOfInterfaceConnections;
-	pair<int,int> numberOfOpenInterfaceConnections;
+	float position;
+	int numberOfInterfaceConnections;
+	int numberOfOpenInterfaceConnections;
 
 	int* connections;
 
@@ -30,18 +30,18 @@ public:
 	graphNode(string id, int iterationId, int type, int numberOfEdgeTypes, int maxNumberOfConnections);
 	virtual ~graphNode();
 
-	int getNumberOfOpenInterfaceConnections(bool first);
-	void setNumberOfOpenInterfaceConnections(int number, bool isSource);
+	int getNumberOfOpenInterfaceConnections();
+	void setNumberOfOpenInterfaceConnections(int number);
 
-	int getNumberOfInterfaceConnections(bool isSource);
-	void setNumberOfInterfaceConnections(int number, bool isSource);
+	int getNumberOfInterfaceConnections();
+	void setNumberOfInterfaceConnections(int number);
 
-	void decrementOpenInterfaceConnections(bool isSource);
-	void incrementOpenInterfaceConnectionsByN(int number, bool isSource);
-	void incrementInterfaceConnectionsByN(int number, bool isSource);
+	void decrementOpenInterfaceConnections();
+	void incrementOpenInterfaceConnectionsByN(int number);
+	void incrementInterfaceConnectionsByN(int number);
 
-	void setPosition(double number, bool isSource);
-	float getPosition(bool isSource);
+	void setPosition(double number);
+	float getPosition();
 
 	void setConnection(int connectionIterationId, int value);
 	int getConnection(int connectionIterationId);
