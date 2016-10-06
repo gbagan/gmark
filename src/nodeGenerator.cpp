@@ -15,10 +15,24 @@ nodeGenerator::nodeGenerator() {
 	this->conf = 0;
 }
 
-nodeGenerator::nodeGenerator(default_random_engine* randomGenerator_, pair<vector<graphNode>,vector<graphNode>>* nodes_, config::config* conf_) {
+nodeGenerator::nodeGenerator(config::edge & edgeType, default_random_engine* randomGenerator_, pair<vector<graphNode>,vector<graphNode>>* nodes_, config::config* conf_) {
 	this->randomGenerator = randomGenerator_;
 	this->nodes = nodes_;
 	this->conf = conf_;
+
+	if (edgeType.outgoing_distrib.type == DISTRIBUTION::UNIFORM) {
+		this->uniformOutDistr = uniform_int_distribution<int>(edgeType.outgoing_distrib.arg1, edgeType.outgoing_distrib.arg2);
+	} else if (edgeType.outgoing_distrib.type == DISTRIBUTION::NORMAL) {
+		this->normalOutDistr = normal_distribution<double>(edgeType.outgoing_distrib.arg1, edgeType.outgoing_distrib.arg2);
+	}
+
+	if (edgeType.incoming_distrib.type == DISTRIBUTION::UNIFORM) {
+		this->uniformInDistr = uniform_int_distribution<int>(edgeType.incoming_distrib.arg1, edgeType.incoming_distrib.arg2);
+	} else if (edgeType.incoming_distrib.type == DISTRIBUTION::NORMAL) {
+		this->normalInDistr = normal_distribution<double>(edgeType.incoming_distrib.arg1, edgeType.incoming_distrib.arg2);
+	}
+
+	uniformZeroOneDistr = uniform_real_distribution<double>(0.0,1.0);
 }
 nodeGenerator::~nodeGenerator() {
 	// TODO
@@ -31,19 +45,24 @@ void nodeGenerator::initializeConnections(graphNode &n, int maxNumberOfConnectio
 }
 
 
-void nodeGenerator::addInterfaceConnectionsToNode(graphNode &n, distribution distr) {
+void nodeGenerator::addInterfaceConnectionsToNode(graphNode &n, distribution distr, bool addSourceNode) {
 	int numberOfConnections;
 	if (distr.type == DISTRIBUTION::UNIFORM) {
 //		cout << "UNIFORM with " << distr.arg1 << " " << distr.arg2 << endl;
-		std::uniform_int_distribution<int> distribution(distr.arg1, distr.arg2);
-		numberOfConnections = distribution(*randomGenerator);
+		if (addSourceNode) {
+			numberOfConnections = uniformOutDistr(*randomGenerator);
+		} else {
+			numberOfConnections = uniformInDistr(*randomGenerator);
+		}
 	} else if (distr.type == DISTRIBUTION::NORMAL) {
 //		cout << "NORMAL with " << distr.arg1 << " " << distr.arg2 << endl;
-		std::normal_distribution<double> distribution(distr.arg1, distr.arg2);
-		numberOfConnections = round(distribution(*randomGenerator));
+		if (addSourceNode) {
+			numberOfConnections = round(normalOutDistr(*randomGenerator));
+		} else {
+			numberOfConnections = round(normalInDistr(*randomGenerator));
+		}
 	} else if (distr.type == DISTRIBUTION::ZIPFIAN) {
-		uniform_real_distribution<double> distribution(0.0,1.0);
-		double randomValue = distribution(*randomGenerator);
+		double randomValue = uniformZeroOneDistr(*randomGenerator);
 		n.setPosition(randomValue);
 		numberOfConnections = 0;
 	} else { // distr.type == DISTRIBUTION::UNDEFINED
@@ -88,9 +107,10 @@ void nodeGenerator::addNode(config::edge & edgeType, bool addSourceNode) {
 
 
 	graphNode *n = new graphNode(to_string(type) + "-" + to_string(numberOfNodes), numberOfNodes, type, conf->schema.edges.size(), conf->types.at(otherType).size*2);
-	addInterfaceConnectionsToNode(*n, distr);
-	initializeConnections(*n, conf->types.at(otherType).size*2);
+	addInterfaceConnectionsToNode(*n, distr, addSourceNode);
+
 	if (addSourceNode) {
+		initializeConnections(*n, conf->types.at(otherType).size*2);
 		nodes->first.push_back(*n);
 	} else {
 		nodes->second.push_back(*n);
@@ -119,8 +139,7 @@ void nodeGenerator::addNodes(config::edge & edgeType, int type1, int type2, bool
 			int nmOfNodesPerIteration = floor(prob1 / prob2);
 
 			double probNextNode = (prob1 / prob2) - (double)nmOfNodesPerIteration;
-			uniform_real_distribution<double> distribution(0.0,1.0);
-			double randomValue = distribution(*randomGenerator);
+			double randomValue = uniformZeroOneDistr(*randomGenerator);
 			if(randomValue < probNextNode) {
 				nmOfNodesPerIteration++;
 			}

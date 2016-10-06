@@ -13,7 +13,6 @@ namespace std {
 
 incrementalDeterministicGraphGenerator::incrementalDeterministicGraphGenerator(config::config configuration) {
 	this->conf = configuration;
-	this->nodeGen = nodeGenerator(&randomGenerator, &nodes, &conf);
 }
 
 incrementalDeterministicGraphGenerator::~incrementalDeterministicGraphGenerator() {
@@ -500,6 +499,8 @@ void incrementalDeterministicGraphGenerator::processEdgeType(config::edge & edge
 
 	changeDistributionParams(edgeType);
 
+	nodeGen = nodeGenerator(edgeType, &randomGenerator, &nodes, &conf);
+
 	int nmOfIterations;
 	if ((conf.types.at(edgeType.subject_type).scalable && conf.types.at(edgeType.object_type).scalable)
 			|| (!conf.types.at(edgeType.subject_type).scalable && !conf.types.at(edgeType.object_type).scalable)) {
@@ -519,13 +520,13 @@ void incrementalDeterministicGraphGenerator::processEdgeType(config::edge & edge
 	}
 }
 
-void incrementalDeterministicGraphGenerator::generateIncDetGraph(ofstream*  outputFile, int* seeds, int edgeTypeIdLow, int edgeTypeIdHigh) {
-//	cout << "Generate a incremental deterministic graph (given a seed)" << endl;
-
-
-	for (int i=edgeTypeIdLow; i<edgeTypeIdHigh; i++) {
-		processEdgeType(conf.schema.edges.at(i), outputFile, seeds[i]);
-	}
-}
+//void incrementalDeterministicGraphGenerator::generateIncDetGraph(ofstream*  outputFile, int* seeds, int edgeTypeIdLow, int edgeTypeIdHigh) {
+////	cout << "Generate a incremental deterministic graph (given a seed)" << endl;
+//
+//
+//	for (int i=edgeTypeIdLow; i<edgeTypeIdHigh; i++) {
+//		processEdgeType(conf.schema.edges.at(i), outputFile, seeds[i]);
+//	}
+//}
 
 } /* namespace std */
