@@ -11,7 +11,6 @@
 #include <random>
 #include <fstream>
 #include "config.h"
-#include "incrementalDeterministicGraph.h"
 #include "cumulativeDistributionUtils.h"
 #include "nodeGenerator.h"
 
@@ -21,7 +20,9 @@ namespace std {
 class incrementalDeterministicGraphGenerator {
 private:
 	config::config conf;
-	incrementalDeterministicGraph graph;
+	pair<vector<graphNode>, vector<graphNode>> nodes;
+	graphNode tempNode = graphNode();
+
 	cumulativeDistributionUtils cumDistrUtils;
 
 
@@ -62,9 +63,6 @@ public:
 
 	void generateIncDetGraph(ofstream*  outputFile, int* seeds, int edgeTypeIdLow, int edgeTypeIdHigh);
 	void processEdgeType(config::edge & edgeType, ofstream*  outputFile, int seed);
-	incrementalDeterministicGraph getGraph() {
-		return graph;
-	}
 };
 
 } /* namespace std */

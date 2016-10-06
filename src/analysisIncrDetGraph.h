@@ -11,7 +11,6 @@
 #include <iostream>
 #include <string>
 #include "config.h"
-#include "incrementalDeterministicGraph.h"
 
 namespace std {
 

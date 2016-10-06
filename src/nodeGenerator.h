@@ -10,7 +10,7 @@
 
 #include <random>
 #include "config.h"
-#include "incrementalDeterministicGraph.h"
+#include "graphNode.h"
 
 namespace std {
 
@@ -18,11 +18,11 @@ class nodeGenerator {
 
 public:
 	default_random_engine* randomGenerator;
-	incrementalDeterministicGraph* graph;
+	pair<vector<graphNode>, vector<graphNode>>* nodes;
 	config::config* conf;
 
 	nodeGenerator();
-	nodeGenerator(default_random_engine* randomGenerator, incrementalDeterministicGraph* graph, config::config* conf);
+	nodeGenerator(default_random_engine* randomGenerator, pair<vector<graphNode>, vector<graphNode>>* nodes, config::config* conf);
 	virtual ~nodeGenerator();
 
 	void addNodes(config::edge & edgeType, int type1, int type2, bool subject);

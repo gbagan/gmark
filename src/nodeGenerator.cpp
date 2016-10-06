@@ -11,13 +11,13 @@ namespace std {
 
 nodeGenerator::nodeGenerator() {
 	this->randomGenerator = 0;
-	this->graph = 0;
+	this->nodes = 0;
 	this->conf = 0;
 }
 
-nodeGenerator::nodeGenerator(default_random_engine* randomGenerator_, incrementalDeterministicGraph* graph_, config::config* conf_) {
+nodeGenerator::nodeGenerator(default_random_engine* randomGenerator_, pair<vector<graphNode>,vector<graphNode>>* nodes_, config::config* conf_) {
 	this->randomGenerator = randomGenerator_;
-	this->graph = graph_;
+	this->nodes = nodes_;
 	this->conf = conf_;
 }
 nodeGenerator::~nodeGenerator() {
@@ -70,12 +70,12 @@ void nodeGenerator::addNode(config::edge & edgeType, bool addSourceNode) {
 		distr = edgeType.outgoing_distrib;
 		type = edgeType.subject_type;
 		otherType = edgeType.object_type;
-		numberOfNodes = graph->nodes.first.size();
+		numberOfNodes = nodes->first.size();
 	} else {
 		distr = edgeType.incoming_distrib;
 		type = edgeType.object_type;
 		otherType = edgeType.subject_type;
-		numberOfNodes = graph->nodes.second.size();
+		numberOfNodes = nodes->second.size();
 	}
 
 
@@ -91,9 +91,9 @@ void nodeGenerator::addNode(config::edge & edgeType, bool addSourceNode) {
 	addInterfaceConnectionsToNode(*n, distr);
 	initializeConnections(*n, conf->types.at(otherType).size*2);
 	if (addSourceNode) {
-		graph->nodes.first.push_back(*n);
+		nodes->first.push_back(*n);
 	} else {
-		graph->nodes.second.push_back(*n);
+		nodes->second.push_back(*n);
 	}
 
 //		cout << "Creating a node at iteration " << iterationNumber << " of type:" << type <<
@@ -135,12 +135,12 @@ void nodeGenerator::addNodes(config::edge & edgeType, int type1, int type2, bool
 		}
 	} else {
 		if (isSubject) {
-			if (graph->nodes.first.size() < conf->types.at(edgeType.subject_type).size) {
+			if (nodes->first.size() < conf->types.at(edgeType.subject_type).size) {
 //				cout << "Creating " << 1 << " node for type " << type1 << endl;
 				addNode(edgeType, isSubject);
 			}
 		} else {
-			if (graph->nodes.second.size() < conf->types.at(edgeType.object_type).size) {
+			if (nodes->second.size() < conf->types.at(edgeType.object_type).size) {
 //				cout << "Creating " << 1 << " node for type " << type1 << endl;
 				addNode(edgeType, isSubject);
 			}
