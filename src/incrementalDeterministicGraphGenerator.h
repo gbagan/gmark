@@ -24,7 +24,7 @@ private:
 	incrementalDeterministicGraph graph;
 	cumulativeDistributionUtils cumDistrUtils;
 
-	std::default_random_engine randomGeneratorForSeeding;
+
 	std::default_random_engine randomGenerator;
 
 	nodeGenerator nodeGen;
@@ -32,8 +32,7 @@ private:
 	int zipfianStartValueOut = 1;
 	int zipfianStartValueIn = 1;
 
-	void initializeNodesAndEdges();
-	void processEdgeType(config::edge & edgeType, ofstream*  outputFile);
+//	void initializeNodesAndEdges();
 	void processIteration(int iterationNumber, config::edge & edgeType, ofstream*  outputFile);
 
 	// For each iteration
@@ -61,7 +60,8 @@ public:
 	incrementalDeterministicGraphGenerator(config::config configuration);
 	virtual ~incrementalDeterministicGraphGenerator();
 
-	void generateIncDetGraph(ofstream*  outputFile);
+	void generateIncDetGraph(ofstream*  outputFile, int* seeds, int edgeTypeIdLow, int edgeTypeIdHigh);
+	void processEdgeType(config::edge & edgeType, ofstream*  outputFile, int seed);
 	incrementalDeterministicGraph getGraph() {
 		return graph;
 	}

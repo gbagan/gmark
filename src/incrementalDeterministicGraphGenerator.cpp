@@ -235,7 +235,7 @@ void incrementalDeterministicGraphGenerator::changeDistributionParams(config::ed
 	if (changeOutDistr) {
 		if (edgeType.outgoing_distrib.type == DISTRIBUTION::NORMAL) {
 			edgeType.outgoing_distrib.arg1 = (objectProbOrSize * meanICsPerNodeForOtherDistr) / subjectProbOrSize;
-			cout << "new normal mean: " << edgeType.outgoing_distrib.arg1 << endl;
+//			cout << "new normal mean: " << edgeType.outgoing_distrib.arg1 << endl;
 		} else if (edgeType.outgoing_distrib.type == DISTRIBUTION::UNIFORM) {
 			double diff = edgeType.outgoing_distrib.arg2 - edgeType.outgoing_distrib.arg1;
 			double newMean = (objectProbOrSize * meanICsPerNodeForOtherDistr) / subjectProbOrSize;
@@ -246,13 +246,13 @@ void incrementalDeterministicGraphGenerator::changeDistributionParams(config::ed
 				edgeType.outgoing_distrib.arg1 = round(newMean);
 				edgeType.outgoing_distrib.arg2 = round(newMean);
 			}
-			cout << "New uniform min: " << edgeType.outgoing_distrib.arg1 << endl;
-			cout << "New uniform max: " << edgeType.outgoing_distrib.arg2 << endl;
+//			cout << "New uniform min: " << edgeType.outgoing_distrib.arg1 << endl;
+//			cout << "New uniform max: " << edgeType.outgoing_distrib.arg2 << endl;
 		}
 	} else {
 		if (edgeType.incoming_distrib.type == DISTRIBUTION::NORMAL) {
 			edgeType.incoming_distrib.arg1 = (subjectProbOrSize * meanICsPerNodeForOtherDistr) / objectProbOrSize;
-			cout << "new normal mean: " << edgeType.incoming_distrib.arg1 << endl;
+//			cout << "new normal mean: " << edgeType.incoming_distrib.arg1 << endl;
 		} else if (edgeType.incoming_distrib.type == DISTRIBUTION::UNIFORM) {
 			double diff = edgeType.incoming_distrib.arg2 - edgeType.incoming_distrib.arg1;
 			double newMean = (subjectProbOrSize * meanICsPerNodeForOtherDistr) / objectProbOrSize;
@@ -263,14 +263,14 @@ void incrementalDeterministicGraphGenerator::changeDistributionParams(config::ed
 				edgeType.incoming_distrib.arg1 = round(newMean);
 				edgeType.incoming_distrib.arg2 = round(newMean);
 			}
-			cout << "New uniform min: " << edgeType.incoming_distrib.arg1 << endl;
-			cout << "New uniform max: " << edgeType.incoming_distrib.arg2 << endl;
+//			cout << "New uniform min: " << edgeType.incoming_distrib.arg1 << endl;
+//			cout << "New uniform max: " << edgeType.incoming_distrib.arg2 << endl;
 		}
 	}
 }
 
 void incrementalDeterministicGraphGenerator::changeDistributionParams(config::edge & edgeType) {
-	cout << "Changing edge-type " << edgeType.edge_type_id << endl;
+//	cout << "Changing edge-type " << edgeType.edge_type_id << endl;
 
 	if (conf.types.at(edgeType.subject_type).scalable ^ conf.types.at(edgeType.object_type).scalable) {
 		if (conf.types.at(edgeType.subject_type).scalable) {
@@ -287,7 +287,7 @@ void incrementalDeterministicGraphGenerator::changeDistributionParams(config::ed
 			double meanICsPerNodeForInDistr = getMeanEdgesPerNode(edgeType, edgeType.incoming_distrib, 10000);
 			double meanICsPerNodeForOutDistr = getMeanEdgesPerNode(edgeType, edgeType.outgoing_distrib, conf.types.at(edgeType.subject_type).size);
 			if (edgeType.outgoing_distrib.type == DISTRIBUTION::ZIPFIAN) {
-				cout << "zipfianStartValueOut" << endl;
+//				cout << "zipfianStartValueOut" << endl;
 				zipfianStartValueOut = max(1.0, round(meanICsPerNodeForInDistr - meanICsPerNodeForOutDistr));
 			} else {
 				changeDistributionParams(edgeType, meanICsPerNodeForInDistr, true, conf.types.at(edgeType.subject_type).size, conf.types.at(edgeType.subject_type).size);
@@ -331,7 +331,7 @@ void incrementalDeterministicGraphGenerator::changeDistributionParams(config::ed
 //			changeDistributionParams(edgeType, meanICsPerNodeForOutDistr, false, subjectProbOrSize, objectProbOrSize);
 			double newMean = (objectProbOrSize * meanICsPerNodeForInDistr) / subjectProbOrSize;
 			zipfianStartValueOut = ceil(newMean - meanICsPerNodeForOutDistr);
-			cout << "Change the Zipfian start value to: " << zipfianStartValueOut << endl;
+//			cout << "Change the Zipfian start value to: " << zipfianStartValueOut << endl;
 		}
 		return;
 	}
@@ -345,7 +345,7 @@ void incrementalDeterministicGraphGenerator::changeDistributionParams(config::ed
 //			changeDistributionParams(edgeType, meanICsPerNodeForInDistr, true, subjectProbOrSize, objectProbOrSize);
 			double newMean = (subjectProbOrSize * meanICsPerNodeForOutDistr) / objectProbOrSize;
 			zipfianStartValueIn = ceil(newMean - meanICsPerNodeForInDistr);
-			cout << "Change the Zipfian start value to: " << zipfianStartValueIn << endl;
+//			cout << "Change the Zipfian start value to: " << zipfianStartValueIn << endl;
 		}
 		return;
 	}
@@ -375,13 +375,13 @@ void incrementalDeterministicGraphGenerator::changeDistributionParams(config::ed
 			// Change in-distr
 			double newMean = (subjectProbOrSize * meanICsPerNodeForOutDistr) / objectProbOrSize;
 			zipfianStartValueIn = ceil(newMean - meanICsPerNodeForInDistr);
-			cout << "Change the ZipfianIn start value to: " << zipfianStartValueIn << endl;
+//			cout << "Change the ZipfianIn start value to: " << zipfianStartValueIn << endl;
 			return;
 		} else {
 			// Change out-distr
 			double newMean = (objectProbOrSize * meanICsPerNodeForInDistr) / subjectProbOrSize;
 			zipfianStartValueOut = ceil(newMean - meanICsPerNodeForOutDistr);
-			cout << "Change the ZipfianOut start value to: " << zipfianStartValueOut << endl;
+//			cout << "Change the ZipfianOut start value to: " << zipfianStartValueOut << endl;
 			return;
 		}
 	}
@@ -491,10 +491,13 @@ void incrementalDeterministicGraphGenerator::processIteration(int iterationNumbe
 	}
 }
 
-void incrementalDeterministicGraphGenerator::processEdgeType(config::edge & edgeType, ofstream*  outputFile) {
+void incrementalDeterministicGraphGenerator::processEdgeType(config::edge & edgeType, ofstream*  outputFile, int seed) {
 //	cout << endl << endl << "-----Processing edge-type " << to_string(edgeType.edge_type_id) << "-----" << endl;
-	int newSeed = randomGeneratorForSeeding();
-	randomGenerator.seed(newSeed);
+	zipfianStartValueIn = 1;
+	zipfianStartValueOut = 1;
+	graph = incrementalDeterministicGraph();
+
+	randomGenerator.seed(seed);
 
 	changeDistributionParams(edgeType);
 
@@ -517,19 +520,12 @@ void incrementalDeterministicGraphGenerator::processEdgeType(config::edge & edge
 	}
 }
 
-void incrementalDeterministicGraphGenerator::generateIncDetGraph(ofstream*  outputFile) {
+void incrementalDeterministicGraphGenerator::generateIncDetGraph(ofstream*  outputFile, int* seeds, int edgeTypeIdLow, int edgeTypeIdHigh) {
 //	cout << "Generate a incremental deterministic graph (given a seed)" << endl;
 
 
-	// TODO: get the seed from the XML instead of this magic number
-	randomGeneratorForSeeding.seed(222);
-//	initializeNodesAndEdges();
-
-	for (config::edge & edgeType : conf.schema.edges) {
-		zipfianStartValueIn = 1;
-		zipfianStartValueOut = 1;
-		graph = incrementalDeterministicGraph();
-		processEdgeType(edgeType, outputFile);
+	for (int i=edgeTypeIdLow; i<edgeTypeIdHigh; i++) {
+		processEdgeType(conf.schema.edges.at(i), outputFile, seeds[i]);
 	}
 }
 

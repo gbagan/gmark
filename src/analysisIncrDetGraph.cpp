@@ -85,18 +85,21 @@ void analysisIncrDetGraph::distributionAnalysis(config::edge edgeType, ofstream 
 				temp = line;
 				string getSub = temp.erase(0, temp.find("-")+1);
 				string subject = getSub.substr(0, getSub.find(" "));
-				outDistr.at(stoi(subject))++;
+				if (stoi(subject) < conf.types.at(edgeType.subject_type).size) {
+					outDistr.at(stoi(subject))++;
+				}
 
 				string getObj = getPred.erase(0, getPred.find("-")+1);
 				string object = getObj.substr(0, getObj.length());
-				inDistr.at(stoi(object))++;
+				if (stoi(object) < conf.types.at(edgeType.object_type).size) {
+					inDistr.at(stoi(object))++;
+				}
 			}
 		}
 		myfile.close();
 	} else {
 		cout << "Unable to open file";
 	}
-
 
 	int i = 0;
 	rFile << "OutDistribution <- c(";

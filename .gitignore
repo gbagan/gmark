@@ -8,4 +8,4 @@ src/.cproject
 
 src/distributionAnalysis.r
 src/output.txt
-
+src/tempOutputFile*
