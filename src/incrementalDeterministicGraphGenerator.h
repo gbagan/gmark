@@ -37,7 +37,8 @@ private:
 	void processIteration(int iterationNumber, config::edge & edgeType, ofstream*  outputFile);
 
 	// For each iteration
-	int getNumberOfEdgesPerIteration(config::edge & edgeType, int iterationNumber);
+//	int getNumberOfEdgesPerIteration(config::edge & edgeType, int iterationNumber);
+	int getNumberOfEdgesPerIteration(config::edge edgeType, pair<int, int> zipfOpenInterfaceConnections, double subjectProbOrSize, double objectProbOrSize);
 	int getNumberOfOpenICs(vector<graphNode> nodes);
 
 	double getMeanICsPerNode(distribution distr, int zipfMax, int zipfianStartValue);

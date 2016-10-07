@@ -335,6 +335,37 @@ int incrementalDeterministicGraphGenerator::getNumberOfOpenICs(vector<graphNode>
 	return openICs;
 }
 
+int incrementalDeterministicGraphGenerator::getNumberOfEdgesPerIteration(config::edge edgeType, pair<int, int> zipfOpenInterfaceConnections, double subjectProbOrSize, double objectProbOrSize) {
+	int numberOfEdgesPerIteration = 1;
+		int c = 0;
+		int sf = 2;
+		if (zipfOpenInterfaceConnections.first != -1 && zipfOpenInterfaceConnections.second != -1) {
+			// Zipf in- and out-distr case
+			numberOfEdgesPerIteration = min(zipfOpenInterfaceConnections.first, zipfOpenInterfaceConnections.second);
+			c = 0;
+		} else if (zipfOpenInterfaceConnections.first != -1){
+			// Zipf out-distr case
+			int openICsForInDistr = getNumberOfOpenICs(nodes.second);
+			numberOfEdgesPerIteration = min(zipfOpenInterfaceConnections.first, openICsForInDistr);
+			c = round(getMeanICsPerNode(edgeType.incoming_distrib, 0, zipfianStartValueIn) * max(1.0, objectProbOrSize / subjectProbOrSize));
+		} else if (zipfOpenInterfaceConnections.second != -1) {
+			// Zipf in-distr case
+			int openICsForOutDistr = getNumberOfOpenICs(nodes.first);
+			numberOfEdgesPerIteration = min(openICsForOutDistr, zipfOpenInterfaceConnections.second);
+			c = round(getMeanICsPerNode(edgeType.outgoing_distrib, 0, zipfianStartValueOut) * max(1.0, subjectProbOrSize / objectProbOrSize));
+		} else {
+			// Non Zipfian case
+			int openICsForInDistr = getNumberOfOpenICs(nodes.second);
+			int openICsForOutDistr = getNumberOfOpenICs(nodes.first);
+			numberOfEdgesPerIteration = min(openICsForOutDistr, openICsForInDistr);
+
+			double maxSubjectObjectRatio = max(subjectProbOrSize /  objectProbOrSize, objectProbOrSize / subjectProbOrSize);
+			c = round(min(getMeanICsPerNode(edgeType.outgoing_distrib, 0, zipfianStartValueOut), getMeanICsPerNode(edgeType.incoming_distrib, 0, zipfianStartValueIn)) * maxSubjectObjectRatio);
+		}
+		numberOfEdgesPerIteration -= c*sf;
+		return numberOfEdgesPerIteration;
+}
+
 void incrementalDeterministicGraphGenerator::processIteration(int iterationNumber, config::edge & edgeType, ofstream*  outputFile) {
 //	if (iterationNumber % 1000 == 0) {
 //		cout << endl<< "---Process interationNumber " << to_string(iterationNumber) << " of edgeType " << to_string(edgeType.edge_type_id) << "---" << endl;
@@ -374,34 +405,8 @@ void incrementalDeterministicGraphGenerator::processIteration(int iterationNumbe
 	}
 
 	pair<int, int> zipfOpenInterfaceConnections = updateInterfaceConnectionsForZipfianDistributions(edgeType);
+	int numberOfEdgesPerIteration = getNumberOfEdgesPerIteration(edgeType, zipfOpenInterfaceConnections, subjectProbOrSize, objectProbOrSize);
 
-	int numberOfEdgesPerIteration = 1;
-	int c = 0;
-	int sf = 2;
-	if (zipfOpenInterfaceConnections.first != -1 && zipfOpenInterfaceConnections.second != -1) {
-		// Zipf in- and out-distr case
-		numberOfEdgesPerIteration = min(zipfOpenInterfaceConnections.first, zipfOpenInterfaceConnections.second);
-		c = 0;
-	} else if (zipfOpenInterfaceConnections.first != -1){
-		// Zipf out-distr case
-		int openICsForInDistr = getNumberOfOpenICs(nodes.second);
-		numberOfEdgesPerIteration = min(zipfOpenInterfaceConnections.first, openICsForInDistr);
-		c = round(getMeanICsPerNode(edgeType.incoming_distrib, 0, zipfianStartValueIn) * max(1.0, objectProbOrSize / subjectProbOrSize));
-	} else if (zipfOpenInterfaceConnections.second != -1) {
-		// Zipf in-distr case
-		int openICsForOutDistr = getNumberOfOpenICs(nodes.first);
-		numberOfEdgesPerIteration = min(openICsForOutDistr, zipfOpenInterfaceConnections.second);
-		c = round(getMeanICsPerNode(edgeType.outgoing_distrib, 0, zipfianStartValueOut) * max(1.0, subjectProbOrSize / objectProbOrSize));
-	} else {
-		// Non Zipfian case
-		int openICsForInDistr = getNumberOfOpenICs(nodes.second);
-		int openICsForOutDistr = getNumberOfOpenICs(nodes.first);
-		numberOfEdgesPerIteration = min(openICsForOutDistr, openICsForInDistr);
-
-		double maxSubjectObjectRatio = max(subjectProbOrSize /  objectProbOrSize, objectProbOrSize / subjectProbOrSize);
-		c = round(min(getMeanICsPerNode(edgeType.outgoing_distrib, 0, zipfianStartValueOut), getMeanICsPerNode(edgeType.incoming_distrib, 0, zipfianStartValueIn)) * maxSubjectObjectRatio);
-	}
-	numberOfEdgesPerIteration -= c*sf;
 
 //	cout << "numberOfEdgesPerIteration: " << numberOfEdgesPerIteration << endl;
 
