@@ -52,7 +52,7 @@ private:
 
 	int updateInterfaceConnectionsForZipfianDistributions(vector<graphNode> *nodes, distribution distr, bool outDistr);
 	pair<int,int> updateInterfaceConnectionsForZipfianDistributions(config::edge & edgeType);
-	void updateICsForNonScalableType(vector<graphNode> nodes, int iterationNumber, double meanUpdateDistr, double meanNonUpdateDistr, distribution & distrToUpdate, int edgeTypeId, bool updateSubjects);
+	void updateICsForNonScalableType(vector<graphNode> nodes, int iterationNumber, double meanUpdateDistr, double meanNonUpdateDistr, distribution & distrToUpdate, int* zipfianStartValue);
 //	void shiftZipfianDistribution(vector<graphNode> & nodes, int nmNodes, int edgeTypeId, bool changeSubjectNodes);
 
 	void changeDistributionParams(config::edge & edgeType);

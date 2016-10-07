@@ -14,7 +14,7 @@
 
 
 void processEdgeTypesParallel(int low, int high, int* seeds, string* tempOutputFileNames, config::config conf) {
-	cout << "Parallel processing of edgeTypes " << low << ":" << high << endl;
+//	cout << "Parallel processing of edgeTypes " << low << ":" << high << endl;
 	int diff = high - low;
 	if (diff == 1) {
 		ofstream outputFile;
@@ -221,49 +221,49 @@ int main(int argc, char ** argv) {
     
 
     // #### ALGORITHM ####
-//    chrono::high_resolution_clock::time_point start = chrono::high_resolution_clock::now();
-//
-//
-//    // TODO: get the seed from the XML instead of this magic number
-//    std::default_random_engine randomGeneratorForSeeding;
-//    randomGeneratorForSeeding.seed(222);
-//
-////	ofstream *outputFiles = new ofstream[conf.schema.edges.size()];
-//	string *tempOutputFileNames = new string[conf.schema.edges.size()];
-//	int *seeds = new int[conf.schema.edges.size()];
-//
-//	int nmOfEdgeTypes = conf.schema.edges.size();
-//	for (int i=0; i<nmOfEdgeTypes; i++) {
-//		int seed = randomGeneratorForSeeding();
+    chrono::high_resolution_clock::time_point start = chrono::high_resolution_clock::now();
+
+
+    // TODO: get the seed from the XML instead of this magic number
+    std::default_random_engine randomGeneratorForSeeding;
+    randomGeneratorForSeeding.seed(222);
+
+//	ofstream *outputFiles = new ofstream[conf.schema.edges.size()];
+	string *tempOutputFileNames = new string[conf.schema.edges.size()];
+	int *seeds = new int[conf.schema.edges.size()];
+
+	int nmOfEdgeTypes = conf.schema.edges.size();
+	for (int i=0; i<nmOfEdgeTypes; i++) {
+		int seed = randomGeneratorForSeeding();
 //		cout << "Seed " << i << ": " << seed << endl;
-//		seeds[i] = seed;
-//
-//		tempOutputFileNames[i] = "tempOutputFile" + to_string(i) + ".txt";
-//	}
-//
-//	processEdgeTypesParallel(0, nmOfEdgeTypes, seeds, tempOutputFileNames, conf);
-//
-//
-//	// Merge the outputFiles
-//	ofstream outputFile;
-//	outputFile.open("output.txt", ios::trunc);
-//	for (int i=0; i<nmOfEdgeTypes; i++) {
-//		ifstream tempFile(tempOutputFileNames[i]);
-//		if (tempFile.is_open()) {
-//			string line;
-//			while (getline(tempFile, line)) {
-//				outputFile << line << endl;
-//			}
-//		}
-//	}
-//	outputFile.close();
-//
-//
-//
-//    chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
-//	auto duration = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
-//
-//	cout << duration << " ms finished the graph" << endl;
+		seeds[i] = seed;
+
+		tempOutputFileNames[i] = "tempOutputFile" + to_string(i) + ".txt";
+	}
+
+	processEdgeTypesParallel(0, nmOfEdgeTypes, seeds, tempOutputFileNames, conf);
+
+
+	// Merge the outputFiles
+	ofstream outputFile;
+	outputFile.open("output.txt", ios::trunc);
+	for (int i=0; i<nmOfEdgeTypes; i++) {
+		ifstream tempFile(tempOutputFileNames[i]);
+		if (tempFile.is_open()) {
+			string line;
+			while (getline(tempFile, line)) {
+				outputFile << line << endl;
+			}
+		}
+	}
+	outputFile.close();
+
+
+
+    chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
+	auto duration = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
+
+	cout << duration << " ms finished the graph" << endl;
 	// #### ALGORITHM ####
 
 

@@ -152,7 +152,7 @@ pair<int,int> incrementalDeterministicGraphGenerator::updateInterfaceConnections
 	return numberOfOpenInterfaceConnections;
 }
 
-void incrementalDeterministicGraphGenerator::updateICsForNonScalableType(vector<graphNode> nodes, int iterationNumber, double meanUpdateDistr, double meanNonUpdateDistr, distribution & distr, int edgeTypeId, bool updateSubjects) {
+void incrementalDeterministicGraphGenerator::updateICsForNonScalableType(vector<graphNode> nodes, int iterationNumber, double meanUpdateDistr, double meanNonUpdateDistr, distribution & distr, int* zipfianStartValue) {
 //	cout << "Updating ICs for non scalable type" << endl;
 	if (nodes.size() == 0) {
 		cout << "A fixed amount of nodes of one of the types is equal to 0" << endl;
@@ -160,12 +160,6 @@ void incrementalDeterministicGraphGenerator::updateICsForNonScalableType(vector<
 	}
 
 	if (distr.type == DISTRIBUTION::ZIPFIAN) {
-		int* zipfianStartValue;
-		if (updateSubjects) {
-			zipfianStartValue = &zipfianStartValueOut;
-		} else {
-			zipfianStartValue = &zipfianStartValueIn;
-		}
 //		double newMean = (meanNonUpdateDistr * nmNodesNonUpdate) / nmNodesUpdate;
 		double newMean = (meanNonUpdateDistr * iterationNumber) / nodes.size();
 		int increment = round(newMean - meanUpdateDistr - *zipfianStartValue);
@@ -412,14 +406,14 @@ void incrementalDeterministicGraphGenerator::processIteration(int iterationNumbe
 			if (iterationNumber >= conf.types.at(edgeType.subject_type).size) {
 				double meanOutDistr = getMeanEdgesPerNode(edgeType, edgeType.outgoing_distrib, conf.types.at(edgeType.subject_type).size);
 				double meanInDistr = getMeanEdgesPerNode(edgeType, edgeType.incoming_distrib, 10000);
-				updateICsForNonScalableType(nodes.first, iterationNumber, meanOutDistr, meanInDistr, edgeType.outgoing_distrib, edgeType.edge_type_id, true);
+				updateICsForNonScalableType(nodes.first, iterationNumber, meanOutDistr, meanInDistr, edgeType.outgoing_distrib, &zipfianStartValueOut);
 			}
 		} else {
 			// object is not scalable so update the ICs of all the object nodes
 			if (iterationNumber >= conf.types.at(edgeType.object_type).size) {
 				double meanOutDistr = getMeanEdgesPerNode(edgeType, edgeType.outgoing_distrib, 10000);
 				double meanInDistr = getMeanEdgesPerNode(edgeType, edgeType.incoming_distrib, conf.types.at(edgeType.object_type).size);
-				updateICsForNonScalableType(nodes.second, iterationNumber, meanInDistr, meanOutDistr, edgeType.incoming_distrib, edgeType.edge_type_id, false);
+				updateICsForNonScalableType(nodes.second, iterationNumber, meanInDistr, meanOutDistr, edgeType.incoming_distrib, &zipfianStartValueIn);
 			}
 		}
 	} else {
@@ -469,11 +463,9 @@ void incrementalDeterministicGraphGenerator::processIteration(int iterationNumbe
 		graphNode *targetNode;
 
 
-//		cout << "Find source node from nodes 0:" << nmNodesMax-1 << endl;
 		sourceNode = findSourceNode(edgeType);
-//		cout << "Find target node from nodes 0:" << iterationNumber << endl;
 		if (sourceNode->iterationId == -1) {
-//			cout << "Edge is not added because of no available ICs in either the Subject nodes or the target nodes, so go to next iteration" << endl;
+//			cout << "Edge is not added because of no available ICs in the Subject nodes, so go to next iteration" << endl;
 			break;
 		} else {
 			targetNode = findTargetNode(edgeType, sourceNode);
