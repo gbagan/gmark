@@ -40,23 +40,22 @@ private:
 	int getNumberOfEdgesPerIteration(config::edge & edgeType, int iterationNumber);
 	int getNumberOfOpenICs(vector<graphNode> nodes);
 
-	double getMeanEdgesPerNode(config::edge & edgeType, distribution distr, int zipfMax);
+	double getMeanICsPerNode(distribution distr, int zipfMax, int zipfianStartValue);
 	int getNumberOfEdgesPerIteration(config::edge & edgeType);
 
 	graphNode *findSourceNode(config::edge & edgeType);
 	graphNode *findTargetNode(config::edge & edgeType, graphNode *sourceNode);
 	graphNode *findNodeIdFromCumulProbs(vector<float> & cumulProbs, bool findSourceNode);
 
-	vector<float> getCdf(distribution distr, int nodeType, graphNode *sourceNode, bool findSourceNode);
 	void addEdge(graphNode *sourceNode, graphNode *targetNode, int predicate, ofstream*  outputFiles);
 
-	int updateInterfaceConnectionsForZipfianDistributions(vector<graphNode> *nodes, distribution distr, bool outDistr);
+	int updateInterfaceConnectionsForZipfianDistributions(vector<graphNode> *nodes, distribution distr, int zipfianStartValue);
 	pair<int,int> updateInterfaceConnectionsForZipfianDistributions(config::edge & edgeType);
 	void updateICsForNonScalableType(vector<graphNode> nodes, int iterationNumber, double meanUpdateDistr, double meanNonUpdateDistr, distribution & distrToUpdate, int* zipfianStartValue);
 //	void shiftZipfianDistribution(vector<graphNode> & nodes, int nmNodes, int edgeTypeId, bool changeSubjectNodes);
 
 	void changeDistributionParams(config::edge & edgeType);
-	void changeDistributionParams(config::edge & edgeType, double meanICsPerNodeForOtherDistr, bool changeOutDistr, double subjectProbOrSize, double ofjectProbOrSize);
+	void changeDistributionParams(distribution & distr, double meanICsPerNodeForOtherDistr, bool changeOutDistr, double subjectProbOrSize, double ofjectProbOrSize);
 public:
 	incrementalDeterministicGraphGenerator(config::config configuration);
 	virtual ~incrementalDeterministicGraphGenerator();

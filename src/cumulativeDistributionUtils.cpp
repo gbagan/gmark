@@ -22,7 +22,7 @@ cumulativeDistributionUtils::~cumulativeDistributionUtils() {
 	// TODO Auto-generated destructor stub
 }
 
-vector<float> cumulativeDistributionUtils::calculateUnifGausCumulPercentagesForNnodes(vector<graphNode> & nodes, graphNode  *sourceNode) {
+vector<float> cumulativeDistributionUtils::calculateCDF(vector<graphNode> & nodes, graphNode  *sourceNode) {
 	int sum = 0;
 	vector<int> nonNormalizedResults;
 	int i = 0;

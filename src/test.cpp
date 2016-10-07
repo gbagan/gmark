@@ -258,7 +258,7 @@ int main(int argc, char ** argv) {
 	}
 	outputFile.close();
 
-
+	// TODO: delete temp files
 
     chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
 	auto duration = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
