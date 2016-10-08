@@ -32,6 +32,7 @@ private:
 
 	int zipfianStartValueOut = 1;
 	int zipfianStartValueIn = 1;
+	uniform_real_distribution<double> uniformDistr = uniform_real_distribution<double>(0.0,1.0);
 
 //	void initializeNodesAndEdges();
 	void processIteration(int iterationNumber, config::edge & edgeType, ofstream*  outputFile);
@@ -46,7 +47,7 @@ private:
 
 	graphNode *findSourceNode(config::edge & edgeType);
 	graphNode *findTargetNode(config::edge & edgeType, graphNode *sourceNode);
-	graphNode *findNodeIdFromCumulProbs(vector<float> & cumulProbs, bool findSourceNode);
+//	graphNode *findNodeIdFromCumulProbs(vector<float> & cumulProbs, bool findSourceNode);
 
 	void addEdge(graphNode *sourceNode, graphNode *targetNode, int predicate, ofstream*  outputFiles);
 

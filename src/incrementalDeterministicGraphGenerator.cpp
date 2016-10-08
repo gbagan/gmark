@@ -20,36 +20,38 @@ incrementalDeterministicGraphGenerator::~incrementalDeterministicGraphGenerator(
 }
 
 // ####### Generate edges #######
-graphNode *incrementalDeterministicGraphGenerator::findNodeIdFromCumulProbs(vector<float> & cumulProbs, bool findSourceNode) {
-	uniform_real_distribution<double> distribution(0.0,1.0);
-	double randomValue = distribution(randomGenerator);
-	int i = cumDistrUtils.findPositionInCdf(cumulProbs, randomValue);
-	if (findSourceNode) {
-		return &nodes.first.at(i);
-	} else {
-		return &nodes.second.at(i);
-	}
-}
+//graphNode *incrementalDeterministicGraphGenerator::findNodeIdFromCumulProbs(vector<float> & cumulProbs, bool findSourceNode) {
+//	uniform_real_distribution<double> distribution(0.0,1.0);
+//	double randomValue = distribution(randomGenerator);
+//	int i = cumDistrUtils.findPositionInCdf(cumulProbs, randomValue);
+//	if (findSourceNode) {
+//		return &nodes.first.at(i);
+//	} else {
+//		return &nodes.second.at(i);
+//	}
+//}
 
 graphNode *incrementalDeterministicGraphGenerator::findSourceNode(config::edge & edgeType) {
-	vector<float> cdf = cumDistrUtils.calculateCDF(nodes.first, &tempNode);
+	double randomValue = uniformDistr(randomGenerator);
+	int nodeIterationId = cumDistrUtils.calculateCDF(nodes.first, &tempNode, randomValue);
 
-	if(cdf.at(0) == -1) {
+	if(nodeIterationId == -1) {
 //		cout << "Cannot find a node\n";
 		return &tempNode;
 	} else {
-		return findNodeIdFromCumulProbs(cdf, true);
+		return &nodes.first.at(nodeIterationId);
 	}
 }
 
 graphNode *incrementalDeterministicGraphGenerator::findTargetNode(config::edge & edgeType, graphNode *sourceNode) {
-	vector<float> cdf = cumDistrUtils.calculateCDF(nodes.second, sourceNode);
+	double randomValue = uniformDistr(randomGenerator);
+	int nodeIterationId = cumDistrUtils.calculateCDF(nodes.second, sourceNode, randomValue);
 
-	if(cdf.at(0) == -1) {
+	if(nodeIterationId == -1) {
 //		cout << "Cannot find a node\n";
 		return &tempNode;
 	} else {
-		return findNodeIdFromCumulProbs(cdf, false);
+		return &nodes.second.at(nodeIterationId);
 	}
 }
 

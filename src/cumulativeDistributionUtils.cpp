@@ -22,7 +22,7 @@ cumulativeDistributionUtils::~cumulativeDistributionUtils() {
 	// TODO Auto-generated destructor stub
 }
 
-vector<float> cumulativeDistributionUtils::calculateCDF(vector<graphNode> & nodes, graphNode  *sourceNode) {
+int cumulativeDistributionUtils::calculateCDF(vector<graphNode> & nodes, graphNode  *sourceNode, double randomValue) {
 	int sum = 0;
 	vector<int> nonNormalizedResults;
 	int i = 0;
@@ -42,22 +42,24 @@ vector<float> cumulativeDistributionUtils::calculateCDF(vector<graphNode> & node
 
 	if(sum == 0) {
 //		cout << "Sum of the cumulRes of unifGaus is 0\n";
-		vector<float> dummy;
-		dummy.push_back(-1);
-		return dummy;
+		return -1;
 	}
 
-	float temp = 0;
-	vector<float> normalizedCumulResults;
+	float cumulValue = 0;
+//	vector<float> normalizedCumulResults;
 //	cout << "normalizedCumulResults size: " << nonNormalizedResults.size() << ": ";
 	for(int i=0; i<nonNormalizedResults.size(); i++) {
-		temp += (float) nonNormalizedResults.at(i) / sum;
-		normalizedCumulResults.push_back(temp);
+		cumulValue += (float) nonNormalizedResults.at(i) / sum;
+		if (randomValue <= cumulValue) {
+			return i;
+		}
+//		normalizedCumulResults.push_back(cumulValue);
 //		cout << to_string(temp) << ", ";
 	}
 //	cout << "\n";
 
-	return normalizedCumulResults;
+//	return normalizedCumulResults;
+	return nonNormalizedResults.size()-1;
 }
 
 
