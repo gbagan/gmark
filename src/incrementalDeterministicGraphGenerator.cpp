@@ -153,6 +153,24 @@ void incrementalDeterministicGraphGenerator::updateICsForNonScalableType(vector<
 		}
 	}
 }
+
+void incrementalDeterministicGraphGenerator::updateICsForNonScalableType(config::edge & edgeType, int iterationNumber) {
+	if (!conf.types.at(edgeType.subject_type).scalable) {
+		// Subject is not scalable so update the ICs of all the subject nodes
+		if (iterationNumber >= conf.types.at(edgeType.subject_type).size) {
+			double meanOutDistr = getMeanICsPerNode(edgeType.outgoing_distrib, conf.types.at(edgeType.subject_type).size);
+			double meanInDistr = getMeanICsPerNode(edgeType.incoming_distrib, 10000);
+			updateICsForNonScalableType(nodes.first, iterationNumber, meanOutDistr, meanInDistr, edgeType.outgoing_distrib);
+		}
+	} else {
+		// object is not scalable so update the ICs of all the object nodes
+		if (iterationNumber >= conf.types.at(edgeType.object_type).size) {
+			double meanOutDistr = getMeanICsPerNode(edgeType.outgoing_distrib, 10000);
+			double meanInDistr = getMeanICsPerNode(edgeType.incoming_distrib, conf.types.at(edgeType.object_type).size);
+			updateICsForNonScalableType(nodes.second, iterationNumber, meanInDistr, meanOutDistr, edgeType.incoming_distrib);
+		}
+	}
+}
 // ####### Update interface-connections #######
 
 double incrementalDeterministicGraphGenerator::getMeanICsPerNode(distribution & distr, int zipfMax) {
@@ -323,7 +341,18 @@ int incrementalDeterministicGraphGenerator::getNumberOfOpenICs(vector<graphNode>
 	return openICs;
 }
 
-int incrementalDeterministicGraphGenerator::getNumberOfEdgesPerIteration(config::edge edgeType, pair<int, int> zipfOpenInterfaceConnections, double subjectProbOrSize, double objectProbOrSize) {
+int incrementalDeterministicGraphGenerator::getNumberOfEdgesPerIteration(config::edge edgeType, pair<int, int> zipfOpenInterfaceConnections) {
+	double subjectProbOrSize = -1.0;
+	double objectProbOrSize = -1.0;
+
+	if (conf.types.at(edgeType.subject_type).scalable && conf.types.at(edgeType.object_type).scalable) {
+		subjectProbOrSize = conf.types.at(edgeType.subject_type).proportion;
+		objectProbOrSize = conf.types.at(edgeType.subject_type).proportion;
+	} else if ((!conf.types.at(edgeType.subject_type).scalable && !conf.types.at(edgeType.object_type).scalable)) {
+		subjectProbOrSize = conf.types.at(edgeType.subject_type).size;
+		objectProbOrSize = conf.types.at(edgeType.subject_type).size;
+	}
+
 	int numberOfEdgesPerIteration = 1;
 		int c = 0;
 		int sf = 2;
@@ -364,36 +393,13 @@ void incrementalDeterministicGraphGenerator::processIteration(int iterationNumbe
 //	int subjectNodes = graph.nodes.first.size();
 //	int objectNodes = graph.nodes.second.size();
 
-	double subjectProbOrSize = -1.0;
-	double objectProbOrSize = -1.0;
+
 	if (conf.types.at(edgeType.subject_type).scalable ^ conf.types.at(edgeType.object_type).scalable) {
-		if (!conf.types.at(edgeType.subject_type).scalable) {
-			// Subject is not scalable so update the ICs of all the subject nodes
-			if (iterationNumber >= conf.types.at(edgeType.subject_type).size) {
-				double meanOutDistr = getMeanICsPerNode(edgeType.outgoing_distrib, conf.types.at(edgeType.subject_type).size);
-				double meanInDistr = getMeanICsPerNode(edgeType.incoming_distrib, 10000);
-				updateICsForNonScalableType(nodes.first, iterationNumber, meanOutDistr, meanInDistr, edgeType.outgoing_distrib);
-			}
-		} else {
-			// object is not scalable so update the ICs of all the object nodes
-			if (iterationNumber >= conf.types.at(edgeType.object_type).size) {
-				double meanOutDistr = getMeanICsPerNode(edgeType.outgoing_distrib, 10000);
-				double meanInDistr = getMeanICsPerNode(edgeType.incoming_distrib, conf.types.at(edgeType.object_type).size);
-				updateICsForNonScalableType(nodes.second, iterationNumber, meanInDistr, meanOutDistr, edgeType.incoming_distrib);
-			}
-		}
-	} else {
-		if (conf.types.at(edgeType.subject_type).scalable) {
-			subjectProbOrSize = conf.types.at(edgeType.subject_type).proportion;
-			objectProbOrSize = conf.types.at(edgeType.subject_type).proportion;
-		} else {
-			subjectProbOrSize = conf.types.at(edgeType.subject_type).size;
-			objectProbOrSize = conf.types.at(edgeType.subject_type).size;
-		}
+		updateICsForNonScalableType(edgeType, iterationNumber);
 	}
 
 	pair<int, int> zipfOpenInterfaceConnections = updateInterfaceConnectionsForZipfianDistributions(edgeType);
-	int numberOfEdgesPerIteration = getNumberOfEdgesPerIteration(edgeType, zipfOpenInterfaceConnections, subjectProbOrSize, objectProbOrSize);
+	int numberOfEdgesPerIteration = getNumberOfEdgesPerIteration(edgeType, zipfOpenInterfaceConnections);
 
 
 //	cout << "numberOfEdgesPerIteration: " << numberOfEdgesPerIteration << endl;
