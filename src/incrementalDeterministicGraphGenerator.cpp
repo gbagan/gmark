@@ -174,18 +174,18 @@ void incrementalDeterministicGraphGenerator::updateICsForNonScalableType(config:
 // ####### Update interface-connections #######
 
 double incrementalDeterministicGraphGenerator::getMeanICsPerNode(distribution & distr, int zipfMax) {
-	float meanEdgesPerNode;
+	double meanEdgesPerNode;
 	if (distr.type == DISTRIBUTION::NORMAL) {
 		meanEdgesPerNode = distr.arg1;
 	} else if (distr.type == DISTRIBUTION::UNIFORM) {
-		meanEdgesPerNode = ((float)distr.arg2 + (float)distr.arg1) / 2.0;
+		meanEdgesPerNode = (distr.arg2 + distr.arg1) / 2.0;
 	} else if (distr.type == DISTRIBUTION::ZIPFIAN) {
 		if (distr.arg2 > 3.5) {
-			// This mean hold for alpha > 2, but I will use it only when alpha > 3.5 to keep the error between the thearetical mean and the practical mean as low as possible
+			// This mean hold for alpha > 2, but I will use it only when alpha > 3.5 to keep the error between the theoretical mean and the practical mean as low as possible
 			// TODO: maybe instead of the magic number 3.5: use a value dependent on alpha and the total number of nodes in the graph, n. The higher the n, the lower the alpha can be. But always alpha > 2.
 			meanEdgesPerNode = (1.0/(distr.arg2-2.0)) + distr.arg1;
 		} else {
-			float temp = 0;
+			double temp = 0.0;
 			for (int i=1; i<=zipfMax; i++) {
 				temp += i*pow((i), -1*distr.arg2);
 			}
