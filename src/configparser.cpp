@@ -179,10 +179,10 @@ distribution parse_distribution(pugi::xml_node node) {
             dist.arg1 = min;
             dist.arg2 = max;
         } else if (type == "zipfian") {
-            size_t n = node.child("n").text().as_uint();
+//            size_t n = node.child("n").text().as_uint();
             double alpha = node.child("alpha").text().as_double();
             dist.type = DISTRIBUTION::ZIPFIAN;
-            dist.arg1 = n;
+            dist.arg1 = 1;
             dist.arg2 = alpha;
         } else if (type == "normal" or type == "gaussian") {
             double mean = node.child("mu").text().as_double();
