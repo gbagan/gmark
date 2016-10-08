@@ -55,7 +55,7 @@ private:
 //	void shiftZipfianDistribution(vector<graphNode> & nodes, int nmNodes, int edgeTypeId, bool changeSubjectNodes);
 
 	void changeDistributionParams(config::edge & edgeType);
-	void changeDistributionParams(distribution & distr, double meanICsPerNodeForOtherDistr, bool changeOutDistr, double subjectProbOrSize, double ofjectProbOrSize);
+	void changeDistributionParams(distribution & distr, double meanICsPerNodeForOtherDistr, double probOrSizeOther, double probOrSize);
 public:
 	incrementalDeterministicGraphGenerator(config::config configuration);
 	virtual ~incrementalDeterministicGraphGenerator();

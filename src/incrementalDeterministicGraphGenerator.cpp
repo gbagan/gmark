@@ -196,13 +196,13 @@ double incrementalDeterministicGraphGenerator::getMeanICsPerNode(distribution & 
 	return meanEdgesPerNode;
 }
 
-void incrementalDeterministicGraphGenerator::changeDistributionParams(distribution & distr, double meanICsPerNodeForOtherDistr, bool changeOutDistr, double subjectProbOrSize, double objectProbOrSize) {
+void incrementalDeterministicGraphGenerator::changeDistributionParams(distribution & distr, double meanICsPerNodeForOtherDistr, double probOrSizeOther, double probOrSize) {
 	if (distr.type == DISTRIBUTION::NORMAL) {
-		distr.arg1 = (objectProbOrSize * meanICsPerNodeForOtherDistr) / subjectProbOrSize;
-//			cout << "new normal mean: " << edgeType.outgoing_distrib.arg1 << endl;
+		distr.arg1 = (probOrSizeOther * meanICsPerNodeForOtherDistr) / probOrSize;
+			cout << "new normal mean: " << distr.arg1 << endl;
 	} else if (distr.type == DISTRIBUTION::UNIFORM) {
 		double diff = distr.arg2 - distr.arg1;
-		double newMean = (objectProbOrSize * meanICsPerNodeForOtherDistr) / subjectProbOrSize;
+		double newMean = (probOrSizeOther * meanICsPerNodeForOtherDistr) / probOrSize;
 		if (diff > 0.0) {
 			distr.arg1 = max(round(newMean - (diff/2)), 0.0);
 			distr.arg2 = round(newMean + (diff/2));
@@ -210,8 +210,8 @@ void incrementalDeterministicGraphGenerator::changeDistributionParams(distributi
 			distr.arg1 = round(newMean);
 			distr.arg2 = round(newMean);
 		}
-//		cout << "New uniform min: " << edgeType.outgoing_distrib.arg1 << endl;
-//		cout << "New uniform max: " << edgeType.outgoing_distrib.arg2 << endl;
+		cout << "New uniform min: " << distr.arg1 << endl;
+		cout << "New uniform max: " << distr.arg2 << endl;
 	}
 }
 
@@ -226,7 +226,7 @@ void incrementalDeterministicGraphGenerator::changeDistributionParams(config::ed
 			if (edgeType.incoming_distrib.type == DISTRIBUTION::ZIPFIAN) {
 				edgeType.incoming_distrib.arg1 = max(1.0, round(meanICsPerNodeForOutDistr - meanICsPerNodeForInDistr));
 			} else {
-				changeDistributionParams(edgeType.incoming_distrib, meanICsPerNodeForOutDistr, false, conf.types.at(edgeType.object_type).size, conf.types.at(edgeType.object_type).size);
+				changeDistributionParams(edgeType.incoming_distrib, meanICsPerNodeForOutDistr, conf.types.at(edgeType.subject_type).size, conf.types.at(edgeType.object_type).size);
 			}
 		} else {
 			// Out-distr is not scalable, so change the out-distribution
@@ -236,7 +236,7 @@ void incrementalDeterministicGraphGenerator::changeDistributionParams(config::ed
 //				cout << "zipfianStartValueOut" << endl;
 				edgeType.outgoing_distrib.arg1 = max(1.0, round(meanICsPerNodeForInDistr - meanICsPerNodeForOutDistr));
 			} else {
-				changeDistributionParams(edgeType.outgoing_distrib, meanICsPerNodeForInDistr, true, conf.types.at(edgeType.subject_type).size, conf.types.at(edgeType.subject_type).size);
+				changeDistributionParams(edgeType.outgoing_distrib, meanICsPerNodeForInDistr, conf.types.at(edgeType.object_type).size, conf.types.at(edgeType.subject_type).size);
 			}
 		}
 
@@ -260,7 +260,7 @@ void incrementalDeterministicGraphGenerator::changeDistributionParams(config::ed
 	// In-distr is undefined, so change this in-distr
 	if (edgeType.incoming_distrib.type == DISTRIBUTION::UNDEFINED) {
 		double meanICsPerNodeForOutDistr = getMeanICsPerNode(edgeType.outgoing_distrib, 10000);
-		changeDistributionParams(edgeType.incoming_distrib, meanICsPerNodeForOutDistr, false, subjectProbOrSize, objectProbOrSize);
+		changeDistributionParams(edgeType.incoming_distrib, meanICsPerNodeForOutDistr, subjectProbOrSize, objectProbOrSize);
 	}
 
 	// Out-distr is Zipfian, so change the params of the in-distr (only if )
@@ -304,11 +304,14 @@ void incrementalDeterministicGraphGenerator::changeDistributionParams(config::ed
 		if (meanICsPerNodeForOutDistr * subjectProbOrSize >
 			meanICsPerNodeForInDistr * objectProbOrSize) {
 			// Change in-distr
-			changeDistributionParams(edgeType.incoming_distrib, meanICsPerNodeForOutDistr, false, subjectProbOrSize, objectProbOrSize);
+			cout << "meanICsPerNodeForOutDistr: " << meanICsPerNodeForOutDistr << endl;
+			cout << "subjectProbOrSize: " << subjectProbOrSize << endl;
+			cout << "objectProbOrSize: " << objectProbOrSize << endl;
+			changeDistributionParams(edgeType.incoming_distrib, meanICsPerNodeForOutDistr, subjectProbOrSize, objectProbOrSize);
 			return;
 		} else {
 			// Change out-distr
-			changeDistributionParams(edgeType.outgoing_distrib, meanICsPerNodeForInDistr, true, subjectProbOrSize, objectProbOrSize);
+			changeDistributionParams(edgeType.outgoing_distrib, meanICsPerNodeForInDistr, objectProbOrSize, subjectProbOrSize);
 			return;
 		}
 	}
