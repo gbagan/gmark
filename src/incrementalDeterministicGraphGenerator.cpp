@@ -33,7 +33,7 @@ incrementalDeterministicGraphGenerator::~incrementalDeterministicGraphGenerator(
 
 graphNode *incrementalDeterministicGraphGenerator::findSourceNode(config::edge & edgeType) {
 	double randomValue = uniformDistr(randomGenerator);
-	int nodeIterationId = cumDistrUtils.calculateCDF(nodes.first, &tempNode, randomValue);
+	int nodeIterationId = cumDistrUtils.calculateCDF(nodes.first, tempNode, randomValue);
 
 	if(nodeIterationId == -1) {
 //		cout << "Cannot find a node\n";
@@ -43,7 +43,7 @@ graphNode *incrementalDeterministicGraphGenerator::findSourceNode(config::edge &
 	}
 }
 
-graphNode *incrementalDeterministicGraphGenerator::findTargetNode(config::edge & edgeType, graphNode *sourceNode) {
+graphNode *incrementalDeterministicGraphGenerator::findTargetNode(config::edge & edgeType, graphNode & sourceNode) {
 	double randomValue = uniformDistr(randomGenerator);
 	int nodeIterationId = cumDistrUtils.calculateCDF(nodes.second, sourceNode, randomValue);
 
@@ -169,7 +169,7 @@ void incrementalDeterministicGraphGenerator::updateICsForNonScalableType(vector<
 }
 // ####### Update interface-connections #######
 
-double incrementalDeterministicGraphGenerator::getMeanICsPerNode(distribution distr, int zipfMax, int zipfianStartValue) {
+double incrementalDeterministicGraphGenerator::getMeanICsPerNode(distribution & distr, int zipfMax, int zipfianStartValue) {
 	float meanEdgesPerNode;
 	if (distr.type == DISTRIBUTION::NORMAL) {
 		meanEdgesPerNode = distr.arg1;
@@ -422,7 +422,7 @@ void incrementalDeterministicGraphGenerator::processIteration(int iterationNumbe
 //			cout << "Edge is not added because of no available ICs in the Subject nodes, so go to next iteration" << endl;
 			break;
 		} else {
-			targetNode = findTargetNode(edgeType, sourceNode);
+			targetNode = findTargetNode(edgeType, *sourceNode);
 		}
 
 		if(targetNode->iterationId == -1) {

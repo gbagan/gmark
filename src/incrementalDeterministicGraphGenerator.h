@@ -42,11 +42,11 @@ private:
 	int getNumberOfEdgesPerIteration(config::edge edgeType, pair<int, int> zipfOpenInterfaceConnections, double subjectProbOrSize, double objectProbOrSize);
 	int getNumberOfOpenICs(vector<graphNode> nodes);
 
-	double getMeanICsPerNode(distribution distr, int zipfMax, int zipfianStartValue);
+	double getMeanICsPerNode(distribution & distr, int zipfMax, int zipfianStartValue);
 	int getNumberOfEdgesPerIteration(config::edge & edgeType);
 
 	graphNode *findSourceNode(config::edge & edgeType);
-	graphNode *findTargetNode(config::edge & edgeType, graphNode *sourceNode);
+	graphNode *findTargetNode(config::edge & edgeType, graphNode & sourceNode);
 //	graphNode *findNodeIdFromCumulProbs(vector<float> & cumulProbs, bool findSourceNode);
 
 	void addEdge(graphNode *sourceNode, graphNode *targetNode, int predicate, ofstream*  outputFiles);

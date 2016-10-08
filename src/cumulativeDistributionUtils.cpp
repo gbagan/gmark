@@ -22,7 +22,7 @@ cumulativeDistributionUtils::~cumulativeDistributionUtils() {
 	// TODO Auto-generated destructor stub
 }
 
-int cumulativeDistributionUtils::calculateCDF(vector<graphNode> & nodes, graphNode  *sourceNode, double randomValue) {
+int cumulativeDistributionUtils::calculateCDF(vector<graphNode> & nodes, graphNode & sourceNode, double randomValue) {
 	int sum = 0;
 	vector<int> nonNormalizedResults;
 	int i = 0;
@@ -31,8 +31,8 @@ int cumulativeDistributionUtils::calculateCDF(vector<graphNode> & nodes, graphNo
 //		cout << "Node" << n.iterationId << " found with openConnections: " << n.getNumberOfOpenInterfaceConnections(findSource) << "\n";
 
 		int possibleConnections = n.getNumberOfOpenInterfaceConnections();
-		if (sourceNode->iterationId != -1) {
-			possibleConnections = possibleConnections * (1 - sourceNode->getConnection(i));
+		if (sourceNode.iterationId != -1) {
+			possibleConnections = possibleConnections * (1 - sourceNode.getConnection(i));
 		}
 
 		nonNormalizedResults.push_back(possibleConnections);
