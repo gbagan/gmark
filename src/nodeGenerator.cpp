@@ -168,10 +168,14 @@ void nodeGenerator::addNodes(config::edge & edgeType, int type1, int type2, bool
 }
 
 void nodeGenerator::addSubjectNodes(config::edge & edgeType) {
-	addNodes(edgeType, edgeType.subject_type, edgeType.object_type, true);
+	for (int i=0; i<10; i++) {
+		addNodes(edgeType, edgeType.subject_type, edgeType.object_type, true);
+	}
 }
 void nodeGenerator::addObjectNodes(config::edge & edgeType) {
-	addNodes(edgeType, edgeType.object_type, edgeType.subject_type, false);
+	for (int i=0; i<10; i++) {
+		addNodes(edgeType, edgeType.object_type, edgeType.subject_type, false);
+	}
 }
 
 } /* namespace std */

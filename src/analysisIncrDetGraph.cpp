@@ -109,7 +109,7 @@ void analysisIncrDetGraph::distributionAnalysis(config::edge edgeType, ofstream 
 			rFile << ", ";
 		}
 		i++;
-		if(i!=0 && i % 100 == 0) {
+		if(i!=0 && i % 400 == 0) {
 			rFile << endl;
 		}
 	}
@@ -124,7 +124,7 @@ void analysisIncrDetGraph::distributionAnalysis(config::edge edgeType, ofstream 
 			rFile << ", ";
 		}
 		i++;
-		if(i!=0 && i % 100 == 0) {
+		if(i!=0 && i % 400 == 0) {
 			rFile << endl;
 		}
 	}

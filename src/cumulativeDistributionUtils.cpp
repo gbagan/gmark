@@ -22,15 +22,16 @@ cumulativeDistributionUtils::~cumulativeDistributionUtils() {
 	// TODO Auto-generated destructor stub
 }
 
-int cumulativeDistributionUtils::calculateCDF(vector<graphNode> & nodes, graphNode & sourceNode, double randomValue) {
+int cumulativeDistributionUtils::calculateCDF(vector<graphNode*> & nodes, graphNode & sourceNode, double randomValue) {
 	int sum = 0;
 	vector<int> nonNormalizedResults;
 	int i = 0;
 
-	for(graphNode & n: nodes) {
-//		cout << "Node" << n.iterationId << " found with openConnections: " << n.getNumberOfOpenInterfaceConnections(findSource) << "\n";
+	for(graphNode* & n: nodes) {
+//		cout << "Node" << n->iterationId << " found with openConnections: " << n->getNumberOfOpenInterfaceConnections() << "\n";
 
-		int possibleConnections = n.getNumberOfOpenInterfaceConnections();
+		int possibleConnections = n->getNumberOfOpenInterfaceConnections();
+
 		if (sourceNode.iterationId != -1) {
 			possibleConnections = possibleConnections * (1 - sourceNode.getConnection(i));
 		}
@@ -41,7 +42,7 @@ int cumulativeDistributionUtils::calculateCDF(vector<graphNode> & nodes, graphNo
 	}
 
 	if(sum == 0) {
-//		cout << "Sum of the cumulRes of unifGaus is 0\n";
+//		cout << "Sum of the pdf is 0\n";
 		return -1;
 	}
 
@@ -51,7 +52,7 @@ int cumulativeDistributionUtils::calculateCDF(vector<graphNode> & nodes, graphNo
 	for(int i=0; i<nonNormalizedResults.size(); i++) {
 		cumulValue += (float) nonNormalizedResults.at(i) / sum;
 		if (randomValue <= cumulValue) {
-			return i;
+			return nodes[i]->iterationId;
 		}
 //		normalizedCumulResults.push_back(cumulValue);
 //		cout << to_string(temp) << ", ";
@@ -59,7 +60,7 @@ int cumulativeDistributionUtils::calculateCDF(vector<graphNode> & nodes, graphNo
 //	cout << "\n";
 
 //	return normalizedCumulResults;
-	return nonNormalizedResults.size()-1;
+	return nodes.size()-1;
 }
 
 

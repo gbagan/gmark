@@ -37,19 +37,20 @@ private:
 
 	// For each iteration
 //	int getNumberOfEdgesPerIteration(config::edge & edgeType, int iterationNumber);
-	int getNumberOfEdgesPerIteration(config::edge edgeType, pair<int, int> zipfOpenInterfaceConnections);
-	int getNumberOfOpenICs(vector<graphNode> nodes);
+//	int getNumberOfEdgesPerIteration(config::edge edgeType, pair<int, int> zipfOpenInterfaceConnections);
+	int getNumberOfEdgesPerIteration(config::edge edgeType, vector<graphNode*> subjectNodesWithOpenICs, vector<graphNode*> objectNodesWithOpenICs);
+	int getNumberOfOpenICs(vector<graphNode*> nodes);
 
 	double getMeanICsPerNode(distribution & distr, int zipfMax);
 
-	graphNode *findSourceNode(config::edge & edgeType);
-	graphNode *findTargetNode(config::edge & edgeType, graphNode & sourceNode);
+	graphNode *findSourceNode(config::edge & edgeType, vector<graphNode*> &nodesWithOpenICs);
+	graphNode *findTargetNode(config::edge & edgeType, graphNode & sourceNode, vector<graphNode*> &nodesWithOpenICs);
 //	graphNode *findNodeIdFromCumulProbs(vector<float> & cumulProbs, bool findSourceNode);
 
 	void addEdge(graphNode *sourceNode, graphNode *targetNode, int predicate, ofstream*  outputFiles);
 
-	int updateInterfaceConnectionsForZipfianDistributions(vector<graphNode> *nodes, distribution distr);
-	pair<int,int> updateInterfaceConnectionsForZipfianDistributions(config::edge & edgeType);
+	void updateInterfaceConnectionsForZipfianDistributions(vector<graphNode> *nodes, distribution distr);
+//	pair<int,int> updateInterfaceConnectionsForZipfianDistributions(config::edge & edgeType);
 	void updateICsForNonScalableType(vector<graphNode> & nodes, int iterationNumber, double meanUpdateDistr, double meanNonUpdateDistr, distribution & distrToUpdate);
 	void updateICsForNonScalableType(config::edge & edgeType, int iterationNumber);
 //	void shiftZipfianDistribution(vector<graphNode> & nodes, int nmNodes, int edgeTypeId, bool changeSubjectNodes);

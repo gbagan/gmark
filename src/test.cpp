@@ -241,8 +241,19 @@ int main(int argc, char ** argv) {
 		tempOutputFileNames[i] = "tempOutputFile" + to_string(i) + ".txt";
 	}
 
-	processEdgeTypesParallel(0, nmOfEdgeTypes, seeds, tempOutputFileNames, conf);
+	// ##Parallel##
+//	processEdgeTypesParallel(0, nmOfEdgeTypes, seeds, tempOutputFileNames, conf);
+	// ##Parallel##
 
+	// ##Sequential##
+	for (int i=0; i<nmOfEdgeTypes; i++) {
+		cout << "Processing edge-type " << i << endl;
+		ofstream outputFile;
+		outputFile.open(tempOutputFileNames[i], ios::trunc);
+		incrementalDeterministicGraphGenerator graphGenerator = incrementalDeterministicGraphGenerator(conf);
+		graphGenerator.processEdgeType(conf.schema.edges.at(i), &outputFile, seeds[i]);
+	}
+	// ##Sequential##
 
 	// Merge the outputFiles
 	ofstream outputFile;
@@ -282,17 +293,28 @@ int main(int argc, char ** argv) {
     	i++;
     }
     rFile.close();
-	// #### ANALYSIS ####
+//	 #### ANALYSIS ####
 
 //    if(graph_file != "") {
 //        report::report rep;
 //
 //        ofstream graph_stream;
-//        graph_stream.open(graph_file);
+//        graph_stream.open("outputGraphGen1.txt");
 //        cout << "graph generation" << endl;
 //        graph::ntriple_graph_writer writer(graph_stream);
 //        writer.build_graph(conf, rep);
+//
+//        for (int i=0; i<conf.schema.edges.size(); i++) {
+//			ifstream tempFile("tempOutputOld" + to_string(i) + ".txt");
+//			if (tempFile.is_open()) {
+//				string line;
+//				while (getline(tempFile, line)) {
+//					graph_stream << line << endl;
+//				}
+//			}
+//		}
 //        graph_stream.close();
+
 //
 //        ofstream report_stream;
 //        report_stream.open(report_directory + "/graph.html");
@@ -303,9 +325,9 @@ int main(int argc, char ** argv) {
 //        report::workload_report rep;
 //
 //        ofstream workload_stream;
-//        workload_stream.open(workload_file);
+//        workload_stream.open("workloadTest.txt");
 //        workload::workload wl;
-//        if(selectivity) {
+//        if(true) { // selectivity
 //            workload2::generate_workload(conf, wl, rep);
 //        }
 //        else {
