@@ -32,9 +32,9 @@ int cumulativeDistributionUtils::calculateCDF(vector<graphNode*> & nodes, graphN
 
 		int possibleConnections = n->getNumberOfOpenInterfaceConnections();
 
-		if (sourceNode.iterationId != -1) {
-			possibleConnections = possibleConnections * (1 - sourceNode.getConnection(i));
-		}
+//		if (sourceNode.iterationId != -1) {
+//			possibleConnections = possibleConnections * (1 - sourceNode.getConnection(i));
+//		}
 
 		nonNormalizedResults.push_back(possibleConnections);
 		sum += possibleConnections;

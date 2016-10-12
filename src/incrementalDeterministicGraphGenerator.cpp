@@ -62,7 +62,7 @@ void incrementalDeterministicGraphGenerator::addEdge(graphNode *sourceNode, grap
 //	nodes.first.at(sourceNode->iterationId).decrementOpenInterfaceConnections();
 //	nodes.second.at(targetNode->iterationId).decrementOpenInterfaceConnections();
 
-	sourceNode->setConnection(targetNode->iterationId, 1);
+//	sourceNode->setConnection(targetNode->iterationId, 1);
 //	nodes.first.at(sourceNode->iterationId).setConnection(targetNode->iterationId, 1);
 	*outputFile << sourceNode->type << "-" << sourceNode->iterationId << " " << predicate << " " << targetNode->type << "-" << targetNode->iterationId << endl;
 }
@@ -364,11 +364,12 @@ int incrementalDeterministicGraphGenerator::getNumberOfOpenICs(vector<graphNode*
 //}
 
 int incrementalDeterministicGraphGenerator::getNumberOfEdgesPerIteration(config::edge edgeType, vector<graphNode*> subjectNodesWithOpenICs, vector<graphNode*> objectNodesWithOpenICs) {
+	int scale = 5;
 	int c = round(max(getMeanICsPerNode(edgeType.outgoing_distrib, 10000), getMeanICsPerNode(edgeType.incoming_distrib, 10000)));
 	int openICs = min(getNumberOfOpenICs(subjectNodesWithOpenICs), getNumberOfOpenICs(objectNodesWithOpenICs));
 //	cout << "OpenConnections: "  << openICs << endl;
 //	cout << "c: "  << c << endl;
-	return openICs - c;
+	return openICs - (c*scale);
 }
 
 vector<graphNode*> getNodesWithAtLeastOneOpenIC(vector<graphNode> & nodes) {
@@ -457,7 +458,7 @@ void incrementalDeterministicGraphGenerator::processEdgeType(config::edge & edge
 	} else {
 		nmOfIterations = max(conf.types.at(edgeType.object_type).size, conf.types.at(edgeType.subject_type).size);
 	}
-	int sf = 10;
+	int sf = 100;
 //	cout << "Total number of iterations: " << nmOfIterations << endl;
 
 

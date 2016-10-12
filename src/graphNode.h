@@ -24,7 +24,7 @@ public:
 	int numberOfInterfaceConnections;
 	int numberOfOpenInterfaceConnections;
 
-	int* connections;
+//	int* connections;
 
 	graphNode();
 	graphNode(string id, int iterationId, int type, int numberOfEdgeTypes, int maxNumberOfConnections);
@@ -43,8 +43,8 @@ public:
 	void setPosition(double number);
 	float getPosition();
 
-	void setConnection(int connectionIterationId, int value);
-	int getConnection(int connectionIterationId);
+//	void setConnection(int connectionIterationId, int value);
+//	int getConnection(int connectionIterationId);
 };
 
 } /* namespace std */

@@ -14,6 +14,14 @@ nodeGenerator::nodeGenerator() {
 	this->nodes = 0;
 	this->conf = 0;
 }
+nodeGenerator::~nodeGenerator() {
+//	for (graphNode node: nodes->first) {
+//		delete &node;
+//	}
+//	for (graphNode node: nodes->second) {
+//		delete &node;
+//	}
+}
 
 nodeGenerator::nodeGenerator(config::edge & edgeType, default_random_engine* randomGenerator_, pair<vector<graphNode>,vector<graphNode>>* nodes_, config::config* conf_) {
 	this->randomGenerator = randomGenerator_;
@@ -34,15 +42,12 @@ nodeGenerator::nodeGenerator(config::edge & edgeType, default_random_engine* ran
 
 	uniformZeroOneDistr = uniform_real_distribution<double>(0.0,1.0);
 }
-nodeGenerator::~nodeGenerator() {
-	// TODO
-}
 
-void nodeGenerator::initializeConnections(graphNode &n, int maxNumberOfConnections) {
-	for (int i=0; i<maxNumberOfConnections; i++) {
-		n.setConnection(i, 0);
-	}
-}
+//void nodeGenerator::initializeConnections(graphNode &n, int maxNumberOfConnections) {
+//	for (int i=0; i<maxNumberOfConnections; i++) {
+//		n.setConnection(i, 0);
+//	}
+//}
 
 
 void nodeGenerator::addInterfaceConnectionsToNode(graphNode &n, distribution distr, bool addSourceNode) {
@@ -110,7 +115,7 @@ void nodeGenerator::addNode(config::edge & edgeType, bool addSourceNode) {
 	addInterfaceConnectionsToNode(*n, distr, addSourceNode);
 
 	if (addSourceNode) {
-		initializeConnections(*n, conf->types.at(otherType).size*2);
+//		initializeConnections(*n, conf->types.at(otherType).size*2);
 		nodes->first.push_back(*n);
 	} else {
 		nodes->second.push_back(*n);
@@ -168,12 +173,12 @@ void nodeGenerator::addNodes(config::edge & edgeType, int type1, int type2, bool
 }
 
 void nodeGenerator::addSubjectNodes(config::edge & edgeType) {
-	for (int i=0; i<10; i++) {
+	for (int i=0; i<100; i++) {
 		addNodes(edgeType, edgeType.subject_type, edgeType.object_type, true);
 	}
 }
 void nodeGenerator::addObjectNodes(config::edge & edgeType) {
-	for (int i=0; i<10; i++) {
+	for (int i=0; i<100; i++) {
 		addNodes(edgeType, edgeType.object_type, edgeType.subject_type, false);
 	}
 }

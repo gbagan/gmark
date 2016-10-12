@@ -20,7 +20,7 @@ graphNode::graphNode() {
 	this->numberOfInterfaceConnections = 0;
 	this->position = 0.0;
 
-	this->connections = new int[1];
+//	this->connections = new int[1];
 }
 graphNode::graphNode(string globalId, int localId, int nodeType, int numberOfEdgeTypes, int maxNumberOfConnections) {
 	this->id = globalId;
@@ -31,7 +31,7 @@ graphNode::graphNode(string globalId, int localId, int nodeType, int numberOfEdg
 	this->numberOfInterfaceConnections = 0;
 	this->position = 0.0;
 
-	this->connections = new int[maxNumberOfConnections];
+//	this->connections = new int[maxNumberOfConnections];
 }
 
 graphNode::~graphNode() {
@@ -71,11 +71,11 @@ float graphNode::getPosition() {
 	return this->position;
 }
 
-void graphNode::setConnection(int connectionIterationId, int value) {
-	this->connections[connectionIterationId] = value;
-}
-int graphNode::getConnection(int connectionIterationId) {
-	return this->connections[connectionIterationId];
-}
+//void graphNode::setConnection(int connectionIterationId, int value) {
+//	this->connections[connectionIterationId] = value;
+//}
+//int graphNode::getConnection(int connectionIterationId) {
+//	return this->connections[connectionIterationId];
+//}
 
 } /* namespace std */
