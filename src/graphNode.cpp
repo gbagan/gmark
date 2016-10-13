@@ -22,14 +22,15 @@ graphNode::graphNode() {
 
 //	this->connections = new int[1];
 }
-graphNode::graphNode(string globalId, int localId, int nodeType, int numberOfEdgeTypes, int maxNumberOfConnections) {
+graphNode::graphNode(string globalId, int localId, int nodeType, int numberOfEdgeTypes, int maxNumberOfConnections,
+		int numberOfICs, float position) {
 	this->id = globalId;
 	this->iterationId = localId;
 	this->type = nodeType;
 
-	this->numberOfOpenInterfaceConnections = 0;
-	this->numberOfInterfaceConnections = 0;
-	this->position = 0.0;
+	this->numberOfOpenInterfaceConnections = numberOfICs;
+	this->numberOfInterfaceConnections = numberOfICs;
+	this->position = position;
 
 //	this->connections = new int[maxNumberOfConnections];
 }

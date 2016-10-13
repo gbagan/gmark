@@ -50,7 +50,7 @@ nodeGenerator::nodeGenerator(config::edge & edgeType, default_random_engine* ran
 //}
 
 
-void nodeGenerator::addInterfaceConnectionsToNode(graphNode &n, distribution distr, bool addSourceNode) {
+int nodeGenerator::getNumberOfICs(distribution distr, bool addSourceNode) {
 	int numberOfConnections;
 	if (distr.type == DISTRIBUTION::UNIFORM) {
 //		cout << "UNIFORM with " << distr.arg1 << " " << distr.arg2 << endl;
@@ -66,10 +66,6 @@ void nodeGenerator::addInterfaceConnectionsToNode(graphNode &n, distribution dis
 		} else {
 			numberOfConnections = round(normalInDistr(*randomGenerator));
 		}
-	} else if (distr.type == DISTRIBUTION::ZIPFIAN) {
-		double randomValue = uniformZeroOneDistr(*randomGenerator);
-		n.setPosition(randomValue);
-		numberOfConnections = 0;
 	} else { // distr.type == DISTRIBUTION::UNDEFINED
 		numberOfConnections = 0;
 	}
@@ -78,8 +74,9 @@ void nodeGenerator::addInterfaceConnectionsToNode(graphNode &n, distribution dis
 		numberOfConnections = 0;
 	}
 //	cout << "Before: " << n.getNumberOfInterfaceConnections(findSourceNode) << endl;
-	n.setNumberOfOpenInterfaceConnections(numberOfConnections);
-	n.setNumberOfInterfaceConnections(numberOfConnections);
+//	n.setNumberOfOpenInterfaceConnections(numberOfConnections);
+//	n.setNumberOfInterfaceConnections(numberOfConnections);
+	return numberOfConnections;
 //	cout << "Node at iteration " << n.iterationId << " get " << numberOfConnections << " interface-connections" << endl;
 //	cout << "After: " << n.getNumberOfInterfaceConnections(findSourceNode) << endl;
 }
@@ -111,8 +108,14 @@ void nodeGenerator::addNode(config::edge & edgeType, bool addSourceNode) {
 	}
 
 
-	graphNode *n = new graphNode(to_string(type) + "-" + to_string(numberOfNodes), numberOfNodes, type, conf->schema.edges.size(), conf->types.at(otherType).size*2);
-	addInterfaceConnectionsToNode(*n, distr, addSourceNode);
+	float pos = 0.0;
+	int numberOfICs = 0;
+	if (distr.type == DISTRIBUTION::ZIPFIAN) {
+		pos = uniformZeroOneDistr(*randomGenerator);
+	} else {
+		numberOfICs = getNumberOfICs(distr, addSourceNode);
+	}
+	graphNode *n = new graphNode(to_string(type) + "-" + to_string(numberOfNodes), numberOfNodes, type, conf->schema.edges.size(), conf->types.at(otherType).size*2, numberOfICs, pos);
 
 	if (addSourceNode) {
 //		initializeConnections(*n, conf->types.at(otherType).size*2);

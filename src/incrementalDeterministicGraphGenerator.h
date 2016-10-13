@@ -43,11 +43,11 @@ private:
 
 	double getMeanICsPerNode(distribution & distr, int zipfMax);
 
-	graphNode *findSourceNode(config::edge & edgeType, vector<graphNode*> &nodesWithOpenICs);
-	graphNode *findTargetNode(config::edge & edgeType, graphNode & sourceNode, vector<graphNode*> &nodesWithOpenICs);
+	int findSourceNode(config::edge & edgeType, vector<graphNode*> &nodesWithOpenICs);
+	int findTargetNode(config::edge & edgeType, int sourceNodeLocalId, vector<graphNode*> &nodesWithOpenICs);
 //	graphNode *findNodeIdFromCumulProbs(vector<float> & cumulProbs, bool findSourceNode);
 
-	void addEdge(graphNode *sourceNode, graphNode *targetNode, int predicate, ofstream*  outputFiles);
+	void addEdge(graphNode &sourceNode, graphNode &targetNode, int predicate, ofstream*  outputFiles);
 
 	void updateInterfaceConnectionsForZipfianDistributions(vector<graphNode> *nodes, distribution distr);
 //	pair<int,int> updateInterfaceConnectionsForZipfianDistributions(config::edge & edgeType);

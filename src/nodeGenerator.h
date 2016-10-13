@@ -18,7 +18,7 @@ class nodeGenerator {
 private:
 	void addNode(config::edge & edgeType, bool findSourceNode);
 	void addNodes(config::edge & edgeType, int type1, int type2, bool subject);
-	void addInterfaceConnectionsToNode(graphNode &n, distribution distr, bool addSourceNode);
+	int getNumberOfICs(distribution distr, bool addSourceNode);
 	void initializeConnections(graphNode &n, int maxNumberOfConnections);
 
 	uniform_int_distribution<int> uniformOutDistr;

@@ -31,40 +31,30 @@ incrementalDeterministicGraphGenerator::~incrementalDeterministicGraphGenerator(
 //	}
 //}
 
-graphNode *incrementalDeterministicGraphGenerator::findSourceNode(config::edge & edgeType, vector<graphNode*> &nodesWithOpenICs) {
+int incrementalDeterministicGraphGenerator::findSourceNode(config::edge & edgeType, vector<graphNode*> &nodesWithOpenICs) {
 	double randomValue = uniformDistr(randomGenerator);
 	int subjectNodeId = cumDistrUtils.calculateCDF(nodesWithOpenICs, tempNode, randomValue);
 
-	if(subjectNodeId == -1) {
-//		cout << "Cannot find a node\n";
-		return &tempNode;
-	} else {
-		return &nodes.first[subjectNodeId];
-	}
+	return subjectNodeId;
 }
 
-graphNode *incrementalDeterministicGraphGenerator::findTargetNode(config::edge & edgeType, graphNode & sourceNode, vector<graphNode*> &nodesWithOpenICs) {
+int incrementalDeterministicGraphGenerator::findTargetNode(config::edge & edgeType, int sourceNodeLocalId, vector<graphNode*> &nodesWithOpenICs) {
 	double randomValue = uniformDistr(randomGenerator);
-	int objectNodeId = cumDistrUtils.calculateCDF(nodesWithOpenICs, sourceNode, randomValue);
+	int objectNodeId = cumDistrUtils.calculateCDF(nodesWithOpenICs, nodes.first[sourceNodeLocalId], randomValue);
 
-	if(objectNodeId == -1) {
-//		cout << "Cannot find a node\n";
-		return &tempNode;
-	} else {
-		return &nodes.second[objectNodeId];
-	}
+	return objectNodeId;
 }
 
 
-void incrementalDeterministicGraphGenerator::addEdge(graphNode *sourceNode, graphNode *targetNode, int predicate, ofstream*  outputFile) {
-	sourceNode->decrementOpenInterfaceConnections();
-	targetNode->decrementOpenInterfaceConnections();
+void incrementalDeterministicGraphGenerator::addEdge(graphNode &sourceNode, graphNode &targetNode, int predicate, ofstream*  outputFile) {
+	sourceNode.decrementOpenInterfaceConnections();
+	targetNode.decrementOpenInterfaceConnections();
 //	nodes.first.at(sourceNode->iterationId).decrementOpenInterfaceConnections();
 //	nodes.second.at(targetNode->iterationId).decrementOpenInterfaceConnections();
 
 //	sourceNode->setConnection(targetNode->iterationId, 1);
 //	nodes.first.at(sourceNode->iterationId).setConnection(targetNode->iterationId, 1);
-	*outputFile << sourceNode->type << "-" << sourceNode->iterationId << " " << predicate << " " << targetNode->type << "-" << targetNode->iterationId << endl;
+	*outputFile << sourceNode.type << "-" << sourceNode.iterationId << " " << predicate << " " << targetNode.type << "-" << targetNode.iterationId << endl;
 }
 // ####### Generate edges #######
 
@@ -421,22 +411,22 @@ void incrementalDeterministicGraphGenerator::processIteration(int iterationNumbe
 //	cout << "numberOfEdgesPerIteration: " << numberOfEdgesPerIteration << endl;
 
 	for (int i=0; i<numberOfEdgesPerIteration; i++) {
-		graphNode *sourceNode;
-		graphNode *targetNode;
+		int sourceNodeLocalId;
+		int targetNodeLocalId;
 
 
-		sourceNode = findSourceNode(edgeType, subjectNodesWithOpenICs);
-		if (sourceNode->iterationId == -1) {
+		sourceNodeLocalId = findSourceNode(edgeType, subjectNodesWithOpenICs);
+		if (sourceNodeLocalId == -1) {
 //			cout << "Edge is not added because of no available ICs in the Subject nodes, so go to next iteration" << endl;
 			break;
 		} else {
-			targetNode = findTargetNode(edgeType, *sourceNode, objectNodesWithOpenICs);
+			targetNodeLocalId = findTargetNode(edgeType, sourceNodeLocalId, objectNodesWithOpenICs);
 		}
 
-		if(targetNode->iterationId == -1) {
+		if(targetNodeLocalId == -1) {
 //			cout << "Target iterationId = -1" << endl;
 		} else {
-			addEdge(sourceNode, targetNode, edgeType.predicate, outputFile);
+			addEdge(nodes.first[sourceNodeLocalId], nodes.second[targetNodeLocalId], edgeType.predicate, outputFile);
 //			cout << "Edge added: [" << sourceNode->iterationId << " - " << targetNode->iterationId << "]" << endl;
 		}
 	}

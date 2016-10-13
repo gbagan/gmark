@@ -27,7 +27,8 @@ public:
 //	int* connections;
 
 	graphNode();
-	graphNode(string id, int iterationId, int type, int numberOfEdgeTypes, int maxNumberOfConnections);
+	graphNode(string id, int iterationId, int type, int numberOfEdgeTypes, int maxNumberOfConnections,
+			int numberOfICs, float position);
 	virtual ~graphNode();
 
 	int getNumberOfOpenInterfaceConnections();
