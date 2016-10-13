@@ -353,9 +353,28 @@ int incrementalDeterministicGraphGenerator::getNumberOfOpenICs(vector<graphNode*
 //	return numberOfEdgesPerIteration;
 //}
 
-int incrementalDeterministicGraphGenerator::getNumberOfEdgesPerIteration(config::edge edgeType, vector<graphNode*> subjectNodesWithOpenICs, vector<graphNode*> objectNodesWithOpenICs) {
+int incrementalDeterministicGraphGenerator::getNumberOfEdgesPerIteration(config::edge edgeType, vector<graphNode*> subjectNodesWithOpenICs, vector<graphNode*> objectNodesWithOpenICs, int iterationNumber) {
 	int scale = 5;
-	int c = round(max(getMeanICsPerNode(edgeType.outgoing_distrib, 10000), getMeanICsPerNode(edgeType.incoming_distrib, 10000)));
+
+	int subjects;
+	if (conf.types.at(edgeType.subject_type).scalable) {
+		subjects = round(max(1.0, conf.types.at(edgeType.subject_type).proportion / conf.types.at(edgeType.object_type).proportion)) * iterationNumber;
+	} else {
+		subjects = conf.types.at(edgeType.subject_type).size;
+	}
+
+	int objects;
+	if (conf.types.at(edgeType.object_type).scalable) {
+		objects = round(max(1.0, conf.types.at(edgeType.object_type).proportion / conf.types.at(edgeType.subject_type).proportion)) * iterationNumber;
+	} else {
+		objects = conf.types.at(edgeType.object_type).size;
+	}
+
+	int c = round(max(getMeanICsPerNode(edgeType.outgoing_distrib, subjects), getMeanICsPerNode(edgeType.incoming_distrib, objects)));
+
+	if (conf.types.at(edgeType.subject_type).scalable ^ conf.types.at(edgeType.object_type).scalable) {
+		c = 1;
+	}
 	int openICs = min(getNumberOfOpenICs(subjectNodesWithOpenICs), getNumberOfOpenICs(objectNodesWithOpenICs));
 //	cout << "OpenConnections: "  << openICs << endl;
 //	cout << "c: "  << c << endl;
@@ -405,7 +424,7 @@ void incrementalDeterministicGraphGenerator::processIteration(int iterationNumbe
 //	cout << "ObjectsWithOpenICs: " << objectNodesWithOpenICs.size() << endl;
 
 //	int numberOfEdgesPerIteration = getNumberOfEdgesPerIteration(edgeType, zipfOpenInterfaceConnections);
-	int numberOfEdgesPerIteration = getNumberOfEdgesPerIteration(edgeType, subjectNodesWithOpenICs, objectNodesWithOpenICs);
+	int numberOfEdgesPerIteration = getNumberOfEdgesPerIteration(edgeType, subjectNodesWithOpenICs, objectNodesWithOpenICs, iterationNumber);
 
 
 //	cout << "numberOfEdgesPerIteration: " << numberOfEdgesPerIteration << endl;
@@ -448,7 +467,7 @@ void incrementalDeterministicGraphGenerator::processEdgeType(config::edge & edge
 	} else {
 		nmOfIterations = max(conf.types.at(edgeType.object_type).size, conf.types.at(edgeType.subject_type).size);
 	}
-	int sf = 100;
+	int sf = 1;
 //	cout << "Total number of iterations: " << nmOfIterations << endl;
 
 
