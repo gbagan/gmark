@@ -63,17 +63,9 @@ void analysisIncrDetGraph::distributionAnalysis(config::edge edgeType, ofstream 
 	vector<int> outDistr;
 	vector<int> inDistr;
 
-	// Initialize outDistr-vector
-	for (int i=0; i<conf.types.at(edgeType.subject_type).size; i++) {
-		outDistr.push_back(0);
-	}
-
-	// Initialize inDistr-vector
-	for (int i=0; i<conf.types.at(edgeType.object_type).size; i++) {
-		inDistr.push_back(0);
-	}
-
-	// Analyze all edges
+	// Get max values (localIds) of the subjects and object nodes
+	int maxSubject = 0;
+	int maxObject = 0;
 	string line;
 	ifstream myfile(outpuFile);
 	if (myfile.is_open()) {
@@ -85,15 +77,51 @@ void analysisIncrDetGraph::distributionAnalysis(config::edge edgeType, ofstream 
 				temp = line;
 				string getSub = temp.erase(0, temp.find("-")+1);
 				string subject = getSub.substr(0, getSub.find(" "));
-				if (stoi(subject) < conf.types.at(edgeType.subject_type).size) {
-					outDistr.at(stoi(subject))++;
+				if (stoi(subject) > maxSubject) {
+					maxSubject = stoi(subject);
 				}
 
 				string getObj = getPred.erase(0, getPred.find("-")+1);
 				string object = getObj.substr(0, getObj.length());
-				if (stoi(object) < conf.types.at(edgeType.object_type).size) {
-					inDistr.at(stoi(object))++;
+				if (stoi(object) > maxObject) {
+					maxObject = stoi(object);
 				}
+			}
+		}
+	} else {
+		cout << "Unable to open file";
+	}
+
+//	cout << "MaxSubject: " << maxSubject << endl;
+//	cout << "MaxObject: " << maxObject << endl;
+
+	// Initialize outDistr-vector
+	for (int i=0; i<=maxSubject; i++) {
+		outDistr.push_back(0);
+	}
+
+	// Initialize inDistr-vector
+	for (int i=0; i<=maxObject; i++) {
+		inDistr.push_back(0);
+	}
+
+	// Analyze all edges
+	myfile.clear();
+	myfile.seekg(0, ios::beg);
+	if (myfile.is_open()) {
+		while (getline(myfile, line)) {
+			string temp = line;
+			string getPred = temp.erase(0, temp.find(" ")+1);
+			string predicate = getPred.substr(0, getPred.find(" "));
+			if (stoi(predicate) == edgeType.predicate) {
+				temp = line;
+				string getSub = temp.erase(0, temp.find("-")+1);
+				string subject = getSub.substr(0, getSub.find(" "));
+				outDistr.at(stoi(subject))++;
+
+				string getObj = getPred.erase(0, getPred.find("-")+1);
+				string object = getObj.substr(0, getObj.length());
+				inDistr.at(stoi(object))++;
 			}
 		}
 		myfile.close();
