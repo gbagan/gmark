@@ -467,7 +467,7 @@ void incrementalDeterministicGraphGenerator::processEdgeType(config::edge & edge
 	} else {
 		nmOfIterations = max(conf.types.at(edgeType.object_type).size, conf.types.at(edgeType.subject_type).size);
 	}
-	int sf = 1;
+	int sf = 100;
 //	cout << "Total number of iterations: " << nmOfIterations << endl;
 
 
