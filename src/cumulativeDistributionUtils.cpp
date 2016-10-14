@@ -130,7 +130,7 @@ int cumulativeDistributionUtils::findPositionInCdf(vector<double> & cdf, double 
 
 	int pos = 0;
 	if (randomValue > cdf[0]) {
-		int pos = binarySearch(0, cdf.size(), cdf, randomValue);
+		pos = binarySearch(0, cdf.size(), cdf, randomValue);
 		if (pos >= cdf.size()) {
 			pos = cdf.size()-1;
 		}

@@ -39,6 +39,7 @@ void incrementalDeterministicGraphGenerator::addEdge(graphNode &sourceNode, grap
 	sourceNode.decrementOpenInterfaceConnections();
 	targetNode.decrementOpenInterfaceConnections();
 
+//	cout << sourceNode.type << "-" << sourceNode.iterationId << " " << predicate << " " << targetNode.type << "-" << targetNode.iterationId << endl;
 	*outputFile << sourceNode.type << "-" << sourceNode.iterationId << " " << predicate << " " << targetNode.type << "-" << targetNode.iterationId << endl;
 }
 // ####### Generate edges #######
@@ -371,7 +372,8 @@ void incrementalDeterministicGraphGenerator::processIteration(int iterationNumbe
 //	}
 	nodeGen.addSubjectNodes(edgeType);
 	nodeGen.addObjectNodes(edgeType);
-
+//	cout << "Subjects: " << nodes.first.size() << endl;
+//	cout << "Objects: " << nodes.second.size() << endl;
 
 	if (conf.types.at(edgeType.subject_type).scalable ^ conf.types.at(edgeType.object_type).scalable) {
 		updateICsForNonScalableType(edgeType, iterationNumber);
@@ -386,17 +388,14 @@ void incrementalDeterministicGraphGenerator::processIteration(int iterationNumbe
 
 	vector<int> subjectNodeIdVector = constructNodesVector(nodes.first);
 	vector<int> objectNodeIdVector = constructNodesVector(nodes.second);
-	int nmSubjects = subjectNodeIdVector.size();
-	int nmObjects = objectNodeIdVector.size();
-	if (nmSubjects < nmObjects) {
-		random_shuffle(objectNodeIdVector.begin(), objectNodeIdVector.end());
-	} else {
-		random_shuffle(subjectNodeIdVector.begin(), subjectNodeIdVector.end());
-		nmSubjects = nmObjects;
-	}
 
+	random_shuffle(objectNodeIdVector.begin(), objectNodeIdVector.end());
+	random_shuffle(subjectNodeIdVector.begin(), subjectNodeIdVector.end());
+
+	int n = min(subjectNodeIdVector.size(), objectNodeIdVector.size());
 	int c = getDistributionRandomnessTradeoff(edgeType, iterationNumber);
-	for (int i=0; i<nmSubjects-c; i++) {
+	int edgesInThisIteration = n-c;
+	for (int i=0; i<edgesInThisIteration; i++) {
 		addEdge(nodes.first[subjectNodeIdVector[i]], nodes.second[objectNodeIdVector[i]], edgeType.predicate, outputFile);
 	}
 

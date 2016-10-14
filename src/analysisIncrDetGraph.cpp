@@ -91,6 +91,8 @@ void analysisIncrDetGraph::distributionAnalysis(config::edge edgeType, ofstream 
 	} else {
 		cout << "Unable to open file";
 	}
+	maxSubject = max(maxSubject, (int)conf.types[edgeType.subject_type].size);
+	maxObject = max(maxObject, (int)conf.types[edgeType.object_type].size);
 
 //	cout << "MaxSubject: " << maxSubject << endl;
 //	cout << "MaxObject: " << maxObject << endl;
