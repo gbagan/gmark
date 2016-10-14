@@ -66,15 +66,13 @@ int cumulativeDistributionUtils::calculateCDF(vector<graphNode*> & nodes, graphN
 
 
 
-vector<float> cumulativeDistributionUtils::zipfCdf(distribution zipfDistr, int iterationNumber) {
-	float alpha = zipfDistr.arg2;
-	int n = iterationNumber;
+vector<double> cumulativeDistributionUtils::zipfCdf(double alpha, int n) {
 //	cout << "Zipfian n=" << n << endl;
 //	cout << "Zipfian alpha=" << alpha << endl;
 
-	vector<float> zipfian;
-	float sum = 0.0;
-	float step;
+	vector<double> zipfian;
+	double sum = 0.0;
+	double step;
 	for(int i=1; i<=n; i++) {
 		step = pow(i, -1.0*alpha);
 		zipfian.push_back(step);
@@ -82,10 +80,10 @@ vector<float> cumulativeDistributionUtils::zipfCdf(distribution zipfDistr, int i
 	}
 
 
-	vector<float> cdf;
+	vector<double> cdf;
 //	cout << endl << "CDF: " << endl;
 
-	float tempSum = 0.0;
+	double tempSum = 0.0;
 	for(int i=0; i<n; i++) {
 		tempSum += zipfian.at(i) / sum;
 //		cout << tempSum << ", ";
@@ -97,22 +95,47 @@ vector<float> cumulativeDistributionUtils::zipfCdf(distribution zipfDistr, int i
 }
 
 
-
-int cumulativeDistributionUtils::findPositionInCdf(vector<float> & cdf, double randomValue) {
-	int i = 0;
-//	cout << "Random value: " << randomValue << endl;
-	for(float cumulProbValue: cdf) {
-//		cout << "i=" << i << ", cumulProbValue=" << cumulProbValue << endl;
-		if(randomValue <= cumulProbValue) {
-			break;
+int binarySearch(int low, int high, vector<double> & cdf, double randomValue) {
+	if (high-low <= 1) {
+		if (randomValue > cdf[low]) {
+			return high;
+		} else {
+			return low;
 		}
-		i++;
+	} else {
+		int mid = ceil((high+low)/2.0);
+		if (randomValue < cdf[mid]) {
+			return binarySearch(low, mid, cdf, randomValue);
+		} else {
+			return binarySearch(low+mid, high, cdf, randomValue);
+		}
 	}
-	if (i >= cdf.size() && i != 0) {
-		 i= cdf.size()-1;
+}
+
+int cumulativeDistributionUtils::findPositionInCdf(vector<double> & cdf, double randomValue) {
+//	int i = 0;
+////	cout << "Random value: " << randomValue << endl;
+//	for(float cumulProbValue: cdf) {
+////		cout << "i=" << i << ", cumulProbValue=" << cumulProbValue << endl;
+//		if(randomValue <= cumulProbValue) {
+//			break;
+//		}
+//		i++;
+//	}
+//	if (i >= cdf.size() && i != 0) {
+//		 i= cdf.size()-1;
+//	}
+////	cout << "Returning: " << i << endl;
+//	return i;
+
+	int pos = 0;
+	if (randomValue > cdf[0]) {
+		int pos = binarySearch(0, cdf.size(), cdf, randomValue);
+		if (pos >= cdf.size()) {
+			pos = cdf.size()-1;
+		}
 	}
-//	cout << "Returning: " << i << endl;
-	return i;
+	return pos;
 }
 
 

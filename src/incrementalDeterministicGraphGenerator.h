@@ -38,13 +38,13 @@ private:
 	// For each iteration
 //	int getNumberOfEdgesPerIteration(config::edge & edgeType, int iterationNumber);
 //	int getNumberOfEdgesPerIteration(config::edge edgeType, pair<int, int> zipfOpenInterfaceConnections);
-	int getNumberOfEdgesPerIteration(config::edge edgeType, vector<graphNode*> subjectNodesWithOpenICs, vector<graphNode*> objectNodesWithOpenICs, int iterationNumber);
-	int getNumberOfOpenICs(vector<graphNode*> nodes);
+//	int getNumberOfEdgesPerIteration(config::edge edgeType, vector<graphNode*> subjectNodesWithOpenICs, vector<graphNode*> objectNodesWithOpenICs, int iterationNumber);
+//	int getNumberOfOpenICs(vector<graphNode*> nodes);
 
 	double getMeanICsPerNode(distribution & distr, int zipfMax);
 
-	int findSourceNode(config::edge & edgeType, vector<graphNode*> &nodesWithOpenICs);
-	int findTargetNode(config::edge & edgeType, int sourceNodeLocalId, vector<graphNode*> &nodesWithOpenICs);
+//	int findSourceNode(config::edge & edgeType, vector<graphNode*> &nodesWithOpenICs);
+//	int findTargetNode(config::edge & edgeType, int sourceNodeLocalId, vector<graphNode*> &nodesWithOpenICs);
 //	graphNode *findNodeIdFromCumulProbs(vector<float> & cumulProbs, bool findSourceNode);
 
 	void addEdge(graphNode &sourceNode, graphNode &targetNode, int predicate, ofstream*  outputFiles);
@@ -57,6 +57,8 @@ private:
 
 	void changeDistributionParams(config::edge & edgeType);
 	void changeDistributionParams(distribution & distr, double meanICsPerNodeForOtherDistr, double probOrSizeOther, double probOrSize);
+
+	int getDistributionRandomnessTradeoff(config::edge edgeType, int iterationNumber);
 public:
 	incrementalDeterministicGraphGenerator(config::config configuration);
 	virtual ~incrementalDeterministicGraphGenerator();

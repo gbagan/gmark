@@ -34,9 +34,9 @@ public:
 
 	int calculateCDF(vector<graphNode*> & nodes, graphNode & sourceNode, double randomValue);
 //	vector<float> calculateZipfCumulPercentagesForNnodes(vector<graphNode> & nodes, int currentEdgeTypeNumber, float alpha, int iterationNumber, bool findSource);
-	vector<float> zipfCdf(distribution zipfDistr, int iterationNumber);
+	vector<double> zipfCdf(double alpha, int iterationNumber);
 
-	int findPositionInCdf(vector<float> & cdf, double randomValue);
+	int findPositionInCdf(vector<double> & cdf, double randomValue);
 
 	// For sorting
 //	bool compare(const pair<pair<float, int>, float> & first, const pair<pair<float, int>, float> & second);
