@@ -100,12 +100,12 @@ void nodeGenerator::addNode(config::edge & edgeType, bool addSourceNode) {
 	}
 
 
-	if(!conf->types.at(type).scalable && numberOfNodes > conf->types.at(type).size-1) {
-		// NodeType is not scalable and all nodes are already created and added to the graph
-		// !configuration.types.at(type).scalable <- NodeType is not scalable
-		// graph->nodes.at(type).size() > configuration.types.at(type).size <- all nodes are already created and added to the graph
-		return; // So: Do NOT add the node
-	}
+//	if(!conf->types.at(type).scalable && numberOfNodes > conf->types.at(type).size-1) {
+//		// NodeType is not scalable and all nodes are already created and added to the graph
+//		// !configuration.types.at(type).scalable <- NodeType is not scalable
+//		// graph->nodes.at(type).size() > configuration.types.at(type).size <- all nodes are already created and added to the graph
+//		return; // So: Do NOT add the node
+//	}
 
 
 	float pos = 0.0;

@@ -195,6 +195,9 @@ void analysisIncrDetGraph::printToRfile(ofstream& rFile, bool outDistr, config::
 		rFile << "par(pch=22, col=\"blue\")" << endl;
 		rFile << "lines(x,y/sum)" << endl;
 
+		rFile << "\n# Log-log plot" << endl;
+		rFile << "plot(sort(InDistribution, decreasing=TRUE), log=\"xy\", ylab=\"Number of edges\", xlab=\"" << conf.types.at(nodeType).alias << " sorted on number of edges in edge-type " << edge.edge_type_id << "\", main=\"Log-log plot of the Zipfian "<< distributionVar <<" of edge-type " << edge.edge_type_id << "\")" << endl;
+
 		rFile << "\n# Zoomed view" << endl;
 		rFile << "hist(" << distributionVar <<", xlab=\"Number of edges per " << conf.types.at(nodeType).alias << "\", breaks=c(seq(min("<< distributionVar <<")-0.5, max("<< distributionVar <<")+0.5,1)), main=\""<< distributionVar <<" of edge-type " << edge.edge_type_id << "\", prob=TRUE, xlim=c(0,10))" << endl;
 		rFile << "lines(x,y/sum)" << endl;
