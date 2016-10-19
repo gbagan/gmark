@@ -20,7 +20,7 @@ void processEdgeTypesParallel(int low, int high, int* seeds, string* tempOutputF
 		ofstream outputFile;
 		outputFile.open(tempOutputFileNames[low], ios::trunc);
 
-		incrementalDeterministicGraphGenerator graphGenerator = incrementalDeterministicGraphGenerator(conf);
+		incrementalDeterministicGraphGenerator graphGenerator(conf);
 		graphGenerator.processEdgeType(conf.schema.edges.at(low), &outputFile, seeds[low]);
 
 		outputFile.close();
@@ -173,7 +173,7 @@ void html_workload_report(config::config & conf, report::workload_report & rep, 
 
 
 int main(int argc, char ** argv) {
-    string conf_file = "../use-cases/test.xml";
+    string conf_file = "../use-cases/social-network.xml";
     string graph_file;
     string workload_file;
     string report_directory = ".";
@@ -260,6 +260,7 @@ int main(int argc, char ** argv) {
 	outputFile.open("output.txt", ios::trunc);
 	for (int i=0; i<nmOfEdgeTypes; i++) {
 		ifstream tempFile(tempOutputFileNames[i]);
+//		outputFile << tempFile.rdbuf();
 		if (tempFile.is_open()) {
 			string line;
 			while (getline(tempFile, line)) {
@@ -293,6 +294,8 @@ int main(int argc, char ** argv) {
     	i++;
     }
     rFile.close();
+
+    analyzeGraph.numberOfEdgesVsNode();
 	// #### ANALYSIS ####
 
 //    if(graph_file != "") {

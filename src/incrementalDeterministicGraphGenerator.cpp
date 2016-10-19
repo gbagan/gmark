@@ -35,12 +35,24 @@ incrementalDeterministicGraphGenerator::~incrementalDeterministicGraphGenerator(
 //}
 
 
-void incrementalDeterministicGraphGenerator::addEdge(graphNode &sourceNode, graphNode &targetNode, int predicate, ofstream*  outputFile) {
+void incrementalDeterministicGraphGenerator::addEdge(graphNode &sourceNode, graphNode &targetNode, int predicate, ofstream*  outputFile, bool lastEdge) {
 	sourceNode.decrementOpenInterfaceConnections();
 	targetNode.decrementOpenInterfaceConnections();
 
+	if (outputBufferLines < 10 && predicate == 0) {
+		cout << to_string(sourceNode.type) + "-" + to_string(sourceNode.iterationId) + " " + to_string(predicate) + " " + to_string(targetNode.type) + "-" + to_string(targetNode.iterationId) + "\n";
+	}
 //	cout << sourceNode.type << "-" << sourceNode.iterationId << " " << predicate << " " << targetNode.type << "-" << targetNode.iterationId << endl;
-	*outputFile << sourceNode.type << "-" << sourceNode.iterationId << " " << predicate << " " << targetNode.type << "-" << targetNode.iterationId << endl;
+	outputBufferLines++;
+	if (outputBufferLines % 100 == 0 || lastEdge) {
+		string outputBuffer = to_string(sourceNode.type) + "-" + to_string(sourceNode.iterationId) + " " + to_string(predicate) + " " + to_string(targetNode.type) + "-" + to_string(targetNode.iterationId);
+		// Use endl to flush
+		*outputFile << outputBuffer << endl;
+	} else {
+		string outputBuffer = to_string(sourceNode.type) + "-" + to_string(sourceNode.iterationId) + " " + to_string(predicate) + " " + to_string(targetNode.type) + "-" + to_string(targetNode.iterationId) + "\n";
+		*outputFile << outputBuffer;
+	}
+//	*outputFile << sourceNode.type << "-" << sourceNode.iterationId << " " << predicate << " " << targetNode.type << "-" << targetNode.iterationId << endl;
 }
 // ####### Generate edges #######
 
@@ -168,7 +180,15 @@ void incrementalDeterministicGraphGenerator::changeDistributionParams(distributi
 }
 
 void incrementalDeterministicGraphGenerator::changeDistributionParams(config::edge & edgeType) {
-//	cout << "Changing edge-type " << edgeType.edge_type_id << endl;
+	if (conf.types.at(edgeType.subject_type).scalable && conf.types.at(edgeType.subject_type).proportion == 0) {
+		conf.types.at(edgeType.subject_type).proportion = 1.0 / (double)conf.types.size();
+		conf.types.at(edgeType.subject_type).size = (1.0 / (double)conf.types.size()) * conf.nb_nodes;
+	}
+	if (conf.types.at(edgeType.object_type).scalable && conf.types.at(edgeType.object_type).proportion == 0) {
+		conf.types.at(edgeType.object_type).scalable = true;
+		conf.types.at(edgeType.object_type).proportion = 1.0 / (double)conf.types.size();
+		conf.types.at(edgeType.object_type).size = (1.0 / (double)conf.types.size()) * conf.nb_nodes;
+	}
 
 	if (conf.types.at(edgeType.subject_type).scalable ^ conf.types.at(edgeType.object_type).scalable) {
 		if (conf.types.at(edgeType.subject_type).scalable) {
@@ -185,7 +205,6 @@ void incrementalDeterministicGraphGenerator::changeDistributionParams(config::ed
 			double meanICsPerNodeForInDistr = getMeanICsPerNode(edgeType.incoming_distrib, 10000);
 			double meanICsPerNodeForOutDistr = getMeanICsPerNode(edgeType.outgoing_distrib, conf.types.at(edgeType.subject_type).size);
 			if (edgeType.outgoing_distrib.type == DISTRIBUTION::ZIPFIAN) {
-//				cout << "zipfianStartValueOut" << endl;
 				edgeType.outgoing_distrib.arg1 = max(1.0, round(meanICsPerNodeForInDistr - meanICsPerNodeForOutDistr));
 			} else {
 				changeDistributionParams(edgeType.outgoing_distrib, meanICsPerNodeForInDistr, conf.types.at(edgeType.subject_type).size, conf.types.at(edgeType.subject_type).size);
@@ -207,12 +226,6 @@ void incrementalDeterministicGraphGenerator::changeDistributionParams(config::ed
 	} else {
 		subjectProbOrSize = conf.types.at(edgeType.subject_type).size;
 		objectProbOrSize = conf.types.at(edgeType.object_type).size;
-	}
-
-	// In-distr is undefined, so change this in-distr
-	if (edgeType.incoming_distrib.type == DISTRIBUTION::UNDEFINED) {
-		double meanICsPerNodeForOutDistr = getMeanICsPerNode(edgeType.outgoing_distrib, 10000);
-		changeDistributionParams(edgeType.incoming_distrib, meanICsPerNodeForOutDistr, subjectProbOrSize, objectProbOrSize);
 	}
 
 	// Out-distr is Zipfian, so change the params of the in-distr (only if )
@@ -252,9 +265,6 @@ void incrementalDeterministicGraphGenerator::changeDistributionParams(config::ed
 		if (meanICsPerNodeForOutDistr * subjectProbOrSize >
 			meanICsPerNodeForInDistr * objectProbOrSize) {
 			// Change in-distr
-			cout << "meanICsPerNodeForOutDistr: " << meanICsPerNodeForOutDistr << endl;
-			cout << "subjectProbOrSize: " << subjectProbOrSize << endl;
-			cout << "objectProbOrSize: " << objectProbOrSize << endl;
 			changeDistributionParams(edgeType.incoming_distrib, meanICsPerNodeForOutDistr, subjectProbOrSize, objectProbOrSize);
 			return;
 		} else {
@@ -395,8 +405,12 @@ void incrementalDeterministicGraphGenerator::processIteration(int iterationNumbe
 	int n = min(subjectNodeIdVector.size(), objectNodeIdVector.size());
 	int c = getDistributionRandomnessTradeoff(edgeType, iterationNumber);
 	int edgesInThisIteration = n-c;
+	bool lastEdge = false;
 	for (int i=0; i<edgesInThisIteration; i++) {
-		addEdge(nodes.first[subjectNodeIdVector[i]], nodes.second[objectNodeIdVector[i]], edgeType.predicate, outputFile);
+		if (i == edgesInThisIteration-1) {
+			lastEdge = true;
+		}
+		addEdge(nodes.first[subjectNodeIdVector[i]], nodes.second[objectNodeIdVector[i]], edgeType.predicate, outputFile, lastEdge);
 	}
 
 
@@ -445,7 +459,7 @@ void incrementalDeterministicGraphGenerator::processEdgeType(config::edge & edge
 	} else {
 		nmOfIterations = max(conf.types.at(edgeType.object_type).size, conf.types.at(edgeType.subject_type).size);
 	}
-	int sf = 100;
+	int sf = 1000;
 //	cout << "Total number of iterations: " << nmOfIterations << endl;
 
 

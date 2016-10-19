@@ -159,7 +159,9 @@ void parse_schema(pugi::xml_node node, config::config & conf) {
                 outdistribution = distribution(DISTRIBUTION::ZIPFIAN, 0, 2.5);
             }
             
-            
+            if(indistribution.type == DISTRIBUTION::UNDEFINED) {
+				indistribution = distribution(DISTRIBUTION::NORMAL, 0, 1);
+			}
             
             conf.schema.add_edge(source_type, symbol, target_type, multiplicity, edgeTypeId, outdistribution, indistribution);
             //cout << "conf.add_edge "  << source_type << " " << symbol << " " << target_type << " " << multiplicity << " " << outdistribution << " " << indistribution <<endl;

@@ -22,6 +22,7 @@ private:
 	config::config conf;
 	pair<vector<graphNode>, vector<graphNode>> nodes;
 	graphNode tempNode = graphNode();
+	int outputBufferLines = 0;
 
 	cumulativeDistributionUtils cumDistrUtils;
 
@@ -47,7 +48,7 @@ private:
 //	int findTargetNode(config::edge & edgeType, int sourceNodeLocalId, vector<graphNode*> &nodesWithOpenICs);
 //	graphNode *findNodeIdFromCumulProbs(vector<float> & cumulProbs, bool findSourceNode);
 
-	void addEdge(graphNode &sourceNode, graphNode &targetNode, int predicate, ofstream*  outputFiles);
+	void addEdge(graphNode &sourceNode, graphNode &targetNode, int predicate, ofstream*  outputFiles, bool lastEdge);
 
 	void updateInterfaceConnectionsForZipfianDistributions(vector<graphNode> *nodes, distribution distr);
 //	pair<int,int> updateInterfaceConnectionsForZipfianDistributions(config::edge & edgeType);

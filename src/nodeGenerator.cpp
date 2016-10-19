@@ -176,12 +176,12 @@ void nodeGenerator::addNodes(config::edge & edgeType, int type1, int type2, bool
 }
 
 void nodeGenerator::addSubjectNodes(config::edge & edgeType) {
-	for (int i=0; i<100; i++) {
+	for (int i=0; i<1000; i++) {
 		addNodes(edgeType, edgeType.subject_type, edgeType.object_type, true);
 	}
 }
 void nodeGenerator::addObjectNodes(config::edge & edgeType) {
-	for (int i=0; i<100; i++) {
+	for (int i=0; i<1000; i++) {
 		addNodes(edgeType, edgeType.object_type, edgeType.subject_type, false);
 	}
 }

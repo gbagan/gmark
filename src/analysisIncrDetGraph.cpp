@@ -20,6 +20,24 @@ analysisIncrDetGraph::~analysisIncrDetGraph() {
 	// TODO Auto-generated destructor stub
 }
 
+void analysisIncrDetGraph::numberOfEdgesVsNode() {
+	cout << "\n\n-----Number of edges-----\n";
+	int numberOfEdges = 0;
+	string line;
+	ifstream myfile(outpuFile);
+	if (myfile.is_open()) {
+		while (getline(myfile, line)) {
+			numberOfEdges++;
+		}
+	} else {
+		cout << "Unable to open file";
+	}
+	myfile.close();
+
+	cout << "Number of nodes: " << conf.nb_nodes << endl;
+	cout << "Number of edges: " << numberOfEdges << endl;
+}
+
 void analysisIncrDetGraph::numberOfNodesAnalysis() {
 	cout << "\n\n-----Node-size analysis-----\n";
 
@@ -75,15 +93,18 @@ void analysisIncrDetGraph::distributionAnalysis(config::edge edgeType, ofstream 
 			string predicate = getPred.substr(0, getPred.find(" "));
 			if (stoi(predicate) == edgeType.predicate) {
 				temp = line;
+				string subjectType = temp.substr(0, temp.find("-"));
 				string getSub = temp.erase(0, temp.find("-")+1);
 				string subject = getSub.substr(0, getSub.find(" "));
-				if (stoi(subject) > maxSubject) {
+				if (stoi(subjectType) == edgeType.subject_type && stoi(subject) > maxSubject) {
 					maxSubject = stoi(subject);
 				}
 
+				getPred = getPred.erase(0, getPred.find(" ")+1);
+				string objectType = getPred.substr(0, getPred.find("-"));
 				string getObj = getPred.erase(0, getPred.find("-")+1);
 				string object = getObj.substr(0, getObj.length());
-				if (stoi(object) > maxObject) {
+				if (stoi(objectType) == edgeType.object_type && stoi(object) > maxObject) {
 					maxObject = stoi(object);
 				}
 			}
@@ -117,13 +138,20 @@ void analysisIncrDetGraph::distributionAnalysis(config::edge edgeType, ofstream 
 			string predicate = getPred.substr(0, getPred.find(" "));
 			if (stoi(predicate) == edgeType.predicate) {
 				temp = line;
+				string subjectType = temp.substr(0, temp.find("-"));
 				string getSub = temp.erase(0, temp.find("-")+1);
 				string subject = getSub.substr(0, getSub.find(" "));
-				outDistr.at(stoi(subject))++;
 
+				getPred = getPred.erase(0, getPred.find(" ")+1);
+
+				string objectType = getPred.substr(0, getPred.find("-"));
 				string getObj = getPred.erase(0, getPred.find("-")+1);
 				string object = getObj.substr(0, getObj.length());
-				inDistr.at(stoi(object))++;
+
+				if (stoi(objectType) == edgeType.object_type && stoi(subjectType) == edgeType.subject_type) {
+					outDistr.at(stoi(subject))++;
+					inDistr.at(stoi(object))++;
+				}
 			}
 		}
 		myfile.close();
@@ -196,7 +224,7 @@ void analysisIncrDetGraph::printToRfile(ofstream& rFile, bool outDistr, config::
 		rFile << "lines(x,y/sum)" << endl;
 
 		rFile << "\n# Log-log plot" << endl;
-		rFile << "plot(sort(InDistribution, decreasing=TRUE), log=\"xy\", ylab=\"Number of edges\", xlab=\"" << conf.types.at(nodeType).alias << " sorted on number of edges in edge-type " << edge.edge_type_id << "\", main=\"Log-log plot of the Zipfian "<< distributionVar <<" of edge-type " << edge.edge_type_id << "\")" << endl;
+		rFile << "plot(sort("<< distributionVar <<", decreasing=TRUE), log=\"xy\", ylab=\"Number of edges\", xlab=\"" << conf.types.at(nodeType).alias << " sorted on number of edges in edge-type " << edge.edge_type_id << "\", main=\"Log-log plot of the Zipfian "<< distributionVar <<" of edge-type " << edge.edge_type_id << "\")" << endl;
 
 		rFile << "\n# Zoomed view" << endl;
 		rFile << "hist(" << distributionVar <<", xlab=\"Number of edges per " << conf.types.at(nodeType).alias << "\", breaks=c(seq(min("<< distributionVar <<")-0.5, max("<< distributionVar <<")+0.5,1)), main=\""<< distributionVar <<" of edge-type " << edge.edge_type_id << "\", prob=TRUE, xlim=c(0,10))" << endl;
@@ -241,7 +269,7 @@ void analysisIncrDetGraph::printToRfile(ofstream& rFile, bool outDistr, config::
 //		rFile << "plot(pdf, main=\""<< distributionVar <<" of edge-type " << edge.edge_type_id << "\", xlab=\"" << conf.types.at(nodeType).alias << " sorted on the number of out-going edges with edge-type " << edge.edge_type_id << "\", ylab=\"Density\", log=\"xy\")" << endl;
 //		rFile << "par(pch=22, col=\"blue\")" << endl;
 //		rFile << "lines(xValues, zipf, type=\"l\")" << endl;
-	} else if(distr->type == DISTRIBUTION::NORMAL) {
+	} else if(distr->type == DISTRIBUTION::NORMAL || distr->type == DISTRIBUTION::UNDEFINED) {
 		rFile << "xValues = seq(min(" << distributionVar << ")-0.5, max(" << distributionVar << ")+0.5, 0.01)" << endl;
 		rFile << "norm = dnorm(xValues, mean=" << distr->arg1 << ", sd=" << distr->arg2 << ")" << endl;
 		rFile << "par(pch=22, col=\"blue\")" << endl;

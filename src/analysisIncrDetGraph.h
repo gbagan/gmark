@@ -26,6 +26,7 @@ public:
 
 	void numberOfNodesAnalysis();
 	void distributionAnalysis(config::edge edgeType, ofstream & rFile);
+	void numberOfEdgesVsNode();
 };
 
 } /* namespace std */
