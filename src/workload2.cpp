@@ -327,7 +327,7 @@ void generate_random_path(const graph & graph, const matrix_of_paths & matrix, l
         }
     
         if (nb_paths == 0) {
-            throw string("error: generate_random_path ") + to_string(__LINE__);
+            throw string("error: generate_random_path ") + patch::to_string(__LINE__);
             //cerr << "error: generate_random_path " << __LINE__ << endl;
             //exit(-1);
         }
@@ -347,7 +347,7 @@ void generate_random_path(const graph & graph, const matrix_of_paths & matrix, l
     }
     
     if(matrix.data[len][current_node].count(current_sel) == 0 || matrix.data[len][current_node].at(current_sel) == 0) {
-        throw string("error: generate_random_path ") + to_string(__LINE__);
+        throw string("error: generate_random_path ") + patch::to_string(__LINE__);
         //cerr << "error: generate_random_path " << __LINE__ << endl;
         //exit(0);
     }
@@ -555,8 +555,8 @@ void generate_arity_more_than_2(workload::query & q, size_t arity, bool is_cycle
     for (size_t i = 0; i < arity; i++) {
         while (true) {
             size_t i = uniform_random_generator(0, arity-1).next();
-            if(std::find(q.variables.begin(), q.variables.end(), "?x" + to_string(i)) == q.variables.end()) {
-		q.variables.push_back("?x" + to_string(i));
+            if(std::find(q.variables.begin(), q.variables.end(), "?x" + patch::to_string(i)) == q.variables.end()) {
+		q.variables.push_back("?x" + patch::to_string(i));
                 break;
             }
         }
@@ -589,8 +589,8 @@ void generate_chain(const config::config & conf, const config::workload & wconf,
     
     for(size_t i = 0; i < nb_conjs; i++) {
         auto & conjunct = body.conjuncts[i];
-        conjunct.source = "?x" + to_string(i);
-        conjunct.target = "?x" + to_string(i+1);
+        conjunct.source = "?x" + patch::to_string(i);
+        conjunct.target = "?x" + patch::to_string(i+1);
         conjunct.star = path[i].star;
         generate_random_conjunct(conf, wconf, path[i].start, path[i].selectivity, path[i].end, conjunct);
     }
@@ -603,7 +603,7 @@ void generate_chain(const config::config & conf, const config::workload & wconf,
     }
     else if (arity == 2) {
         q.variables.push_back("?x0");
-        q.variables.push_back("?x" + to_string(nb_conjs));
+        q.variables.push_back("?x" + patch::to_string(nb_conjs));
     }
     else if (arity > 2) {
         generate_arity_more_than_2(q, arity, false);
@@ -650,7 +650,7 @@ void generate_star(const config::config & conf, const config::workload & wconf, 
         auto & conjunct = body.conjuncts[i];
         generate_random_path(g, pathmat, central_type, 1, wconf.multiplicity, path);
         conjunct.source = "?x0";
-        conjunct.target = "?x" + to_string(i+1);
+        conjunct.target = "?x" + patch::to_string(i+1);
         conjunct.star = path[0].star;
         generate_random_conjunct(conf, wconf, central_type, path[0].selectivity, path[0].end, conjunct);
     }
@@ -701,8 +701,8 @@ void generate_cycle(const config::config & conf, const config::workload & wconf,
     
     for(size_t i = 0; i < n1; i++) {
         auto & conjunct = body.conjuncts[i];
-        conjunct.source = "?x" + to_string(i);
-        conjunct.target = "?x" + to_string(i+1);
+        conjunct.source = "?x" + patch::to_string(i);
+        conjunct.target = "?x" + patch::to_string(i+1);
         conjunct.star = path[i].star;
         generate_random_conjunct(conf, wconf, path[i].start, path[i].selectivity, path[i].end, conjunct);
     }
@@ -717,12 +717,12 @@ void generate_cycle(const config::config & conf, const config::workload & wconf,
         if (i == 0)
             conjunct.source = "?x0";
         else
-            conjunct.source = "?x" + to_string(n1+i);
+            conjunct.source = "?x" + patch::to_string(n1+i);
         
         if (i == n2-1)
-            conjunct.target = "?x" + to_string(n1);
+            conjunct.target = "?x" + patch::to_string(n1);
         else
-            conjunct.target = "?x" + to_string(n1+i+1);
+            conjunct.target = "?x" + patch::to_string(n1+i+1);
         
         conjunct.star = path2[i].star;
         generate_random_conjunct(conf, wconf, path2[i].start, path2[i].selectivity, path2[i].end, conjunct);
@@ -735,7 +735,7 @@ void generate_cycle(const config::config & conf, const config::workload & wconf,
     }
     else if (arity == 2) {
         q.variables.push_back("?x0");
-        q.variables.push_back("?x" + to_string(n1));
+        q.variables.push_back("?x" + patch::to_string(n1));
     }
     else if (arity > 2) {
         generate_arity_more_than_2(q, arity, true);
@@ -773,8 +773,8 @@ void generate_starchain(const config::config & conf, const config::workload & wc
     
     for(size_t i = 0; i < n1; i++) {
         auto & conjunct = body.conjuncts[i];
-        conjunct.source = "?x" + to_string(i);
-        conjunct.target = "?x" + to_string(i+1);
+        conjunct.source = "?x" + patch::to_string(i);
+        conjunct.target = "?x" + patch::to_string(i+1);
         conjunct.star = path[i].star;
         generate_random_conjunct(conf, wconf, path[i].start, path[i].selectivity, path[i].end, conjunct);
     }
@@ -789,7 +789,7 @@ void generate_starchain(const config::config & conf, const config::workload & wc
         auto & conjunct = body.conjuncts[n1+i];
         generate_random_path(g, pathmat2, path[0].start, 1, wconf.multiplicity, path2);
         conjunct.source = "?x0";
-        conjunct.target = "?x" + to_string(n1+i+1);
+        conjunct.target = "?x" + patch::to_string(n1+i+1);
         conjunct.star = path[0].star;
         generate_random_conjunct(conf, wconf, path2[0].start, path2[0].selectivity, path2[0].end, conjunct);
     }
@@ -797,8 +797,8 @@ void generate_starchain(const config::config & conf, const config::workload & wc
     for(size_t i = 0; i < n3; i++) {
         auto & conjunct = body.conjuncts[n1+n2+i];
         generate_random_path(g, pathmat2, path[n1-1].end, 1, wconf.multiplicity, path2);
-        conjunct.source = "?x" + to_string(n1);
-        conjunct.target = "?x" + to_string(n1+n2+i+1);
+        conjunct.source = "?x" + patch::to_string(n1);
+        conjunct.target = "?x" + patch::to_string(n1+n2+i+1);
         conjunct.star = path[0].star;
         generate_random_conjunct(conf, wconf, path2[0].start, path2[0].selectivity, path2[0].end, conjunct);
     }
@@ -813,7 +813,7 @@ void generate_starchain(const config::config & conf, const config::workload & wc
     }
     else if (arity == 2) {
         q.variables.push_back("?x0");
-        q.variables.push_back("?x" + to_string(n1));
+        q.variables.push_back("?x" + patch::to_string(n1));
     }
     else if (arity > 2) {
         generate_arity_more_than_2(q, arity, false);

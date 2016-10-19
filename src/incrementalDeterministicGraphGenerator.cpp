@@ -44,12 +44,12 @@ void incrementalDeterministicGraphGenerator::addEdge(graphNode &sourceNode, grap
 //	}
 
 	outputBufferLines++;
+	string outputBuffer = to_string(sourceNode.type) + "-" + to_string(sourceNode.iterationId) + " " + to_string(predicate) + " " + to_string(targetNode.type) + "-" + to_string(targetNode.iterationId);
 	if (outputBufferLines % 100 == 0 || lastEdge) {
-		string outputBuffer = patch::to_string(sourceNode.type) + "-" + patch::to_string(sourceNode.iterationId) + " " + patch::to_string(predicate) + " " + patch::to_string(targetNode.type) + "-" + patch::to_string(targetNode.iterationId);
 		// Use endl to flush
 		*outputFile << outputBuffer << endl;
 	} else {
-		string outputBuffer = patch::to_string(sourceNode.type) + "-" + patch::to_string(sourceNode.iterationId) + " " + patch::to_string(predicate) + " " + patch::to_string(targetNode.type) + "-" + patch::to_string(targetNode.iterationId) + "\n";
+		outputBuffer += "\n";
 		*outputFile << outputBuffer;
 	}
 //	*outputFile << sourceNode.type << "-" << sourceNode.iterationId << " " << predicate << " " << targetNode.type << "-" << targetNode.iterationId << endl;

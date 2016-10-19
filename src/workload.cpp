@@ -73,7 +73,7 @@ void write_xml(const query & query, ostream & stream, config::config & conf) {
     stream << "    <number>" << query.info.number << "</number>\n";
     stream << "    <input>" << query.info.input << "</input>\n";
     stream << "    <arity>" << query.info.arity << "</arity>\n";
-    stream << "    <selectivity>" << (query.info.arity == 2 ? to_string(query.info.selectivity) : "-") << "</selectivity>\n";
+    stream << "    <selectivity>" << (query.info.arity == 2 ? patch::to_string(query.info.selectivity) : "-") << "</selectivity>\n";
     stream << "    <multiplicity>" << query.info.multiplicity << "</multiplicity>\n";
     stream << "    <conjunct>" << query.info.conjunct << "</conjunct>\n";
     stream << "    <disjuncts>" << query.info.disjuncts.first << "-" << query.info.disjuncts.second << "</disjuncts>\n";
@@ -381,8 +381,8 @@ void generate_chain(const config::config & conf, const config::workload & wconf,
     
     for(size_t i = 0; i < nb_conjs; i++) {
         auto & conjunct = body.conjuncts[i];
-        conjunct.source = "?x" + to_string(i);
-        conjunct.target = "?x" + to_string(i+1);
+        conjunct.source = "?x" + patch::to_string(i);
+        conjunct.target = "?x" + patch::to_string(i+1);
         conjunct.star = path[2*i+1];
         generate_random_conjunct(conf, wconf, path[2*i], path[2*i+2], conjunct);
     }
@@ -393,7 +393,7 @@ void generate_chain(const config::config & conf, const config::workload & wconf,
     }
     else if (arity >= 2) {
         q.variables.push_back("?x0");
-        q.variables.push_back("?x" + to_string(nb_conjs));
+        q.variables.push_back("?x" + patch::to_string(nb_conjs));
     }
 }
 
