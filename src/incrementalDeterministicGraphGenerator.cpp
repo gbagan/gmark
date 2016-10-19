@@ -39,10 +39,10 @@ void incrementalDeterministicGraphGenerator::addEdge(graphNode &sourceNode, grap
 	sourceNode.decrementOpenInterfaceConnections();
 	targetNode.decrementOpenInterfaceConnections();
 
-	if (outputBufferLines < 10 && predicate == 0) {
-		cout << to_string(sourceNode.type) + "-" + to_string(sourceNode.iterationId) + " " + to_string(predicate) + " " + to_string(targetNode.type) + "-" + to_string(targetNode.iterationId) + "\n";
-	}
-//	cout << sourceNode.type << "-" << sourceNode.iterationId << " " << predicate << " " << targetNode.type << "-" << targetNode.iterationId << endl;
+//	if (outputBufferLines < 10 && predicate == 0) {
+//		cout << to_string(sourceNode.type) + "-" + to_string(sourceNode.iterationId) + " " + to_string(predicate) + " " + to_string(targetNode.type) + "-" + to_string(targetNode.iterationId) + "\n";
+//	}
+
 	outputBufferLines++;
 	if (outputBufferLines % 100 == 0 || lastEdge) {
 		string outputBuffer = to_string(sourceNode.type) + "-" + to_string(sourceNode.iterationId) + " " + to_string(predicate) + " " + to_string(targetNode.type) + "-" + to_string(targetNode.iterationId);
@@ -163,7 +163,7 @@ double incrementalDeterministicGraphGenerator::getMeanICsPerNode(distribution & 
 void incrementalDeterministicGraphGenerator::changeDistributionParams(distribution & distr, double meanICsPerNodeForOtherDistr, double probOrSizeOther, double probOrSize) {
 	if (distr.type == DISTRIBUTION::NORMAL) {
 		distr.arg1 = (probOrSizeOther * meanICsPerNodeForOtherDistr) / probOrSize;
-			cout << "new normal mean: " << distr.arg1 << endl;
+//			cout << "new normal mean: " << distr.arg1 << endl;
 	} else if (distr.type == DISTRIBUTION::UNIFORM) {
 		double diff = distr.arg2 - distr.arg1;
 		double newMean = (probOrSizeOther * meanICsPerNodeForOtherDistr) / probOrSize;
@@ -174,8 +174,8 @@ void incrementalDeterministicGraphGenerator::changeDistributionParams(distributi
 			distr.arg1 = round(newMean);
 			distr.arg2 = round(newMean);
 		}
-		cout << "New uniform min: " << distr.arg1 << endl;
-		cout << "New uniform max: " << distr.arg2 << endl;
+//		cout << "New uniform min: " << distr.arg1 << endl;
+//		cout << "New uniform max: " << distr.arg2 << endl;
 	}
 }
 

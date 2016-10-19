@@ -21,7 +21,6 @@ analysisIncrDetGraph::~analysisIncrDetGraph() {
 }
 
 void analysisIncrDetGraph::numberOfEdgesVsNode() {
-	cout << "\n\n-----Number of edges-----\n";
 	int numberOfEdges = 0;
 	string line;
 	ifstream myfile(outpuFile);
@@ -34,8 +33,8 @@ void analysisIncrDetGraph::numberOfEdgesVsNode() {
 	}
 	myfile.close();
 
-	cout << "Number of nodes: " << conf.nb_nodes << endl;
-	cout << "Number of edges: " << numberOfEdges << endl;
+	cout << "Number of nodes in conf: " << conf.nb_nodes << endl;
+	cout << "Number of edges generated: " << numberOfEdges << endl;
 }
 
 void analysisIncrDetGraph::numberOfNodesAnalysis() {
