@@ -161,7 +161,7 @@ void analysisIncrDetGraph::distributionAnalysis(config::edge edgeType, ofstream 
 	int i = 0;
 	rFile << "OutDistribution <- c(";
 	for (int nm: outDistr) {
-		rFile << to_string(nm);
+		rFile << nm;
 		if(i != outDistr.size()-1) {
 			rFile << ", ";
 		}
@@ -176,7 +176,7 @@ void analysisIncrDetGraph::distributionAnalysis(config::edge edgeType, ofstream 
 	i=0;
 	rFile << "InDistribution <- c(";
 	for (int nm: inDistr) {
-		rFile << to_string(nm);
+		rFile << nm;
 		if(i != inDistr.size()-1) {
 			rFile << ", ";
 		}
