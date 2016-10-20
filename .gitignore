@@ -9,3 +9,7 @@ src/.cproject
 src/distributionAnalysis.r
 src/output.txt
 src/tempOutputFile*
+distributionAnalysis.r
+output.txt
+tempOutputFile*
+runScript.sh

@@ -363,7 +363,7 @@ int incrementalDeterministicGraphGenerator::getDistributionRandomnessTradeoff(co
 		c = round(max(getMeanICsPerNode(edgeType.outgoing_distrib, subjects), getMeanICsPerNode(edgeType.incoming_distrib, objects)));
 	}
 
-	return c*scale;
+	return max(scale, c*scale);
 }
 
 vector<int> constructNodesVector(vector<graphNode> & nodes) {
@@ -449,7 +449,6 @@ void incrementalDeterministicGraphGenerator::processEdgeType(config::edge & edge
 	randomGenerator.seed(seed);
 
 	changeDistributionParams(edgeType);
-
 	nodeGen = nodeGenerator(edgeType, &randomGenerator, &nodes, &conf);
 
 	int nmOfIterations;
