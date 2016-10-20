@@ -220,7 +220,7 @@ int main(int argc, char ** argv) {
     conf.complete_config();
     
 
-    cout << "\n\nConfig file: " << conf_file << endl;
+    cout << "Config file: " << conf_file << endl;
 
     // #### ALGORITHM ####
     chrono::high_resolution_clock::time_point start = chrono::high_resolution_clock::now();
@@ -240,7 +240,7 @@ int main(int argc, char ** argv) {
 //		cout << "Seed " << i << ": " << seed << endl;
 		seeds[i] = seed;
 
-		tempOutputFileNames[i] = "tempOutputFile" + patch::to_string(i) + ".txt";
+		tempOutputFileNames[i] = "tempOutputFile" + to_string(i) + ".txt";
 	}
 
 	// ##Parallel##

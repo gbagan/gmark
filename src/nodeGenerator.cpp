@@ -115,7 +115,7 @@ void nodeGenerator::addNode(config::edge & edgeType, bool addSourceNode) {
 	} else {
 		numberOfICs = getNumberOfICs(distr, addSourceNode);
 	}
-	graphNode *n = new graphNode(patch::to_string(type) + "-" + patch::to_string(numberOfNodes), numberOfNodes, type, conf->schema.edges.size(), conf->types.at(otherType).size*2, numberOfICs, pos);
+	graphNode *n = new graphNode(to_string(type) + "-" + to_string(numberOfNodes), numberOfNodes, type, conf->schema.edges.size(), conf->types.at(otherType).size*2, numberOfICs, pos);
 
 	if (addSourceNode) {
 //		initializeConnections(*n, conf->types.at(otherType).size*2);

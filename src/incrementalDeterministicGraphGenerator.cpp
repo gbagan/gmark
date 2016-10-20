@@ -399,8 +399,8 @@ void incrementalDeterministicGraphGenerator::processIteration(int iterationNumbe
 	vector<int> subjectNodeIdVector = constructNodesVector(nodes.first);
 	vector<int> objectNodeIdVector = constructNodesVector(nodes.second);
 
-	random_shuffle(objectNodeIdVector.begin(), objectNodeIdVector.end());
-	random_shuffle(subjectNodeIdVector.begin(), subjectNodeIdVector.end());
+	shuffle(objectNodeIdVector.begin(), objectNodeIdVector.end(), randomGenerator);
+	shuffle(subjectNodeIdVector.begin(), subjectNodeIdVector.end(), randomGenerator);
 
 	int n = min(subjectNodeIdVector.size(), objectNodeIdVector.size());
 	int c = getDistributionRandomnessTradeoff(edgeType, iterationNumber);

@@ -9,6 +9,7 @@
 #define INCREMENTALDETERMINISTICGRAPHGENERATOR_H_
 
 #include <random>
+#include <algorithm>
 #include <fstream>
 #include "config.h"
 #include "cumulativeDistributionUtils.h"
