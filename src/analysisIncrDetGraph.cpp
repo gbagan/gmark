@@ -73,7 +73,7 @@ void analysisIncrDetGraph::numberOfNodesAnalysis() {
 
 
 void analysisIncrDetGraph::distributionAnalysis(config::edge edgeType, ofstream & rFile) {
-//	cout << "\n\n-----Distribution analysis-----\n";
+	cout << "\n\n-----Distribution analysis-----\n";
 //	cout << "EdgeType: " << to_string(edgeType) << endl;
 
 

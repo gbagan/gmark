@@ -107,7 +107,7 @@ int binarySearch(int low, int high, vector<double> & cdf, double randomValue) {
 		if (randomValue < cdf[mid]) {
 			return binarySearch(low, mid, cdf, randomValue);
 		} else {
-			return binarySearch(low+mid, high, cdf, randomValue);
+			return binarySearch(mid, high, cdf, randomValue);
 		}
 	}
 }
