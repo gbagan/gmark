@@ -61,6 +61,8 @@ private:
 	void changeDistributionParams(distribution & distr, double meanICsPerNodeForOtherDistr, double probOrSizeOther, double probOrSize);
 
 	int getDistributionRandomnessTradeoff(config::edge edgeType, int iterationNumber);
+
+	vector<graphNode*> constructNodesVectorAndRemoveNodeWithZeroICs(vector<graphNode> &nodes_);
 public:
 	incrementalDeterministicGraphGenerator(config::config configuration);
 	virtual ~incrementalDeterministicGraphGenerator();

@@ -30,9 +30,11 @@ public:
 	default_random_engine* randomGenerator;
 	pair<vector<graphNode>, vector<graphNode>>* nodes;
 	config::config* conf;
+	int birthIdSubject;
+	int birthIdObject;
 
 	nodeGenerator();
-	nodeGenerator(config::edge & edgeType, default_random_engine* randomGenerator, pair<vector<graphNode>, vector<graphNode>>* nodes, config::config* conf);
+	nodeGenerator(config::edge & edgeType, int birthIdSub, int birthIdOb, default_random_engine* randomGenerator, pair<vector<graphNode>, vector<graphNode>>* nodes, config::config* conf);
 	virtual ~nodeGenerator();
 
 	void addSubjectNodes(config::edge & edgeType);

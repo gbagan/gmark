@@ -13,6 +13,8 @@ nodeGenerator::nodeGenerator() {
 	this->randomGenerator = 0;
 	this->nodes = 0;
 	this->conf = 0;
+	this->birthIdSubject = 0;
+	this->birthIdObject = 0;
 }
 nodeGenerator::~nodeGenerator() {
 //	for (graphNode node: nodes->first) {
@@ -23,7 +25,9 @@ nodeGenerator::~nodeGenerator() {
 //	}
 }
 
-nodeGenerator::nodeGenerator(config::edge & edgeType, default_random_engine* randomGenerator_, pair<vector<graphNode>,vector<graphNode>>* nodes_, config::config* conf_) {
+nodeGenerator::nodeGenerator(config::edge & edgeType, int birthIdSubj, int birthIdObj, default_random_engine* randomGenerator_, pair<vector<graphNode>,vector<graphNode>>* nodes_, config::config* conf_) {
+	this->birthIdSubject = birthIdSubj;
+	this->birthIdObject = birthIdObj;
 	this->randomGenerator = randomGenerator_;
 	this->nodes = nodes_;
 	this->conf = conf_;
@@ -73,12 +77,9 @@ int nodeGenerator::getNumberOfICs(distribution distr, bool addSourceNode) {
 	if (numberOfConnections < 0) {
 		numberOfConnections = 0;
 	}
-//	cout << "Before: " << n.getNumberOfInterfaceConnections(findSourceNode) << endl;
-//	n.setNumberOfOpenInterfaceConnections(numberOfConnections);
-//	n.setNumberOfInterfaceConnections(numberOfConnections);
+
+//	cout << "Node get " << numberOfConnections << " interface-connections" << endl;
 	return numberOfConnections;
-//	cout << "Node at iteration " << n.iterationId << " get " << numberOfConnections << " interface-connections" << endl;
-//	cout << "After: " << n.getNumberOfInterfaceConnections(findSourceNode) << endl;
 }
 
 
@@ -86,17 +87,17 @@ void nodeGenerator::addNode(config::edge & edgeType, bool addSourceNode) {
 	distribution distr;
 	size_t type;
 	size_t otherType;
-	int numberOfNodes;
+	int birthId;
 	if(addSourceNode) {
 		distr = edgeType.outgoing_distrib;
 		type = edgeType.subject_type;
 		otherType = edgeType.object_type;
-		numberOfNodes = nodes->first.size();
+		birthId = birthIdSubject;
 	} else {
 		distr = edgeType.incoming_distrib;
 		type = edgeType.object_type;
 		otherType = edgeType.subject_type;
-		numberOfNodes = nodes->second.size();
+		birthId = birthIdObject;
 	}
 
 
@@ -115,13 +116,15 @@ void nodeGenerator::addNode(config::edge & edgeType, bool addSourceNode) {
 	} else {
 		numberOfICs = getNumberOfICs(distr, addSourceNode);
 	}
-	graphNode *n = new graphNode(to_string(type) + "-" + to_string(numberOfNodes), numberOfNodes, type, conf->schema.edges.size(), conf->types.at(otherType).size*2, numberOfICs, pos);
+	graphNode *n = new graphNode(to_string(type) + "-" + to_string(birthId), birthId, type, conf->schema.edges.size(), conf->types.at(otherType).size*2, numberOfICs, numberOfICs, pos);
 
 	if (addSourceNode) {
 //		initializeConnections(*n, conf->types.at(otherType).size*2);
 		nodes->first.push_back(*n);
+		birthIdSubject++;
 	} else {
 		nodes->second.push_back(*n);
+		birthIdObject++;
 	}
 
 //		cout << "Creating a node at iteration " << iterationNumber << " of type:" << type <<

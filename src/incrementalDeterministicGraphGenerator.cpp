@@ -39,7 +39,7 @@ void incrementalDeterministicGraphGenerator::addEdge(graphNode &sourceNode, grap
 	sourceNode.decrementOpenInterfaceConnections();
 	targetNode.decrementOpenInterfaceConnections();
 
-//	if (outputBufferLines < 10 && predicate == 0) {
+//	if (outputBufferLines < 10 && predicate == 1) {
 //		cout << to_string(sourceNode.type) + "-" + to_string(sourceNode.iterationId) + " " + to_string(predicate) + " " + to_string(targetNode.type) + "-" + to_string(targetNode.iterationId) + "\n";
 //	}
 
@@ -366,15 +366,41 @@ int incrementalDeterministicGraphGenerator::getDistributionRandomnessTradeoff(co
 	return max(scale, c*scale);
 }
 
-vector<int> constructNodesVector(vector<graphNode> & nodes) {
-	vector<int> nodesVector;
-	for (graphNode n: nodes) {
+vector<graphNode*> constructNodesVector2(vector<graphNode> & nodes) {
+	vector<graphNode*> nodesVector;
+	for (graphNode & n: nodes) {
 		for (int i=0; i<n.getNumberOfOpenInterfaceConnections(); i++) {
-			nodesVector.push_back(n.iterationId);
+			nodesVector.push_back(&n);
 		}
 	}
 	return nodesVector;
 }
+
+vector<graphNode*> incrementalDeterministicGraphGenerator::constructNodesVectorAndRemoveNodeWithZeroICs(vector<graphNode> &nodes_) {
+	vector<graphNode*> nodesVector;
+	int i=0;
+//	cout << "Vector: [";
+	for (graphNode & n: nodes_) {
+		int ics = n.getNumberOfOpenInterfaceConnections();
+//		cout << ics << endl;
+		if (ics == 0) {
+//			graphNode last = nodes_->back();
+//			nodes_->pop_back();
+//			cout << "Before: " << nodes_->at(i).iterationId << " with "<< nodes_->at(i).getNumberOfOpenInterfaceConnections() << endl;
+//			nodes_->at(i) = last;
+//			cout << "After: " << nodes_->at(i).iterationId << " with "<< nodes_->at(i).getNumberOfOpenInterfaceConnections() << endl;
+		} else {
+			for (int i=0; i<ics; i++) {
+				nodesVector.push_back(&n);
+//				cout << n.iterationId << " ";
+			}
+		}
+		i++;
+	}
+//	cout << "]" << endl;
+	return nodesVector;
+}
+
 
 void incrementalDeterministicGraphGenerator::processIteration(int iterationNumber, config::edge & edgeType, ofstream*  outputFile) {
 //	if (iterationNumber % 1000 == 0) {
@@ -384,23 +410,55 @@ void incrementalDeterministicGraphGenerator::processIteration(int iterationNumbe
 	nodeGen.addObjectNodes(edgeType);
 //	cout << "Subjects: " << nodes.first.size() << endl;
 //	cout << "Objects: " << nodes.second.size() << endl;
+//	for (graphNode n: nodes.first) {
+//		cout << n.iterationId << " openICs: " << n.getNumberOfOpenInterfaceConnections() << endl;
+//		cout << n.iterationId << " ICs: " << n.getNumberOfInterfaceConnections() << endl;
+//	}
 
-	if (conf.types.at(edgeType.subject_type).scalable ^ conf.types.at(edgeType.object_type).scalable) {
-		updateICsForNonScalableType(edgeType, iterationNumber);
+	vector<graphNode*> subjectNodeIdVector, objectNodeIdVector;
+	if ( edgeType.outgoing_distrib.type == DISTRIBUTION::ZIPFIAN ||
+			(!conf.types.at(edgeType.subject_type).scalable && conf.types.at(edgeType.object_type).scalable) ) {
+		subjectNodeIdVector = constructNodesVector2(nodes.first);
+
+		if (edgeType.outgoing_distrib.type == DISTRIBUTION::ZIPFIAN) {
+			updateInterfaceConnectionsForZipfianDistributions(&nodes.first, edgeType.outgoing_distrib);
+		}
+		if (!conf.types.at(edgeType.subject_type).scalable && conf.types.at(edgeType.object_type).scalable) {
+			updateICsForNonScalableType(edgeType, iterationNumber);
+		}
+	} else {
+		subjectNodeIdVector = constructNodesVectorAndRemoveNodeWithZeroICs(nodes.first);
 	}
 
-	if(edgeType.outgoing_distrib.type == DISTRIBUTION::ZIPFIAN) {
-		updateInterfaceConnectionsForZipfianDistributions(&nodes.first, edgeType.outgoing_distrib);
-	}
-	if(edgeType.incoming_distrib.type == DISTRIBUTION::ZIPFIAN) {
-		updateInterfaceConnectionsForZipfianDistributions(&nodes.second, edgeType.incoming_distrib);
+//	cout << "Before shuffled vector: [";
+//	for (int i=0; i<subjectNodeIdVector.size(); i++) {
+//		cout << subjectNodeIdVector[i]->iterationId << " ";
+//	}
+//	cout << "]" << endl;
+
+	if ( edgeType.incoming_distrib.type == DISTRIBUTION::ZIPFIAN ||
+			(conf.types.at(edgeType.subject_type).scalable && !conf.types.at(edgeType.object_type).scalable) ) {
+		objectNodeIdVector = constructNodesVector2(nodes.second);
+
+		if (edgeType.incoming_distrib.type == DISTRIBUTION::ZIPFIAN) {
+			updateInterfaceConnectionsForZipfianDistributions(&nodes.second, edgeType.incoming_distrib);
+		}
+		if (conf.types.at(edgeType.subject_type).scalable && !conf.types.at(edgeType.object_type).scalable) {
+			updateICsForNonScalableType(edgeType, iterationNumber);
+		}
+	} else {
+		objectNodeIdVector = constructNodesVectorAndRemoveNodeWithZeroICs(nodes.second);
 	}
 
-	vector<int> subjectNodeIdVector = constructNodesVector(nodes.first);
-	vector<int> objectNodeIdVector = constructNodesVector(nodes.second);
 
 	shuffle(objectNodeIdVector.begin(), objectNodeIdVector.end(), randomGenerator);
 	shuffle(subjectNodeIdVector.begin(), subjectNodeIdVector.end(), randomGenerator);
+
+//	cout << "Shuffled vector: [";
+//	for (int i=0; i<subjectNodeIdVector.size(); i++) {
+//		cout << subjectNodeIdVector[i]->iterationId << " ";
+//	}
+//	cout << "]" << endl;
 
 	int n = min(subjectNodeIdVector.size(), objectNodeIdVector.size());
 	int c = getDistributionRandomnessTradeoff(edgeType, iterationNumber);
@@ -410,7 +468,8 @@ void incrementalDeterministicGraphGenerator::processIteration(int iterationNumbe
 		if (i == edgesInThisIteration-1) {
 			lastEdge = true;
 		}
-		addEdge(nodes.first[subjectNodeIdVector[i]], nodes.second[objectNodeIdVector[i]], edgeType.predicate, outputFile, lastEdge);
+//		cout << "Add edge: " << subjectNodeIdVector[i]->iterationId << " - " << objectNodeIdVector[i]->iterationId << endl;
+		addEdge(*subjectNodeIdVector[i], *objectNodeIdVector[i], edgeType.predicate, outputFile, lastEdge);
 	}
 
 
@@ -449,7 +508,7 @@ void incrementalDeterministicGraphGenerator::processEdgeType(config::edge & edge
 	randomGenerator.seed(seed);
 
 	changeDistributionParams(edgeType);
-	nodeGen = nodeGenerator(edgeType, &randomGenerator, &nodes, &conf);
+	nodeGen = nodeGenerator(edgeType, 0, 0, &randomGenerator, &nodes, &conf);
 
 	int nmOfIterations;
 	if ((conf.types.at(edgeType.subject_type).scalable && conf.types.at(edgeType.object_type).scalable)
