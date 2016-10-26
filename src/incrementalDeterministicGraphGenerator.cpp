@@ -65,14 +65,12 @@ void incrementalDeterministicGraphGenerator::updateInterfaceConnectionsForZipfia
 	vector<double> zipfianCdf = cumDistrUtils.zipfCdf(distr.arg2, nmNodes);
 	int newInterfaceConnections = 0;
 	int difference = 0;
-	for (int i=0; i<nmNodes; i++) {
-		graphNode *node = &nodesVec->at(i);
+	for (graphNode & node: *nodesVec) {
+		newInterfaceConnections = cumDistrUtils.findPositionInCdf(zipfianCdf, node.getPosition()) + distr.arg1;
 
-		newInterfaceConnections = cumDistrUtils.findPositionInCdf(zipfianCdf, node->getPosition()) + distr.arg1;
-
-		difference = newInterfaceConnections - node->getNumberOfInterfaceConnections();
-		node->incrementOpenInterfaceConnectionsByN(difference);
-		node->setNumberOfInterfaceConnections(newInterfaceConnections);
+		difference = newInterfaceConnections - node.getNumberOfInterfaceConnections();
+		node.incrementOpenInterfaceConnectionsByN(difference);
+		node.setNumberOfInterfaceConnections(newInterfaceConnections);
 	}
 }
 
