@@ -21,11 +21,11 @@ private:
 	int getNumberOfICs(distribution distr, bool addSourceNode);
 	void initializeConnections(graphNode &n, int maxNumberOfConnections);
 
-	uniform_int_distribution<int> uniformOutDistr;
-	normal_distribution<double> normalOutDistr;
-	uniform_int_distribution<int> uniformInDistr;
-	normal_distribution<double> normalInDistr;
-	uniform_real_distribution<double> uniformZeroOneDistr;
+//	uniform_int_distribution<int> uniformOutDistr;
+//	normal_distribution<double> normalOutDistr;
+//	uniform_int_distribution<int> uniformInDistr;
+//	normal_distribution<double> normalInDistr;
+//	uniform_real_distribution<double> uniformZeroOneDistr;
 public:
 	default_random_engine* randomGenerator;
 	pair<vector<graphNode>, vector<graphNode>>* nodes;

@@ -216,11 +216,11 @@ int main(int argc, char ** argv) {
     
     configparser::parse_config(conf_file, conf);
     
-    cout << "complete config" << endl;
+//    cout << "complete config" << endl;
     conf.complete_config();
     
 
-    cout << "Config file: " << conf_file << endl;
+//    cout << "Config file: " << conf_file << endl;
 
     // #### ALGORITHM ####
     chrono::high_resolution_clock::time_point start = chrono::high_resolution_clock::now();
@@ -278,7 +278,7 @@ int main(int argc, char ** argv) {
     chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
 	auto duration = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
 
-	cout << duration << " ms finished the graph" << endl;
+	cout << duration << ", ";
 	// #### ALGORITHM ####
 
 
@@ -298,7 +298,7 @@ int main(int argc, char ** argv) {
 //    }
 //    rFile.close();
 
-    analyzeGraph.numberOfEdgesVsNode();
+//    analyzeGraph.numberOfEdgesVsNode();
 	// #### ANALYSIS ####
 
 //    if(graph_file != "") {
