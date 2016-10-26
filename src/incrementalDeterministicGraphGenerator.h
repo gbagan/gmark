@@ -31,6 +31,14 @@ private:
 
 	config::config conf;
 	pair<vector<graphNode>, vector<graphNode>> nodes;
+	struct edge2 {
+		int subjectType;
+		int subjectId;
+		int predicate;
+		int objectType;
+		int objectId;
+	};
+	vector<edge2> edges;
 	graphNode tempNode = graphNode();
 	int outputBufferLines = 0;
 
@@ -44,7 +52,7 @@ private:
 	uniform_real_distribution<double> uniformDistr = uniform_real_distribution<double>(0.0,1.0);
 
 //	void initializeNodesAndEdges();
-	void processIteration(int iterationNumber, config::edge & edgeType, ofstream*  outputFile);
+	void processIteration(int iterationNumber, config::edge & edgeType);
 
 	// For each iteration
 //	int getNumberOfEdgesPerIteration(config::edge & edgeType, int iterationNumber);
@@ -58,7 +66,7 @@ private:
 //	int findTargetNode(config::edge & edgeType, int sourceNodeLocalId, vector<graphNode*> &nodesWithOpenICs);
 //	graphNode *findNodeIdFromCumulProbs(vector<float> & cumulProbs, bool findSourceNode);
 
-	void addEdge(graphNode &sourceNode, graphNode &targetNode, int predicate, ofstream*  outputFiles, bool lastEdge);
+	void addEdge(graphNode &sourceNode, graphNode &targetNode, int predicate);
 
 	void updateInterfaceConnectionsForZipfianDistributions(vector<graphNode> *nodes, distribution distr);
 //	pair<int,int> updateInterfaceConnectionsForZipfianDistributions(config::edge & edgeType);
@@ -77,7 +85,7 @@ public:
 	virtual ~incrementalDeterministicGraphGenerator();
 
 	void generateIncDetGraph(ofstream*  outputFile, int* seeds, int edgeTypeIdLow, int edgeTypeIdHigh);
-	void processEdgeType(config::edge & edgeType, ofstream*  outputFile, int seed);
+	void processEdgeType(config::edge & edgeType, ofstream & outputFile, int seed);
 };
 
 } /* namespace std */

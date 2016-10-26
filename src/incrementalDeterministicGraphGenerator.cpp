@@ -35,7 +35,7 @@ incrementalDeterministicGraphGenerator::~incrementalDeterministicGraphGenerator(
 //}
 
 
-void incrementalDeterministicGraphGenerator::addEdge(graphNode &sourceNode, graphNode &targetNode, int predicate, ofstream*  outputFile, bool lastEdge) {
+void incrementalDeterministicGraphGenerator::addEdge(graphNode &sourceNode, graphNode &targetNode, int predicate) {
 	sourceNode.decrementOpenInterfaceConnections();
 	targetNode.decrementOpenInterfaceConnections();
 
@@ -43,14 +43,24 @@ void incrementalDeterministicGraphGenerator::addEdge(graphNode &sourceNode, grap
 //		cout << to_string(sourceNode.type) + "-" + to_string(sourceNode.iterationId) + " " + to_string(predicate) + " " + to_string(targetNode.type) + "-" + to_string(targetNode.iterationId) + "\n";
 //	}
 
-	outputBufferLines++;
-	string outputBuffer = to_string(sourceNode.type) + "-" + to_string(sourceNode.iterationId) + " " + to_string(predicate) + " " + to_string(targetNode.type) + "-" + to_string(targetNode.iterationId);
-	if (outputBufferLines % 50 == 0 || lastEdge) {
+	edge2 newEdge;
+	newEdge.subjectId = sourceNode.iterationId;
+	newEdge.subjectType = sourceNode.type;
+	newEdge.predicate = predicate;
+	newEdge.objectId = targetNode.iterationId;
+	newEdge.objectType = targetNode.type;
+
+	edges.push_back(newEdge);
+
+//	string outputBuffer = to_string(sourceNode.type) + "-" + to_string(sourceNode.iterationId) + " " + to_string(predicate) + " " + to_string(targetNode.type) + "-" + to_string(targetNode.iterationId);
+
+//	outputBufferLines++;
+//	if (outputBufferLines % 50 == 0 || lastEdge) {
 		// Use endl to flush
-		*outputFile << outputBuffer << endl;
-	} else {
-		outputBuffer += outputBuffer + "\n";
-	}
+//		*outputFile << outputBuffer << endl;
+//	} else {
+//		outputBuffer += outputBuffer + "\n";
+//	}
 //	*outputFile << sourceNode.type << "-" << sourceNode.iterationId << " " << predicate << " " << targetNode.type << "-" << targetNode.iterationId << endl;
 }
 // ####### Generate edges #######
@@ -105,7 +115,7 @@ void incrementalDeterministicGraphGenerator::updateICsForNonScalableType(vector<
 		}
 
 //		cout << "Update nodes with " << increment << endl;
-		for (graphNode node: nodes) {
+		for (graphNode & node: nodes) {
 			node.incrementOpenInterfaceConnectionsByN(increment);
 			node.incrementInterfaceConnectionsByN(increment);
 		}
@@ -410,9 +420,9 @@ vector<graphNode*> incrementalDeterministicGraphGenerator::constructNodesVectorA
 }
 
 
-void incrementalDeterministicGraphGenerator::processIteration(int iterationNumber, config::edge & edgeType, ofstream*  outputFile) {
+void incrementalDeterministicGraphGenerator::processIteration(int iterationNumber, config::edge & edgeType) {
 //	if (iterationNumber % 1000 == 0) {
-//		cout << endl<< "---Process interationNumber " << to_string(iterationNumber) << " of edgeType " << to_string(edgeType.edge_type_id) << "---" << endl;
+//		cout <<÷ endl<< "---Process interationNumber " << to_string(iterationNumber) << " of edgeType " << to_string(edgeType.edge_type_id) << "---" << endl;
 //	}
 	chrono::high_resolution_clock::time_point start = chrono::high_resolution_clock::now();
 	nodeGen.addSubjectNodes(edgeType);
@@ -465,13 +475,10 @@ void incrementalDeterministicGraphGenerator::processIteration(int iterationNumbe
 	int n = min(subjectNodeIdVector.size(), objectNodeIdVector.size());
 	int c = getDistributionRandomnessTradeoff(edgeType, iterationNumber);
 	int edgesInThisIteration = n-c;
-	bool lastEdge = false;
+
 	for (int i=0; i<edgesInThisIteration; i++) {
-		if (i == edgesInThisIteration-1) {
-			lastEdge = true;
-		}
 //		cout << "Add edge: " << subjectNodeIdVector[i]->iterationId << " - " << objectNodeIdVector[i]->iterationId << endl;
-		addEdge(*subjectNodeIdVector[i], *objectNodeIdVector[i], edgeType.predicate, outputFile, lastEdge);
+		addEdge(*subjectNodeIdVector[i], *objectNodeIdVector[i], edgeType.predicate);
 	}
 	end = chrono::high_resolution_clock::now();
 	duration = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
@@ -506,8 +513,8 @@ void incrementalDeterministicGraphGenerator::processIteration(int iterationNumbe
 //	}
 }
 
-void incrementalDeterministicGraphGenerator::processEdgeType(config::edge & edgeType, ofstream*  outputFile, int seed) {
-//	cout << endl << endl << "-----Processing edge-type " << to_string(edgeType.edge_type_id) << "-----" << endl;
+void incrementalDeterministicGraphGenerator::processEdgeType(config::edge & edgeType, ofstream & outputFile, int seed) {
+	cout << endl << endl << "-----Processing edge-type " << to_string(edgeType.edge_type_id) << "-----" << endl;
 
 	randomGenerator.seed(seed);
 
@@ -527,12 +534,36 @@ void incrementalDeterministicGraphGenerator::processEdgeType(config::edge & edge
 
 	for(int i=0; i<nmOfIterations; i+=sf) {
 //		cout << "Number of maxNodes: " << numberOfNodesOfMax << endl;
-		processIteration(i, edgeType, outputFile);
+		processIteration(i, edgeType);
 	}
-//	cout << "Time for node gen: " << timeForNodeGen << endl;
-//	cout << "Time for updating: " << timeForUpdating << endl;
-//	cout << "Time for shuffling: " << timeForShuffling << endl;
-//	cout << "Time for adding edges: " << timeForAddingEdges << endl;
+
+
+	// Materialize the edge
+	chrono::high_resolution_clock::time_point start = chrono::high_resolution_clock::now();
+	int i=0;
+	string outputBuffer = "";
+	cout << edges.size() << endl;
+	for (edge2 e: edges) {
+		string edgeString = to_string(e.subjectType) + "-" + to_string(e.subjectId) + " " + to_string(e.predicate) + " " + to_string(e.objectType) + "-" + to_string(e.objectId);
+
+		if (i % 50 == 0 || i==edges.size()-1) {
+			// Use endl to flush
+			outputBuffer += edgeString;
+			outputFile << outputBuffer << endl;
+			outputBuffer = "";
+		} else {
+			outputBuffer += edgeString + "\n";
+		}
+		i++;
+	}
+	chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
+	auto durationForMaterialize = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
+
+	cout << "Time for node gen: " << timeForNodeGen << endl;
+	cout << "Time for updating: " << timeForUpdating << endl;
+	cout << "Time for shuffling: " << timeForShuffling << endl;
+	cout << "Time for adding edges: " << timeForAddingEdges << endl;
+	cout << "Time for materialization: " << durationForMaterialize << endl;
 }
 
 

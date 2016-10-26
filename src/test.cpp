@@ -21,7 +21,7 @@ void processEdgeTypesParallel(int low, int high, int* seeds, string* tempOutputF
 		outputFile.open(tempOutputFileNames[low], ios::trunc);
 
 		incrementalDeterministicGraphGenerator graphGenerator(conf);
-		graphGenerator.processEdgeType(conf.schema.edges.at(low), &outputFile, seeds[low]);
+		graphGenerator.processEdgeType(conf.schema.edges.at(low), outputFile, seeds[low]);
 
 		outputFile.close();
 	} else {
@@ -268,7 +268,7 @@ int main(int argc, char ** argv) {
 	for (int i=0; i<nmOfEdgeTypes; i++) {
 //		cout << "Processing edge-type " << i << endl;
 		incrementalDeterministicGraphGenerator graphGenerator = incrementalDeterministicGraphGenerator(conf);
-		graphGenerator.processEdgeType(conf.schema.edges.at(i), &outputFile, seeds[i]);
+		graphGenerator.processEdgeType(conf.schema.edges.at(i), outputFile, seeds[i]);
 	}
 	// ##Sequential##
 
