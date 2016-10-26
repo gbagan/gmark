@@ -45,12 +45,11 @@ void incrementalDeterministicGraphGenerator::addEdge(graphNode &sourceNode, grap
 
 	outputBufferLines++;
 	string outputBuffer = to_string(sourceNode.type) + "-" + to_string(sourceNode.iterationId) + " " + to_string(predicate) + " " + to_string(targetNode.type) + "-" + to_string(targetNode.iterationId);
-	if (outputBufferLines % 100 == 0 || lastEdge) {
+	if (outputBufferLines % 50 == 0 || lastEdge) {
 		// Use endl to flush
 		*outputFile << outputBuffer << endl;
 	} else {
-		outputBuffer += "\n";
-		*outputFile << outputBuffer;
+		outputBuffer += outputBuffer + "\n";
 	}
 //	*outputFile << sourceNode.type << "-" << sourceNode.iterationId << " " << predicate << " " << targetNode.type << "-" << targetNode.iterationId << endl;
 }
@@ -415,8 +414,13 @@ void incrementalDeterministicGraphGenerator::processIteration(int iterationNumbe
 //	if (iterationNumber % 1000 == 0) {
 //		cout << endl<< "---Process interationNumber " << to_string(iterationNumber) << " of edgeType " << to_string(edgeType.edge_type_id) << "---" << endl;
 //	}
+	chrono::high_resolution_clock::time_point start = chrono::high_resolution_clock::now();
 	nodeGen.addSubjectNodes(edgeType);
 	nodeGen.addObjectNodes(edgeType);
+	chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
+	auto duration = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
+	timeForNodeGen += duration;
+
 //	cout << "Subjects: " << nodes.first.size() << endl;
 //	cout << "Objects: " << nodes.second.size() << endl;
 //	for (graphNode n: nodes.first) {
@@ -424,44 +428,32 @@ void incrementalDeterministicGraphGenerator::processIteration(int iterationNumbe
 //		cout << n.iterationId << " ICs: " << n.getNumberOfInterfaceConnections() << endl;
 //	}
 
-	vector<graphNode*> subjectNodeIdVector, objectNodeIdVector;
-	if ( edgeType.outgoing_distrib.type == DISTRIBUTION::ZIPFIAN ||
-			(!conf.types.at(edgeType.subject_type).scalable && conf.types.at(edgeType.object_type).scalable) ) {
-		subjectNodeIdVector = constructNodesVector2(nodes.first);
-
-		if (edgeType.outgoing_distrib.type == DISTRIBUTION::ZIPFIAN) {
-			updateInterfaceConnectionsForZipfianDistributions(&nodes.first, edgeType.outgoing_distrib);
-		}
-		if (!conf.types.at(edgeType.subject_type).scalable && conf.types.at(edgeType.object_type).scalable) {
-			updateICsForNonScalableType(edgeType, iterationNumber);
-		}
-	} else {
-		subjectNodeIdVector = constructNodesVector2(nodes.first);
+	start = chrono::high_resolution_clock::now();
+	countForUpdatingZipf++;
+	if (edgeType.outgoing_distrib.type == DISTRIBUTION::ZIPFIAN && countForUpdatingZipf % 10 == 0) {
+		updateInterfaceConnectionsForZipfianDistributions(&nodes.first, edgeType.outgoing_distrib);
+	}
+	if (edgeType.incoming_distrib.type == DISTRIBUTION::ZIPFIAN && countForUpdatingZipf % 10 == 0) {
+		updateInterfaceConnectionsForZipfianDistributions(&nodes.second, edgeType.incoming_distrib);
+	}
+	if (conf.types.at(edgeType.subject_type).scalable ^ conf.types.at(edgeType.object_type).scalable) {
+		updateICsForNonScalableType(edgeType, iterationNumber);
 	}
 
-//	cout << "Before shuffled vector: [";
-//	for (int i=0; i<subjectNodeIdVector.size(); i++) {
-//		cout << subjectNodeIdVector[i]->iterationId << " ";
-//	}
-//	cout << "]" << endl;
-
-	if ( edgeType.incoming_distrib.type == DISTRIBUTION::ZIPFIAN ||
-			(conf.types.at(edgeType.subject_type).scalable && !conf.types.at(edgeType.object_type).scalable) ) {
-		objectNodeIdVector = constructNodesVector2(nodes.second);
-
-		if (edgeType.incoming_distrib.type == DISTRIBUTION::ZIPFIAN) {
-			updateInterfaceConnectionsForZipfianDistributions(&nodes.second, edgeType.incoming_distrib);
-		}
-		if (conf.types.at(edgeType.subject_type).scalable && !conf.types.at(edgeType.object_type).scalable) {
-			updateICsForNonScalableType(edgeType, iterationNumber);
-		}
-	} else {
-		objectNodeIdVector = constructNodesVector2(nodes.second);
-	}
+	end = chrono::high_resolution_clock::now();
+	duration = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
+	timeForUpdating += duration;
 
 
+	start = chrono::high_resolution_clock::now();
+	vector<graphNode*> subjectNodeIdVector = constructNodesVector2(nodes.first);
+	vector<graphNode*> objectNodeIdVector = constructNodesVector2(nodes.second);
 	shuffle(objectNodeIdVector.begin(), objectNodeIdVector.end(), randomGenerator);
 	shuffle(subjectNodeIdVector.begin(), subjectNodeIdVector.end(), randomGenerator);
+	end = chrono::high_resolution_clock::now();
+	duration = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
+	timeForShuffling += duration;
+
 
 //	cout << "Shuffled vector: [";
 //	for (int i=0; i<subjectNodeIdVector.size(); i++) {
@@ -469,6 +461,7 @@ void incrementalDeterministicGraphGenerator::processIteration(int iterationNumbe
 //	}
 //	cout << "]" << endl;
 
+	start = chrono::high_resolution_clock::now();
 	int n = min(subjectNodeIdVector.size(), objectNodeIdVector.size());
 	int c = getDistributionRandomnessTradeoff(edgeType, iterationNumber);
 	int edgesInThisIteration = n-c;
@@ -480,7 +473,9 @@ void incrementalDeterministicGraphGenerator::processIteration(int iterationNumbe
 //		cout << "Add edge: " << subjectNodeIdVector[i]->iterationId << " - " << objectNodeIdVector[i]->iterationId << endl;
 		addEdge(*subjectNodeIdVector[i], *objectNodeIdVector[i], edgeType.predicate, outputFile, lastEdge);
 	}
-
+	end = chrono::high_resolution_clock::now();
+	duration = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
+	timeForAddingEdges += duration;
 
 //	vector<graphNode*> subjectNodesWithOpenICs = getNodesWithAtLeastOneOpenIC(nodes.first);
 //	vector<graphNode*> objectNodesWithOpenICs = getNodesWithAtLeastOneOpenIC(nodes.second);
@@ -534,6 +529,10 @@ void incrementalDeterministicGraphGenerator::processEdgeType(config::edge & edge
 //		cout << "Number of maxNodes: " << numberOfNodesOfMax << endl;
 		processIteration(i, edgeType, outputFile);
 	}
+//	cout << "Time for node gen: " << timeForNodeGen << endl;
+//	cout << "Time for updating: " << timeForUpdating << endl;
+//	cout << "Time for shuffling: " << timeForShuffling << endl;
+//	cout << "Time for adding edges: " << timeForAddingEdges << endl;
 }
 
 
