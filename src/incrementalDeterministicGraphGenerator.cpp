@@ -106,10 +106,9 @@ void incrementalDeterministicGraphGenerator::updateICsForNonScalableType(vector<
 		}
 
 //		cout << "Update nodes with " << increment << endl;
-		for (int i=0; i<nodes.size(); i++) {
-			nodes[i].incrementOpenInterfaceConnectionsByN(increment);
-			nodes[i].incrementInterfaceConnectionsByN(increment);
-
+		for (graphNode node: nodes) {
+			node.incrementOpenInterfaceConnectionsByN(increment);
+			node.incrementInterfaceConnectionsByN(increment);
 		}
 	}
 }
@@ -327,16 +326,16 @@ void incrementalDeterministicGraphGenerator::changeDistributionParams(config::ed
 ////	cout << "c: "  << c << endl;
 //	return openICs - (c*scale);
 //}
-
-vector<graphNode*> getNodesWithAtLeastOneOpenIC(vector<graphNode> & nodes) {
-	vector<graphNode*> nodesWithOpenICs;
-	for (graphNode & node: nodes) {
-		if (node.getNumberOfOpenInterfaceConnections() > 0) {
-			nodesWithOpenICs.push_back(&node);
-		}
-	}
-	return nodesWithOpenICs;
-}
+//
+//vector<graphNode*> getNodesWithAtLeastOneOpenIC(vector<graphNode> & nodes) {
+//	vector<graphNode*> nodesWithOpenICs;
+//	for (graphNode & node: nodes) {
+//		if (node.getNumberOfOpenInterfaceConnections() > 0) {
+//			nodesWithOpenICs.push_back(&node);
+//		}
+//	}
+//	return nodesWithOpenICs;
+//}
 
 int incrementalDeterministicGraphGenerator::getDistributionRandomnessTradeoff(config::edge edgeType, int iterationNumber) {
 	int scale = 5;
@@ -364,6 +363,16 @@ int incrementalDeterministicGraphGenerator::getDistributionRandomnessTradeoff(co
 	return max(scale, c*scale);
 }
 
+//vector<int> constructNodesVector(vector<graphNode> & nodes) {
+//	vector<int> nodesVector;
+//	for (graphNode & n: nodes) {
+//		for (int i=0; i<n.getNumberOfOpenInterfaceConnections(); i++) {
+//			nodesVector.push_back(n.iterationId);
+//		}
+//	}
+//	return nodesVector;
+//}
+
 vector<graphNode*> constructNodesVector2(vector<graphNode> & nodes) {
 	vector<graphNode*> nodesVector;
 	for (graphNode & n: nodes) {
@@ -376,24 +385,26 @@ vector<graphNode*> constructNodesVector2(vector<graphNode> & nodes) {
 
 vector<graphNode*> incrementalDeterministicGraphGenerator::constructNodesVectorAndRemoveNodeWithZeroICs(vector<graphNode> &nodes_) {
 	vector<graphNode*> nodesVector;
-	int i=0;
+	int size = nodes_.size();
 //	cout << "Vector: [";
-	for (graphNode & n: nodes_) {
-		int ics = n.getNumberOfOpenInterfaceConnections();
+	for (int i=0; i<size; i++) {
+		int ics = nodes_[i].getNumberOfOpenInterfaceConnections();
 //		cout << ics << endl;
-		if (ics == 0) {
-//			graphNode last = nodes_->back();
-//			nodes_->pop_back();
-//			cout << "Before: " << nodes_->at(i).iterationId << " with "<< nodes_->at(i).getNumberOfOpenInterfaceConnections() << endl;
-//			nodes_->at(i) = last;
-//			cout << "After: " << nodes_->at(i).iterationId << " with "<< nodes_->at(i).getNumberOfOpenInterfaceConnections() << endl;
+		if (ics == 0 && nodes_.size() > 0) {
+			graphNode last = nodes_.back();
+//			cout << "i=" << i << endl;
+//			cout << "size: " << nodes_.size() << endl;
+//			cout << "Before: " << nodes_.at(i).iterationId << " with "<< nodes_.at(i).getNumberOfOpenInterfaceConnections() << endl;
+			nodes_.at(i) = last;
+//			cout << "After: " << nodes_.at(i).iterationId << " with "<< nodes_.at(i).getNumberOfOpenInterfaceConnections() << endl;
+			nodes_.pop_back();
+			size--;
 		} else {
 			for (int i=0; i<ics; i++) {
-				nodesVector.push_back(&n);
+				nodesVector.push_back(&nodes_[i]);
 //				cout << n.iterationId << " ";
 			}
 		}
-		i++;
 	}
 //	cout << "]" << endl;
 	return nodesVector;
@@ -425,7 +436,7 @@ void incrementalDeterministicGraphGenerator::processIteration(int iterationNumbe
 			updateICsForNonScalableType(edgeType, iterationNumber);
 		}
 	} else {
-		subjectNodeIdVector = constructNodesVectorAndRemoveNodeWithZeroICs(nodes.first);
+		subjectNodeIdVector = constructNodesVector2(nodes.first);
 	}
 
 //	cout << "Before shuffled vector: [";
@@ -445,7 +456,7 @@ void incrementalDeterministicGraphGenerator::processIteration(int iterationNumbe
 			updateICsForNonScalableType(edgeType, iterationNumber);
 		}
 	} else {
-		objectNodeIdVector = constructNodesVectorAndRemoveNodeWithZeroICs(nodes.second);
+		objectNodeIdVector = constructNodesVector2(nodes.second);
 	}
 
 
