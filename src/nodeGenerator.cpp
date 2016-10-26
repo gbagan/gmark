@@ -175,13 +175,23 @@ void nodeGenerator::addNodes(config::edge & edgeType, int type1, int type2, bool
 }
 
 void nodeGenerator::addSubjectNodes(config::edge & edgeType) {
-	for (int i=0; i<1000; i++) {
-		addNodes(edgeType, edgeType.subject_type, edgeType.object_type, true);
+	if (!conf->types.at(edgeType.subject_type).scalable && conf->types.at(edgeType.object_type).scalable &&
+			nodes->first.size() >= conf->types.at(edgeType.subject_type).size) {
+		return;
+	} else {
+		for (int i=0; i<1000; i++) {
+			addNodes(edgeType, edgeType.subject_type, edgeType.object_type, true);
+		}
 	}
 }
 void nodeGenerator::addObjectNodes(config::edge & edgeType) {
-	for (int i=0; i<1000; i++) {
-		addNodes(edgeType, edgeType.object_type, edgeType.subject_type, false);
+	if (conf->types.at(edgeType.subject_type).scalable && !conf->types.at(edgeType.object_type).scalable &&
+			nodes->second.size() >= conf->types.at(edgeType.object_type).size) {
+		return;
+	} else {
+		for (int i=0; i<1000; i++) {
+			addNodes(edgeType, edgeType.object_type, edgeType.subject_type, false);
+		}
 	}
 }
 
