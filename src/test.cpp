@@ -179,7 +179,8 @@ int main(int argc, char ** argv) {
     string report_directory = ".";
     int c;
 //    bool selectivity = true;
-    long nb_nodes = -1;
+//    long nb_nodes = -1;
+    string nb_nodes_string = "";
     bool print_alias = false;    
 
     while ((c = getopt(argc, argv, "c:g:w:an:r:")) != -1) {
@@ -200,14 +201,36 @@ int main(int argc, char ** argv) {
                 report_directory = optarg;
                 break;
             case 'n':
-                nb_nodes = atol(optarg);
+//                nb_nodes = atol(optarg);
+                nb_nodes_string = optarg;
                 break;
         }
     }
     
+    size_t pos = 0;
+    std::string token;
+    vector<int> nb_nodes_per_graph;
+    while ((pos = nb_nodes_string.find("-")) != string::npos) {
+    	token = nb_nodes_string.substr(0, pos);
+//        cout << "Found token: " << token << endl;
+        if (token.compare("") == 0) {
+        	nb_nodes_per_graph.push_back(0);
+        } else {
+        	nb_nodes_per_graph.push_back(stoi(token));
+        	nb_nodes_string.erase(0, pos + 1);
+        }
+    }
+
+    if (nb_nodes_string.compare("") != 0) {
+//    	cout << "Found token: " << nb_nodes_string << endl;
+    	nb_nodes_per_graph.push_back(stoi(nb_nodes_string));
+    }
+
+
     config::config conf;
-    if (nb_nodes >= 0) {
-        conf.nb_nodes = nb_nodes;
+    if (nb_nodes_per_graph.size() > 0) {
+        conf.nb_nodes = nb_nodes_per_graph[0];
+        conf.nb_graphs = nb_nodes_per_graph.size();
     }
     else {
         conf.nb_nodes = 0;
@@ -218,7 +241,7 @@ int main(int argc, char ** argv) {
     
 //    cout << "complete config" << endl;
     conf.complete_config();
-    cout << "Number of graphs=" << conf.nb_graphs << endl;
+//    cout << "Number of graphs=" << conf.nb_graphs << endl;
 
 //    cout << "Config file: " << conf_file << endl;
 
@@ -274,7 +297,11 @@ int main(int argc, char ** argv) {
 		incrementalDeterministicGraphGenerator graphGenerator = incrementalDeterministicGraphGenerator();
 		for (int j=0; j<conf.nb_graphs; j++) {
 			config::config conf2;
-			conf2.nb_nodes = 0;
+			if (nb_nodes_per_graph.size() > j) {
+				conf2.nb_nodes = nb_nodes_per_graph[j];
+			} else {
+				conf2.nb_nodes = 0;
+			}
 			configparser::parse_config(conf_file, conf2, j);
 			conf2.complete_config();
 
@@ -296,7 +323,7 @@ int main(int argc, char ** argv) {
 
 
 	// #### ANALYSIS ####
-    analysisIncrDetGraph analyzeGraph("outputGraph3.txt", conf);
+//    analysisIncrDetGraph analyzeGraph("outputGraph3.txt", conf);
 
 
 //    ofstream rFile;

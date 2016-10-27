@@ -19,7 +19,9 @@ int parse_config(const string & filename, config::config & conf, int graph_numbe
     
     pugi::xml_node root = doc.child("generator");
 
-    conf.nb_graphs = root.child("size").text().as_uint();
+    if (conf.nb_graphs == 0) {
+    	conf.nb_graphs = root.child("size").text().as_uint();
+    }
 //    pugi::xml_node graph_node = root.child("graph");
     unsigned int nodes;
     unsigned int edges;

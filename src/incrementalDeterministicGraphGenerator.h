@@ -20,21 +20,21 @@ namespace std {
 
 class incrementalDeterministicGraphGenerator {
 private:
-	int timeForNodeGen = 0;
-	int timeForUpdating = 0;
-	int timeForShuffling = 0;
-	int timeForAddingEdges = 0;
+//	int timeForNodeGen = 0;
+//	int timeForUpdating = 0;
+//	int timeForShuffling = 0;
+//	int timeForAddingEdges = 0;
+//
+//	int timeForIteration = 0;
 
 
 
 	config::config conf;
 	pair<vector<graphNode>, vector<graphNode>> nodes;
 	struct edge2 {
-		int subjectType;
-		int subjectId;
+		string subjectId;
 		int predicate;
-		int objectType;
-		int objectId;
+		string objectId;
 	};
 	vector<edge2> edges;
 	graphNode tempNode = graphNode();
