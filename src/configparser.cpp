@@ -6,7 +6,7 @@
 
 namespace configparser {
 
-int parse_config(const string & filename, config::config & conf) {
+int parse_config(const string & filename, config::config & conf, int graph_number) {
     pugi::xml_document doc;
     pugi::xml_parse_result result = doc.load_file(filename.c_str());
 
@@ -19,10 +19,20 @@ int parse_config(const string & filename, config::config & conf) {
     
     pugi::xml_node root = doc.child("generator");
 
-    pugi::xml_node graph_node = root.child("graph");
+    conf.nb_graphs = root.child("size").text().as_uint();
+//    pugi::xml_node graph_node = root.child("graph");
+    unsigned int nodes;
+    unsigned int edges;
+    int i = 0;
+    for (pugi::xml_node graph_node : root.children("graph")) {
+    	if (i >= graph_number) {
+    		nodes = graph_node.child("nodes").text().as_uint();
+    		edges = graph_node.child("edges").text().as_uint();
+    		break;
+    	}
+    	i++;
+    }
     
-    unsigned int nodes = graph_node.child("nodes").text().as_uint();
-    unsigned int edges = graph_node.child("edges").text().as_uint();
     
     if(conf.nb_nodes == 0) {
         conf.nb_nodes = nodes;

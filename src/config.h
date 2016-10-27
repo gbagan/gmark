@@ -129,6 +129,7 @@ public:
 
 class config {
 public:
+	size_t nb_graphs;
     string input;
     size_t nb_nodes;
     size_t nb_edges;
