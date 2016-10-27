@@ -25,8 +25,6 @@ private:
 	int timeForShuffling = 0;
 	int timeForAddingEdges = 0;
 
-	int countForUpdatingZipf = 0;
-
 
 
 	config::config conf;
@@ -52,7 +50,7 @@ private:
 	uniform_real_distribution<double> uniformDistr = uniform_real_distribution<double>(0.0,1.0);
 
 //	void initializeNodesAndEdges();
-	void processIteration(int iterationNumber, config::edge & edgeType);
+	void processIteration(config::edge & edgeType);
 
 	// For each iteration
 //	int getNumberOfEdgesPerIteration(config::edge & edgeType, int iterationNumber);
@@ -70,8 +68,8 @@ private:
 
 	void updateInterfaceConnectionsForZipfianDistributions(vector<graphNode> *nodes, distribution distr);
 //	pair<int,int> updateInterfaceConnectionsForZipfianDistributions(config::edge & edgeType);
-	void updateICsForNonScalableType(vector<graphNode> & nodes, int iterationNumber, double meanUpdateDistr, double meanNonUpdateDistr, distribution & distrToUpdate);
-	void updateICsForNonScalableType(config::edge & edgeType, int iterationNumber);
+	void updateICsForNonScalableType(vector<graphNode> & nodes, int nmNodesOther, double meanUpdateDistr, double meanNonUpdateDistr, distribution & distrToUpdate);
+	void updateICsForNonScalableType(config::edge & edgeType);
 //	void shiftZipfianDistribution(vector<graphNode> & nodes, int nmNodes, int edgeTypeId, bool changeSubjectNodes);
 
 	void changeDistributionParams(config::edge & edgeType);
@@ -81,11 +79,11 @@ private:
 
 	vector<graphNode*> constructNodesVectorAndRemoveNodeWithZeroICs(vector<graphNode> &nodes_);
 public:
-	incrementalDeterministicGraphGenerator(config::config configuration);
+	incrementalDeterministicGraphGenerator();
 	virtual ~incrementalDeterministicGraphGenerator();
 
 	void generateIncDetGraph(ofstream*  outputFile, int* seeds, int edgeTypeIdLow, int edgeTypeIdHigh);
-	void processEdgeType(config::edge & edgeType, ofstream & outputFile, int seed);
+	void processEdgeType(config::config configuration, config::edge & edgeType, ofstream & outputFile);
 };
 
 } /* namespace std */

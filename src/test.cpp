@@ -20,8 +20,8 @@ void processEdgeTypesParallel(int low, int high, int* seeds, string* tempOutputF
 		ofstream outputFile;
 		outputFile.open(tempOutputFileNames[low], ios::trunc);
 
-		incrementalDeterministicGraphGenerator graphGenerator(conf);
-		graphGenerator.processEdgeType(conf.schema.edges.at(low), outputFile, seeds[low]);
+		incrementalDeterministicGraphGenerator graphGenerator;
+		graphGenerator.processEdgeType(conf, conf.schema.edges.at(low), outputFile);
 
 		outputFile.close();
 	} else {
@@ -214,11 +214,11 @@ int main(int argc, char ** argv) {
     }
     conf.print_alias = print_alias;
     
-    configparser::parse_config(conf_file, conf);
+    configparser::parse_config(conf_file, conf, 0);
     
 //    cout << "complete config" << endl;
     conf.complete_config();
-    
+    cout << "Number of graphs=" << conf.nb_graphs << endl;
 
 //    cout << "Config file: " << conf_file << endl;
 
@@ -227,21 +227,21 @@ int main(int argc, char ** argv) {
 
 
     // TODO: get the seed from the XML instead of this magic number
-    std::default_random_engine randomGeneratorForSeeding;
-    randomGeneratorForSeeding.seed(222);
-
-//	ofstream *outputFiles = new ofstream[conf.schema.edges.size()];
-	string *tempOutputFileNames = new string[conf.schema.edges.size()];
-	int *seeds = new int[conf.schema.edges.size()];
-
-	int nmOfEdgeTypes = conf.schema.edges.size();
-	for (int i=0; i<nmOfEdgeTypes; i++) {
-		int seed = randomGeneratorForSeeding();
-//		cout << "Seed " << i << ": " << seed << endl;
-		seeds[i] = seed;
-
-		tempOutputFileNames[i] = "tempOutputFile" + to_string(i) + ".txt";
-	}
+//    std::default_random_engine randomGeneratorForSeeding;
+//    randomGeneratorForSeeding.seed(222);
+//
+////	ofstream *outputFiles = new ofstream[conf.schema.edges.size()];
+//	string *tempOutputFileNames = new string[conf.schema.edges.size()];
+//	int *seeds = new int[conf.schema.edges.size()];
+//
+//	int nmOfEdgeTypes = conf.schema.edges.size();
+//	for (int i=0; i<nmOfEdgeTypes; i++) {
+//		int seed = randomGeneratorForSeeding();
+////		cout << "Seed " << i << ": " << seed << endl;
+//		seeds[i] = seed;
+//
+//		tempOutputFileNames[i] = "tempOutputFile" + to_string(i) + ".txt";
+//	}
 
 	// ##Parallel##
 //	processEdgeTypesParallel(0, nmOfEdgeTypes, seeds, tempOutputFileNames, conf);
@@ -263,12 +263,25 @@ int main(int argc, char ** argv) {
 	// ##Parallel##
 
 	// ##Sequential##
-	ofstream outputFile;
-	outputFile.open("output.txt", ios::trunc);
-	for (int i=0; i<nmOfEdgeTypes; i++) {
+	for (int i=0; i<conf.nb_graphs; i++) {
+		string file = "outputGraph" + to_string(i+1) + ".txt";
+		const char * fileChar = file.c_str();
+		remove(fileChar);
+	}
+	for (int i=0; i<conf.schema.edges.size(); i++) {
 //		cout << "Processing edge-type " << i << endl;
-		incrementalDeterministicGraphGenerator graphGenerator = incrementalDeterministicGraphGenerator(conf);
-		graphGenerator.processEdgeType(conf.schema.edges.at(i), outputFile, seeds[i]);
+
+		incrementalDeterministicGraphGenerator graphGenerator = incrementalDeterministicGraphGenerator();
+		for (int j=0; j<conf.nb_graphs; j++) {
+			config::config conf2;
+			conf2.nb_nodes = 0;
+			configparser::parse_config(conf_file, conf2, j);
+			conf2.complete_config();
+
+			ofstream outputFile;
+			outputFile.open("outputGraph" + to_string(j+1) + ".txt", ios::app);
+			graphGenerator.processEdgeType(conf2, conf2.schema.edges.at(i), outputFile);
+		}
 	}
 	// ##Sequential##
 
@@ -283,7 +296,7 @@ int main(int argc, char ** argv) {
 
 
 	// #### ANALYSIS ####
-    analysisIncrDetGraph analyzeGraph("output.txt", conf);
+    analysisIncrDetGraph analyzeGraph("outputGraph3.txt", conf);
 
 
 //    ofstream rFile;

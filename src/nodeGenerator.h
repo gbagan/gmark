@@ -17,7 +17,7 @@ namespace std {
 class nodeGenerator {
 private:
 	void addNode(config::edge & edgeType, bool findSourceNode);
-	void addNodes(config::edge & edgeType, int type1, int type2, bool subject);
+//	void addNodes(config::edge & edgeType, int type1, int type2, bool subject);
 	int getNumberOfICs(distribution distr, bool addSourceNode);
 	void initializeConnections(graphNode &n, int maxNumberOfConnections);
 
