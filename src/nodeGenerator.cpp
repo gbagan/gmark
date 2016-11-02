@@ -82,17 +82,14 @@ int nodeGenerator::getNumberOfICs(distribution distr, bool addSourceNode) {
 void nodeGenerator::addNode(config::edge & edgeType, bool addSourceNode) {
 	distribution distr;
 	size_t type;
-	size_t otherType;
 	int birthId;
 	if(addSourceNode) {
 		distr = edgeType.outgoing_distrib;
 		type = edgeType.subject_type;
-		otherType = edgeType.object_type;
 		birthId = birthIdSubject;
 	} else {
 		distr = edgeType.incoming_distrib;
 		type = edgeType.object_type;
-		otherType = edgeType.subject_type;
 		birthId = birthIdObject;
 	}
 
@@ -112,7 +109,7 @@ void nodeGenerator::addNode(config::edge & edgeType, bool addSourceNode) {
 	} else {
 		numberOfICs = getNumberOfICs(distr, addSourceNode);
 	}
-	graphNode *n = new graphNode(to_string(type) + "-" + to_string(birthId), birthId, type, conf->schema.edges.size(), conf->types.at(otherType).size*2, numberOfICs, numberOfICs, pos);
+	graphNode *n = new graphNode(to_string(type) + "-" + to_string(birthId), birthId, type, conf->schema.edges.size(), numberOfICs, numberOfICs, pos);
 
 	if (addSourceNode) {
 //		initializeConnections(*n, conf->types.at(otherType).size*2);

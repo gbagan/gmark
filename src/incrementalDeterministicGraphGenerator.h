@@ -20,11 +20,11 @@ namespace std {
 
 class incrementalDeterministicGraphGenerator {
 private:
-//	int timeForNodeGen = 0;
-//	int timeForUpdating = 0;
-//	int timeForShuffling = 0;
-//	int timeForAddingEdges = 0;
-//
+	int timeForNodeGen = 0;
+	int timeForUpdating = 0;
+	int timeForShuffling = 0;
+	int timeForAddingEdges = 0;
+
 //	int timeForIteration = 0;
 
 
@@ -33,7 +33,7 @@ private:
 	pair<vector<graphNode>, vector<graphNode>> nodes;
 	struct edge2 {
 		string subjectId;
-		int predicate;
+		string predicate;
 		string objectId;
 	};
 	vector<edge2> edges;
@@ -77,13 +77,13 @@ private:
 
 	int getDistributionRandomnessTradeoff(config::edge edgeType, int iterationNumber);
 
-	vector<graphNode*> constructNodesVectorAndRemoveNodeWithZeroICs(vector<graphNode> &nodes_);
+//	vector<graphNode*> constructNodesVectorAndRemoveNodeWithZeroICs(vector<graphNode> &nodes_);
 public:
 	incrementalDeterministicGraphGenerator();
 	virtual ~incrementalDeterministicGraphGenerator();
 
 	void generateIncDetGraph(ofstream*  outputFile, int* seeds, int edgeTypeIdLow, int edgeTypeIdHigh);
-	void processEdgeType(config::config configuration, config::edge & edgeType, ofstream & outputFile);
+	void processEdgeType(config::config configuration, config::edge & edgeType, ofstream & outputFile, bool printZipfPos);
 };
 
 } /* namespace std */

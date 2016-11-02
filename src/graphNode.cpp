@@ -22,7 +22,7 @@ graphNode::graphNode() {
 
 //	this->connections = new int[1];
 }
-graphNode::graphNode(string globalId, int localId, int nodeType, int numberOfEdgeTypes, int maxNumberOfConnections, int numberOfOpenICs,
+graphNode::graphNode(string globalId, int localId, int nodeType, int numberOfEdgeTypes, int numberOfOpenICs,
 		int numberOfICs, float position) {
 	this->id = globalId;
 	this->iterationId = localId;
