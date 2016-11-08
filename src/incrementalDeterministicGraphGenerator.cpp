@@ -474,9 +474,10 @@ void incrementalDeterministicGraphGenerator::processIteration(config::edge & edg
 
 }
 
-void incrementalDeterministicGraphGenerator::processEdgeType(config::config configuration, config::edge & edgeType, ofstream & outputFile, bool printZipfPos) {
+int incrementalDeterministicGraphGenerator::processEdgeType(config::config configuration, config::edge & edgeType, ofstream & outputFile, bool printZipfPos) {
 //	cout << endl << endl << "-----Processing edge-type " << to_string(edgeType.edge_type_id) << "-----" << endl;
 
+	chrono::high_resolution_clock::time_point start = chrono::high_resolution_clock::now();
 	this->conf = configuration;
 //	cout << "Number of nodes: " << conf.nb_nodes << endl;
 
@@ -487,7 +488,8 @@ void incrementalDeterministicGraphGenerator::processEdgeType(config::config conf
 
 	processIteration(edgeType);
 
-
+	chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
+	auto durationWitoutMaterialize = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
 
 	// Materialize the edge
 //	chrono::high_resolution_clock::time_point start = chrono::high_resolution_clock::now();
@@ -518,7 +520,7 @@ void incrementalDeterministicGraphGenerator::processEdgeType(config::config conf
 //	cout << "Time for iteration: " << timeForIteration << endl;
 
 	if (printZipfPos && edgeType.outgoing_distrib.type == DISTRIBUTION::ZIPFIAN) {
-		cout << "Print out-distr pos" << endl;
+//		cout << "Print out-distr pos" << endl;
 		ofstream zipfPosOutDistrFile;
 		zipfPosOutDistrFile.open("zipfPosSmallestGraphOutDistr" + to_string(edgeType.edge_type_id) + ".txt", ios::trunc);
 		for (graphNode node: nodes.first) {
@@ -527,7 +529,7 @@ void incrementalDeterministicGraphGenerator::processEdgeType(config::config conf
 		zipfPosOutDistrFile.close();
 	}
 	if (printZipfPos && edgeType.incoming_distrib.type == DISTRIBUTION::ZIPFIAN) {
-		cout << "Print in-distr pos" << endl;
+//		cout << "Print in-distr pos" << endl;
 		ofstream zipfPosInDistrFile;
 		zipfPosInDistrFile.open("zipfPosSmallestGraphInDistr" + to_string(edgeType.edge_type_id) + ".txt", ios::trunc);
 		for (graphNode node: nodes.second) {
@@ -535,6 +537,9 @@ void incrementalDeterministicGraphGenerator::processEdgeType(config::config conf
 		}
 		zipfPosInDistrFile.close();
 	}
+
+
+	return durationWitoutMaterialize;
 }
 
 

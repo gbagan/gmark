@@ -83,7 +83,7 @@ public:
 	virtual ~incrementalDeterministicGraphGenerator();
 
 	void generateIncDetGraph(ofstream*  outputFile, int* seeds, int edgeTypeIdLow, int edgeTypeIdHigh);
-	void processEdgeType(config::config configuration, config::edge & edgeType, ofstream & outputFile, bool printZipfPos);
+	int processEdgeType(config::config configuration, config::edge & edgeType, ofstream & outputFile, bool printZipfPos);
 };
 
 } /* namespace std */

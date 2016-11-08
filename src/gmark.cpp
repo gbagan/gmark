@@ -24,6 +24,9 @@ vector<size_t> generate_random_slots(pair<size_t,size_t> range, const distributi
     
     for (size_t node = range.first; node <= range.second; node++) {
         size_t nb_slots = gen->next();
+        if (distrib.type == DISTRIBUTION::ZIPFIAN) {
+        	nb_slots++;
+        }
         for (size_t i = 0; i < nb_slots; i++) {
             vslots.push_back(node);
         }
@@ -103,7 +106,7 @@ void abstract_graph_writer::add_random_edges2(config::edge & c_edge) {
 
 
 void abstract_graph_writer::add_remaining_edges(size_t predicate, size_t nb_edges) {
-    cout << "add_remaining_edges: " << predicate << " " << nb_edges << endl;
+//    cout << "add_remaining_edges: " << predicate << " " << nb_edges << endl;
 }
 
 void abstract_graph_writer::build_graph (config::config & conf, report::report & rep) {
@@ -131,9 +134,9 @@ void abstract_graph_writer::build_graph (config::config & conf, report::report &
     created_edges.clear();
     created_edges.resize(conf.predicates.size());
     
-    cout << "creating edges" << endl;
+//    cout << "creating edges" << endl;
     for (config::edge & edge : conf.schema.edges) {
-        cout << "add random edges: " << edge.subject_type << " " << edge.predicate << " " << edge.object_type << " " << edge.multiplicity << " " << edge.outgoing_distrib << " " << edge.incoming_distrib <<endl;
+//        cout << "add random edges: " << edge.subject_type << " " << edge.predicate << " " << edge.object_type << " " << edge.multiplicity << " " << edge.outgoing_distrib << " " << edge.incoming_distrib <<endl;
         add_random_edges(edge);
     }
     
@@ -177,12 +180,12 @@ ntriple_graph_writer::ntriple_graph_writer (ostream & s) {
 }
 
 void ntriple_graph_writer::print_edge(size_t subject, size_t predicate, size_t object) {
-    *stream << subject << " ";
+    *stream << "1-" << subject-20000 << " ";
     string alias = conf->predicates[predicate].alias;
     if (conf->print_alias && alias.size() > 0)
 	*stream << alias;
     else
         *stream << predicate;
-    *stream << " " << object << "\n";
+    *stream << " " << "2-" << object-32000 << "\n";
 }
 }
