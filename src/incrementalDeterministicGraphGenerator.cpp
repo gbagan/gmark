@@ -474,6 +474,25 @@ void incrementalDeterministicGraphGenerator::processIteration(config::edge & edg
 
 }
 
+void incrementalDeterministicGraphGenerator::printRank(vector<graphNode> nodes, int edgeTypeId, int nbNodes) {
+	int maxDegree = 0;
+	for (graphNode node: nodes) {
+		int degree = node.numberOfInterfaceConnections - node.numberOfOpenInterfaceConnections;
+		if (degree > maxDegree) {
+			maxDegree = degree;
+		}
+	}
+
+	cout << "Maxdegree=" << maxDegree << endl;
+	ofstream rankFile;
+	rankFile.open("rankFileET" + to_string(edgeTypeId) + "n" + to_string(nbNodes) + ".txt", ios::trunc);
+	for (graphNode node: nodes) {
+		double rank = ((double)node.numberOfInterfaceConnections - (double)node.numberOfOpenInterfaceConnections) / (double) maxDegree;
+		rankFile << to_string(rank) << endl;
+	}
+	rankFile.close();
+}
+
 int incrementalDeterministicGraphGenerator::processEdgeType(config::config configuration, config::edge & edgeType, ofstream & outputFile, bool printZipfPos) {
 //	cout << endl << endl << "-----Processing edge-type " << to_string(edgeType.edge_type_id) << "-----" << endl;
 
@@ -488,8 +507,8 @@ int incrementalDeterministicGraphGenerator::processEdgeType(config::config confi
 
 	processIteration(edgeType);
 
-	chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
-	auto durationWitoutMaterialize = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
+//	chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
+//	auto durationWitoutMaterialize = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
 
 	// Materialize the edge
 //	chrono::high_resolution_clock::time_point start = chrono::high_resolution_clock::now();
@@ -509,8 +528,8 @@ int incrementalDeterministicGraphGenerator::processEdgeType(config::config confi
 			outputFile << edgeString << "\n";
 		}
 	}
-//	chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
-//	auto durationForMaterialize = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
+	chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
+	auto durationForMaterialize = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
 
 //	cout << "Time for node gen: " << timeForNodeGen << endl;
 //	cout << "Time for updating: " << timeForUpdating << endl;
@@ -519,27 +538,29 @@ int incrementalDeterministicGraphGenerator::processEdgeType(config::config confi
 //	cout << "Time for materialization: " << durationForMaterialize << endl;
 //	cout << "Time for iteration: " << timeForIteration << endl;
 
-	if (printZipfPos && edgeType.outgoing_distrib.type == DISTRIBUTION::ZIPFIAN) {
-//		cout << "Print out-distr pos" << endl;
-		ofstream zipfPosOutDistrFile;
-		zipfPosOutDistrFile.open("zipfPosSmallestGraphOutDistr" + to_string(edgeType.edge_type_id) + ".txt", ios::trunc);
-		for (graphNode node: nodes.first) {
-			zipfPosOutDistrFile << node.id << " = " << node.getPosition() << endl;
-		}
-		zipfPosOutDistrFile.close();
-	}
-	if (printZipfPos && edgeType.incoming_distrib.type == DISTRIBUTION::ZIPFIAN) {
-//		cout << "Print in-distr pos" << endl;
-		ofstream zipfPosInDistrFile;
-		zipfPosInDistrFile.open("zipfPosSmallestGraphInDistr" + to_string(edgeType.edge_type_id) + ".txt", ios::trunc);
-		for (graphNode node: nodes.second) {
-			zipfPosInDistrFile << node.id << " = " << node.getPosition() << endl;
-		}
-		zipfPosInDistrFile.close();
-	}
+//	if (printZipfPos && edgeType.outgoing_distrib.type == DISTRIBUTION::ZIPFIAN) {
+////		cout << "Print out-distr pos" << endl;
+//		ofstream zipfPosOutDistrFile;
+//		zipfPosOutDistrFile.open("zipfPosSmallestGraphOutDistr" + to_string(edgeType.edge_type_id) + ".txt", ios::trunc);
+//		for (graphNode node: nodes.first) {
+//			zipfPosOutDistrFile << node.id << " = " << node.getPosition() << endl;
+//		}
+//		zipfPosOutDistrFile.close();
+//	}
+//	if (printZipfPos && edgeType.incoming_distrib.type == DISTRIBUTION::ZIPFIAN) {
+////		cout << "Print in-distr pos" << endl;
+//		ofstream zipfPosInDistrFile;
+//		zipfPosInDistrFile.open("zipfPosSmallestGraphInDistr" + to_string(edgeType.edge_type_id) + ".txt", ios::trunc);
+//		for (graphNode node: nodes.second) {
+//			zipfPosInDistrFile << node.id << " = " << node.getPosition() << endl;
+//		}
+//		zipfPosInDistrFile.close();
+//	}
 
+	printRank(nodes.first, edgeType.edge_type_id, conf.nb_nodes);
+//	printRank(nodes.second, edgeType.edge_type_id, conf.nb_nodes);
 
-	return durationWitoutMaterialize;
+	return durationForMaterialize;
 }
 
 

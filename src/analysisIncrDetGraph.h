@@ -29,6 +29,7 @@ public:
 	void numberOfEdgesVsNode();
 	void zipfianPosAnalysis(int egdeTypeId, bool outDistr);
 	void zipfianPosAnalysis();
+	void relativeDegreeChange(int edgeTypeId);
 };
 
 } /* namespace std */

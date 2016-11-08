@@ -6,6 +6,7 @@
  */
 
 #include <fstream>
+#include <cmath>
 #include "analysisIncrDetGraph.h"
 
 
@@ -361,5 +362,83 @@ void analysisIncrDetGraph::zipfianPosAnalysis(int edgeTypeId, bool outDistr) {
 
 }
 
+double meann(vector<double> doubles) {
+	double sum = 0;
+	for (double d: doubles) {
+		sum += d;
+	}
+	return sum / (double)doubles.size();
+}
+
+
+double sd(vector<string> doubleStrings) {
+	vector<double> doubles;
+	for (string dStr: doubleStrings) {
+		if (dStr.compare("")) {
+			doubles.push_back(stod(dStr));
+		}
+	}
+
+	double mean = meann(doubles);
+	double sumOfSquaredDifferences = 0;
+	for (double d: doubles) {
+		sumOfSquaredDifferences += (d - mean) * (d - mean);
+	}
+
+	double sd = sqrt(1.0 / (double) doubleStrings.size() * sumOfSquaredDifferences);
+	return sd;
+}
+
+
+void analysisIncrDetGraph::relativeDegreeChange(int etId) {
+	string baseFileName = "rankFileET" + to_string(etId);
+	ifstream rankFile1(baseFileName + "n1000.txt");
+	ifstream rankFile2(baseFileName + "n2000.txt");
+	ifstream rankFile3(baseFileName + "n3000.txt");
+	ifstream rankFile4(baseFileName + "n4000.txt");
+	ifstream rankFile5(baseFileName + "n5000.txt");
+	ifstream rankFile6(baseFileName + "n6000.txt");
+	ifstream rankFile7(baseFileName + "n7000.txt");
+	ifstream rankFile8(baseFileName + "n8000.txt");
+	ifstream rankFile9(baseFileName + "n9000.txt");
+	ifstream rankFile10(baseFileName + "n10000.txt");
+	ifstream* files[10] = {&rankFile1, &rankFile2, &rankFile3, &rankFile4, &rankFile5, &rankFile6, &rankFile7, &rankFile8, &rankFile9, &rankFile10};
+	string line;
+	vector<vector<string>> rankVector;
+	if (rankFile1.is_open() && rankFile2.is_open() && rankFile3.is_open() && rankFile4.is_open() && rankFile5.is_open() &&
+			rankFile6.is_open() && rankFile7.is_open() && rankFile8.is_open() && rankFile9.is_open() && rankFile10.is_open()) {
+		for (int i=0; i<9; i++) {
+			cout << i << endl;
+			while (getline(*files[i], line)) {
+				vector<string> ranksForOneNode;
+//				cout << line;
+				ranksForOneNode.push_back(line);
+				for (int i=1; i<10; i++) {
+					getline(*files[i], line);
+//					cout << ", " << line;
+					ranksForOneNode.push_back(line);
+				}
+				rankVector.push_back(ranksForOneNode);
+//				cout << endl;
+			}
+		}
+		cout << "NbLines=" << rankVector.size() << endl;
+	} else {
+		cout << "Unable to open file";
+	}
+
+	vector<double> sds;
+	for (vector<string> nodeRanks: rankVector) {
+		sds.push_back(sd(nodeRanks));
+	}
+
+	double sum = 0;
+	for (double sd: sds) {
+		sum += sd;
+	}
+
+	cout << "Mean sd = " << sum / (double)sds.size();
+
+}
 
 } /* namespace std */

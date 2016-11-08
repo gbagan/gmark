@@ -1,4 +1,4 @@
-for((i=0;i<=1000000; i+=1000000/10))
+for((i=0;i<=500000; i+=500000/10))
 do
-	./src/test -c use-cases/test.xml -n ${i}
+  ./src/test -c use-cases/test.xml -n ${i}
 done

@@ -78,6 +78,8 @@ private:
 	int getDistributionRandomnessTradeoff(config::edge edgeType, int iterationNumber);
 
 //	vector<graphNode*> constructNodesVectorAndRemoveNodeWithZeroICs(vector<graphNode> &nodes_);
+
+	void printRank(vector<graphNode> nodes, int edgeTypeId, int nbNodes);
 public:
 	incrementalDeterministicGraphGenerator();
 	virtual ~incrementalDeterministicGraphGenerator();
