@@ -405,21 +405,31 @@ void analysisIncrDetGraph::relativeDegreeChange(int etId) {
 	ifstream* files[10] = {&rankFile1, &rankFile2, &rankFile3, &rankFile4, &rankFile5, &rankFile6, &rankFile7, &rankFile8, &rankFile9, &rankFile10};
 	string line;
 	vector<vector<string>> rankVector;
+	int count = 0;
 	if (rankFile1.is_open() && rankFile2.is_open() && rankFile3.is_open() && rankFile4.is_open() && rankFile5.is_open() &&
 			rankFile6.is_open() && rankFile7.is_open() && rankFile8.is_open() && rankFile9.is_open() && rankFile10.is_open()) {
 		for (int i=0; i<9; i++) {
-			cout << i << endl;
+			if (count < 10) {
+				cout << i << endl;
+			}
 			while (getline(*files[i], line)) {
 				vector<string> ranksForOneNode;
-//				cout << line;
+				if (count < 10) {
+					cout << line;
+				}
 				ranksForOneNode.push_back(line);
 				for (int i=1; i<10; i++) {
 					getline(*files[i], line);
-//					cout << ", " << line;
+					if (count < 10) {
+						cout << ", " << line;
+					}
 					ranksForOneNode.push_back(line);
 				}
 				rankVector.push_back(ranksForOneNode);
-//				cout << endl;
+				if (count < 10) {
+					cout << endl;
+				}
+				count++;
 			}
 		}
 		cout << "NbLines=" << rankVector.size() << endl;
@@ -438,6 +448,11 @@ void analysisIncrDetGraph::relativeDegreeChange(int etId) {
 	}
 
 	cout << "Mean sd = " << sum / (double)sds.size();
+
+}
+
+
+void analysisIncrDetGraph::createRankFiles(bool outDistr) {
 
 }
 

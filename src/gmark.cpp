@@ -180,12 +180,12 @@ ntriple_graph_writer::ntriple_graph_writer (ostream & s) {
 }
 
 void ntriple_graph_writer::print_edge(size_t subject, size_t predicate, size_t object) {
-    *stream << "1-" << subject-20000 << " ";
+    *stream <<  subject << " ";
     string alias = conf->predicates[predicate].alias;
     if (conf->print_alias && alias.size() > 0)
 	*stream << alias;
     else
         *stream << predicate;
-    *stream << " " << "2-" << object-32000 << "\n";
+    *stream << " " << object << "\n";
 }
 }

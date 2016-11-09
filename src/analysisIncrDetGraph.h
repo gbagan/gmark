@@ -30,6 +30,7 @@ public:
 	void zipfianPosAnalysis(int egdeTypeId, bool outDistr);
 	void zipfianPosAnalysis();
 	void relativeDegreeChange(int edgeTypeId);
+	void createRankFiles(bool outDistr);
 };
 
 } /* namespace std */
