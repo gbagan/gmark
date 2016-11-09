@@ -484,11 +484,13 @@ void incrementalDeterministicGraphGenerator::printRank(vector<graphNode> nodes, 
 	}
 
 	cout << "Maxdegree=" << maxDegree << endl;
-	ofstream rankFile;
+	ofstream rankFile, degreeFile;
 	rankFile.open("rankFileET" + to_string(edgeTypeId) + "n" + to_string(nbNodes) + ".txt", ios::trunc);
+	degreeFile.open("rankFileET" + to_string(edgeTypeId) + "n" + to_string(nbNodes) + "degree.txt", ios::trunc);
 	for (graphNode node: nodes) {
 		double rank = ((double)node.numberOfInterfaceConnections - (double)node.numberOfOpenInterfaceConnections) / (double) maxDegree;
 		rankFile << to_string(rank) << endl;
+		degreeFile << to_string(node.numberOfInterfaceConnections - node.numberOfOpenInterfaceConnections) << "-" << to_string(maxDegree) << endl;
 	}
 	rankFile.close();
 }
@@ -557,7 +559,7 @@ int incrementalDeterministicGraphGenerator::processEdgeType(config::config confi
 //		zipfPosInDistrFile.close();
 //	}
 
-	printRank(nodes.first, edgeType.edge_type_id, conf.nb_nodes);
+//	printRank(nodes.first, edgeType.edge_type_id, conf.nb_nodes);
 //	printRank(nodes.second, edgeType.edge_type_id, conf.nb_nodes);
 
 	return durationForMaterialize;

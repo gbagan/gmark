@@ -489,7 +489,7 @@ int main(int argc, char ** argv) {
 
   	// #### ANALYSIS ####
       analysisIncrDetGraph analyzeGraph("outputGraph.txt", conf);
-      analyzeGraph.relativeDegreeChange(0);
+//      analyzeGraph.relativeDegreeChange(0);
   //    analyzeGraph.zipfianPosAnalysis(2, false);
   //
   //

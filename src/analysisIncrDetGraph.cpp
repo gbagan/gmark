@@ -363,30 +363,38 @@ void analysisIncrDetGraph::zipfianPosAnalysis(int edgeTypeId, bool outDistr) {
 }
 
 double meann(vector<double> doubles) {
-	double sum = 0;
-	for (double d: doubles) {
-		sum += d;
+	if (doubles.size() == 0) {
+		return 0.0;
+	} else {
+		double sum = 0;
+		for (double d: doubles) {
+			sum += d;
+		}
+		return sum / (double)doubles.size();
 	}
-	return sum / (double)doubles.size();
 }
 
 
 double sd(vector<string> doubleStrings) {
-	vector<double> doubles;
-	for (string dStr: doubleStrings) {
-		if (dStr.compare("")) {
-			doubles.push_back(stod(dStr));
+	if (doubleStrings.size() == 0) {
+		return 0.0;
+	} else {
+		vector<double> doubles;
+		for (string dStr: doubleStrings) {
+			if (dStr.compare("")) {
+				doubles.push_back(stod(dStr));
+			}
 		}
-	}
 
-	double mean = meann(doubles);
-	double sumOfSquaredDifferences = 0;
-	for (double d: doubles) {
-		sumOfSquaredDifferences += (d - mean) * (d - mean);
-	}
+		double mean = meann(doubles);
+		double sumOfSquaredDifferences = 0;
+		for (double d: doubles) {
+			sumOfSquaredDifferences += (d - mean) * (d - mean);
+		}
 
-	double sd = sqrt(1.0 / (double) doubleStrings.size() * sumOfSquaredDifferences);
-	return sd;
+		double sd = sqrt(1.0 / (double) doubleStrings.size() * sumOfSquaredDifferences);
+		return sd;
+	}
 }
 
 
@@ -414,16 +422,25 @@ void analysisIncrDetGraph::relativeDegreeChange(int etId) {
 			}
 			while (getline(*files[i], line)) {
 				vector<string> ranksForOneNode;
-				if (count < 10) {
-					cout << line;
-				}
-				ranksForOneNode.push_back(line);
-				for (int i=1; i<10; i++) {
-					getline(*files[i], line);
+				bool firstEdgeAdded = false;
+
+				if (stod(line) != 0.0 || firstEdgeAdded) {
 					if (count < 10) {
-						cout << ", " << line;
+						cout << line;
 					}
 					ranksForOneNode.push_back(line);
+					firstEdgeAdded = true;
+				}
+				for (int j=i+1; j<10; j++) {
+					getline(*files[j], line);
+
+					if (stod(line) != 0.0 || firstEdgeAdded) {
+						ranksForOneNode.push_back(line);
+						firstEdgeAdded = true;
+						if (count < 10) {
+							cout << ", " << line;
+						}
+					}
 				}
 				rankVector.push_back(ranksForOneNode);
 				if (count < 10) {
@@ -437,15 +454,34 @@ void analysisIncrDetGraph::relativeDegreeChange(int etId) {
 		cout << "Unable to open file";
 	}
 
+	ofstream sdOfNodesFile;
+	string sdOfNodesFileName = "sdOfNodes.txt";
+	sdOfNodesFile.open(sdOfNodesFileName);
 	vector<double> sds;
 	for (vector<string> nodeRanks: rankVector) {
 		sds.push_back(sd(nodeRanks));
+		for (string str: nodeRanks) {
+			sdOfNodesFile << str << ", ";
+		}
+		sdOfNodesFile << endl;
 	}
 
+	string sdsString = "c(";
 	double sum = 0;
+	int c = 0;
 	for (double sd: sds) {
 		sum += sd;
+		sdsString += to_string(sd);
+		if (c != sds.size()-1) {
+			sdsString +=  ", ";
+		}
+		if (c % 400 == 0 && c != 0) {
+			sdsString += "\n";
+		}
+		c++;
 	}
+	sdsString += ")";
+	cout << sdsString << endl;
 
 	cout << "Mean sd = " << sum / (double)sds.size();
 
