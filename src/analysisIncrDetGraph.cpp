@@ -377,7 +377,7 @@ double meann(vector<double> doubles) {
 
 double sd(vector<string> doubleStrings) {
 	if (doubleStrings.size() == 0) {
-		return 0.0;
+		return -1.0;
 	} else {
 		vector<double> doubles;
 		for (string dStr: doubleStrings) {
@@ -400,6 +400,7 @@ double sd(vector<string> doubleStrings) {
 
 void analysisIncrDetGraph::relativeDegreeChange(int etId) {
 	string baseFileName = "rankFileET" + to_string(etId);
+	cout << "baseFileName: " << baseFileName << endl;
 	ifstream rankFile1(baseFileName + "n1000.txt");
 	ifstream rankFile2(baseFileName + "n2000.txt");
 	ifstream rankFile3(baseFileName + "n3000.txt");
@@ -459,11 +460,14 @@ void analysisIncrDetGraph::relativeDegreeChange(int etId) {
 	sdOfNodesFile.open(sdOfNodesFileName);
 	vector<double> sds;
 	for (vector<string> nodeRanks: rankVector) {
-		sds.push_back(sd(nodeRanks));
-		for (string str: nodeRanks) {
-			sdOfNodesFile << str << ", ";
+		double stdev = sd(nodeRanks);
+		if (stdev != -1.0) {
+			sds.push_back(stdev);
+			for (string str: nodeRanks) {
+				sdOfNodesFile << str << ", ";
+			}
+			sdOfNodesFile << endl;
 		}
-		sdOfNodesFile << endl;
 	}
 
 	string sdsString = "c(";

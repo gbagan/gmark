@@ -401,15 +401,18 @@ int main(int argc, char ** argv) {
 
 
 
-
+//      chrono::high_resolution_clock::time_point start = chrono::high_resolution_clock::now();
 //      for (int i=0; i<conf.nb_graphs; i++) {
 //
 //    	config::config conf2;
-//		conf2.nb_nodes = 0;
+//    	if (nb_nodes_per_graph.size() > i) {
+//			conf2.nb_nodes = nb_nodes_per_graph[i];
+//		} else {
+//			conf2.nb_nodes = 0;
+//		}
 //
 //		configparser::parse_config(conf_file, conf2, i);
 //		conf2.complete_config();
-//
 //    	report::report rep;
 //
 //        ofstream graph_stream;
@@ -417,17 +420,19 @@ int main(int argc, char ** argv) {
 //        graph_stream.open(fileName);
 ////        cout << "graph generation" << endl;
 //        graph::ntriple_graph_writer writer(graph_stream);
-////        chrono::high_resolution_clock::time_point start = chrono::high_resolution_clock::now();
+//
 //        writer.build_graph(conf2, rep);
 //        creatRankFile(conf2, fileName);
-////        chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
-////        auto durationWitoutMaterialize = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
-////        cout << durationWitoutMaterialize << ", ";
 //      }
+//	chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
+//	auto durationWithMaterialize = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
+//	cout << durationWithMaterialize << ", ";
 
 
-
-
+//	for (int i=100000; i<=1000000; i+=1000000/10) {
+//		cout << "./src/test -c use-cases/test.xml -n " << i/10 << "-" << 2*i/10 << "-" << 3*i/10 << "-" << 4*i/10 << "-" << 5*i/10 <<  "-" << 6*i/10 << "-" << 7*i/10 << "-" << 8*i/10 << "-" << 9*i/10 << "-" << 10*i/10 <<endl;
+//		cout << "./src/test -c use-cases/test.xml -n " << i <<endl;
+//	}
 
 
 //
@@ -489,7 +494,7 @@ int main(int argc, char ** argv) {
 
   	// #### ANALYSIS ####
       analysisIncrDetGraph analyzeGraph("outputGraph.txt", conf);
-//      analyzeGraph.relativeDegreeChange(0);
+      analyzeGraph.relativeDegreeChange(0);
   //    analyzeGraph.zipfianPosAnalysis(2, false);
   //
   //

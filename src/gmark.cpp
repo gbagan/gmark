@@ -162,7 +162,7 @@ void abstract_graph_writer::add_vertices(size_t type, size_t size) {
     if (size == 0) {
         size = 1;
     }
-    cout << "add_vertices: " << type << " " << size << " " <<  nb_nodes << " " << nb_nodes+size-1 << endl;
+//    cout << "add_vertices: " << type << " " << size << " " <<  nb_nodes << " " << nb_nodes+size-1 << endl;
     node_ranges_per_type.push_back(make_pair(nb_nodes, nb_nodes+size-1));
     nb_nodes += size;
 }
