@@ -475,7 +475,7 @@ void analysisIncrDetGraph::relativeDegreeChange(int etId) {
 	int c = 0;
 	for (double sd: sds) {
 		sum += sd;
-		sdsString += to_string(sd);
+		sdsString += to_string(1-2*sd);
 		if (c != sds.size()-1) {
 			sdsString +=  ", ";
 		}

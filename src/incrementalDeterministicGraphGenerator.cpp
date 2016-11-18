@@ -461,7 +461,7 @@ void incrementalDeterministicGraphGenerator::processIteration(config::edge & edg
 
 	start = chrono::high_resolution_clock::now();
 	for (int i=0; i<min(subjectNodeIdVector.size(), objectNodeIdVector.size()); i++) {
-		double randomValue = uniformDistr(randomGenerator);
+//		double randomValue = uniformDistr(randomGenerator);
 //		if (randomValue > 0.03 || (!conf.types[edgeType.subject_type].scalable || !conf.types[edgeType.object_type].scalable)) {
 //			cout << "Add edge: " << subjectNodeIdVector[i]->iterationId << " - " << objectNodeIdVector[i]->iterationId << endl;
 			addEdge(nodes.first[subjectNodeIdVector[i]], nodes.second[objectNodeIdVector[i]], edgeType.predicate);
@@ -502,7 +502,7 @@ int incrementalDeterministicGraphGenerator::processEdgeType(config::config confi
 	this->conf = configuration;
 //	cout << "Number of nodes: " << conf.nb_nodes << endl;
 
-//	changeDistributionParams(edgeType);
+	changeDistributionParams(edgeType);
 	nodeGen = nodeGenerator(edgeType, nodes.first.size(), nodes.second.size(), &randomGenerator, &nodes, &conf);
 
 
@@ -564,6 +564,7 @@ int incrementalDeterministicGraphGenerator::processEdgeType(config::config confi
 
 	return durationForMaterialize;
 }
+
 
 
 } /* namespace std */

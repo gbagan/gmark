@@ -3,10 +3,10 @@ CFLAGS=-g -O3 -Wall -std=c++11
 
 all: test 
 
-test: test.o gmark.o configparser.o pugixml.o randomgen.o config.o workload.o workload2.o incrementalDeterministicGraphGenerator.o graphNode.o cumulativeDistributionUtils.o analysisIncrDetGraph.o nodeGenerator.o
-	$(CC) test.o gmark.o configparser.o randomgen.o pugixml.o config.o workload.o workload2.o incrementalDeterministicGraphGenerator.o graphNode.o cumulativeDistributionUtils.o analysisIncrDetGraph.o nodeGenerator.o -o test
+test: test.o gmark.o configparser.o pugixml.o randomgen.o config.o workload.o workload2.o incrementalDeterministicGraphGenerator.o graphNode.o cumulativeDistributionUtils.o analysisIncrDetGraph.o nodeGenerator.o processingEdgeTypes.o
+	$(CC) test.o gmark.o configparser.o randomgen.o pugixml.o config.o workload.o workload2.o incrementalDeterministicGraphGenerator.o graphNode.o cumulativeDistributionUtils.o analysisIncrDetGraph.o nodeGenerator.o processingEdgeTypes.o -o test
 
-test.o: test.cpp configparser.h config.h gmark.h workload.h incrementalDeterministicGraphGenerator.h analysisIncrDetGraph.h
+test.o: test.cpp configparser.h config.h gmark.h workload.h incrementalDeterministicGraphGenerator.h analysisIncrDetGraph.h processingEdgeTypes.h
 	$(CC) $(CFLAGS) -c test.cpp
 
 config.o: config.cpp config.h randomgen.h
@@ -46,6 +46,8 @@ analysisIncrDetGraph.o: analysisIncrDetGraph.cpp config.h
 nodeGenerator.o: nodeGenerator.cpp config.h
 	$(CC) $(CFLAGS) -c nodeGenerator.cpp
 
+processingEdgeTypes.o: processingEdgeTypes.cpp incrementalDeterministicGraphGenerator.h config.h configparser.h
+	$(CC) $(CFLAGS) -c processingEdgeTypes.cpp
 
 clean:
 	rm -rf *.o test
