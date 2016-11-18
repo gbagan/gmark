@@ -113,18 +113,18 @@ void incrementalDeterministicGraphGenerator::updateICsForNonScalableType(vector<
 void incrementalDeterministicGraphGenerator::updateICsForNonScalableType(config::edge & edgeType) {
 	if (!conf.types.at(edgeType.subject_type).scalable) {
 		// Subject is not scalable so update the ICs of all the subject nodes
-		if (conf.types.at(edgeType.object_type).size >= conf.types.at(edgeType.subject_type).size) {
+//		if (conf.types.at(edgeType.object_type).size >= conf.types.at(edgeType.subject_type).size) {
 			double meanOutDistr = getMeanICsPerNode(edgeType.outgoing_distrib, nodes.first.size());
 			double meanInDistr = getMeanICsPerNode(edgeType.incoming_distrib, nodes.second.size());
 			updateICsForNonScalableType(nodes.first, conf.types.at(edgeType.object_type).size, meanOutDistr, meanInDistr, edgeType.outgoing_distrib);
-		}
+//		}
 	} else {
 		// object is not scalable so update the ICs of all the object nodes
-		if (conf.types.at(edgeType.subject_type).size >= conf.types.at(edgeType.object_type).size) {
+//		if (conf.types.at(edgeType.subject_type).size >= conf.types.at(edgeType.object_type).size) {
 			double meanOutDistr = getMeanICsPerNode(edgeType.outgoing_distrib, nodes.first.size());
 			double meanInDistr = getMeanICsPerNode(edgeType.incoming_distrib, nodes.second.size());
 			updateICsForNonScalableType(nodes.second, conf.types.at(edgeType.subject_type).size, meanInDistr, meanOutDistr, edgeType.incoming_distrib);
-		}
+//		}
 	}
 }
 // ####### Update interface-connections #######
