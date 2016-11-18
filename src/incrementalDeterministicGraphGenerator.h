@@ -26,8 +26,8 @@ private:
 	int timeForAddingEdges = 0;
 
 //	int timeForIteration = 0;
-
-
+	int outDistrShift = 0;
+	int inDistrShift = 0;
 
 	config::config conf;
 	pair<vector<graphNode>, vector<graphNode>> nodes;
@@ -36,6 +36,7 @@ private:
 		string predicate;
 		string objectId;
 	};
+	int graphNumber = 0;
 	vector<edge2> edges;
 	graphNode tempNode = graphNode();
 	int outputBufferLines = 0;
@@ -50,7 +51,7 @@ private:
 	uniform_real_distribution<double> uniformDistr = uniform_real_distribution<double>(0.0,1.0);
 
 //	void initializeNodesAndEdges();
-	void processIteration(config::edge & edgeType);
+	void processIteration(config::edge & edgeType, int graphNumber);
 
 	// For each iteration
 //	int getNumberOfEdgesPerIteration(config::edge & edgeType, int iterationNumber);
@@ -74,6 +75,7 @@ private:
 
 	void changeDistributionParams(config::edge & edgeType);
 	void changeDistributionParams(distribution & distr, double meanICsPerNodeForOtherDistr, double probOrSizeOther, double probOrSize);
+	void performDistributionShift(config::edge & edgeType);
 
 	int getDistributionRandomnessTradeoff(config::edge edgeType, int iterationNumber);
 
@@ -85,7 +87,7 @@ public:
 	virtual ~incrementalDeterministicGraphGenerator();
 
 	void generateIncDetGraph(ofstream*  outputFile, int* seeds, int edgeTypeIdLow, int edgeTypeIdHigh);
-	int processEdgeType(config::config configuration, config::edge & edgeType, ofstream & outputFile, bool printZipfPos);
+	int processEdgeType(config::config configuration, config::edge & edgeType, ofstream & outputFile, int graphNumber);
 };
 
 } /* namespace std */

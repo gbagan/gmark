@@ -279,88 +279,88 @@ void analysisIncrDetGraph::printToRfile(ofstream& rFile, bool outDistr, config::
 }
 
 
-string getNodeWithHighestZipfianPos(int edgeTypeId, bool outDistr) {
-	double maxPos = 0.0;
-	string node;
-	string line;
+//string getNodeWithHighestZipfianPos(int edgeTypeId, bool outDistr) {
+//	double maxPos = 0.0;
+//	string node;
+//	string line;
+//
+//	string fileName;
+//	if (outDistr) {
+//		fileName = "zipfPosSmallestGraphOutDistr" + to_string(edgeTypeId) + ".txt";
+//	} else {
+//		fileName = "zipfPosSmallestGraphInDistr" + to_string(edgeTypeId) + ".txt";
+//	}
+//	ifstream myfile(fileName);
+//	if (myfile.is_open()) {
+//		while (getline(myfile, line)) {
+//			string temp = line;
+//			string getPos = temp.erase(0, temp.find(" = ")+3);
+//			string pos = getPos.substr(0, getPos.size());
+//			if (stod(pos) > maxPos) {
+//				maxPos = stod(pos);
+//				node = line.substr(0, line.find(" = "));
+//			}
+//		}
+//		cout << "Node with highest position in Zipfian degree distribution: " << node << endl;
+//	} else {
+//		cout << "Unable to open file";
+//	}
+//
+//	return node;
+//}
 
-	string fileName;
-	if (outDistr) {
-		fileName = "zipfPosSmallestGraphOutDistr" + to_string(edgeTypeId) + ".txt";
-	} else {
-		fileName = "zipfPosSmallestGraphInDistr" + to_string(edgeTypeId) + ".txt";
-	}
-	ifstream myfile(fileName);
-	if (myfile.is_open()) {
-		while (getline(myfile, line)) {
-			string temp = line;
-			string getPos = temp.erase(0, temp.find(" = ")+3);
-			string pos = getPos.substr(0, getPos.size());
-			if (stod(pos) > maxPos) {
-				maxPos = stod(pos);
-				node = line.substr(0, line.find(" = "));
-			}
-		}
-		cout << "Node with highest position in Zipfian degree distribution: " << node << endl;
-	} else {
-		cout << "Unable to open file";
-	}
+//void analysisIncrDetGraph::zipfianPosAnalysis() {
+//	for (int i=0; i<conf.schema.edges.size(); i++) {
+//
+//		if (conf.schema.edges[i].outgoing_distrib.type == DISTRIBUTION::ZIPFIAN) {
+//			string influencorNode = getNodeWithHighestZipfianPos(i, true);
+//			for (int j=0; j<conf.nb_graphs; j++) {
+//
+//			}
+//		}
+//
+//		if (conf.schema.edges[i].incoming_distrib.type == DISTRIBUTION::ZIPFIAN) {
+//			string influencorNode = getNodeWithHighestZipfianPos(i, false);
+//			for (int j=0; j<conf.nb_graphs; j++) {
+//
+//			}
+//		}
+//	}
+//}
 
-	return node;
-}
-
-void analysisIncrDetGraph::zipfianPosAnalysis() {
-	for (int i=0; i<conf.schema.edges.size(); i++) {
-
-		if (conf.schema.edges[i].outgoing_distrib.type == DISTRIBUTION::ZIPFIAN) {
-			string influencorNode = getNodeWithHighestZipfianPos(i, true);
-			for (int j=0; j<conf.nb_graphs; j++) {
-
-			}
-		}
-
-		if (conf.schema.edges[i].incoming_distrib.type == DISTRIBUTION::ZIPFIAN) {
-			string influencorNode = getNodeWithHighestZipfianPos(i, false);
-			for (int j=0; j<conf.nb_graphs; j++) {
-
-			}
-		}
-	}
-}
-
-void analysisIncrDetGraph::zipfianPosAnalysis(int edgeTypeId, bool outDistr) {
-	// Find node with highest position in Zipf degree distr
-	string node = getNodeWithHighestZipfianPos(edgeTypeId, outDistr);
-
-
-
-	// Get the number of connection to or from this node with the highest position
-	string line;
-	int connections = 0;
-	ifstream graphFile("outputGraph" + to_string(edgeTypeId+1) + ".txt");
-	if (graphFile.is_open()) {
-		while (getline(graphFile, line)) {
-			string temp = line;
-			string subject = temp.substr(0, temp.find(" "));
-			if (outDistr) {
-				if (subject.compare(node) == 0) {
-					connections++;
-				}
-			} else {
-				string remSubject = temp.erase(0, temp.find(" ")+1);
-				string remPred = remSubject.erase(0, remSubject.find(" ")+1);
-//				cout << "Object = " << remPred << endl;
-				if (remPred.compare(node) == 0) {
-					connections++;
-				}
-			}
-		}
-		cout << "Number of connections: " << connections << endl;
-	} else {
-		cout << "Unable to open file";
-	}
-
-}
+//void analysisIncrDetGraph::zipfianPosAnalysis(int edgeTypeId, bool outDistr) {
+//	// Find node with highest position in Zipf degree distr
+//	string node = getNodeWithHighestZipfianPos(edgeTypeId, outDistr);
+//
+//
+//
+//	// Get the number of connection to or from this node with the highest position
+//	string line;
+//	int connections = 0;
+//	ifstream graphFile("outputGraph" + to_string(edgeTypeId+1) + ".txt");
+//	if (graphFile.is_open()) {
+//		while (getline(graphFile, line)) {
+//			string temp = line;
+//			string subject = temp.substr(0, temp.find(" "));
+//			if (outDistr) {
+//				if (subject.compare(node) == 0) {
+//					connections++;
+//				}
+//			} else {
+//				string remSubject = temp.erase(0, temp.find(" ")+1);
+//				string remPred = remSubject.erase(0, remSubject.find(" ")+1);
+////				cout << "Object = " << remPred << endl;
+//				if (remPred.compare(node) == 0) {
+//					connections++;
+//				}
+//			}
+//		}
+//		cout << "Number of connections: " << connections << endl;
+//	} else {
+//		cout << "Unable to open file";
+//	}
+//
+//}
 
 double meann(vector<double> doubles) {
 	if (doubles.size() == 0) {

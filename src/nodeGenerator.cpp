@@ -70,16 +70,16 @@ int nodeGenerator::getNumberOfICs(distribution distr, bool addSourceNode) {
 		numberOfConnections = 0;
 	}
 
-	if (numberOfConnections < 0) {
-		numberOfConnections = 0;
-	}
+//	if (numberOfConnections < 0) {
+//		numberOfConnections = 0;
+//	}
 
 //	cout << "Node get " << numberOfConnections << " interface-connections" << endl;
 	return numberOfConnections;
 }
 
 
-void nodeGenerator::addNode(config::edge & edgeType, bool addSourceNode) {
+void nodeGenerator::addNode(config::edge & edgeType, int distrShift, bool addSourceNode) {
 	distribution distr;
 	size_t type;
 	int birthId;
@@ -107,9 +107,14 @@ void nodeGenerator::addNode(config::edge & edgeType, bool addSourceNode) {
 	if (distr.type == DISTRIBUTION::ZIPFIAN) {
 		pos = uniform_real_distribution<double>(0.0,1.0)(*randomGenerator);
 	} else {
-		numberOfICs = getNumberOfICs(distr, addSourceNode);
+		numberOfICs = getNumberOfICs(distr, addSourceNode) + distrShift;
 	}
-	graphNode *n = new graphNode(to_string(type) + "-" + to_string(birthId), birthId, type, conf->schema.edges.size(), numberOfICs, numberOfICs, pos);
+
+	int nonNegativeICs = numberOfICs;
+	if (numberOfICs < 0) {
+		nonNegativeICs = 0;
+	}
+	graphNode *n = new graphNode(to_string(type) + "-" + to_string(birthId), birthId, type, conf->schema.edges.size(), nonNegativeICs, nonNegativeICs, pos, numberOfICs);
 
 	if (addSourceNode) {
 //		initializeConnections(*n, conf->types.at(otherType).size*2);
@@ -154,20 +159,20 @@ void nodeGenerator::addNode(config::edge & edgeType, bool addSourceNode) {
 //
 //}
 
-void nodeGenerator::addSubjectNodes(config::edge & edgeType) {
+void nodeGenerator::addSubjectNodes(config::edge & edgeType, int distrShift) {
 	int currentNumberOfSubjectNodes = nodes->first.size();
 	int totalNumberSubjectOfNodes = conf->types[edgeType.subject_type].size;
 	int subjectNodesToGenerate = totalNumberSubjectOfNodes - currentNumberOfSubjectNodes;
 	for (int i=0; i<subjectNodesToGenerate; i++) {
-		addNode(edgeType, true);
+		addNode(edgeType, distrShift, true);
 	}
 }
-void nodeGenerator::addObjectNodes(config::edge & edgeType) {
+void nodeGenerator::addObjectNodes(config::edge & edgeType, int distrShift) {
 	int currentNumberOfObjectNodes = nodes->second.size();
 	int totalNumberObjectOfNodes = conf->types[edgeType.object_type].size;
 	int objectNodesToGenerate = totalNumberObjectOfNodes - currentNumberOfObjectNodes;
 	for (int i=0; i<objectNodesToGenerate; i++) {
-		addNode(edgeType, false);
+		addNode(edgeType, distrShift, false);
 	}
 }
 

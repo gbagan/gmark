@@ -23,7 +23,7 @@ graphNode::graphNode() {
 //	this->connections = new int[1];
 }
 graphNode::graphNode(string globalId, int localId, int nodeType, int numberOfEdgeTypes, int numberOfOpenICs,
-		int numberOfICs, float position) {
+		int numberOfICs, float position, int nonNegativeICs) {
 	this->id = globalId;
 	this->iterationId = localId;
 	this->type = nodeType;
@@ -31,7 +31,7 @@ graphNode::graphNode(string globalId, int localId, int nodeType, int numberOfEdg
 	this->numberOfOpenInterfaceConnections = numberOfICs;
 	this->numberOfInterfaceConnections = numberOfOpenICs;
 	this->position = position;
-
+	this->numberOfNonNegativeICs = nonNegativeICs;
 //	this->connections = new int[maxNumberOfConnections];
 }
 
@@ -59,10 +59,20 @@ void graphNode::decrementOpenInterfaceConnections() {
 	this->numberOfOpenInterfaceConnections--;
 }
 void graphNode::incrementOpenInterfaceConnectionsByN(int number) {
-	this->numberOfOpenInterfaceConnections += number;
+//	cout << "numberOfNonNegativeICs" << this->numberOfNonNegativeICs << endl;
+//	cout << "numberOfNonNegativeICs" << this->numberOfNonNegativeICs << endl;
+//	cout << "numberOfOpenInterfaceConnections" << this->numberOfOpenInterfaceConnections << endl;
+	if (this->numberOfNonNegativeICs >= 0) {
+		this->numberOfOpenInterfaceConnections += number;
+	}
+//	cout << "numberOfOpenInterfaceConnections" << this->numberOfOpenInterfaceConnections << endl;
 }
 void graphNode::incrementInterfaceConnectionsByN(int number) {
-	this->numberOfInterfaceConnections += number;
+//	cout
+	this->numberOfNonNegativeICs += number;
+	if (this->numberOfNonNegativeICs > 0) {
+		this->numberOfInterfaceConnections = this->numberOfNonNegativeICs;
+	}
 }
 
 void graphNode::setPosition(double number) {

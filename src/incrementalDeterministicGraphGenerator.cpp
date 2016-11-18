@@ -20,21 +20,6 @@ incrementalDeterministicGraphGenerator::~incrementalDeterministicGraphGenerator(
 }
 
 // ####### Generate edges #######
-//int incrementalDeterministicGraphGenerator::findSourceNode(config::edge & edgeType, vector<graphNode*> &nodesWithOpenICs) {
-//	double randomValue = uniformDistr(randomGenerator);
-//	int subjectNodeId = cumDistrUtils.calculateCDF(nodesWithOpenICs, tempNode, randomValue);
-//
-//	return subjectNodeId;
-//}
-//
-//int incrementalDeterministicGraphGenerator::findTargetNode(config::edge & edgeType, int sourceNodeLocalId, vector<graphNode*> &nodesWithOpenICs) {
-//	double randomValue = uniformDistr(randomGenerator);
-//	int objectNodeId = cumDistrUtils.calculateCDF(nodesWithOpenICs, nodes.first[sourceNodeLocalId], randomValue);
-//
-//	return objectNodeId;
-//}
-
-
 void incrementalDeterministicGraphGenerator::addEdge(graphNode &sourceNode, graphNode &targetNode, int predicate) {
 //	cout << "SourceNode" << sourceNode.iterationId << endl;
 //	cout << "Before: subject openICs = " << sourceNode.getNumberOfOpenInterfaceConnections() << endl;
@@ -199,6 +184,7 @@ void incrementalDeterministicGraphGenerator::changeDistributionParams(config::ed
 		conf.types.at(edgeType.object_type).size = (1.0 / (double)conf.types.size()) * conf.nb_nodes;
 	}
 
+	// One scalable node-type
 	if (conf.types.at(edgeType.subject_type).scalable ^ conf.types.at(edgeType.object_type).scalable) {
 		if (conf.types.at(edgeType.subject_type).scalable) {
 			// In-distr is not scalable, so change the in-distribution
@@ -227,6 +213,7 @@ void incrementalDeterministicGraphGenerator::changeDistributionParams(config::ed
 		return;
 	}
 
+	// Both node-types, of the current edge-type, are scalable or both are not
 	double subjectProbOrSize;
 	double objectProbOrSize;
 	if (conf.types.at(edgeType.subject_type).scalable) {
@@ -303,51 +290,6 @@ void incrementalDeterministicGraphGenerator::changeDistributionParams(config::ed
 	}
 }
 
-//int incrementalDeterministicGraphGenerator::getNumberOfOpenICs(vector<graphNode*> nodes) {
-//	int openICs = 0;
-//	for(int i=0; i<nodes.size(); i++) {
-//		openICs += (*nodes.at(i)).getNumberOfOpenInterfaceConnections();
-//	}
-//	return openICs;
-//}
-
-//int incrementalDeterministicGraphGenerator::getNumberOfEdgesPerIteration(config::edge edgeType, vector<graphNode*> subjectNodesWithOpenICs, vector<graphNode*> objectNodesWithOpenICs, int iterationNumber) {
-//	int scale = 5;
-//
-//	int subjects;
-//	if (conf.types.at(edgeType.subject_type).scalable) {
-//		subjects = round(max(1.0, conf.types.at(edgeType.subject_type).proportion / conf.types.at(edgeType.object_type).proportion)) * iterationNumber;
-//	} else {
-//		subjects = conf.types.at(edgeType.subject_type).size;
-//	}
-//
-//	int objects;
-//	if (conf.types.at(edgeType.object_type).scalable) {
-//		objects = round(max(1.0, conf.types.at(edgeType.object_type).proportion / conf.types.at(edgeType.subject_type).proportion)) * iterationNumber;
-//	} else {
-//		objects = conf.types.at(edgeType.object_type).size;
-//	}
-//
-//	int c = round(max(getMeanICsPerNode(edgeType.outgoing_distrib, subjects), getMeanICsPerNode(edgeType.incoming_distrib, objects)));
-//
-//	if (conf.types.at(edgeType.subject_type).scalable ^ conf.types.at(edgeType.object_type).scalable) {
-//		c = 1;
-//	}
-//	int openICs = min(getNumberOfOpenICs(subjectNodesWithOpenICs), getNumberOfOpenICs(objectNodesWithOpenICs));
-////	cout << "OpenConnections: "  << openICs << endl;
-////	cout << "c: "  << c << endl;
-//	return openICs - (c*scale);
-//}
-//
-//vector<graphNode*> getNodesWithAtLeastOneOpenIC(vector<graphNode> & nodes) {
-//	vector<graphNode*> nodesWithOpenICs;
-//	for (graphNode & node: nodes) {
-//		if (node.getNumberOfOpenInterfaceConnections() > 0) {
-//			nodesWithOpenICs.push_back(&node);
-//		}
-//	}
-//	return nodesWithOpenICs;
-//}
 
 int incrementalDeterministicGraphGenerator::getDistributionRandomnessTradeoff(config::edge edgeType, int iterationNumber) {
 	int scale = 5;
@@ -387,53 +329,73 @@ vector<int> constructNodesVector(vector<graphNode> & nodes) {
 	return nodesVector;
 }
 
-//vector<graphNode*> incrementalDeterministicGraphGenerator::constructNodesVectorAndRemoveNodeWithZeroICs(vector<graphNode> &nodes_) {
-//	vector<graphNode*> nodesVector;
-//	int size = nodes_.size();
-////	cout << "Vector: [";
-//	for (int i=0; i<size; i++) {
-//		int ics = nodes_[i].getNumberOfOpenInterfaceConnections();
-////		cout << ics << endl;
-//		if (ics == 0 && nodes_.size() > 0) {
-//			graphNode last = nodes_.back();
-////			cout << "i=" << i << endl;
-////			cout << "size: " << nodes_.size() << endl;
-////			cout << "Before: " << nodes_.at(i).iterationId << " with "<< nodes_.at(i).getNumberOfOpenInterfaceConnections() << endl;
-//			nodes_.at(i) = last;
-////			cout << "After: " << nodes_.at(i).iterationId << " with "<< nodes_.at(i).getNumberOfOpenInterfaceConnections() << endl;
-//			nodes_.pop_back();
-//			size--;
-//		} else {
-//			for (int i=0; i<ics; i++) {
-//				nodesVector.push_back(&nodes_[i]);
-////				cout << n.iterationId << " ";
-//			}
-//		}
-//	}
-////	cout << "]" << endl;
-//	return nodesVector;
-//}
+void incrementalDeterministicGraphGenerator::performDistributionShift(config::edge & edgeType) {
+	if (graphNumber > 0) {
+		int sf = edgeType.scale_factor;
+		if (conf.types[edgeType.subject_type].size > conf.types[edgeType.object_type].size) {
+			// Increment all ICs and openICs with 1
+			outDistrShift += sf;
+			for (graphNode & node: nodes.first) {
+				node.incrementOpenInterfaceConnectionsByN(sf);
+				node.incrementInterfaceConnectionsByN(sf);
+			}
+
+			// Increment all ICs and openICs with floor(num) or floor(num)+1 with probability num-floor(num)
+			double num = ((double) sf * (double)conf.types[edgeType.subject_type].size) / (double)conf.types[edgeType.object_type].size;
+			int numIncrement = floor(num);
+			double randomValue = uniformDistr(randomGenerator);
+			if (randomValue < num - (double)floor(num)) {
+				numIncrement++;
+			}
+			inDistrShift += numIncrement;
+			for (graphNode & node: nodes.second) {
+				node.incrementOpenInterfaceConnectionsByN(numIncrement);
+				node.incrementInterfaceConnectionsByN(numIncrement);
+			}
+		} else {
+			// Increment all ICs and openICs with 1
+			inDistrShift += sf;
+			for (graphNode & node: nodes.second) {
+				node.incrementOpenInterfaceConnectionsByN(sf);
+				node.incrementInterfaceConnectionsByN(sf);
+			}
+
+			// Increment all ICs and openICs with floor(num) or floor(num)+1 with probability num-floor(num)
+			double num = ((double) sf * (double)conf.types[edgeType.object_type].size) / (double)conf.types[edgeType.subject_type].size;
+			int numIncrement = floor(num);
+			double randomValue = uniformDistr(randomGenerator);
+			if (randomValue < num - (double)floor(num)) {
+				numIncrement++;
+			}
+			outDistrShift += numIncrement;
+			for (graphNode & node: nodes.first) {
+				node.incrementOpenInterfaceConnectionsByN(numIncrement);
+				node.incrementInterfaceConnectionsByN(numIncrement);
+			}
+		}
+	}
+}
 
 
-void incrementalDeterministicGraphGenerator::processIteration(config::edge & edgeType) {
+void incrementalDeterministicGraphGenerator::processIteration(config::edge & edgeType, int graphNumber) {
 //	if (iterationNumber % 1000 == 0) {
 //		cout <<÷ endl<< "---Process interationNumber " << to_string(iterationNumber) << " of edgeType " << to_string(edgeType.edge_type_id) << "---" << endl;
 //	}
-	chrono::high_resolution_clock::time_point start = chrono::high_resolution_clock::now();
-	nodeGen.addSubjectNodes(edgeType);
-	nodeGen.addObjectNodes(edgeType);
-	chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
-	auto duration = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
-	timeForNodeGen += duration;
 
-//	cout << "Subjects: " << nodes.first.size() << endl;
-//	cout << "Objects: " << nodes.second.size() << endl;
-//	for (graphNode n: nodes.first) {
-//		cout << n.iterationId << " openICs: " << n.getNumberOfOpenInterfaceConnections() << endl;
-//		cout << n.iterationId << " ICs: " << n.getNumberOfInterfaceConnections() << endl;
-//	}
+	if (!(conf.types.at(edgeType.subject_type).scalable ^ conf.types.at(edgeType.object_type).scalable)) {
+		performDistributionShift(edgeType);
+	}
 
-	start = chrono::high_resolution_clock::now();
+	int distrScale = 0;
+	if (true) {
+		// TODO: if distribution scale
+		distrScale = graphNumber;
+	}
+	nodeGen.addSubjectNodes(edgeType, outDistrShift);
+	nodeGen.addObjectNodes(edgeType, inDistrShift);
+
+
+
 	if (edgeType.outgoing_distrib.type == DISTRIBUTION::ZIPFIAN) {
 		updateInterfaceConnectionsForZipfianDistributions(&nodes.first, edgeType.outgoing_distrib);
 	}
@@ -444,22 +406,15 @@ void incrementalDeterministicGraphGenerator::processIteration(config::edge & edg
 		updateICsForNonScalableType(edgeType);
 	}
 
-	end = chrono::high_resolution_clock::now();
-	duration = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
-	timeForUpdating += duration;
 
 
-	start = chrono::high_resolution_clock::now();
+
 	vector<int> subjectNodeIdVector = constructNodesVector(nodes.first);
 	vector<int> objectNodeIdVector = constructNodesVector(nodes.second);
 	shuffle(objectNodeIdVector.begin(), objectNodeIdVector.end(), randomGenerator);
 	shuffle(subjectNodeIdVector.begin(), subjectNodeIdVector.end(), randomGenerator);
-	end = chrono::high_resolution_clock::now();
-	duration = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
-	timeForShuffling += duration;
 
 
-	start = chrono::high_resolution_clock::now();
 	for (int i=0; i<min(subjectNodeIdVector.size(), objectNodeIdVector.size()); i++) {
 //		double randomValue = uniformDistr(randomGenerator);
 //		if (randomValue > 0.03 || (!conf.types[edgeType.subject_type].scalable || !conf.types[edgeType.object_type].scalable)) {
@@ -467,10 +422,6 @@ void incrementalDeterministicGraphGenerator::processIteration(config::edge & edg
 			addEdge(nodes.first[subjectNodeIdVector[i]], nodes.second[objectNodeIdVector[i]], edgeType.predicate);
 //		}
 	}
-	end = chrono::high_resolution_clock::now();
-	duration = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
-	timeForAddingEdges += duration;
-//	timeForIteration += duration;
 
 }
 
@@ -495,25 +446,24 @@ void incrementalDeterministicGraphGenerator::printRank(vector<graphNode> nodes, 
 	rankFile.close();
 }
 
-int incrementalDeterministicGraphGenerator::processEdgeType(config::config configuration, config::edge & edgeType, ofstream & outputFile, bool printZipfPos) {
-//	cout << endl << endl << "-----Processing edge-type " << to_string(edgeType.edge_type_id) << "-----" << endl;
-
+int incrementalDeterministicGraphGenerator::processEdgeType(config::config configuration, config::edge & edgeType, ofstream & outputFile, int graphNumber_) {
 	chrono::high_resolution_clock::time_point start = chrono::high_resolution_clock::now();
+
 	this->conf = configuration;
+	this->graphNumber = graphNumber_;
+	cout << "\n\n-----------GraphNumber: " << graphNumber << "--------------" << endl;
 //	cout << "Number of nodes: " << conf.nb_nodes << endl;
 
 	changeDistributionParams(edgeType);
 	nodeGen = nodeGenerator(edgeType, nodes.first.size(), nodes.second.size(), &randomGenerator, &nodes, &conf);
 
 
-
-	processIteration(edgeType);
+	processIteration(edgeType, graphNumber);
 
 //	chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
 //	auto durationWitoutMaterialize = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
 
 	// Materialize the edge
-//	chrono::high_resolution_clock::time_point start = chrono::high_resolution_clock::now();
 //	string outputBuffer = "";
 //	cout << "Number of edges: " << edges.size() << endl;
 	for (int i=0; i<edges.size(); i++) {
@@ -531,38 +481,13 @@ int incrementalDeterministicGraphGenerator::processEdgeType(config::config confi
 		}
 	}
 	chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
-	auto durationForMaterialize = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
+	auto durationWithMaterialize = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
 
-//	cout << "Time for node gen: " << timeForNodeGen << endl;
-//	cout << "Time for updating: " << timeForUpdating << endl;
-//	cout << "Time for shuffling: " << timeForShuffling << endl;
-//	cout << "Time for adding edges: " << timeForAddingEdges << endl;
-//	cout << "Time for materialization: " << durationForMaterialize << endl;
-//	cout << "Time for iteration: " << timeForIteration << endl;
-
-//	if (printZipfPos && edgeType.outgoing_distrib.type == DISTRIBUTION::ZIPFIAN) {
-////		cout << "Print out-distr pos" << endl;
-//		ofstream zipfPosOutDistrFile;
-//		zipfPosOutDistrFile.open("zipfPosSmallestGraphOutDistr" + to_string(edgeType.edge_type_id) + ".txt", ios::trunc);
-//		for (graphNode node: nodes.first) {
-//			zipfPosOutDistrFile << node.id << " = " << node.getPosition() << endl;
-//		}
-//		zipfPosOutDistrFile.close();
-//	}
-//	if (printZipfPos && edgeType.incoming_distrib.type == DISTRIBUTION::ZIPFIAN) {
-////		cout << "Print in-distr pos" << endl;
-//		ofstream zipfPosInDistrFile;
-//		zipfPosInDistrFile.open("zipfPosSmallestGraphInDistr" + to_string(edgeType.edge_type_id) + ".txt", ios::trunc);
-//		for (graphNode node: nodes.second) {
-//			zipfPosInDistrFile << node.id << " = " << node.getPosition() << endl;
-//		}
-//		zipfPosInDistrFile.close();
-//	}
 
 	printRank(nodes.first, edgeType.edge_type_id, conf.nb_nodes);
 //	printRank(nodes.second, edgeType.edge_type_id, conf.nb_nodes);
 
-	return durationForMaterialize;
+	return durationWithMaterialize;
 }
 
 

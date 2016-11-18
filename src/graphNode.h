@@ -24,10 +24,12 @@ public:
 	int numberOfInterfaceConnections;
 	int numberOfOpenInterfaceConnections;
 
+	int numberOfNonNegativeICs;
+
 //	int* connections;
 
 	graphNode();
-	graphNode(string id, int iterationId, int type, int numberOfEdgeTypes, int numberOfOpenICs,int numberOfICs, float position);
+	graphNode(string id, int iterationId, int type, int numberOfEdgeTypes, int numberOfOpenICs,int numberOfICs, float position, int nonNegativeICs);
 	virtual ~graphNode();
 
 	int getNumberOfOpenInterfaceConnections();

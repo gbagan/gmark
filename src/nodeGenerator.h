@@ -16,7 +16,7 @@ namespace std {
 
 class nodeGenerator {
 private:
-	void addNode(config::edge & edgeType, bool findSourceNode);
+	void addNode(config::edge & edgeType, int distrShift, bool findSourceNode);
 //	void addNodes(config::edge & edgeType, int type1, int type2, bool subject);
 	int getNumberOfICs(distribution distr, bool addSourceNode);
 	void initializeConnections(graphNode &n, int maxNumberOfConnections);
@@ -37,8 +37,8 @@ public:
 	nodeGenerator(config::edge & edgeType, int birthIdSub, int birthIdOb, default_random_engine* randomGenerator, pair<vector<graphNode>, vector<graphNode>>* nodes, config::config* conf);
 	virtual ~nodeGenerator();
 
-	void addSubjectNodes(config::edge & edgeType);
-	void addObjectNodes(config::edge & edgeType);
+	void addSubjectNodes(config::edge & edgeType, int distrShift);
+	void addObjectNodes(config::edge & edgeType, int distrShift);
 
 };
 

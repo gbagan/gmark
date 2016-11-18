@@ -160,6 +160,17 @@ void parse_schema(pugi::xml_node node, config::config & conf) {
             pugi::xml_node indistribution_node = target_node.child("indistribution");
             distribution indistribution = parse_distribution(indistribution_node);
             
+            pugi::xml_node sfNode = target_node.child("scalefactor");
+            int sf = 0;
+            if (!sfNode.empty()) {
+            	sf = sfNode.text().as_int();
+            	if (sf < 0) {
+            		sf = 0;
+            		cout << "The scale-factor should be greater than 0" << endl;
+            	}
+            }
+
+
             if (multiplicity == '1') { // && outdistribution.type == DISTRIBUTION::UNDEFINED) {
                 outdistribution = distribution(DISTRIBUTION::UNIFORM, 1, 1);
             }
@@ -175,7 +186,7 @@ void parse_schema(pugi::xml_node node, config::config & conf) {
 				indistribution = distribution(DISTRIBUTION::NORMAL, 0, 1);
 			}
             
-            conf.schema.add_edge(source_type, symbol, target_type, multiplicity, edgeTypeId, outdistribution, indistribution);
+            conf.schema.add_edge(source_type, symbol, target_type, multiplicity, edgeTypeId, sf, outdistribution, indistribution);
             //cout << "conf.add_edge "  << source_type << " " << symbol << " " << target_type << " " << multiplicity << " " << outdistribution << " " << indistribution <<endl;
             
         }

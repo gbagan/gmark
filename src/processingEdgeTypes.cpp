@@ -45,9 +45,9 @@ void processingEdgeTypes::sequentialProcessing() {
 			ofstream outputFile;
 			outputFile.open("outputGraph" + to_string(j+1) + ".txt", ios::app);
 			if (j == 0) {
-				runningTime += graphGenerator.processEdgeType(conf2, conf2.schema.edges.at(i), outputFile, true);
+				runningTime += graphGenerator.processEdgeType(conf2, conf2.schema.edges.at(i), outputFile, j);
 			} else {
-				runningTime += graphGenerator.processEdgeType(conf2, conf2.schema.edges.at(i), outputFile, false);
+				runningTime += graphGenerator.processEdgeType(conf2, conf2.schema.edges.at(i), outputFile, j);
 			}
 		}
 	}
