@@ -110,11 +110,7 @@ void nodeGenerator::addNode(config::edge & edgeType, int distrShift, bool addSou
 		numberOfICs = getNumberOfICs(distr, addSourceNode) + distrShift;
 	}
 
-	int nonNegativeICs = numberOfICs;
-	if (numberOfICs < 0) {
-		nonNegativeICs = 0;
-	}
-	graphNode *n = new graphNode(to_string(type) + "-" + to_string(birthId), birthId, type, conf->schema.edges.size(), nonNegativeICs, nonNegativeICs, pos, numberOfICs);
+	graphNode *n = new graphNode(to_string(type) + "-" + to_string(birthId), birthId, type, conf->schema.edges.size(), numberOfICs, numberOfICs, pos);
 
 	if (addSourceNode) {
 //		initializeConnections(*n, conf->types.at(otherType).size*2);

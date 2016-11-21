@@ -32,6 +32,7 @@ void processingEdgeTypes::sequentialProcessing() {
 //		cout << "Processing edge-type " << i << endl;
 
 		incrementalDeterministicGraphGenerator graphGenerator = incrementalDeterministicGraphGenerator();
+		config::config previousConf = conf;
 		for (int j=0; j<conf.nb_graphs; j++) {
 			config::config conf2;
 			if (nb_nodes_per_graph.size() > j) {
@@ -44,11 +45,10 @@ void processingEdgeTypes::sequentialProcessing() {
 
 			ofstream outputFile;
 			outputFile.open("outputGraph" + to_string(j+1) + ".txt", ios::app);
-			if (j == 0) {
-				runningTime += graphGenerator.processEdgeType(conf2, conf2.schema.edges.at(i), outputFile, j);
-			} else {
-				runningTime += graphGenerator.processEdgeType(conf2, conf2.schema.edges.at(i), outputFile, j);
-			}
+
+			runningTime += graphGenerator.processEdgeTypeSingleGraph(conf2, previousConf, conf2.schema.edges.at(i), outputFile, j);
+
+			previousConf = conf2;
 		}
 	}
 

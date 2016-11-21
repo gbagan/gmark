@@ -51,7 +51,7 @@ private:
 	uniform_real_distribution<double> uniformDistr = uniform_real_distribution<double>(0.0,1.0);
 
 //	void initializeNodesAndEdges();
-	void processIteration(config::edge & edgeType, int graphNumber);
+	void incrementGraph(config::edge & edgeType, int graphNumber);
 
 	// For each iteration
 //	int getNumberOfEdgesPerIteration(config::edge & edgeType, int iterationNumber);
@@ -67,17 +67,18 @@ private:
 
 	void addEdge(graphNode &sourceNode, graphNode &targetNode, int predicate);
 
-	void updateInterfaceConnectionsForZipfianDistributions(vector<graphNode> *nodes, distribution distr);
+	void updateInterfaceConnectionsForZipfianDistributions(vector<graphNode> *nodes, distribution distr, bool outDistr);
 //	pair<int,int> updateInterfaceConnectionsForZipfianDistributions(config::edge & edgeType);
 	void updateICsForNonScalableType(vector<graphNode> & nodes, int nmNodesOther, double meanUpdateDistr, double meanNonUpdateDistr, distribution & distrToUpdate);
 	void updateICsForNonScalableType(config::edge & edgeType);
 //	void shiftZipfianDistribution(vector<graphNode> & nodes, int nmNodes, int edgeTypeId, bool changeSubjectNodes);
 
-	void changeDistributionParams(config::edge & edgeType);
-	void changeDistributionParams(distribution & distr, double meanICsPerNodeForOtherDistr, double probOrSizeOther, double probOrSize);
+	void updateShifts(config::edge & edgeType, config::config & previousConf);
+	void updateDistributionShifts(config::edge & edgeType);
+//	void changeDistributionParams(distribution & distr, double meanICsPerNodeForOtherDistr, double probOrSizeOther, double probOrSize);
 	void performDistributionShift(config::edge & edgeType);
 
-	int getDistributionRandomnessTradeoff(config::edge edgeType, int iterationNumber);
+//	int getDistributionRandomnessTradeoff(config::edge edgeType, int iterationNumber);
 
 //	vector<graphNode*> constructNodesVectorAndRemoveNodeWithZeroICs(vector<graphNode> &nodes_);
 
@@ -87,7 +88,7 @@ public:
 	virtual ~incrementalDeterministicGraphGenerator();
 
 	void generateIncDetGraph(ofstream*  outputFile, int* seeds, int edgeTypeIdLow, int edgeTypeIdHigh);
-	int processEdgeType(config::config configuration, config::edge & edgeType, ofstream & outputFile, int graphNumber);
+	int processEdgeTypeSingleGraph(config::config configuration, config::config previousConf, config::edge & edgeType, ofstream & outputFile, int graphNumber);
 };
 
 } /* namespace std */
