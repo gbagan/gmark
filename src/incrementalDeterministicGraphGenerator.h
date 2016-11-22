@@ -20,11 +20,6 @@ namespace std {
 
 class incrementalDeterministicGraphGenerator {
 private:
-	int timeForNodeGen = 0;
-	int timeForUpdating = 0;
-	int timeForShuffling = 0;
-	int timeForAddingEdges = 0;
-
 //	int timeForIteration = 0;
 	int outDistrShift = 0;
 	int inDistrShift = 0;
@@ -50,37 +45,25 @@ private:
 
 	uniform_real_distribution<double> uniformDistr = uniform_real_distribution<double>(0.0,1.0);
 
-//	void initializeNodesAndEdges();
 	void incrementGraph(config::edge & edgeType, int graphNumber);
 
-	// For each iteration
-//	int getNumberOfEdgesPerIteration(config::edge & edgeType, int iterationNumber);
-//	int getNumberOfEdgesPerIteration(config::edge edgeType, pair<int, int> zipfOpenInterfaceConnections);
-//	int getNumberOfEdgesPerIteration(config::edge edgeType, vector<graphNode*> subjectNodesWithOpenICs, vector<graphNode*> objectNodesWithOpenICs, int iterationNumber);
-//	int getNumberOfOpenICs(vector<graphNode*> nodes);
 
 	double getMeanICsPerNode(distribution & distr, int zipfMax);
-
-//	int findSourceNode(config::edge & edgeType, vector<graphNode*> &nodesWithOpenICs);
-//	int findTargetNode(config::edge & edgeType, int sourceNodeLocalId, vector<graphNode*> &nodesWithOpenICs);
-//	graphNode *findNodeIdFromCumulProbs(vector<float> & cumulProbs, bool findSourceNode);
 
 	void addEdge(graphNode &sourceNode, graphNode &targetNode, int predicate);
 
 	void updateInterfaceConnectionsForZipfianDistributions(vector<graphNode> *nodes, distribution distr, bool outDistr);
-//	pair<int,int> updateInterfaceConnectionsForZipfianDistributions(config::edge & edgeType);
-	void updateICsForNonScalableType(vector<graphNode> & nodes, int nmNodesOther, double meanUpdateDistr, double meanNonUpdateDistr, distribution & distrToUpdate);
-	void updateICsForNonScalableType(config::edge & edgeType);
-//	void shiftZipfianDistribution(vector<graphNode> & nodes, int nmNodes, int edgeTypeId, bool changeSubjectNodes);
+
+	void performShiftForNonScalableNodes(config::edge & edgeType);
+
 
 	void updateShifts(config::edge & edgeType, config::config & previousConf);
-	void updateDistributionShifts(config::edge & edgeType);
-//	void changeDistributionParams(distribution & distr, double meanICsPerNodeForOtherDistr, double probOrSizeOther, double probOrSize);
-	void performDistributionShift(config::edge & edgeType);
+	void fixSchemaInequality(config::edge & edgeType);
 
-//	int getDistributionRandomnessTradeoff(config::edge edgeType, int iterationNumber);
+	void performSchemaIndicatedShift(config::edge & edgeType);
+	void performFixingShiftForZipfian(config::edge & edgeType, vector<int> subjectNodeIdVector, vector<int> objectNodeIdVector);
 
-//	vector<graphNode*> constructNodesVectorAndRemoveNodeWithZeroICs(vector<graphNode> &nodes_);
+
 
 	void printRank(vector<graphNode> nodes, int edgeTypeId, int nbNodes);
 public:
