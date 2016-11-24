@@ -7,6 +7,14 @@ gMark is a domain- and query language-independent framework targeting highly tun
 **gMark was demonstrated in VLDB 2016. The gMark research paper has been accepted in the IEEE TKDE (Transactions on Knowledge and Data Engineering) journal.** 
 
 If you use gMark, please cite:
+    @article{BBCFLA17,
+      author = {Bagan, G. and Bonifati, A. and Ciucanu, R. and Fletcher, G. H. L. and Lemay, A. and Advokaat, N.},
+      title = {{gMark}: Schema-Driven Generation of Graphs and Queries},
+      journal = {IEEE Transactions on Knowledge and Data Engineering},
+      year = {2017 (to appear)}
+    }
+
+and/or
 
     @article{BBCFLA16,
       author = {Bagan, G. and Bonifati, A. and Ciucanu, R. and Fletcher, G. H. L. and Lemay, A. and Advokaat, N.},
