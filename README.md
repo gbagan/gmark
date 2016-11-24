@@ -4,7 +4,7 @@ gMark is a domain- and query language-independent framework targeting highly tun
 
 **For more details about gMark, please refer to our technical report: http://arxiv.org/abs/1511.08386**
 
-**gMark was demonstrated in VLDB 2016**
+**gMark was demonstrated in VLDB 2016. The gMark research paper has been accepted in the IEEE TKDE (Transactions on Knowledge and Data Engineering) journal.** 
 
 If you use gMark, please cite:
 
