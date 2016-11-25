@@ -191,6 +191,203 @@ void analysisIncrDetGraph::distributionAnalysis(config::edge edgeType, ofstream 
 	printToRfile(rFile, false, edgeType);
 }
 
+
+void analysisIncrDetGraph::distributionAnalysis2(config::edge edgeType, ofstream & rFile) {
+	cout << "\n\n-----Distribution analysis-----\n";
+//	cout << "EdgeType: " << to_string(edgeType) << endl;
+
+
+	vector<int> outDistr;
+	vector<int> inDistr;
+
+	// Get max values (localIds) of the subjects and object nodes
+	int maxSubject = 0;
+	int maxObject = 0;
+	string line;
+	ifstream myfile(outpuFile);
+	if (myfile.is_open()) {
+		while (getline(myfile, line)) {
+			string temp = line;
+			string getPred = temp.erase(0, temp.find(" ")+1);
+			string predicate = getPred.substr(0, getPred.find(" "));
+			if (stoi(predicate) == edgeType.predicate) {
+				temp = line;
+				string subjectType = temp.substr(0, temp.find("-"));
+				string getSub = temp.erase(0, temp.find("-")+1);
+				string subject = getSub.substr(0, getSub.find(" "));
+				if (stoi(subjectType) == edgeType.subject_type && stoi(subject) > maxSubject) {
+					maxSubject = stoi(subject);
+				}
+
+				getPred = getPred.erase(0, getPred.find(" ")+1);
+				string objectType = getPred.substr(0, getPred.find("-"));
+				string getObj = getPred.erase(0, getPred.find("-")+1);
+				string object = getObj.substr(0, getObj.length());
+				if (stoi(objectType) == edgeType.object_type && stoi(object) > maxObject) {
+					maxObject = stoi(object);
+				}
+			}
+		}
+	} else {
+		cout << "Unable to open file";
+	}
+	maxSubject = max(maxSubject, (int)conf.types[edgeType.subject_type].size-1);
+	maxObject = max(maxObject, (int)conf.types[edgeType.object_type].size-1);
+
+//	cout << "MaxSubject: " << maxSubject << endl;
+//	cout << "MaxObject: " << maxObject << endl;
+
+	// Initialize outDistr-vector
+	for (int i=0; i<=maxSubject; i++) {
+		outDistr.push_back(0);
+	}
+
+	// Initialize inDistr-vector
+	for (int i=0; i<=maxObject; i++) {
+		inDistr.push_back(0);
+	}
+
+	// Analyze all edges
+	myfile.clear();
+	myfile.seekg(0, ios::beg);
+	if (myfile.is_open()) {
+		while (getline(myfile, line)) {
+			string temp = line;
+			string getPred = temp.erase(0, temp.find(" ")+1);
+			string predicate = getPred.substr(0, getPred.find(" "));
+			if (stoi(predicate) == edgeType.predicate) {
+				temp = line;
+				string subjectType = temp.substr(0, temp.find("-"));
+				string getSub = temp.erase(0, temp.find("-")+1);
+				string subject = getSub.substr(0, getSub.find(" "));
+
+				getPred = getPred.erase(0, getPred.find(" ")+1);
+
+				string objectType = getPred.substr(0, getPred.find("-"));
+				string getObj = getPred.erase(0, getPred.find("-")+1);
+				string object = getObj.substr(0, getObj.length());
+
+				if (stoi(objectType) == edgeType.object_type && stoi(subjectType) == edgeType.subject_type) {
+					outDistr.at(stoi(subject))++;
+					inDistr.at(stoi(object))++;
+				}
+			}
+		}
+		myfile.close();
+	} else {
+		cout << "Unable to open file";
+	}
+
+
+	if(edgeType.outgoing_distrib.type == DISTRIBUTION::UNIFORM) {
+		int maxOut = 0;
+		int minOut = INT_MAX;
+		int sumOut = 0;
+		for (int i: outDistr) {
+			if (i > maxOut) {
+				maxOut = i;
+			}
+			if (i < minOut) {
+				minOut = i;
+			}
+			sumOut += i;
+		}
+		rFile << "min"<< id <<" = "<< minOut  << endl;
+		rFile << "max"<< id <<" = "<< maxOut << endl;
+		rFile << "m"<< id++ <<" = "<< (double)sumOut / (double) outDistr.size() << endl;
+	}
+	else if(edgeType.outgoing_distrib.type == DISTRIBUTION::ZIPFIAN) {
+		rFile << "TODO" << endl;
+	} else if(edgeType.outgoing_distrib.type == DISTRIBUTION::NORMAL || edgeType.outgoing_distrib.type == DISTRIBUTION::UNDEFINED) {
+		int sumOut = 0;
+		for (int i: outDistr) {
+			sumOut += i;
+		}
+
+		double mean = (double)sumOut / (double)outDistr.size();
+		double varianceSum = 0.0;
+		for (int i: outDistr) {
+			varianceSum += ((double)i-mean)*((double)i-mean);
+		}
+
+		double variance = varianceSum / (double) outDistr.size();
+		double sd = sqrt(variance);
+
+
+		rFile << "m"<< id <<" = "<< mean << endl;
+		rFile << "sd"<< id++ <<" = "<< sd << endl;
+	}
+
+
+
+
+	if(edgeType.incoming_distrib.type == DISTRIBUTION::UNIFORM) {
+		int maxIn = 0;
+		int minIn = INT_MAX;
+		int sumIn = 0;
+		for (int i: inDistr) {
+			if (i > maxIn) {
+				maxIn = i;
+			}
+			if (i < minIn) {
+				minIn = i;
+			}
+			sumIn += i;
+		}
+		rFile << "min"<< id <<" = "<< minIn  << endl;
+		rFile << "max"<< id <<" = "<< maxIn << endl;
+		rFile << "m"<< id++ <<" = "<< (double)sumIn / (double)inDistr.size() << endl;
+	} else if(edgeType.outgoing_distrib.type == DISTRIBUTION::NORMAL) {
+		int sumIn = 0;
+		for (int i: inDistr) {
+			sumIn += i;
+		}
+
+		double mean = (double)sumIn / (double)inDistr.size();
+		double varianceSum = 0.0;
+		for (int i: inDistr) {
+			varianceSum += ((double)i-mean)*((double)i-mean);
+		}
+
+		double variance = varianceSum / (double) inDistr.size();
+		double sd = sqrt(variance);
+
+
+		rFile << "m"<< id <<" = "<< mean << endl;
+		rFile << "sd"<< id++ <<" = "<< sd << endl;
+	}
+//	int i = 0;
+//	rFile << "OutDistribution <- c(";
+//	for (int nm: outDistr) {
+//		rFile << nm;
+//		if(i != outDistr.size()-1) {
+//			rFile << ", ";
+//		}
+//		i++;
+//		if(i!=0 && i % 400 == 0) {
+//			rFile << endl;
+//		}
+//	}
+//	rFile << ")" << endl;
+//	printToRfile2(rFile, true, edgeType);
+//
+//	i=0;
+//	rFile << "InDistribution <- c(";
+//	for (int nm: inDistr) {
+//		rFile << nm;
+//		if(i != inDistr.size()-1) {
+//			rFile << ", ";
+//		}
+//		i++;
+//		if(i!=0 && i % 400 == 0) {
+//			rFile << endl;
+//		}
+//	}
+//	rFile << ")" << endl;
+//
+//	printToRfile2(rFile, false, edgeType);
+}
+
 void analysisIncrDetGraph::printToRfile(ofstream& rFile, bool outDistr, config::edge edge) {
 	string distributionVar;
 	distribution* distr;
@@ -274,6 +471,34 @@ void analysisIncrDetGraph::printToRfile(ofstream& rFile, bool outDistr, config::
 		rFile << "norm = dnorm(xValues, mean=" << distr->arg1 << ", sd=" << distr->arg2 << ")" << endl;
 		rFile << "par(pch=22, col=\"blue\")" << endl;
 		rFile << "lines(xValues, norm, type=\"l\")" << endl;
+	}
+	rFile << endl;
+}
+
+
+void analysisIncrDetGraph::printToRfile2(ofstream& rFile, bool outDistr, config::edge edge) {
+	string distributionVar;
+	distribution* distr;
+	int nodeType;
+	if(outDistr) {
+		distributionVar = "OutDistribution";
+		distr = &edge.outgoing_distrib;
+		nodeType = edge.subject_type;
+	} else {
+		distributionVar = "InDistribution";
+		distr = &edge.incoming_distrib;
+		nodeType = edge.object_type;
+	}
+
+	if(distr->type == DISTRIBUTION::UNIFORM) {
+		rFile << "min"<< id <<" = min("<< distributionVar <<")" << endl;
+		rFile << "max"<< id <<" = max("<< distributionVar <<")" << endl;
+		rFile << "m"<< id++ <<" = mean("<< distributionVar <<")" << endl;
+	} else if(distr->type == DISTRIBUTION::ZIPFIAN) {
+		rFile << "TODO" << endl;
+	} else if(distr->type == DISTRIBUTION::NORMAL || distr->type == DISTRIBUTION::UNDEFINED) {
+		rFile << "m"<< id <<" = mean("<< distributionVar <<")" << endl;
+		rFile << "sd"<< id++ <<" = sd("<< distributionVar <<")" << endl;
 	}
 	rFile << endl;
 }
@@ -398,7 +623,7 @@ double sd(vector<string> doubleStrings) {
 }
 
 
-void analysisIncrDetGraph::relativeDegreeChange(int etId) {
+void analysisIncrDetGraph::stability(int etId) {
 	string baseFileName = "rankFileET" + to_string(etId);
 	cout << "baseFileName: " << baseFileName << endl;
 	ifstream rankFile1(baseFileName + "n1000.txt");
@@ -492,8 +717,5 @@ void analysisIncrDetGraph::relativeDegreeChange(int etId) {
 }
 
 
-void analysisIncrDetGraph::createRankFiles(bool outDistr) {
-
-}
 
 } /* namespace std */

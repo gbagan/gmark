@@ -109,7 +109,7 @@ double incrementalDeterministicGraphGenerator::getMeanICsPerNode(distribution & 
 			temp += (i-1)*pow((i), -1*distr.arg2);
 		}
 		meanEdgesPerNode = temp;
-//		cout << "Zipfian mean=" << meanEdgesPerNode << endl;
+		cout << "Zipfian mean=" << meanEdgesPerNode << endl;
 	} else {
 		meanEdgesPerNode = 1;
 	}
@@ -118,11 +118,6 @@ double incrementalDeterministicGraphGenerator::getMeanICsPerNode(distribution & 
 
 
 void incrementalDeterministicGraphGenerator::fixSchemaInequality(config::edge & edgeType) {
-	if ((edgeType.outgoing_distrib.type == DISTRIBUTION::ZIPFIAN || edgeType.incoming_distrib.type == DISTRIBUTION::ZIPFIAN)) {
-		// Do this after constructing the Zipfian ICs-vector
-		return;
-	}
-
 	cout << "conf.types[edgeType.subject_type].size: " << conf.types[edgeType.subject_type].size << endl;
 	cout << "conf.types[edgeType.object_type].size: " << conf.types[edgeType.object_type].size << endl;
 
@@ -169,6 +164,27 @@ vector<int> constructNodesVector(vector<graphNode> & nodes) {
 	for (graphNode & n: nodes) {
 //		cout << "node" << n.iterationId << " has " << n.getNumberOfOpenInterfaceConnections() << " openICs" << endl;
 		for (int i=0; i<n.getNumberOfOpenInterfaceConnections(); i++) {
+			nodesVector.push_back(n.iterationId);
+		}
+	}
+	return nodesVector;
+}
+
+vector<int> constructNodesVectorMinusOne(vector<graphNode> & nodes) {
+	vector<int> nodesVector;
+	for (graphNode & n: nodes) {
+//		cout << "node" << n.iterationId << " has " << n.getNumberOfOpenInterfaceConnections() << " openICs" << endl;
+		for (int i=0; i<n.getNumberOfOpenInterfaceConnections()-1; i++) {
+			nodesVector.push_back(n.iterationId);
+		}
+	}
+	return nodesVector;
+}
+
+vector<int> constructNodesVectorLastOne(vector<graphNode> & nodes) {
+	vector<int> nodesVector;
+	for (graphNode & n: nodes) {
+		if(n.getNumberOfOpenInterfaceConnections() > 0) {
 			nodesVector.push_back(n.iterationId);
 		}
 	}
@@ -228,7 +244,7 @@ void incrementalDeterministicGraphGenerator::performSchemaIndicatedShift(config:
 	}
 }
 
-void incrementalDeterministicGraphGenerator::performFixingShiftForZipfian(config::edge & edgeType, vector<int> subjectNodeIdVector, vector<int> objectNodeIdVector) {
+void incrementalDeterministicGraphGenerator::performFixingShiftForZipfian(config::edge & edgeType, vector<int> & subjectNodeIdVector, vector<int> & objectNodeIdVector) {
 	// Perform a shift in one of the distributions, when there is a large difference in the lengths of the vectors
 	if (subjectNodeIdVector.size() < objectNodeIdVector.size()) {
 		int diff = objectNodeIdVector.size() - subjectNodeIdVector.size();
@@ -292,38 +308,71 @@ void incrementalDeterministicGraphGenerator::incrementGraph(config::edge & edgeT
 	}
 
 
-	// Create vectors
-	vector<int> subjectNodeIdVector = constructNodesVector(nodes.first);
-	vector<int> objectNodeIdVector = constructNodesVector(nodes.second);
+	if (edgeType.scale_factor > 0 ||
+			!conf.types[edgeType.subject_type].scalable || !conf.types[edgeType.object_type].scalable ||
+			edgeType.outgoing_distrib.type == DISTRIBUTION::ZIPFIAN || edgeType.incoming_distrib.type == DISTRIBUTION::ZIPFIAN) {
+		vector<int> subjectNodeIdVector = constructNodesVector(nodes.first);
+		vector<int> objectNodeIdVector = constructNodesVector(nodes.second);
+
+		if (edgeType.outgoing_distrib.type == DISTRIBUTION::ZIPFIAN || edgeType.incoming_distrib.type == DISTRIBUTION::ZIPFIAN) {
+			performFixingShiftForZipfian(edgeType, subjectNodeIdVector, objectNodeIdVector);
+		}
+
+		shuffle(subjectNodeIdVector.begin(), subjectNodeIdVector.end(), randomGenerator);
+		shuffle(objectNodeIdVector.begin(), objectNodeIdVector.end(), randomGenerator);
 
 
-	if (edgeType.outgoing_distrib.type == DISTRIBUTION::ZIPFIAN || edgeType.incoming_distrib.type == DISTRIBUTION::ZIPFIAN) {
-		performFixingShiftForZipfian(edgeType, subjectNodeIdVector, objectNodeIdVector);
-	}
-
-
-	// Shuffle vectors
-	shuffle(objectNodeIdVector.begin(), objectNodeIdVector.end(), randomGenerator);
-	shuffle(subjectNodeIdVector.begin(), subjectNodeIdVector.end(), randomGenerator);
-
-
-	// Create edges
-	for (int i=0; i<min(subjectNodeIdVector.size(), objectNodeIdVector.size()); i++) {
-		if (edgeType.scale_factor > 0) {
-//			cout << "Add edge: " << nodes.first[subjectNodeIdVector[i]].iterationId << " - " << nodes.second[objectNodeIdVector[i]].iterationId << endl;
+		for (int i=0; i<min(subjectNodeIdVector.size(), objectNodeIdVector.size()); i++) {
 			addEdge(nodes.first[subjectNodeIdVector[i]], nodes.second[objectNodeIdVector[i]], edgeType.predicate);
+		}
+	} else {
+		// Create vectors
+		vector<int> subjectNodeIdVectorMinusOne = constructNodesVectorMinusOne(nodes.first);
+		vector<int> objectNodeIdVectorMinusOne = constructNodesVectorMinusOne(nodes.second);
+
+		vector<int> subjectNodeIdVectorLastOne = constructNodesVectorLastOne(nodes.first);
+		vector<int> objectNodeIdVectorLastOne = constructNodesVectorLastOne(nodes.second);
+
+		// Shuffle small vectors
+		shuffle(subjectNodeIdVectorLastOne.begin(), subjectNodeIdVectorLastOne.end(), randomGenerator);
+		shuffle(objectNodeIdVectorLastOne.begin(), objectNodeIdVectorLastOne.end(), randomGenerator);
+
+		// Add the difference in the lastOne-vector to the minusOne-vector
+		if (subjectNodeIdVectorLastOne.size() > objectNodeIdVectorLastOne.size()) {
+			for (int i=objectNodeIdVectorLastOne.size(); i<subjectNodeIdVectorLastOne.size(); i++) {
+				subjectNodeIdVectorMinusOne.push_back(subjectNodeIdVectorLastOne[i]);
+			}
 		} else {
+			for (int i=subjectNodeIdVectorLastOne.size(); i<objectNodeIdVectorLastOne.size(); i++) {
+				objectNodeIdVectorMinusOne.push_back(objectNodeIdVectorLastOne[i]);
+			}
+		}
+
+		if (edgeType.outgoing_distrib.type == DISTRIBUTION::ZIPFIAN || edgeType.incoming_distrib.type == DISTRIBUTION::ZIPFIAN) {
+			performFixingShiftForZipfian(edgeType, subjectNodeIdVectorMinusOne, objectNodeIdVectorMinusOne);
+		}
+
+
+		// Shuffle large vectors
+		shuffle(subjectNodeIdVectorMinusOne.begin(), subjectNodeIdVectorMinusOne.end(), randomGenerator);
+		shuffle(objectNodeIdVectorMinusOne.begin(), objectNodeIdVectorMinusOne.end(), randomGenerator);
+
+
+		// Create edges
+		for (int i=0; i<min(subjectNodeIdVectorMinusOne.size(), objectNodeIdVectorMinusOne.size()); i++) {
+			addEdge(nodes.first[subjectNodeIdVectorMinusOne[i]], nodes.second[objectNodeIdVectorMinusOne[i]], edgeType.predicate);
+		}
+
+		for (int i=0; i<min(subjectNodeIdVectorLastOne.size(), objectNodeIdVectorLastOne.size()); i++) {
 			double randomValue = uniformDistr(randomGenerator);
-			if (randomValue > 0.03 || (!conf.types[edgeType.subject_type].scalable || !conf.types[edgeType.object_type].scalable)) {
-//				cout << "Add edge: " << nodes.first[subjectNodeIdVector[i]].iterationId << " - " << nodes.second[objectNodeIdVector[i]].iterationId << endl;
-				addEdge(nodes.first[subjectNodeIdVector[i]], nodes.second[objectNodeIdVector[i]], edgeType.predicate);
+			if (randomValue > 0.25) {
+				addEdge(nodes.first[subjectNodeIdVectorLastOne[i]], nodes.second[objectNodeIdVectorLastOne[i]], edgeType.predicate);
 			}
 		}
 	}
-
 }
 
-void incrementalDeterministicGraphGenerator::printRank(vector<graphNode> nodes, int edgeTypeId, int nbNodes) {
+void incrementalDeterministicGraphGenerator::printRankZipf(vector<graphNode> nodes, int edgeTypeId, int nbNodes) {
 	int maxDegree = 0;
 	for (graphNode node: nodes) {
 		int degree = node.numberOfInterfaceConnections - node.numberOfOpenInterfaceConnections;
@@ -344,6 +393,25 @@ void incrementalDeterministicGraphGenerator::printRank(vector<graphNode> nodes, 
 	rankFile.close();
 }
 
+void incrementalDeterministicGraphGenerator::printRankNonZipf(vector<graphNode> nodes, int edgeTypeId, int nbNodes) {
+	ofstream rankFile;
+	rankFile.open("rankFileET" + to_string(edgeTypeId) + "n" + to_string(nbNodes) + ".txt", ios::trunc);
+	for (graphNode currentNode: nodes) {
+		int nodesWithLowerDegree = 0;
+		int degree = currentNode.numberOfInterfaceConnections - currentNode.numberOfOpenInterfaceConnections;
+		for (graphNode compareNode: nodes) {
+			if (compareNode.numberOfInterfaceConnections - compareNode.numberOfOpenInterfaceConnections <= degree) {
+				nodesWithLowerDegree++;
+			}
+		}
+		double rank = (double)nodesWithLowerDegree / (double)nodes.size();
+		rankFile << to_string(rank) << endl;
+	}
+
+
+	rankFile.close();
+}
+
 
 int incrementalDeterministicGraphGenerator::processEdgeTypeSingleGraph(config::config configuration, config::config previousConf, config::edge & edgeType, ofstream & outputFile, int graphNumber_) {
 	chrono::high_resolution_clock::time_point start = chrono::high_resolution_clock::now();
@@ -360,8 +428,10 @@ int incrementalDeterministicGraphGenerator::processEdgeTypeSingleGraph(config::c
 		inDistrShift = 1;
 	}
 
-	if (graphNumber == 0) {
-		fixSchemaInequality(edgeType);
+	if (graphNumber == 0 &&
+			edgeType.outgoing_distrib.type != DISTRIBUTION::ZIPFIAN &&
+			edgeType.incoming_distrib.type != DISTRIBUTION::ZIPFIAN) {
+			fixSchemaInequality(edgeType);
 	}
 
 	nodeGen = nodeGenerator(edgeType, nodes.first.size(), nodes.second.size(), &randomGenerator, &nodes, &conf);
@@ -391,11 +461,13 @@ int incrementalDeterministicGraphGenerator::processEdgeTypeSingleGraph(config::c
 			outputFile << edgeString << "\n";
 		}
 	}
+	outputFile.flush();
 	chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
 	auto durationWithMaterialize = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
 
 
-//	printRank(nodes.first, edgeType.edge_type_id, conf.nb_nodes);
+//	printRankZipf(nodes.first, edgeType.edge_type_id, conf.nb_nodes);
+//	printRankNonZipf(nodes.first, edgeType.edge_type_id, conf.nb_nodes);
 //	printRank(nodes.second, edgeType.edge_type_id, conf.nb_nodes);
 
 

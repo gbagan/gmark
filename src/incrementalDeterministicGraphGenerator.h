@@ -61,11 +61,12 @@ private:
 	void fixSchemaInequality(config::edge & edgeType);
 
 	void performSchemaIndicatedShift(config::edge & edgeType);
-	void performFixingShiftForZipfian(config::edge & edgeType, vector<int> subjectNodeIdVector, vector<int> objectNodeIdVector);
+	void performFixingShiftForZipfian(config::edge & edgeType, vector<int> & subjectNodeIdVector, vector<int> & objectNodeIdVector);
 
 
 
-	void printRank(vector<graphNode> nodes, int edgeTypeId, int nbNodes);
+	void printRankZipf(vector<graphNode> nodes, int edgeTypeId, int nbNodes);
+	void printRankNonZipf(vector<graphNode> nodes, int edgeTypeId, int nbNodes);
 public:
 	incrementalDeterministicGraphGenerator();
 	virtual ~incrementalDeterministicGraphGenerator();

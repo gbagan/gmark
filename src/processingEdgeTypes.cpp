@@ -24,7 +24,7 @@ processingEdgeTypes::~processingEdgeTypes() {
 void processingEdgeTypes::sequentialProcessing() {
 	auto runningTime = 0;
 	for (int i=0; i<conf.nb_graphs; i++) {
-		string file = "outputGraph" + to_string(i+1) + ".txt";
+		string file = "outputGraph" + to_string(i) + ".txt";
 		const char * fileChar = file.c_str();
 		remove(fileChar);
 	}
@@ -44,7 +44,7 @@ void processingEdgeTypes::sequentialProcessing() {
 			conf2.complete_config();
 
 			ofstream outputFile;
-			outputFile.open("outputGraph" + to_string(j+1) + ".txt", ios::app);
+			outputFile.open("outputGraph" + to_string(j) + ".txt", ios::app);
 
 			runningTime += graphGenerator.processEdgeTypeSingleGraph(conf2, previousConf, conf2.schema.edges.at(i), outputFile, j);
 
