@@ -192,6 +192,34 @@ void analysisIncrDetGraph::distributionAnalysis(config::edge edgeType, ofstream 
 }
 
 
+double calcMSE(vector<double> dataPdf, double alpha) {
+//	cout << "DataPdf = [";
+	vector<double> zipf;
+	double sum = 0.0;
+	for (int d=0; d<dataPdf.size(); d++) {
+//		cout << dataPdf[d] << ",";
+		double zipfItem = pow(d+1, -1.0 * alpha);
+		zipf.push_back(zipfItem);
+		sum += zipfItem;
+	}
+//	cout << "]" << endl;
+
+//	cout << "ZipfPdf = [";
+	vector<double> zipfPdf;
+	for (double z: zipf) {
+		zipfPdf.push_back(z/sum);
+//		cout << z / sum << ",";
+	}
+//	cout << "]" << endl;
+
+	double squareError = 0.0;
+	for (int d=0; d<dataPdf.size(); d++) {
+		double data = (double) dataPdf[d];
+		squareError += (data - zipfPdf[d]) * (data - zipfPdf[d]);
+	}
+	return squareError;
+}
+
 void analysisIncrDetGraph::distributionAnalysis2(config::edge edgeType, ofstream & rFile) {
 	cout << "\n\n-----Distribution analysis-----\n";
 //	cout << "EdgeType: " << to_string(edgeType) << endl;
@@ -297,7 +325,65 @@ void analysisIncrDetGraph::distributionAnalysis2(config::edge edgeType, ofstream
 		rFile << "m"<< id++ <<" = "<< (double)sumOut / (double) outDistr.size() << endl;
 	}
 	else if(edgeType.outgoing_distrib.type == DISTRIBUTION::ZIPFIAN) {
-		rFile << "TODO" << endl;
+		int maxDegree = 0;
+		for (int i: outDistr) {
+			if (i > maxDegree) {
+				maxDegree = i;
+			}
+		}
+
+		vector<int> frequencies;
+		for (int i=0; i<=maxDegree; i++) {
+			frequencies.push_back(0);
+		}
+		for (int d: outDistr) {
+			frequencies[d]++;
+		}
+//		cout << "Frequencies: [";
+//		for (int f: frequencies) {
+//			cout << f << ",";
+//		}
+//		cout << "]" << endl;
+
+
+		int maxOut = 0;
+		int startValue = 0;
+		int sumOut = 0;
+		int count = 0;
+		for (int i: frequencies) {
+			if (i >= maxOut) {
+				maxOut = i;
+				startValue = count;
+			}
+			sumOut += i;
+			count++;
+		}
+//		cout << "MaxFreq=" << maxOut << endl;
+		vector<double> found;
+		double sum = 0.0;
+		for (int i=startValue; i<frequencies.size(); i++) {
+			double fr = (double) frequencies[i];
+			found.push_back(fr);
+			sum += fr;
+		}
+
+		vector<double> foundPdf;
+		for (double f: found) {
+			foundPdf.push_back(f / sum);
+		}
+
+		double minError = INT_MAX;
+		double bestAlpha = INT_MAX;
+		for (double a=1.0; a<=10.0; a+=0.01) {
+			double squareError = calcMSE(foundPdf, a);
+//			cout << "Alpha=" << a << " gives error: " << squareError << endl;
+			if (squareError < minError) {
+				minError = squareError;
+				bestAlpha = a;
+			}
+		}
+		rFile << "alpha"<< id++ <<" = "<< bestAlpha << endl;
+
 	} else if(edgeType.outgoing_distrib.type == DISTRIBUTION::NORMAL || edgeType.outgoing_distrib.type == DISTRIBUTION::UNDEFINED) {
 		int sumOut = 0;
 		for (int i: outDistr) {
@@ -356,6 +442,71 @@ void analysisIncrDetGraph::distributionAnalysis2(config::edge edgeType, ofstream
 		rFile << "m"<< id <<" = "<< mean << endl;
 		rFile << "sd"<< id++ <<" = "<< sd << endl;
 	}
+	else if(edgeType.outgoing_distrib.type == DISTRIBUTION::ZIPFIAN) {
+		int maxDegree = 0;
+		for (int i: inDistr) {
+			if (i > maxDegree) {
+				maxDegree = i;
+			}
+		}
+
+		vector<int> frequencies;
+		for (int i=0; i<=maxDegree; i++) {
+			frequencies.push_back(0);
+		}
+		for (int d: inDistr) {
+			frequencies[d]++;
+		}
+//		cout << "Frequencies: [";
+//		for (int f: frequencies) {
+//			cout << f << ",";
+//		}
+//		cout << "]" << endl;
+
+
+		int maxIn = 0;
+		int startValue = 0;
+		int sumIn = 0;
+		int count = 0;
+		for (int i: frequencies) {
+			if (i >= maxIn) {
+				maxIn = i;
+				startValue = count;
+			}
+			sumIn += i;
+			count++;
+		}
+//		cout << "MaxFreq=" << maxOut << endl;
+		vector<double> found;
+		double sum = 0.0;
+		for (int i=startValue; i<frequencies.size(); i++) {
+			double fr = (double) frequencies[i];
+			found.push_back(fr);
+			sum += fr;
+		}
+
+		vector<double> foundPdf;
+		for (double f: found) {
+			foundPdf.push_back(f / sum);
+		}
+
+		double minError = INT_MAX;
+		double bestAlpha = INT_MAX;
+		for (double a=1.0; a<10.0; a+=0.01) {
+			double squareError = calcMSE(foundPdf, a);
+//			cout << "Alpha=" << a << " gives error: " << squareError << endl;
+			if (squareError < minError) {
+				minError = squareError;
+				bestAlpha = a;
+			}
+		}
+		rFile << "alpha"<< id++ <<" = "<< bestAlpha << endl;
+
+	}
+
+
+
+
 //	int i = 0;
 //	rFile << "OutDistribution <- c(";
 //	for (int nm: outDistr) {
