@@ -110,6 +110,7 @@ double incrementalDeterministicGraphGenerator::getMeanICsPerNode(distribution & 
 		}
 		meanEdgesPerNode = temp;
 		cout << "Zipfian mean=" << meanEdgesPerNode << endl;
+		cout << "####----###### DIT HAD NOOIT MOGEN GEBEUREN!!!! ####----######" << endl;
 	} else {
 		meanEdgesPerNode = 1;
 	}
@@ -439,6 +440,7 @@ int incrementalDeterministicGraphGenerator::processEdgeTypeSingleGraph(config::c
 
 	cout << "OutShif: " << outDistrShift << endl;
 	cout << "InShif: " << inDistrShift << endl;
+//	int nbEdgesBeforeIncrementing = edges.size();
 	incrementGraph(edgeType, graphNumber);
 
 //	chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
@@ -465,11 +467,97 @@ int incrementalDeterministicGraphGenerator::processEdgeTypeSingleGraph(config::c
 	chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
 	auto durationWithMaterialize = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
 
+//	// Number of nodes analysis
+//	int subjectNodes = 0;
+//	for (graphNode n: nodes.first) {
+//		if (n.numberOfInterfaceConnections != n.numberOfOpenInterfaceConnections) {
+//			subjectNodes++;
+//		}
+//	}
+//	int objectNodes = 0;
+//	for (graphNode n: nodes.second) {
+//		if (n.numberOfInterfaceConnections != n.numberOfOpenInterfaceConnections) {
+//			objectNodes++;
+//		}
+//	}
+//
+//	cout << "Subject nodes: " << subjectNodes << endl;
+//	cout << "Object nodes: " << objectNodes << endl;
 
 //	printRankZipf(nodes.first, edgeType.edge_type_id, conf.nb_nodes);
 //	printRankNonZipf(nodes.first, edgeType.edge_type_id, conf.nb_nodes);
 //	printRank(nodes.second, edgeType.edge_type_id, conf.nb_nodes);
 
+
+	// Connectiveness Analysis
+//	int newnew = 0;
+//	int newOld = 0;
+//	int oldold = 0;
+//	for (int i=nbEdgesBeforeIncrementing-1; i<edges.size(); i++) {
+//		string subjectId = edges[i].subjectId;
+//		string subjectIdLocalId = subjectId.substr(subjectId.find("-")+1, subjectId.length());
+//		int subjectIdInt = stoi(subjectIdLocalId);
+////		cout << "subjectIdInt: " << subjectIdInt << endl;
+//
+//		string objectId = edges[i].objectId;
+//		string objectIdLocalId = objectId.substr(objectId.find("-")+1, objectId.length());
+//		int objectIdInt = stoi(objectIdLocalId);
+////		cout << "objectIdInt: " << objectIdInt << endl;
+//
+//		if (subjectIdInt >= 500 && objectIdInt >= 500) {
+//			newnew++;
+//		} else if (subjectIdInt < 500 && objectIdInt < 500) {
+//			oldold++;
+//		} else {
+//			newOld++;
+//		}
+//	}
+//	cout << "NewNew: " << newnew << endl;
+//	cout << "OldOld: " << oldold << endl;
+//	cout << "NewOld: " << newOld << endl;
+//	ofstream newnewF, oldoldF, newOldF;
+//	newnewF.open("newnew.txt", ios::app);
+//	oldoldF.open("oldold.txt", ios::app);
+//	newOldF.open("newold.txt", ios::app);
+//	if (graphNumber > 0) {
+//		newnewF << newnew << ",";
+//		oldoldF << oldold << ",";
+//		newOldF << newOld << ",";
+//	}
+
+//	vector<int> connectedToOldGraph;
+//	for (int i=nbEdgesBeforeIncrementing-1; i<edges.size(); i++) {
+//		connectedToOldGraph.push_back(0);
+//	}
+//	for (int i=nbEdgesBeforeIncrementing-1; i<edges.size(); i++) {
+//		string subjectId = edges[i].subjectId;
+//		string subjectIdLocalId = subjectId.substr(subjectId.find("-")+1, subjectId.length());
+//		int subjectIdInt = stoi(subjectIdLocalId);
+////		cout << "subjectIdInt: " << subjectIdInt << endl;
+//
+//		string objectId = edges[i].objectId;
+//		string objectIdLocalId = objectId.substr(objectId.find("-")+1, objectId.length());
+//		int objectIdInt = stoi(objectIdLocalId);
+////		cout << "objectIdInt: " << objectIdInt << endl;
+//
+//		if (subjectIdInt >= 500 && objectIdInt < 500) {
+//			connectedToOldGraph[subjectIdInt-500]++;
+//		} else if (subjectIdInt < 500 && objectIdInt >= 500) {
+//			connectedToOldGraph[objectIdInt-500]++;
+//		}
+//	}
+//
+//	int nodesConnected = 0;
+//	for(int c: connectedToOldGraph) {
+//		if (c>0) {
+//			nodesConnected++;
+//		}
+//	}
+//	ofstream nConnected;
+//	nConnected.open("nConnected.txt", ios::app);
+//	if (graphNumber > 0) {
+//		nConnected << nodesConnected << ",";
+//	}
 
 	return durationWithMaterialize;
 }
