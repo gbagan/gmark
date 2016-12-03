@@ -349,9 +349,6 @@ void incrementalDeterministicGraphGenerator::incrementGraph(config::edge & edgeT
 			}
 		}
 
-		if (edgeType.outgoing_distrib.type == DISTRIBUTION::ZIPFIAN || edgeType.incoming_distrib.type == DISTRIBUTION::ZIPFIAN) {
-			performFixingShiftForZipfian(edgeType, subjectNodeIdVectorMinusOne, objectNodeIdVectorMinusOne);
-		}
 
 
 		// Shuffle large vectors
@@ -504,10 +501,12 @@ int incrementalDeterministicGraphGenerator::processEdgeTypeSingleGraph(config::c
 //		int objectIdInt = stoi(objectIdLocalId);
 ////		cout << "objectIdInt: " << objectIdInt << endl;
 //
-//		if (subjectIdInt >= 500 && objectIdInt >= 500) {
+//		if (subjectIdInt >= 5000 && objectIdInt >= 5000) {
 //			newnew++;
-//		} else if (subjectIdInt < 500 && objectIdInt < 500) {
+//		} else if (subjectIdInt < 5000 && objectIdInt < 5000) {
 //			oldold++;
+////			cout << "subjectIdInt: " << subjectIdInt << endl;
+////			cout << "objectIdInt: " << objectIdInt << endl;
 //		} else {
 //			newOld++;
 //		}

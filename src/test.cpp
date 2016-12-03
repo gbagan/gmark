@@ -242,7 +242,7 @@ void creatRankFileNonZipf(config::config conf, string graphFileName) {
 //	vector<int> inDistr;
 
 	// Initialize outDistr-vector
-	for (int i=0; i<=conf.types[conf.schema.edges[0].subject_type].size; i++) {
+	for (int i=0; i<conf.types[conf.schema.edges[0].subject_type].size; i++) {
 		outDistr.push_back(0);
 	}
 
@@ -530,7 +530,8 @@ int main(int argc, char ** argv) {
 
 
 
-
+    analysisIncrDetGraph analyzeGraph("test.txt", conf);
+    analyzeGraph.stability(0);
   	// #### ANALYSIS ####
 //    for (int g=0; g<3; g++) {
 //    	cout << "g=" << g << endl;
