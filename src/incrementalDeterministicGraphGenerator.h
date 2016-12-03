@@ -63,7 +63,8 @@ private:
 	void performSchemaIndicatedShift(config::edge & edgeType);
 	void performFixingShiftForZipfian(config::edge & edgeType, vector<int> & subjectNodeIdVector, vector<int> & objectNodeIdVector);
 
-
+	void performOutDistributionShift(config::edge & edgeType);
+	void performInDistributionShift(config::edge & edgeType);
 
 	void printRankZipf(vector<graphNode> nodes, int edgeTypeId, int nbNodes);
 	void printRankNonZipf(vector<graphNode> nodes, int edgeTypeId, int nbNodes);

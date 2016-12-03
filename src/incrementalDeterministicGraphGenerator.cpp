@@ -61,38 +61,45 @@ void incrementalDeterministicGraphGenerator::updateInterfaceConnectionsForZipfia
 	}
 }
 
+void incrementalDeterministicGraphGenerator::performOutDistributionShift(config::edge & edgeType) {
+	double meanOutDistr = getMeanICsPerNode(edgeType.outgoing_distrib, -1) + outDistrShift;
+	double meanInDistr = getMeanICsPerNode(edgeType.incoming_distrib, -1) + inDistrShift;
+	int newMeanOutDistr = ((double) conf.types.at(edgeType.object_type).size * meanInDistr) / (double) conf.types.at(edgeType.subject_type).size;
+	int incr = floor(newMeanOutDistr - meanOutDistr);
+
+	if (incr > 0) {
+		cout << "Shift out-distrib with: " << incr << endl;
+		outDistrShift += incr;
+		for (graphNode & n: nodes.first) {
+			n.incrementInterfaceConnectionsByN(incr);
+			n.incrementOpenInterfaceConnectionsByN(incr);
+		}
+	}
+}
+
+void incrementalDeterministicGraphGenerator::performInDistributionShift(config::edge & edgeType) {
+	double meanOutDistr = getMeanICsPerNode(edgeType.outgoing_distrib, -1) + outDistrShift;
+	double meanInDistr = getMeanICsPerNode(edgeType.incoming_distrib, -1) + inDistrShift;
+	double newMeanInDistr = ((double) conf.types.at(edgeType.subject_type).size * meanOutDistr) / (double) conf.types.at(edgeType.object_type).size;
+	int incr = floor(newMeanInDistr - meanInDistr);
+
+	if (incr > 0) {
+		cout << "Shift in-distrib with: " << incr << endl;
+		inDistrShift += incr;
+		for (graphNode & n: nodes.second) {
+			n.incrementInterfaceConnectionsByN(incr);
+			n.incrementOpenInterfaceConnectionsByN(incr);
+		}
+	}
+}
 
 void incrementalDeterministicGraphGenerator::performShiftForNonScalableNodes(config::edge & edgeType) {
 	// Both distribution are non-Zipfian
 
 	if (!conf.types.at(edgeType.subject_type).scalable) {
-		double meanOutDistr = getMeanICsPerNode(edgeType.outgoing_distrib, -1) + outDistrShift;
-		double meanInDistr = getMeanICsPerNode(edgeType.incoming_distrib, -1) + inDistrShift;
-		int newMeanOutDistr = floor((conf.types.at(edgeType.object_type).size * meanInDistr) / conf.types.at(edgeType.subject_type).size);
-		int incr = newMeanOutDistr - meanOutDistr;
-
-		if (incr > 0) {
-			cout << "Shift out-distrib with: " << incr << endl;
-			outDistrShift += incr;
-			for (graphNode & n: nodes.first) {
-				n.incrementInterfaceConnectionsByN(incr);
-				n.incrementOpenInterfaceConnectionsByN(incr);
-			}
-		}
+		performOutDistributionShift(edgeType);
 	} else {
-		double meanOutDistr = getMeanICsPerNode(edgeType.outgoing_distrib, -1) + outDistrShift;
-		double meanInDistr = getMeanICsPerNode(edgeType.incoming_distrib, -1) + inDistrShift;
-		int newMeanInDistr = floor((conf.types.at(edgeType.subject_type).size * meanOutDistr) / conf.types.at(edgeType.object_type).size);
-		int incr = newMeanInDistr - meanInDistr;
-
-		if (incr > 0) {
-			cout << "Shift in-distrib with: " << incr << endl;
-			inDistrShift += incr;
-			for (graphNode & n: nodes.second) {
-				n.incrementInterfaceConnectionsByN(incr);
-				n.incrementOpenInterfaceConnectionsByN(incr);
-			}
-		}
+		performInDistributionShift(edgeType);
 	}
 }
 // ####### Update interface-connections #######
@@ -119,43 +126,14 @@ double incrementalDeterministicGraphGenerator::getMeanICsPerNode(distribution & 
 
 
 void incrementalDeterministicGraphGenerator::fixSchemaInequality(config::edge & edgeType) {
-	cout << "conf.types[edgeType.subject_type].size: " << conf.types[edgeType.subject_type].size << endl;
-	cout << "conf.types[edgeType.object_type].size: " << conf.types[edgeType.object_type].size << endl;
-
 	double evOutDistribution = getMeanICsPerNode(edgeType.outgoing_distrib, conf.types[edgeType.subject_type].size) + outDistrShift;
-	cout << "evOutDistribution: " << evOutDistribution << endl;
 
 	double evInDistribution = getMeanICsPerNode(edgeType.incoming_distrib, conf.types[edgeType.object_type].size) + inDistrShift;
-	cout << "evInDistribution: " << evInDistribution << endl;
 
 	if ((conf.types[edgeType.subject_type].size * evOutDistribution) > (conf.types[edgeType.object_type].size * evInDistribution)) {
-		double newMean = ((double) conf.types[edgeType.subject_type].size * evOutDistribution) / (double) conf.types[edgeType.object_type].size;
-		int updateInt = floor(newMean - evInDistribution);
-
-		cout << "newMean in: " << newMean << endl;
-		if (updateInt > 0) {
-			inDistrShift += updateInt;
-			cout << "Update in distribution: " << updateInt << endl;
-			cout << "inDistrShift: " << inDistrShift << endl;
-			for (graphNode & n: nodes.second) {
-				n.incrementInterfaceConnectionsByN(updateInt);
-				n.incrementOpenInterfaceConnectionsByN(updateInt);
-			}
-		}
+		performInDistributionShift(edgeType);
 	} else {
-		double newMean = ((double) conf.types[edgeType.object_type].size * evInDistribution) / (double) conf.types[edgeType.subject_type].size;
-		int updateInt = floor(newMean - evOutDistribution);
-
-		cout << "newMean out: " << newMean << endl;
-		if (updateInt > 0) {
-			outDistrShift += updateInt;
-			cout << "Update out distribution: " << updateInt << endl;
-			cout << "outDistrShift: " << outDistrShift << endl;
-			for (graphNode & n: nodes.first) {
-				n.incrementInterfaceConnectionsByN(updateInt);
-				n.incrementOpenInterfaceConnectionsByN(updateInt);
-			}
-		}
+		performOutDistributionShift(edgeType);
 	}
 }
 
