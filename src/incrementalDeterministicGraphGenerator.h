@@ -27,6 +27,8 @@ private:
 	config::config conf;
 	pair<vector<graphNode>, vector<graphNode>> nodes;
 	struct edge2 {
+		int subjectIterationId;
+		int objectIterationId;
 		string subjectId;
 		string predicate;
 		string objectId;
@@ -45,7 +47,7 @@ private:
 
 	uniform_real_distribution<double> uniformDistr = uniform_real_distribution<double>(0.0,1.0);
 
-	void incrementGraph(config::edge & edgeType, int graphNumber);
+	void incrementGraph(config::edge & edgeType);
 
 
 	double getMeanICsPerNode(distribution & distr, int zipfMax);
@@ -68,6 +70,9 @@ private:
 
 	void printRankZipf(vector<graphNode> nodes, int edgeTypeId, int nbNodes);
 	void printRankNonZipf(vector<graphNode> nodes, int edgeTypeId, int nbNodes);
+
+
+	void calculateSimilarity(graphNode n1, graphNode n2);
 public:
 	incrementalDeterministicGraphGenerator();
 	virtual ~incrementalDeterministicGraphGenerator();

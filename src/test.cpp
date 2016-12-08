@@ -530,8 +530,8 @@ int main(int argc, char ** argv) {
 
 
 
-    analysisIncrDetGraph analyzeGraph("test.txt", conf);
-    analyzeGraph.stability(0);
+//    analysisIncrDetGraph analyzeGraph("test.txt", conf);
+//    analyzeGraph.stability(0);
   	// #### ANALYSIS ####
 //    for (int g=0; g<3; g++) {
 //    	cout << "g=" << g << endl;

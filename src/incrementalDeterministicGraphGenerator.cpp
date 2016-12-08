@@ -6,6 +6,7 @@
  */
 
 #include <vector>
+#include <algorithm>    // std::set_intersection, std::sort
 #include "incrementalDeterministicGraphGenerator.h"
 #include "graphNode.h"
 
@@ -19,12 +20,57 @@ incrementalDeterministicGraphGenerator::~incrementalDeterministicGraphGenerator(
 	// TODO Auto-generated destructor stub
 }
 
+
+
+void incrementalDeterministicGraphGenerator::calculateSimilarity(graphNode n1, graphNode n2) {
+//	cout << "Simialrity between node " << n1.iterationId << " and node " << n2.iterationId << endl;
+	vector<int> s1, s2;
+	for (edge2 e: edges) {
+		if (e.subjectIterationId == n1.iterationId) {
+			s1.push_back(e.objectIterationId);
+		}
+		if (e.subjectIterationId == n2.iterationId) {
+			s2.push_back(e.objectIterationId);
+		}
+	}
+
+
+	vector<int> intersectionVec(max(s1.size(), s2.size()));
+	vector<int>::iterator itIntersection;
+
+	sort(s1.begin(), s1.end());
+
+
+	itIntersection = set_intersection(s1.begin(), s1.end(),
+			s2.begin(), s2.end(), intersectionVec.begin());
+
+	intersectionVec.resize(itIntersection-intersectionVec.begin());
+
+	int unionCount = s1.size() + s2.size() - intersectionVec.size();
+
+	if (unionCount == 0) {
+		cout << 0.0 << ",";
+	} else {
+		cout <<	(float)intersectionVec.size() / (float)unionCount << ",";
+	}
+}
+
+
+
+
+
+
+
+
+
 // ####### Generate edges #######
 void incrementalDeterministicGraphGenerator::addEdge(graphNode &sourceNode, graphNode &targetNode, int predicate) {
 	sourceNode.decrementOpenInterfaceConnections();
 	targetNode.decrementOpenInterfaceConnections();
 
 	edge2 newEdge;
+	newEdge.subjectIterationId = sourceNode.iterationId;
+	newEdge.objectIterationId = targetNode.iterationId;
 	newEdge.subjectId = sourceNode.id;
 	newEdge.predicate = to_string(predicate);
 	newEdge.objectId = targetNode.id;
@@ -258,7 +304,7 @@ void incrementalDeterministicGraphGenerator::performFixingShiftForZipfian(config
 	}
 }
 
-void incrementalDeterministicGraphGenerator::incrementGraph(config::edge & edgeType, int graphNumber) {
+void incrementalDeterministicGraphGenerator::incrementGraph(config::edge & edgeType) {
 	// Perform the shifting of the distribution as indecated by the user in the schema
 
 	if (graphNumber > 0) {
@@ -416,10 +462,25 @@ int incrementalDeterministicGraphGenerator::processEdgeTypeSingleGraph(config::c
 	cout << "OutShif: " << outDistrShift << endl;
 	cout << "InShif: " << inDistrShift << endl;
 //	int nbEdgesBeforeIncrementing = edges.size();
-	incrementGraph(edgeType, graphNumber);
+	incrementGraph(edgeType);
 
 //	chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
 //	auto durationWitoutMaterialize = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
+
+	cout << "Node similarities" << endl;
+	int countForLineBreak = 0;
+	for (graphNode n1: nodes.first) {
+		for (graphNode n2: nodes.first) {
+			if (n1.iterationId != n2.iterationId) {
+				calculateSimilarity(n1, n2);
+				countForLineBreak++;
+				if (countForLineBreak % 500 == 0) {
+					cout << endl;
+				}
+			}
+		}
+	}
+	cout << endl;
 
 	// Materialize the edge
 //	string outputBuffer = "";
