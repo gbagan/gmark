@@ -27,10 +27,16 @@ void incrementalDeterministicGraphGenerator::calculateSimilarity(graphNode n1, g
 	vector<int> s1, s2;
 	for (edge2 e: edges) {
 		if (e.subjectIterationId == n1.iterationId) {
-			s1.push_back(e.objectIterationId);
+			if (std::find(s1.begin(), s1.end(), e.objectIterationId) == s1.end()) {
+				// Set s1 does not contain the new objectId
+				s1.push_back(e.objectIterationId);
+			}
 		}
 		if (e.subjectIterationId == n2.iterationId) {
-			s2.push_back(e.objectIterationId);
+			if (std::find(s2.begin(), s2.end(), e.objectIterationId) == s2.end()) {
+				// Set s2 does not contain the new objectId
+				s2.push_back(e.objectIterationId);
+			}
 		}
 	}
 
@@ -39,7 +45,19 @@ void incrementalDeterministicGraphGenerator::calculateSimilarity(graphNode n1, g
 	vector<int>::iterator itIntersection;
 
 	sort(s1.begin(), s1.end());
+	sort(s2.begin(), s2.end());
 
+	//	cout << "In s1: ";
+	//	for (int i:s1) {
+	//		cout << i << ",";
+	//	}
+	//	cout << endl;
+	//
+	//	cout << "In s2: ";
+	//	for (int i:s2) {
+	//		cout << i << ",";
+	//	}
+	//	cout << endl;
 
 	itIntersection = set_intersection(s1.begin(), s1.end(),
 			s2.begin(), s2.end(), intersectionVec.begin());
@@ -48,6 +66,8 @@ void incrementalDeterministicGraphGenerator::calculateSimilarity(graphNode n1, g
 
 	int unionCount = s1.size() + s2.size() - intersectionVec.size();
 
+//	cout << "Intersection: " << intersectionVec.size() << endl;
+//	cout << "Union: " << unionCount << endl;
 	if (unionCount == 0) {
 		cout << 0.0 << ",";
 	} else {
@@ -56,6 +76,48 @@ void incrementalDeterministicGraphGenerator::calculateSimilarity(graphNode n1, g
 }
 
 
+
+
+
+void incrementalDeterministicGraphGenerator::printRankZipf(vector<graphNode> nodes, int edgeTypeId, int nbNodes) {
+	int maxDegree = 0;
+	for (graphNode node: nodes) {
+		int degree = node.numberOfInterfaceConnections - node.numberOfOpenInterfaceConnections;
+		if (degree > maxDegree) {
+			maxDegree = degree;
+		}
+	}
+
+	cout << "Maxdegree=" << maxDegree << endl;
+	ofstream rankFile, degreeFile;
+	rankFile.open("rankFileET" + to_string(edgeTypeId) + "n" + to_string(nbNodes) + ".txt", ios::trunc);
+	degreeFile.open("rankFileET" + to_string(edgeTypeId) + "n" + to_string(nbNodes) + "degree.txt", ios::trunc);
+	for (graphNode node: nodes) {
+		double rank = ((double)node.numberOfInterfaceConnections - (double)node.numberOfOpenInterfaceConnections) / (double) maxDegree;
+		rankFile << to_string(rank) << endl;
+		degreeFile << to_string(node.numberOfInterfaceConnections - node.numberOfOpenInterfaceConnections) << "-" << to_string(maxDegree) << endl;
+	}
+	rankFile.close();
+}
+
+void incrementalDeterministicGraphGenerator::printRankNonZipf(vector<graphNode> nodes, int edgeTypeId, int nbNodes) {
+	ofstream rankFile;
+	rankFile.open("rankFileET" + to_string(edgeTypeId) + "n" + to_string(nbNodes) + ".txt", ios::trunc);
+	for (graphNode currentNode: nodes) {
+		int nodesWithLowerDegree = 0;
+		int degree = currentNode.numberOfInterfaceConnections - currentNode.numberOfOpenInterfaceConnections;
+		for (graphNode compareNode: nodes) {
+			if (compareNode.numberOfInterfaceConnections - compareNode.numberOfOpenInterfaceConnections <= degree) {
+				nodesWithLowerDegree++;
+			}
+		}
+		double rank = (double)nodesWithLowerDegree / (double)nodes.size();
+		rankFile << to_string(rank) << endl;
+	}
+
+
+	rankFile.close();
+}
 
 
 
@@ -304,35 +366,8 @@ void incrementalDeterministicGraphGenerator::performFixingShiftForZipfian(config
 	}
 }
 
-void incrementalDeterministicGraphGenerator::incrementGraph(config::edge & edgeType) {
-	// Perform the shifting of the distribution as indecated by the user in the schema
 
-	if (graphNumber > 0) {
-		performSchemaIndicatedShift(edgeType);
-		if ((conf.types.at(edgeType.subject_type).scalable ^ conf.types.at(edgeType.object_type).scalable) &&
-					 edgeType.outgoing_distrib.type != DISTRIBUTION::ZIPFIAN &&
-					 edgeType.incoming_distrib.type != DISTRIBUTION::ZIPFIAN) {
-			performShiftForNonScalableNodes(edgeType);
-		}
-	}
-
-
-	// Add subject and object nodes to the graph
-	// Specify the current shift to get the wright amound of ICs
-	nodeGen.addSubjectNodes(edgeType, outDistrShift);
-	nodeGen.addObjectNodes(edgeType, inDistrShift);
-
-
-
-	// Update the ICs for the Zipfian distribution to satisfy the property that influecer nodes will get more ICs when the graph grows
-	if (edgeType.outgoing_distrib.type == DISTRIBUTION::ZIPFIAN) {
-		updateInterfaceConnectionsForZipfianDistributions(&nodes.first, edgeType.outgoing_distrib, true);
-	}
-	if (edgeType.incoming_distrib.type == DISTRIBUTION::ZIPFIAN) {
-		updateInterfaceConnectionsForZipfianDistributions(&nodes.second, edgeType.incoming_distrib, false);
-	}
-
-
+void incrementalDeterministicGraphGenerator::generateEdges(config::edge & edgeType, double prob) {
 	if (edgeType.scale_factor > 0 ||
 			!conf.types[edgeType.subject_type].scalable || !conf.types[edgeType.object_type].scalable ||
 			edgeType.outgoing_distrib.type == DISTRIBUTION::ZIPFIAN || edgeType.incoming_distrib.type == DISTRIBUTION::ZIPFIAN) {
@@ -387,55 +422,149 @@ void incrementalDeterministicGraphGenerator::incrementGraph(config::edge & edgeT
 
 		for (int i=0; i<min(subjectNodeIdVectorLastOne.size(), objectNodeIdVectorLastOne.size()); i++) {
 			double randomValue = uniformDistr(randomGenerator);
-			if (randomValue > 0.25) {
+			if (randomValue > prob) {
 				addEdge(nodes.first[subjectNodeIdVectorLastOne[i]], nodes.second[objectNodeIdVectorLastOne[i]], edgeType.predicate);
 			}
 		}
 	}
 }
 
-void incrementalDeterministicGraphGenerator::printRankZipf(vector<graphNode> nodes, int edgeTypeId, int nbNodes) {
-	int maxDegree = 0;
-	for (graphNode node: nodes) {
-		int degree = node.numberOfInterfaceConnections - node.numberOfOpenInterfaceConnections;
-		if (degree > maxDegree) {
-			maxDegree = degree;
+void incrementalDeterministicGraphGenerator::incrementGraph(config::edge & edgeType) {
+	// Perform the shifting of the distribution as indecated by the user in the schema
+
+	if (graphNumber > 0) {
+		performSchemaIndicatedShift(edgeType);
+		if ((conf.types.at(edgeType.subject_type).scalable ^ conf.types.at(edgeType.object_type).scalable) &&
+					 edgeType.outgoing_distrib.type != DISTRIBUTION::ZIPFIAN &&
+					 edgeType.incoming_distrib.type != DISTRIBUTION::ZIPFIAN) {
+			performShiftForNonScalableNodes(edgeType);
 		}
 	}
 
-	cout << "Maxdegree=" << maxDegree << endl;
-	ofstream rankFile, degreeFile;
-	rankFile.open("rankFileET" + to_string(edgeTypeId) + "n" + to_string(nbNodes) + ".txt", ios::trunc);
-	degreeFile.open("rankFileET" + to_string(edgeTypeId) + "n" + to_string(nbNodes) + "degree.txt", ios::trunc);
-	for (graphNode node: nodes) {
-		double rank = ((double)node.numberOfInterfaceConnections - (double)node.numberOfOpenInterfaceConnections) / (double) maxDegree;
-		rankFile << to_string(rank) << endl;
-		degreeFile << to_string(node.numberOfInterfaceConnections - node.numberOfOpenInterfaceConnections) << "-" << to_string(maxDegree) << endl;
+
+	// Add subject and object nodes to the graph
+	// Specify the current shift to get the wright amound of ICs
+	nodeGen.addSubjectNodes(edgeType, outDistrShift);
+	nodeGen.addObjectNodes(edgeType, inDistrShift);
+
+
+
+	// Update the ICs for the Zipfian distribution to satisfy the property that influecer nodes will get more ICs when the graph grows
+	if (edgeType.outgoing_distrib.type == DISTRIBUTION::ZIPFIAN) {
+		updateInterfaceConnectionsForZipfianDistributions(&nodes.first, edgeType.outgoing_distrib, true);
 	}
-	rankFile.close();
+	if (edgeType.incoming_distrib.type == DISTRIBUTION::ZIPFIAN) {
+		updateInterfaceConnectionsForZipfianDistributions(&nodes.second, edgeType.incoming_distrib, false);
+	}
+
+	double prob = 0.25;
+	if (edgeType.correlated_with.size() == 0) {
+		generateEdges(edgeType, prob);
+	} else {
+		generateCorrelatedEdges(edgeType, prob);
+	}
 }
 
-void incrementalDeterministicGraphGenerator::printRankNonZipf(vector<graphNode> nodes, int edgeTypeId, int nbNodes) {
-	ofstream rankFile;
-	rankFile.open("rankFileET" + to_string(edgeTypeId) + "n" + to_string(nbNodes) + ".txt", ios::trunc);
-	for (graphNode currentNode: nodes) {
-		int nodesWithLowerDegree = 0;
-		int degree = currentNode.numberOfInterfaceConnections - currentNode.numberOfOpenInterfaceConnections;
-		for (graphNode compareNode: nodes) {
-			if (compareNode.numberOfInterfaceConnections - compareNode.numberOfOpenInterfaceConnections <= degree) {
-				nodesWithLowerDegree++;
+
+void incrementalDeterministicGraphGenerator::generateCorrelatedEdges(config::edge & edgeType, double prob) {
+	shuffle(correlatedEdges.begin(), correlatedEdges.end(), randomGenerator);
+
+	for (edge2 possibleEdge: correlatedEdges) {
+		if (nodes.first[possibleEdge.subjectIterationId].numberOfOpenInterfaceConnections > 0 &&
+				nodes.second[possibleEdge.objectIterationId].numberOfOpenInterfaceConnections > 0) {
+//			cout << "Add edge: " << possibleEdge.subjectIterationId << " - " << edgeType.predicate << " - " << possibleEdge.objectIterationId << endl;
+			addEdge(nodes.first[possibleEdge.subjectIterationId], nodes.second[possibleEdge.objectIterationId], edgeType.predicate);
+		}
+	}
+	generateEdges(edgeType, prob);
+}
+
+void incrementalDeterministicGraphGenerator::addToMapping(int subject, int target) {
+	mapping[subject].push_back(target);
+}
+
+void incrementalDeterministicGraphGenerator::randomMapping(vector<int> subjects, vector<int> objects) {
+	mapping = vector<vector<int>>(subjects.size());
+	if (subjects.size() > objects.size()) {
+		shuffle(subjects.begin(), subjects.end(), randomGenerator);
+		for (int i=0; i<objects.size(); i++) {
+			addToMapping(subjects[i], objects[i]);
+		}
+		for (int i=objects.size(); i<subjects.size(); i++) {
+			int randomObject = uniformDistr(randomGenerator) * objects.size();
+			addToMapping(subjects[i], objects[randomObject]);
+		}
+	} else {
+		shuffle(objects.begin(), objects.end(), randomGenerator);
+		for (int i=0; i<subjects.size(); i++) {
+			addToMapping(subjects[i], objects[i]);
+		}
+		for (int i=subjects.size(); i<objects.size(); i++) {
+			int randomSubject = uniformDistr(randomGenerator) * subjects.size();
+			addToMapping(subjects[randomSubject], objects[i]);
+		}
+	}
+}
+
+void incrementalDeterministicGraphGenerator::incrementCorrelatedGraph(config::edge & edgeType) {
+	// Define mapping
+	// Get edges that form the basis of the correlation
+	// Transform the target nodes of the edges with the mapping-function
+
+
+	for (int edgeTypeId: edgeType.correlated_with) {
+		vector<int> subjectsOfMapping;
+		int targetNodesBasis = conf.types[conf.schema.edges[edgeTypeId].object_type].size;
+		for (int i=0; i<targetNodesBasis; i++) {
+			subjectsOfMapping.push_back(i);
+		}
+
+		vector<int> objectsOfMapping;
+		int nmOfObjects = conf.types[edgeType.object_type].size;
+		for (int i=0; i<nmOfObjects; i++) {
+			objectsOfMapping.push_back(i);
+		}
+
+		randomMapping(subjectsOfMapping, objectsOfMapping);
+
+		string line;
+		ifstream outputfile("outputgraph0.txt");
+		if (outputfile.is_open()) {
+			while (getline(outputfile,line)) {
+				string subjectId = line.substr(0, line.find(" "));
+				string subject = line.substr(line.find("-")+1, line.find(" "));
+				string temp = line.erase(0, line.find(" ")+1);
+				int predicate = stoi(temp.substr(0, temp.find(" ")));
+//				cout << "Predicate: " << predicate << endl;
+
+				if (predicate == edgeTypeId) {
+					int object = stoi(temp.substr(temp.find("-")+1, temp.length()));
+					vector<int> mappedObjects = mapping[object];
+					for (int mappedObject: mappedObjects) {
+//						cout << "target: " << object << endl;
+						edge2 possibleEdge;
+						possibleEdge.subjectIterationId = stoi(subject);
+						possibleEdge.subjectId = subjectId;
+						possibleEdge.predicate = to_string(edgeType.edge_type_id);
+						possibleEdge.objectIterationId = mappedObject;
+						possibleEdge.objectId = to_string(edgeType.object_type) + "-" + to_string(mappedObject);
+
+						correlatedEdges.push_back(possibleEdge);
+					}
+				}
 			}
+			outputfile.close();
 		}
-		double rank = (double)nodesWithLowerDegree / (double)nodes.size();
-		rankFile << to_string(rank) << endl;
 	}
 
+	incrementGraph(edgeType);
 
-	rankFile.close();
 }
 
 
-int incrementalDeterministicGraphGenerator::processEdgeTypeSingleGraph(config::config configuration, config::config previousConf, config::edge & edgeType, ofstream & outputFile, int graphNumber_) {
+
+
+int incrementalDeterministicGraphGenerator::processEdgeTypeSingleGraph(config::config configuration, config::edge & edgeType, ofstream & outputFile, int graphNumber_) {
 	chrono::high_resolution_clock::time_point start = chrono::high_resolution_clock::now();
 
 	this->conf = configuration;
@@ -462,10 +591,32 @@ int incrementalDeterministicGraphGenerator::processEdgeTypeSingleGraph(config::c
 	cout << "OutShif: " << outDistrShift << endl;
 	cout << "InShif: " << inDistrShift << endl;
 //	int nbEdgesBeforeIncrementing = edges.size();
-	incrementGraph(edgeType);
+
+
+	if (edgeType.correlated_with.size() == 0) {
+		incrementGraph(edgeType);
+	} else {
+		cout << "Assume the following edge-type have been generated: " << endl;
+		for (int etId: edgeType.correlated_with) {
+			cout << " - " << etId << endl;
+		}
+		incrementCorrelatedGraph(edgeType);
+
+//		for (int i=0; i<mapping.size(); i++) {
+//			cout << i << ": ";
+//			for (int m: mapping[i]) {
+//				cout << m << ",";
+//			}
+//			cout << endl;
+//		}
+//		for (edge2 possibleEdge: correlatedEdges) {
+//			cout << "Possible edge: " << possibleEdge.subjectId << " - " << possibleEdge.predicate << " - " << possibleEdge.objectId << endl;
+//		}
+	}
 
 //	chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
 //	auto durationWitoutMaterialize = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
+
 
 	cout << "Node similarities" << endl;
 	int countForLineBreak = 0;

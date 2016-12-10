@@ -58,6 +58,10 @@ int parse_config(const string & filename, config::config & conf, int graph_numbe
         parse_schema(schema, conf);
     }
     
+    for (pugi::xml_node corr : root.children("correlation")) {
+		parse_correlation(corr, conf);
+    }
+
     parse_workloads(root, conf);
     
     return 1;
@@ -142,7 +146,7 @@ void parse_types(pugi::xml_node node, config::config & conf) {
 }
 
 void parse_schema(pugi::xml_node node, config::config & conf) {
-    int currentEdgeTypeId = 0;
+//    int currentEdgeTypeId = 0;
 	for (pugi::xml_node source_node : node.children("source")) {
         size_t source_type = source_node.attribute("type").as_uint();
         for (pugi::xml_node target_node : source_node.children("target")) {
@@ -150,8 +154,9 @@ void parse_schema(pugi::xml_node node, config::config & conf) {
             size_t target_type = target_node.attribute("type").as_uint();
             size_t symbol = target_node.attribute("symbol").as_uint();
             string mult_string = target_node.attribute("multiplicity").value();
-            size_t edgeTypeId = currentEdgeTypeId;
-            currentEdgeTypeId++;
+            size_t edgeTypeId = target_node.attribute("edge_type").as_uint();
+//            size_t edgeTypeId = currentEdgeTypeId;
+//            currentEdgeTypeId++;
             if (mult_string.size() > 0 && (mult_string[0] == '?' || mult_string[0] == '+' || mult_string[0] == '1')) {
                 multiplicity = mult_string[0];
             }
@@ -170,6 +175,13 @@ void parse_schema(pugi::xml_node node, config::config & conf) {
             	}
             }
 
+            pugi::xml_node corr = target_node.child("correlation");
+			vector<int> correlatedWith(0);
+            for(pugi::xml_node edgeType: corr.children("edge_type")) {
+				int edgeTypeId = edgeType.text().as_uint();
+				correlatedWith.push_back(edgeTypeId);
+			}
+
 
             if (multiplicity == '1') { // && outdistribution.type == DISTRIBUTION::UNDEFINED) {
                 outdistribution = distribution(DISTRIBUTION::UNIFORM, 1, 1);
@@ -186,11 +198,33 @@ void parse_schema(pugi::xml_node node, config::config & conf) {
 				indistribution = distribution(DISTRIBUTION::NORMAL, 0, 1);
 			}
             
-            conf.schema.add_edge(source_type, symbol, target_type, multiplicity, edgeTypeId, sf, outdistribution, indistribution);
+            conf.schema.add_edge(source_type, symbol, target_type, multiplicity, edgeTypeId, sf, outdistribution, indistribution, correlatedWith);
             //cout << "conf.add_edge "  << source_type << " " << symbol << " " << target_type << " " << multiplicity << " " << outdistribution << " " << indistribution <<endl;
             
         }
     }
+}
+
+void parse_correlation(pugi::xml_node node, config::config & conf) {
+	config::correlationDef corr;
+
+	vector<int> basisForCorrelation;
+	pugi::xml_node basis = node.child("basis");
+	for (pugi::xml_node edgeTypeFrom : basis.children("edge_type")) {
+		int edgeTypeId = edgeTypeFrom.text().as_uint();
+		basisForCorrelation.push_back(edgeTypeId);
+	}
+	corr.basis_for_correlation = basisForCorrelation;
+
+	vector<int> targetForCorrelation;
+	pugi::xml_node target = node.child("target");
+	for (pugi::xml_node edgeTypeTarget : target.children("edge_type")) {
+		int edgeTypeId = edgeTypeTarget.text().as_uint();
+		targetForCorrelation.push_back(edgeTypeId);
+	}
+	corr.target_for_correlation = targetForCorrelation;
+
+	conf.correlations.push_back(corr);
 }
 
 distribution parse_distribution(pugi::xml_node node) {

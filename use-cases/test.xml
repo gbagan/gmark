@@ -1,121 +1,69 @@
 <generator>
-	<size>10</size>
+	<size>1</size>
 	<graph>
-		<nodes>1000</nodes>
+		<nodes>200</nodes>
 	</graph>
-	<graph>
-		<nodes>2000</nodes>
-	</graph>
-	<graph>
-		<nodes>3000</nodes>
-	</graph>
-	<graph>
-		<nodes>4000</nodes>
-	</graph>
-	<graph>
-		<nodes>5000</nodes>
-	</graph>
-	<graph>
-		<nodes>6000</nodes>
-	</graph>
-	<graph>
-		<nodes>7000</nodes>
-	</graph>
-	<graph>
-		<nodes>8000</nodes>
-	</graph>
-	<graph>
-		<nodes>9000</nodes>
-	</graph>
-	<graph>
-		<nodes>10000</nodes>
-	</graph>
+
 
 
 
 	<predicates>
-		<size>4</size>
+		<size>2</size>
 		<alias symbol="0">authors</alias>
 		<proportion symbol="0">0.5</proportion>
 
 		<alias symbol="1">publishedIn</alias>
-		<proportion symbol="1">0.3</proportion>
-
-		<alias symbol="2">heldIn</alias>
-		<proportion symbol="2">0.01</proportion>
-
-		<alias symbol="3">extendedTo</alias>
-		<proportion symbol="3">0.19</proportion>
+		<proportion symbol="1">0.5</proportion>
 	</predicates>
 
 	<types>
-		<size>5</size>
+		<size>3</size>
 		<alias type="0">researcher</alias>
-		<proportion type="0">0.5</proportion>
+		<proportion type="0">0.25</proportion>
 
 		<alias type="1">paper</alias>
-		<proportion type="1">0.3</proportion>
+		<proportion type="1">0.25</proportion>
 
 		<alias type="2">journal</alias>
-		<proportion type="2">0.1</proportion>
+		<proportion type="2">0.5</proportion>
 
-		<alias type="3">conference</alias>
-		<proportion type="3">0.1</proportion>
-
-		<alias type="4">city</alias>
-		<fixed type="4">100</fixed>
 	</types>
 
 
 	<schema>
-		<source type="0"> <!-- researcher -->
-			<target type="1" symbol="0"> <!-- authors a paper -->
+		<source type="0"> <!-- paper -->
+			<target type="1" symbol="0" edge_type="0"> <!-- published in a conference -->
 				<indistribution type="gaussian">
-					<mu>3</mu>
-					<sigma>1</sigma>
+					<mu>5</mu>
+					<sigma>0</sigma>
 				</indistribution>
-				<outdistribution type="zipfian">
-					<alpha>2.5</alpha>
+				<outdistribution type="uniform">
+					<min>5</min>
+					<max>5</max>
 				</outdistribution>
 			</target>
-		</source>
 
-		<source type="1"> <!-- paper -->
-			<target type="3" symbol="1" multiplicity="1"> <!-- published in a conference -->
+			<target type="2" symbol="1" edge_type="1"> <!-- extended to a journal -->
 				<indistribution type="gaussian">
-					<mu>40</mu>
-					<sigma>10</sigma>
+					<mu>5</mu>
+					<sigma>0</sigma>
 				</indistribution>
 				<outdistribution type="uniform">
-					<min>1</min>
-					<max>1</max>
-				</outdistribution>
-			</target>
-
-			<target type="2" symbol="3" multiplicity="?"> <!-- extended to a journal -->
-				<indistribution type="zipfian">
-					<alpha>2.5</alpha>
-				</indistribution>
-				<outdistribution type="uniform">
-					<min>0</min>
-					<max>1</max>
-				</outdistribution>
-			</target>
-		</source>
-
-
-		<source type="3"> <!-- conference -->
-			<target type="4" symbol="2" multiplicity="1"> <!-- held in a city -->
-				<indistribution type="zipfian">
-					<alpha>2.5</alpha>
-				</indistribution>
-				<outdistribution type="uniform">
-					<min>1</min>
-					<max>1</max>
+					<min>5</min>
+					<max>5</max>
 				</outdistribution>
 			</target>
 		</source>
 	</schema>
+
+	<correlation>
+		<basis>
+			<edge_type>0</edge_type>
+		</basis>
+		<target>
+			<edge_type>1</edge_type>
+		</target>
+	</correlation>
 
 
 	<workload id="0" size="50">

@@ -19,13 +19,7 @@ namespace std {
 
 
 class incrementalDeterministicGraphGenerator {
-private:
-//	int timeForIteration = 0;
-	int outDistrShift = 0;
-	int inDistrShift = 0;
-
-	config::config conf;
-	pair<vector<graphNode>, vector<graphNode>> nodes;
+public:
 	struct edge2 {
 		int subjectIterationId;
 		int objectIterationId;
@@ -33,21 +27,23 @@ private:
 		string predicate;
 		string objectId;
 	};
-	int graphNumber = 0;
+
+	pair<vector<graphNode>, vector<graphNode>> nodes;
 	vector<edge2> edges;
-	graphNode tempNode = graphNode();
-	int outputBufferLines = 0;
+private:
+	int outDistrShift = 0;
+	int inDistrShift = 0;
+	int graphNumber = 0;
 
+	config::config conf;
 	cumulativeDistributionUtils cumDistrUtils;
-
-
 	std::default_random_engine randomGenerator;
-
 	nodeGenerator nodeGen;
 
 	uniform_real_distribution<double> uniformDistr = uniform_real_distribution<double>(0.0,1.0);
 
 	void incrementGraph(config::edge & edgeType);
+	void incrementCorrelatedGraph(config::edge & edgeType);
 
 
 	double getMeanICsPerNode(distribution & distr, int zipfMax);
@@ -59,7 +55,7 @@ private:
 	void performShiftForNonScalableNodes(config::edge & edgeType);
 
 
-	void updateShifts(config::edge & edgeType, config::config & previousConf);
+//	void updateShifts(config::edge & edgeType, config::config & previousConf);
 	void fixSchemaInequality(config::edge & edgeType);
 
 	void performSchemaIndicatedShift(config::edge & edgeType);
@@ -71,14 +67,25 @@ private:
 	void printRankZipf(vector<graphNode> nodes, int edgeTypeId, int nbNodes);
 	void printRankNonZipf(vector<graphNode> nodes, int edgeTypeId, int nbNodes);
 
+	void generateEdges(config::edge & edgeType, double prob);
 
+
+	// Correlation
+	vector<edge2> correlatedEdges;
+	vector<vector<int>> mapping;
+
+	void generateCorrelatedEdges(config::edge & edgeType, double prob);
 	void calculateSimilarity(graphNode n1, graphNode n2);
+
+	void randomMapping(vector<int> subjects, vector<int> objects);
+	void addToMapping(int subject, int target);
+
 public:
 	incrementalDeterministicGraphGenerator();
 	virtual ~incrementalDeterministicGraphGenerator();
 
 	void generateIncDetGraph(ofstream*  outputFile, int* seeds, int edgeTypeIdLow, int edgeTypeIdHigh);
-	int processEdgeTypeSingleGraph(config::config configuration, config::config previousConf, config::edge & edgeType, ofstream & outputFile, int graphNumber);
+	int processEdgeTypeSingleGraph(config::config configuration, config::edge & edgeType, ofstream & outputFile, int graphNumber);
 };
 
 } /* namespace std */
