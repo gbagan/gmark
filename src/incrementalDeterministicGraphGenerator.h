@@ -43,7 +43,6 @@ private:
 	uniform_real_distribution<double> uniformDistr = uniform_real_distribution<double>(0.0,1.0);
 
 	void incrementGraph(config::edge & edgeType);
-	void incrementCorrelatedGraph(config::edge & edgeType);
 
 
 	double getMeanICsPerNode(distribution & distr, int zipfMax);
@@ -71,14 +70,15 @@ private:
 
 
 	// Correlation
-	vector<edge2> correlatedEdges;
-	vector<vector<int>> mapping;
+	vector<edge2> generateCorrelatedEdgeSet(config::edge & edgeType);
 
-	void generateCorrelatedEdges(config::edge & edgeType, double prob);
+	void generateCorrelatedEdges(config::edge & edgeType, double prob, vector<edge2> correlatedEdges);
 	void calculateSimilarity(graphNode n1, graphNode n2);
 
-	void randomMapping(vector<int> subjects, vector<int> objects);
-	void addToMapping(int subject, int target);
+	vector<vector<int>> randomMapping(vector<int> subjects, vector<int> objects);
+	void addToMapping(vector<vector<int>> & mapping, int subject, int target);
+
+	vector<vector<int>> icPreservingMapping(vector<int> subjects, vector<int> objects, int correlatedETid);
 
 public:
 	incrementalDeterministicGraphGenerator();

@@ -22,10 +22,10 @@
 		<proportion type="0">0.25</proportion>
 
 		<alias type="1">paper</alias>
-		<proportion type="1">0.25</proportion>
+		<proportion type="1">0.20</proportion>
 
 		<alias type="2">journal</alias>
-		<proportion type="2">0.5</proportion>
+		<proportion type="2">0.20</proportion>
 
 	</types>
 
@@ -44,6 +44,9 @@
 			</target>
 
 			<target type="2" symbol="1" edge_type="1"> <!-- extended to a journal -->
+				<correlation>
+					<edge_type>0</edge_type>
+				</correlation>
 				<indistribution type="gaussian">
 					<mu>5</mu>
 					<sigma>0</sigma>
@@ -56,14 +59,7 @@
 		</source>
 	</schema>
 
-	<correlation>
-		<basis>
-			<edge_type>0</edge_type>
-		</basis>
-		<target>
-			<edge_type>1</edge_type>
-		</target>
-	</correlation>
+	
 
 
 	<workload id="0" size="50">

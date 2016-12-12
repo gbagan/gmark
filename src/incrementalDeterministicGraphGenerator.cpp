@@ -461,12 +461,13 @@ void incrementalDeterministicGraphGenerator::incrementGraph(config::edge & edgeT
 	if (edgeType.correlated_with.size() == 0) {
 		generateEdges(edgeType, prob);
 	} else {
-		generateCorrelatedEdges(edgeType, prob);
+		vector<edge2> possibleEdges = generateCorrelatedEdgeSet(edgeType);
+		generateCorrelatedEdges(edgeType, prob, possibleEdges);
 	}
 }
 
 
-void incrementalDeterministicGraphGenerator::generateCorrelatedEdges(config::edge & edgeType, double prob) {
+void incrementalDeterministicGraphGenerator::generateCorrelatedEdges(config::edge & edgeType, double prob, vector<edge2> correlatedEdges) {
 	shuffle(correlatedEdges.begin(), correlatedEdges.end(), randomGenerator);
 
 	for (edge2 possibleEdge: correlatedEdges) {
@@ -479,38 +480,148 @@ void incrementalDeterministicGraphGenerator::generateCorrelatedEdges(config::edg
 	generateEdges(edgeType, prob);
 }
 
-void incrementalDeterministicGraphGenerator::addToMapping(int subject, int target) {
+void incrementalDeterministicGraphGenerator::addToMapping(vector<vector<int>> & mapping, int subject, int target) {
 	mapping[subject].push_back(target);
 }
 
-void incrementalDeterministicGraphGenerator::randomMapping(vector<int> subjects, vector<int> objects) {
-	mapping = vector<vector<int>>(subjects.size());
+
+bool pairCompare(const pair<int, int>& firstElem, const pair<int, int>& secondElem) {
+  return firstElem.first > secondElem.first;
+}
+
+
+vector<vector<int>> incrementalDeterministicGraphGenerator::icPreservingMapping(vector<int> subjects, vector<int> objects, int correlatedETid) {
+	vector<vector<int>> mapping = vector<vector<int>>(subjects.size());
+
+
+	// Get the degree of all nodes
+	vector<int> inDistr(subjects.size());
+	// Initialize outDistr-vector
+	for (int i=0; i<subjects.size(); i++) {
+		inDistr.push_back(0);
+	}
+
+	// Analyze all edges
+	string line;
+	ifstream myfile("outputgraph" + to_string(graphNumber) + ".txt");
+	myfile.clear();
+	myfile.seekg(0, ios::beg);
+	if (myfile.is_open()) {
+		while (getline(myfile, line)) {
+			string temp = line;
+			string getPred = temp.erase(0, temp.find(" ")+1);
+			string predicate = getPred.substr(0, getPred.find(" "));
+			if (stoi(predicate) == correlatedETid) {
+				temp = line;
+				string subjectType = temp.substr(0, temp.find("-"));
+				string getSub = temp.erase(0, temp.find("-")+1);
+				string subject = getSub.substr(0, getSub.find(" "));
+
+				getPred = getPred.erase(0, getPred.find(" ")+1);
+
+				string objectType = getPred.substr(0, getPred.find("-"));
+				string getObj = getPred.erase(0, getPred.find("-")+1);
+				string object = getObj.substr(0, getObj.length());
+
+				if (stoi(objectType) == conf.schema.edges[correlatedETid].object_type && stoi(subjectType) == conf.schema.edges[correlatedETid].subject_type) {
+					inDistr.at(stoi(object))++;
+				}
+			}
+		}
+		myfile.close();
+	} else {
+		cout << "Unable to open file";
+	}
+
+
+//	for (int i=0; i<subjects.size(); i++) {
+//		cout << "Degree of node" << i << ": " <<  inDistr[i] << endl;
+//	}
+
+	vector<pair<int,int>> degreeNodeIdPairSubjects(subjects.size());
+	for (int i=0; i<subjects.size(); i++) {
+		degreeNodeIdPairSubjects[i] = make_pair(inDistr[i], i);
+	}
+	sort(degreeNodeIdPairSubjects.begin(), degreeNodeIdPairSubjects.end(), pairCompare);
+
+//	for (int i=0; i<degreeNodeIdPairSubjects.size(); i++) {
+//		cout << "Degree of node" << degreeNodeIdPairSubjects[i].second << " sorted: " <<  degreeNodeIdPairSubjects[i].first << endl;
+//	}
+
+//	cout << "Number of object nodes: " << objects.size() << endl;
+//	for (int i=0; i<objects.size(); i++) {
+//		cout << "Degree of object node" << i << ": " <<  nodes.second[i].numberOfInterfaceConnections << endl;
+//	}
+	vector<pair<int,int>> degreeNodeIdPairObjects(objects.size());
+	for (int i=0; i<objects.size(); i++) {
+		degreeNodeIdPairObjects[i] = make_pair(nodes.second[i].numberOfInterfaceConnections, i);
+	}
+	sort(degreeNodeIdPairObjects.begin(), degreeNodeIdPairObjects.end(), pairCompare);
+//	for (int i=0; i<objects.size(); i++) {
+//		cout << "Degree of object node" << degreeNodeIdPairObjects[i].second << " sorted: " <<  degreeNodeIdPairObjects[i].first << endl;
+//	}
+
+
+
+	for (int i=0; i<min(degreeNodeIdPairSubjects.size(), degreeNodeIdPairObjects.size()); i++) {
+//		cout << "Add mapping: " << degreeNodeIdPairSubjects[i].second << " -> " << degreeNodeIdPairObjects[i].second << endl;
+		addToMapping(mapping, degreeNodeIdPairSubjects[i].second, degreeNodeIdPairObjects[i].second);
+	}
+
+	cout << "1: " << degreeNodeIdPairSubjects.size() << ", 2: " << degreeNodeIdPairObjects.size() << endl;
+	if (degreeNodeIdPairSubjects.size() > degreeNodeIdPairObjects.size()) {
+		for (int i=degreeNodeIdPairObjects.size(); i<degreeNodeIdPairSubjects.size(); i++) {
+//			cout << "Add mapping: " << degreeNodeIdPairSubjects[i].second << " -> " << degreeNodeIdPairObjects[i-degreeNodeIdPairObjects.size()].second << endl;
+			addToMapping(mapping, degreeNodeIdPairSubjects[i].second, degreeNodeIdPairObjects[i-degreeNodeIdPairObjects.size()].second);
+		}
+	} else {
+		for (int i=degreeNodeIdPairSubjects.size(); i<degreeNodeIdPairObjects.size(); i++) {
+//			cout << "Add mapping: " << degreeNodeIdPairSubjects[i-degreeNodeIdPairSubjects.size()].second << " -> " << degreeNodeIdPairObjects[i].second << endl;
+			addToMapping(mapping, degreeNodeIdPairSubjects[i-degreeNodeIdPairSubjects.size()].second, degreeNodeIdPairObjects[i].second);
+		}
+	}
+
+//	for (int i=0; i<mapping.size(); i++) {
+//		cout << "Mapping for subject node" << i << ": ";
+//		for (int j=0; j<mapping[i].size(); j++) {
+//			cout << mapping[i][j] << ",";
+//		}
+//		cout << endl;
+//	}
+	return mapping;
+}
+
+
+vector<vector<int>> incrementalDeterministicGraphGenerator::randomMapping(vector<int> subjects, vector<int> objects) {
+	vector<vector<int>> mapping = vector<vector<int>>(subjects.size());
 	if (subjects.size() > objects.size()) {
 		shuffle(subjects.begin(), subjects.end(), randomGenerator);
 		for (int i=0; i<objects.size(); i++) {
-			addToMapping(subjects[i], objects[i]);
+			addToMapping(mapping, subjects[i], objects[i]);
 		}
 		for (int i=objects.size(); i<subjects.size(); i++) {
 			int randomObject = uniformDistr(randomGenerator) * objects.size();
-			addToMapping(subjects[i], objects[randomObject]);
+			addToMapping(mapping, subjects[i], objects[randomObject]);
 		}
 	} else {
 		shuffle(objects.begin(), objects.end(), randomGenerator);
 		for (int i=0; i<subjects.size(); i++) {
-			addToMapping(subjects[i], objects[i]);
+			addToMapping(mapping, subjects[i], objects[i]);
 		}
 		for (int i=subjects.size(); i<objects.size(); i++) {
 			int randomSubject = uniformDistr(randomGenerator) * subjects.size();
-			addToMapping(subjects[randomSubject], objects[i]);
+			addToMapping(mapping, subjects[randomSubject], objects[i]);
 		}
 	}
+	return mapping;
 }
 
-void incrementalDeterministicGraphGenerator::incrementCorrelatedGraph(config::edge & edgeType) {
+vector<incrementalDeterministicGraphGenerator::edge2> incrementalDeterministicGraphGenerator::generateCorrelatedEdgeSet(config::edge & edgeType) {
 	// Define mapping
 	// Get edges that form the basis of the correlation
 	// Transform the target nodes of the edges with the mapping-function
 
+	vector<edge2> correlatedEdges;
 
 	for (int edgeTypeId: edgeType.correlated_with) {
 		vector<int> subjectsOfMapping;
@@ -525,10 +636,11 @@ void incrementalDeterministicGraphGenerator::incrementCorrelatedGraph(config::ed
 			objectsOfMapping.push_back(i);
 		}
 
-		randomMapping(subjectsOfMapping, objectsOfMapping);
+//		vector<vector<int>> mapping = randomMapping(subjectsOfMapping, objectsOfMapping);
+		vector<vector<int>> mapping = icPreservingMapping(subjectsOfMapping, objectsOfMapping, edgeTypeId);
 
 		string line;
-		ifstream outputfile("outputgraph0.txt");
+		ifstream outputfile("outputgraph" + to_string(graphNumber) + ".txt");
 		if (outputfile.is_open()) {
 			while (getline(outputfile,line)) {
 				string subjectId = line.substr(0, line.find(" "));
@@ -557,7 +669,7 @@ void incrementalDeterministicGraphGenerator::incrementCorrelatedGraph(config::ed
 		}
 	}
 
-	incrementGraph(edgeType);
+	return correlatedEdges;
 
 }
 
@@ -593,14 +705,12 @@ int incrementalDeterministicGraphGenerator::processEdgeTypeSingleGraph(config::c
 //	int nbEdgesBeforeIncrementing = edges.size();
 
 
-	if (edgeType.correlated_with.size() == 0) {
-		incrementGraph(edgeType);
-	} else {
+	if (edgeType.correlated_with.size() > 0) {
 		cout << "Assume the following edge-type have been generated: " << endl;
 		for (int etId: edgeType.correlated_with) {
 			cout << " - " << etId << endl;
 		}
-		incrementCorrelatedGraph(edgeType);
+//		incrementCorrelatedGraph(edgeType);
 
 //		for (int i=0; i<mapping.size(); i++) {
 //			cout << i << ": ";
@@ -613,6 +723,7 @@ int incrementalDeterministicGraphGenerator::processEdgeTypeSingleGraph(config::c
 //			cout << "Possible edge: " << possibleEdge.subjectId << " - " << possibleEdge.predicate << " - " << possibleEdge.objectId << endl;
 //		}
 	}
+	incrementGraph(edgeType);
 
 //	chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
 //	auto durationWitoutMaterialize = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
