@@ -474,7 +474,9 @@ void incrementalDeterministicGraphGenerator::generateCorrelatedEdges(config::edg
 		if (nodes.first[possibleEdge.subjectIterationId].numberOfOpenInterfaceConnections > 0 &&
 				nodes.second[possibleEdge.objectIterationId].numberOfOpenInterfaceConnections > 0) {
 //			cout << "Add edge: " << possibleEdge.subjectIterationId << " - " << edgeType.predicate << " - " << possibleEdge.objectIterationId << endl;
+//			for (int i=0; i<nodes.second[possibleEdge.objectIterationId].numberOfOpenInterfaceConnections; i++) {
 			addEdge(nodes.first[possibleEdge.subjectIterationId], nodes.second[possibleEdge.objectIterationId], edgeType.predicate);
+//			}
 		}
 	}
 	generateEdges(edgeType, prob);
@@ -568,16 +570,15 @@ vector<vector<int>> incrementalDeterministicGraphGenerator::icPreservingMapping(
 		addToMapping(mapping, degreeNodeIdPairSubjects[i].second, degreeNodeIdPairObjects[i].second);
 	}
 
-	cout << "1: " << degreeNodeIdPairSubjects.size() << ", 2: " << degreeNodeIdPairObjects.size() << endl;
 	if (degreeNodeIdPairSubjects.size() > degreeNodeIdPairObjects.size()) {
 		for (int i=degreeNodeIdPairObjects.size(); i<degreeNodeIdPairSubjects.size(); i++) {
 //			cout << "Add mapping: " << degreeNodeIdPairSubjects[i].second << " -> " << degreeNodeIdPairObjects[i-degreeNodeIdPairObjects.size()].second << endl;
-			addToMapping(mapping, degreeNodeIdPairSubjects[i].second, degreeNodeIdPairObjects[i-degreeNodeIdPairObjects.size()].second);
+			addToMapping(mapping, degreeNodeIdPairSubjects[i].second, uniformDistr(randomGenerator)*objects.size());
 		}
 	} else {
 		for (int i=degreeNodeIdPairSubjects.size(); i<degreeNodeIdPairObjects.size(); i++) {
 //			cout << "Add mapping: " << degreeNodeIdPairSubjects[i-degreeNodeIdPairSubjects.size()].second << " -> " << degreeNodeIdPairObjects[i].second << endl;
-			addToMapping(mapping, degreeNodeIdPairSubjects[i-degreeNodeIdPairSubjects.size()].second, degreeNodeIdPairObjects[i].second);
+			addToMapping(mapping, uniformDistr(randomGenerator)*subjects.size(), degreeNodeIdPairObjects[i].second);
 		}
 	}
 
@@ -710,18 +711,6 @@ int incrementalDeterministicGraphGenerator::processEdgeTypeSingleGraph(config::c
 		for (int etId: edgeType.correlated_with) {
 			cout << " - " << etId << endl;
 		}
-//		incrementCorrelatedGraph(edgeType);
-
-//		for (int i=0; i<mapping.size(); i++) {
-//			cout << i << ": ";
-//			for (int m: mapping[i]) {
-//				cout << m << ",";
-//			}
-//			cout << endl;
-//		}
-//		for (edge2 possibleEdge: correlatedEdges) {
-//			cout << "Possible edge: " << possibleEdge.subjectId << " - " << possibleEdge.predicate << " - " << possibleEdge.objectId << endl;
-//		}
 	}
 	incrementGraph(edgeType);
 

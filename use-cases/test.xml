@@ -34,12 +34,12 @@
 		<source type="0"> <!-- paper -->
 			<target type="1" symbol="0" edge_type="0"> <!-- published in a conference -->
 				<indistribution type="gaussian">
-					<mu>5</mu>
-					<sigma>0</sigma>
+					<mu>10</mu>
+					<sigma>1</sigma>
 				</indistribution>
 				<outdistribution type="uniform">
 					<min>5</min>
-					<max>5</max>
+					<max>15</max>
 				</outdistribution>
 			</target>
 
@@ -49,11 +49,11 @@
 				</correlation>
 				<indistribution type="gaussian">
 					<mu>5</mu>
-					<sigma>0</sigma>
+					<sigma>1</sigma>
 				</indistribution>
 				<outdistribution type="uniform">
-					<min>5</min>
-					<max>5</max>
+					<min>4</min>
+					<max>6</max>
 				</outdistribution>
 			</target>
 		</source>
