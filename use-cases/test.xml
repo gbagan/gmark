@@ -1,31 +1,37 @@
 <generator>
 	<size>1</size>
 	<graph>
-		<nodes>200</nodes>
+		<nodes>50</nodes>
 	</graph>
 
 
 
 
 	<predicates>
-		<size>2</size>
+		<size>3</size>
 		<alias symbol="0">authors</alias>
 		<proportion symbol="0">0.5</proportion>
 
 		<alias symbol="1">publishedIn</alias>
 		<proportion symbol="1">0.5</proportion>
+
+		<alias symbol="2">ietsIn</alias>
+		<proportion symbol="2">0.5</proportion>
 	</predicates>
 
 	<types>
-		<size>3</size>
+		<size>4</size>
 		<alias type="0">researcher</alias>
-		<proportion type="0">0.25</proportion>
+		<proportion type="0">1</proportion>
 
 		<alias type="1">paper</alias>
-		<proportion type="1">0.20</proportion>
+		<proportion type="1">1</proportion>
 
 		<alias type="2">journal</alias>
-		<proportion type="2">0.20</proportion>
+		<proportion type="2">1</proportion>
+
+		<alias type="3">iets</alias>
+		<proportion type="3">1</proportion>
 
 	</types>
 
@@ -34,18 +40,30 @@
 		<source type="0"> <!-- paper -->
 			<target type="1" symbol="0" edge_type="0"> <!-- published in a conference -->
 				<indistribution type="gaussian">
-					<mu>10</mu>
-					<sigma>1</sigma>
+					<mu>5</mu>
+					<sigma>0</sigma>
 				</indistribution>
 				<outdistribution type="uniform">
 					<min>5</min>
-					<max>15</max>
+					<max>5</max>
 				</outdistribution>
 			</target>
 
-			<target type="2" symbol="1" edge_type="1"> <!-- extended to a journal -->
+			<target type="2" symbol="1" edge_type="1"> <!-- published in a conference -->
+				<indistribution type="gaussian">
+					<mu>5</mu>
+					<sigma>0</sigma>
+				</indistribution>
+				<outdistribution type="uniform">
+					<min>5</min>
+					<max>5</max>
+				</outdistribution>
+			</target>
+
+			<target type="3" symbol="2" edge_type="2"> <!-- extended to a journal -->
 				<correlation>
 					<edge_type>0</edge_type>
+					<edge_type>1</edge_type>
 				</correlation>
 				<indistribution type="gaussian">
 					<mu>5</mu>

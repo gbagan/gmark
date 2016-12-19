@@ -73,7 +73,7 @@ private:
 	vector<edge2> generateCorrelatedEdgeSet(config::edge & edgeType);
 
 	void generateCorrelatedEdges(config::edge & edgeType, double prob, vector<edge2> correlatedEdges);
-	void calculateSimilarity(graphNode n1, graphNode n2);
+//	double calculateSimilarity(graphNode n1, graphNode n2, vector<edge2> edges);
 
 	vector<vector<int>> randomMapping(vector<int> subjects, vector<int> objects);
 	void addToMapping(vector<vector<int>> & mapping, int subject, int target);

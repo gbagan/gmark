@@ -22,58 +22,7 @@ incrementalDeterministicGraphGenerator::~incrementalDeterministicGraphGenerator(
 
 
 
-void incrementalDeterministicGraphGenerator::calculateSimilarity(graphNode n1, graphNode n2) {
-//	cout << "Simialrity between node " << n1.iterationId << " and node " << n2.iterationId << endl;
-	vector<int> s1, s2;
-	for (edge2 e: edges) {
-		if (e.subjectIterationId == n1.iterationId) {
-			if (std::find(s1.begin(), s1.end(), e.objectIterationId) == s1.end()) {
-				// Set s1 does not contain the new objectId
-				s1.push_back(e.objectIterationId);
-			}
-		}
-		if (e.subjectIterationId == n2.iterationId) {
-			if (std::find(s2.begin(), s2.end(), e.objectIterationId) == s2.end()) {
-				// Set s2 does not contain the new objectId
-				s2.push_back(e.objectIterationId);
-			}
-		}
-	}
 
-
-	vector<int> intersectionVec(max(s1.size(), s2.size()));
-	vector<int>::iterator itIntersection;
-
-	sort(s1.begin(), s1.end());
-	sort(s2.begin(), s2.end());
-
-	//	cout << "In s1: ";
-	//	for (int i:s1) {
-	//		cout << i << ",";
-	//	}
-	//	cout << endl;
-	//
-	//	cout << "In s2: ";
-	//	for (int i:s2) {
-	//		cout << i << ",";
-	//	}
-	//	cout << endl;
-
-	itIntersection = set_intersection(s1.begin(), s1.end(),
-			s2.begin(), s2.end(), intersectionVec.begin());
-
-	intersectionVec.resize(itIntersection-intersectionVec.begin());
-
-	int unionCount = s1.size() + s2.size() - intersectionVec.size();
-
-//	cout << "Intersection: " << intersectionVec.size() << endl;
-//	cout << "Union: " << unionCount << endl;
-	if (unionCount == 0) {
-		cout << 0.0 << ",";
-	} else {
-		cout <<	(float)intersectionVec.size() / (float)unionCount << ",";
-	}
-}
 
 
 
@@ -471,15 +420,15 @@ void incrementalDeterministicGraphGenerator::generateCorrelatedEdges(config::edg
 	shuffle(correlatedEdges.begin(), correlatedEdges.end(), randomGenerator);
 
 	for (edge2 possibleEdge: correlatedEdges) {
-		if (nodes.first[possibleEdge.subjectIterationId].numberOfOpenInterfaceConnections > 0 &&
-				nodes.second[possibleEdge.objectIterationId].numberOfOpenInterfaceConnections > 0) {
+//		if (nodes.first[possibleEdge.subjectIterationId].numberOfOpenInterfaceConnections > 0 &&
+//				nodes.second[possibleEdge.objectIterationId].numberOfOpenInterfaceConnections > 0) {
 //			cout << "Add edge: " << possibleEdge.subjectIterationId << " - " << edgeType.predicate << " - " << possibleEdge.objectIterationId << endl;
 //			for (int i=0; i<nodes.second[possibleEdge.objectIterationId].numberOfOpenInterfaceConnections; i++) {
 			addEdge(nodes.first[possibleEdge.subjectIterationId], nodes.second[possibleEdge.objectIterationId], edgeType.predicate);
 //			}
-		}
+//		}
 	}
-	generateEdges(edgeType, prob);
+//	generateEdges(edgeType, prob);
 }
 
 void incrementalDeterministicGraphGenerator::addToMapping(vector<vector<int>> & mapping, int subject, int target) {
@@ -640,6 +589,15 @@ vector<incrementalDeterministicGraphGenerator::edge2> incrementalDeterministicGr
 //		vector<vector<int>> mapping = randomMapping(subjectsOfMapping, objectsOfMapping);
 		vector<vector<int>> mapping = icPreservingMapping(subjectsOfMapping, objectsOfMapping, edgeTypeId);
 
+		// Print mapping:
+		for(int i=0; i<mapping.size(); i++) {
+			cout << i << ": [";
+			for (int j=0; j<mapping[i].size(); j++) {
+				cout << mapping[i][j] << ",";
+			}
+			cout << "]" << endl;
+		}
+
 		string line;
 		ifstream outputfile("outputgraph" + to_string(graphNumber) + ".txt");
 		if (outputfile.is_open()) {
@@ -718,20 +676,7 @@ int incrementalDeterministicGraphGenerator::processEdgeTypeSingleGraph(config::c
 //	auto durationWitoutMaterialize = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
 
 
-	cout << "Node similarities" << endl;
-	int countForLineBreak = 0;
-	for (graphNode n1: nodes.first) {
-		for (graphNode n2: nodes.first) {
-			if (n1.iterationId != n2.iterationId) {
-				calculateSimilarity(n1, n2);
-				countForLineBreak++;
-				if (countForLineBreak % 500 == 0) {
-					cout << endl;
-				}
-			}
-		}
-	}
-	cout << endl;
+
 
 	// Materialize the edge
 //	string outputBuffer = "";

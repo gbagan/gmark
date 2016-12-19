@@ -1,10 +1,14 @@
 CC=g++
 CFLAGS=-g -O3 -Wall -std=c++11
 
+objects = test.o gmark.o configparser.o pugixml.o randomgen.o config.o workload.o workload2.o \
+			incrementalDeterministicGraphGenerator.o graphNode.o cumulativeDistributionUtils.o \
+			analysisIncrDetGraph.o nodeGenerator.o processingEdgeTypes.o analyseCorrelation.o
+
 all: test 
 
-test: test.o gmark.o configparser.o pugixml.o randomgen.o config.o workload.o workload2.o incrementalDeterministicGraphGenerator.o graphNode.o cumulativeDistributionUtils.o analysisIncrDetGraph.o nodeGenerator.o processingEdgeTypes.o
-	$(CC) test.o gmark.o configparser.o randomgen.o pugixml.o config.o workload.o workload2.o incrementalDeterministicGraphGenerator.o graphNode.o cumulativeDistributionUtils.o analysisIncrDetGraph.o nodeGenerator.o processingEdgeTypes.o -o test
+test: $(objects)
+	$(CC) $(objects) -o test
 
 test.o: test.cpp configparser.h config.h gmark.h workload.h incrementalDeterministicGraphGenerator.h analysisIncrDetGraph.h processingEdgeTypes.h
 	$(CC) $(CFLAGS) -c test.cpp
@@ -46,8 +50,11 @@ analysisIncrDetGraph.o: analysisIncrDetGraph.cpp config.h
 nodeGenerator.o: nodeGenerator.cpp config.h
 	$(CC) $(CFLAGS) -c nodeGenerator.cpp
 
-processingEdgeTypes.o: processingEdgeTypes.cpp incrementalDeterministicGraphGenerator.h config.h configparser.h
+processingEdgeTypes.o: processingEdgeTypes.cpp incrementalDeterministicGraphGenerator.h config.h configparser.h analyseCorrelation.h
 	$(CC) $(CFLAGS) -c processingEdgeTypes.cpp
+
+analyseCorrelation.o: analyseCorrelation.cpp incrementalDeterministicGraphGenerator.h
+	$(CC) $(CFLAGS) -c analyseCorrelation.cpp
 
 clean:
 	rm -rf *.o test
