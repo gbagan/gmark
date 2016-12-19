@@ -420,15 +420,15 @@ void incrementalDeterministicGraphGenerator::generateCorrelatedEdges(config::edg
 	shuffle(correlatedEdges.begin(), correlatedEdges.end(), randomGenerator);
 
 	for (edge2 possibleEdge: correlatedEdges) {
-//		if (nodes.first[possibleEdge.subjectIterationId].numberOfOpenInterfaceConnections > 0 &&
-//				nodes.second[possibleEdge.objectIterationId].numberOfOpenInterfaceConnections > 0) {
+		if (nodes.first[possibleEdge.subjectIterationId].numberOfOpenInterfaceConnections > 0 &&
+				nodes.second[possibleEdge.objectIterationId].numberOfOpenInterfaceConnections > 0) {
 //			cout << "Add edge: " << possibleEdge.subjectIterationId << " - " << edgeType.predicate << " - " << possibleEdge.objectIterationId << endl;
 //			for (int i=0; i<nodes.second[possibleEdge.objectIterationId].numberOfOpenInterfaceConnections; i++) {
 			addEdge(nodes.first[possibleEdge.subjectIterationId], nodes.second[possibleEdge.objectIterationId], edgeType.predicate);
 //			}
-//		}
+		}
 	}
-//	generateEdges(edgeType, prob);
+	generateEdges(edgeType, prob);
 }
 
 void incrementalDeterministicGraphGenerator::addToMapping(vector<vector<int>> & mapping, int subject, int target) {
@@ -554,6 +554,7 @@ vector<vector<int>> incrementalDeterministicGraphGenerator::randomMapping(vector
 			addToMapping(mapping, subjects[i], objects[randomObject]);
 		}
 	} else {
+		// Bijective when sizes are equal
 		shuffle(objects.begin(), objects.end(), randomGenerator);
 		for (int i=0; i<subjects.size(); i++) {
 			addToMapping(mapping, subjects[i], objects[i]);
@@ -586,8 +587,8 @@ vector<incrementalDeterministicGraphGenerator::edge2> incrementalDeterministicGr
 			objectsOfMapping.push_back(i);
 		}
 
-//		vector<vector<int>> mapping = randomMapping(subjectsOfMapping, objectsOfMapping);
-		vector<vector<int>> mapping = icPreservingMapping(subjectsOfMapping, objectsOfMapping, edgeTypeId);
+		vector<vector<int>> mapping = randomMapping(subjectsOfMapping, objectsOfMapping);
+//		vector<vector<int>> mapping = icPreservingMapping(subjectsOfMapping, objectsOfMapping, edgeTypeId);
 
 		// Print mapping:
 		for(int i=0; i<mapping.size(); i++) {
@@ -600,30 +601,39 @@ vector<incrementalDeterministicGraphGenerator::edge2> incrementalDeterministicGr
 
 		string line;
 		ifstream outputfile("outputgraph" + to_string(graphNumber) + ".txt");
+		outputfile.clear();
+		outputfile.seekg(0, ios::beg);
 		if (outputfile.is_open()) {
+			int i = 0;
 			while (getline(outputfile,line)) {
-				string subjectId = line.substr(0, line.find(" "));
-				string subject = line.substr(line.find("-")+1, line.find(" "));
-				string temp = line.erase(0, line.find(" ")+1);
-				int predicate = stoi(temp.substr(0, temp.find(" ")));
-//				cout << "Predicate: " << predicate << endl;
+				i++;
+				if (i > generatedNumberOfEdges) {
+					cout << "Line " << i << ": " << line << endl;
+					string subjectId = line.substr(0, line.find(" "));
+					string subject = line.substr(line.find("-")+1, line.find(" "));
+					string temp = line.erase(0, line.find(" ")+1);
+					int predicate = stoi(temp.substr(0, temp.find(" ")));
+	//				cout << "Predicate: " << predicate << endl;
 
-				if (predicate == edgeTypeId) {
-					int object = stoi(temp.substr(temp.find("-")+1, temp.length()));
-					vector<int> mappedObjects = mapping[object];
-					for (int mappedObject: mappedObjects) {
-//						cout << "target: " << object << endl;
-						edge2 possibleEdge;
-						possibleEdge.subjectIterationId = stoi(subject);
-						possibleEdge.subjectId = subjectId;
-						possibleEdge.predicate = to_string(edgeType.edge_type_id);
-						possibleEdge.objectIterationId = mappedObject;
-						possibleEdge.objectId = to_string(edgeType.object_type) + "-" + to_string(mappedObject);
+					if (predicate == edgeTypeId) {
+						int object = stoi(temp.substr(temp.find("-")+1, temp.length()));
+						vector<int> mappedObjects = mapping[object];
+	//					cout << "Object found: " << object << endl;
+						for (int mappedObject: mappedObjects) {
+	//						cout << "Mapped to: " << mappedObject << endl;
+							edge2 possibleEdge;
+							possibleEdge.subjectIterationId = stoi(subject);
+							possibleEdge.subjectId = subjectId;
+							possibleEdge.predicate = to_string(edgeType.edge_type_id);
+							possibleEdge.objectIterationId = mappedObject;
+							possibleEdge.objectId = to_string(edgeType.object_type) + "-" + to_string(mappedObject);
 
-						correlatedEdges.push_back(possibleEdge);
+							correlatedEdges.push_back(possibleEdge);
+						}
 					}
 				}
 			}
+			generatedNumberOfEdges = i;
 			outputfile.close();
 		}
 	}
@@ -636,6 +646,7 @@ vector<incrementalDeterministicGraphGenerator::edge2> incrementalDeterministicGr
 
 
 int incrementalDeterministicGraphGenerator::processEdgeTypeSingleGraph(config::config configuration, config::edge & edgeType, ofstream & outputFile, int graphNumber_) {
+	cout << "Edge-type: " << edgeType.edge_type_id << endl << "Graph number: " << graphNumber_ << endl;
 	chrono::high_resolution_clock::time_point start = chrono::high_resolution_clock::now();
 
 	this->conf = configuration;
@@ -659,8 +670,8 @@ int incrementalDeterministicGraphGenerator::processEdgeTypeSingleGraph(config::c
 	nodeGen = nodeGenerator(edgeType, nodes.first.size(), nodes.second.size(), &randomGenerator, &nodes, &conf);
 
 
-	cout << "OutShif: " << outDistrShift << endl;
-	cout << "InShif: " << inDistrShift << endl;
+//	cout << "OutShif: " << outDistrShift << endl;
+//	cout << "InShif: " << inDistrShift << endl;
 //	int nbEdgesBeforeIncrementing = edges.size();
 
 

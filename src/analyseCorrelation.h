@@ -25,7 +25,7 @@ public:
 	analyseCorrelation(config::config & conf);
 	virtual ~analyseCorrelation();
 
-	void analyze();
+	void analyze(config::edge & edgeType, int graphNumber);
 
 };
 

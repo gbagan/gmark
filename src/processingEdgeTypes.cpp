@@ -45,15 +45,15 @@ void processingEdgeTypes::sequentialProcessing() {
 
 
 
-	for (int i=0; i<conf.schema.edges.size(); i++) {
+	for (config::edge edgeType: conf.schema.edges) {
 //		cout << "Processing edge-type " << i << endl;
-		processEdgeType(i);
+		processEdgeType(edgeType);
 	}
 
 	cout << runningTime << ", ";
 }
 
-void processingEdgeTypes::processEdgeType(int edgeTypeId) {
+void processingEdgeTypes::processEdgeType(config::edge & edgeType) {
 	incrementalDeterministicGraphGenerator graphGenerator = incrementalDeterministicGraphGenerator();
 
 	// For all different graph sizes
@@ -65,7 +65,7 @@ void processingEdgeTypes::processEdgeType(int edgeTypeId) {
 		} else {
 			conf2.nb_nodes = 0;
 		}
-		// Parse the confoguration
+		// Parse the configuration
 		configparser::parse_config(conf_file, conf2, j);
 		conf2.complete_config();
 		conf2.nb_graphs = conf.nb_graphs;
@@ -74,11 +74,11 @@ void processingEdgeTypes::processEdgeType(int edgeTypeId) {
 		ofstream outputFile;
 		outputFile.open("outputGraph" + to_string(j) + ".txt", ios::app);
 
-		graphGenerator.processEdgeTypeSingleGraph(conf2, conf2.schema.edges.at(edgeTypeId), outputFile, j);
+		graphGenerator.processEdgeTypeSingleGraph(conf2, conf2.schema.edges.at(edgeType.edge_type_id), outputFile, j);
 
-		if (conf2.schema.edges[edgeTypeId].correlated_with.size() > 0) {
+		if (conf2.schema.edges[edgeType.edge_type_id].correlated_with.size() > 0) {
 			analyseCorrelation correlation(conf2);
-			correlation.analyze();
+			correlation.analyze(edgeType, j);
 		}
 	}
 }

@@ -137,11 +137,11 @@ vector<incrementalDeterministicGraphGenerator::edge2> analyseCorrelation::addEdg
 
 
 
-void analyseCorrelation::analyze() {
-	for (config::edge & edgeType: conf.schema.edges) {
-		if (edgeType.correlated_with.size() > 0) {
-			for (int i=0; i<conf.nb_graphs; i++) {
-				string basisFile = "outputGraph" + to_string(i) + ".txt";
+void analyseCorrelation::analyze(config::edge & edgeType, int graphNumber) {
+//	for (config::edge & edgeType: conf.schema.edges) {
+//		if (edgeType.correlated_with.size() > 0) {
+//			for (int i=0; i<conf.nb_graphs; i++) {
+				string basisFile = "outputGraph" + to_string(graphNumber) + ".txt";
 
 				// Similarity of basis
 				vector<incrementalDeterministicGraphGenerator::edge2> basisEdges = addEdges(basisFile, edgeType.correlated_with);
@@ -166,9 +166,9 @@ void analyseCorrelation::analyze() {
 				cout << "plot(simP, simQ, main=\"nbObjects(p) = 2*nbObjects(q)\", xlab=\"Similarity in edge-type p\", ylab=\"Similarity in edge-type q\", col=rgb(0,0,0,50,maxColorValue=255), pch=16)" << endl;
 				cout << "abline(lm(simQ~simP), col=\"blue\") # regression line (y~x)"  << endl;
 				cout << "cov(simP, simQ) / (sd(simP)*sd(simQ))" << endl << endl;
-			}
-		}
-	}
+//			}
+//		}
+//	}
 }
 
 

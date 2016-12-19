@@ -19,7 +19,7 @@ private:
 	vector<int> nb_nodes_per_graph;
 	string conf_file;
 
-	void processEdgeType(int edgeTypeId);
+	void processEdgeType(config::edge & edgeType);
 public:
 	processingEdgeTypes(config::config conf, vector<int> nb_nodes_per_graph, string conf_file);
 	virtual ~processingEdgeTypes();

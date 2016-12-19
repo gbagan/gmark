@@ -34,6 +34,7 @@ private:
 	int outDistrShift = 0;
 	int inDistrShift = 0;
 	int graphNumber = 0;
+	int generatedNumberOfEdges = 0;
 
 	config::config conf;
 	cumulativeDistributionUtils cumDistrUtils;
