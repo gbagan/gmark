@@ -15,12 +15,14 @@ namespace std {
 class analyseCorrelation {
 private:
 	config::config conf;
-	double calculateSimilarity(int n1, int n2, vector<incrementalDeterministicGraphGenerator::edge2> edges);
+	double calculateSimilarity(int n1, int n2, vector<incrementalDeterministicGraphGenerator::edge2> edges, int nbEdgeTypesInCorrelation);
 
 	void addBasisEdges();
 	vector<incrementalDeterministicGraphGenerator::edge2> addEdges(string fileName, vector<int> edgeTypeId);
 
-	void printSimilarities(int nodes, vector<incrementalDeterministicGraphGenerator::edge2> edges);
+	void printSimilarities(int nodes, vector<incrementalDeterministicGraphGenerator::edge2> edges, int nbEdgeTypesInCorrelation);
+
+	int findEdgeTypeId(int subjectId, int predicate, int objectId);
 public:
 	analyseCorrelation(config::config & conf);
 	virtual ~analyseCorrelation();

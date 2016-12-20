@@ -13,7 +13,8 @@
 namespace std {
 
 incrementalDeterministicGraphGenerator::incrementalDeterministicGraphGenerator() {
-	randomGenerator.seed(chrono::system_clock::now().time_since_epoch().count());
+//	randomGenerator.seed(chrono::system_clock::now().time_since_epoch().count());
+	randomGenerator.seed(22);
 }
 
 incrementalDeterministicGraphGenerator::~incrementalDeterministicGraphGenerator() {
@@ -378,6 +379,18 @@ void incrementalDeterministicGraphGenerator::generateEdges(config::edge & edgeTy
 	}
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
 void incrementalDeterministicGraphGenerator::incrementGraph(config::edge & edgeType) {
 	// Perform the shifting of the distribution as indecated by the user in the schema
 
@@ -406,7 +419,7 @@ void incrementalDeterministicGraphGenerator::incrementGraph(config::edge & edgeT
 		updateInterfaceConnectionsForZipfianDistributions(&nodes.second, edgeType.incoming_distrib, false);
 	}
 
-	double prob = 0.25;
+	double prob = 0.0;//0.25;
 	if (edgeType.correlated_with.size() == 0) {
 		generateEdges(edgeType, prob);
 	} else {
@@ -416,19 +429,40 @@ void incrementalDeterministicGraphGenerator::incrementGraph(config::edge & edgeT
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 void incrementalDeterministicGraphGenerator::generateCorrelatedEdges(config::edge & edgeType, double prob, vector<edge2> correlatedEdges) {
 	shuffle(correlatedEdges.begin(), correlatedEdges.end(), randomGenerator);
 
 	for (edge2 possibleEdge: correlatedEdges) {
-		if (nodes.first[possibleEdge.subjectIterationId].numberOfOpenInterfaceConnections > 0 &&
-				nodes.second[possibleEdge.objectIterationId].numberOfOpenInterfaceConnections > 0) {
+//		if (nodes.first[possibleEdge.subjectIterationId].numberOfOpenInterfaceConnections > 0 &&
+//				nodes.second[possibleEdge.objectIterationId].numberOfOpenInterfaceConnections > 0) {
 //			cout << "Add edge: " << possibleEdge.subjectIterationId << " - " << edgeType.predicate << " - " << possibleEdge.objectIterationId << endl;
 //			for (int i=0; i<nodes.second[possibleEdge.objectIterationId].numberOfOpenInterfaceConnections; i++) {
 			addEdge(nodes.first[possibleEdge.subjectIterationId], nodes.second[possibleEdge.objectIterationId], edgeType.predicate);
 //			}
-		}
+//		}
 	}
-	generateEdges(edgeType, prob);
+//	generateEdges(edgeType, prob);
 }
 
 void incrementalDeterministicGraphGenerator::addToMapping(vector<vector<int>> & mapping, int subject, int target) {
@@ -567,6 +601,20 @@ vector<vector<int>> incrementalDeterministicGraphGenerator::randomMapping(vector
 	return mapping;
 }
 
+
+int incrementalDeterministicGraphGenerator::findEdgeTypeId(int subjectId, int predicate, int objectId) {
+	int edgeTypeId = -1;
+	for (config::edge edgeType: conf.schema.edges) {
+		if (edgeType.subject_type == subjectId &&
+				edgeType.predicate == predicate &&
+				edgeType.object_type == objectId) {
+			edgeTypeId =  edgeType.edge_type_id;
+		}
+	}
+	return edgeTypeId;
+}
+
+
 vector<incrementalDeterministicGraphGenerator::edge2> incrementalDeterministicGraphGenerator::generateCorrelatedEdgeSet(config::edge & edgeType) {
 	// Define mapping
 	// Get edges that form the basis of the correlation
@@ -574,69 +622,86 @@ vector<incrementalDeterministicGraphGenerator::edge2> incrementalDeterministicGr
 
 	vector<edge2> correlatedEdges;
 
-	for (int edgeTypeId: edgeType.correlated_with) {
-		vector<int> subjectsOfMapping;
-		int targetNodesBasis = conf.types[conf.schema.edges[edgeTypeId].object_type].size;
-		for (int i=0; i<targetNodesBasis; i++) {
-			subjectsOfMapping.push_back(i);
+
+	// Object nodes from the basis of the correlation
+	vector<int> subjectsOfMapping;
+	for (int i=0; i<edgeType.correlated_with.size(); i++) {
+		int correlatedBasisEdgeTypeId = edgeType.correlated_with[i];
+		int objectType = conf.schema.edges[correlatedBasisEdgeTypeId].object_type;
+		int nbObjectNodes = conf.types[objectType].size;
+		for (int j=0; j<nbObjectNodes*edgeType.correlated_with.size(); j+=edgeType.correlated_with.size()) {
+			subjectsOfMapping.push_back(j+i);
 		}
+	}
 
-		vector<int> objectsOfMapping;
-		int nmOfObjects = conf.types[edgeType.object_type].size;
-		for (int i=0; i<nmOfObjects; i++) {
-			objectsOfMapping.push_back(i);
+	// Object nodes from the correlated edge-type
+	vector<int> objectsOfMapping;
+	int nmOfObjects = conf.types[edgeType.object_type].size;
+	for (int i=0; i<nmOfObjects; i++) {
+		objectsOfMapping.push_back(i);
+	}
+
+	mapping = randomMapping(subjectsOfMapping, objectsOfMapping);
+//	mapping = icPreservingMapping(subjectsOfMapping, objectsOfMapping, edgeTypeId);
+
+	// Print mapping:
+	for(int i=0; i<mapping.size(); i++) {
+		cout << "M(" << i % edgeType.correlated_with.size() << "-" << i / edgeType.correlated_with.size() << ", " << i << "): [";
+		for (int j=0; j<mapping[i].size(); j++) {
+			cout << mapping[i][j] << ",";
 		}
+		cout << "]" << endl;
+	}
 
-		vector<vector<int>> mapping = randomMapping(subjectsOfMapping, objectsOfMapping);
-//		vector<vector<int>> mapping = icPreservingMapping(subjectsOfMapping, objectsOfMapping, edgeTypeId);
+	string line;
+	ifstream outputfile("outputgraph" + to_string(graphNumber) + ".txt");
+	outputfile.clear();
+	outputfile.seekg(0, ios::beg);
+	if (outputfile.is_open()) {
+		int i = 0;
+		while (getline(outputfile,line)) {
+			i++;
+			if (i > generatedNumberOfEdges) {
+//				cout << "Line " << i << ": " << line << endl;
+				string subjectId = line.substr(0, line.find(" "));
+				int subjectType = stoi(subjectId.substr(0, subjectId.find("-")));
+				string subject = subjectId.substr(subjectId.find("-")+1, subjectId.length());
+//				cout << "SubjectType: " << subjectType << ". SubjectNumber: " << subject << endl;
 
-		// Print mapping:
-		for(int i=0; i<mapping.size(); i++) {
-			cout << i << ": [";
-			for (int j=0; j<mapping[i].size(); j++) {
-				cout << mapping[i][j] << ",";
-			}
-			cout << "]" << endl;
-		}
+				string temp = line.erase(0, line.find(" ")+1);
+				int predicate = stoi(temp.substr(0, temp.find(" ")));
+//				cout << "Predicate: " << predicate << endl;
 
-		string line;
-		ifstream outputfile("outputgraph" + to_string(graphNumber) + ".txt");
-		outputfile.clear();
-		outputfile.seekg(0, ios::beg);
-		if (outputfile.is_open()) {
-			int i = 0;
-			while (getline(outputfile,line)) {
-				i++;
-				if (i > generatedNumberOfEdges) {
-					cout << "Line " << i << ": " << line << endl;
-					string subjectId = line.substr(0, line.find(" "));
-					string subject = line.substr(line.find("-")+1, line.find(" "));
-					string temp = line.erase(0, line.find(" ")+1);
-					int predicate = stoi(temp.substr(0, temp.find(" ")));
-	//				cout << "Predicate: " << predicate << endl;
+				temp = temp.erase(0, line.find(" ")+1);
+				int objectType  = stoi(temp.substr(0, temp.find("-")));
+				int object = stoi(temp.substr(temp.find("-")+1, temp.length()));
+//				cout << "ObjectType: " << objectType << ". ObjectNumber: " << object << endl;
 
-					if (predicate == edgeTypeId) {
-						int object = stoi(temp.substr(temp.find("-")+1, temp.length()));
-						vector<int> mappedObjects = mapping[object];
-	//					cout << "Object found: " << object << endl;
-						for (int mappedObject: mappedObjects) {
-	//						cout << "Mapped to: " << mappedObject << endl;
-							edge2 possibleEdge;
-							possibleEdge.subjectIterationId = stoi(subject);
-							possibleEdge.subjectId = subjectId;
-							possibleEdge.predicate = to_string(edgeType.edge_type_id);
-							possibleEdge.objectIterationId = mappedObject;
-							possibleEdge.objectId = to_string(edgeType.object_type) + "-" + to_string(mappedObject);
+				int edgeTypeId = findEdgeTypeId(subjectType, predicate, objectType);
+				vector<int>::iterator index;
+				index = find(edgeType.correlated_with.begin(), edgeType.correlated_with.end(), edgeTypeId);
+				if (index != edgeType.correlated_with.end()) {
+//					cout << "Index: " << *index << endl;
+					vector<int> mappedObjects = mapping[*index + edgeType.correlated_with.size() * object];
+//					cout << "Object found: " << object << endl;
+					for (int mappedObject: mappedObjects) {
+//						cout << "Mapped to: " << mappedObject << endl;
+						edge2 possibleEdge;
+						possibleEdge.subjectIterationId = stoi(subject);
+						possibleEdge.subjectId = subjectId;
+						possibleEdge.predicate = to_string(edgeType.edge_type_id);
+						possibleEdge.objectIterationId = mappedObject;
+						possibleEdge.objectId = to_string(edgeType.object_type) + "-" + to_string(mappedObject);
 
-							correlatedEdges.push_back(possibleEdge);
-						}
+						correlatedEdges.push_back(possibleEdge);
 					}
 				}
 			}
-			generatedNumberOfEdges = i;
-			outputfile.close();
 		}
+		generatedNumberOfEdges = i;
+		outputfile.close();
 	}
+
 
 	return correlatedEdges;
 

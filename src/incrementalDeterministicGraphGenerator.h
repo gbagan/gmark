@@ -71,15 +71,17 @@ private:
 
 
 	// Correlation
+	vector<vector<int>> mapping;
+
 	vector<edge2> generateCorrelatedEdgeSet(config::edge & edgeType);
 
 	void generateCorrelatedEdges(config::edge & edgeType, double prob, vector<edge2> correlatedEdges);
-//	double calculateSimilarity(graphNode n1, graphNode n2, vector<edge2> edges);
 
 	vector<vector<int>> randomMapping(vector<int> subjects, vector<int> objects);
 	void addToMapping(vector<vector<int>> & mapping, int subject, int target);
 
 	vector<vector<int>> icPreservingMapping(vector<int> subjects, vector<int> objects, int correlatedETid);
+	int findEdgeTypeId(int subjectId, int predicate, int objectId);
 
 public:
 	incrementalDeterministicGraphGenerator();
