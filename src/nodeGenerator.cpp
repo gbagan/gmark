@@ -155,17 +155,17 @@ void nodeGenerator::addNode(config::edge & edgeType, int distrShift, bool addSou
 //
 //}
 
-void nodeGenerator::addSubjectNodes(config::edge & edgeType, int distrShift) {
+void nodeGenerator::addSubjectNodes(config::edge & edgeType, int distrShift, int graphNumber) {
 	int currentNumberOfSubjectNodes = nodes->first.size();
-	int totalNumberSubjectOfNodes = conf->types[edgeType.subject_type].size;
+	int totalNumberSubjectOfNodes = conf->types[edgeType.subject_type].size[graphNumber];
 	int subjectNodesToGenerate = totalNumberSubjectOfNodes - currentNumberOfSubjectNodes;
 	for (int i=0; i<subjectNodesToGenerate; i++) {
 		addNode(edgeType, distrShift, true);
 	}
 }
-void nodeGenerator::addObjectNodes(config::edge & edgeType, int distrShift) {
+void nodeGenerator::addObjectNodes(config::edge & edgeType, int distrShift, int graphNumber) {
 	int currentNumberOfObjectNodes = nodes->second.size();
-	int totalNumberObjectOfNodes = conf->types[edgeType.object_type].size;
+	int totalNumberObjectOfNodes = conf->types[edgeType.object_type].size[graphNumber];
 	int objectNodesToGenerate = totalNumberObjectOfNodes - currentNumberOfObjectNodes;
 	for (int i=0; i<objectNodesToGenerate; i++) {
 		addNode(edgeType, distrShift, false);

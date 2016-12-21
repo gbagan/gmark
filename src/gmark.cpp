@@ -125,7 +125,7 @@ void abstract_graph_writer::build_graph (config::config & conf, report::report &
     this->conf = &conf;
     size_t type = 0;
     for (auto & typeconfig : conf.types) {
-        add_vertices(type, typeconfig.size);
+        add_vertices(type, typeconfig.size[0]);
         type++;
     }
     
@@ -141,8 +141,8 @@ void abstract_graph_writer::build_graph (config::config & conf, report::report &
     }
     
     for (size_t predicate = 0; predicate < conf.predicates.size(); predicate++) {
-        if(created_edges[predicate] < conf.predicates[predicate].size) {
-            size_t nb_edges = conf.predicates[predicate].size - created_edges[predicate];
+        if(created_edges[predicate] < conf.predicates[predicate].size[0]) {
+            int nb_edges = conf.predicates[predicate].size[0] - created_edges[predicate];
             add_remaining_edges(predicate, nb_edges);
         }
     }
@@ -186,7 +186,7 @@ void ntriple_graph_writer::print_edge(size_t subject, size_t predicate, size_t o
 	*stream << alias;
     else
         *stream << predicate;
-    *stream << " 1-" << object-conf->nb_nodes/2 << "\n";
+    *stream << " 1-" << object-conf->nb_nodes[0]/2 << "\n";
     stream->flush();
 }
 }

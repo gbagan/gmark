@@ -38,47 +38,47 @@ void schem::add_edge(size_t subject_type, size_t predicate, size_t object_type, 
 
 
 void config::complete_config() {
-    complete_types_config();
+//    complete_types_config();
     complete_predicates_config();
 }
 
-void config::complete_types_config() {
-    size_t nb_not_allocated_nodes = nb_nodes;
-    size_t nb_not_allocated_types = 0;
-    size_t counter = 0;
-    for (auto & type : types) {
-        if (type.size > 0) {
-            nb_not_allocated_nodes -= type.size;
-        }
-        else {
-            nb_not_allocated_types++;
-        }
-    }
-    if (nb_not_allocated_types != 0) {
-        size_t average_nb_nodes = nb_not_allocated_nodes / nb_not_allocated_types;
-        if (node_distribution.type == DISTRIBUTION::UNDEFINED) {
-            node_distribution.type = DISTRIBUTION::NORMAL;
-        }
-        random_generator * gen = make_generator_with_mean(node_distribution.type, average_nb_nodes);
-        for (size_t i = 0; i < types.size()-1; i++) {
-            auto & type = types[i];
-            if (type.size == 0) {
-                type.size = gen->next();
-                counter += type.size;
-            }
-        }
-        auto & type = types[types.size()-1];
-        if (type.size == 0) {
-            if (counter < nb_not_allocated_nodes) {
-                type.size = nb_not_allocated_nodes - counter;
-            }
-            else {
-                type.size = gen->next();
-            }
-        }
-        delete gen;
-    }
-}
+//void config::complete_types_config() {
+//    size_t nb_not_allocated_nodes = nb_nodes;
+//    size_t nb_not_allocated_types = 0;
+//    size_t counter = 0;
+//    for (auto & type : types) {
+//        if (type.size > 0) {
+//            nb_not_allocated_nodes -= type.size;
+//        }
+//        else {
+//            nb_not_allocated_types++;
+//        }
+//    }
+//    if (nb_not_allocated_types != 0) {
+//        size_t average_nb_nodes = nb_not_allocated_nodes / nb_not_allocated_types;
+//        if (node_distribution.type == DISTRIBUTION::UNDEFINED) {
+//            node_distribution.type = DISTRIBUTION::NORMAL;
+//        }
+//        random_generator * gen = make_generator_with_mean(node_distribution.type, average_nb_nodes);
+//        for (size_t i = 0; i < types.size()-1; i++) {
+//            auto & type = types[i];
+//            if (type.size == 0) {
+//                type.size = gen->next();
+//                counter += type.size;
+//            }
+//        }
+//        auto & type = types[types.size()-1];
+//        if (type.size == 0) {
+//            if (counter < nb_not_allocated_nodes) {
+//                type.size = nb_not_allocated_nodes - counter;
+//            }
+//            else {
+//                type.size = gen->next();
+//            }
+//        }
+//        delete gen;
+//    }
+//}
 
 void config::complete_predicates_config() {
     

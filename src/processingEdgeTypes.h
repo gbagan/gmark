@@ -16,12 +16,12 @@ namespace std {
 class processingEdgeTypes {
 private:
 	config::config conf;
-	vector<int> nb_nodes_per_graph;
+//	vector<int> nb_nodes_per_graph;
 	string conf_file;
 
 	void processEdgeType(config::edge & edgeType);
 public:
-	processingEdgeTypes(config::config conf, vector<int> nb_nodes_per_graph, string conf_file);
+	processingEdgeTypes(config::config conf, string conf_file);
 	virtual ~processingEdgeTypes();
 
 	void sequentialProcessing();

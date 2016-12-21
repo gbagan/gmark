@@ -184,7 +184,7 @@ void analyseCorrelation::analyze(config::edge & edgeType, int graphNumber) {
 //				cout << endl << endl;
 
 				cout << "simP = c(";
-				printSimilarities(conf.types[edgeType.subject_type].size , basisEdges, edgeType.correlated_with.size());
+				printSimilarities(conf.types[edgeType.subject_type].size[graphNumber] , basisEdges, edgeType.correlated_with.size());
 				cout << ")" << endl;
 
 				// Similarity of generated edge-type
@@ -199,7 +199,7 @@ void analyseCorrelation::analyze(config::edge & edgeType, int graphNumber) {
 
 				cout << "# Generated correlated edge-type: " << endl;
 				cout << "simQ = c(";
-				printSimilarities(conf.types[edgeType.subject_type].size, correlatedEdges, 1);
+				printSimilarities(conf.types[edgeType.subject_type].size[graphNumber], correlatedEdges, 1);
 				cout << ")" << endl;
 
 				cout << "par(cex.main=1.8, cex.lab=1.5, cex.axis=1.5, col=\"black\")" << endl;

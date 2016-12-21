@@ -27,7 +27,7 @@ private:
     vector<size_t> nb_edges_by_type;
 
     vector<pair<size_t,size_t>> node_ranges_per_type;
-    vector<size_t> created_edges;
+    vector<int> created_edges;
     
     //unordered_map<size_t, unordered_map<size_t, unordered_set<size_t>>> neighbors;
     void add_random_edges1(config::edge & c_edge);

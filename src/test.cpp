@@ -57,7 +57,7 @@ void html_graph_report(config::config & conf, report::report & rep, ofstream & s
     stream << "var data = google.visualization.arrayToDataTable([\n";
     stream << "['Node type', 'Number of nodes'], \n";
     for (auto & type : conf.types) {
-        stream << "['" << type.alias << "', " << type.size << "],\n";
+        stream << "['" << type.alias << "', " << type.size[0] << "],\n";
     }
     stream << "]);\n";
     stream << "var options = {\n";
@@ -70,7 +70,7 @@ void html_graph_report(config::config & conf, report::report & rep, ofstream & s
     stream << "var data = google.visualization.arrayToDataTable([\n";
     stream << "['Node type', 'Number of nodes'], \n";
     for (auto & type : conf.types) {
-        stream << "['" << type.alias << "', " << type.size << "],\n";
+        stream << "['" << type.alias << "', " << type.size[0] << "],\n";
     }
     stream << "]);\n";
     stream << "var options = {\n";
@@ -85,8 +85,8 @@ void html_graph_report(config::config & conf, report::report & rep, ofstream & s
     stream << "['Predicate type', 'Number of predicates'], \n";
     for (auto & predicate : conf.predicates) {
         size_t size = 0;
-        if (conf.nb_edges > 0)
-            size = predicate.size;
+        if (conf.nb_edges[0] > 0)
+            size = predicate.size[0];
         else;
             size = predicate.proportion * rep.nb_edges;
         stream << "['" << predicate.alias << "', " << size << "],\n";
@@ -119,7 +119,7 @@ void html_graph_report(config::config & conf, report::report & rep, ofstream & s
     stream << "</script></head>\n";
     stream << "<body>\n";
     stream << "<table border=\"1\">\n";
-    stream << "<tr><td>Size</td><td width=\"600\">" << conf.nb_nodes << " nodes</td>";
+    stream << "<tr><td>Size</td><td width=\"600\">" << conf.nb_nodes[0] << " nodes</td>";
     stream << "<td width=\"600\">" << rep.nb_nodes << " nodes (" << rep.nb_edges << " edges)</td></tr>\n";
     stream << "<tr><td>Execution time</td><td></td><td>" << rep.exec_time << " seconds</td></tr>\n";
     stream << "<tr><td></td><td><div id=\"hist11\"/></td><td><div id=\"hist12\"/></td></tr>\n";
@@ -177,7 +177,7 @@ void creatRankFileZipf(config::config conf, string graphFileName) {
 //	vector<int> inDistr;
 
 	// Initialize outDistr-vector
-	for (int i=0; i<=conf.types[conf.schema.edges[0].subject_type].size; i++) {
+	for (int i=0; i<=conf.types[conf.schema.edges[0].subject_type].size[0]; i++) {
 		outDistr.push_back(0);
 	}
 
@@ -225,8 +225,8 @@ void creatRankFileZipf(config::config conf, string graphFileName) {
 	}
 	cout << "Maxdegree = " << max << endl;
 	ofstream rankFile, degreeFile;
-	string fname = "rankFileET0n" + to_string(conf.nb_nodes) + ".txt";
-	string fname2 = "rankFileET0n" + to_string(conf.nb_nodes) + "degree.txt";
+	string fname = "rankFileET0n" + to_string(conf.nb_nodes[0]) + ".txt";
+	string fname2 = "rankFileET0n" + to_string(conf.nb_nodes[0]) + "degree.txt";
 	rankFile.open (fname);
 	degreeFile.open (fname2);
 	for (int val: outDistr) {
@@ -243,7 +243,7 @@ void creatRankFileNonZipf(config::config conf, string graphFileName) {
 //	vector<int> inDistr;
 
 	// Initialize outDistr-vector
-	for (int i=0; i<conf.types[conf.schema.edges[0].subject_type].size; i++) {
+	for (int i=0; i<conf.types[conf.schema.edges[0].subject_type].size[0]; i++) {
 		outDistr.push_back(0);
 	}
 
@@ -284,7 +284,7 @@ void creatRankFileNonZipf(config::config conf, string graphFileName) {
 	}
 
 	ofstream rankFile;
-	rankFile.open("rankFileET0n" + to_string(conf.nb_nodes) + ".txt", ios::trunc);
+	rankFile.open("rankFileET0n" + to_string(conf.nb_nodes[0]) + ".txt", ios::trunc);
 	for (int currentNodeDegree: outDistr) {
 		int nodesWithLowerDegree = 0;
 		for (int compareNodeDegree: outDistr) {
@@ -341,7 +341,7 @@ int main(int argc, char ** argv) {
     
     size_t pos = 0;
     std::string token;
-    vector<int> nb_nodes_per_graph;
+    vector<unsigned int> nb_nodes_per_graph;
     while ((pos = nb_nodes_string.find("-")) != string::npos) {
     	token = nb_nodes_string.substr(0, pos);
 //        cout << "Found token: " << token << endl;
@@ -361,17 +361,20 @@ int main(int argc, char ** argv) {
 
     config::config conf;
     if (nb_nodes_per_graph.size() > 0) {
-        conf.nb_nodes = nb_nodes_per_graph[0];
+        for (int nb: nb_nodes_per_graph) {
+        	conf.nb_nodes[nb] = nb;
+        }
         conf.nb_graphs = nb_nodes_per_graph.size();
     }
     else {
-        conf.nb_nodes = 0;
+        conf.nb_nodes = {-1};
     }
     conf.print_alias = print_alias;
     
-    configparser::parse_config(conf_file, conf, 0);
-    
-//    cout << "complete config" << endl;
+    cout << "Parse config" << endl;
+    configparser::parse_config(conf_file, conf);
+
+    cout << "complete config" << endl;
     conf.complete_config();
 //    cout << "Number of graphs=" << conf.nb_graphs << endl;
 
@@ -418,7 +421,7 @@ int main(int argc, char ** argv) {
 	// ##Parallel##
 
 	// ##Sequential##
-    processingEdgeTypes processETs(conf, nb_nodes_per_graph, conf_file);
+    processingEdgeTypes processETs(conf, conf_file);
     processETs.sequentialProcessing();
 //	 ##Sequential##
 
@@ -450,7 +453,7 @@ int main(int argc, char ** argv) {
 //			conf2.nb_nodes = 0;
 //		}
 //
-//		configparser::parse_config(conf_file, conf2, i);
+//		configparser::parse_config(conf_file, conf2);
 //		conf2.complete_config();
 //    	report::report rep;
 //
@@ -534,7 +537,7 @@ int main(int argc, char ** argv) {
 //    analysisIncrDetGraph analyzeGraph("test.txt", conf);
 //    analyzeGraph.stability(0);
   	// #### ANALYSIS ####
-    for (int g=0; g<1; g++) {
+    for (int g=0; g<3; g++) {
     	cout << "g=" << g << endl;
     	string outpName = "outputGraph" + to_string(g) + ".txt";
     	analysisIncrDetGraph analyzeGraph(outpName, conf);
@@ -550,7 +553,7 @@ int main(int argc, char ** argv) {
 			rFile << "# Analysis of the distributions of edge-type: " << i << endl;
 			cout << "# Analysis of the distributions of edge-type: " << i << endl;
 	//       	analyzeGraph.distributionAnalysis2(e, rFile);
-			analyzeGraph.distributionAnalysis(e, rFileHulp);
+			analyzeGraph.distributionAnalysis(e, rFileHulp, g);
 
 			rFile << endl;
 

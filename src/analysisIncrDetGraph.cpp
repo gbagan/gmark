@@ -34,7 +34,7 @@ void analysisIncrDetGraph::numberOfEdgesVsNode() {
 	}
 	myfile.close();
 
-	cout << "Number of nodes in conf: " << conf.nb_nodes << endl;
+	cout << "Number of nodes in conf: " << conf.nb_nodes[0] << endl;
 	cout << "Number of edges generated: " << numberOfEdges << endl;
 }
 
@@ -73,7 +73,7 @@ void analysisIncrDetGraph::numberOfNodesAnalysis() {
 }
 
 
-void analysisIncrDetGraph::distributionAnalysis(config::edge edgeType, ofstream & rFile) {
+void analysisIncrDetGraph::distributionAnalysis(config::edge edgeType, ofstream & rFile, int graphNumber) {
 	cout << "\n\n-----Distribution analysis-----\n";
 //	cout << "EdgeType: " << to_string(edgeType) << endl;
 
@@ -112,8 +112,8 @@ void analysisIncrDetGraph::distributionAnalysis(config::edge edgeType, ofstream 
 	} else {
 		cout << "Unable to open file";
 	}
-	maxSubject = max(maxSubject, (int)conf.types[edgeType.subject_type].size-1);
-	maxObject = max(maxObject, (int)conf.types[edgeType.object_type].size-1);
+	maxSubject = max(maxSubject, (int)conf.types[edgeType.subject_type].size[graphNumber]-1);
+	maxObject = max(maxObject, (int)conf.types[edgeType.object_type].size[graphNumber]-1);
 
 //	cout << "MaxSubject: " << maxSubject << endl;
 //	cout << "MaxObject: " << maxObject << endl;
@@ -220,7 +220,7 @@ double calcMSE(vector<double> dataPdf, double alpha) {
 	return squareError;
 }
 
-void analysisIncrDetGraph::distributionAnalysis2(config::edge edgeType, ofstream & rFile) {
+void analysisIncrDetGraph::distributionAnalysis2(config::edge edgeType, ofstream & rFile, int graphNumber) {
 	cout << "\n\n-----Distribution analysis-----\n";
 //	cout << "EdgeType: " << to_string(edgeType) << endl;
 
@@ -259,8 +259,8 @@ void analysisIncrDetGraph::distributionAnalysis2(config::edge edgeType, ofstream
 	} else {
 		cout << "Unable to open file";
 	}
-	maxSubject = max(maxSubject, (int)conf.types[edgeType.subject_type].size-1);
-	maxObject = max(maxObject, (int)conf.types[edgeType.object_type].size-1);
+	maxSubject = max(maxSubject, (int)conf.types[edgeType.subject_type].size[graphNumber]-1);
+	maxObject = max(maxObject, (int)conf.types[edgeType.object_type].size[graphNumber]-1);
 
 //	cout << "MaxSubject: " << maxSubject << endl;
 //	cout << "MaxObject: " << maxObject << endl;

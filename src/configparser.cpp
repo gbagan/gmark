@@ -6,7 +6,7 @@
 
 namespace configparser {
 
-int parse_config(const string & filename, config::config & conf, int graph_number) {
+int parse_config(const string & filename, config::config & conf) {
     pugi::xml_document doc;
     pugi::xml_parse_result result = doc.load_file(filename.c_str());
 
@@ -23,25 +23,24 @@ int parse_config(const string & filename, config::config & conf, int graph_numbe
     	conf.nb_graphs = root.child("size").text().as_uint();
     }
 //    pugi::xml_node graph_node = root.child("graph");
-    unsigned int nodes;
-    unsigned int edges;
-    int i = 0;
-    for (pugi::xml_node graph_node : root.children("graph")) {
-    	if (i >= graph_number) {
-    		nodes = graph_node.child("nodes").text().as_uint();
-    		edges = graph_node.child("edges").text().as_uint();
-    		break;
-    	}
-    	i++;
-    }
-    
-    
-    if(conf.nb_nodes == 0) {
-        conf.nb_nodes = nodes;
+
+    if (conf.nb_nodes[0] == -1) {
+    	conf.nb_nodes.resize(conf.nb_graphs);
+    	conf.nb_edges.resize(conf.nb_graphs);
+
+    	int i = 0;
+		for (pugi::xml_node graph_node : root.children("graph")) {
+			if (i >= conf.nb_graphs) {
+				cout << "Number of graphs is greater than specified by the size" << endl;
+			}
+			conf.nb_nodes[i] = graph_node.child("nodes").text().as_uint();
+//			cout << "Graph " << i << ": " << conf.nb_nodes[i] << endl;
+			conf.nb_edges[i] = graph_node.child("edges").text().as_uint();
+			i++;
+		}
     }
 
     conf.input = filename;
-    conf.nb_edges = edges;
    
     pugi::xml_node predicates = root.child("predicates");
     if (!predicates.empty()) {
@@ -71,7 +70,7 @@ void parse_predicates(pugi::xml_node node, config::config & conf) {
     size_t size = node.child("size").text().as_uint();
     //cout << "predicates size: " << size << endl;
     conf.predicates.resize(size);
-    
+
     conf.predicate_distribution = parse_distribution(node.child("distribution"));
     
     for (pugi::xml_node alias_node : node.children("alias")) {
@@ -88,13 +87,16 @@ void parse_predicates(pugi::xml_node node, config::config & conf) {
     
     for (pugi::xml_node proportion_node : node.children("proportion")) {
         size_t id = proportion_node.attribute("symbol").as_uint();
+        conf.predicates[id].size.resize(conf.nb_graphs);
         double proportion = proportion_node.text().as_double();
         if (id < 0 || id >= size) {
             cerr << "id " << id << " is out of range" << endl;
             continue;
         }
         conf.predicates[id].proportion = proportion;
-        conf.predicates[id].size = (size_t) (proportion * conf.nb_edges);
+        for (int i=0; i<conf.nb_edges.size(); i++) {
+        	conf.predicates[id].size.push_back((int) (proportion * conf.nb_edges[i]));
+        }
     }
 }
 
@@ -115,31 +117,41 @@ void parse_types(pugi::xml_node node, config::config & conf) {
     }
     
     for (pugi::xml_node proportion_node : node.children("proportion")) {
-        size_t id = proportion_node.attribute("type").as_uint();
-        double proportion = proportion_node.text().as_double();
+    	size_t id = proportion_node.attribute("type").as_uint();
+    	conf.types[id].size.resize(conf.nb_graphs);
+
+    	double proportion = proportion_node.text().as_double();
         //cout << "proportion " << id << ", " << proportion  << endl;
         if (id < 0 || id >= size) {
             cerr << "id " << id << " is out of range" << endl;
             continue;
         }
-        conf.types[id].size = (size_t) (proportion * conf.nb_nodes);
+
+        for (int i=0; i<conf.nb_graphs; i++) {
+        	conf.types[id].size[i] = (size_t) (proportion * conf.nb_nodes[i]);
+        	if (proportion * conf.nb_nodes[i] > 0 && conf.types[id].size[i] == 0) {
+				conf.types[id].size[i] = 1;
+			}
+//        	cout << "i: " << i << ". Graphsize: " << conf.nb_nodes[i] << ": ";
+//        	cout << "Type " << conf.types[id].alias << ": " << conf.types[id].size[i] << endl;
+        }
         conf.types[id].scalable = true;
         conf.types[id].proportion = proportion;
-        
-        if (proportion * conf.nb_nodes > 0 &&  conf.types[id].size == 0) {
-            conf.types[id].size = 1;
-        }
     }
     
     for (pugi::xml_node fixed_node : node.children("fixed")) {
         size_t id = fixed_node.attribute("type").as_uint();
+        conf.types[id].size.resize(conf.nb_graphs);
+
         size_t size2 = fixed_node.text().as_uint();
         //cout << "fixed " << id << ", " << size  << endl;
         if (id < 0 || id >= size) {
             cerr << "id " << id << " is out of range" << endl;
             continue;
         }
-        conf.types[id].size = size2;
+        for (int i=0; i<conf.nb_graphs; i++) {
+        	conf.types[id].size[i] = size2;
+        }
         conf.types[id].scalable = false;
         conf.types[id].proportion = -1;
     }    

@@ -11,9 +11,8 @@
 
 namespace std {
 
-processingEdgeTypes::processingEdgeTypes(config::config conf_, vector<int> nb_nodes_per_graph_, string conf_file_) {
+processingEdgeTypes::processingEdgeTypes(config::config conf_, string conf_file_) {
 	this->conf = conf_;
-	this->nb_nodes_per_graph = nb_nodes_per_graph_;
 	this->conf_file = conf_file_;
 }
 
@@ -59,25 +58,25 @@ void processingEdgeTypes::processEdgeType(config::edge & edgeType) {
 	// For all different graph sizes
 	for (int j=0; j<conf.nb_graphs; j++) {
 		// Update config for the right number of nodes
-		config::config conf2;
-		if (nb_nodes_per_graph.size() > j) {
-			conf2.nb_nodes = nb_nodes_per_graph[j];
-		} else {
-			conf2.nb_nodes = 0;
-		}
+//		config::config conf2;
+//		if (nb_nodes_per_graph.size() > j) {
+//			conf2.nb_nodes = nb_nodes_per_graph[j];
+//		} else {
+//			conf2.nb_nodes = 0;
+//		}
 		// Parse the configuration
-		configparser::parse_config(conf_file, conf2, j);
-		conf2.complete_config();
-		conf2.nb_graphs = conf.nb_graphs;
+//		configparser::parse_config(conf_file, conf2, j);
+//		conf2.complete_config();
+//		conf2.nb_graphs = conf.nb_graphs;
 
 		// Define the output file
 		ofstream outputFile;
 		outputFile.open("outputGraph" + to_string(j) + ".txt", ios::app);
 
-		graphGenerator.processEdgeTypeSingleGraph(conf2, conf2.schema.edges.at(edgeType.edge_type_id), outputFile, j);
+		graphGenerator.processEdgeTypeSingleGraph(conf, conf.schema.edges.at(edgeType.edge_type_id), outputFile, j);
 
-		if (conf2.schema.edges[edgeType.edge_type_id].correlated_with.size() > 0) {
-			analyseCorrelation correlation(conf2);
+		if (conf.schema.edges[edgeType.edge_type_id].correlated_with.size() > 0) {
+			analyseCorrelation correlation(conf);
 			correlation.analyze(edgeType, j);
 		}
 	}

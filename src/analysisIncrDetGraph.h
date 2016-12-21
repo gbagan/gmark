@@ -27,8 +27,8 @@ public:
 	virtual ~analysisIncrDetGraph();
 
 	void numberOfNodesAnalysis();
-	void distributionAnalysis(config::edge edgeType, ofstream & rFile);
-	void distributionAnalysis2(config::edge edgeType, ofstream & rFile);
+	void distributionAnalysis(config::edge edgeType, ofstream & rFile, int graphNumber);
+	void distributionAnalysis2(config::edge edgeType, ofstream & rFile, int graphNumber);
 	void numberOfEdgesVsNode();
 //	void zipfianPosAnalysis(int egdeTypeId, bool outDistr);
 //	void zipfianPosAnalysis();

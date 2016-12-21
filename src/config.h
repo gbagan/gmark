@@ -12,18 +12,18 @@ using namespace std;
 class type {
 public:
     string alias;
-    size_t size;
+    vector<size_t> size;
     bool scalable;
     double proportion;
 
     type () {
         alias = "";
-        size = 0;
+        size.push_back(0);
         scalable = true;
         proportion = 0.0;
     }
     
-    type (const string & alias_, size_t size_, bool scalable_, double proportion_) {
+    type (const string & alias_, vector<size_t> size_, bool scalable_, double proportion_) {
         alias = alias_;
         size = size_;
         scalable = scalable_;
@@ -34,16 +34,16 @@ public:
 class predicate {
 public:
    string alias;
-   size_t size;
+   vector<int> size;
    double proportion;
    
    predicate () {
        alias = "";
-       size = 0;
+       size.push_back(0);
        proportion = 0;
    }
   
-   predicate (const string & alias_, size_t size_, double proportion_) {
+   predicate (const string & alias_, vector<int> size_, double proportion_) {
         alias = alias_;
         size = size_;
         proportion = proportion_;
@@ -139,8 +139,8 @@ class config {
 public:
 	size_t nb_graphs;
     string input;
-    size_t nb_nodes;
-    size_t nb_edges;
+    vector<int> nb_nodes;
+    vector<size_t> nb_edges;
     vector<type> types;
     distribution node_distribution;     
     vector<predicate> predicates;
@@ -151,7 +151,7 @@ public:
     bool print_alias;    
 
     void complete_config();
-    void complete_types_config();
+//    void complete_types_config();
     void complete_predicates_config();
 };
 
