@@ -126,7 +126,7 @@ void incrementalDeterministicGraphGenerator::performOutDistributionShift(config:
 	int incr = floor(newMeanOutDistr - meanOutDistr);
 
 	if (incr > 0) {
-		cout << "Shift out-distrib with: " << incr << endl;
+//		cout << "Shift out-distrib with: " << incr << endl;
 		outDistrShift += incr;
 		for (graphNode & n: nodes.first) {
 			n.incrementInterfaceConnectionsByN(incr);
@@ -142,7 +142,7 @@ void incrementalDeterministicGraphGenerator::performInDistributionShift(config::
 	int incr = floor(newMeanInDistr - meanInDistr);
 
 	if (incr > 0) {
-		cout << "Shift in-distrib with: " << incr << endl;
+//		cout << "Shift in-distrib with: " << incr << endl;
 		inDistrShift += incr;
 		for (graphNode & n: nodes.second) {
 			n.incrementInterfaceConnectionsByN(incr);
@@ -302,9 +302,9 @@ void incrementalDeterministicGraphGenerator::performFixingShiftForZipfian(config
 		int diff = subjectNodeIdVector.size() - objectNodeIdVector.size();
 		int incr = diff / conf.types[edgeType.object_type].size[graphNumber];
 		if (incr > 0) {
-			cout << "Shift in-distr after vector gen: " << incr << endl;
+//			cout << "Shift in-distr after vector gen: " << incr << endl;
 			inDistrShift += incr;
-			cout << "inDistrShift: " << inDistrShift << endl;
+//			cout << "inDistrShift: " << inDistrShift << endl;
 			for (graphNode & n: nodes.second) {
 				n.incrementInterfaceConnectionsByN(incr);
 				n.incrementOpenInterfaceConnectionsByN(incr);
@@ -581,22 +581,14 @@ void incrementalDeterministicGraphGenerator::randomMapping(vector<int> subjects,
 
 	if (subjects.size() > objects.size()) {
 		shuffle(subjects.begin(), subjects.end(), randomGenerator);
-		for (int i=0; i<objects.size(); i++) {
-			addToMapping(subjects[i], objects[i]);
-		}
-		for (int i=objects.size(); i<subjects.size(); i++) {
-			int randomObject = uniformDistr(randomGenerator) * objects.size();
-			addToMapping(subjects[i], objects[randomObject]);
+		for (int i=0; i<subjects.size(); i++) {
+			addToMapping(subjects[i], objects[i % objects.size()]);
 		}
 	} else {
 		// Bijective when sizes are equal
 		shuffle(objects.begin(), objects.end(), randomGenerator);
-		for (int i=0; i<subjects.size(); i++) {
-			addToMapping(subjects[i], objects[i]);
-		}
-		for (int i=subjects.size(); i<objects.size(); i++) {
-			int randomSubject = uniformDistr(randomGenerator) * subjects.size();
-			addToMapping(subjects[randomSubject], objects[i]);
+		for (int i=0; i<objects.size(); i++) {
+			addToMapping(subjects[i % subjects.size()], objects[i]);
 		}
 	}
 }
@@ -734,7 +726,7 @@ int incrementalDeterministicGraphGenerator::processEdgeTypeSingleGraph(config::c
 
 	this->conf = configuration;
 	this->graphNumber = graphNumber_;
-	cout << "\n\n-----------GraphNumber: " << graphNumber << ". Edge-type: " << edgeType.edge_type_id << "--------------" << endl;
+//	cout << "\n\n-----------GraphNumber: " << graphNumber << ". Edge-type: " << edgeType.edge_type_id << "--------------" << endl;
 //	cout << "Number of nodes: " << conf.nb_nodes[graphNumber] << endl;
 
 	if (edgeType.outgoing_distrib.type == DISTRIBUTION::ZIPFIAN && outDistrShift == 0) {
@@ -747,7 +739,7 @@ int incrementalDeterministicGraphGenerator::processEdgeTypeSingleGraph(config::c
 	if (graphNumber == 0 &&
 			edgeType.outgoing_distrib.type != DISTRIBUTION::ZIPFIAN &&
 			edgeType.incoming_distrib.type != DISTRIBUTION::ZIPFIAN) {
-			fixSchemaInequality(edgeType);
+//			fixSchemaInequality(edgeType);
 	}
 
 	nodeGen = nodeGenerator(edgeType, nodes.first.size(), nodes.second.size(), &randomGenerator, &nodes, &conf);

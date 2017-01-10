@@ -22,7 +22,6 @@ processingEdgeTypes::~processingEdgeTypes() {
 
 void processingEdgeTypes::sequentialProcessing() {
 	// Delete the output graphs
-	auto runningTime = 0;
 	for (int i=0; i<conf.nb_graphs; i++) {
 		string file = "outputGraph" + to_string(i) + ".txt";
 		const char * fileChar = file.c_str();
@@ -48,8 +47,6 @@ void processingEdgeTypes::sequentialProcessing() {
 //		cout << "Processing edge-type " << i << endl;
 		processEdgeType(edgeType);
 	}
-
-	cout << runningTime << ", ";
 }
 
 void processingEdgeTypes::processEdgeType(config::edge & edgeType) {
