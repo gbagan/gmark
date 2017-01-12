@@ -333,7 +333,7 @@ void incrementalDeterministicGraphGenerator::generateEdges(config::edge & edgeTy
 		shuffle(objectNodeIdVector.begin(), objectNodeIdVector.end(), randomGenerator);
 
 
-		for (int i=0; i<min(subjectNodeIdVector.size(), objectNodeIdVector.size()); i++) {
+		for (size_t i=0; i<min(subjectNodeIdVector.size(), objectNodeIdVector.size()); i++) {
 			addEdge(nodes.first[subjectNodeIdVector[i]], nodes.second[objectNodeIdVector[i]], edgeType.predicate);
 		}
 	} else {
@@ -350,11 +350,11 @@ void incrementalDeterministicGraphGenerator::generateEdges(config::edge & edgeTy
 
 		// Add the difference in the lastOne-vector to the minusOne-vector
 		if (subjectNodeIdVectorLastOne.size() > objectNodeIdVectorLastOne.size()) {
-			for (int i=objectNodeIdVectorLastOne.size(); i<subjectNodeIdVectorLastOne.size(); i++) {
+			for (size_t i=objectNodeIdVectorLastOne.size(); i<subjectNodeIdVectorLastOne.size(); i++) {
 				subjectNodeIdVectorMinusOne.push_back(subjectNodeIdVectorLastOne[i]);
 			}
 		} else {
-			for (int i=subjectNodeIdVectorLastOne.size(); i<objectNodeIdVectorLastOne.size(); i++) {
+			for (size_t i=subjectNodeIdVectorLastOne.size(); i<objectNodeIdVectorLastOne.size(); i++) {
 				objectNodeIdVectorMinusOne.push_back(objectNodeIdVectorLastOne[i]);
 			}
 		}
@@ -367,11 +367,11 @@ void incrementalDeterministicGraphGenerator::generateEdges(config::edge & edgeTy
 
 
 		// Create edges
-		for (int i=0; i<min(subjectNodeIdVectorMinusOne.size(), objectNodeIdVectorMinusOne.size()); i++) {
+		for (size_t i=0; i<min(subjectNodeIdVectorMinusOne.size(), objectNodeIdVectorMinusOne.size()); i++) {
 			addEdge(nodes.first[subjectNodeIdVectorMinusOne[i]], nodes.second[objectNodeIdVectorMinusOne[i]], edgeType.predicate);
 		}
 
-		for (int i=0; i<min(subjectNodeIdVectorLastOne.size(), objectNodeIdVectorLastOne.size()); i++) {
+		for (size_t i=0; i<min(subjectNodeIdVectorLastOne.size(), objectNodeIdVectorLastOne.size()); i++) {
 			double randomValue = uniformDistr(randomGenerator);
 			if (randomValue > prob) {
 				addEdge(nodes.first[subjectNodeIdVectorLastOne[i]], nodes.second[objectNodeIdVectorLastOne[i]], edgeType.predicate);
@@ -483,7 +483,7 @@ vector<vector<int>> incrementalDeterministicGraphGenerator::icPreservingMapping(
 	// Get the degree of all nodes
 	vector<int> inDistr(subjects.size());
 	// Initialize outDistr-vector
-	for (int i=0; i<subjects.size(); i++) {
+	for (size_t i=0; i<subjects.size(); i++) {
 		inDistr.push_back(0);
 	}
 
@@ -509,7 +509,7 @@ vector<vector<int>> incrementalDeterministicGraphGenerator::icPreservingMapping(
 				string getObj = getPred.erase(0, getPred.find("-")+1);
 				string object = getObj.substr(0, getObj.length());
 
-				if (stoi(objectType) == conf.schema.edges[correlatedETid].object_type && stoi(subjectType) == conf.schema.edges[correlatedETid].subject_type) {
+				if (stoul(objectType) == conf.schema.edges[correlatedETid].object_type && stoul(subjectType) == conf.schema.edges[correlatedETid].subject_type) {
 					inDistr.at(stoi(object))++;
 				}
 			}
@@ -525,7 +525,7 @@ vector<vector<int>> incrementalDeterministicGraphGenerator::icPreservingMapping(
 //	}
 
 	vector<pair<int,int>> degreeNodeIdPairSubjects(subjects.size());
-	for (int i=0; i<subjects.size(); i++) {
+	for (size_t i=0; i<subjects.size(); i++) {
 		degreeNodeIdPairSubjects[i] = make_pair(inDistr[i], i);
 	}
 	sort(degreeNodeIdPairSubjects.begin(), degreeNodeIdPairSubjects.end(), pairCompare);
@@ -539,7 +539,7 @@ vector<vector<int>> incrementalDeterministicGraphGenerator::icPreservingMapping(
 //		cout << "Degree of object node" << i << ": " <<  nodes.second[i].numberOfInterfaceConnections << endl;
 //	}
 	vector<pair<int,int>> degreeNodeIdPairObjects(objects.size());
-	for (int i=0; i<objects.size(); i++) {
+	for (size_t i=0; i<objects.size(); i++) {
 		degreeNodeIdPairObjects[i] = make_pair(nodes.second[i].numberOfInterfaceConnections, i);
 	}
 	sort(degreeNodeIdPairObjects.begin(), degreeNodeIdPairObjects.end(), pairCompare);
@@ -549,18 +549,18 @@ vector<vector<int>> incrementalDeterministicGraphGenerator::icPreservingMapping(
 
 
 
-	for (int i=0; i<min(degreeNodeIdPairSubjects.size(), degreeNodeIdPairObjects.size()); i++) {
+	for (size_t i=0; i<min(degreeNodeIdPairSubjects.size(), degreeNodeIdPairObjects.size()); i++) {
 //		cout << "Add mapping: " << degreeNodeIdPairSubjects[i].second << " -> " << degreeNodeIdPairObjects[i].second << endl;
 		addToMapping(degreeNodeIdPairSubjects[i].second, degreeNodeIdPairObjects[i].second);
 	}
 
 	if (degreeNodeIdPairSubjects.size() > degreeNodeIdPairObjects.size()) {
-		for (int i=degreeNodeIdPairObjects.size(); i<degreeNodeIdPairSubjects.size(); i++) {
+		for (size_t i=degreeNodeIdPairObjects.size(); i<degreeNodeIdPairSubjects.size(); i++) {
 //			cout << "Add mapping: " << degreeNodeIdPairSubjects[i].second << " -> " << degreeNodeIdPairObjects[i-degreeNodeIdPairObjects.size()].second << endl;
 			addToMapping(degreeNodeIdPairSubjects[i].second, uniformDistr(randomGenerator)*objects.size());
 		}
 	} else {
-		for (int i=degreeNodeIdPairSubjects.size(); i<degreeNodeIdPairObjects.size(); i++) {
+		for (size_t i=degreeNodeIdPairSubjects.size(); i<degreeNodeIdPairObjects.size(); i++) {
 //			cout << "Add mapping: " << degreeNodeIdPairSubjects[i-degreeNodeIdPairSubjects.size()].second << " -> " << degreeNodeIdPairObjects[i].second << endl;
 			addToMapping(uniformDistr(randomGenerator)*subjects.size(), degreeNodeIdPairObjects[i].second);
 		}
@@ -582,13 +582,13 @@ void incrementalDeterministicGraphGenerator::randomMapping(vector<int> subjects,
 
 	if (subjects.size() > objects.size()) {
 		shuffle(subjects.begin(), subjects.end(), randomGenerator);
-		for (int i=0; i<subjects.size(); i++) {
+		for (size_t i=0; i<subjects.size(); i++) {
 			addToMapping(subjects[i], objects[i % objects.size()]);
 		}
 	} else {
 		// Bijective when sizes are equal
 		shuffle(objects.begin(), objects.end(), randomGenerator);
-		for (int i=0; i<objects.size(); i++) {
+		for (size_t i=0; i<objects.size(); i++) {
 			addToMapping(subjects[i % subjects.size()], objects[i]);
 		}
 	}
@@ -598,9 +598,9 @@ void incrementalDeterministicGraphGenerator::randomMapping(vector<int> subjects,
 int incrementalDeterministicGraphGenerator::findEdgeTypeId(int subjectId, int predicate, int objectId) {
 	int edgeTypeId = -1;
 	for (config::edge edgeType: conf.schema.edges) {
-		if (edgeType.subject_type == subjectId &&
-				edgeType.predicate == predicate &&
-				edgeType.object_type == objectId) {
+		if ((int)edgeType.subject_type == subjectId &&
+				(int)edgeType.predicate == predicate &&
+				(int)edgeType.object_type == objectId) {
 			edgeTypeId =  edgeType.edge_type_id;
 		}
 	}
@@ -618,9 +618,9 @@ vector<incrementalDeterministicGraphGenerator::edge2> incrementalDeterministicGr
 
 	// Object nodes from the basis of the correlation
 	vector<int> subjectsOfMapping;
-	int minSubject;
-	int maxSubject;
-	for (int i=0; i<edgeType.correlated_with.size(); i++) {
+	size_t minSubject;
+	size_t maxSubject;
+	for (size_t i=0; i<edgeType.correlated_with.size(); i++) {
 		int correlatedBasisEdgeTypeId = edgeType.correlated_with[i];
 		int objectType = conf.schema.edges[correlatedBasisEdgeTypeId].object_type;
 
@@ -662,9 +662,9 @@ vector<incrementalDeterministicGraphGenerator::edge2> incrementalDeterministicGr
 
 	// Print mapping:
 	cout << "After" << endl;
-	for(int i=0; i<mapping.size(); i++) {
+	for(size_t i=0; i<mapping.size(); i++) {
 		cout << "M(" << i % edgeType.correlated_with.size() << "-" << i / edgeType.correlated_with.size() << ", " << i << "): [";
-		for (int j=0; j<mapping[i].size(); j++) {
+		for (size_t j=0; j<mapping[i].size(); j++) {
 			cout << mapping[i][j] << ",";
 		}
 		cout << "]" << endl;
@@ -768,7 +768,7 @@ int incrementalDeterministicGraphGenerator::processEdgeTypeSingleGraph(config::c
 	// Materialize the edge
 //	string outputBuffer = "";
 //	cout << "Number of edges: " << edges.size() << endl;
-	for (int i=0; i<edges.size(); i++) {
+	for (size_t i=0; i<edges.size(); i++) {
 		edge2 e = edges[i];
 		string edgeString = e.subjectId + " " + e.predicate + " " + e.objectId;
 
