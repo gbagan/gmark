@@ -633,7 +633,7 @@ vector<incrementalDeterministicGraphGenerator::edge2> incrementalDeterministicGr
 		}
 		cout << "Min subj: " << minSubject / edgeType.correlated_with.size() << endl;
 		cout << "Max subj: " << maxSubject / edgeType.correlated_with.size() << endl;
-		for (int j=minSubject; j<maxSubject; j+=edgeType.correlated_with.size()) {
+		for (size_t j=minSubject; j<maxSubject; j+=edgeType.correlated_with.size()) {
 			subjectsOfMapping.push_back(j+i);
 		}
 	}
