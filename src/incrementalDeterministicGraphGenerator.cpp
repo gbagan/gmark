@@ -7,6 +7,7 @@
 
 #include <vector>
 #include <algorithm>    // std::set_intersection, std::sort
+#include <chrono>
 #include "incrementalDeterministicGraphGenerator.h"
 #include "graphNode.h"
 
