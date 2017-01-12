@@ -177,7 +177,7 @@ void creatRankFileZipf(config::config conf, string graphFileName) {
 //	vector<int> inDistr;
 
 	// Initialize outDistr-vector
-	for (int i=0; i<=conf.types[conf.schema.edges[0].subject_type].size[0]; i++) {
+	for (size_t i=0; i <= conf.types[conf.schema.edges[0].subject_type].size[0]; i++) {
 		outDistr.push_back(0);
 	}
 
@@ -243,7 +243,7 @@ void creatRankFileNonZipf(config::config conf, string graphFileName) {
 //	vector<int> inDistr;
 
 	// Initialize outDistr-vector
-	for (int i=0; i<conf.types[conf.schema.edges[0].subject_type].size[0]; i++) {
+	for (size_t i=0; i<conf.types[conf.schema.edges[0].subject_type].size[0]; i++) {
 		outDistr.push_back(0);
 	}
 
@@ -339,7 +339,7 @@ int main(int argc, char ** argv) {
         }
     }
     
-    size_t pos = 0;
+    int pos = 0;
     std::string token;
     vector<unsigned int> nb_nodes_per_graph;
     while ((pos = nb_nodes_string.find("-")) != string::npos) {
@@ -447,7 +447,7 @@ int main(int argc, char ** argv) {
 
 
       chrono::high_resolution_clock::time_point start = chrono::high_resolution_clock::now();
-      for (int i=0; i<conf.nb_graphs; i++) {
+      for (size_t i=0; i<conf.nb_graphs; i++) {
 //    	  cout << "i: " << i << endl;
 //    	cout << "Processing graph " << i << endl;
     	config::config conf2;
