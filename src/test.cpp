@@ -342,7 +342,7 @@ int main(int argc, char ** argv) {
     int pos = 0;
     std::string token;
     vector<unsigned int> nb_nodes_per_graph;
-    while ((pos = nb_nodes_string.find("-")) != string::npos) {
+    while ((pos = nb_nodes_string.find("-")) != (int)string::npos) {
     	token = nb_nodes_string.substr(0, pos);
 //        cout << "Found token: " << token << endl;
         if (token.compare("") == 0) {
