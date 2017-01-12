@@ -727,7 +727,7 @@ int incrementalDeterministicGraphGenerator::processEdgeTypeSingleGraph(config::c
 
 	this->conf = configuration;
 	this->graphNumber = graphNumber_;
-	cout << "\n\n-----------GraphNumber: " << graphNumber << ". Edge-type: " << edgeType.edge_type_id << "--------------" << endl;
+//	cout << "\n\n-----------GraphNumber: " << graphNumber << ". Edge-type: " << edgeType.edge_type_id << "--------------" << endl;
 //	cout << "Number of nodes: " << conf.nb_nodes[graphNumber] << endl;
 
 	if (edgeType.outgoing_distrib.type == DISTRIBUTION::ZIPFIAN && outDistrShift == 0) {

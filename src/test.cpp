@@ -371,12 +371,12 @@ int main(int argc, char ** argv) {
     }
     conf.print_alias = print_alias;
     
-    cout << "Parse config" << endl;
+//    cout << "Parse config" << endl;
     configparser::parse_config(conf_file, conf);
 
-    cout << "complete config" << endl;
+//    cout << "complete config" << endl;
     conf.complete_config();
-    cout << "Number of graphs=" << conf.nb_graphs << endl;
+//    cout << "Number of graphs=" << conf.nb_graphs << endl;
 
 //    cout << "Config file: " << conf_file << endl;
 
