@@ -421,14 +421,14 @@ int main(int argc, char ** argv) {
 	// ##Parallel##
 
 	// ##Sequential##
-    chrono::high_resolution_clock::time_point start = chrono::high_resolution_clock::now();
-
-    processingEdgeTypes processETs(conf, conf_file);
-    processETs.sequentialProcessing();
-
-    chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
-    auto duration = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
-	cout << duration << ", ";
+//    chrono::high_resolution_clock::time_point start = chrono::high_resolution_clock::now();
+//
+//    processingEdgeTypes processETs(conf, conf_file);
+//    processETs.sequentialProcessing();
+//
+//    chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
+//    auto duration = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
+//	cout << duration << ", ";
 //	 ##Sequential##
 
 
@@ -446,40 +446,40 @@ int main(int argc, char ** argv) {
 
 
 
-//      chrono::high_resolution_clock::time_point start = chrono::high_resolution_clock::now();
-//      for (size_t i=0; i<conf.nb_graphs; i++) {
-////    	  cout << "i: " << i << endl;
-////    	cout << "Processing graph " << i << endl;
-//    	config::config conf2;
-////    	cout << "i: " << i << endl;
-//    	if (nb_nodes_per_graph.size() > i) {
-//    		conf2.nb_nodes.push_back(nb_nodes_per_graph[i]);
-//		} else {
-//			conf2.nb_nodes.push_back(-1);
-//		}
-//    	conf2.nb_graphs = conf.nb_graphs;
-//
-//		configparser::parse_config(conf_file, conf2);
-//		conf2.complete_config();
-//    	report::report rep;
-//
-//        ofstream graph_stream;
-//        string fileName = "outputGraph" + to_string(i) + ".txt";
-//        graph_stream.open(fileName);
-////        cout << "graph generation" << endl;
-//        graph::ntriple_graph_writer writer(graph_stream);
-//
-//        writer.build_graph(conf2, rep);
-////        creatRankFileZipf(conf2, fileName);
-////        creatRankFileNonZipf(conf2, fileName);
-//      }
-//	chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
-//	auto durationWithMaterialize = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
-//	cout << durationWithMaterialize << ", ";
+      chrono::high_resolution_clock::time_point start = chrono::high_resolution_clock::now();
+      for (size_t i=0; i<conf.nb_graphs; i++) {
+//    	  cout << "i: " << i << endl;
+//    	cout << "Processing graph " << i << endl;
+    	config::config conf2;
+//    	cout << "i: " << i << endl;
+    	if (nb_nodes_per_graph.size() > i) {
+    		conf2.nb_nodes.push_back(nb_nodes_per_graph[i]);
+		} else {
+			conf2.nb_nodes.push_back(-1);
+		}
+    	conf2.nb_graphs = conf.nb_graphs;
+
+		configparser::parse_config(conf_file, conf2);
+		conf2.complete_config();
+    	report::report rep;
+
+        ofstream graph_stream;
+        string fileName = "outputGraph" + to_string(i) + ".txt";
+        graph_stream.open(fileName);
+//        cout << "graph generation" << endl;
+        graph::ntriple_graph_writer writer(graph_stream);
+
+        writer.build_graph(conf2, rep);
+//        creatRankFileZipf(conf2, fileName);
+//        creatRankFileNonZipf(conf2, fileName);
+      }
+	chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
+	auto durationWithMaterialize = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
+	cout << durationWithMaterialize << ", ";
 
 
 //	for (int i=0; i<=100000000; i+=100000000/10) {
-//		cout << "./src/test -c use-cases/test.xml -n " << i/10 << "-" << 2*i/10 << "-" << 3*i/10 << "-" << 4*i/10 << "-" << 5*i/10 <<  "-" << 6*i/10 << "-" << 7*i/10 << "-" << 8*i/10 << "-" << 9*i/10 << "-" << 10*i/10 <<endl;
+//		cout << "./src/test -c use-cases/test.xml -n " << i/20 << "-" << 2*i/20 << "-" << 3*i/20 << "-" << 4*i/20 << "-" << 5*i/20 <<  "-" << 6*i/20 << "-" << 7*i/20 << "-" << 8*i/20 << "-" << 9*i/20 << "-" << 10*i/20 << "-" << 11*i/20 << "-" << 12*i/20 << "-" << 13*i/20 << "-" << 14*i/20 << "-" << 15*i/20 << "-" << 16*i/20 << "-" << 17*i/20 << "-" << 18*i/20 << "-" << 19*i/20 << "-" << 20*i/20 <<endl;
 ////		cout << "./src/test -c use-cases/test.xml -n " << i <<endl;
 //	}
 
