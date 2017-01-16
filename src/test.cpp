@@ -421,14 +421,14 @@ int main(int argc, char ** argv) {
 	// ##Parallel##
 
 	// ##Sequential##
-    chrono::high_resolution_clock::time_point start = chrono::high_resolution_clock::now();
-
-    processingEdgeTypes processETs(conf, conf_file);
-    processETs.sequentialProcessing();
-
-    chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
-    auto duration = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
-	cout << duration << ", ";
+//    chrono::high_resolution_clock::time_point start = chrono::high_resolution_clock::now();
+//
+//    processingEdgeTypes processETs(conf, conf_file);
+//    processETs.sequentialProcessing();
+//
+//    chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
+//    auto duration = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
+//	cout << duration << ", ";
 //	 ##Sequential##
 
 
@@ -446,36 +446,36 @@ int main(int argc, char ** argv) {
 
 
 
-//      chrono::high_resolution_clock::time_point start = chrono::high_resolution_clock::now();
-//      for (size_t i=0; i<conf.nb_graphs; i++) {
-////    	  cout << "i: " << i << endl;
-////    	cout << "Processing graph " << i << endl;
-//    	config::config conf2;
-////    	cout << "i: " << i << endl;
-//    	if (nb_nodes_per_graph.size() > i) {
-//    		conf2.nb_nodes.push_back(nb_nodes_per_graph[i]);
-//		} else {
-//			conf2.nb_nodes.push_back(-1);
-//		}
-//    	conf2.nb_graphs = conf.nb_graphs;
-//
-//		configparser::parse_config(conf_file, conf2);
-//		conf2.complete_config();
-//    	report::report rep;
-//
-//        ofstream graph_stream;
-//        string fileName = "outputGraph" + to_string(i) + ".txt";
-//        graph_stream.open(fileName);
-////        cout << "graph generation" << endl;
-//        graph::ntriple_graph_writer writer(graph_stream);
-//
-//        writer.build_graph(conf2, rep);
-////        creatRankFileZipf(conf2, fileName);
-////        creatRankFileNonZipf(conf2, fileName);
-//      }
-//	chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
-//	auto durationWithMaterialize = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
-//	cout << durationWithMaterialize << ", ";
+      chrono::high_resolution_clock::time_point start = chrono::high_resolution_clock::now();
+      for (size_t i=0; i<conf.nb_graphs; i++) {
+//    	  cout << "i: " << i << endl;
+//    	cout << "Processing graph " << i << endl;
+    	config::config conf2;
+//    	cout << "i: " << i << endl;
+    	if (nb_nodes_per_graph.size() > i) {
+    		conf2.nb_nodes.push_back(nb_nodes_per_graph[i]);
+		} else {
+			conf2.nb_nodes.push_back(-1);
+		}
+    	conf2.nb_graphs = conf.nb_graphs;
+
+		configparser::parse_config(conf_file, conf2);
+		conf2.complete_config();
+    	report::report rep;
+
+        ofstream graph_stream;
+        string fileName = "outputGraph" + to_string(i) + ".txt";
+        graph_stream.open(fileName);
+//        cout << "graph generation" << endl;
+        graph::ntriple_graph_writer writer(graph_stream);
+
+        writer.build_graph(conf2, rep);
+//        creatRankFileZipf(conf2, fileName);
+//        creatRankFileNonZipf(conf2, fileName);
+      }
+	chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
+	auto durationWithMaterialize = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
+	cout << durationWithMaterialize << ", ";
 
 
 //	for (int i=0; i<=100000000; i+=100000000/10) {
