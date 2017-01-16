@@ -71,7 +71,7 @@ private:
 
 	// Correlation
 	vector<vector<int>> mapping;
-	vector<int> correlatedNumberOfEdges_PerEdgeType;
+	vector<edge2> basis;
 
 	vector<edge2> generateCorrelatedEdgeSet(config::edge & edgeType);
 
