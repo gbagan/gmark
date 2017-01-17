@@ -1,8 +1,15 @@
 <!-- gMark encoding of the schema from LDBC SNB -->
 
 <generator>
+	<size>3</size>
 	<graph>
-		<nodes>100000</nodes>
+		<nodes>10000</nodes>
+	</graph>
+	<graph>
+		<nodes>20000</nodes>
+	</graph>
+	<graph>
+		<nodes>30000</nodes>
 	</graph>
 
 	<predicates>
@@ -60,16 +67,16 @@
 
 	<schema>
 		<source type="0"> <!-- Person -->
-			<target type="14" symbol="15" multiplicity="1"/>
-			<target type="12" symbol="16" multiplicity="1"/>
-			<target type="12" symbol="17" multiplicity="1"/>
-			<target type="14" symbol="18" multiplicity="1"/>
-			<target type="12" symbol="19" multiplicity="*"/>
-			<target type="12" symbol="20" multiplicity="*"/>
-			<target type="12" symbol="21" multiplicity="1"/>
-			<target type="12" symbol="22" multiplicity="1"/>
+			<target type="14" symbol="15" multiplicity="1" edge_type="0"/>
+			<target type="12" symbol="16" multiplicity="1" edge_type="1"/>
+			<target type="12" symbol="17" multiplicity="1" edge_type="2"/>
+			<target type="14" symbol="18" multiplicity="1" edge_type="3"/>
+			<target type="12" symbol="19" multiplicity="*" edge_type="4"/>
+			<target type="12" symbol="20" multiplicity="*" edge_type="5"/>
+			<target type="12" symbol="21" multiplicity="1" edge_type="6"/>
+			<target type="12" symbol="22" multiplicity="1" edge_type="7"/>
 
-			<target type="0" symbol="0" multiplicity="*"> <!-- knows -->
+			<target type="0" symbol="0" multiplicity="*" edge_type="8"> <!-- knows -->
 				<indistribution type="zipfian">
 					<alpha>2.5</alpha>
 				</indistribution>
@@ -78,7 +85,7 @@
 				</outdistribution>
 			</target>
 
-			<target type="3" symbol="6" multiplicity="1"> <!-- isLocatedIn -->
+			<target type="3" symbol="6" multiplicity="1" edge_type="9"> <!-- isLocatedIn -->
 				<indistribution type="zipfian">
 					<alpha>2.5</alpha>
 				</indistribution>
@@ -88,7 +95,7 @@
 				</outdistribution>
 			</target>
 
-			<target type="1" symbol="4" multiplicity="*"> <!-- studyAt -->
+			<target type="1" symbol="4" multiplicity="*" edge_type="10"> <!-- studyAt -->
 				<indistribution type="zipfian">
 					<alpha>2.5</alpha>
 				</indistribution>
@@ -98,7 +105,7 @@
 				</outdistribution>
 			</target>
 
-			<target type="2" symbol="5" multiplicity="*"> <!-- workAt -->
+			<target type="2" symbol="5" multiplicity="*" edge_type="11"> <!-- workAt -->
 				<indistribution type="zipfian">
 					<alpha>2.5</alpha>
 				</indistribution>
@@ -108,7 +115,7 @@
 				</outdistribution>
 			</target>
 
-			<target type="7" symbol="1" multiplicity="*"> <!-- hasInterest -->
+			<target type="7" symbol="1" multiplicity="*" edge_type="12"> <!-- hasInterest -->
 				<indistribution type="zipfian">
 					<alpha>2.5</alpha>
 				</indistribution>
@@ -117,7 +124,7 @@
 				</outdistribution>
 			</target>
 
-			<target type="11" symbol="8" multiplicity="*"> <!-- likes -->
+			<target type="11" symbol="8" multiplicity="*" edge_type="13"> <!-- likes -->
 				<indistribution type="zipfian">
 					<alpha>2.5</alpha>
 				</indistribution>
@@ -129,9 +136,9 @@
 
 
 		<source type="1"> <!-- University -->
-			<target type="12" symbol="16" multiplicity="1"/>
+			<target type="12" symbol="16" multiplicity="1" edge_type="14"/>
 
-			<target type="3" symbol="6" multiplicity="1"> <!-- isLocatedIn -->
+			<target type="3" symbol="6" multiplicity="1" edge_type="15"> <!-- isLocatedIn -->
 				<indistribution type="zipfian">
 					<alpha>2.5</alpha>
 				</indistribution>
@@ -144,9 +151,9 @@
 
 
 		<source type="2"> <!-- Company -->
-			<target type="12" symbol="16" multiplicity="1"/>
+			<target type="12" symbol="16" multiplicity="1" edge_type="16"/>
 
-			<target type="4" symbol="6" multiplicity="1"> <!-- isLocatedIn -->
+			<target type="4" symbol="6" multiplicity="1" edge_type="17"> <!-- isLocatedIn -->
 				<indistribution type="zipfian">
 					<alpha>2.5</alpha>
 				</indistribution>
@@ -159,9 +166,9 @@
 
 
 		<source type="3"> <!-- City -->
-			<target type="12" symbol="16" multiplicity="1"/>
+			<target type="12" symbol="16" multiplicity="1" edge_type="18"/>
 
-			<target type="4" symbol="7" multiplicity="1"> <!-- isPartOf -->
+			<target type="4" symbol="7" multiplicity="1" edge_type="19"> <!-- isPartOf -->
 				<indistribution type="zipfian">
 					<alpha>2.5</alpha>
 				</indistribution>
@@ -174,9 +181,9 @@
 
 
 		<source type="4"> <!-- Country -->
-			<target type="12" symbol="16" multiplicity="1"/>
+			<target type="12" symbol="16" multiplicity="1" edge_type="20"/>
 
-			<target type="5" symbol="7" multiplicity="1"> <!-- isPartOf -->
+			<target type="5" symbol="7" multiplicity="1" edge_type="21"> <!-- isPartOf -->
 				<indistribution type="zipfian">
 					<alpha>2.5</alpha>
 				</indistribution>
@@ -189,15 +196,15 @@
 
 
 		<source type="5"> <!-- Continent -->
-			<target type="12" symbol="16" multiplicity="1"/>
+			<target type="12" symbol="16" multiplicity="1" edge_type="22"/>
 		</source>	
 
 
 		<source type="6"> <!-- Forum -->
-			<target type="12" symbol="26" multiplicity="1"/>
-			<target type="14" symbol="15" multiplicity="1"/>
+			<target type="12" symbol="26" multiplicity="1" edge_type="23"/>
+			<target type="14" symbol="15" multiplicity="1" edge_type="24"/>
 
-			<target type="0" symbol="2" multiplicity="1"> <!-- hasModerator -->
+			<target type="0" symbol="2" multiplicity="1" edge_type="25"> <!-- hasModerator -->
 				<indistribution type="zipfian">
 					<alpha>2.5</alpha>
 				</indistribution>
@@ -207,7 +214,7 @@
 				</outdistribution>
 			</target>
 
-			<target type="0" symbol="3" multiplicity="+"> <!-- hasMember -->
+			<target type="0" symbol="3" multiplicity="+" edge_type="26"> <!-- hasMember -->
 				<indistribution type="zipfian">
 					<alpha>2.5</alpha>
 				</indistribution>
@@ -216,7 +223,7 @@
 				</outdistribution>
 			</target>
 
-			<target type="9" symbol="10" multiplicity="+"> <!-- containerOf -->
+			<target type="9" symbol="10" multiplicity="+" edge_type="27"> <!-- containerOf -->
 				<indistribution type="uniform">
 					<min>1</min>
 					<max>1</max>
@@ -226,7 +233,7 @@
 				</outdistribution>
 			</target>
 
-			<target type="7" symbol="11" multiplicity="*"> <!-- hasTag -->
+			<target type="7" symbol="11" multiplicity="*" edge_type="28"> <!-- hasTag -->
 				<indistribution type="zipfian">
 					<alpha>2.5</alpha>
 				</indistribution>
@@ -238,9 +245,9 @@
 
 
 		<source type="7"> <!-- Tag -->
-			<target type="12" symbol="16" multiplicity="1"/>
+			<target type="12" symbol="16" multiplicity="1" edge_type="29"/>
 
-			<target type="8" symbol="12" multiplicity="*"> <!-- hasType -->
+			<target type="8" symbol="12" multiplicity="*" edge_type="30"> <!-- hasType -->
 				<indistribution type="zipfian">
 					<alpha>2.5</alpha>
 				</indistribution>
@@ -252,9 +259,9 @@
 
 
 		<source type="8"> <!-- TagClass -->
-			<target type="12" symbol="16" multiplicity="1"/>
+			<target type="12" symbol="16" multiplicity="1" edge_type="31"/>
 
-			<target type="8" symbol="13" multiplicity="1"> <!-- isSubclassOf -->
+			<target type="8" symbol="13" multiplicity="1" edge_type="32"> <!-- isSubclassOf -->
 				<indistribution type="zipfian">
 					<alpha>2.5</alpha>
 				</indistribution>
@@ -266,11 +273,11 @@
 
 
 		<source type="9"> <!-- Post -->
-			<target type="12" symbol="23" multiplicity="?"/>
-			<target type="12" symbol="24" multiplicity="?"/>
-			<target type="12" symbol="25" multiplicity="?"/>
+			<target type="12" symbol="23" multiplicity="?" edge_type="33"/>
+			<target type="12" symbol="24" multiplicity="?" edge_type="34"/>
+			<target type="12" symbol="25" multiplicity="?" edge_type="35"/>
 
-			<target type="11" symbol="13" multiplicity="1"> <!-- isSubclassOf -->
+			<target type="11" symbol="13" multiplicity="1" edge_type="36"> <!-- isSubclassOf -->
 				<indistribution type="zipfian">
 					<alpha>2.5</alpha>
 				</indistribution>
@@ -283,10 +290,10 @@
 
 
 		<source type="10"> <!-- Comment -->
-			<target type="12" symbol="23" multiplicity="1"/>
-			<target type="13" symbol="24" multiplicity="1"/>
+			<target type="12" symbol="23" multiplicity="1" edge_type="37"/>
+			<target type="13" symbol="24" multiplicity="1" edge_type="38"/>
 
-			<target type="11" symbol="14" multiplicity="1"> <!-- replyOf -->
+			<target type="11" symbol="14" multiplicity="1" edge_type="39"> <!-- replyOf -->
 				<indistribution type="zipfian">
 					<alpha>2.5</alpha>
 				</indistribution>
@@ -296,7 +303,7 @@
 				</outdistribution>
 			</target>
 
-			<target type="11" symbol="13" multiplicity="*"> <!-- isSubclassOf -->
+			<target type="11" symbol="13" multiplicity="*" edge_type="40"> <!-- isSubclassOf -->
 				<indistribution type="zipfian">
 					<alpha>2.5</alpha>
 				</indistribution>
@@ -309,11 +316,11 @@
 
 
 		<source type="11"> <!-- Message -->
-			<target type="14" symbol="15" multiplicity="1"/>
-			<target type="12" symbol="21" multiplicity="1"/>
-			<target type="12" symbol="22" multiplicity="1"/>
+			<target type="14" symbol="15" multiplicity="1" edge_type="41"/>
+			<target type="12" symbol="21" multiplicity="1" edge_type="42"/>
+			<target type="12" symbol="22" multiplicity="1" edge_type="43"/>
 
-			<target type="4" symbol="6" multiplicity="1"> <!-- isLocatedIn -->
+			<target type="4" symbol="6" multiplicity="1" edge_type="44"> <!-- isLocatedIn -->
 				<indistribution type="zipfian">
 					<alpha>2.5</alpha>
 				</indistribution>
@@ -323,7 +330,7 @@
 				</outdistribution>
 			</target>
 
-			<target type="0" symbol="9" multiplicity="1"> <!-- hasCreator -->
+			<target type="0" symbol="9" multiplicity="1" edge_type="45"> <!-- hasCreator -->
 				<indistribution type="zipfian">
 					<alpha>2.5</alpha>
 				</indistribution>
@@ -333,7 +340,7 @@
 				</outdistribution>
 			</target>
 
-			<target type="7" symbol="11" multiplicity="*"> <!-- hasTag -->
+			<target type="7" symbol="11" multiplicity="*" edge_type="46"> <!-- hasTag -->
 				<indistribution type="zipfian">
 					<alpha>2.5</alpha>
 				</indistribution>

@@ -305,7 +305,7 @@ void creatRankFileNonZipf(config::config conf, string graphFileName) {
 
 
 int main(int argc, char ** argv) {
-    string conf_file = "../use-cases/test2.xml";
+    string conf_file = "../use-cases/social-network.xml";
     string graph_file;
     string workload_file;
     string report_directory = ".";
@@ -448,13 +448,15 @@ int main(int argc, char ** argv) {
 
       chrono::high_resolution_clock::time_point start = chrono::high_resolution_clock::now();
       for (size_t i=0; i<conf.nb_graphs; i++) {
-//    	  cout << "i: " << i << endl;
+    	  cout << "i: " << i << endl;
 //    	cout << "Processing graph " << i << endl;
     	config::config conf2;
-//    	cout << "i: " << i << endl;
+    	cout << "graph number: " << i << endl;
     	if (nb_nodes_per_graph.size() > i) {
+    		cout << "Push " << nb_nodes_per_graph[i] << endl;
     		conf2.nb_nodes.push_back(nb_nodes_per_graph[i]);
 		} else {
+			cout << "Push -1" << endl;
 			conf2.nb_nodes.push_back(-1);
 		}
     	conf2.nb_graphs = conf.nb_graphs;
@@ -469,7 +471,7 @@ int main(int argc, char ** argv) {
 //        cout << "graph generation" << endl;
         graph::ntriple_graph_writer writer(graph_stream);
 
-        writer.build_graph(conf2, rep);
+        writer.build_graph(conf2, rep, i);
 //        creatRankFileZipf(conf2, fileName);
 //        creatRankFileNonZipf(conf2, fileName);
       }
@@ -543,7 +545,7 @@ int main(int argc, char ** argv) {
 //    analysisIncrDetGraph analyzeGraph("test.txt", conf);
 //    analyzeGraph.stability(0);
   	// #### ANALYSIS ####
-//    for (int g=0; g<1; g++) {
+//    for (int g=0; g<3; g++) {
 ////    	cout << "g=" << g << endl;
 //    	string outpName = "outputGraph" + to_string(g) + ".txt";
 //    	analysisIncrDetGraph analyzeGraph(outpName, conf);

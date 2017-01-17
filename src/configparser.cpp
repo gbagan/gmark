@@ -154,7 +154,23 @@ void parse_types(pugi::xml_node node, config::config & conf) {
         }
         conf.types[id].scalable = false;
         conf.types[id].proportion = -1;
-    }    
+    }
+
+    for (pugi::xml_node alias_node : node.children("alias")) {
+    	size_t id = alias_node.attribute("type").as_uint();
+    	conf.types[id].size.resize(conf.nb_graphs);
+//    	cout << "ID: " << id << endl;
+//    	cout << "Name: " << alias_node.text().get() << endl;
+    	for (int i=0; i<conf.nb_graphs; i++) {
+//			cout << "Before: " << conf.types[id].size[i] << endl;
+    		if (conf.types[id].size[i] == 0) {
+				conf.types[id].scalable = true;
+				conf.types[id].proportion = 1.0 / size;
+				conf.types[id].size[i] =  conf.types[id].proportion * conf.nb_nodes[i];
+			}
+//    		cout << "After: " << conf.types[id].size[i] << endl;
+    	}
+	}
 }
 
 void parse_schema(pugi::xml_node node, config::config & conf) {
