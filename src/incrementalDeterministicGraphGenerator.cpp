@@ -30,45 +30,45 @@ incrementalDeterministicGraphGenerator::~incrementalDeterministicGraphGenerator(
 
 
 
-void incrementalDeterministicGraphGenerator::printRankZipf(vector<graphNode> nodes, int edgeTypeId, int nbNodes) {
-	int maxDegree = 0;
-	for (graphNode node: nodes) {
-		int degree = node.numberOfInterfaceConnections - node.numberOfOpenInterfaceConnections;
-		if (degree > maxDegree) {
-			maxDegree = degree;
-		}
-	}
-
-	cout << "Maxdegree=" << maxDegree << endl;
-	ofstream rankFile, degreeFile;
-	rankFile.open("rankFileET" + to_string(edgeTypeId) + "n" + to_string(nbNodes) + ".txt", ios::trunc);
-	degreeFile.open("rankFileET" + to_string(edgeTypeId) + "n" + to_string(nbNodes) + "degree.txt", ios::trunc);
-	for (graphNode node: nodes) {
-		double rank = ((double)node.numberOfInterfaceConnections - (double)node.numberOfOpenInterfaceConnections) / (double) maxDegree;
-		rankFile << to_string(rank) << endl;
-		degreeFile << to_string(node.numberOfInterfaceConnections - node.numberOfOpenInterfaceConnections) << "-" << to_string(maxDegree) << endl;
-	}
-	rankFile.close();
-}
-
-void incrementalDeterministicGraphGenerator::printRankNonZipf(vector<graphNode> nodes, int edgeTypeId, int nbNodes) {
-	ofstream rankFile;
-	rankFile.open("rankFileET" + to_string(edgeTypeId) + "n" + to_string(nbNodes) + ".txt", ios::trunc);
-	for (graphNode currentNode: nodes) {
-		int nodesWithLowerDegree = 0;
-		int degree = currentNode.numberOfInterfaceConnections - currentNode.numberOfOpenInterfaceConnections;
-		for (graphNode compareNode: nodes) {
-			if (compareNode.numberOfInterfaceConnections - compareNode.numberOfOpenInterfaceConnections <= degree) {
-				nodesWithLowerDegree++;
-			}
-		}
-		double rank = (double)nodesWithLowerDegree / (double)nodes.size();
-		rankFile << to_string(rank) << endl;
-	}
-
-
-	rankFile.close();
-}
+//void incrementalDeterministicGraphGenerator::printRankZipf(vector<graphNode> nodes, int edgeTypeId, int nbNodes) {
+//	int maxDegree = 0;
+//	for (graphNode node: nodes) {
+//		int degree = node.numberOfInterfaceConnections - node.numberOfOpenInterfaceConnections;
+//		if (degree > maxDegree) {
+//			maxDegree = degree;
+//		}
+//	}
+//
+//	cout << "Maxdegree=" << maxDegree << endl;
+//	ofstream rankFile, degreeFile;
+//	rankFile.open("rankFileET" + to_string(edgeTypeId) + "n" + to_string(nbNodes) + ".txt", ios::trunc);
+//	degreeFile.open("rankFileET" + to_string(edgeTypeId) + "n" + to_string(nbNodes) + "degree.txt", ios::trunc);
+//	for (graphNode node: nodes) {
+//		double rank = ((double)node.numberOfInterfaceConnections - (double)node.numberOfOpenInterfaceConnections) / (double) maxDegree;
+//		rankFile << to_string(rank) << endl;
+//		degreeFile << to_string(node.numberOfInterfaceConnections - node.numberOfOpenInterfaceConnections) << "-" << to_string(maxDegree) << endl;
+//	}
+//	rankFile.close();
+//}
+//
+//void incrementalDeterministicGraphGenerator::printRankNonZipf(vector<graphNode> nodes, int edgeTypeId, int nbNodes) {
+//	ofstream rankFile;
+//	rankFile.open("rankFileET" + to_string(edgeTypeId) + "n" + to_string(nbNodes) + ".txt", ios::trunc);
+//	for (graphNode currentNode: nodes) {
+//		int nodesWithLowerDegree = 0;
+//		int degree = currentNode.numberOfInterfaceConnections - currentNode.numberOfOpenInterfaceConnections;
+//		for (graphNode compareNode: nodes) {
+//			if (compareNode.numberOfInterfaceConnections - compareNode.numberOfOpenInterfaceConnections <= degree) {
+//				nodesWithLowerDegree++;
+//			}
+//		}
+//		double rank = (double)nodesWithLowerDegree / (double)nodes.size();
+//		rankFile << to_string(rank) << endl;
+//	}
+//
+//
+//	rankFile.close();
+//}
 
 
 
@@ -176,7 +176,7 @@ double incrementalDeterministicGraphGenerator::getMeanICsPerNode(distribution & 
 		}
 		meanEdgesPerNode = temp;
 		cout << "Zipfian mean=" << meanEdgesPerNode << endl;
-		cout << "####----###### DIT HAD NOOIT MOGEN GEBEUREN!!!! ####----######" << endl;
+		cout << "####----###### SHOULD NEVER HAPPEN!!!! ####----######" << endl;
 	} else {
 		meanEdgesPerNode = 1;
 	}
@@ -410,6 +410,14 @@ void incrementalDeterministicGraphGenerator::incrementGraph(config::edge & edgeT
 	nodeGen.addSubjectNodes(edgeType, outDistrShift, graphNumber);
 	nodeGen.addObjectNodes(edgeType, inDistrShift, graphNumber);
 
+//	cout << "Number of subject nodes: " << nodes.first.size() << endl;
+//	for (graphNode n: nodes.first) {
+//		cout << "SubjectNode: " << n.id << endl;
+//	}
+//	cout << "Number of object nodes: " << nodes.second.size() << endl;
+//	for (graphNode n: nodes.second) {
+//		cout << "ObjectNode: " << n.id << endl;
+//	}
 
 
 	// Update the ICs for the Zipfian distribution to satisfy the property that influecer nodes will get more ICs when the graph grows
@@ -727,7 +735,7 @@ int incrementalDeterministicGraphGenerator::processEdgeTypeSingleGraph(config::c
 
 	this->conf = configuration;
 	this->graphNumber = graphNumber_;
-//	cout << "\n\n-----------GraphNumber: " << graphNumber << ". Edge-type: " << edgeType.edge_type_id << "--------------" << endl;
+	cout << "\n\n-----------GraphNumber: " << graphNumber << ". Edge-type: " << edgeType.edge_type_id << "--------------" << endl;
 //	cout << "Number of nodes: " << conf.nb_nodes[graphNumber] << endl;
 
 	if (edgeType.outgoing_distrib.type == DISTRIBUTION::ZIPFIAN && outDistrShift == 0) {
@@ -740,11 +748,10 @@ int incrementalDeterministicGraphGenerator::processEdgeTypeSingleGraph(config::c
 	if (graphNumber == 0 &&
 			edgeType.outgoing_distrib.type != DISTRIBUTION::ZIPFIAN &&
 			edgeType.incoming_distrib.type != DISTRIBUTION::ZIPFIAN) {
-//			fixSchemaInequality(edgeType);
+			fixSchemaInequality(edgeType);
 	}
 
 	nodeGen = nodeGenerator(edgeType, nodes.first.size(), nodes.second.size(), &randomGenerator, &nodes, &conf);
-
 
 //	cout << "OutShif: " << outDistrShift << endl;
 //	cout << "InShif: " << inDistrShift << endl;
