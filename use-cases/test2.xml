@@ -1,7 +1,13 @@
 <generator>
-	<size>1</size>
+	<size>3</size>
 	<graph>
-		<nodes>1000000</nodes>
+		<nodes>10000</nodes>
+	</graph>
+	<graph>
+		<nodes>20000</nodes>
+	</graph>
+	<graph>
+		<nodes>30000</nodes>
 	</graph>
 
 	<predicates>

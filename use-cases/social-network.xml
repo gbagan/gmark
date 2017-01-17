@@ -3,13 +3,13 @@
 <generator>
 	<size>3</size>
 	<graph>
-		<nodes>10000</nodes>
+		<nodes>100</nodes>
 	</graph>
 	<graph>
-		<nodes>20000</nodes>
+		<nodes>200</nodes>
 	</graph>
 	<graph>
-		<nodes>30000</nodes>
+		<nodes>300</nodes>
 	</graph>
 
 	<predicates>
@@ -116,6 +116,9 @@
 			</target>
 
 			<target type="7" symbol="1" multiplicity="*" edge_type="12"> <!-- hasInterest -->
+				<correlation>
+					<edge_type>9</edge_type>
+				</correlation>
 				<indistribution type="zipfian">
 					<alpha>2.5</alpha>
 				</indistribution>
