@@ -5,10 +5,10 @@ objects = graphNode.o incrementalDeterministicGraphGenerator.o cumulativeDistrib
 			nodeGenerator.o processingEdgeTypes.o
 			
 
-all: analysis 
+all: monStaGen 
 
-analysis: $(objects)
-	$(CC) $(objects) -c -o analysis
+monStaGen: $(objects)
+	$(CC) $(objects) -c -o monStaGen
 
 
 graphNode.o: graphNode.cpp

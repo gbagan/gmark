@@ -10,12 +10,7 @@ analysis: $(objects)
 	$(CC) $(objects) -c -o analysis
 
 
-analyseCorrelation.o: analyseCorrelation.cpp
-	$(CC) $(CFLAGS) -c analyseCorrelation.cpp ../monStaGen/incrementalDeterministicGraphGenerator.h
 
-analysisIncrDetGraph.o: analysisIncrDetGraph.cpp ../config.h
-	$(CC) $(CFLAGS) -c analysisIncrDetGraph.cpp
-	
 
 clean:
 	rm -rf *.o test
