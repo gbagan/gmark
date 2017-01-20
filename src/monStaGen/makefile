@@ -14,7 +14,7 @@ analysis: $(objects)
 graphNode.o: graphNode.cpp
 	$(CC) $(CFLAGS) -c graphNode.cpp
 	
-incrementalDeterministicGraphGenerator.o: incrementalDeterministicGraphGenerator.cpp ../config.h graphNode.h nodeGenerator.h
+incrementalDeterministicGraphGenerator.o: incrementalDeterministicGraphGenerator.cpp incrementalDeterministicGraphGenerator.h ../config.h graphNode.h nodeGenerator.h
 	$(CC) $(CFLAGS) -c incrementalDeterministicGraphGenerator.cpp
 
 cumulativeDistributionUtils.o: cumulativeDistributionUtils.cpp graphNode.h ../config.h
