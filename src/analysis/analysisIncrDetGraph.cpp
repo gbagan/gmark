@@ -790,7 +790,7 @@ void analysisIncrDetGraph::stability(int etId) {
 	ifstream rankFile10(baseFileName + "n10000.txt");
 	ifstream* files[10] = {&rankFile1, &rankFile2, &rankFile3, &rankFile4, &rankFile5, &rankFile6, &rankFile7, &rankFile8, &rankFile9, &rankFile10};
 	string line;
-	vector<vector<string>> rankVector;
+	vector< vector<string> > rankVector;
 	int count = 0;
 	if (rankFile1.is_open() && rankFile2.is_open() && rankFile3.is_open() && rankFile4.is_open() && rankFile5.is_open() &&
 			rankFile6.is_open() && rankFile7.is_open() && rankFile8.is_open() && rankFile9.is_open() && rankFile10.is_open()) {

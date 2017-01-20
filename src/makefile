@@ -2,8 +2,8 @@ CC=g++
 CFLAGS=-g -O3 -Wall -std=c++11
 
 objects = test.o gmark.o configparser.o pugixml.o randomgen.o config.o workload.o workload2.o \
-			incrementalDeterministicGraphGenerator.o graphNode.o cumulativeDistributionUtils.o \
-			nodeGenerator.o processingEdgeTypes.o analysisIncrDetGraph.o analyseCorrelation.o
+			monStaGen/incrementalDeterministicGraphGenerator.o monStaGen/graphNode.o monStaGen/cumulativeDistributionUtils.o \
+			monStaGen/nodeGenerator.o monStaGen/processingEdgeTypes.o analysis/analysisIncrDetGraph.o analysis/analyseCorrelation.o
 
 all: test 
 	+$(MAKE) -C analysis
@@ -40,4 +40,4 @@ pugixml.o: pugixml.cpp pugixml.hpp
 
 
 clean:
-	rm -rf *.o test
+	rm -rf *.o test analysis/*.o monStaGen/*.o

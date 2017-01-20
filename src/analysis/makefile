@@ -11,7 +11,7 @@ analysis: $(objects)
 
 
 analyseCorrelation.o: analyseCorrelation.cpp
-	$(CC) $(CFLAGS) -c analyseCorrelation.cpp ../incrementalDeterministicGraphGenerator.h
+	$(CC) $(CFLAGS) -c analyseCorrelation.cpp ../monStaGen/incrementalDeterministicGraphGenerator.h
 
 analysisIncrDetGraph.o: analysisIncrDetGraph.cpp ../config.h
 	$(CC) $(CFLAGS) -c analysisIncrDetGraph.cpp

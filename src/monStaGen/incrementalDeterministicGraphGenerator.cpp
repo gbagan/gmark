@@ -326,7 +326,7 @@ void incrementalDeterministicGraphGenerator::generateEdges(config::edge & edgeTy
 		vector<int> objectNodeIdVector = constructNodesVector(nodes.second);
 
 		if (edgeType.outgoing_distrib.type == DISTRIBUTION::ZIPFIAN || edgeType.incoming_distrib.type == DISTRIBUTION::ZIPFIAN) {
-			performFixingShiftForZipfian(edgeType, subjectNodeIdVector, objectNodeIdVector);
+//			performFixingShiftForZipfian(edgeType, subjectNodeIdVector, objectNodeIdVector);
 		}
 
 		shuffle(subjectNodeIdVector.begin(), subjectNodeIdVector.end(), randomGenerator);
@@ -483,8 +483,8 @@ bool pairCompare(const pair<int, int>& firstElem, const pair<int, int>& secondEl
 }
 
 
-vector<vector<int>> incrementalDeterministicGraphGenerator::icPreservingMapping(vector<int> subjects, vector<int> objects, int correlatedETid) {
-	vector<vector<int>> mapping = vector<vector<int>>(subjects.size());
+vector< vector<int> > incrementalDeterministicGraphGenerator::icPreservingMapping(vector<int> subjects, vector<int> objects, int correlatedETid) {
+	vector< vector<int> > mapping = vector< vector<int> >(subjects.size());
 
 
 	// Get the degree of all nodes
@@ -531,7 +531,7 @@ vector<vector<int>> incrementalDeterministicGraphGenerator::icPreservingMapping(
 //		cout << "Degree of node" << i << ": " <<  inDistr[i] << endl;
 //	}
 
-	vector<pair<int,int>> degreeNodeIdPairSubjects(subjects.size());
+	vector< pair<int,int> > degreeNodeIdPairSubjects(subjects.size());
 	for (size_t i=0; i<subjects.size(); i++) {
 		degreeNodeIdPairSubjects[i] = make_pair(inDistr[i], i);
 	}
@@ -545,7 +545,7 @@ vector<vector<int>> incrementalDeterministicGraphGenerator::icPreservingMapping(
 //	for (int i=0; i<objects.size(); i++) {
 //		cout << "Degree of object node" << i << ": " <<  nodes.second[i].numberOfInterfaceConnections << endl;
 //	}
-	vector<pair<int,int>> degreeNodeIdPairObjects(objects.size());
+	vector< pair<int,int> > degreeNodeIdPairObjects(objects.size());
 	for (size_t i=0; i<objects.size(); i++) {
 		degreeNodeIdPairObjects[i] = make_pair(nodes.second[i].numberOfInterfaceConnections, i);
 	}
@@ -751,7 +751,7 @@ int incrementalDeterministicGraphGenerator::processEdgeTypeSingleGraph(config::c
 	if (graphNumber == 0 &&
 			edgeType.outgoing_distrib.type != DISTRIBUTION::ZIPFIAN &&
 			edgeType.incoming_distrib.type != DISTRIBUTION::ZIPFIAN) {
-			fixSchemaInequality(edgeType);
+//			fixSchemaInequality(edgeType);
 	}
 
 	nodeGen = nodeGenerator(edgeType, nodes.first.size(), nodes.second.size(), &randomGenerator, &nodes, &conf);

@@ -28,7 +28,7 @@ public:
 		string objectId;
 	};
 
-	pair<vector<graphNode>, vector<graphNode>> nodes;
+	pair< vector<graphNode>, vector<graphNode> > nodes;
 	vector<edge2> edges;
 private:
 	int outDistrShift = 0;
@@ -70,7 +70,7 @@ private:
 
 
 	// Correlation
-	vector<vector<int>> mapping;
+	vector< vector<int> > mapping;
 	vector<edge2> basis;
 
 	vector<edge2> generateCorrelatedEdgeSet(config::edge & edgeType);
@@ -80,7 +80,7 @@ private:
 	void randomMapping(vector<int> subjects, vector<int> objects);
 	void addToMapping(int subject, int target);
 
-	vector<vector<int>> icPreservingMapping(vector<int> subjects, vector<int> objects, int correlatedETid);
+	vector< vector<int> > icPreservingMapping(vector<int> subjects, vector<int> objects, int correlatedETid);
 	int findEdgeTypeId(int subjectId, int predicate, int objectId);
 
 public:

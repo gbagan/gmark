@@ -297,7 +297,7 @@ void analyseCorrelation::analyze(config::edge & edgeType, int graphNumber) {
 //	for (config::edge & edgeType: conf.schema.edges) {
 //		if (edgeType.correlated_with.size() > 0) {
 //			for (int i=0; i<conf.nb_graphs; i++) {
-				string basisFile = "outputGraph" + to_string(graphNumber) + ".txt";
+				string basisFile = "ignore/outputGraph" + to_string(graphNumber) + ".txt";
 
 				// Similarity of basis
 				vector<incrementalDeterministicGraphGenerator::edge2> basisEdges = addEdges(basisFile, edgeType.correlated_with);
@@ -318,7 +318,8 @@ void analyseCorrelation::analyze(config::edge & edgeType, int graphNumber) {
 				cout << ")" << endl;
 
 				// Similarity of generated edge-type
-				vector<int> correlatedEdgeType = {edgeType.edge_type_id};
+				vector<int> correlatedEdgeType;
+				correlatedEdgeType.push_back(edgeType.edge_type_id);
 				vector<incrementalDeterministicGraphGenerator::edge2> correlatedEdges = addEdges(basisFile, correlatedEdgeType);
 
 //				cout << "\n\n CorrelatedEdges: " << endl;

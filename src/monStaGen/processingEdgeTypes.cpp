@@ -23,7 +23,7 @@ processingEdgeTypes::~processingEdgeTypes() {
 void processingEdgeTypes::sequentialProcessing() {
 	// Delete the output graphs
 	for (int i=0; i<conf.nb_graphs; i++) {
-		string file = "outputGraph" + to_string(i) + ".txt";
+		string file = "ignore/outputGraph" + to_string(i) + ".txt";
 		const char * fileChar = file.c_str();
 		remove(fileChar);
 	}
@@ -68,7 +68,7 @@ void processingEdgeTypes::processEdgeType(config::edge & edgeType) {
 
 		// Define the output file
 		ofstream outputFile;
-		outputFile.open("outputGraph" + to_string(j) + ".txt", ios::app);
+		outputFile.open("ignore/outputGraph" + to_string(j) + ".txt", ios::app);
 
 		graphGenerator.processEdgeTypeSingleGraph(conf, conf.schema.edges.at(edgeType.edge_type_id), outputFile, j);
 

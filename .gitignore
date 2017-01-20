@@ -1,4 +1,6 @@
 demo/*
+ignore
+ignore/*
 src/test
 src/querytranslate/test
 src/queryinterface/test

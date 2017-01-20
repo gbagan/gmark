@@ -25,7 +25,7 @@ nodeGenerator::~nodeGenerator() {
 //	}
 }
 
-nodeGenerator::nodeGenerator(config::edge & edgeType, int birthIdSubj, int birthIdObj, default_random_engine* randomGenerator_, pair<vector<graphNode>,vector<graphNode>>* nodes_, config::config* conf_) {
+nodeGenerator::nodeGenerator(config::edge & edgeType, int birthIdSubj, int birthIdObj, default_random_engine* randomGenerator_, pair< vector<graphNode>,vector<graphNode> >* nodes_, config::config* conf_) {
 	this->birthIdSubject = birthIdSubj;
 	this->birthIdObject = birthIdObj;
 	this->randomGenerator = randomGenerator_;
