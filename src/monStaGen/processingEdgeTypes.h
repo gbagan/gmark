@@ -8,7 +8,7 @@
 #ifndef PROCESSINGEDGETYPES_H_
 #define PROCESSINGEDGETYPES_H_
 
-#include "config.h"
+#include "../config.h"
 #include "incrementalDeterministicGraphGenerator.h"
 
 namespace std {

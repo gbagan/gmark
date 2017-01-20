@@ -10,7 +10,7 @@
 
 #include <iostream>
 #include <string>
-#include "config.h"
+#include "../config.h"
 
 namespace std {
 

@@ -11,7 +11,7 @@
 #include <random>
 #include <algorithm>
 #include <fstream>
-#include "config.h"
+#include "../config.h"
 #include "cumulativeDistributionUtils.h"
 #include "nodeGenerator.h"
 

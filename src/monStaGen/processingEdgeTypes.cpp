@@ -6,8 +6,8 @@
  */
 
 #include "processingEdgeTypes.h"
-#include "configparser.h"
-#include "analyseCorrelation.h"
+#include "../configparser.h"
+#include "../analysis/analyseCorrelation.h"
 
 namespace std {
 

@@ -9,7 +9,7 @@
 #define NODEGENERATOR_H_
 
 #include <random>
-#include "config.h"
+#include "../config.h"
 #include "graphNode.h"
 
 namespace std {

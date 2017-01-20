@@ -17,6 +17,136 @@ analyseCorrelation::~analyseCorrelation() {
 	// TODO Auto-generated destructor stub
 }
 
+void analyseCorrelation::analyzeLocationUniCorrelation(string fileNameLoc, string fileNameUni) {
+	vector<long> persons;
+	vector<long*> locationEdges;
+	vector<long> locations;
+
+	ofstream corrPersonLocation;
+	corrPersonLocation.open ("corrPersonLocation.txt");
+	corrPersonLocation << "correlatedEdgeType = c(";
+
+	long dummy[2];
+	// Find all person ids
+	string line;
+	ifstream myfile(fileNameLoc);
+	myfile.clear();
+	myfile.seekg(0, ios::beg);
+	int i = 0;
+	if (myfile.is_open()) {
+		while (getline(myfile, line)) {
+			if (i!=0) {
+				string pid = line.substr(0, line.find("|"));
+				cout << "Pid: " << pid << endl;
+				long persId = stol(pid);
+				if (find(persons.begin(), persons.end(), persId) == persons.end()) {
+					persons.push_back(persId);
+				}
+
+				string lid = line.substr(line.find("|")+1, line.size());
+				cout << "Lid: " << lid << endl;
+				long lineId = stol(lid);
+
+				dummy[0] = persId;
+				dummy[1] = lineId;
+				locations.push_back(dummy[1]);
+				locationEdges.push_back(dummy);
+			}
+			i++;
+		}
+		myfile.close();
+	} else {
+		cout << "Unable to open file: " << fileNameLoc << endl;
+	}
+
+	sort(locations.begin(), locations.end());
+	for (long loc: locations) {
+		cout << loc << ",";
+	}
+	cout << endl;
+
+
+//	i = 0;
+//	ifstream uniFile(fileNameUni);
+//	uniFile.clear();
+//	uniFile.seekg(0, ios::beg);
+//	if (uniFile.is_open()) {
+//		while (getline(uniFile, line)) {
+//			if (i != 0) {
+//				string pid = line.substr(0, line.find("|"));
+////				cout << "Pid: " << pid << endl;
+//				long persId = stol(pid);
+//				if (find(persons.begin(), persons.end(), persId) == persons.end()) {
+//					persons.push_back(persId);
+//				}
+//
+//				string temp = line.erase(0, line.find("|")+1);
+//				string uid = temp.substr(0, line.find("|"));
+////				cout << "Uid: " << uid << endl;
+//				long uniId = stol(uid);
+//
+//				dummy[0] = persId;
+//				dummy[1] = uniId;
+//				locationEdges.push_back(dummy);
+//			}
+//			i++;
+//		}
+//		myfile.close();
+//	} else {
+//		cout << "Unable to open file: " << fileNameUni << endl;
+//	}
+
+	cout << "NbPersons: " << persons.size() << endl;
+
+	int countForLineBreak = 0;
+	for (int i=0; i<persons.size(); i++) {
+		for (int j=i+1; j<persons.size(); j++) {
+			cout << i << "." << j << " - ";
+			vector<long> s1, s2;
+			for (long* edge: locationEdges) {
+				if (edge[0] == persons[i]) {
+					if (std::find(s1.begin(), s1.end(), edge[1]) == s1.end()) {
+						s1.push_back(edge[1]);
+					}
+				}
+				if (edge[0] == persons[j]) {
+					if (std::find(s2.begin(), s2.end(), edge[1]) == s2.end()) {
+						s2.push_back(edge[1]);
+					}
+				}
+			}
+			vector<int> intersectionVec(max(s1.size(), s2.size()));
+			vector<int>::iterator itIntersection;
+
+			sort(s1.begin(), s1.end());
+			sort(s2.begin(), s2.end());
+
+			itIntersection = set_intersection(s1.begin(), s1.end(),
+					s2.begin(), s2.end(), intersectionVec.begin());
+
+			intersectionVec.resize(itIntersection-intersectionVec.begin());
+
+			int unionCount = s1.size() + s2.size() - intersectionVec.size();
+
+
+			if (unionCount == 0) {
+				corrPersonLocation << "0.0";
+			} else {
+				corrPersonLocation << (float)intersectionVec.size() / (float)unionCount;
+			}
+			if (!(i >= persons.size()-2 && j >= persons.size()-1)) {
+				corrPersonLocation << ",";
+			}
+			countForLineBreak++;
+			if (countForLineBreak % 300 == 0) {
+				cout << "Line: " << countForLineBreak << endl;
+				corrPersonLocation << endl;
+			}
+		}
+	}
+	corrPersonLocation << ")" << endl;
+}
+
 void analyseCorrelation::printSimilarities(int nodes, vector<incrementalDeterministicGraphGenerator::edge2> edges, int nbEdgeTypesInCorrelation) {
 //	cout << "Node similarities" << endl;
 	int countForLineBreak = 0;

@@ -10,7 +10,7 @@
 
 #include <vector>
 #include "graphNode.h"
-#include "config.h"
+#include "../config.h"
 
 namespace std {
 

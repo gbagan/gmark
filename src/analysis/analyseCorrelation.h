@@ -8,7 +8,7 @@
 #ifndef ANALYSECORRELATION_H_
 #define ANALYSECORRELATION_H_
 
-#include "incrementalDeterministicGraphGenerator.h"
+#include "../monStaGen/incrementalDeterministicGraphGenerator.h"
 
 namespace std {
 
@@ -28,6 +28,8 @@ public:
 	virtual ~analyseCorrelation();
 
 	void analyze(config::edge & edgeType, int graphNumber);
+
+	void analyzeLocationUniCorrelation(string fileNameLoc, string fileNameUni);
 
 };
 
