@@ -395,7 +395,7 @@ void incrementalDeterministicGraphGenerator::generateEdges(config::edge & edgeTy
 void incrementalDeterministicGraphGenerator::incrementGraph(config::edge & edgeType) {
 	// Perform the shifting of the distribution as indecated by the user in the schema
 
-	chrono::high_resolution_clock::time_point start = chrono::high_resolution_clock::now();
+//	chrono::high_resolution_clock::time_point start = chrono::high_resolution_clock::now();
 	if (graphNumber > 0) {
 		performSchemaIndicatedShift(edgeType);
 		if ((conf.types.at(edgeType.subject_type).scalable ^ conf.types.at(edgeType.object_type).scalable) &&
@@ -404,19 +404,19 @@ void incrementalDeterministicGraphGenerator::incrementGraph(config::edge & edgeT
 			performShiftForNonScalableNodes(edgeType);
 		}
 	}
-	chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
-	auto duration = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
-	cout << "Shifting: " << duration << endl;
+//	chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
+//	auto duration = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
+//	cout << "Shifting: " << duration << endl;
 
 
-	start = chrono::high_resolution_clock::now();
+//	start = chrono::high_resolution_clock::now();
 	// Add subject and object nodes to the graph
 	// Specify the current shift to get the wright amound of ICs
 	nodeGen.addSubjectNodes(edgeType, outDistrShift, graphNumber);
 	nodeGen.addObjectNodes(edgeType, inDistrShift, graphNumber);
-	end = chrono::high_resolution_clock::now();
-	duration = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
-	cout << "Adding nodes: " << duration << endl;
+//	end = chrono::high_resolution_clock::now();
+//	duration = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
+//	cout << "Adding nodes: " << duration << endl;
 
 //	cout << "Number of subject nodes: " << nodes.first.size() << endl;
 //	for (graphNode n: nodes.first) {
@@ -427,7 +427,7 @@ void incrementalDeterministicGraphGenerator::incrementGraph(config::edge & edgeT
 //		cout << "ObjectNode: " << n.id << endl;
 //	}
 
-	start = chrono::high_resolution_clock::now();
+//	start = chrono::high_resolution_clock::now();
 	// Update the ICs for the Zipfian distribution to satisfy the property that influecer nodes will get more ICs when the graph grows
 	if (edgeType.outgoing_distrib.type == DISTRIBUTION::ZIPFIAN) {
 		updateInterfaceConnectionsForZipfianDistributions(&nodes.first, edgeType.outgoing_distrib, true);
@@ -435,11 +435,11 @@ void incrementalDeterministicGraphGenerator::incrementGraph(config::edge & edgeT
 	if (edgeType.incoming_distrib.type == DISTRIBUTION::ZIPFIAN) {
 		updateInterfaceConnectionsForZipfianDistributions(&nodes.second, edgeType.incoming_distrib, false);
 	}
-	end = chrono::high_resolution_clock::now();
-	duration = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
-	cout << "Updating Zipfian: " << duration << endl;
+//	end = chrono::high_resolution_clock::now();
+//	duration = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
+//	cout << "Updating Zipfian: " << duration << endl;
 
-	start = chrono::high_resolution_clock::now();
+//	start = chrono::high_resolution_clock::now();
 	double prob = 0.25;
 	if (edgeType.correlated_with.size() == 0) {
 		generateEdges(edgeType, prob);
@@ -447,9 +447,9 @@ void incrementalDeterministicGraphGenerator::incrementGraph(config::edge & edgeT
 		vector<edge2> possibleEdges = generateCorrelatedEdgeSet(edgeType);
 		generateCorrelatedEdges(edgeType, prob, possibleEdges);
 	}
-	end = chrono::high_resolution_clock::now();
-	duration = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
-	cout << "Adding edges: " << duration << endl;
+//	end = chrono::high_resolution_clock::now();
+//	duration = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
+//	cout << "Adding edges: " << duration << endl;
 
 }
 
@@ -750,7 +750,7 @@ vector<incrementalDeterministicGraphGenerator::edge2> incrementalDeterministicGr
 
 
 int incrementalDeterministicGraphGenerator::processEdgeTypeSingleGraph(config::config configuration, config::edge & edgeType, ofstream & outputFile, int graphNumber_) {
-	cout << endl << endl;
+//	cout << endl << endl;
 	this->conf = configuration;
 	this->graphNumber = graphNumber_;
 //	cout << "\n\n-----------GraphNumber: " << graphNumber << ". Edge-type: " << edgeType.edge_type_id << "--------------" << endl;
@@ -789,7 +789,7 @@ int incrementalDeterministicGraphGenerator::processEdgeTypeSingleGraph(config::c
 
 
 
-	chrono::high_resolution_clock::time_point start = chrono::high_resolution_clock::now();
+//	chrono::high_resolution_clock::time_point start = chrono::high_resolution_clock::now();
 	// Materialize the edge
 //	string outputBuffer = "";
 //	cout << "Number of edges: " << edges.size() << endl;
@@ -808,9 +808,9 @@ int incrementalDeterministicGraphGenerator::processEdgeTypeSingleGraph(config::c
 		}
 	}
 	outputFile.flush();
-	chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
-	auto materializeation = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
-	cout << "Materialization: " << materializeation << endl;
+//	chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
+//	auto materializeation = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
+//	cout << "Materialization: " << materializeation << endl;
 
 //	// Number of nodes analysis
 //	int subjectNodes = 0;
