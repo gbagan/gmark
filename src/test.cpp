@@ -15,27 +15,6 @@
 #include "analysis/analyseCorrelation.h"
 
 
-//void processEdgeTypesParallel(int low, int high, int* seeds, string* tempOutputFileNames, config::config conf) {
-////	cout << "Parallel processing of edgeTypes " << low << ":" << high << endl;
-//	int diff = high - low;
-//	if (diff == 1) {
-//		ofstream outputFile;
-//		outputFile.open(tempOutputFileNames[low], ios::trunc);
-//
-//		incrementalDeterministicGraphGenerator graphGenerator;
-//		graphGenerator.processEdgeType(conf, conf.schema.edges.at(low), outputFile);
-//
-//		outputFile.close();
-//	} else {
-//		int mid = floor(diff / 2);
-//		thread first (processEdgeTypesParallel, low, low+mid, seeds, tempOutputFileNames, conf);
-//		thread second (processEdgeTypesParallel, low+mid, high, seeds, tempOutputFileNames, conf);
-//
-//		first.join();
-//		second.join();
-//	}
-//}
-
 void print_report(report::report & rep) {
     cout << "report:" << endl;
     cout << "number of nodes: " << rep.nb_nodes << endl;
@@ -300,7 +279,27 @@ void creatRankFileNonZipf(config::config conf, string graphFileName) {
 	rankFile.close();
 }
 
+void parseNodeSequence(vector<unsigned int>* nodeSequence, string nodeSequenceString) {
+	// Define the sequence as: 10-20-30-40
+	// Generates 4 graphs where the first graph has 10 nodes, the second 20 nodes, etc.
+	int pos = 0;
+	std::string token;
+	while ((pos = nodeSequenceString.find("-")) != (int)string::npos) {
+		token = nodeSequenceString.substr(0, pos);
+//        cout << "Found token: " << token << endl;
+		if (token.compare("") == 0) {
+			nodeSequence->push_back(0);
+		} else {
+			nodeSequence->push_back(stoi(token));
+			nodeSequenceString.erase(0, pos + 1);
+		}
+	}
 
+	if (nodeSequenceString.compare("") != 0) {
+//    	cout << "Found token: " << nb_nodes_string << endl;
+		nodeSequence->push_back(stoi(nodeSequenceString));
+	}
+}
 
 
 
@@ -316,6 +315,7 @@ int main(int argc, char ** argv) {
     string nb_nodes_string = "";
     bool print_alias = false;    
     bool monStaGen = false;
+    vector<unsigned int> nb_nodes_per_graph;
 
     while ((c = getopt(argc, argv, "c:g:w:a:n:r:i")) != -1) {
         switch(c) {
@@ -337,6 +337,7 @@ int main(int argc, char ** argv) {
             case 'n':
 //                nb_nodes = atol(optarg);
                 nb_nodes_string = optarg;
+                parseNodeSequence(&nb_nodes_per_graph, nb_nodes_string);
                 break;
             case 'i':
             	monStaGen = true;
@@ -345,24 +346,7 @@ int main(int argc, char ** argv) {
         }
     }
     
-    int pos = 0;
-    std::string token;
-    vector<unsigned int> nb_nodes_per_graph;
-    while ((pos = nb_nodes_string.find("-")) != (int)string::npos) {
-    	token = nb_nodes_string.substr(0, pos);
-//        cout << "Found token: " << token << endl;
-        if (token.compare("") == 0) {
-        	nb_nodes_per_graph.push_back(0);
-        } else {
-        	nb_nodes_per_graph.push_back(stoi(token));
-        	nb_nodes_string.erase(0, pos + 1);
-        }
-    }
 
-    if (nb_nodes_string.compare("") != 0) {
-//    	cout << "Found token: " << nb_nodes_string << endl;
-    	nb_nodes_per_graph.push_back(stoi(nb_nodes_string));
-    }
 
 
     config::config conf;
@@ -386,46 +370,6 @@ int main(int argc, char ** argv) {
 
 //    cout << "Config file: " << conf_file << endl;
 
-    // #### ALGORITHM ####
-//    chrono::high_resolution_clock::time_point start = chrono::high_resolution_clock::now();
-
-
-    // TODO: get the seed from the XML instead of this magic number
-//    std::default_random_engine randomGeneratorForSeeding;
-//    randomGeneratorForSeeding.seed(222);
-//
-////	ofstream *outputFiles = new ofstream[conf.schema.edges.size()];
-//	string *tempOutputFileNames = new string[conf.schema.edges.size()];
-//	int *seeds = new int[conf.schema.edges.size()];
-//
-//	int nmOfEdgeTypes = conf.schema.edges.size();
-//	for (int i=0; i<nmOfEdgeTypes; i++) {
-//		int seed = randomGeneratorForSeeding();
-////		cout << "Seed " << i << ": " << seed << endl;
-//		seeds[i] = seed;
-//
-//		tempOutputFileNames[i] = "tempOutputFile" + to_string(i) + ".txt";
-//	}
-
-	// ##Parallel##
-//	processEdgeTypesParallel(0, nmOfEdgeTypes, seeds, tempOutputFileNames, conf);
-//
-//	// Merge the outputFiles
-//	ofstream outputFile;
-//	outputFile.open("output.txt", ios::trunc);
-//	for (int i=0; i<nmOfEdgeTypes; i++) {
-//		ifstream tempFile(tempOutputFileNames[i]);
-////		outputFile << tempFile.rdbuf();
-//		if (tempFile.is_open()) {
-//			string line;
-//			while (getline(tempFile, line)) {
-//				outputFile << line << endl;
-//			}
-//		}
-//	}
-//	outputFile.close();
-	// ##Parallel##
-
 
     if (monStaGen) {
     	// ##Sequential##
@@ -444,13 +388,14 @@ int main(int argc, char ** argv) {
 	//	  	cout << "Processing graph " << i << endl;
 			config::config conf2;
 
-			if (nb_nodes_per_graph.size() > i) {
-				conf2.nb_nodes.push_back(nb_nodes_per_graph[i]);
+			if (nb_nodes_per_graph.size() > 0) {
+				for (int nb: nb_nodes_per_graph)
+				conf2.nb_nodes.push_back(nb);
 			} else {
 				conf2.nb_nodes.push_back(-1);
 			}
 			conf2.nb_graphs = conf.nb_graphs;
-
+			cout << "NbNodes[0]: " << conf2.nb_nodes[0] << endl;
 			configparser::parse_config(conf_file, conf2);
 			conf2.complete_config();
 			report::report rep;
@@ -461,6 +406,7 @@ int main(int argc, char ** argv) {
 
 			graph::ntriple_graph_writer writer(graph_stream);
 
+			cout << "NbNodes[i]: " << conf2.nb_nodes[i] << endl;
 			writer.build_graph(conf2, rep, i);
 	//      creatRankFileZipf(conf2, fileName);
 	//      creatRankFileNonZipf(conf2, fileName);
