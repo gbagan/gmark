@@ -15,7 +15,7 @@ namespace std {
 
 class graphNode {
 public:
-	string id;
+	int id;
 	int iterationId;
 	int type;
 //	bool is_virtual;
@@ -28,7 +28,7 @@ public:
 //	int* connections;
 
 	graphNode();
-	graphNode(string id, int iterationId, int type, int numberOfEdgeTypes, int numberOfOpenICs,int numberOfICs, float position);
+	graphNode(int id, int iterationId, int type, int numberOfEdgeTypes, int numberOfOpenICs,int numberOfICs, float position);
 	virtual ~graphNode();
 
 	int getNumberOfOpenInterfaceConnections();

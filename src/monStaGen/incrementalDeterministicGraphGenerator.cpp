@@ -729,10 +729,10 @@ vector<incrementalDeterministicGraphGenerator::edge2> incrementalDeterministicGr
 //					cout << "Mapped to: " << mappedObject << endl;
 					edge2 possibleEdge;
 					possibleEdge.subjectIterationId = stoi(subject);
-					possibleEdge.subjectId = subjectId;
+					possibleEdge.subjectId = stoi(subjectId);
 					possibleEdge.predicate = to_string(edgeType.edge_type_id);
 					possibleEdge.objectIterationId = mappedObject;
-					possibleEdge.objectId = to_string(edgeType.object_type) + "-" + to_string(mappedObject);
+					possibleEdge.objectId = edgeType.object_type + (conf.types.size() * mappedObject);
 
 					correlatedEdges.push_back(possibleEdge);
 				}
@@ -795,17 +795,7 @@ int incrementalDeterministicGraphGenerator::processEdgeTypeSingleGraph(config::c
 //	cout << "Number of edges: " << edges.size() << endl;
 	for (size_t i=0; i<edges.size(); i++) {
 		edge2 e = edges[i];
-		string edgeString = e.subjectId + " " + e.predicate + " " + e.objectId;
-
-		if (i==edges.size()-1) {
-			// Use endl to flush
-//			outputBuffer += edgeString;
-			outputFile << edgeString << endl;
-//			outputBuffer = "";
-		} else {
-//			outputBuffer += edgeString + "\n";
-			outputFile << edgeString << "\n";
-		}
+		outputFile << e.subjectId << " " << e.predicate << " " << e.objectId << "\n";
 	}
 	outputFile.flush();
 //	chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();

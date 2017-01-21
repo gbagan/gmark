@@ -109,8 +109,11 @@ void nodeGenerator::addNode(config::edge & edgeType, int distrShift, bool addSou
 	} else {
 		numberOfICs = getNumberOfICs(distr, addSourceNode) + distrShift;
 	}
-
-	graphNode *n = new graphNode(to_string(type) + "-" + to_string(birthId), birthId, type, conf->schema.edges.size(), numberOfICs, numberOfICs, pos);
+//	cout << "Adding node" << endl;
+//	cout << "Type: " << type << endl;
+//	cout << "BirthId: " << birthId << endl;
+//	cout << "Id: " << type + (birthId * conf->types.size()) << endl;
+	graphNode *n = new graphNode(type + (birthId * conf->types.size()), birthId, type, conf->schema.edges.size(), numberOfICs, numberOfICs, pos);
 
 	if (addSourceNode) {
 //		initializeConnections(*n, conf->types.at(otherType).size*2);

@@ -23,9 +23,9 @@ public:
 	struct edge2 {
 		int subjectIterationId;
 		int objectIterationId;
-		string subjectId;
+		int subjectId;
 		string predicate;
-		string objectId;
+		int objectId;
 	};
 
 	pair< vector<graphNode>, vector<graphNode> > nodes;

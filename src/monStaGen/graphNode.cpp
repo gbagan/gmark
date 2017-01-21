@@ -12,7 +12,7 @@
 namespace std {
 
 graphNode::graphNode() {
-	this->id = "None";
+	this->id = -1;
 	this->iterationId = -1;
 	this->type = -1;
 
@@ -22,7 +22,7 @@ graphNode::graphNode() {
 
 //	this->connections = new int[1];
 }
-graphNode::graphNode(string globalId, int localId, int nodeType, int numberOfEdgeTypes, int numberOfOpenICs,
+graphNode::graphNode(int globalId, int localId, int nodeType, int numberOfEdgeTypes, int numberOfOpenICs,
 		int numberOfICs, float position) {
 	this->id = globalId;
 	this->iterationId = localId;

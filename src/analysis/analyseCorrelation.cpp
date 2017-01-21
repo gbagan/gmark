@@ -171,7 +171,7 @@ double analyseCorrelation::calculateSimilarity(int n1, int n2, vector<incrementa
 	vector<int> s1, s2;
 	for (incrementalDeterministicGraphGenerator::edge2 e: edges) {
 		if (e.subjectIterationId == n1) {
-			int typeIdNumber = stoi(e.objectId.substr(0, e.objectId.find("-"))) + nbEdgeTypesInCorrelation * e.objectIterationId;
+			int typeIdNumber = e.objectId % conf.types.size() + nbEdgeTypesInCorrelation * e.objectIterationId;
 			if (std::find(s1.begin(), s1.end(), typeIdNumber) == s1.end()) {
 				// Set s1 does not contain the new objectId
 				s1.push_back(typeIdNumber);
@@ -181,7 +181,7 @@ double analyseCorrelation::calculateSimilarity(int n1, int n2, vector<incrementa
 			}
 		}
 		if (e.subjectIterationId == n2) {
-			int typeIdNumber = stoi(e.objectId.substr(0, e.objectId.find("-"))) + nbEdgeTypesInCorrelation * e.objectIterationId;
+			int typeIdNumber = e.objectId % conf.types.size() + nbEdgeTypesInCorrelation * e.objectIterationId;
 			if (std::find(s2.begin(), s2.end(), typeIdNumber) == s2.end()) {
 				// Set s2 does not contain the new objectId
 				s2.push_back(typeIdNumber);
@@ -269,9 +269,9 @@ vector<incrementalDeterministicGraphGenerator::edge2> analyseCorrelation::addEdg
 //				cout << line << endl;
 
 				incrementalDeterministicGraphGenerator::edge2 basisEdge;
-				basisEdge.objectId = objectType;
+				basisEdge.objectId = stoi(objectType);
 				basisEdge.objectIterationId = stoi(object);
-				basisEdge.subjectId = subjectType;
+				basisEdge.subjectId = stoi(subjectType);
 				basisEdge.subjectIterationId = stoi(subject);
 				basisEdge.predicate = predicate;
 				basisEdges.push_back(basisEdge);

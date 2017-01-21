@@ -94,19 +94,17 @@ void analysisIncrDetGraph::distributionAnalysis(config::edge edgeType, ofstream 
 			string predicate = getPred.substr(0, getPred.find(" "));
 			if (stoi(predicate) == edgeType.predicate) {
 				temp = line;
-				string subjectType = temp.substr(0, temp.find("-"));
-				string getSub = temp.erase(0, temp.find("-")+1);
-				string subject = getSub.substr(0, getSub.find(" "));
-				if (stoi(subjectType) == edgeType.subject_type && stoi(subject) > maxSubject) {
-					maxSubject = stoi(subject);
+				int subjectType = stoi(temp.substr(0, temp.find(" "))) % conf.types.size();
+				int subject = stoi(temp.substr(0, temp.find(" "))) / conf.types.size();
+				if (subjectType == edgeType.subject_type && subject > maxSubject) {
+					maxSubject = subject;
 				}
 
 				getPred = getPred.erase(0, getPred.find(" ")+1);
-				string objectType = getPred.substr(0, getPred.find("-"));
-				string getObj = getPred.erase(0, getPred.find("-")+1);
-				string object = getObj.substr(0, getObj.length());
-				if (stoi(objectType) == edgeType.object_type && stoi(object) > maxObject) {
-					maxObject = stoi(object);
+				int objectType = stoi(getPred.substr(0, getPred.size())) % conf.types.size();;
+				int object = stoi(getPred.substr(0, getPred.size())) / conf.types.size();;
+				if (objectType == edgeType.object_type && object > maxObject) {
+					maxObject = object;
 				}
 			}
 		}
@@ -139,19 +137,17 @@ void analysisIncrDetGraph::distributionAnalysis(config::edge edgeType, ofstream 
 			string predicate = getPred.substr(0, getPred.find(" "));
 			if (stoi(predicate) == edgeType.predicate) {
 				temp = line;
-				string subjectType = temp.substr(0, temp.find("-"));
-				string getSub = temp.erase(0, temp.find("-")+1);
-				string subject = getSub.substr(0, getSub.find(" "));
+				int subjectType = stoi(temp.substr(0, temp.find(" "))) % conf.types.size();
+				int subject = stoi(temp.substr(0, temp.find(" "))) / conf.types.size();
 
 				getPred = getPred.erase(0, getPred.find(" ")+1);
 
-				string objectType = getPred.substr(0, getPred.find("-"));
-				string getObj = getPred.erase(0, getPred.find("-")+1);
-				string object = getObj.substr(0, getObj.length());
+				int objectType = stoi(getPred.substr(0, getPred.size())) % conf.types.size();
+				int object = stoi(getPred.substr(0, getPred.size())) / conf.types.size();
 
-				if (stoi(objectType) == edgeType.object_type && stoi(subjectType) == edgeType.subject_type) {
-					outDistr.at(stoi(subject))++;
-					inDistr.at(stoi(object))++;
+				if (objectType == edgeType.object_type && subjectType == edgeType.subject_type) {
+					outDistr.at(subject)++;
+					inDistr.at(object)++;
 				}
 			}
 		}
