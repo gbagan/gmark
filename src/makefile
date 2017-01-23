@@ -3,7 +3,8 @@ CFLAGS=-g -O3 -Wall -std=c++11
 
 objects = test.o gmark.o configparser.o pugixml.o randomgen.o config.o workload.o workload2.o \
 			incrementalDeterministicGraphGenerator.o graphNode.o cumulativeDistributionUtils.o \
-			nodeGenerator.o processingEdgeTypes.o analysisIncrDetGraph.o analyseCorrelation.o
+			nodeGenerator.o processingEdgeTypes.o analysisIncrDetGraph.o analyseCorrelation.o \
+			correlation.o
 
 all: test 
 	 
@@ -62,7 +63,8 @@ nodeGenerator.o: monStaGen/nodeGenerator.cpp config.h
 processingEdgeTypes.o: monStaGen/processingEdgeTypes.cpp monStaGen/incrementalDeterministicGraphGenerator.h config.h configparser.h
 	$(CC) $(CFLAGS) -c monStaGen/processingEdgeTypes.cpp
 
-
+correlation.o: monStaGen/correlation.cpp monStaGen/correlation.h
+	$(CC) $(CFLAGS) -c monStaGen/correlation.cpp
 
 clean:
 	rm -rf *.o test
