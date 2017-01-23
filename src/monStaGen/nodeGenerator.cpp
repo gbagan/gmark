@@ -31,20 +31,6 @@ nodeGenerator::nodeGenerator(config::edge & edgeType, int birthIdSubj, int birth
 	this->randomGenerator = randomGenerator_;
 	this->nodes = nodes_;
 	this->conf = conf_;
-
-//	if (edgeType.outgoing_distrib.type == DISTRIBUTION::UNIFORM) {
-//		this->uniformOutDistr = uniform_int_distribution<int>(edgeType.outgoing_distrib.arg1, edgeType.outgoing_distrib.arg2);
-//	} else if (edgeType.outgoing_distrib.type == DISTRIBUTION::NORMAL) {
-//		this->normalOutDistr = normal_distribution<double>(edgeType.outgoing_distrib.arg1, edgeType.outgoing_distrib.arg2);
-//	}
-//
-//	if (edgeType.incoming_distrib.type == DISTRIBUTION::UNIFORM) {
-//		this->uniformInDistr = uniform_int_distribution<int>(edgeType.incoming_distrib.arg1, edgeType.incoming_distrib.arg2);
-//	} else if (edgeType.incoming_distrib.type == DISTRIBUTION::NORMAL) {
-//		this->normalInDistr = normal_distribution<double>(edgeType.incoming_distrib.arg1, edgeType.incoming_distrib.arg2);
-//	}
-//
-//	uniformZeroOneDistr = uniform_real_distribution<double>(0.0,1.0);
 }
 
 //void nodeGenerator::initializeConnections(graphNode &n, int maxNumberOfConnections) {
@@ -94,13 +80,6 @@ void nodeGenerator::addNode(config::edge & edgeType, int distrShift, bool addSou
 	}
 
 
-//	if(!conf->types.at(type).scalable && numberOfNodes > conf->types.at(type).size-1) {
-//		// NodeType is not scalable and all nodes are already created and added to the graph
-//		// !configuration.types.at(type).scalable <- NodeType is not scalable
-//		// graph->nodes.at(type).size() > configuration.types.at(type).size <- all nodes are already created and added to the graph
-//		return; // So: Do NOT add the node
-//	}
-
 
 	float pos = 0.0;
 	int numberOfICs = 0;
@@ -130,33 +109,6 @@ void nodeGenerator::addNode(config::edge & edgeType, int distrShift, bool addSou
 
 
 }
-
-//void nodeGenerator::addNodes(config::edge & edgeType, int type1, int type2, bool isSubject) {
-//	if ((conf->types.at(edgeType.subject_type).scalable && conf->types.at(edgeType.object_type).scalable)
-//			|| (!conf->types.at(edgeType.subject_type).scalable && !conf->types.at(edgeType.object_type).scalable)) {
-//		double prob1;
-//		double prob2;
-//		if (conf->types.at(edgeType.subject_type).scalable) {
-//			prob1 = conf->types.at(type1).proportion;
-//			prob2 = conf->types.at(type2).proportion;
-//		} else {
-//			prob1 = conf->types.at(type1).size;
-//			prob2 = conf->types.at(type2).size;
-//		}
-//		if (prob1 > prob2) {
-//			int nmOfNodesPerIteration = floor(prob1 / prob2);
-//
-//			double probNextNode = (prob1 / prob2) - (double)nmOfNodesPerIteration;
-//			double randomValue = uniform_real_distribution<double>(0.0,1.0)(*randomGenerator);
-//			if(randomValue < probNextNode) {
-//				nmOfNodesPerIteration++;
-//			}
-//
-////			cout << "Creating " << nmOfNodesPerIteration << " nodes for type " << type1 << endl;
-//			for (int i=0; i<nmOfNodesPerIteration; i++) {
-//				addNode(edgeType, isSubject);
-//
-//}
 
 void nodeGenerator::addSubjectNodes(config::edge & edgeType, int distrShift, int graphNumber) {
 	int currentNumberOfSubjectNodes = nodes->first.size();

@@ -152,7 +152,7 @@ void analyseCorrelation::printSimilarities(int nodes, vector<incrementalDetermin
 	int countForLineBreak = 0;
 	for (int i=0; i<nodes; i++) {
 		for (int j=i+1; j<nodes; j++) {
-//			cout << i << "." << j;
+//			cout << "i:" << i << " and j:" << j << " gives: ";
 			cout << calculateSimilarity(i, j, edges, nbEdgeTypesInCorrelation);
 			if (!(i >= nodes-2 && j >= nodes-1)) {
 				cout << ",";
@@ -167,24 +167,28 @@ void analyseCorrelation::printSimilarities(int nodes, vector<incrementalDetermin
 }
 
 double analyseCorrelation::calculateSimilarity(int n1, int n2, vector<incrementalDeterministicGraphGenerator::edge2> edges, int nbEdgeTypesInCorrelation) {
+//	cout << "Sim between " << n1 << " and " << n2 << endl;
 //	cout << "Simialrity between node " << n1.iterationId << " and node " << n2.iterationId << endl;
 	vector<int> s1, s2;
+//	cout << "Number of edges: " << edges.size() << endl;
 	for (incrementalDeterministicGraphGenerator::edge2 e: edges) {
+//		cout << "Edge from " << e.subjectIterationId << " to " << e.objectIterationId << endl;
+//		cout << "Edge: " << e.subjectIterationId << " " << e.objectIterationId << endl;
 		if (e.subjectIterationId == n1) {
-			int typeIdNumber = e.objectId % conf.types.size() + nbEdgeTypesInCorrelation * e.objectIterationId;
-			if (std::find(s1.begin(), s1.end(), typeIdNumber) == s1.end()) {
+			int objectId = e.objectIterationId;
+			if (std::find(s1.begin(), s1.end(), objectId) == s1.end()) {
 				// Set s1 does not contain the new objectId
-				s1.push_back(typeIdNumber);
+				s1.push_back(objectId);
 //				if (n1 == 0 && n2 == 1) {
 //					cout << "In s1: " << e.objectIterationId << endl;
 //				}
 			}
 		}
 		if (e.subjectIterationId == n2) {
-			int typeIdNumber = e.objectId % conf.types.size() + nbEdgeTypesInCorrelation * e.objectIterationId;
-			if (std::find(s2.begin(), s2.end(), typeIdNumber) == s2.end()) {
+			int objectId = e.objectIterationId;
+			if (std::find(s2.begin(), s2.end(), objectId) == s2.end()) {
 				// Set s2 does not contain the new objectId
-				s2.push_back(typeIdNumber);
+				s2.push_back(objectId);
 //				if (n1 == 0 && n2 == 1) {
 //					cout << "In s2: " << e.objectIterationId << endl;
 //				}
@@ -199,17 +203,17 @@ double analyseCorrelation::calculateSimilarity(int n1, int n2, vector<incrementa
 	sort(s1.begin(), s1.end());
 	sort(s2.begin(), s2.end());
 
-	//	cout << "In s1: ";
-	//	for (int i:s1) {
-	//		cout << i << ",";
-	//	}
-	//	cout << endl;
-	//
-	//	cout << "In s2: ";
-	//	for (int i:s2) {
-	//		cout << i << ",";
-	//	}
-	//	cout << endl;
+//		cout << "In s1: ";
+//		for (int i:s1) {
+//			cout << i << ",";
+//		}
+//		cout << endl;
+//
+//		cout << "In s2: ";
+//		for (int i:s2) {
+//			cout << i << ",";
+//		}
+//		cout << endl;
 
 	itIntersection = set_intersection(s1.begin(), s1.end(),
 			s2.begin(), s2.end(), intersectionVec.begin());
@@ -249,31 +253,38 @@ vector<incrementalDeterministicGraphGenerator::edge2> analyseCorrelation::addEdg
 	myfile.seekg(0, ios::beg);
 	if (myfile.is_open()) {
 		while (getline(myfile, line)) {
+//			cout << "Line: " << line << endl;
 			string temp = line;
 			string getPred = temp.erase(0, temp.find(" ")+1);
 			string predicate = getPred.substr(0, getPred.find(" "));
+			int pred = stoi(predicate);
 
 			temp = line;
-			string subjectType = temp.substr(0, temp.find("-"));
-			string getSub = temp.erase(0, temp.find("-")+1);
-			string subject = getSub.substr(0, getSub.find(" "));
+			string subjectStr = temp.substr(0, temp.find(" "));
+			int subject = stoi(subjectStr);
+			int subjectType = subject % conf.types.size();
+			int subjectId = subject / conf.types.size();
 
 			getPred = getPred.erase(0, getPred.find(" ")+1);
 
-			string objectType = getPred.substr(0, getPred.find("-"));
-			string getObj = getPred.erase(0, getPred.find("-")+1);
-			string object = getObj.substr(0, getObj.length());
+			string objectStr = getPred.substr(0, getPred.length());
+			int object = stoi(objectStr);
+			int objectType = object % conf.types.size();
+			int objectId = object / conf.types.size();
 
-			int edgeTypeId = findEdgeTypeId(stoi(subjectType), stoi(predicate), stoi(objectType));
+//			cout << subjectId << " " << pred << " " << objectId << endl;
+
+			int edgeTypeId = findEdgeTypeId(subjectType, pred, objectType);
+//			cout << "Edge above belongs to edge-type: " << edgeTypeId << endl;
 			if (std::find(basis.begin(), basis.end(), edgeTypeId) != basis.end()) {
 //				cout << line << endl;
 
 				incrementalDeterministicGraphGenerator::edge2 basisEdge;
-				basisEdge.objectId = stoi(objectType);
-				basisEdge.objectIterationId = stoi(object);
-				basisEdge.subjectId = stoi(subjectType);
-				basisEdge.subjectIterationId = stoi(subject);
-				basisEdge.predicate = predicate;
+				basisEdge.objectId = object;
+				basisEdge.objectIterationId = objectId;
+				basisEdge.subjectId = subject;
+				basisEdge.subjectIterationId = subjectId;
+				basisEdge.predicate = pred;
 				basisEdges.push_back(basisEdge);
 
 //				cout << "SubjectId: " << basisEdge.subjectId << ". SubjectNm: " << basisEdge.subjectIterationId << endl;
