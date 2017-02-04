@@ -94,8 +94,14 @@ void incrementalDeterministicGraphGenerator::addEdge(graphNode &sourceNode, grap
 
 
 // ####### Update interface-connections #######
-void incrementalDeterministicGraphGenerator::updateInterfaceConnectionsForZipfianDistributions(vector<graphNode> *nodesVec, distribution distr, bool outDistr) {
+void incrementalDeterministicGraphGenerator::updateInterfaceConnectionsForZipfianDistributions(distribution distr, bool outDistr) {
 //	cout << "New Zipfian case" << endl;
+	vector<graphNode> *nodesVec;
+	if (outDistr) {
+		nodesVec = &nodes.first;
+	} else {
+		nodesVec = &nodes.second;
+	}
 	int nmNodes = nodesVec->size();
 
 	vector<double> zipfianCdf = cumDistrUtils.zipfCdf(distr.arg2, nmNodes);
@@ -114,8 +120,10 @@ void incrementalDeterministicGraphGenerator::updateInterfaceConnectionsForZipfia
 
 //		cout << "newInterfaceConnections: " << newInterfaceConnections << endl;
 		difference = newInterfaceConnections - node.getNumberOfInterfaceConnections();
-		node.incrementOpenInterfaceConnectionsByN(difference);
-		node.setNumberOfInterfaceConnections(newInterfaceConnections);
+		if (difference > 0) {
+			node.incrementOpenInterfaceConnectionsByN(difference);
+			node.setNumberOfInterfaceConnections(newInterfaceConnections);
+		}
 //		cout << "after openICs: " << node.getNumberOfOpenInterfaceConnections() << endl;
 	}
 }
@@ -430,10 +438,10 @@ void incrementalDeterministicGraphGenerator::incrementGraph(config::edge & edgeT
 //	start = chrono::high_resolution_clock::now();
 	// Update the ICs for the Zipfian distribution to satisfy the property that influecer nodes will get more ICs when the graph grows
 	if (edgeType.outgoing_distrib.type == DISTRIBUTION::ZIPFIAN) {
-		updateInterfaceConnectionsForZipfianDistributions(&nodes.first, edgeType.outgoing_distrib, true);
+		updateInterfaceConnectionsForZipfianDistributions(edgeType.outgoing_distrib, true);
 	}
 	if (edgeType.incoming_distrib.type == DISTRIBUTION::ZIPFIAN) {
-		updateInterfaceConnectionsForZipfianDistributions(&nodes.second, edgeType.incoming_distrib, false);
+		updateInterfaceConnectionsForZipfianDistributions(edgeType.incoming_distrib, false);
 	}
 //	end = chrono::high_resolution_clock::now();
 //	duration = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
@@ -463,7 +471,7 @@ void incrementalDeterministicGraphGenerator::incrementGraph(config::edge & edgeT
 
 
 
-int incrementalDeterministicGraphGenerator::processEdgeTypeSingleGraph(config::config configuration, config::edge & edgeType, ofstream & outputFile, int graphNumber_) {
+int incrementalDeterministicGraphGenerator::processEdgeTypeSingleGraph(config::config configuration, config::edge & edgeType, ofstream & outputFile, int graphNumber_, bool printNodeProperties) {
 //	cout << endl << endl;
 	this->conf = configuration;
 	this->graphNumber = graphNumber_;
@@ -512,6 +520,28 @@ int incrementalDeterministicGraphGenerator::processEdgeTypeSingleGraph(config::c
 		outputFile << e.subjectId << " " << e.predicate << " " << e.objectId << "\n";
 	}
 	outputFile.flush();
+
+	if (printNodeProperties) {
+		string subjectsNodesFileName = "ignore/subjects_edgeType" + to_string(edgeType.edge_type_id) + "graphNumber" + to_string(graphNumber_) +".txt";
+		ofstream subjectNodes;
+		subjectNodes.open(subjectsNodesFileName);
+		subjectNodes << "Global node id, local node id, degree in the graph\n";
+		for (graphNode subject: nodes.first) {
+			subjectNodes << subject.id << ", " << subject.iterationId << ", " << subject.numberOfInterfaceConnections-subject.numberOfOpenInterfaceConnections << "\n";
+		}
+		subjectNodes.flush();
+
+
+		string objectsNodesFileName = "ignore/objects_edgeType" + to_string(edgeType.edge_type_id) + "graphNumber" + to_string(graphNumber_) +".txt";
+		ofstream objectNodes;
+		objectNodes.open(objectsNodesFileName);
+		objectNodes << "Global node id, local node id, degree in the graph\n";
+		for (graphNode object: nodes.second) {
+			objectNodes << object.id << ", " << object.iterationId << ", " << object.numberOfInterfaceConnections-object.numberOfOpenInterfaceConnections << "\n";
+		}
+		objectNodes.flush();
+	}
+
 //	chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
 //	auto materializeation = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
 //	cout << "Materialization: " << materializeation << endl;

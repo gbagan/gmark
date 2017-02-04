@@ -305,7 +305,7 @@ void parseNodeSequence(vector<unsigned int>* nodeSequence, string nodeSequenceSt
 
 int main(int argc, char ** argv) {
 //    cout << "Starting...." << endl;
-	string conf_file = "../use-cases/test2.xml";
+	string conf_file = "../use-cases/test.xml";
     string graph_file;
     string workload_file;
     string report_directory = ".";
@@ -315,9 +315,10 @@ int main(int argc, char ** argv) {
     string nb_nodes_string = "";
     bool print_alias = false;    
     bool monStaGen = false;
+    bool printNodeProperties = false;
     vector<unsigned int> nb_nodes_per_graph;
 
-    while ((c = getopt(argc, argv, "c:g:w:a:n:r:i")) != -1) {
+    while ((c = getopt(argc, argv, "c:g:w:an:r:ip")) != -1) {
         switch(c) {
             case 'c':
                 conf_file = optarg;
@@ -341,6 +342,9 @@ int main(int argc, char ** argv) {
                 break;
             case 'i':
             	monStaGen = true;
+            	break;
+            case 'p':
+            	printNodeProperties = true;
             	break;
         }
     }
@@ -374,7 +378,7 @@ int main(int argc, char ** argv) {
     	chrono::high_resolution_clock::time_point start = chrono::high_resolution_clock::now();
 
 		processingEdgeTypes processETs(conf, conf_file);
-		processETs.sequentialProcessing();
+		processETs.sequentialProcessing(printNodeProperties);
 
 		chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
 		auto duration = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
@@ -416,7 +420,7 @@ int main(int argc, char ** argv) {
 
 
 //    analyseCorrelation correlation(conf);
-//    correlation.analyzeLocationUniCorrelation("locatedIn.csv", "studiesAt.csv");
+//    correlation.analyzeLocationUniCorrelation("ignore/person_isLocatedIn_place_0_0.csv", "ignore/person_studyAt_organisation_0_0.csv");
 
 
 

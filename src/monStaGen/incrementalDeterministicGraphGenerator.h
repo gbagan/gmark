@@ -49,7 +49,7 @@ private:
 
 	void addEdge(graphNode &sourceNode, graphNode &targetNode, int predicate);
 
-	void updateInterfaceConnectionsForZipfianDistributions(vector<graphNode> *nodes, distribution distr, bool outDistr);
+	void updateInterfaceConnectionsForZipfianDistributions(distribution distr, bool outDistr);
 
 	void performShiftForNonScalableNodes(config::edge & edgeType);
 
@@ -88,7 +88,7 @@ public:
 	virtual ~incrementalDeterministicGraphGenerator();
 
 	void generateIncDetGraph(ofstream*  outputFile, int* seeds, int edgeTypeIdLow, int edgeTypeIdHigh);
-	int processEdgeTypeSingleGraph(config::config configuration, config::edge & edgeType, ofstream & outputFile, int graphNumber);
+	int processEdgeTypeSingleGraph(config::config configuration, config::edge & edgeType, ofstream & outputFile, int graphNumber, bool printNodeProperties);
 };
 
 } /* namespace std */

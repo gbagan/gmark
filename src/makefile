@@ -63,7 +63,7 @@ nodeGenerator.o: monStaGen/nodeGenerator.cpp config.h
 processingEdgeTypes.o: monStaGen/processingEdgeTypes.cpp monStaGen/incrementalDeterministicGraphGenerator.h config.h configparser.h
 	$(CC) $(CFLAGS) -c monStaGen/processingEdgeTypes.cpp
 
-correlation.o: monStaGen/correlation.cpp monStaGen/correlation.h
+correlation.o: monStaGen/correlation.cpp monStaGen/incrementalDeterministicGraphGenerator.h
 	$(CC) $(CFLAGS) -c monStaGen/correlation.cpp
 
 clean:

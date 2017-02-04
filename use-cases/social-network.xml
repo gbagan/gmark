@@ -1,9 +1,9 @@
 <!-- gMark encoding of the schema from LDBC SNB -->
 
 <generator>
-	<size>3</size>
+	<size>1</size>
 	<graph>
-		<nodes>100</nodes>
+		<nodes>1000</nodes>
 	</graph>
 
 	<predicates>
@@ -93,6 +93,9 @@
 			</target>
 
 			<target type="1" symbol="4" multiplicity="*" edge_type="10"> <!-- studyAt -->
+				<correlation>
+					<edge_type>9</edge_type>
+				</correlation>
 				<indistribution type="zipfian">
 					<alpha>2.5</alpha>
 				</indistribution>
@@ -113,9 +116,6 @@
 			</target>
 
 			<target type="7" symbol="1" multiplicity="*" edge_type="12"> <!-- hasInterest -->
-				<correlation>
-					<edge_type>9</edge_type>
-				</correlation>
 				<indistribution type="zipfian">
 					<alpha>2.5</alpha>
 				</indistribution>

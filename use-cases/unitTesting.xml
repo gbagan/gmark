@@ -1,0 +1,80 @@
+<generator>
+	<size>3</size>
+	<graph>
+		<nodes>10000</nodes>
+	</graph>
+	<graph>
+		<nodes>20000</nodes>
+	</graph>
+	<graph>
+		<nodes>30000</nodes>
+	</graph>
+
+	<predicates>
+		<size>2</size>
+		<alias symbol="0">pred2</alias>
+		<alias symbol="1">pred2</alias>
+	</predicates>
+
+	<types>
+		<size>3</size>
+		<alias type="0">researcher</alias>
+		<proportion type="0">0.3</proportion>
+
+		<alias type="1">paper</alias>
+		<proportion type="1">0.4</proportion>
+
+		<alias type="2">journal</alias>
+		<proportion type="2">0.3</proportion>
+	</types>
+
+
+	<schema>
+		<source type="0"> 
+			<target type="1" symbol="0" edge_type="0"> 
+				<indistribution type="gaussian">
+					<mu>3</mu>
+					<sigma>1</sigma>
+				</indistribution>
+				<outdistribution type="zipfian">
+					<alpha>2.5</alpha>
+				</outdistribution>
+			</target>
+
+			<target type="2" symbol="1" edge_type="1"> 
+				<indistribution type="gaussian">
+					<mu>3</mu>
+					<sigma>1</sigma>
+				</indistribution>
+				<outdistribution type="uniform">
+					<min>3</min>
+					<max>4</max>
+				</outdistribution>
+			</target>
+		</source>
+
+	</schema>
+
+
+	<workload id="0" size="50">
+		<!-- bounds for the size of these queries -->
+		<size>
+			<conjuncts min="3" max="4"/>	<!-- number of A^M where M is a multiplicity 1 or * -->
+			<disjuncts min="1" max="3"/>	<!-- number of w_1 + ... + w_n in each A -->
+			<length min="2" max="4"/>		<!-- number of a_1 . ... . a_m in each w_i -->
+		</size>
+
+		<!-- probability to have "*" as multiplicity of the conjuncts -->
+		<multiplicity star="0.5"/>
+
+		<!-- the arity of the generated queries, we allow 0 for Boolean queries -->
+		<arity min="0" max="4"/>
+
+		<!-- we want only linear queries, but not constant nor quadratic -->
+		<selectivity constant="1" linear="1" quadratic="1"/>
+
+		<!-- we want to have in the workload chains and stars, but not cycles, etc. -->
+		<type chain="1" star="1" cycle="1" starchain="1"/>
+	</workload>
+
+</generator>
