@@ -26,6 +26,7 @@ public:
 		int subjectId;
 		string predicate;
 		int objectId;
+		int createdInGraph;
 	};
 
 	pair< vector<graphNode>, vector<graphNode> > nodes;
@@ -80,8 +81,10 @@ private:
 	void randomMapping(vector<int> subjects, vector<int> objects);
 	void addToMapping(int subject, int target);
 
-	vector< vector<int> > icPreservingMapping(vector<int> subjects, vector<int> objects, int correlatedETid);
+	void icPreservingMapping(vector<int> subjects, vector<int> objects, int correlatedETid);
 	int findEdgeTypeId(int subjectId, int predicate, int objectId);
+	vector<int> sortOnDegree(vector<int> objectsIterationIds);
+	vector<int> sortOnDegree(vector<int> subjectsIterationIds, int correlatedETid);
 
 public:
 	incrementalDeterministicGraphGenerator();

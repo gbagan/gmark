@@ -1,7 +1,10 @@
 <!-- gMark encoding of the schema from LDBC SNB -->
 
 <generator>
-	<size>1</size>
+	<size>2</size>
+	<graph>
+		<nodes>500</nodes>
+	</graph>
 	<graph>
 		<nodes>1000</nodes>
 	</graph>

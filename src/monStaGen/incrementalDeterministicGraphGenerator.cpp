@@ -87,6 +87,7 @@ void incrementalDeterministicGraphGenerator::addEdge(graphNode &sourceNode, grap
 	newEdge.subjectId = sourceNode.id;
 	newEdge.predicate = to_string(predicate);
 	newEdge.objectId = targetNode.id;
+	newEdge.createdInGraph = graphNumber;
 
 	edges.push_back(newEdge);
 }
@@ -448,6 +449,7 @@ void incrementalDeterministicGraphGenerator::incrementGraph(config::edge & edgeT
 //	cout << "Updating Zipfian: " << duration << endl;
 
 //	start = chrono::high_resolution_clock::now();
+
 	double prob = 0.25;
 	if (edgeType.correlated_with.size() == 0) {
 		generateEdges(edgeType, prob);
@@ -504,6 +506,7 @@ int incrementalDeterministicGraphGenerator::processEdgeTypeSingleGraph(config::c
 			cout << " - " << etId << endl;
 		}
 	}
+
 	incrementGraph(edgeType);
 
 //	chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
@@ -517,7 +520,7 @@ int incrementalDeterministicGraphGenerator::processEdgeTypeSingleGraph(config::c
 //	cout << "Number of edges: " << edges.size() << endl;
 	for (size_t i=0; i<edges.size(); i++) {
 		edge2 e = edges[i];
-		outputFile << e.subjectId << " " << e.predicate << " " << e.objectId << "\n";
+		outputFile << e.subjectId << " " << e.predicate << " " << e.objectId << " | " << e.createdInGraph <<"\n";
 	}
 	outputFile.flush();
 
