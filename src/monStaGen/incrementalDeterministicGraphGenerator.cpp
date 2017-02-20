@@ -136,7 +136,8 @@ void incrementalDeterministicGraphGenerator::performOutDistributionShift(config:
 	int incr = floor(newMeanOutDistr - meanOutDistr);
 
 	if (incr > 0) {
-//		cout << "Shift out-distrib with: " << incr << endl;
+		cout << "Conflicting schema requirements identified. The mean of the out-degree distribution will be set to " << newMeanOutDistr << endl;
+		cout << "This is done by a shift of " << incr << " value to the right in the out-degree distribution\n" << endl;
 		outDistrShift += incr;
 		for (graphNode & n: nodes.first) {
 			n.incrementInterfaceConnectionsByN(incr);
@@ -152,7 +153,8 @@ void incrementalDeterministicGraphGenerator::performInDistributionShift(config::
 	int incr = floor(newMeanInDistr - meanInDistr);
 
 	if (incr > 0) {
-//		cout << "Shift in-distrib with: " << incr << endl;
+		cout << "Conflicting schema requirements identified. The mean of the in-degree distribution will be set to " << newMeanInDistr << endl;
+		cout << "This is done by a shift of " << incr << " value to the right in the in-degree distribution\n" << endl;
 		inDistrShift += incr;
 		for (graphNode & n: nodes.second) {
 			n.incrementInterfaceConnectionsByN(incr);
@@ -297,9 +299,10 @@ void incrementalDeterministicGraphGenerator::performFixingShiftForZipfian(config
 		int diff = objectNodeIdVector.size() - subjectNodeIdVector.size();
 		int incr = diff / conf.types[edgeType.subject_type].size[graphNumber];
 		if (incr > 0) {
-			cout << "Shift out-distr after vector gen: " << incr << endl;
+			cout << "Update schema requirements in the presence of a Zipfian distribution in graphNumber " << graphNumber << endl;
+			cout << "Shift out-distr with " << incr << " values to the right" << endl;
 			outDistrShift += incr;
-			cout << "outDistrShift: " << outDistrShift << endl;
+			cout << "Total outDistrShift: " << outDistrShift << endl << endl;
 			for (graphNode & n: nodes.first) {
 				n.incrementInterfaceConnectionsByN(incr);
 				n.incrementOpenInterfaceConnectionsByN(incr);
@@ -312,9 +315,10 @@ void incrementalDeterministicGraphGenerator::performFixingShiftForZipfian(config
 		int diff = subjectNodeIdVector.size() - objectNodeIdVector.size();
 		int incr = diff / conf.types[edgeType.object_type].size[graphNumber];
 		if (incr > 0) {
-//			cout << "Shift in-distr after vector gen: " << incr << endl;
+			cout << "Update schema requirements in the presence of a Zipfian distribution in graphNumber " << graphNumber << endl;
+			cout << "Shift in-distr with " << incr << " values to the right" << endl;
 			inDistrShift += incr;
-//			cout << "inDistrShift: " << inDistrShift << endl;
+			cout << "Total inDistrShift: " << inDistrShift << endl << endl;
 			for (graphNode & n: nodes.second) {
 				n.incrementInterfaceConnectionsByN(incr);
 				n.incrementOpenInterfaceConnectionsByN(incr);
@@ -335,7 +339,7 @@ void incrementalDeterministicGraphGenerator::generateEdges(config::edge & edgeTy
 		vector<int> objectNodeIdVector = constructNodesVector(nodes.second);
 
 		if (edgeType.outgoing_distrib.type == DISTRIBUTION::ZIPFIAN || edgeType.incoming_distrib.type == DISTRIBUTION::ZIPFIAN) {
-//			performFixingShiftForZipfian(edgeType, subjectNodeIdVector, objectNodeIdVector);
+			performFixingShiftForZipfian(edgeType, subjectNodeIdVector, objectNodeIdVector);
 		}
 
 		shuffle(subjectNodeIdVector.begin(), subjectNodeIdVector.end(), randomGenerator);
@@ -402,9 +406,9 @@ void incrementalDeterministicGraphGenerator::generateEdges(config::edge & edgeTy
 
 
 void incrementalDeterministicGraphGenerator::incrementGraph(config::edge & edgeType) {
-	// Perform the shifting of the distribution as indecated by the user in the schema
+	cout << "Processing graph " << graphNumber << " edge type " << edgeType.edge_type_id << endl;
 
-//	chrono::high_resolution_clock::time_point start = chrono::high_resolution_clock::now();
+	// Perform the shifting of the distribution as indecated by the user in the schema
 	if (graphNumber > 0) {
 		performSchemaIndicatedShift(edgeType);
 		if ((conf.types.at(edgeType.subject_type).scalable ^ conf.types.at(edgeType.object_type).scalable) &&
@@ -413,30 +417,15 @@ void incrementalDeterministicGraphGenerator::incrementGraph(config::edge & edgeT
 			performShiftForNonScalableNodes(edgeType);
 		}
 	}
-//	chrono::high_resolution_clock::time_point end = chrono::high_resolution_clock::now();
-//	auto duration = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
-//	cout << "Shifting: " << duration << endl;
 
 
-//	start = chrono::high_resolution_clock::now();
 	// Add subject and object nodes to the graph
 	// Specify the current shift to get the wright amound of ICs
 	nodeGen.addSubjectNodes(edgeType, outDistrShift, graphNumber);
 	nodeGen.addObjectNodes(edgeType, inDistrShift, graphNumber);
-//	end = chrono::high_resolution_clock::now();
-//	duration = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
-//	cout << "Adding nodes: " << duration << endl;
 
-//	cout << "Number of subject nodes: " << nodes.first.size() << endl;
-//	for (graphNode n: nodes.first) {
-//		cout << "SubjectNode: " << n.id << endl;
-//	}
-//	cout << "Number of object nodes: " << nodes.second.size() << endl;
-//	for (graphNode n: nodes.second) {
-//		cout << "ObjectNode: " << n.id << endl;
-//	}
 
-//	start = chrono::high_resolution_clock::now();
+
 	// Update the ICs for the Zipfian distribution to satisfy the property that influecer nodes will get more ICs when the graph grows
 	if (edgeType.outgoing_distrib.type == DISTRIBUTION::ZIPFIAN) {
 		updateInterfaceConnectionsForZipfianDistributions(edgeType.outgoing_distrib, true);
@@ -444,11 +433,7 @@ void incrementalDeterministicGraphGenerator::incrementGraph(config::edge & edgeT
 	if (edgeType.incoming_distrib.type == DISTRIBUTION::ZIPFIAN) {
 		updateInterfaceConnectionsForZipfianDistributions(edgeType.incoming_distrib, false);
 	}
-//	end = chrono::high_resolution_clock::now();
-//	duration = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
-//	cout << "Updating Zipfian: " << duration << endl;
 
-//	start = chrono::high_resolution_clock::now();
 
 	double prob = 0.25;
 	if (edgeType.correlated_with.size() == 0) {
@@ -457,9 +442,6 @@ void incrementalDeterministicGraphGenerator::incrementGraph(config::edge & edgeT
 		vector<edge2> possibleEdges = generateCorrelatedEdgeSet(edgeType);
 		generateCorrelatedEdges(edgeType, prob, possibleEdges);
 	}
-//	end = chrono::high_resolution_clock::now();
-//	duration = chrono::duration_cast<chrono::milliseconds>( end - start ).count();
-//	cout << "Adding edges: " << duration << endl;
 
 }
 
@@ -490,7 +472,7 @@ int incrementalDeterministicGraphGenerator::processEdgeTypeSingleGraph(config::c
 	if (graphNumber == 0 &&
 			edgeType.outgoing_distrib.type != DISTRIBUTION::ZIPFIAN &&
 			edgeType.incoming_distrib.type != DISTRIBUTION::ZIPFIAN) {
-//			fixSchemaInequality(edgeType);
+			fixSchemaInequality(edgeType);
 	}
 
 	nodeGen = nodeGenerator(edgeType, nodes.first.size(), nodes.second.size(), &randomGenerator, &nodes, &conf);
