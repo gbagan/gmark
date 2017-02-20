@@ -249,7 +249,7 @@ void incrementalDeterministicGraphGenerator::performSchemaIndicatedShift(config:
 	if (conf.types[edgeType.subject_type].size > conf.types[edgeType.object_type].size) {
 		// Increment all ICs and openICs with 1
 		outDistrShift += sf;
-		cout << "Update out-nodes in dbsh: " << sf << endl;
+		cout << "Perform schema-indicated shift: out-degree distribution " << sf << endl;
 		for (graphNode & node: nodes.first) {
 			node.incrementOpenInterfaceConnectionsByN(sf);
 			node.incrementInterfaceConnectionsByN(sf);
@@ -263,7 +263,7 @@ void incrementalDeterministicGraphGenerator::performSchemaIndicatedShift(config:
 			numIncrement++;
 		}
 		inDistrShift += numIncrement;
-		cout << "Update in-nodes in dbsh: " << sf << endl;
+		cout << "Perform schema-indicated shift: in-degree distribution " << sf << "\n" << endl;
 		for (graphNode & node: nodes.second) {
 			node.incrementOpenInterfaceConnectionsByN(numIncrement);
 			node.incrementInterfaceConnectionsByN(numIncrement);
@@ -272,7 +272,7 @@ void incrementalDeterministicGraphGenerator::performSchemaIndicatedShift(config:
 		// Increment all ICs and openICs with 1
 		inDistrShift += sf;
 		for (graphNode & node: nodes.second) {
-			cout << "Update out-nodes in dbsh: " << sf << endl;
+			cout << "Perform schema-indicated shift: in-degree distribution " << sf << endl;
 			node.incrementOpenInterfaceConnectionsByN(sf);
 			node.incrementInterfaceConnectionsByN(sf);
 		}
@@ -286,7 +286,7 @@ void incrementalDeterministicGraphGenerator::performSchemaIndicatedShift(config:
 		}
 		outDistrShift += numIncrement;
 		for (graphNode & node: nodes.first) {
-			cout << "Update in-nodes in dbsh: " << sf << endl;
+			cout << "Perform schema-indicated shift: out-degree distribution " << sf << "\n" <<  endl;
 			node.incrementOpenInterfaceConnectionsByN(numIncrement);
 			node.incrementInterfaceConnectionsByN(numIncrement);
 		}
@@ -406,8 +406,6 @@ void incrementalDeterministicGraphGenerator::generateEdges(config::edge & edgeTy
 
 
 void incrementalDeterministicGraphGenerator::incrementGraph(config::edge & edgeType) {
-	cout << "Processing graph " << graphNumber << " edge type " << edgeType.edge_type_id << endl;
-
 	// Perform the shifting of the distribution as indecated by the user in the schema
 	if (graphNumber > 0) {
 		performSchemaIndicatedShift(edgeType);
@@ -456,7 +454,9 @@ void incrementalDeterministicGraphGenerator::incrementGraph(config::edge & edgeT
 
 
 int incrementalDeterministicGraphGenerator::processEdgeTypeSingleGraph(config::config configuration, config::edge & edgeType, ofstream & outputFile, int graphNumber_, bool printNodeProperties) {
-//	cout << endl << endl;
+	cout << "Processing graph " << graphNumber_ << " edge type " << edgeType.edge_type_id << endl;
+
+	//	cout << endl << endl;
 	this->conf = configuration;
 	this->graphNumber = graphNumber_;
 //	cout << "\n\n-----------GraphNumber: " << graphNumber << ". Edge-type: " << edgeType.edge_type_id << "--------------" << endl;
@@ -625,6 +625,7 @@ int incrementalDeterministicGraphGenerator::processEdgeTypeSingleGraph(config::c
 //		nConnected << nodesConnected << ",";
 //	}
 
+	cout << endl;
 	return 0;
 }
 
