@@ -181,7 +181,7 @@ int main(int argc, char ** argv) {
     string workload_file;
     string report_directory = ".";
     int c;
-//    bool selectivity = true;
+    bool selectivity = true;
 //    long nb_nodes = -1;
     string nb_nodes_string = "";
     bool print_alias = false;    
@@ -270,6 +270,8 @@ int main(int argc, char ** argv) {
 			ofstream report_stream;
 	        report_stream.open(report_directory + "/graph.html");
 	        html_graph_report(conf, rep, report_stream);
+
+	        graph_stream.close();
 		}
     }
 
@@ -278,9 +280,9 @@ int main(int argc, char ** argv) {
         report::workload_report rep;
 
         ofstream workload_stream;
-        workload_stream.open("workloadTest.txt");
+        workload_stream.open(workload_file);
         workload::workload wl;
-        if(true) { // selectivity
+        if(selectivity) {
             workload2::generate_workload(conf, wl, rep);
         }
         else {

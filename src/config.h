@@ -93,11 +93,6 @@ public:
     
 };
 
-class correlationDef {
-public:
-	vector<int> basis_for_correlation;
-	vector<int> target_for_correlation;
-};
 
 class workload_type {
 public:
@@ -146,7 +141,6 @@ public:
     vector<predicate> predicates;
     distribution predicate_distribution;
     schem schema;
-    vector<correlationDef> correlations;
     vector<workload> workloads;
     bool print_alias;    
 

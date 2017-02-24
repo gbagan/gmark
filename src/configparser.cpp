@@ -57,9 +57,6 @@ int parse_config(const string & filename, config::config & conf) {
         parse_schema(schema, conf);
     }
     
-    for (pugi::xml_node corr : root.children("correlation")) {
-		parse_correlation(corr, conf);
-    }
 
     parse_workloads(root, conf);
     
@@ -233,27 +230,6 @@ void parse_schema(pugi::xml_node node, config::config & conf) {
     }
 }
 
-void parse_correlation(pugi::xml_node node, config::config & conf) {
-	config::correlationDef corr;
-
-	vector<int> basisForCorrelation;
-	pugi::xml_node basis = node.child("basis");
-	for (pugi::xml_node edgeTypeFrom : basis.children("edge_type")) {
-		int edgeTypeId = edgeTypeFrom.text().as_uint();
-		basisForCorrelation.push_back(edgeTypeId);
-	}
-	corr.basis_for_correlation = basisForCorrelation;
-
-	vector<int> targetForCorrelation;
-	pugi::xml_node target = node.child("target");
-	for (pugi::xml_node edgeTypeTarget : target.children("edge_type")) {
-		int edgeTypeId = edgeTypeTarget.text().as_uint();
-		targetForCorrelation.push_back(edgeTypeId);
-	}
-	corr.target_for_correlation = targetForCorrelation;
-
-	conf.correlations.push_back(corr);
-}
 
 distribution parse_distribution(pugi::xml_node node) {
     distribution dist;

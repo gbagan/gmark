@@ -262,7 +262,7 @@ vector<incrementalDeterministicGraphGenerator::edge2> incrementalDeterministicGr
 						edge2 possibleEdge;
 						possibleEdge.subjectIterationId = subjectIterationId;
 						possibleEdge.subjectId = subjectId;
-						possibleEdge.predicate = to_string(edgeType.edge_type_id);
+						possibleEdge.predicate = edgeType.edge_type_id;
 						possibleEdge.objectIterationId = mappedObject;
 						possibleEdge.objectId = mappedObject * conf.types.size() + edgeType.object_type;
 

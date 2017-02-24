@@ -30,7 +30,7 @@ void incrementalDeterministicGraphGenerator::addEdge(graphNode &sourceNode, grap
 	newEdge.subjectIterationId = sourceNode.iterationId;
 	newEdge.objectIterationId = targetNode.iterationId;
 	newEdge.subjectId = sourceNode.id;
-	newEdge.predicate = to_string(predicate);
+	newEdge.predicate = predicate;
 	newEdge.objectId = targetNode.id;
 	newEdge.createdInGraph = graphNumber;
 
@@ -244,7 +244,13 @@ int incrementalDeterministicGraphGenerator::processEdgeTypeSingleGraph(config::c
 //	cout << "Number of edges: " << edges.size() << endl;
 	for (size_t i=0; i<edges.size(); i++) {
 		edge2 e = edges[i];
-		outputFile << e.subjectId << " " << e.predicate << " " << e.objectId << " | " << e.createdInGraph <<"\n";
+		outputFile << e.subjectId << " ";
+		if (conf.print_alias) {
+			outputFile << conf.predicates[e.predicate].alias;
+		} else {
+			outputFile << e.predicate;
+		}
+		outputFile << " " << e.objectId << " | " << e.createdInGraph <<"\n";
 	}
 	outputFile.flush();
 

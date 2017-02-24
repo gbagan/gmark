@@ -24,7 +24,7 @@ public:
 		int subjectIterationId;
 		int objectIterationId;
 		int subjectId;
-		string predicate;
+		int predicate;
 		int objectId;
 		int createdInGraph;
 	};
