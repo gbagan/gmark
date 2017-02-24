@@ -203,13 +203,15 @@ void incrementalDeterministicGraphGenerator::incrementGraph(config::edge & edgeT
 
 
 
-int incrementalDeterministicGraphGenerator::processEdgeTypeSingleGraph(config::config configuration, config::edge & edgeType, ofstream & outputFile, int graphNumber_, bool printNodeProperties) {
+int incrementalDeterministicGraphGenerator::processEdgeTypeSingleGraph(config::config configuration, config::edge & edgeType,
+		ofstream & outputFile, string outputFileName_,
+		int graphNumber_, bool printNodeProperties) {
 	cout << "Processing graph " << graphNumber_ << " edge type " << edgeType.edge_type_id << endl;
 
 	//	cout << endl << endl;
 	this->conf = configuration;
 	this->graphNumber = graphNumber_;
-//	cout << "\n\n-----------GraphNumber: " << graphNumber << ". Edge-type: " << edgeType.edge_type_id << "--------------" << endl;
+	this->outputFileName = outputFileName_;
 //	cout << "Number of nodes: " << conf.nb_nodes[graphNumber] << endl;
 
 	if (edgeType.outgoing_distrib.type == DISTRIBUTION::ZIPFIAN && outDistrShift == 0) {
@@ -247,7 +249,7 @@ int incrementalDeterministicGraphGenerator::processEdgeTypeSingleGraph(config::c
 	outputFile.flush();
 
 	if (printNodeProperties) {
-		string subjectsNodesFileName = "ignore/subjects_edgeType" + to_string(edgeType.edge_type_id) + "graphNumber" + to_string(graphNumber_) +".txt";
+		string subjectsNodesFileName = outputFileName + "_subjects_edgeType" + to_string(edgeType.edge_type_id) + "graphNumber" + to_string(graphNumber_) +".txt";
 		ofstream subjectNodes;
 		subjectNodes.open(subjectsNodesFileName);
 		subjectNodes << "Global node id, local node id, degree in the graph\n";
@@ -257,7 +259,7 @@ int incrementalDeterministicGraphGenerator::processEdgeTypeSingleGraph(config::c
 		subjectNodes.flush();
 
 
-		string objectsNodesFileName = "ignore/objects_edgeType" + to_string(edgeType.edge_type_id) + "graphNumber" + to_string(graphNumber_) +".txt";
+		string objectsNodesFileName = outputFileName + "_objects_edgeType" + to_string(edgeType.edge_type_id) + "graphNumber" + to_string(graphNumber_) +".txt";
 		ofstream objectNodes;
 		objectNodes.open(objectsNodesFileName);
 		objectNodes << "Global node id, local node id, degree in the graph\n";

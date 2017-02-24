@@ -19,12 +19,12 @@ private:
 //	vector<int> nb_nodes_per_graph;
 	string conf_file;
 
-	void processEdgeType(config::edge & edgeType, bool printNodeProperties);
+	void processEdgeType(config::edge & edgeType, bool printNodeProperties, string graphFile);
 public:
 	processingEdgeTypes(config::config conf, string conf_file);
 	virtual ~processingEdgeTypes();
 
-	void sequentialProcessing(bool printNodeProperties);
+	void sequentialProcessing(bool printNodeProperties, string graphFile);
 };
 
 } /* namespace std */

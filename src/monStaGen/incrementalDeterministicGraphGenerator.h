@@ -35,6 +35,7 @@ private:
 	int outDistrShift = 0;
 	int inDistrShift = 0;
 	int graphNumber = 0;
+	string outputFileName = "ignore/outputGraph";
 
 	config::config conf;
 	cumulativeDistributionUtils cumDistrUtils;
@@ -91,7 +92,9 @@ public:
 	virtual ~incrementalDeterministicGraphGenerator();
 
 	void generateIncDetGraph(ofstream*  outputFile, int* seeds, int edgeTypeIdLow, int edgeTypeIdHigh);
-	int processEdgeTypeSingleGraph(config::config configuration, config::edge & edgeType, ofstream & outputFile, int graphNumber, bool printNodeProperties);
+	int processEdgeTypeSingleGraph(config::config configuration, config::edge & edgeType,
+			ofstream & outputFile, string outputFileName,
+			int graphNumber, bool printNodeProperties);
 };
 
 } /* namespace std */

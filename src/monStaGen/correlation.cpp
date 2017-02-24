@@ -77,7 +77,7 @@ vector<int> incrementalDeterministicGraphGenerator::sortOnDegree(vector<int> sub
 //	cout << "indegreeDistr size: " << indegreeDistr.size();
 
 	string line;
-	ifstream outputfile("ignore/outputgraph" + to_string(graphNumber) + ".txt");
+	ifstream outputfile(outputFileName + to_string(graphNumber) + ".txt");
 	outputfile.clear();
 	outputfile.seekg(0, ios::beg);
 	if (outputfile.is_open()) {
@@ -228,7 +228,7 @@ vector<incrementalDeterministicGraphGenerator::edge2> incrementalDeterministicGr
 //	}
 
 	string line;
-	ifstream outputfile("ignore/outputgraph" + to_string(graphNumber) + ".txt");
+	ifstream outputfile(outputFileName + to_string(graphNumber) + ".txt");
 	outputfile.clear();
 	outputfile.seekg(0, ios::beg);
 	if (outputfile.is_open()) {
