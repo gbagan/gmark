@@ -350,8 +350,6 @@ int main(int argc, char ** argv) {
     }
     
 
-
-
     config::config conf;
     if (nb_nodes_per_graph.size() > 0) {
     	for (int nb: nb_nodes_per_graph) {

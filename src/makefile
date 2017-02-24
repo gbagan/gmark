@@ -4,7 +4,7 @@ CFLAGS=-g -O3 -Wall -std=c++11
 objects = test.o gmark.o configparser.o pugixml.o randomgen.o config.o workload.o workload2.o \
 			incrementalDeterministicGraphGenerator.o graphNode.o cumulativeDistributionUtils.o \
 			nodeGenerator.o processingEdgeTypes.o analysisIncrDetGraph.o analyseCorrelation.o \
-			correlation.o
+			correlation.o shiftingDegreeDistribution.o
 
 all: test 
 	 
@@ -66,5 +66,7 @@ processingEdgeTypes.o: monStaGen/processingEdgeTypes.cpp monStaGen/incrementalDe
 correlation.o: monStaGen/correlation.cpp monStaGen/incrementalDeterministicGraphGenerator.h
 	$(CC) $(CFLAGS) -c monStaGen/correlation.cpp
 
+shiftingDegreeDistribution.o: monStaGen/shiftingDegreeDistribution.cpp monStaGen/incrementalDeterministicGraphGenerator.h
+	$(CC) $(CFLAGS) -c monStaGen/shiftingDegreeDistribution.cpp
 clean:
 	rm -rf *.o test

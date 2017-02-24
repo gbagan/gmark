@@ -19,11 +19,9 @@ graphNode::graphNode() {
 	this->numberOfOpenInterfaceConnections = 0;
 	this->numberOfInterfaceConnections = 0;
 	this->position = 0.0;
-
-//	this->connections = new int[1];
 }
-graphNode::graphNode(int globalId, int localId, int nodeType, int numberOfEdgeTypes, int numberOfOpenICs,
-		int numberOfICs, float position) {
+graphNode::graphNode(int globalId, int localId, int nodeType,
+		int numberOfOpenICs, int numberOfICs, float position) {
 	this->id = globalId;
 	this->iterationId = localId;
 	this->type = nodeType;
@@ -31,7 +29,6 @@ graphNode::graphNode(int globalId, int localId, int nodeType, int numberOfEdgeTy
 	this->numberOfOpenInterfaceConnections = numberOfICs;
 	this->numberOfInterfaceConnections = numberOfOpenICs;
 	this->position = position;
-//	this->connections = new int[maxNumberOfConnections];
 }
 
 graphNode::~graphNode() {
@@ -58,9 +55,7 @@ void graphNode::decrementOpenInterfaceConnections() {
 	this->numberOfOpenInterfaceConnections--;
 }
 void graphNode::incrementOpenInterfaceConnectionsByN(int number) {
-//	cout << "numberOfOpenInterfaceConnections" << this->numberOfOpenInterfaceConnections << endl;
 	this->numberOfOpenInterfaceConnections += number;
-//	cout << "numberOfOpenInterfaceConnections" << this->numberOfOpenInterfaceConnections << endl;
 }
 void graphNode::incrementInterfaceConnectionsByN(int number) {
 	this->numberOfInterfaceConnections += number;
@@ -73,12 +68,5 @@ void graphNode::setPosition(double number) {
 float graphNode::getPosition() {
 	return this->position;
 }
-
-//void graphNode::setConnection(int connectionIterationId, int value) {
-//	this->connections[connectionIterationId] = value;
-//}
-//int graphNode::getConnection(int connectionIterationId) {
-//	return this->connections[connectionIterationId];
-//}
 
 } /* namespace std */

@@ -28,14 +28,8 @@ int cumulativeDistributionUtils::calculateCDF(vector<graphNode*> & nodes, graphN
 	int i = 0;
 
 	for(graphNode* & n: nodes) {
-//		cout << "Node" << n->iterationId << " found with openConnections: " << n->getNumberOfOpenInterfaceConnections() << "\n";
-
 		int possibleConnections = n->getNumberOfOpenInterfaceConnections();
 		possibleConnections = max(possibleConnections, 0);
-
-//		if (sourceNode.iterationId != -1) {
-//			possibleConnections = possibleConnections * (1 - sourceNode.getConnection(i));
-//		}
 
 		nonNormalizedResults.push_back(possibleConnections);
 		sum += possibleConnections;

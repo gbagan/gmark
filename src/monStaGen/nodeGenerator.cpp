@@ -17,12 +17,7 @@ nodeGenerator::nodeGenerator() {
 	this->birthIdObject = 0;
 }
 nodeGenerator::~nodeGenerator() {
-//	for (graphNode node: nodes->first) {
-//		delete &node;
-//	}
-//	for (graphNode node: nodes->second) {
-//		delete &node;
-//	}
+
 }
 
 nodeGenerator::nodeGenerator(config::edge & edgeType, int birthIdSubj, int birthIdObj, default_random_engine* randomGenerator_, pair< vector<graphNode>,vector<graphNode> >* nodes_, config::config* conf_) {
@@ -33,32 +28,18 @@ nodeGenerator::nodeGenerator(config::edge & edgeType, int birthIdSubj, int birth
 	this->conf = conf_;
 }
 
-//void nodeGenerator::initializeConnections(graphNode &n, int maxNumberOfConnections) {
-//	for (int i=0; i<maxNumberOfConnections; i++) {
-//		n.setConnection(i, 0);
-//	}
-//}
-
 
 int nodeGenerator::getNumberOfICs(distribution distr, bool addSourceNode) {
 	int numberOfConnections;
 	if (distr.type == DISTRIBUTION::UNIFORM) {
 //		cout << "UNIFORM with " << distr.arg1 << " " << distr.arg2 << endl;
-
 		numberOfConnections = uniform_int_distribution<int>(distr.arg1, distr.arg2)(*randomGenerator);
-
 	} else if (distr.type == DISTRIBUTION::NORMAL) {
 //		cout << "NORMAL with " << distr.arg1 << " " << distr.arg2 << endl;
-
 		numberOfConnections = round(normal_distribution<double>(distr.arg1, distr.arg2)(*randomGenerator));
-
 	} else { // distr.type == DISTRIBUTION::UNDEFINED
 		numberOfConnections = 0;
 	}
-
-//	if (numberOfConnections < 0) {
-//		numberOfConnections = 0;
-//	}
 
 //	cout << "Node get " << numberOfConnections << " interface-connections" << endl;
 	return numberOfConnections;
@@ -80,7 +61,6 @@ void nodeGenerator::addNode(config::edge & edgeType, int distrShift, bool addSou
 	}
 
 
-
 	float pos = 0.0;
 	int numberOfICs = 0;
 	if (distr.type == DISTRIBUTION::ZIPFIAN) {
@@ -92,22 +72,15 @@ void nodeGenerator::addNode(config::edge & edgeType, int distrShift, bool addSou
 //	cout << "Type: " << type << endl;
 //	cout << "BirthId: " << birthId << endl;
 //	cout << "Id: " << type + (birthId * conf->types.size()) << endl;
-	graphNode *n = new graphNode(type + (birthId * conf->types.size()), birthId, type, conf->schema.edges.size(), numberOfICs, numberOfICs, pos);
+	graphNode *n = new graphNode(type + (birthId * conf->types.size()), birthId, type, numberOfICs, numberOfICs, pos);
 
 	if (addSourceNode) {
-//		initializeConnections(*n, conf->types.at(otherType).size*2);
 		nodes->first.push_back(*n);
 		birthIdSubject++;
 	} else {
 		nodes->second.push_back(*n);
 		birthIdObject++;
 	}
-
-//		cout << "Creating a node at iteration " << iterationNumber << " of type:" << type <<
-//				". Size of that type=" << conf.types.at(type).size << "\n";
-
-
-
 }
 
 void nodeGenerator::addSubjectNodes(config::edge & edgeType, int distrShift, int graphNumber) {
