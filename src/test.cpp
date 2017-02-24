@@ -189,7 +189,7 @@ int main(int argc, char ** argv) {
     bool printNodeProperties = false;
     vector<unsigned int> nb_nodes_per_graph;
 
-    while ((c = getopt(argc, argv, "c:g:w:an:r:ip")) != -1) {
+    while ((c = getopt(argc, argv, "c:g:w:an:r:mp")) != -1) {
         switch(c) {
             case 'c':
                 conf_file = optarg;
@@ -208,10 +208,14 @@ int main(int argc, char ** argv) {
                 break;
             case 'n':
 //                nb_nodes = atol(optarg);
+            	// optarg needs to be in the form
+            	//		(int-)* int
+            	// for example, a sequence with three graphs: 10000-20000-30000
+            	// or, a single graph: 30000
                 nb_nodes_string = optarg;
                 parseNodeSequence(&nb_nodes_per_graph, nb_nodes_string);
                 break;
-            case 'i':
+            case 'm':
             	monStaGen = true;
             	break;
             case 'p':
