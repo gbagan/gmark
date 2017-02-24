@@ -202,47 +202,4 @@ double incrementalDeterministicGraphGenerator::getMeanICsPerNode(distribution & 
 }
 
 
-
-//void incrementalDeterministicGraphGenerator::printRankZipf(vector<graphNode> nodes, int edgeTypeId, int nbNodes) {
-//	int maxDegree = 0;
-//	for (graphNode node: nodes) {
-//		int degree = node.numberOfInterfaceConnections - node.numberOfOpenInterfaceConnections;
-//		if (degree > maxDegree) {
-//			maxDegree = degree;
-//		}
-//	}
-//
-//	cout << "Maxdegree=" << maxDegree << endl;
-//	ofstream rankFile, degreeFile;
-//	rankFile.open("rankFileET" + to_string(edgeTypeId) + "n" + to_string(nbNodes) + ".txt", ios::trunc);
-//	degreeFile.open("rankFileET" + to_string(edgeTypeId) + "n" + to_string(nbNodes) + "degree.txt", ios::trunc);
-//	for (graphNode node: nodes) {
-//		double rank = ((double)node.numberOfInterfaceConnections - (double)node.numberOfOpenInterfaceConnections) / (double) maxDegree;
-//		rankFile << to_string(rank) << endl;
-//		degreeFile << to_string(node.numberOfInterfaceConnections - node.numberOfOpenInterfaceConnections) << "-" << to_string(maxDegree) << endl;
-//	}
-//	rankFile.close();
-//}
-//
-//void incrementalDeterministicGraphGenerator::printRankNonZipf(vector<graphNode> nodes, int edgeTypeId, int nbNodes) {
-//	ofstream rankFile;
-//	rankFile.open("rankFileET" + to_string(edgeTypeId) + "n" + to_string(nbNodes) + ".txt", ios::trunc);
-//	for (graphNode currentNode: nodes) {
-//		int nodesWithLowerDegree = 0;
-//		int degree = currentNode.numberOfInterfaceConnections - currentNode.numberOfOpenInterfaceConnections;
-//		for (graphNode compareNode: nodes) {
-//			if (compareNode.numberOfInterfaceConnections - compareNode.numberOfOpenInterfaceConnections <= degree) {
-//				nodesWithLowerDegree++;
-//			}
-//		}
-//		double rank = (double)nodesWithLowerDegree / (double)nodes.size();
-//		rankFile << to_string(rank) << endl;
-//	}
-//
-//
-//	rankFile.close();
-//}
-
-
-
 } /* namespace std */

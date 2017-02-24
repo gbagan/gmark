@@ -7,7 +7,6 @@
 
 #include "processingEdgeTypes.h"
 #include "../configparser.h"
-#include "../analysis/analyseCorrelation.h"
 
 namespace std {
 
@@ -46,10 +45,6 @@ void processingEdgeTypes::processEdgeType(config::edge & edgeType, bool printNod
 
 		graphGenerator.processEdgeTypeSingleGraph(conf, conf.schema.edges.at(edgeType.edge_type_id), outputFile, graphFile, j, printNodeProperties);
 
-		if (conf.schema.edges[edgeType.edge_type_id].correlated_with.size() > 0) {
-			analyseCorrelation correlation(conf);
-			correlation.analyze(edgeType, j);
-		}
 	}
 }
 

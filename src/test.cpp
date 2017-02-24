@@ -10,9 +10,7 @@
 #include "workload2.h"
 #include "report.h"
 #include "monStaGen/incrementalDeterministicGraphGenerator.h"
-#include "analysis/analysisIncrDetGraph.h"
 #include "monStaGen/processingEdgeTypes.h"
-#include "analysis/analyseCorrelation.h"
 
 
 void print_report(report::report & rep) {
@@ -151,133 +149,6 @@ void html_workload_report(config::config & conf, report::workload_report & rep, 
 }
 
 
-void creatRankFileZipf(config::config conf, string graphFileName) {
-	vector<int> outDistr;
-//	vector<int> inDistr;
-
-	// Initialize outDistr-vector
-	for (size_t i=0; i <= conf.types[conf.schema.edges[0].subject_type].size[0]; i++) {
-		outDistr.push_back(0);
-	}
-
-	// Initialize inDistr-vector
-//	for (int i=0; i<=conf.types[conf.schema.edges[0].object_type].size; i++) {
-//		inDistr.push_back(0);
-//	}
-
-	// Analyze all edges
-	string line;
-	ifstream myfile(graphFileName);
-	myfile.clear();
-	myfile.seekg(0, ios::beg);
-	if (myfile.is_open()) {
-		while (getline(myfile, line)) {
-			string temp = line;
-			string getPred = temp.erase(0, temp.find(" ")+1);
-			string predicate = getPred.substr(0, getPred.find(" "));
-
-			temp = line;
-			string subjectType = temp.substr(0, temp.find("-"));
-			string getSub = temp.erase(0, temp.find("-")+1);
-			string subject = getSub.substr(0, getSub.find(" "));
-
-//			getPred = getPred.erase(0, getPred.find(" ")+1);
-//
-//			string objectType = getPred.substr(0, getPred.find("-"));
-//			string getObj = getPred.erase(0, getPred.find("-")+1);
-//			string object = getObj.substr(0, getObj.length());
-
-			outDistr.at(stoi(subject))++;
-//			inDistr.at(stoi(object) - ...TODO...)++;
-
-		}
-		myfile.close();
-	} else {
-		cout << "Unable to open file";
-	}
-
-	int max = 0;
-	for (int val: outDistr) {
-		if (val > max) {
-			max = val;
-		}
-	}
-	cout << "Maxdegree = " << max << endl;
-	ofstream rankFile, degreeFile;
-	string fname = "rankFileET0n" + to_string(conf.nb_nodes[0]) + ".txt";
-	string fname2 = "rankFileET0n" + to_string(conf.nb_nodes[0]) + "degree.txt";
-	rankFile.open (fname);
-	degreeFile.open (fname2);
-	for (int val: outDistr) {
-		rankFile << (double)val/(double)max << endl;
-		degreeFile << val << "-" << max << endl;
-	}
-}
-
-
-
-
-void creatRankFileNonZipf(config::config conf, string graphFileName) {
-	vector<int> outDistr;
-//	vector<int> inDistr;
-
-	// Initialize outDistr-vector
-	for (size_t i=0; i<conf.types[conf.schema.edges[0].subject_type].size[0]; i++) {
-		outDistr.push_back(0);
-	}
-
-	// Initialize inDistr-vector
-//	for (int i=0; i<=conf.types[conf.schema.edges[0].object_type].size; i++) {
-//		inDistr.push_back(0);
-//	}
-
-	// Analyze all edges
-	string line;
-	ifstream myfile(graphFileName);
-	myfile.clear();
-	myfile.seekg(0, ios::beg);
-	if (myfile.is_open()) {
-		while (getline(myfile, line)) {
-			string temp = line;
-//			string getPred = temp.erase(0, temp.find(" ")+1);
-//			string predicate = getPred.substr(0, getPred.find(" "));
-
-//			temp = line;
-			string subjectType = temp.substr(0, temp.find("-"));
-			string getSub = temp.erase(0, temp.find("-")+1);
-			string subject = getSub.substr(0, getSub.find(" "));
-
-//			getPred = getPred.erase(0, getPred.find(" ")+1);
-//
-//			string objectType = getPred.substr(0, getPred.find("-"));
-//			string getObj = getPred.erase(0, getPred.find("-")+1);
-//			string object = getObj.substr(0, getObj.length());
-
-			outDistr.at(stoi(subject))++;
-//			inDistr.at(stoi(object) - ...TODO...)++;
-
-		}
-		myfile.close();
-	} else {
-		cout << "Unable to open file";
-	}
-
-	ofstream rankFile;
-	rankFile.open("rankFileET0n" + to_string(conf.nb_nodes[0]) + ".txt", ios::trunc);
-	for (int currentNodeDegree: outDistr) {
-		int nodesWithLowerDegree = 0;
-		for (int compareNodeDegree: outDistr) {
-			if (compareNodeDegree <= currentNodeDegree) {
-				nodesWithLowerDegree++;
-			}
-		}
-		double rank = (double)nodesWithLowerDegree / (double)outDistr.size();
-		rankFile << to_string(rank) << endl;
-	}
-
-
-	rankFile.close();
-}
 
 void parseNodeSequence(vector<unsigned int>* nodeSequence, string nodeSequenceString) {
 	// Define the sequence as: 10-20-30-40
@@ -391,27 +262,12 @@ int main(int argc, char ** argv) {
 			graph::ntriple_graph_writer writer(graph_stream);
 
 			writer.build_graph(conf, rep, i);
-	//      creatRankFileZipf(conf, fileName);
-	//      creatRankFileNonZipf(conf, fileName);
 
 			ofstream report_stream;
 	        report_stream.open(report_directory + "/graph.html");
 	        html_graph_report(conf, rep, report_stream);
 		}
     }
-
-
-
-//    analyseCorrelation correlation(conf);
-//    correlation.analyzeLocationUniCorrelation("ignore/person_isLocatedIn_place_0_0.csv", "ignore/person_studyAt_organisation_0_0.csv");
-
-
-
-
-
-
-
-
 
 
     if (workload_file != "") {
@@ -448,65 +304,5 @@ int main(int argc, char ** argv) {
         }
         */
     }
-
-
-
-
-//    analysisIncrDetGraph analyzeGraph("test.txt", conf);
-//    analyzeGraph.stability(0);
-  	// #### ANALYSIS FOR MONSTAGEN ####
-    for (int g=0; g<conf.nb_graphs; g++) {
-    	string outpName = graph_file + to_string(g) + ".txt";
-    	analysisIncrDetGraph analyzeGraph(outpName, conf);
-
-       ofstream rFile, rFileHulp;
-       string rNameHulp = graph_file + "_distributionAnalysisHulp" + to_string(g) + ".r";
-       rFileHulp.open(rNameHulp, ios::trunc);
-       rFile << "# This R-file is generated by gMark" << endl;
-       int i = 0;
-       for(config::edge e: conf.schema.edges) {
-    	   rFileHulp << "# Analysis of the distributions of edge-type: " << i << endl;
-			cout << "# Analysis of the distributions of edge-type: " << i << endl;
-	//       	analyzeGraph.distributionAnalysis2(e, rFile);
-			analyzeGraph.distributionAnalysis(e, rFileHulp, g);
-
-			rFile << endl;
-
-			i++;
-       }
-
-//	rFile << "meanMin = mean(c(min0, min1, min2, min3, min4, min5, min6, min7, min8, min9, min10, min11, min12, min13, min14, min15, min16, min17, min18, min19))" << endl;
-//	rFile << "sdMin = sd(c(min0, min1, min2, min3, min4, min5, min6, min7, min8, min9, min10, min11, min12, min13, min14, min15, min16, min17, min18, min19))" << endl;
-//	rFile << "meanMax = mean(c(max0, max1, max2, max3, max4, max5, max6, max7, max8, max9, max10, max11, max12, max13, max14, max15, max16, max17, max18, max19))" << endl;
-//	rFile << "sdMax = sd(c(max0, max1, max2, max3, max4, max5, max6, max7, max8, max9, max10, max11, max12, max13, max14, max15, max16, max17, max18, max19))" << endl;
-//	rFile << "meanMean = mean(c(m0, m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, m13, m14, m15, m16, m17, m18, m19))" << endl;
-//	rFile << "sdMean = sd(c(m0, m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, m13, m14, m15, m16, m17, m18, m19))" << endl;
-
-//	rFile << "meanMean = mean(c(m0, m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, m13, m14, m15, m16, m17, m18, m19))" << endl;
-//	rFile << "sdMean = sd(c(m0, m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, m13, m14, m15, m16, m17, m18, m19))" << endl;
-//	rFile << "meanSd = mean(c(sd0, sd1, sd2, sd3, sd4, sd5, sd6, sd7, sd8, sd9, sd10, sd11, sd12, sd13, sd14, sd15, sd16, sd17, sd18, sd19))" << endl;
-//	rFile << "sdSd = sd(c(sd0, sd1, sd2, sd3, sd4, sd5, sd6, sd7, sd8, sd9, sd10, sd11, sd12, sd13, sd14, sd15, sd16, sd17, sd18, sd19))" << endl;
-
-
-//    rFile << "meanMean = mean(c(alpha0, alpha1, alpha2, alpha3, alpha4, alpha5, alpha6, alpha7, alpha8, alpha9, alpha10, alpha11, alpha12, alpha13, alpha14, alpha15, alpha16, alpha17, alpha18, alpha19))" << endl;
-//	rFile << "sdMean = sd(c(alpha0, alpha1, alpha2, alpha3, alpha4, alpha5, alpha6, alpha7, alpha8, alpha9, alpha10, alpha11, alpha12, alpha13, alpha14, alpha15, alpha16, alpha17, alpha18, alpha19))" << endl;
-
-//       	rFile.close();
-//
-
-    }
-//    analyzeGraph.stability(0);
-////      analyzeGraph.numberOfEdgesVsNode();
-
-  	// #### ANALYSIS ####
-
-
-
-
-
-
-
-
-
 }
 

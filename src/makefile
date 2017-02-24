@@ -3,8 +3,7 @@ CFLAGS=-g -O3 -Wall -std=c++11
 
 objects = test.o gmark.o configparser.o pugixml.o randomgen.o config.o workload.o workload2.o \
 			incrementalDeterministicGraphGenerator.o graphNode.o cumulativeDistributionUtils.o \
-			nodeGenerator.o processingEdgeTypes.o analysisIncrDetGraph.o analyseCorrelation.o \
-			correlation.o shiftingDegreeDistribution.o
+			nodeGenerator.o processingEdgeTypes.o correlation.o shiftingDegreeDistribution.o
 
 all: test 
 	 
@@ -37,14 +36,6 @@ pugixml.o: pugixml.cpp pugixml.hpp
 	$(CC) $(CFLAGS) -c pugixml.cpp
 
 
-
-
-analyseCorrelation.o: analysis/analyseCorrelation.cpp monStaGen/incrementalDeterministicGraphGenerator.h
-	$(CC) $(CFLAGS) -c analysis/analyseCorrelation.cpp 
-
-analysisIncrDetGraph.o: analysis/analysisIncrDetGraph.cpp config.h
-	$(CC) $(CFLAGS) -c analysis/analysisIncrDetGraph.cpp
-	
 
 
 
