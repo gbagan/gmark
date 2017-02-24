@@ -382,30 +382,21 @@ int main(int argc, char ** argv) {
     } else {
 		for (size_t i=0; i<conf.nb_graphs; i++) {
 	//	  	cout << "Processing graph " << i << endl;
-			config::config conf2;
-
-			if (nb_nodes_per_graph.size() > 0) {
-				for (int nb: nb_nodes_per_graph)
-				conf2.nb_nodes.push_back(nb);
-			} else {
-				conf2.nb_nodes.push_back(-1);
-			}
-			conf2.nb_graphs = conf.nb_graphs;
-//			cout << "NbNodes[0]: " << conf2.nb_nodes[0] << endl;
-			configparser::parse_config(conf_file, conf2);
-			conf2.complete_config();
 			report::report rep;
-
 			ofstream graph_stream;
-			string fileName = graph_file + to_string(i) + ".txt";
-			graph_stream.open(fileName);
 
+			string fileName = graph_file + to_string(i) + ".txt";
+
+			graph_stream.open(fileName);
 			graph::ntriple_graph_writer writer(graph_stream);
 
-//			cout << "NbNodes[i]: " << conf2.nb_nodes[i] << endl;
-			writer.build_graph(conf2, rep, i);
-	//      creatRankFileZipf(conf2, fileName);
-	//      creatRankFileNonZipf(conf2, fileName);
+			writer.build_graph(conf, rep, i);
+	//      creatRankFileZipf(conf, fileName);
+	//      creatRankFileNonZipf(conf, fileName);
+
+			ofstream report_stream;
+	        report_stream.open(report_directory + "/graph.html");
+	        html_graph_report(conf, rep, report_stream);
 		}
     }
 
@@ -422,92 +413,57 @@ int main(int argc, char ** argv) {
 
 
 
-//    if(graph_file != "") {
 
+    if (workload_file != "") {
+        report::workload_report rep;
 
+        ofstream workload_stream;
+        workload_stream.open("workloadTest.txt");
+        workload::workload wl;
+        if(true) { // selectivity
+            workload2::generate_workload(conf, wl, rep);
+        }
+        else {
+            workload::generate_workload(conf, wl);
+        }
+        workload::write_xml(wl, workload_stream, conf);
+        workload_stream.close();
 
+        ofstream report_stream;
+        report_stream.open(report_directory + "/workload.html");
+        html_workload_report(conf, rep, report_stream);
 
-
-
-
-
-//	for (int i=0; i<=1000000; i+=1000000/10) {
-//		cout << "./src/test -c use-cases/test.xml -n " << i/20 << "-" << 2*i/20 << "-" << 3*i/20 << "-" << 4*i/20 << "-" << 5*i/20 <<  "-" << 6*i/20 << "-" << 7*i/20 << "-" << 8*i/20 << "-" << 9*i/20 << "-" << 10*i/20 << "-" << 11*i/20 << "-" << 12*i/20 << "-" << 13*i/20 << "-" << 14*i/20 << "-" << 15*i/20 << "-" << 16*i/20 << "-" << 17*i/20 << "-" << 18*i/20 << "-" << 19*i/20 << "-" << 20*i/20 <<endl;
-////		cout << "./src/test -c use-cases/test.xml -n " << i <<endl;
-//	}
-
-
-//
-//        for (int i=0; i<conf.schema.edges.size(); i++) {
-//			ifstream tempFile("tempOutputOld" + to_string(i) + ".txt");
-//			if (tempFile.is_open()) {
-//				string line;
-//				while (getline(tempFile, line)) {
-//					graph_stream << line << endl;
-//				}
-//			}
-//		}
-//        graph_stream.close();
-//
-//
-//        ofstream report_stream;
-//        report_stream.open(report_directory + "/graph.html");
-//        html_graph_report(conf, rep, report_stream);
-//    }
-//
-//    if (workload_file != "") {
-//        report::workload_report rep;
-//
-//        ofstream workload_stream;
-//        workload_stream.open("workloadTest.txt");
-//        workload::workload wl;
-//        if(true) { // selectivity
-//            workload2::generate_workload(conf, wl, rep);
-//        }
-//        else {
-//            workload::generate_workload(conf, wl);
-//        }
-//        workload::write_xml(wl, workload_stream, conf);
-//        workload_stream.close();
-//
-//        ofstream report_stream;
-//        report_stream.open(report_directory + "/workload.html");
-//        html_workload_report(conf, rep, report_stream);
-//
-//        /*
-//        workload2::matrix mat;
-//        workload2::distance_matrix_between_types(conf, mat);
-//        cout << mat << endl;
-//        workload2::graph graph;
-//        compute_graph_from_matrix(mat, 4, graph);
-//        workload2::matrix_of_paths mat2;
-//        number_of_paths(graph, config::selectivity::CONSTANT, 3, mat2);
-//        vector<workload2::triple> path;
-//        generate_random_path(graph, mat2, -1, 3, path);
-//        for (auto & triple : path) {
-//            cout << triple << endl;
-//        }
-//        */
-//    }
+        /*
+        workload2::matrix mat;
+        workload2::distance_matrix_between_types(conf, mat);
+        cout << mat << endl;
+        workload2::graph graph;
+        compute_graph_from_matrix(mat, 4, graph);
+        workload2::matrix_of_paths mat2;
+        number_of_paths(graph, config::selectivity::CONSTANT, 3, mat2);
+        vector<workload2::triple> path;
+        generate_random_path(graph, mat2, -1, 3, path);
+        for (auto & triple : path) {
+            cout << triple << endl;
+        }
+        */
+    }
 
 
 
 
 //    analysisIncrDetGraph analyzeGraph("test.txt", conf);
 //    analyzeGraph.stability(0);
-  	// #### ANALYSIS ####
+  	// #### ANALYSIS FOR MONSTAGEN ####
     for (int g=0; g<conf.nb_graphs; g++) {
-//    	cout << "g=" << g << endl;
     	string outpName = graph_file + to_string(g) + ".txt";
     	analysisIncrDetGraph analyzeGraph(outpName, conf);
 
        ofstream rFile, rFileHulp;
-//       string rName = "distributionAnalysis" + to_string(g) + ".r";
        string rNameHulp = graph_file + "_distributionAnalysisHulp" + to_string(g) + ".r";
-//       rFile.open(rName, ios::trunc);
        rFileHulp.open(rNameHulp, ios::trunc);
        rFile << "# This R-file is generated by gMark" << endl;
-       int i =0;
+       int i = 0;
        for(config::edge e: conf.schema.edges) {
     	   rFileHulp << "# Analysis of the distributions of edge-type: " << i << endl;
 			cout << "# Analysis of the distributions of edge-type: " << i << endl;

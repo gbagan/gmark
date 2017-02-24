@@ -106,7 +106,7 @@ void abstract_graph_writer::add_random_edges2(config::edge & c_edge) {
 
 
 void abstract_graph_writer::add_remaining_edges(size_t predicate, size_t nb_edges) {
-//    cout << "add_remaining_edges: " << predicate << " " << nb_edges << endl;
+    cout << "add_remaining_edges: " << predicate << " " << nb_edges << endl;
 }
 
 void abstract_graph_writer::build_graph (config::config & conf, report::report & rep, int graphNumber) {
@@ -134,9 +134,9 @@ void abstract_graph_writer::build_graph (config::config & conf, report::report &
     created_edges.clear();
     created_edges.resize(conf.predicates.size());
     
-//    cout << "creating edges" << endl;
+    cout << "creating edges" << endl;
     for (config::edge & edge : conf.schema.edges) {
-//        cout << "add random edges: " << edge.subject_type << " " << edge.predicate << " " << edge.object_type << " " << edge.multiplicity << " " << edge.outgoing_distrib << " " << edge.incoming_distrib <<endl;
+        cout << "add random edges: " << edge.subject_type << " " << edge.predicate << " " << edge.object_type << " " << edge.multiplicity << " " << edge.outgoing_distrib << " " << edge.incoming_distrib <<endl;
         add_random_edges(edge);
     }
     
@@ -162,7 +162,7 @@ void abstract_graph_writer::add_vertices(size_t type, size_t size) {
     if (size == 0) {
         size = 1;
     }
-//    cout << "add_vertices: " << type << " " << size << " " <<  nb_nodes << " " << nb_nodes+size-1 << endl;
+    cout << "add_vertices: " << type << " " << size << " " <<  nb_nodes << " " << nb_nodes+size-1 << endl;
     node_ranges_per_type.push_back(make_pair(nb_nodes, nb_nodes+size-1));
     nb_nodes += size;
 }
