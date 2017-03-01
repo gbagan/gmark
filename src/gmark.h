@@ -27,7 +27,7 @@ private:
     vector<size_t> nb_edges_by_type;
 
     vector<pair<size_t,size_t>> node_ranges_per_type;
-    vector<size_t> created_edges;
+    vector<int> created_edges;
     
     //unordered_map<size_t, unordered_map<size_t, unordered_set<size_t>>> neighbors;
     void add_random_edges1(config::edge & c_edge);
@@ -38,7 +38,7 @@ protected:
     config::config * conf;
     
 public:
-    void build_graph (config::config & conf, report::report & rep);
+    void build_graph (config::config & conf, report::report & rep, int graphNumber);
     void add_vertices(size_t type, size_t size);
     void add_edge(size_t subject, size_t predicate, size_t object);
     virtual void print_edge(size_t subject, size_t predicate, size_t object) = 0;
