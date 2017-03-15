@@ -1,5 +1,7 @@
 #include <unistd.h>
 #include <fstream>
+#include <chrono>
+#include <thread>
 
 #include "config.h"
 #include "gmark.h"
@@ -7,6 +9,9 @@
 #include "workload.h"
 #include "workload2.h"
 #include "report.h"
+#include "monStaGen/incrementalDeterministicGraphGenerator.h"
+#include "monStaGen/processingEdgeTypes.h"
+
 
 void print_report(report::report & rep) {
     cout << "report:" << endl;
@@ -29,7 +34,7 @@ void html_graph_report(config::config & conf, report::report & rep, ofstream & s
     stream << "var data = google.visualization.arrayToDataTable([\n";
     stream << "['Node type', 'Number of nodes'], \n";
     for (auto & type : conf.types) {
-        stream << "['" << type.alias << "', " << type.size << "],\n";
+        stream << "['" << type.alias << "', " << type.size[0] << "],\n";
     }
     stream << "]);\n";
     stream << "var options = {\n";
@@ -42,7 +47,7 @@ void html_graph_report(config::config & conf, report::report & rep, ofstream & s
     stream << "var data = google.visualization.arrayToDataTable([\n";
     stream << "['Node type', 'Number of nodes'], \n";
     for (auto & type : conf.types) {
-        stream << "['" << type.alias << "', " << type.size << "],\n";
+        stream << "['" << type.alias << "', " << type.size[0] << "],\n";
     }
     stream << "]);\n";
     stream << "var options = {\n";
@@ -57,8 +62,8 @@ void html_graph_report(config::config & conf, report::report & rep, ofstream & s
     stream << "['Predicate type', 'Number of predicates'], \n";
     for (auto & predicate : conf.predicates) {
         size_t size = 0;
-        if (conf.nb_edges > 0)
-            size = predicate.size;
+        if (conf.nb_edges[0] > 0)
+            size = predicate.size[0];
         else;
             size = predicate.proportion * rep.nb_edges;
         stream << "['" << predicate.alias << "', " << size << "],\n";
@@ -91,7 +96,7 @@ void html_graph_report(config::config & conf, report::report & rep, ofstream & s
     stream << "</script></head>\n";
     stream << "<body>\n";
     stream << "<table border=\"1\">\n";
-    stream << "<tr><td>Size</td><td width=\"600\">" << conf.nb_nodes << " nodes</td>";
+    stream << "<tr><td>Size</td><td width=\"600\">" << conf.nb_nodes[0] << " nodes</td>";
     stream << "<td width=\"600\">" << rep.nb_nodes << " nodes (" << rep.nb_edges << " edges)</td></tr>\n";
     stream << "<tr><td>Execution time</td><td></td><td>" << rep.exec_time << " seconds</td></tr>\n";
     stream << "<tr><td></td><td><div id=\"hist11\"/></td><td><div id=\"hist12\"/></td></tr>\n";
@@ -145,18 +150,46 @@ void html_workload_report(config::config & conf, report::workload_report & rep, 
 
 
 
+void parseNodeSequence(vector<unsigned int>* nodeSequence, string nodeSequenceString) {
+	// Define the sequence as: 10-20-30-40
+	// Generates 4 graphs where the first graph has 10 nodes, the second 20 nodes, etc.
+	int pos = 0;
+	std::string token;
+	while ((pos = nodeSequenceString.find("-")) != (int)string::npos) {
+		token = nodeSequenceString.substr(0, pos);
+//        cout << "Found token: " << token << endl;
+		if (token.compare("") == 0) {
+			nodeSequence->push_back(0);
+		} else {
+			nodeSequence->push_back(stoi(token));
+			nodeSequenceString.erase(0, pos + 1);
+		}
+	}
+
+	if (nodeSequenceString.compare("") != 0) {
+//    	cout << "Found token: " << nb_nodes_string << endl;
+		nodeSequence->push_back(stoi(nodeSequenceString));
+	}
+}
+
+
 
 int main(int argc, char ** argv) {
-    string conf_file = "../use-cases/test.xml";
+//    cout << "Starting...." << endl;
+	string conf_file = "../use-cases/test.xml";
     string graph_file;
     string workload_file;
     string report_directory = ".";
     int c;
     bool selectivity = true;
-    long nb_nodes = -1;
+//    long nb_nodes = -1;
+    string nb_nodes_string = "";
     bool print_alias = false;    
+    bool monStaGen = false;
+    bool printNodeProperties = false;
+    vector<unsigned int> nb_nodes_per_graph;
 
-    while ((c = getopt(argc, argv, "c:g:w:an:r:")) != -1) {
+    while ((c = getopt(argc, argv, "c:g:w:an:r:mp")) != -1) {
         switch(c) {
             case 'c':
                 conf_file = optarg;
@@ -174,41 +207,75 @@ int main(int argc, char ** argv) {
                 report_directory = optarg;
                 break;
             case 'n':
-                nb_nodes = atol(optarg);
+//                nb_nodes = atol(optarg);
+            	// optarg needs to be in the form
+            	//		(int-)* int
+            	// for example, a sequence with three graphs: 10000-20000-30000
+            	// or, a single graph: 30000
+                nb_nodes_string = optarg;
+                parseNodeSequence(&nb_nodes_per_graph, nb_nodes_string);
                 break;
+            case 'm':
+            	monStaGen = true;
+            	break;
+            case 'p':
+            	printNodeProperties = true;
+            	break;
         }
     }
     
+
     config::config conf;
-    if (nb_nodes >= 0) {
-        conf.nb_nodes = nb_nodes;
+    if (nb_nodes_per_graph.size() > 0) {
+    	for (int nb: nb_nodes_per_graph) {
+    		conf.nb_nodes.push_back(nb);
+        }
+        conf.nb_graphs = nb_nodes_per_graph.size();
     }
     else {
-        conf.nb_nodes = 0;
+        conf.nb_nodes = {-1};
     }
     conf.print_alias = print_alias;
     
+//    cout << "Parse config" << endl;
     configparser::parse_config(conf_file, conf);
-    
-    cout << "complete config" << endl;
+
+//    cout << "complete config" << endl;
     conf.complete_config();
-    
-    
-    if(graph_file != "") {
-        report::report rep;
+//    cout << "Number of graphs=" << conf.nb_graphs << endl;
 
-        ofstream graph_stream;
-        graph_stream.open(graph_file);
-        cout << "graph generation" << endl;
-        graph::ntriple_graph_writer writer(graph_stream);
-        writer.build_graph(conf, rep);
-        graph_stream.close();
+//    cout << "Config file: " << conf_file << endl;
 
-        ofstream report_stream;
-        report_stream.open(report_directory + "/graph.html");
-        html_graph_report(conf, rep, report_stream);
+    if (graph_file == "") {
+    	graph_file = "ignore/outputGraph";
     }
-    
+
+
+    if (monStaGen) {
+		processingEdgeTypes processETs(conf, conf_file);
+		processETs.sequentialProcessing(printNodeProperties, graph_file);
+    } else {
+		for (size_t i=0; i<conf.nb_graphs; i++) {
+	//	  	cout << "Processing graph " << i << endl;
+			report::report rep;
+			ofstream graph_stream;
+
+			string fileName = graph_file + to_string(i) + ".txt";
+
+			graph_stream.open(fileName);
+			graph::ntriple_graph_writer writer(graph_stream);
+
+			writer.build_graph(conf, rep, i);
+
+			ofstream report_stream;
+	        report_stream.open(report_directory + "/graph.html");
+	        html_graph_report(conf, rep, report_stream);
+
+	        graph_stream.close();
+		}
+    }
+
+
     if (workload_file != "") {
         report::workload_report rep;
 
@@ -226,7 +293,7 @@ int main(int argc, char ** argv) {
 
         ofstream report_stream;
         report_stream.open(report_directory + "/workload.html");
-        html_workload_report(conf, rep, report_stream);  
+        html_workload_report(conf, rep, report_stream);
 
         /*
         workload2::matrix mat;

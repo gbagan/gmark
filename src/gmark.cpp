@@ -24,6 +24,9 @@ vector<size_t> generate_random_slots(pair<size_t,size_t> range, const distributi
     
     for (size_t node = range.first; node <= range.second; node++) {
         size_t nb_slots = gen->next();
+        if (distrib.type == DISTRIBUTION::ZIPFIAN) {
+        	nb_slots++;
+        }
         for (size_t i = 0; i < nb_slots; i++) {
             vslots.push_back(node);
         }
@@ -106,7 +109,7 @@ void abstract_graph_writer::add_remaining_edges(size_t predicate, size_t nb_edge
     cout << "add_remaining_edges: " << predicate << " " << nb_edges << endl;
 }
 
-void abstract_graph_writer::build_graph (config::config & conf, report::report & rep) {
+void abstract_graph_writer::build_graph (config::config & conf, report::report & rep, int graphNumber) {
     struct timeval tbegin,tend;
     gettimeofday(&tbegin,NULL);
 
@@ -122,7 +125,7 @@ void abstract_graph_writer::build_graph (config::config & conf, report::report &
     this->conf = &conf;
     size_t type = 0;
     for (auto & typeconfig : conf.types) {
-        add_vertices(type, typeconfig.size);
+        add_vertices(type, typeconfig.size[graphNumber]);
         type++;
     }
     
@@ -138,8 +141,8 @@ void abstract_graph_writer::build_graph (config::config & conf, report::report &
     }
     
     for (size_t predicate = 0; predicate < conf.predicates.size(); predicate++) {
-        if(created_edges[predicate] < conf.predicates[predicate].size) {
-            size_t nb_edges = conf.predicates[predicate].size - created_edges[predicate];
+        if(created_edges[predicate] < conf.predicates[predicate].size[graphNumber]) {
+            int nb_edges = conf.predicates[predicate].size[graphNumber] - created_edges[predicate];
             add_remaining_edges(predicate, nb_edges);
         }
     }
@@ -177,12 +180,13 @@ ntriple_graph_writer::ntriple_graph_writer (ostream & s) {
 }
 
 void ntriple_graph_writer::print_edge(size_t subject, size_t predicate, size_t object) {
-    *stream << subject << " ";
+    *stream <<  subject << " ";
     string alias = conf->predicates[predicate].alias;
     if (conf->print_alias && alias.size() > 0)
 	*stream << alias;
     else
         *stream << predicate;
     *stream << " " << object << "\n";
+//    stream->flush();
 }
 }

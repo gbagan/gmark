@@ -1,0 +1,17 @@
+demo/*
+ignore
+ignore/*
+src/test
+src/querytranslate/test
+src/queryinterface/test
+
+src/.project
+src/.cproject
+
+src/distributionAnalysis.r
+src/output*.txt
+src/tempOutputFile*
+distributionAnalysis.r
+output.txt
+tempOutputFile*
+runScript.sh
