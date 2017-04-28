@@ -5,6 +5,9 @@ src/test
 src/querytranslate/test
 src/queryinterface/test
 
+*.o
+*.iml
+*.idea/
 src/.project
 src/.cproject
 

@@ -187,7 +187,7 @@ int main(int argc, char ** argv) {
     bool print_alias = false;    
     bool monStaGen = false;
     bool printNodeProperties = false;
-    vector<unsigned int> nb_nodes_per_graph;
+    vector<unsigned int> graphSequence;
 
     while ((c = getopt(argc, argv, "c:g:w:an:r:mp")) != -1) {
         switch(c) {
@@ -213,7 +213,7 @@ int main(int argc, char ** argv) {
             	// for example, a sequence with three graphs: 10000-20000-30000
             	// or, a single graph: 30000
                 nb_nodes_string = optarg;
-                parseNodeSequence(&nb_nodes_per_graph, nb_nodes_string);
+                parseNodeSequence(&graphSequence, nb_nodes_string);
                 break;
             case 'm':
             	monStaGen = true;
@@ -226,14 +226,15 @@ int main(int argc, char ** argv) {
     
 
     config::config conf;
-    if (nb_nodes_per_graph.size() > 0) {
-    	for (int nb: nb_nodes_per_graph) {
+    if (graphSequence.size() > 0) {
+    	for (int nb: graphSequence) {
     		conf.nb_nodes.push_back(nb);
         }
-        conf.nb_graphs = nb_nodes_per_graph.size();
+        conf.nb_graphs = graphSequence.size();
     }
     else {
         conf.nb_nodes = {-1};
+        conf.nb_graphs = 0;
     }
     conf.print_alias = print_alias;
     
