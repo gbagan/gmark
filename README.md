@@ -41,7 +41,7 @@ and/or
 
 In the rest of the readme, suppose that we are in demo/scripts.
 
-**To generate an entire workflow, use the prepared script play.sh:**
+**To generate an entire workload, use the prepared script play.sh:**
 
     ./play.sh
 
