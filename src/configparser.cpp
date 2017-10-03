@@ -20,7 +20,11 @@ int parse_config(const string & filename, config::config & conf) {
     pugi::xml_node root = doc.child("generator");
 
     if (conf.nb_graphs == 0) {
-    	conf.nb_graphs = root.child("size").text().as_uint();
+    	if (root.child("size")) {
+    	    conf.nb_graphs = root.child("size").text().as_uint();
+    	} else {
+    	    conf.nb_graphs = 1;
+    	}
     }
 //    pugi::xml_node graph_node = root.child("graph");
 
