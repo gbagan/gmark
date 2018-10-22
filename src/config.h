@@ -22,7 +22,7 @@ public:
         scalable = true;
         proportion = 0.0;
     }
-    
+
     type (const string & alias_, vector<size_t> size_, bool scalable_, double proportion_) {
         alias = alias_;
         size = size_;
@@ -36,13 +36,13 @@ public:
    string alias;
    vector<int> size;
    double proportion;
-   
+
    predicate () {
        alias = "";
        size.push_back(0);
        proportion = 0;
    }
-  
+
    predicate (const string & alias_, vector<int> size_, double proportion_) {
         alias = alias_;
         size = size_;
@@ -69,28 +69,28 @@ public:
 class schem {
 public:
     vector<edge> edges;
-    
+
 public:
     void add_edge(size_t subject_type,  size_t predicate, size_t object_type, char multiplicity, int edgeTypeId,
     			int scaleFactor, const distribution & outgoing_dist, const distribution & incoming_dist, vector<int> correlatedWith);
-    
+
     void add_edge(size_t subject_type, size_t predicate, size_t object_type, char multiplicity, int edgeTypeId,
     			int scaleFactor, DISTRIBUTION::type type, double arg1, double arg2, vector<int> correlatedWith);
-    
+
     void add_edge(size_t subject_type, size_t predicate, size_t object_type, char multiplicity, int edgeTypeId, int scaleFactor,
                   DISTRIBUTION::type outgoing_type, double outgoing_arg1, double outgoing_arg2,
                   DISTRIBUTION::type incoming_type, double incoming_arg1, double incoming_arg2, vector<int> correlatedWith);
-    
+
     /*
     vector<config_edge>::iterator begin() {
         return edges.begin();
     }
-    
+
     vector<config_edge>::iterator end() {
         return edges.end();
     }
     */
-    
+
 };
 
 
@@ -137,12 +137,12 @@ public:
     vector<int> nb_nodes;
     vector<size_t> nb_edges;
     vector<type> types;
-    distribution node_distribution;     
+    distribution node_distribution;
     vector<predicate> predicates;
     distribution predicate_distribution;
     schem schema;
     vector<workload> workloads;
-    bool print_alias;    
+    bool print_alias;
 
     void complete_config();
 //    void complete_types_config();

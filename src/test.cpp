@@ -70,7 +70,7 @@ void html_graph_report(config::config & conf, report::report & rep, ofstream & s
     }
     stream << "]);\n";
     stream << "var options = {\n";
-    stream << "vAxis: { logScale: true, baseline: 1 },\n";    
+    stream << "vAxis: { logScale: true, baseline: 1 },\n";
     stream << "title: 'Number of predicates by type'\n";
     stream << "};\n";
     stream << "var chart = new google.visualization.ColumnChart(document.getElementById('hist21'));\n";
@@ -111,14 +111,14 @@ void html_workload_report(config::config & conf, report::workload_report & rep, 
     stream << "<body>\n";
     stream << "<table border=\"1\">\n";
     stream << "<tr><td>Number of queries</td><td width=\"600\">" << wconf.size << "</td><td width=\"600\">" << wconf.size << "</td></tr>\n";
-    stream << "<tr><td>Arity</td><td>" << wconf.arity.first << "-" << wconf.arity.second; 
+    stream << "<tr><td>Arity</td><td>" << wconf.arity.first << "-" << wconf.arity.second;
     stream << "</td><td>" << rep.min_arity << "-" << rep.max_arity;
     stream << " (" << rep.nb_arity_2 << " queries are binary)</td></tr>\n";
-    stream << "<tr><td>Number of conjuncts</td><td>" << wconf.conjuncts.first << "-" << wconf.conjuncts.second; 
+    stream << "<tr><td>Number of conjuncts</td><td>" << wconf.conjuncts.first << "-" << wconf.conjuncts.second;
     stream << "</td><td>" << rep.min_conjuncts << "-" << rep.max_conjuncts << "</td></tr>\n";
-    stream << "<tr><td>Number of disjuncts</td><td>" << wconf.disjuncts.first << "-" << wconf.disjuncts.second; 
+    stream << "<tr><td>Number of disjuncts</td><td>" << wconf.disjuncts.first << "-" << wconf.disjuncts.second;
     stream << "</td><td>" << rep.min_disjuncts << "-" << rep.max_disjuncts << "</td></tr>\n";
-    stream << "<tr><td>Chain length</td><td>" << wconf.length.first << "-" << wconf.length.second; 
+    stream << "<tr><td>Chain length</td><td>" << wconf.length.first << "-" << wconf.length.second;
     stream << "</td><td>" << rep.min_length << "-" << rep.max_length << "</td></tr>\n";
     stream << "<tr><td>Percentage of stars</td><td>" << 100 * wconf.multiplicity << "%</td><td>" << 100 * rep.percentage_of_stars << "%</td></tr>\n";
     stream << "<tr><td>Execution time</td><td></td><td>" << rep.exec_time << "</td></tr>\n";
@@ -184,7 +184,7 @@ int main(int argc, char ** argv) {
     bool selectivity = true;
 //    long nb_nodes = -1;
     string nb_nodes_string = "";
-    bool print_alias = false;    
+    bool print_alias = false;
     bool monStaGen = false;
     bool printNodeProperties = false;
     vector<unsigned int> graphSequence;
@@ -223,7 +223,7 @@ int main(int argc, char ** argv) {
             	break;
         }
     }
-    
+
 
     config::config conf;
     if (graphSequence.size() > 0) {
@@ -237,7 +237,7 @@ int main(int argc, char ** argv) {
         conf.nb_graphs = 0;
     }
     conf.print_alias = print_alias;
-    
+
 //    cout << "Parse config" << endl;
     configparser::parse_config(conf_file, conf);
 

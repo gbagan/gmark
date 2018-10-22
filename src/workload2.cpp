@@ -60,7 +60,7 @@ SELECTIVITY::type operator * (SELECTIVITY::type a, SELECTIVITY::type b) {
                 case SELECTIVITY::GREATER:      return SELECTIVITY::NONE;
                 case SELECTIVITY::LESS_GREATER: return SELECTIVITY::NONE;
                 case SELECTIVITY::CROSS:        return SELECTIVITY::NONE;
-            }       
+            }
         case SELECTIVITY::EQUALS:
             switch(b) {
                 case SELECTIVITY::ONEONE:       return SELECTIVITY::ONEONE;
@@ -202,30 +202,30 @@ bool is_subclass_of(SELECTIVITY::type type, config::selectivity::type type2) {
 
 ostream & operator << (ostream& stream, const matrix & mat) {
     size_t size = mat.data.size();
-    
+
     for (size_t i = 0; i < size; i++) {
         for (size_t j = 0; j < size; j++) {
             stream << "(";
             for (auto pair : mat.data[i][j]) {
-                stream << pair.first << " " << pair.second << " "; 
+                stream << pair.first << " " << pair.second << " ";
             }
             stream << ") ";
         }
         stream << "\n";
     }
     return stream;
-}    
+}
 
 ostream & operator << (ostream& stream, const triple & t) {
-    stream << "(" << t.start << " " << t.selectivity << " " << t.end << ")"; 
-    
+    stream << "(" << t.start << " " << t.selectivity << " " << t.end << ")";
+
     return stream;
 }
 
 void distance_matrix_between_types(const config::config & conf, matrix & mat) {
     size_t size = conf.types.size();
     int log_size = (int) (log(size) + 4);
-    
+
     matrix temp_matrix;
 
     mat.data.resize(size);
@@ -234,13 +234,13 @@ void distance_matrix_between_types(const config::config & conf, matrix & mat) {
         mat.data[i].resize(size);
         //temp_matrix.data[i].resize(size);
     }
-    
+
     for (const auto & edge : conf.schema.edges) {
         auto selectivity = get_selectivity_from_config_edge(edge, conf);
         mat.data[edge.subject_type][edge.object_type][selectivity] = 1;
         mat.data[edge.object_type][edge.subject_type][-selectivity] = 1;
     }
-    
+
     for (int step = 0; step < log_size; step++) {
         // copy matrix into temp_matrix
         temp_matrix.data = mat.data;
@@ -288,7 +288,7 @@ void number_of_paths(const graph & graph, config::selectivity::type type, size_t
     for (size_t i = 0; i <= n; i++) {
         matrix.data[i].resize(m);
     }
-    
+
     for (size_t j = 0; j < m; j++) {
         for (auto sel : SELECTIVITY::types) {
             if (is_subclass_of(sel, type)) {
@@ -296,7 +296,7 @@ void number_of_paths(const graph & graph, config::selectivity::type type, size_t
             }
         }
     }
-    
+
     for (size_t i = 1; i <= n; i++) {
         for (size_t j = 0; j < m; j++) {
             for (auto sel : SELECTIVITY::types) {
@@ -313,9 +313,9 @@ void number_of_paths(const graph & graph, config::selectivity::type type, size_t
 void generate_random_path(const graph & graph, const matrix_of_paths & matrix, long first_node, size_t len, double star, vector<triple> & path) {
     size_t current_node = 0;
     auto current_sel = SELECTIVITY::EQUALS;
-    
+
     if (first_node >= 0) {
-        current_node = first_node;   
+        current_node = first_node;
     }
     else {
         size_t m = graph.neighbors.size();
@@ -325,13 +325,13 @@ void generate_random_path(const graph & graph, const matrix_of_paths & matrix, l
                 nb_paths += matrix.data[len][i].at(SELECTIVITY::EQUALS);
             }
         }
-    
+
         if (nb_paths == 0) {
             throw string("error: generate_random_path ") + to_string(__LINE__);
             //cerr << "error: generate_random_path " << __LINE__ << endl;
             //exit(-1);
         }
-    
+
         size_t rnd = uniform_random_generator(1, nb_paths).next();
         size_t acc = 0;
         current_node = 0;
@@ -345,25 +345,25 @@ void generate_random_path(const graph & graph, const matrix_of_paths & matrix, l
             }
         }
     }
-    
+
     if(matrix.data[len][current_node].count(current_sel) == 0 || matrix.data[len][current_node].at(current_sel) == 0) {
         throw string("error: generate_random_path ") + to_string(__LINE__);
         //cerr << "error: generate_random_path " << __LINE__ << endl;
         //exit(0);
     }
-    
+
     bool has_star = false;
-    
+
     for (size_t i = len; i > 0; i--) {
         bool test = false;
-        
+
         for (const auto & pair : graph.neighbors[current_node].at(SELECTIVITY::EQUALS)) {
             if(pair.first == SELECTIVITY::EQUALS && pair.second.first == current_node) {
                 test = true;
                 break;
             }
         }
-        
+
         if (/*!has_star && */ test && random_0_1() <= star) {
             path.emplace_back(current_node, SELECTIVITY::EQUALS, current_node, true);
             NUMBER_OF_DISJUNCTS++;
@@ -373,7 +373,7 @@ void generate_random_path(const graph & graph, const matrix_of_paths & matrix, l
         else {
             size_t previous_node = current_node;
             SELECTIVITY::type sel;
-        
+
             size_t rnd = uniform_random_generator(1, matrix.data[i][current_node].at(current_sel)).next();
             size_t acc = 0;
             for(auto & pair : graph.neighbors[current_node].at(current_sel)) {
@@ -412,7 +412,7 @@ void number_of_paths2(const automaton & automat, size_t n, size_t v, SELECTIVITY
     }
 
     matrix.data[0][v][sel] = 1;
-    
+
     for (size_t i = 1; i <= n; i++) {
         for (size_t j = 0; j < m; j++) {
             for (auto sel2 : SELECTIVITY::types) {
@@ -432,34 +432,34 @@ void generate_random_path_aux2(const automaton & automat, const matrix_of_paths 
     size_t rnd;
     size_t current_node = start;
     SELECTIVITY::type current_selectivity = SELECTIVITY::EQUALS;
-    
+
     //cout << "starting from " << start << endl;
-    
+
     size_t i = len;
-    
-    
+
+
     while (i <= max_len && (matrix.data[len][current_node].count(current_selectivity) == 0 || matrix.data[i][current_node].at(current_selectivity) == 0)) {
         i++;
     }
-    
+
     if (i > max_len) {
         i = len;
-        while (i > 0 && (matrix.data[len][current_node].count(current_selectivity) == 0 || matrix.data[i][current_node].at(current_selectivity) == 0)) { 
+        while (i > 0 && (matrix.data[len][current_node].count(current_selectivity) == 0 || matrix.data[i][current_node].at(current_selectivity) == 0)) {
             i--;
         }
     }
-    
+
     if (i == 0) {
         cerr << "error: generate_random_path_aux2: " << __LINE__ << endl;
         exit(EXIT_FAILURE);
     }
 
-    
+
     if (i < MIN_LENGTH)
         MIN_LENGTH = i;
     if (i > MAX_LENGTH)
         MAX_LENGTH = i;
-        
+
     for (; i > 0; i--) {
         rnd = uniform_random_generator(1, matrix.data[i][current_node].at(current_selectivity)).next();
         acc = 0;
@@ -492,8 +492,8 @@ void generate_random_disjunct(const automaton & automaton, size_t source, SELECT
         workload::symbol s(pred);
         disj.symbols.push_back(s);
     }
-    
-} 
+
+}
 
 void generate_random_conjunct(const config::config & conf, const config::workload & wconf, size_t source,
                               SELECTIVITY::type sel, size_t target, workload::conjunct & conj) {
@@ -518,21 +518,21 @@ config::selectivity::type generate_random_selectivity(const config::workload & w
     int nb = wconf.selectivity.constant + wconf.selectivity.linear + wconf.selectivity.quadratic;
     int n = uniform_random_generator(1, nb).next();
     int i = 0;
-    
+
     if (wconf.selectivity.constant) {
         i++;
         if(i == n) {
             return config::selectivity::CONSTANT;
         }
     }
-    
+
     if (wconf.selectivity.linear) {
         i++;
         if(i == n) {
             return config::selectivity::LINEAR;
         }
     }
-    
+
     if (wconf.selectivity.quadratic) {
         i++;
         if(i == n) {
@@ -551,7 +551,7 @@ void generate_arity_more_than_2(workload::query & q, size_t arity, bool is_cycle
     else {
         if (arity > nb_conjs)
             arity = nb_conjs;
-    } 
+    }
     for (size_t i = 0; i < arity; i++) {
         while (true) {
             size_t i = uniform_random_generator(0, arity-1).next();
@@ -574,7 +574,7 @@ void generate_chain(const config::config & conf, const config::workload & wconf,
     q.bodies.emplace_back();
     auto & body = q.bodies[0];
     body.conjuncts.resize(nb_conjs);
-    
+
     matrix distmat;
     distance_matrix_between_types(conf, distmat);
     graph g;
@@ -582,11 +582,11 @@ void generate_chain(const config::config & conf, const config::workload & wconf,
     matrix_of_paths pathmat;
     auto selectivity = generate_random_selectivity(wconf);
     q.info.selectivity = selectivity;
-    
+
     number_of_paths(g, selectivity, nb_conjs, pathmat);
     vector<triple> path;
     generate_random_path(g, pathmat, -1, nb_conjs, wconf.multiplicity, path);
-    
+
     for(size_t i = 0; i < nb_conjs; i++) {
         auto & conjunct = body.conjuncts[i];
         conjunct.source = "?x" + to_string(i);
@@ -594,7 +594,7 @@ void generate_chain(const config::config & conf, const config::workload & wconf,
         conjunct.star = path[i].star;
         generate_random_conjunct(conf, wconf, path[i].start, path[i].selectivity, path[i].end, conjunct);
     }
-    
+
     size_t arity = uniform_random_generator(wconf.arity.first, wconf.arity.second).next();
     q.info.arity = arity;
 
@@ -622,30 +622,30 @@ void generate_star(const config::config & conf, const config::workload & wconf, 
     q.bodies.emplace_back();
     auto & body = q.bodies[0];
     body.conjuncts.resize(nb_conjs);
-    
+
     matrix distmat;
     distance_matrix_between_types(conf, distmat);
     graph g;
     compute_graph_from_matrix(distmat, wconf.length.second, g);
-    
+
     auto selectivity = generate_random_selectivity(wconf);
     q.info.selectivity = selectivity;
-    
+
     matrix_of_paths pathmat;
     number_of_paths(g, selectivity, 1, pathmat);
-    
+
     vector<triple> path;
     generate_random_path(g, pathmat, -1, 1, wconf.multiplicity, path);
-    
+
     auto & first_conjunct = body.conjuncts[0];
     first_conjunct.source = "?x0";
     first_conjunct.target = "?x1";
     first_conjunct.star = path[0].star;
-       
+
     generate_random_conjunct(conf, wconf, path[0].start, path[0].selectivity, path[0].end, first_conjunct);
-    
+
     size_t central_type = path[0].start;
-    
+
     for(size_t i = 1; i < nb_conjs; i++) {
         auto & conjunct = body.conjuncts[i];
         generate_random_path(g, pathmat, central_type, 1, wconf.multiplicity, path);
@@ -654,7 +654,7 @@ void generate_star(const config::config & conf, const config::workload & wconf, 
         conjunct.star = path[0].star;
         generate_random_conjunct(conf, wconf, central_type, path[0].selectivity, path[0].end, conjunct);
     }
-    
+
     size_t arity = uniform_random_generator(wconf.arity.first, wconf.arity.second).next();
     q.info.arity = arity;
 
@@ -682,10 +682,10 @@ void generate_cycle(const config::config & conf, const config::workload & wconf,
     q.bodies.emplace_back();
     auto & body = q.bodies[0];
     body.conjuncts.resize(nb_conjs);
-    
+
     size_t n1 = nb_conjs/2;
     size_t n2 = nb_conjs - n1;
-    
+
     matrix distmat;
     distance_matrix_between_types(conf, distmat);
     graph g;
@@ -693,12 +693,12 @@ void generate_cycle(const config::config & conf, const config::workload & wconf,
     matrix_of_paths pathmat;
     auto selectivity = generate_random_selectivity(wconf);
     q.info.selectivity = selectivity;
-       
+
 
     number_of_paths(g, selectivity, n1, pathmat);
     vector<triple> path;
     generate_random_path(g, pathmat, -1, n1, wconf.multiplicity, path);
-    
+
     for(size_t i = 0; i < n1; i++) {
         auto & conjunct = body.conjuncts[i];
         conjunct.source = "?x" + to_string(i);
@@ -711,23 +711,23 @@ void generate_cycle(const config::config & conf, const config::workload & wconf,
     number_of_paths(g, selectivity, n2, pathmat2);
     vector<triple> path2;
     generate_random_path(g, pathmat2, path[0].start, n2, wconf.multiplicity, path2);
-    
+
     for(size_t i = 0; i < n2; i++) {
         auto & conjunct = body.conjuncts[n1+i];
         if (i == 0)
             conjunct.source = "?x0";
         else
             conjunct.source = "?x" + to_string(n1+i);
-        
+
         if (i == n2-1)
             conjunct.target = "?x" + to_string(n1);
         else
             conjunct.target = "?x" + to_string(n1+i+1);
-        
+
         conjunct.star = path2[i].star;
         generate_random_conjunct(conf, wconf, path2[i].start, path2[i].selectivity, path2[i].end, conjunct);
     }
-    
+
     size_t arity = uniform_random_generator(wconf.arity.first, wconf.arity.second).next();
     q.info.arity = arity;
     if (arity == 1) {
@@ -754,11 +754,11 @@ void generate_starchain(const config::config & conf, const config::workload & wc
     q.bodies.emplace_back();
     auto & body = q.bodies[0];
     body.conjuncts.resize(nb_conjs);
-    
+
     size_t n1 = (size_t) ceil ((double)nb_conjs/3.0);
     size_t n2 = (nb_conjs - n1) / 2;
     size_t n3 = nb_conjs - n1 - n2;
-    
+
     matrix distmat;
     distance_matrix_between_types(conf, distmat);
     graph g;
@@ -766,11 +766,11 @@ void generate_starchain(const config::config & conf, const config::workload & wc
     matrix_of_paths pathmat;
     auto selectivity = generate_random_selectivity(wconf);
     q.info.selectivity = selectivity;
-    
+
     number_of_paths(g, selectivity, n1, pathmat);
     vector<triple> path;
     generate_random_path(g, pathmat, -1, n1, wconf.multiplicity, path);
-    
+
     for(size_t i = 0; i < n1; i++) {
         auto & conjunct = body.conjuncts[i];
         conjunct.source = "?x" + to_string(i);
@@ -778,13 +778,13 @@ void generate_starchain(const config::config & conf, const config::workload & wc
         conjunct.star = path[i].star;
         generate_random_conjunct(conf, wconf, path[i].start, path[i].selectivity, path[i].end, conjunct);
     }
-    
-    
+
+
     matrix_of_paths pathmat2;
     number_of_paths(g, selectivity, 1, pathmat2);
-    
+
     vector<triple> path2;
-    
+
     for(size_t i = 0; i < n2; i++) {
         auto & conjunct = body.conjuncts[n1+i];
         generate_random_path(g, pathmat2, path[0].start, 1, wconf.multiplicity, path2);
@@ -793,7 +793,7 @@ void generate_starchain(const config::config & conf, const config::workload & wc
         conjunct.star = path[0].star;
         generate_random_conjunct(conf, wconf, path2[0].start, path2[0].selectivity, path2[0].end, conjunct);
     }
-    
+
     for(size_t i = 0; i < n3; i++) {
         auto & conjunct = body.conjuncts[n1+n2+i];
         generate_random_path(g, pathmat2, path[n1-1].end, 1, wconf.multiplicity, path2);
@@ -802,9 +802,9 @@ void generate_starchain(const config::config & conf, const config::workload & wc
         conjunct.star = path[0].star;
         generate_random_conjunct(conf, wconf, path2[0].start, path2[0].selectivity, path2[0].end, conjunct);
     }
-    
-    
-    
+
+
+
     size_t arity = uniform_random_generator(wconf.arity.first, wconf.arity.second).next();
     q.info.arity = arity;
 
@@ -835,7 +835,7 @@ void generate_query(const config::config & conf, const config::workload & wconf,
             return;
         }
     }
-    
+
     if (wconf.type.star) {
         i++;
         if(i == n) {
@@ -844,7 +844,7 @@ void generate_query(const config::config & conf, const config::workload & wconf,
             return;
         }
     }
-    
+
     if (wconf.type.cycle) {
         i++;
         if(i == n) {
@@ -853,7 +853,7 @@ void generate_query(const config::config & conf, const config::workload & wconf,
             return;
         }
     }
-    
+
     if (wconf.type.starchain) {
         i++;
         if(i == n) {
@@ -876,12 +876,12 @@ void generate_workload(const config::config & conf, workload::workload & wl, rep
     size_t nb_quadratic = 0;
     size_t min_arity = 100000000;
     size_t max_arity = 0;
-    
+
     for (const auto & wconf : conf.workloads) {
         size += wconf.size;
     }
     wl.queries.resize(size);
-    
+
     for (const auto & wconf : conf.workloads) {
         for (unsigned int i = 0; i < wconf.size; i++) {
             int nb_stars = 0;

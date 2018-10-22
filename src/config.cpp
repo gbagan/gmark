@@ -20,14 +20,14 @@ void schem::add_edge(size_t subject_type,  size_t predicate, size_t object_type,
 			int scaleFactor, const distribution & outgoing_dist, const distribution & incoming_dist, vector<int> correlatedWith) {
 	edges.emplace_back(subject_type, predicate, object_type, multiplicity, edgeTypeId, scaleFactor, outgoing_dist, incoming_dist, correlatedWith);
 }
-    
+
 void schem::add_edge(size_t subject_type, size_t predicate, size_t object_type, char multiplicity, int edgeTypeId,
 			int scaleFactor, DISTRIBUTION::type type, double arg1, double arg2, vector<int> correlatedWith) {
     distribution outgoing_dist(type, arg1, arg2);
     distribution incoming_dist(DISTRIBUTION::UNDEFINED, 0, 0);
     add_edge(subject_type, predicate, object_type, multiplicity, edgeTypeId, scaleFactor, outgoing_dist, incoming_dist, correlatedWith);
 }
-    
+
 void schem::add_edge(size_t subject_type, size_t predicate, size_t object_type, char multiplicity, int edgeTypeId, int scaleFactor,
                             DISTRIBUTION::type outgoing_type, double outgoing_arg1, double outgoing_arg2,
                             DISTRIBUTION::type incoming_type, double incoming_arg1, double incoming_arg2, vector<int> correlatedWith) {
@@ -81,7 +81,7 @@ void config::complete_config() {
 //}
 
 void config::complete_predicates_config() {
-    
+
 }
 
 ostream & operator << (ostream& stream, selectivity::type type) {
@@ -99,9 +99,9 @@ ostream & operator << (ostream& stream, selectivity::type type) {
             stream << (int) type;
     }
     return stream;
-}    
-    
-    
-    
-    
+}
+
+
+
+
 }

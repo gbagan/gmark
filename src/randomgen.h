@@ -19,26 +19,26 @@ public:
     DISTRIBUTION::type type;
     double arg1;
     double arg2;
-    
+
     distribution() {
         type = DISTRIBUTION::UNDEFINED;
         arg1 = 0.0;
         arg2 = 0.0;
     }
- 
+
     distribution(DISTRIBUTION::type t, double a1, double a2) {
         type = t;
         arg1 = a1;
         arg2 = a2;
     }
-    
+
 
     distribution(const distribution & o) {
         type = o.type;
         arg1 = o.arg1;
         arg2 = o.arg2;
     }
-    
+
     distribution & operator=(const distribution & o) {
         type = o.type;
         arg1 = o.arg1;
@@ -61,7 +61,7 @@ public:
 class uniform_random_generator : public random_generator {
 private:
     uniform_int_distribution<size_t> * uniform_gen;
-    
+
 public:
     uniform_random_generator(size_t min, size_t max);
     ~uniform_random_generator();
@@ -71,12 +71,12 @@ public:
 class normal_random_generator : public random_generator {
 private:
     normal_distribution<double> * normal_gen = NULL;
-    
+
 public:
     normal_random_generator(double mu, double sigma) {
         normal_gen = new normal_distribution<double>(mu, sigma);
     }
-    
+
     ~normal_random_generator();
     size_t next();
 };

@@ -45,7 +45,7 @@ uniform_random_generator::uniform_random_generator(size_t min, size_t max) {
 uniform_random_generator::~uniform_random_generator() {
     delete uniform_gen;
 }
-    
+
 size_t uniform_random_generator::next() {
     return (*uniform_gen)(RANDOM_GEN);
 }
@@ -84,7 +84,7 @@ zipfian_random_generator::~zipfian_random_generator() {
     delete real_distribution;
     delete int_gen;
 }
-    
+
 size_t zipfian_random_generator::next() {
     double z = (*real_distribution)(RANDOM_GEN);
 
