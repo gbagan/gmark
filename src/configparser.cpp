@@ -32,7 +32,7 @@ int parse_config(const string & filename, config::config & conf) {
     	conf.nb_nodes.resize(conf.nb_graphs);
     	conf.nb_edges.resize(conf.nb_graphs);
 
-    	int i = 0;
+    	unsigned int i = 0;
 		for (pugi::xml_node graph_node : root.children("graph")) {
 			if (i >= conf.nb_graphs) {
 				cout << "Number of graphs is greater than specified by the size" << endl;
@@ -95,7 +95,7 @@ void parse_predicates(pugi::xml_node node, config::config & conf) {
             continue;
         }
         conf.predicates[id].proportion = proportion;
-        for (int i=0; i<conf.nb_edges.size(); i++) {
+        for (unsigned int i=0; i<conf.nb_edges.size(); i++) {
         	conf.predicates[id].size.push_back((int) (proportion * conf.nb_edges[i]));
         }
     }
@@ -128,7 +128,7 @@ void parse_types(pugi::xml_node node, config::config & conf) {
             continue;
         }
 
-        for (int i=0; i<conf.nb_graphs; i++) {
+        for (unsigned int i=0; i<conf.nb_graphs; i++) {
         	conf.types[id].size[i] = (size_t) (proportion * conf.nb_nodes[i]);
         	if (proportion * conf.nb_nodes[i] > 0 && conf.types[id].size[i] == 0) {
 				conf.types[id].size[i] = 1;
@@ -150,7 +150,7 @@ void parse_types(pugi::xml_node node, config::config & conf) {
             cerr << "id " << id << " is out of range" << endl;
             continue;
         }
-        for (int i=0; i<conf.nb_graphs; i++) {
+        for (unsigned int i=0; i<conf.nb_graphs; i++) {
         	conf.types[id].size[i] = size2;
         }
         conf.types[id].scalable = false;
@@ -162,7 +162,7 @@ void parse_types(pugi::xml_node node, config::config & conf) {
     	conf.types[id].size.resize(conf.nb_graphs);
 //    	cout << "ID: " << id << endl;
 //    	cout << "Name: " << alias_node.text().get() << endl;
-    	for (int i=0; i<conf.nb_graphs; i++) {
+    	for (unsigned int i=0; i<conf.nb_graphs; i++) {
 //			cout << "Before: " << conf.types[id].size[i] << endl;
     		if (conf.types[id].size[i] == 0) {
 				conf.types[id].scalable = true;
