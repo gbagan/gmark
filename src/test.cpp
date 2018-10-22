@@ -64,7 +64,7 @@ void html_graph_report(config::config & conf, report::report & rep, ofstream & s
         size_t size = 0;
         if (conf.nb_edges[0] > 0)
             size = predicate.size[0];
-        else;
+        else
             size = predicate.proportion * rep.nb_edges;
         stream << "['" << predicate.alias << "', " << size << "],\n";
     }
