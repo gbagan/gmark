@@ -19,3 +19,6 @@ distributionAnalysis.r
 output.txt
 tempOutputFile*
 runScript.sh
+
+.vscode/
+test*/
