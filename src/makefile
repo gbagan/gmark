@@ -1,12 +1,12 @@
 CC=g++
-CFLAGS=-g -O3 -Wall -std=c++11
+CFLAGS=-g -Wall -std=c++11
 
 objects = test.o gmark.o configparser.o pugixml.o randomgen.o config.o workload.o workload2.o \
 			incrementalDeterministicGraphGenerator.o graphNode.o cumulativeDistributionUtils.o \
 			nodeGenerator.o processingEdgeTypes.o correlation.o shiftingDegreeDistribution.o
 
-all: test 
-	 
+all: test
+
 
 test: $(objects)
 	$(CC) $(objects) -o test
@@ -32,7 +32,7 @@ randomgen.o: randomgen.cpp randomgen.h
 configparser.o: configparser.cpp config.h configparser.h
 	$(CC) $(CFLAGS) -c configparser.cpp
 
-pugixml.o: pugixml.cpp pugixml.hpp 
+pugixml.o: pugixml.cpp pugixml.hpp
 	$(CC) $(CFLAGS) -c pugixml.cpp
 
 
@@ -41,7 +41,7 @@ pugixml.o: pugixml.cpp pugixml.hpp
 
 graphNode.o: monStaGen/graphNode.cpp
 	$(CC) $(CFLAGS) -c monStaGen/graphNode.cpp
-	
+
 incrementalDeterministicGraphGenerator.o: monStaGen/incrementalDeterministicGraphGenerator.cpp monStaGen/incrementalDeterministicGraphGenerator.h config.h monStaGen/graphNode.h monStaGen/nodeGenerator.h
 	$(CC) $(CFLAGS) -c monStaGen/incrementalDeterministicGraphGenerator.cpp
 
