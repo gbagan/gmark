@@ -40,8 +40,8 @@ protected:
 public:
     void build_graph (config::config & conf, report::report & rep, int graphNumber);
     void add_vertices(size_t type, size_t size);
-    void add_edge(size_t subject, size_t predicate, size_t object);
-    virtual void print_edge(size_t subject, size_t predicate, size_t object) = 0;
+    void add_edge(size_t subject, size_t predicate, size_t object, size_t subject_type, size_t object_type);
+    virtual void print_edge(size_t subject, size_t predicate, size_t object, size_t subject_type, size_t object_type) = 0;
     void add_random_edges(config::edge & c_edge);
 };
 
@@ -51,7 +51,7 @@ private:
 
 public:
     ntriple_graph_writer (ostream & s);
-    void print_edge(size_t subject, size_t predicate, size_t object);
+    void print_edge(size_t subject, size_t predicate, size_t object, size_t subject_type, size_t object_type);
 };
 
 
