@@ -22,3 +22,7 @@ runScript.sh
 
 .vscode/
 test*/
+graph.html
+workload.html
+
+*.bak
