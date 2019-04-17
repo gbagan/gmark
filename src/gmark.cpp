@@ -191,6 +191,8 @@ void ntriple_graph_writer::print_edge(size_t subject, size_t predicate, size_t o
     else
         *stream << predicate;
 
+    *stream << " ";
+
     if(conf->print_alias)
         *stream << conf->types[object_type].alias << "_";
 
