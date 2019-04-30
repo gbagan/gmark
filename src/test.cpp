@@ -62,7 +62,7 @@ void html_graph_report(config::config & conf, report::report & rep, ofstream & s
     stream << "['Predicate type', 'Number of predicates'], \n";
     for (auto & predicate : conf.predicates) {
         size_t size = 0;
-        if (conf.nb_edges[0] > 0)
+        if (conf.nb_edges.empty() || conf.nb_edges[0] > 0)
             size = predicate.size[0];
         else
             size = predicate.proportion * rep.nb_edges;
