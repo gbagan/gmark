@@ -13,8 +13,9 @@ COPY . /opt/gmark
 WORKDIR /opt/gmark
 
 # Compile it
-RUN cd demo/scripts && \
-    ./compile-all.sh
+RUN cd /opt/gmark/src && make -j 4 && \
+    cd /opt/gmark/src/querytranslate && make -j 4 && \
+    cd /opt/gmark/src/queryinterface && make -j 4
 
 # Move everything
 RUN cp src/test /usr/local/bin/gmark-gen && \
