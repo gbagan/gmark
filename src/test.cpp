@@ -11,6 +11,7 @@
 #include "report.h"
 #include "monStaGen/incrementalDeterministicGraphGenerator.h"
 #include "monStaGen/processingEdgeTypes.h"
+#include "randomgen.h"
 
 
 void print_report(report::report & rep) {
@@ -173,7 +174,6 @@ void parseNodeSequence(vector<unsigned int>* nodeSequence, string nodeSequenceSt
 }
 
 
-
 int main(int argc, char ** argv) {
 //    cout << "Starting...." << endl;
 	string conf_file = "../use-cases/test.xml";
@@ -189,7 +189,7 @@ int main(int argc, char ** argv) {
     bool printNodeProperties = false;
     vector<unsigned int> graphSequence;
 
-    while ((c = getopt(argc, argv, "c:g:w:an:r:mp")) != -1) {
+    while ((c = getopt(argc, argv, "c:g:w:an:r:mps:")) != -1) {
         switch(c) {
             case 'c':
                 conf_file = optarg;
@@ -221,6 +221,10 @@ int main(int argc, char ** argv) {
             case 'p':
             	printNodeProperties = true;
             	break;
+            case 's':
+                // Seed selection
+                RANDOM_GEN.seed(atol(optarg));
+                break;
         }
     }
 

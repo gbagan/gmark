@@ -5,6 +5,8 @@
 
 using namespace std;
 
+extern default_random_engine RANDOM_GEN;
+
 namespace DISTRIBUTION {
     enum type {
         UNIFORM,
