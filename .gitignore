@@ -11,6 +11,7 @@ src/queryinterface/test
 *.idea/
 src/.project
 src/.cproject
+build/
 
 src/distributionAnalysis.r
 src/output*.txt
