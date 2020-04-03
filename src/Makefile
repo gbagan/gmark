@@ -1,7 +1,7 @@
 CC=g++
-CFLAGS=-g -Wall -std=c++11
+CFLAGS=-g -Wall -std=c++11 -I ../libs
 
-objects = test.o gmark.o configparser.o pugixml.o randomgen.o config.o workload.o workload2.o \
+objects = test.o gmark.o configparser.o pugixml.o argparse.o randomgen.o config.o workload.o workload2.o \
 			incrementalDeterministicGraphGenerator.o graphNode.o cumulativeDistributionUtils.o \
 			nodeGenerator.o processingEdgeTypes.o correlation.o shiftingDegreeDistribution.o
 
@@ -32,12 +32,11 @@ randomgen.o: randomgen.cpp randomgen.h
 configparser.o: configparser.cpp config.h configparser.h
 	$(CC) $(CFLAGS) -c configparser.cpp
 
-pugixml.o: pugixml.cpp pugixml.hpp
-	$(CC) $(CFLAGS) -c pugixml.cpp
+pugixml.o: ../libs/pugixml/pugixml.cpp ../libs/pugixml/pugixml.hpp
+	$(CC) $(CFLAGS) -c ../libs/pugixml/pugixml.cpp
 
-
-
-
+argparse.o: ../libs/argparse/argparse.cpp ../libs/argparse/argparse.hpp
+	$(CC) $(CFLAGS) -c ../libs/argparse/argparse.cpp
 
 graphNode.o: monStaGen/graphNode.cpp
 	$(CC) $(CFLAGS) -c monStaGen/graphNode.cpp
