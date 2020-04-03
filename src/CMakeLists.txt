@@ -15,4 +15,5 @@ target_include_directories(gmark-gen PRIVATE ${libs_path})
 
 # Add libraries
 target_link_libraries(gmark-gen PUBLIC cpp-mini-argparse)
+
 install(TARGETS gmark-gen DESTINATION bin)
