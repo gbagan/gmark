@@ -22,7 +22,7 @@
 #ifndef QUERYINTERFACE_H
 #define QUERYINTERFACE_H
 
-#include "pugixml.hpp"
+#include "pugixml/pugixml.hpp"
 #include <iostream>
 #include <fstream>
 #include <string>

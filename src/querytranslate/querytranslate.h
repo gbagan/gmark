@@ -22,7 +22,7 @@
 #ifndef QUERYTRANSLATE_H
 #define QUERYTRANSLATE_H
 
-#include "pugixml.hpp"
+#include "pugixml/pugixml.hpp"
 #include <iostream>
 #include <fstream>
 #include <string>

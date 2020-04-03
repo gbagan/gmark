@@ -1,5 +1,4 @@
 #include "configparser.h"
-#include "pugixml.hpp"
 #include "config.h"
 
 #include <iostream>
