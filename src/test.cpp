@@ -1,7 +1,8 @@
-#include <unistd.h>
 #include <fstream>
 #include <chrono>
 #include <thread>
+
+#include "argparse/argparse.hpp"
 
 #include "config.h"
 #include "gmark.h"
@@ -174,13 +175,12 @@ void parseNodeSequence(vector<unsigned int>* nodeSequence, string nodeSequenceSt
 }
 
 
-int main(int argc, char ** argv) {
+int main(const int argc, const char ** argv) {
 //    cout << "Starting...." << endl;
 	string conf_file = "../use-cases/test.xml";
     string graph_file;
     string workload_file;
     string report_directory = ".";
-    int c;
     bool selectivity = true;
 //    long nb_nodes = -1;
     string nb_nodes_string = "";
@@ -189,45 +189,70 @@ int main(int argc, char ** argv) {
     bool printNodeProperties = false;
     vector<unsigned int> graphSequence;
 
-    while ((c = getopt(argc, argv, "c:g:w:an:r:mps:")) != -1) {
-        switch(c) {
-            case 'c':
-                conf_file = optarg;
-                break;
-            case 'g':
-                graph_file = optarg;
-                break;
-            case 'w':
-                workload_file = optarg;
-                break;
-            case 'a':
-                print_alias = true;
-                break;
-            case 'r':
-                report_directory = optarg;
-                break;
-            case 'n':
-//                nb_nodes = atol(optarg);
-            	// optarg needs to be in the form
-            	//		(int-)* int
-            	// for example, a sequence with three graphs: 10000-20000-30000
-            	// or, a single graph: 30000
-                nb_nodes_string = optarg;
-                parseNodeSequence(&graphSequence, nb_nodes_string);
-                break;
-            case 'm':
-            	monStaGen = true;
-            	break;
-            case 'p':
-            	printNodeProperties = true;
-            	break;
-            case 's':
-                // Seed selection
-                RANDOM_GEN.seed(atol(optarg));
-                break;
-        }
-    }
+    try {
+        // Parse arguments
+        argparse::ArgumentParser parser("gmark-gen");
+        parser.add_argument("help", "-h", "--help", "Prints the help message", argparse::FLAG);
+        parser.add_argument("schema", "-c", "--conf", "Configuration file", argparse::STORE, conf_file.c_str());
+        parser.add_argument("graph", "-g", "--graph", "Prefix of the output graph file(s)", argparse::STORE);
+        parser.add_argument("workload", "-w", "--workload", "Output workload file", argparse::STORE);
+        parser.add_argument("alias", "-a", "--alias", "If set, use string nodes", argparse::FLAG);
+        parser.add_argument("report", "-r", "--report", "Output report directory", argparse::STORE, ".");
+        parser.add_argument("nodes", "-n", "--nodes", "Number of nodes, e.g. 10000 or 10000-20000-30000", argparse::STORE);
+        parser.add_argument("monstagen", "-m", "--monstagen", "Use monStaGen", argparse::FLAG);
+        parser.add_argument("print_props", "-p", "--print", "Print node properties", argparse::FLAG);
+        parser.add_argument("seed", "-s", "--seed", "Sets the randomness seed", argparse::STORE);
 
+        if(!parser.parse(argv, argc))
+        {
+            // Error has already been printed
+            return 1;
+        }
+
+        if(parser.get("help").is_set())
+        {
+            parser.print_usage();
+            return 0;
+        }
+
+        // Store parameters with a default value
+        conf_file = parser.get("schema").get_value();
+        report_directory = parser.get("report").get_value();
+
+        // Store parameters only if they have been set
+        argparse::ParsedArgument const& graph_arg = parser.get("graph");
+        if(graph_arg.is_set())
+            graph_file = graph_arg.get_value();
+
+        argparse::ParsedArgument const& workload_arg = parser.get("workload");
+        if(workload_arg.is_set())
+            workload_file = workload_arg.get_value();
+
+        // Parse the number of nodes
+        argparse::ParsedArgument const& nodes_arg = parser.get("nodes");
+        if(nodes_arg.is_set())
+            parseNodeSequence(&graphSequence, nodes_arg.get_value().c_str());
+
+        // Store the seed
+        argparse::ParsedArgument const& seed_arg = parser.get("seed");
+        if(seed_arg.is_set())
+            RANDOM_GEN.seed(atol(seed_arg.get_value().c_str()));
+
+        // Store flags
+        print_alias = parser.get("alias").is_set();
+        monStaGen = parser.get("monstagen").is_set();
+        printNodeProperties = parser.get("print_props").is_set();
+    }
+    catch(string& error)
+    {
+        cerr << "ERROR: " << error << endl;
+        return 1;
+    }
+    catch(const char* error)
+    {
+        cerr << "ERROR: " << error << endl;
+        return 1;
+    }
 
     config::config conf;
     if (graphSequence.size() > 0) {
@@ -316,4 +341,3 @@ int main(int argc, char ** argv) {
         */
     }
 }
-
