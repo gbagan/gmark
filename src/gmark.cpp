@@ -1,5 +1,6 @@
 #include "gmark.h"
 #include "config.h"
+#include "time.h"
 
 #include <cstdlib>
 #include <vector>
@@ -13,7 +14,6 @@
 #include <random>
 #include <algorithm>
 #include <chrono>
-#include <sys/time.h>
 
 namespace graph {
 

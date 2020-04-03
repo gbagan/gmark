@@ -1,7 +1,7 @@
 #include "workload2.h"
+#include "time.h"
 
 #include <iostream>
-#include <sys/time.h>
 #include <algorithm>
 
 namespace workload2 {
