@@ -12,6 +12,7 @@ src/queryinterface/test
 src/.project
 src/.cproject
 build/
+build-*/
 
 src/distributionAnalysis.r
 src/output*.txt
