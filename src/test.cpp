@@ -197,7 +197,7 @@ int main(const int argc, const char ** argv) {
         parser.add_argument("graph", "-g", "--graph", "Prefix of the output graph file(s)", argparse::STORE);
         parser.add_argument("workload", "-w", "--workload", "Output workload file", argparse::STORE);
         parser.add_argument("alias", "-a", "--alias", "If set, use string nodes", argparse::FLAG);
-        parser.add_argument("report", "-r", "--report", "Output report directory", argparse::STORE, ".");
+        parser.add_argument("report", "-r", "--report", "Output report directory", argparse::STORE);
         parser.add_argument("nodes", "-n", "--nodes", "Number of nodes, e.g. 10000 or 10000-20000-30000", argparse::STORE);
         parser.add_argument("monstagen", "-m", "--monstagen", "Use monStaGen", argparse::FLAG);
         parser.add_argument("print_props", "-p", "--print", "Print node properties", argparse::FLAG);
@@ -217,7 +217,6 @@ int main(const int argc, const char ** argv) {
 
         // Store parameters with a default value
         conf_file = parser.get("schema").get_value();
-        report_directory = parser.get("report").get_value();
 
         // Store parameters only if they have been set
         argparse::ParsedArgument const& graph_arg = parser.get("graph");
@@ -227,6 +226,10 @@ int main(const int argc, const char ** argv) {
         argparse::ParsedArgument const& workload_arg = parser.get("workload");
         if(workload_arg.is_set())
             workload_file = workload_arg.get_value();
+
+        argparse::ParsedArgument const& report_arg = parser.get("report");
+        if(report_arg.is_set())
+            report_directory = report_arg.get_value();
 
         // Parse the number of nodes
         argparse::ParsedArgument const& nodes_arg = parser.get("nodes");
@@ -321,9 +324,12 @@ int main(const int argc, const char ** argv) {
         workload::write_xml(wl, workload_stream, conf);
         workload_stream.close();
 
-        ofstream report_stream;
-        report_stream.open(report_directory + "/workload.html");
-        html_workload_report(conf, rep, report_stream);
+        if(report_directory != "")
+        {
+            ofstream report_stream;
+            report_stream.open(report_directory + "/workload.html");
+            html_workload_report(conf, rep, report_stream);
+        }
 
         /*
         workload2::matrix mat;
@@ -340,4 +346,6 @@ int main(const int argc, const char ** argv) {
         }
         */
     }
+
+    return 0;
 }
