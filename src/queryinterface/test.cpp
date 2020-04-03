@@ -22,36 +22,41 @@
 #include <cstdlib>
 #include <iostream>
 #include <vector>
-#include <unistd.h>
 #include <fstream>
+
+#include "argparse/argparse.hpp"
+
 #include "queryinterface.h"
 
-int main(int argc, char ** argv) {
+int main(const int argc, const char ** argv) {
 
 //	./test -w ../../xml/queries.xml -t ../querytranslate/translated -o interface-queries
 
+	string input_filename, translate_dir, interface_dir;
 
-//  qinterface("../../xml/queries.xml", "../querytranslate/translated");
+	argparse::ArgumentParser parser("gmark-translate");
+	parser.add_argument("help", "-h", "--help", "Prints the help", argparse::FLAG);
+	parser.add_argument("workload", "-w", "--workload", "Input workload file", argparse::STORE);
+	parser.add_argument("translate", "-t", "--translate", "Input translated queries folder", argparse::STORE);
+	parser.add_argument("interface", "-o", "--output", "Interface output folder", argparse::STORE);
 
-	string inputfilename, translatedir, interfacedir;
-	int c;
-
-	while ((c = getopt(argc, argv, "w:t:o:")) != -1) {
-	switch(c) {
-		case 'w':
-			inputfilename = optarg;
-			break;
-		case 't':
-			translatedir = optarg;
-			break;
-		case 'o':
-			interfacedir = optarg;
-			break;
-	}
+	if(!parser.parse(argv, argc))
+	{
+		// Bad argument
+		return EXIT_FAILURE;
 	}
 
-	qinterface (inputfilename.c_str(), translatedir.c_str(), interfacedir.c_str());
+	if(parser.get("help").is_set())
+	{
+		parser.print_usage();
+		return EXIT_FAILURE;
+	}
 
-  exit(EXIT_SUCCESS);
+	input_filename = parser.get("workload").get_value();
+	translate_dir = parser.get("translate").get_value();
+	interface_dir = parser.get("interface").get_value();
 
+	qinterface (input_filename.c_str(), translate_dir.c_str(), interface_dir.c_str());
+
+	return EXIT_SUCCESS;
 }
