@@ -1,10 +1,12 @@
 demo/*
 ignore
 ignore/*
+
+# Output
 src/test
-src/test.exe
 src/querytranslate/test
 src/queryinterface/test
+*.exe
 
 *.o
 *.iml
