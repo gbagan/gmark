@@ -24,6 +24,7 @@ output.txt
 tempOutputFile*
 runScript.sh
 
+.devcontainer
 .vscode/
 test*/
 graph.html
