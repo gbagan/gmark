@@ -19,13 +19,13 @@ public:
 	int iterationId;
 	int type;
 
-	float position;
+	double position;
 	int numberOfInterfaceConnections;
 	int numberOfOpenInterfaceConnections;
 
 
 	graphNode();
-	graphNode(int id, int iterationId, int type, int numberOfOpenICs,int numberOfICs, float position);
+	graphNode(int id, int iterationId, int type, int numberOfOpenICs,int numberOfICs, double position);
 	virtual ~graphNode();
 
 	int getNumberOfOpenInterfaceConnections();
@@ -39,7 +39,7 @@ public:
 	void incrementInterfaceConnectionsByN(int number);
 
 	void setPosition(double number);
-	float getPosition();
+	double getPosition();
 
 //	void setConnection(int connectionIterationId, int value);
 //	int getConnection(int connectionIterationId);

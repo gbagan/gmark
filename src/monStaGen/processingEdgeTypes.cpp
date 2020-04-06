@@ -21,7 +21,7 @@ processingEdgeTypes::~processingEdgeTypes() {
 
 void processingEdgeTypes::sequentialProcessing(bool printNodeProperties, string graphFile) {
 	// Delete the output graphs
-	for (int i=0; i<conf.nb_graphs; i++) {
+	for (unsigned int i=0; i<conf.nb_graphs; i++) {
 		string file = graphFile + to_string(i) + ".txt";
 		const char * fileChar = file.c_str();
 		remove(fileChar);
@@ -38,7 +38,7 @@ void processingEdgeTypes::processEdgeType(config::edge & edgeType, bool printNod
 	incrementalDeterministicGraphGenerator graphGenerator = incrementalDeterministicGraphGenerator();
 
 	// For all different graph sizes
-	for (int j=0; j<conf.nb_graphs; j++) {
+	for (unsigned int j=0; j<conf.nb_graphs; j++) {
 		// Define the output file
 		ofstream outputFile;
 		outputFile.open(graphFile + to_string(j) + ".txt", ios::app);

@@ -14,7 +14,7 @@
 namespace std {
 
 incrementalDeterministicGraphGenerator::incrementalDeterministicGraphGenerator() {
-	randomGenerator.seed(chrono::system_clock::now().time_since_epoch().count());
+	randomGenerator.seed((unsigned int) chrono::system_clock::now().time_since_epoch().count());
 //	randomGenerator.seed(22);
 }
 

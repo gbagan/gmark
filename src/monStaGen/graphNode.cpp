@@ -21,7 +21,7 @@ graphNode::graphNode() {
 	this->position = 0.0;
 }
 graphNode::graphNode(int globalId, int localId, int nodeType,
-		int numberOfOpenICs, int numberOfICs, float position) {
+		int numberOfOpenICs, int numberOfICs, double position) {
 	this->id = globalId;
 	this->iterationId = localId;
 	this->type = nodeType;
@@ -65,7 +65,7 @@ void graphNode::incrementInterfaceConnectionsByN(int number) {
 void graphNode::setPosition(double number) {
 	this->position = number;
 }
-float graphNode::getPosition() {
+double graphNode::getPosition() {
 	return this->position;
 }
 

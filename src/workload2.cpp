@@ -398,7 +398,7 @@ automaton::automaton(const config::config & conf) {
         auto sel2 = get_selectivity_from_config_edge(edge, conf);
         for (auto sel1 : SELECTIVITY::types) {
             transitions[edge.subject_type][sel1].insert(make_pair(edge.predicate, make_pair(edge.object_type, sel1*sel2)));
-            transitions[edge.object_type][sel1].insert(make_pair(-edge.predicate-1, make_pair(edge.subject_type, sel1*(-sel2))));
+            transitions[edge.object_type][sel1].insert(make_pair(-(long)edge.predicate-1, make_pair(edge.subject_type, sel1*(-sel2))));
         }
     }
 }
@@ -885,9 +885,9 @@ void generate_workload(const config::config & conf, workload::workload & wl, rep
     for (const auto & wconf : conf.workloads) {
         for (unsigned int i = 0; i < wconf.size; i++) {
             int nb_stars = 0;
-            size_t min_disjunct = 10000000000;
+            size_t min_disjunct = (size_t) 10000000000;
             size_t max_disjunct = 0;
-            size_t min_length = 1000000000;
+            size_t min_length = (size_t) 1000000000;
             size_t max_length = 0;
             workload::query & query = wl.queries[c];
             //cout << "generate query " << i << endl;
@@ -895,7 +895,7 @@ void generate_workload(const config::config & conf, workload::workload & wl, rep
                 try {
                     workload2::generate_query(conf, wconf, query);
                 }
-                catch (const string & e) {
+                catch (const string &) {
                     continue;
                 }
                 if (j == 99) {

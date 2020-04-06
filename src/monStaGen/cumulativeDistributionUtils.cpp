@@ -44,7 +44,7 @@ int cumulativeDistributionUtils::calculateCDF(vector<graphNode*> & nodes, graphN
 	float cumulValue = 0;
 //	vector<float> normalizedCumulResults;
 //	cout << "normalizedCumulResults size: " << nonNormalizedResults.size() << ": ";
-	for(int i=0; i<nonNormalizedResults.size(); i++) {
+	for(unsigned int i=0; i<nonNormalizedResults.size(); i++) {
 		cumulValue += (float) nonNormalizedResults.at(i) / sum;
 		if (randomValue <= cumulValue) {
 			return nodes[i]->iterationId;
@@ -95,7 +95,7 @@ int binarySearch(int low, int high, vector<double> & cdf, double randomValue) {
 			return low;
 		}
 	} else {
-		int mid = ceil((high+low)/2.0);
+		int mid = (int) ceil((high+low)/2.0);
 		if (randomValue < cdf[mid]) {
 			return binarySearch(low, mid, cdf, randomValue);
 		} else {
@@ -108,7 +108,7 @@ int cumulativeDistributionUtils::findPositionInCdf(vector<double> & cdf, double 
 	int pos = 0;
 	if (randomValue > cdf[0]) {
 		pos = binarySearch(0, cdf.size(), cdf, randomValue);
-		if (pos >= cdf.size()) {
+		if (pos >= (int) cdf.size()) {
 			pos = cdf.size()-1;
 		}
 	}
@@ -116,5 +116,3 @@ int cumulativeDistributionUtils::findPositionInCdf(vector<double> & cdf, double 
 }
 
 } /* namespace std */
-
-

@@ -33,10 +33,10 @@ int nodeGenerator::getNumberOfICs(distribution distr, bool addSourceNode) {
 	int numberOfConnections;
 	if (distr.type == DISTRIBUTION::UNIFORM) {
 //		cout << "UNIFORM with " << distr.arg1 << " " << distr.arg2 << endl;
-		numberOfConnections = uniform_int_distribution<int>(distr.arg1, distr.arg2)(*randomGenerator);
+		numberOfConnections = uniform_int_distribution<int>((int) distr.arg1, (int) distr.arg2)(*randomGenerator);
 	} else if (distr.type == DISTRIBUTION::NORMAL) {
 //		cout << "NORMAL with " << distr.arg1 << " " << distr.arg2 << endl;
-		numberOfConnections = round(normal_distribution<double>(distr.arg1, distr.arg2)(*randomGenerator));
+		numberOfConnections = (int) round(normal_distribution<double>(distr.arg1, distr.arg2)(*randomGenerator));
 	} else { // distr.type == DISTRIBUTION::UNDEFINED
 		numberOfConnections = 0;
 	}
@@ -64,7 +64,7 @@ void nodeGenerator::addNode(config::edge & edgeType, int distrShift, bool addSou
 	float pos = 0.0;
 	int numberOfICs = 0;
 	if (distr.type == DISTRIBUTION::ZIPFIAN) {
-		pos = uniform_real_distribution<double>(0.0,1.0)(*randomGenerator);
+		pos = (float) uniform_real_distribution<double>(0.0,1.0)(*randomGenerator);
 	} else {
 		numberOfICs = getNumberOfICs(distr, addSourceNode) + distrShift;
 	}

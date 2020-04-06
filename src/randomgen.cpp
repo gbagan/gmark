@@ -7,7 +7,7 @@
 #include <random>
 #include <chrono>
 
-default_random_engine RANDOM_GEN(chrono::system_clock::now().time_since_epoch().count());
+default_random_engine RANDOM_GEN((int)chrono::system_clock::now().time_since_epoch().count());
 
 ostream & operator << (ostream& stream, const distribution & dist) {
     if (dist.type == DISTRIBUTION::UNDEFINED) {

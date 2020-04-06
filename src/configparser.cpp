@@ -166,7 +166,7 @@ void parse_types(pugi::xml_node node, config::config & conf) {
     		if (conf.types[id].size[i] == 0) {
 				conf.types[id].scalable = true;
 				conf.types[id].proportion = 1.0 / size;
-				conf.types[id].size[i] =  conf.types[id].proportion * conf.nb_nodes[i];
+				conf.types[id].size[i] = (size_t) conf.types[id].proportion * conf.nb_nodes[i];
 			}
 //    		cout << "After: " << conf.types[id].size[i] << endl;
     	}

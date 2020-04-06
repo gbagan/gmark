@@ -26,7 +26,7 @@ void incrementalDeterministicGraphGenerator::performSchemaIndicatedShift(config:
 
 		// Increment all ICs and openICs with floor(num) or floor(num)+1 with probability num-floor(num)
 		double num = ((double) sf * (double)conf.types[edgeType.subject_type].size[graphNumber]) / (double)conf.types[edgeType.object_type].size[graphNumber];
-		int numIncrement = floor(num);
+		int numIncrement = (int) floor(num);
 		double randomValue = uniformDistr(randomGenerator);
 		if (randomValue < num - (double)floor(num)) {
 			numIncrement++;
@@ -48,7 +48,7 @@ void incrementalDeterministicGraphGenerator::performSchemaIndicatedShift(config:
 
 		// Increment all ICs and openICs with floor(num) or floor(num)+1 with probability num-floor(num)
 		double num = ((double) sf * (double)conf.types[edgeType.object_type].size[graphNumber]) / (double)conf.types[edgeType.subject_type].size[graphNumber];
-		int numIncrement = floor(num);
+		int numIncrement = (int) floor(num);
 		double randomValue = uniformDistr(randomGenerator);
 		if (randomValue < num - (double)floor(num)) {
 			numIncrement++;
@@ -138,8 +138,8 @@ void incrementalDeterministicGraphGenerator::updateInterfaceConnectionsForZipfia
 void incrementalDeterministicGraphGenerator::performOutDistributionShift(config::edge & edgeType) {
 	double meanOutDistr = getMeanICsPerNode(edgeType.outgoing_distrib, -1) + outDistrShift;
 	double meanInDistr = getMeanICsPerNode(edgeType.incoming_distrib, -1) + inDistrShift;
-	int newMeanOutDistr = ((double) conf.types.at(edgeType.object_type).size[graphNumber] * meanInDistr) / (double) conf.types.at(edgeType.subject_type).size[graphNumber];
-	int incr = floor(newMeanOutDistr - meanOutDistr);
+	int newMeanOutDistr = (int)(((double) conf.types.at(edgeType.object_type).size[graphNumber] * meanInDistr) / (double) conf.types.at(edgeType.subject_type).size[graphNumber]);
+	int incr = (int) floor(newMeanOutDistr - meanOutDistr);
 
 	if (incr > 0) {
 		cout << "Conflicting schema requirements identified. The mean of the out-degree distribution will be set to " << newMeanOutDistr << endl;
@@ -156,7 +156,7 @@ void incrementalDeterministicGraphGenerator::performInDistributionShift(config::
 	double meanOutDistr = getMeanICsPerNode(edgeType.outgoing_distrib, -1) + outDistrShift;
 	double meanInDistr = getMeanICsPerNode(edgeType.incoming_distrib, -1) + inDistrShift;
 	double newMeanInDistr = ((double) conf.types.at(edgeType.subject_type).size[graphNumber] * meanOutDistr) / (double) conf.types.at(edgeType.object_type).size[graphNumber];
-	int incr = floor(newMeanInDistr - meanInDistr);
+	int incr = (int) floor(newMeanInDistr - meanInDistr);
 
 	if (incr > 0) {
 		cout << "Conflicting schema requirements identified. The mean of the in-degree distribution will be set to " << newMeanInDistr << endl;

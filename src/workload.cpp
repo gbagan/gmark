@@ -110,7 +110,7 @@ automaton::automaton(const config::config & conf) {
     transitions.resize(size);
     for (const auto & edge : conf.schema.edges) {
         transitions[edge.subject_type][edge.predicate].insert(edge.object_type);
-        transitions[edge.object_type][-edge.predicate-1].insert(edge.subject_type);
+        transitions[edge.object_type][-(long)edge.predicate-1].insert(edge.subject_type);
     }
 }
 
