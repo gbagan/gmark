@@ -6,18 +6,19 @@ ENV LANG=C.UTF-8 LC_ALL=C.UTF-8 DEBIAN_FRONTEND=noninteractive
 
 # Install g++, make, git and graphviz (queryinterface uses "dot")
 RUN apt update && \
-    apt install -y build-essential git graphviz
+    apt install -y build-essential git graphviz cmake
 
-# Clone gMark
+# Copy gMark from the local repository
 COPY . /opt/gmark
 WORKDIR /opt/gmark
 
 # Compile it
-RUN cd /opt/gmark/src && make -j 4 && \
-    cd /opt/gmark/src/querytranslate && make -j 4 && \
-    cd /opt/gmark/src/queryinterface && make -j 4
-
-# Move everything
-RUN cp src/test /usr/local/bin/gmark-gen && \
-    cp src/querytranslate/test /usr/local/bin/gmark-translate && \
-    cp src/queryinterface/test /usr/local/bin/gmark-interface
+RUN mkdir build && \
+    cd build &&\
+    cmake .. && \
+    cmake --build . && \
+    # Move everything
+    mv bin/gmark-* /usr/local/bin/ && \
+    cd .. && \
+    # Clean up
+    rm -fr build
