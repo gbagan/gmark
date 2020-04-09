@@ -1,7 +1,7 @@
 #ifndef CONFIGPARSER_H
 #define CONFIGPARSER_H
 
-#include "pugixml.hpp"
+#include "pugixml/pugixml.hpp"
 #include "config.h"
 
 namespace configparser {

@@ -71,7 +71,7 @@ vector<int> incrementalDeterministicGraphGenerator::sortOnDegree(vector<int> sub
 	}
 
 	vector<int> indegreeDistr;
-	for (int i=0; i<subjectsIterationIds.size(); i++) {
+	for (unsigned int i=0; i<subjectsIterationIds.size(); i++) {
 		indegreeDistr.push_back(0);
 	}
 //	cout << "indegreeDistr size: " << indegreeDistr.size();
@@ -108,7 +108,7 @@ vector<int> incrementalDeterministicGraphGenerator::sortOnDegree(vector<int> sub
 	}
 
 	vector<pair<int, int> > degreeIteratioIdPairs;
-	for (int i=0; i<subjectsIterationIds.size(); i++) {
+	for (unsigned int i=0; i<subjectsIterationIds.size(); i++) {
 		degreeIteratioIdPairs.push_back(make_pair(indegreeDistr[i], subjectsIterationIds[i]));
 	}
 	sort(degreeIteratioIdPairs.begin(), degreeIteratioIdPairs.end(), pairCompare);
@@ -130,11 +130,11 @@ void incrementalDeterministicGraphGenerator::icPreservingMapping(vector<int> sub
 	vector<int> subjectSortedOnDegree = sortOnDegree(subjects, correlatedETid);
 
 	if (subjects.size() > objects.size()) {
-		for (int i=0; i<subjects.size(); i++) {
+		for (unsigned int i=0; i<subjects.size(); i++) {
 			addToMapping(subjectSortedOnDegree[i], objectSortedOnDegree[i % objects.size()]);
 		}
 	} else {
-		for (int i=0; i<objects.size(); i++) {
+		for (unsigned int i=0; i<objects.size(); i++) {
 			addToMapping(subjectSortedOnDegree[i % subjects.size()], objectSortedOnDegree[i]);
 		}
 	}

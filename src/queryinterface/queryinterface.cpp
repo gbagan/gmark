@@ -9,12 +9,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  **/
@@ -31,7 +31,7 @@
 void qinterface(const string & inputfilename, const string & translatedir, const string & interfacedir)
 {
     pugi::xml_document doc;
-    pugi::xml_parse_result result = doc.load_file(inputfilename.c_str()); 
+    pugi::xml_parse_result result = doc.load_file(inputfilename.c_str());
 
 
     if (! result)
@@ -66,7 +66,7 @@ void qinterface(const string & inputfilename, const string & translatedir, const
   	  {
 				string var_text = var_node.text().get();
 				var_text.erase(var_text.begin());
-        plot_file << "\t" << var_text; 
+        plot_file << "\t" << var_text;
 				plot_file << " [fillcolor=\"yellow\", style=\"filled,\" shape=circle, label=\"?"<< var_text <<"\"];\n";
 				nodes_already_drawn.insert(var_text);
     	}
@@ -75,9 +75,9 @@ void qinterface(const string & inputfilename, const string & translatedir, const
 		  {
 		      for (pugi::xml_node conjunct_node : body_node.children("conjunct"))
 		      {
-							string var_text_src = conjunct_node.attribute("src").value();	
+							string var_text_src = conjunct_node.attribute("src").value();
 							var_text_src.erase(var_text_src.begin());
-							if (nodes_already_drawn.find(var_text_src) == nodes_already_drawn.end()) 
+							if (nodes_already_drawn.find(var_text_src) == nodes_already_drawn.end())
 							{
 		      			plot_file << "\t" << var_text_src << " [shape=circle, label=\"?"<< var_text_src <<"\"];\n";
 								nodes_already_drawn.insert(var_text_src);

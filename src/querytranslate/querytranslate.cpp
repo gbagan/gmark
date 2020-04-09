@@ -9,12 +9,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  **/
@@ -31,7 +31,7 @@
 void qtranslate(const string & inputfilename, const string & output_directory)
 {
     pugi::xml_document doc;
-    pugi::xml_parse_result result = doc.load_file(inputfilename.c_str()); 
+    pugi::xml_parse_result result = doc.load_file(inputfilename.c_str());
     //ofstream sqlout, sparqlout, cypherout, logicbloxout;
     int qcount = 0;
 
@@ -152,7 +152,7 @@ void qtranslate_sql_body(pugi::xml_node body, pugi::xml_node query, ofstream & f
       bool star = false;
       if (conjunct.child("star"))
       {
-        star = true; 
+        star = true;
         concat = conjunct.child("star").child("disj").child("concat");
       }
       else if (conjunct.child("disj"))
@@ -165,17 +165,17 @@ void qtranslate_sql_body(pugi::xml_node body, pugi::xml_node query, ofstream & f
           exit(EXIT_FAILURE);
       }
 
-      if (firstWith) 
+      if (firstWith)
       {
         file << "WITH RECURSIVE c" << c << "(src, trg) AS ((";
         firstWith = false;
       }
       else
         file << ", c" << c << "(src, trg) AS ((";
-     
-      if (star) 
+
+      if (star)
         file << "SELECT edge.src, edge.src FROM edge UNION SELECT edge.trg, edge.trg FROM edge UNION ";
-      
+
       if (!concat)
       {
           cerr << "Bad input file: malformed star";
@@ -186,7 +186,7 @@ void qtranslate_sql_body(pugi::xml_node body, pugi::xml_node query, ofstream & f
       do
       {
           s = 0;
-          if (firstDisj) 
+          if (firstDisj)
           {
             file << "SELECT s0.src";
             firstDisj = false;
@@ -209,7 +209,7 @@ void qtranslate_sql_body(pugi::xml_node body, pugi::xml_node query, ofstream & f
                   tempString = "s0.label = " + (string)symbol.text().get();
                   first = false;
                   string valueedge (symbol.attribute("inverse").value());
-                  if (valueedge.compare("true") == 0) 
+                  if (valueedge.compare("true") == 0)
                     edges += "(SELECT trg as src, src as trg, label FROM edge) as s0";
                   else
                     edges += "edge s0";
@@ -219,7 +219,7 @@ void qtranslate_sql_body(pugi::xml_node body, pugi::xml_node query, ofstream & f
                   s++;
                   tempString += " AND s" + to_string(s) + ".label = " + symbol.text().get() + " ";
                   string valueedge (symbol.attribute("inverse").value());
-                  if (valueedge.compare("true") == 0) 
+                  if (valueedge.compare("true") == 0)
                     edges += ", (SELECT trg as src, src as trg, label FROM edge) as s" + to_string(s);
                   else
                     edges += ", edge s" + to_string(s);
@@ -240,14 +240,14 @@ void qtranslate_sql_body(pugi::xml_node body, pugi::xml_node query, ofstream & f
 
       file << ")";
       /*
-      if (!star) 
+      if (!star)
         file << ")";
-      if (star) 
+      if (star)
         file << ") UNION SELECT head.src, tail.trg FROM c" << c << " as head, c" << c << " as tail WHERE head.trg = tail.src";
-      else 
+      else
         file << ")";
       */
-       
+
       string tempString = conjunct.attribute("src").value();
       if (tempString.length() == 0)
       {
@@ -289,8 +289,8 @@ void qtranslate_sql_body(pugi::xml_node body, pugi::xml_node query, ofstream & f
       file << ") ";
       c++;
 
-      if (star) 
-      { 
+      if (star)
+      {
         file << ", c" << c << "(src, trg) AS (";
         file << "SELECT src, trg FROM c" << c - 1 << " UNION SELECT head.src, tail.trg FROM c" << c -1 << " as head, c" << c << " as tail WHERE head.trg = tail.src) ";
         c++;
@@ -301,10 +301,10 @@ void qtranslate_sql_body(pugi::xml_node body, pugi::xml_node query, ofstream & f
 }
 
 
-void qtranslate_sql_select(pugi::xml_node query, 
-                           unordered_map < string, pair < vector <int>, vector <int> > > & variables, 
-                           int c, 
-                           ostream & file, 
+void qtranslate_sql_select(pugi::xml_node query,
+                           unordered_map < string, pair < vector <int>, vector <int> > > & variables,
+                           int c,
+                           ostream & file,
                            const string & constantsString)
 {
     vector <int>::iterator vecIt;
@@ -320,9 +320,9 @@ void qtranslate_sql_select(pugi::xml_node query,
         //hack for selectivity experiments
         //file << "SELECT COUNT (*) FROM ( ";
 
-        if (distinct) 
+        if (distinct)
           file << "SELECT DISTINCT ";
-        else 
+        else
           file << "SELECT ";
         bool first = true;
 
@@ -420,16 +420,16 @@ void qtranslate_sql_select(pugi::xml_node query,
     {
       if(query.child("head").child("var").empty())
       {
-        if (firstWhere) 
+        if (firstWhere)
           file << " WHERE" << constantsString << ")";
-        else 
+        else
           file << " AND" << constantsString << ")";
       }
-      else 
+      else
       {
-        if (firstWhere) 
+        if (firstWhere)
           file << " WHERE" << constantsString;
-        else 
+        else
           file << " AND" << constantsString;
       }
     }
@@ -437,7 +437,7 @@ void qtranslate_sql_select(pugi::xml_node query,
       file << ")";
 
   //hack for selectivity experiments
-  //if(!query.child("head").child("var").empty()) 
+  //if(!query.child("head").child("var").empty())
   //  file << ") as hack";
 }
 
@@ -510,7 +510,7 @@ void qtranslate_sparql(pugi::xml_node query, ofstream & file)
     file << "PREFIX : <http://example.org/gmark/> ";
     //hack for selectivity experiments
     //file << "SELECT (COUNT(*) AS ?count) { ";
-    
+
     for (pugi::xml_node var_node : query.child("head").children("var"))
     {
         if (distinct && first)
@@ -537,7 +537,7 @@ void qtranslate_sparql(pugi::xml_node query, ofstream & file)
     {
         file << "ASK { ";
     }
-    
+
     for (pugi::xml_node body_node : query.child("bodies").children("body"))
     {
         if(!first)
@@ -577,7 +577,7 @@ void qtranslate_cypher_body(pugi::xml_node body, string outputVariables, ofstrea
   string trgVar = "";
   pugi::xml_node currentNode, currentSymbol;
 
-  if (body.child("conjunct").empty()) 
+  if (body.child("conjunct").empty())
     return;
 
   file << "MATCH ";
@@ -598,7 +598,7 @@ void qtranslate_cypher_body(pugi::xml_node body, string outputVariables, ofstrea
       if (srcVar[0] != '?')
       {
         // src is a constant
-        if (whereClause.length() == 0) 
+        if (whereClause.length() == 0)
           whereClause = "id(gmarkvariable" + srcVar + ") = " + srcVar;
         else
           whereClause += " AND id(gmarkvariable" + srcVar + ") = " + srcVar;
@@ -606,7 +606,7 @@ void qtranslate_cypher_body(pugi::xml_node body, string outputVariables, ofstrea
       if (trgVar[0] != '?')
       {
         // trg is a constant
-        if (whereClause.length() == 0) 
+        if (whereClause.length() == 0)
           whereClause = "id(gmarkvariable" + trgVar + ") = " + trgVar;
         else
           whereClause += " AND id(gmarkvariable" + trgVar + ") = " + trgVar;
@@ -637,26 +637,26 @@ void qtranslate_cypher_body(pugi::xml_node body, string outputVariables, ofstrea
 
       if (star)
       {
-        // (s)-[r*]->(t) 
+        // (s)-[r*]->(t)
         // WHERE ALL (x in type(r) WHERE x=type1 OR ... OR x=typeN)
         file << "(" << ((srcVar[0] == '?') ? srcVar.substr(1) : "gmarkvariable" + srcVar) << ")-[";
 
         firstSymbol = true;
         do
         {
-          if (! firstSymbol) 
+          if (! firstSymbol)
             file << "|p" << (string)currentNode.child("symbol").text().get();
           else
             file << ":p" << (string)currentNode.child("symbol").text().get();
 
           firstSymbol = false;
-          currentNode = currentNode.next_sibling("concat"); 
+          currentNode = currentNode.next_sibling("concat");
         } while (currentNode);
 
         file << "*]->(" << ((trgVar[0] == '?') ? trgVar.substr(1) : "gmarkvariable" + trgVar) << ")";
 
         /*
-        if (whereClause.length() == 0) 
+        if (whereClause.length() == 0)
           whereClause = "ALL (x IN RELATIONSHIPS(gmarkpath" + to_string(c) + ") WHERE";
         else
           whereClause += " AND ALL (x IN RELATIONSHIPS(gmarkpath" + to_string(c) + ") WHERE";
@@ -664,13 +664,13 @@ void qtranslate_cypher_body(pugi::xml_node body, string outputVariables, ofstrea
         firstSymbol = true;
         do
         {
-          if (! firstSymbol) 
+          if (! firstSymbol)
             whereClause += " OR TYPE(x)=p" + (string)currentNode.child("symbol").text().get();
           else
             whereClause += " TYPE(x)=p" + (string)currentNode.child("symbol").text().get();
 
           firstSymbol = false;
-          currentNode = currentNode.next_sibling("concat"); 
+          currentNode = currentNode.next_sibling("concat");
         } while (currentNode);
         whereClause += ")";
         */
@@ -688,13 +688,13 @@ void qtranslate_cypher_body(pugi::xml_node body, string outputVariables, ofstrea
 
         firstSymbol = true;
         file << "(" << ((srcVar[0] == '?') ? srcVar.substr(1) : "gmarkvariable" + srcVar) << ")";
-        do 
+        do
         {
           string valueedge (currentSymbol.attribute("inverse").value());
-          if (valueedge.compare("true") == 0) 
+          if (valueedge.compare("true") == 0)
           {
-            // ()<-[p]-() 
-            if (! firstSymbol) 
+            // ()<-[p]-()
+            if (! firstSymbol)
             {
               file << "()<-[:p" << currentSymbol.text().get() << "]-";
             }
@@ -704,11 +704,11 @@ void qtranslate_cypher_body(pugi::xml_node body, string outputVariables, ofstrea
               firstSymbol = false;
             }
           }
-          else 
+          else
           {
-            // ()-[p]->() 
-            if (! firstSymbol) 
-            { 
+            // ()-[p]->()
+            if (! firstSymbol)
+            {
               file << "()-[:p" << currentSymbol.text().get() << "]->";
             }
             else
@@ -717,31 +717,31 @@ void qtranslate_cypher_body(pugi::xml_node body, string outputVariables, ofstrea
               firstSymbol = false;
             }
           }
-          currentSymbol = currentSymbol.next_sibling("symbol"); 
+          currentSymbol = currentSymbol.next_sibling("symbol");
         } while (currentSymbol);
         file << "(" << ((trgVar[0] == '?') ? trgVar.substr(1) : "gmarkvariable" + trgVar) << ")";
       }
       first = false;
   }
 
-  if(whereClause.length() > 0) 
+  if(whereClause.length() > 0)
     file << " WHERE " << whereClause;
 
-  if(outputVariables.length() == 0) 
+  if(outputVariables.length() == 0)
   {
     // a boolean query
     file << " RETURN \"true\" LIMIT 1";
   }
   else
   {
-    if (distinct) 
+    if (distinct)
     {
       file << " RETURN DISTINCT " << outputVariables;
       //hack for selectivity experiments
       //file << " RETURN count(*)";
 
     }
-    else 
+    else
       file << " RETURN " << outputVariables;
 
   }
@@ -752,7 +752,7 @@ void qtranslate_cypher_body(pugi::xml_node body, string outputVariables, ofstrea
 // conjuncts have only one disjunct (of arbitrary path length)
 void qtranslate_cypher_doc(pugi::xml_document & doc)
 {
-  pugi::xml_node copy, querycopy, newbody; 
+  pugi::xml_node copy, querycopy, newbody;
   pugi::xml_document tempDoc;
   vector < pugi::xml_node > conjunctList;
   vector < pugi::xml_node > removeList;
@@ -761,7 +761,7 @@ void qtranslate_cypher_doc(pugi::xml_document & doc)
   tempDoc.append_child("scratch");
 
   for (pugi::xml_node query: doc.child("queries").children("query"))
-  { 
+  {
     querycopy = tempDoc.child("queries").append_copy(query);
     while (querycopy.child("bodies").remove_child("body"));
 
@@ -772,8 +772,8 @@ void qtranslate_cypher_doc(pugi::xml_document & doc)
 
       for (pugi::xml_node conjunct : body.children("conjunct"))
       {
-        if (conjunct.child("disj")) 
-        { 
+        if (conjunct.child("disj"))
+        {
           copy = tempDoc.child("scratch").append_copy(conjunct);
           conjunctList.push_back(copy);
         }
@@ -789,14 +789,14 @@ void qtranslate_cypher_doc(pugi::xml_document & doc)
   doc.append_copy(tempDoc.child("queries"));
 }
 
-void qtranslate_cypher_doc_reconstructBody(pugi::xml_node & query, 
-                                           pugi::xml_node & body, 
+void qtranslate_cypher_doc_reconstructBody(pugi::xml_node & query,
+                                           pugi::xml_node & body,
                                            vector < pugi::xml_node > conjunctList)
-{ 
-  pugi::xml_node current, currentcopy, disjunct, bodycopy; 
+{
+  pugi::xml_node current, currentcopy, disjunct, bodycopy;
   pugi::xml_document tempDoc;
 
-  if (conjunctList.empty()) 
+  if (conjunctList.empty())
   {
     query.child("bodies").append_copy(body);
   }
@@ -824,7 +824,7 @@ void qtranslate_cypher_doc_reconstructBody(pugi::xml_node & query,
 // labels can not appear under Kleene star.  (see email exchange of June 2015 with Tobias
 // Lindaaker of Neo Technology)
 //
-void qtranslate_cypher(pugi::xml_node query, ofstream & file) 
+void qtranslate_cypher(pugi::xml_node query, ofstream & file)
 {
   bool first = true;
   string outputVariables = "";
@@ -891,7 +891,7 @@ void qtranslate_logicblox(pugi::xml_node query, ofstream & file)
 
   file << "BEGIN";
   for (pugi::xml_node body : query.child("bodies").children("body"))
-  { 
+  {
     qtranslate_logicblox_body(body, bodyIndex, file, head);
     bodyIndex++;
   }
@@ -943,7 +943,7 @@ void qtranslate_logicblox_body(pugi::xml_node body, int bodyIndex, ofstream & fi
           cerr << "Bad input file: malformed structure";
           exit(EXIT_FAILURE);
       }
-        
+
       predicate = "gmarkSubquery" + to_string(bodyIndex) + to_string(conjunctIndex);
 
       do
@@ -962,7 +962,7 @@ void qtranslate_logicblox_body(pugi::xml_node body, int bodyIndex, ofstream & fi
             file << ", core:edge:edge(";
 
           string valueedge = symbol.attribute("inverse").value();
-          if (valueedge.compare("true") == 0) 
+          if (valueedge.compare("true") == 0)
           {
             i++;
             file << "x" << to_string(i) << ", ";
@@ -981,16 +981,16 @@ void qtranslate_logicblox_body(pugi::xml_node body, int bodyIndex, ofstream & fi
         file << ", y = x" << to_string(i);
         file << ".";
 
-        concat = concat.next_sibling("concat"); 
+        concat = concat.next_sibling("concat");
       } while (concat);
 
-      if (star) 
+      if (star)
       {
         file << endl << predicate << "(x, x) <- core:edge:edge(x, r, y).";
         file << endl << predicate << "(y, y) <- core:edge:edge(x, r, y).";
         file << endl << predicate << "(x, y) <- " << predicate << "(x, z), " << predicate << "(z, y).";
       }
-      if (first) 
+      if (first)
       {
         mainbody +=  predicate;
         mainbody +=  "(";

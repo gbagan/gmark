@@ -32,7 +32,7 @@ void write_xml(const symbol & symb, ostream & stream, config::config & conf) {
     else
         stream << symb.id;
     stream << "</symbol>\n";
-}    
+}
 
 void write_xml(const disjunct & disj, ostream & stream, config::config & conf) {
     stream << "        <concat>\n";
@@ -40,8 +40,8 @@ void write_xml(const disjunct & disj, ostream & stream, config::config & conf) {
         write_xml(symb, stream, conf);
     }
     stream << "        </concat>\n";
-}    
-    
+}
+
 void write_xml(const conjunct & conj, ostream & stream, config::config & conf) {
     stream << "      <conjunct src=\"" << conj.source << "\" trg=\"" << conj.target << "\">\n";
     if (conj.star) {
@@ -89,10 +89,10 @@ void write_xml(const query & query, ostream & stream, config::config & conf) {
     for (const auto & body : query.bodies) {
         write_xml(body, stream, conf);
     }
-    
+
     stream << "  </bodies>\n";
     stream << "</query>\n";
-    
+
 }
 
 void write_xml(const workload & wl, ostream & stream, config::config & conf) {
@@ -110,34 +110,34 @@ automaton::automaton(const config::config & conf) {
     transitions.resize(size);
     for (const auto & edge : conf.schema.edges) {
         transitions[edge.subject_type][edge.predicate].insert(edge.object_type);
-        transitions[edge.object_type][-edge.predicate-1].insert(edge.subject_type);
+        transitions[edge.object_type][-(long)edge.predicate-1].insert(edge.subject_type);
     }
 }
 
 void distance_matrix_between_types(const config::config & conf, vector<vector<size_t>> & matrix) {
     size_t size = conf.types.size();
     int log_size = (int) (log(size) + 1);
-    
+
     vector<vector<size_t>> temp_matrix;
-    
+
     matrix.resize(size);
     temp_matrix.resize(size);
     for (size_t i = 0; i < size; i++) {
         matrix[i].resize(size);
         temp_matrix[i].resize(size);
     }
-    
+
     for (size_t i = 0; i < size; i++) {
         for (size_t j = 0; j < size; j++) {
             matrix[i][j] = SIZE_MAX;
         }
     }
-    
+
     for (const auto & edge : conf.schema.edges) {
         matrix[edge.subject_type][edge.object_type] = 1;
         matrix[edge.object_type][edge.subject_type] = 1;
     }
-    
+
     for (int step = 0; step < log_size; step++) {
         // copy matrix into temp_matrix
         for (size_t i = 0; i < size; i++) {
@@ -145,7 +145,7 @@ void distance_matrix_between_types(const config::config & conf, vector<vector<si
                 temp_matrix[i][j] = matrix[i][j];
             }
         }
-        
+
         for (size_t i = 0; i < size; i++) {
             for (size_t j = 0; j < size; j++) {
                 size_t m = matrix[i][j];
@@ -180,11 +180,11 @@ void number_of_paths(const graph & g, size_t n, vector<vector<size_t>> & matrix)
     for (size_t i = 0; i <= n; i++) {
         matrix[i].resize(m);
     }
-    
+
     for (size_t j = 0; j < m; j++) {
         matrix[0][j] = 1;
     }
-    
+
     for (size_t i = 1; i <= n; i++) {
         for (size_t j = 0; j < m; j++) {
             for (size_t k : g.neighbors[j]) {
@@ -203,7 +203,7 @@ void number_of_paths(const graph & g, size_t n, vector<vector<size_t>> & matrix)
 void generate_random_path(const graph & g, const vector<vector<size_t>> & matrix,
                           long first_node, size_t len, double star, vector<size_t> & path) {
     size_t current_node = 0;
-    
+
     if (first_node >= 0) {
         current_node = first_node;
     }
@@ -213,9 +213,9 @@ void generate_random_path(const graph & g, const vector<vector<size_t>> & matrix
         for(size_t i = 0; i < m; i++) {
             nb_paths += matrix[len][i];
         }
-    
+
         // TODO fails if nb_paths == 0
-    
+
         size_t rnd = uniform_random_generator(1, nb_paths).next(); //TODO averifier
         size_t acc = 0;
         current_node = 0;
@@ -249,8 +249,8 @@ void generate_random_path(const graph & g, const vector<vector<size_t>> & matrix
     }
 }
 
-    
-    
+
+
 /*
 computes a matrix m such that m[i][j] is the number of paths of length i and starting from the node j
 and ending with v
@@ -261,9 +261,9 @@ void number_of_paths2(const automaton & automat, size_t n, size_t v, vector<vect
     for (size_t i = 0; i <= n; i++) {
         matrix[i].resize(m);
     }
-    
+
     matrix[0][v] = 1;
-    
+
     for (size_t i = 1; i <= n; i++) {
         for (size_t j = 0; j < m; j++) {
             for (const auto & transitions : automat.transitions[j]) {
@@ -273,7 +273,7 @@ void number_of_paths2(const automaton & automat, size_t n, size_t v, vector<vect
             }
         }
     }
-    
+
     /*for(size_t i = 0; i <= n; i++) {
         for (size_t j = 0; j < m; j++) {
             cout << matrix[i][j] << " ";
@@ -282,7 +282,7 @@ void number_of_paths2(const automaton & automat, size_t n, size_t v, vector<vect
     }
     cout << endl;
     */
-    
+
 }
 
 void generate_random_path_aux2(const automaton & automat, const vector<vector<size_t>> & matrix,
@@ -290,26 +290,26 @@ void generate_random_path_aux2(const automaton & automat, const vector<vector<si
     size_t acc;
     size_t rnd;
     size_t current_node = start;
-    
+
     //cout << "starting from " << start << endl;
-    
+
     size_t i = len;
     while (i <= max_len && matrix[i][current_node] == 0) {
         i++;
     }
-    
+
     if (i > max_len) {
         i = len;
         while (i > 0 && matrix[i][current_node] == 0) {
             i--;
         }
     }
-    
+
     if (i == 0) {
         cerr << "error: generate_random_path_aux2" << endl;
         exit(EXIT_FAILURE);
     }
-        
+
     for (; i > 0; i--) {
         rnd = uniform_random_generator(1, matrix[i][current_node]).next(); // TODO averifier
         acc = 0;
@@ -327,7 +327,7 @@ void generate_random_path_aux2(const automaton & automat, const vector<vector<si
             if (acc >= rnd)
                 break;
         }
-         
+
     }
 }
 
@@ -349,8 +349,8 @@ void generate_random_disjunct(const automaton & automat, size_t source, size_t t
         symbol s(pred);
         disj.symbols.push_back(s);
     }
-    
-}    
+
+}
 
 
 void generate_random_conjunct(const config::config & conf, const config::workload & wconf, size_t source, size_t target, conjunct & conj) {
@@ -369,7 +369,7 @@ void generate_chain(const config::config & conf, const config::workload & wconf,
     q.bodies.emplace_back();
     auto & body = q.bodies[0];
     body.conjuncts.resize(nb_conjs);
-    
+
     vector<vector<size_t>> distmat;
     distance_matrix_between_types(conf, distmat);
     graph g;
@@ -378,7 +378,7 @@ void generate_chain(const config::config & conf, const config::workload & wconf,
     number_of_paths(g, nb_conjs, pathmat);
     vector<size_t> path;
     generate_random_path(g, pathmat, -1, nb_conjs, wconf.multiplicity, path);
-    
+
     for(size_t i = 0; i < nb_conjs; i++) {
         auto & conjunct = body.conjuncts[i];
         conjunct.source = "?x" + to_string(i);
@@ -386,7 +386,7 @@ void generate_chain(const config::config & conf, const config::workload & wconf,
         conjunct.star = path[2*i+1];
         generate_random_conjunct(conf, wconf, path[2*i], path[2*i+2], conjunct);
     }
-    
+
     size_t arity = uniform_random_generator(wconf.arity.first, wconf.arity.second).next();
     if (arity == 1) {
         q.variables.push_back("?x0");
@@ -402,14 +402,14 @@ void generate_star(const config::config & conf, const config::workload & wconf, 
     q.bodies.emplace_back();
     auto & body = q.bodies[0];
     body.conjuncts.resize(nb_conjs);
-    
+
     vector<vector<size_t>> distmat;
     distance_matrix_between_types(conf, distmat);
     graph g;
     compute_workload_graph_from_matrix(distmat, wconf.length.second, g);
     vector<vector<size_t>> pathmat;
     number_of_paths(g, 1, pathmat);
-    
+
     vector<size_t> path;
     generate_random_path(g, pathmat, -1, 1, wconf.multiplicity, path);
     auto & first_conjunct = body.conjuncts[0];
@@ -417,9 +417,9 @@ void generate_star(const config::config & conf, const config::workload & wconf, 
     first_conjunct.target = "?x1";
     first_conjunct.star = path[1];
     generate_random_conjunct(conf, wconf, path[0], path[2], first_conjunct);
-    
+
     size_t central_type = path[0];
-    
+
     for(size_t i = 1; i < nb_conjs; i++) {
         auto & conjunct = body.conjuncts[i];
         generate_random_path(g, pathmat, central_type, 1, wconf.multiplicity, path);
@@ -428,7 +428,7 @@ void generate_star(const config::config & conf, const config::workload & wconf, 
         conjunct.star = path[1];
         generate_random_conjunct(conf, wconf, central_type, path[2], conjunct);
     }
-    
+
     size_t arity = uniform_random_generator(wconf.arity.first, wconf.arity.second).next();
     if (arity >= 1) {
         q.variables.push_back("?x0");
@@ -447,7 +447,7 @@ void generate_query(const config::config & conf, const config::workload & wconf,
     int sum = wconf.type.chain + wconf.type.star + wconf.type.cycle + wconf.type.starchain;
     int n = uniform_random_generator(1, sum).next();
     int i = 0;
-    
+
     if (wconf.type.chain) {
         i++;
         if(i == n) {
@@ -455,7 +455,7 @@ void generate_query(const config::config & conf, const config::workload & wconf,
             return;
         }
     }
-    
+
     if (wconf.type.star) {
         i++;
         if(i == n) {
@@ -463,7 +463,7 @@ void generate_query(const config::config & conf, const config::workload & wconf,
             return;
         }
     }
-    
+
     if (wconf.type.cycle) {
         i++;
         if(i == n) {
@@ -471,7 +471,7 @@ void generate_query(const config::config & conf, const config::workload & wconf,
             return;
         }
     }
-    
+
     if (wconf.type.starchain) {
         i++;
         if(i == n) {
@@ -484,12 +484,12 @@ void generate_query(const config::config & conf, const config::workload & wconf,
 void generate_workload(const config::config & conf, workload & wl) {
     size_t size = 0;
     size_t c = 0;
-    
+
     for (const auto & wconf : conf.workloads) {
         size += wconf.size;
     }
     wl.queries.resize(size);
-    
+
     for (const auto & wconf : conf.workloads) {
         for (size_t i = 0; i < wconf.size; i++) {
             generate_query(conf, wconf, wl.queries[c]);

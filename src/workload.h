@@ -29,7 +29,7 @@ class symbol {
 public:
     size_t id;
     bool reverse;
-    
+
     symbol(size_t, bool);
     symbol(long);
 };
@@ -62,7 +62,7 @@ public:
 
 class workload {
 public:
-    vector<query> queries;    
+    vector<query> queries;
 };
 
 
@@ -82,8 +82,8 @@ public:
 class automaton {
 public:
     vector<unordered_map<long,unordered_set<size_t>>> transitions;
-    
-    
+
+
 public:
     automaton(const config::config & conf);
 };
