@@ -1,7 +1,7 @@
 CC=g++
 CFLAGS=-g -Wall -std=c++11 -I ../libs
 
-objects = test.o gmark.o configparser.o pugixml.o argparse.o randomgen.o config.o workload.o workload2.o \
+objects = test.o gmark.o time.o configparser.o pugixml.o argparse.o randomgen.o config.o workload.o workload2.o \
 			incrementalDeterministicGraphGenerator.o graphNode.o cumulativeDistributionUtils.o \
 			nodeGenerator.o processingEdgeTypes.o correlation.o shiftingDegreeDistribution.o
 
@@ -19,6 +19,9 @@ config.o: config.cpp config.h randomgen.h
 
 gmark.o: gmark.cpp gmark.h config.h randomgen.h
 	$(CC) $(CFLAGS) -c gmark.cpp
+
+time.o:
+	$(CC) $(CFLAGS) -c time.cpp
 
 workload.o: workload.cpp workload.h config.h randomgen.h
 	$(CC) $(CFLAGS) -c workload.cpp
